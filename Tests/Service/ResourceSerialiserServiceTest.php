@@ -136,6 +136,10 @@ class ResourceSerialiserServiceTest extends BaseTestCase
         $link = new LinkMetaResource;
         $link->setup(100, LinkMetaResource::REL_SELF, '/clients/100');
 
+        $this->assertEquals(100, $link->getId(), 'Link resource "id" getter failed');
+        $this->assertEquals(LinkMetaResource::REL_SELF, $link->getRel(), 'Link resource "rel" getter failed');
+        $this->assertEquals('/clients/100', $link->getHref(), 'Link resource "href" getter failed');
+
         $resource = new SimpleAssociatedResourceMock;
         $resource->setAssociation($link);
 
