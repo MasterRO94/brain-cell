@@ -20,16 +20,21 @@ class ResourceSerialiserService
      */
     public function serialise(TransferEntityInterface $entity)
     {
-        return $this->getSerialiser()->serialize($entity, 'json');
+        $serialiser = $this->getSerialiser();
+        return $serialiser->serialize($entity, 'json');
     }
 
     /**
-     * @param array $json
+     * @param array|string $json
      * @param string $entityClassName
      * @return AbstractResource
      */
-    public function deserialise(array $json, $entityClassName)
+    public function deserialise($json, $entityClassName)
     {
+
+        if (is_string($json)) {
+            $json = json_decode($json, true);
+        }
 
         /** @var AbstractResource $entity */
         $entity = $this->hydrateResourceEntity($json, $entityClassName);
@@ -42,15 +47,27 @@ class ResourceSerialiserService
 
     /**
      * @param TransferEntityInterface $entity
-     * @param int $id
+     * @param int $value
      * @return TransferEntityInterface
      */
-    public function setId(TransferEntityInterface $entity, $id)
+    public function setId(TransferEntityInterface $entity, $value)
     {
-        $json = json_encode(['id' => $id]);
-        return $this->getSerialiser()->deserialize($json, get_class($entity), 'json', [
-            'object_to_populate' => $entity
-        ]);
+        return $this->setProtectedProperty($entity, 'id', $value);
+    }
+
+    /**
+     * @param TransferEntityInterface $entity
+     * @param string $property
+     * @param mixed $value
+     * @return TransferEntityInterface
+     */
+    protected function setProtectedProperty(TransferEntityInterface $entity, $property, $value)
+    {
+        $class = new \ReflectionClass(get_class($entity));
+        $property = $class->getProperty($property);
+        $property->setAccessible(true);
+        $property->setValue($entity, $value);
+        return $entity;
     }
 
     /**
@@ -94,7 +111,12 @@ class ResourceSerialiserService
     protected function hydrateResourceEntity(array $data, $entityClassName)
     {
         $data = $this->removeAssociatedAttributes(new $entityClassName, $data);
-        return $this->getSerialiser()->deserialize(json_encode($data), $entityClassName, 'json');
+        $entity = $this->getSerialiser()->deserialize(json_encode($data), $entityClassName, 'json');
+
+        $link = (count($data) === 3) && isset($data['rel']) && isset($data['href']);
+        $this->setProtectedProperty($entity, '___isResourceFullyHydrated', !$link);
+        return $entity;
+
     }
 
     protected function removeAssociatedAttributes(TransferEntityInterface $entity, array $data)
@@ -122,10 +144,16 @@ class ResourceSerialiserService
 
     protected function getSerialiser()
     {
-        return new Serializer(
-            [new PropertyNormalizer],
-            [new JsonEncoder]
-        );
+
+        $normaliser = new PropertyNormalizer;
+        $normaliser->setIgnoredAttributes([
+            '___isResourceFullyHydrated'
+        ]);
+
+        $encoded = new JsonEncoder;
+
+        return new Serializer([$normaliser], [$encoded]);
+
     }
 
 }
