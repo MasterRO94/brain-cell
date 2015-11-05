@@ -2,7 +2,7 @@
 
 namespace Brain\Cell\Transfer\Entity;
 
-use Brain\Cell\Transfer\AbstractCollection;
+use Brain\Cell\Transfer\AbstractResourceCollection;
 use Brain\Cell\Transfer\AbstractResource;
 
 class ClientResource extends AbstractResource
@@ -21,7 +21,7 @@ class ClientResource extends AbstractResource
     }
 
     /**
-     * @return AbstractCollection[]
+     * @return AbstractResourceCollection[]
      */
     public function getAssociatedCollections()
     {

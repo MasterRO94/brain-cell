@@ -2,7 +2,7 @@
 
 namespace Brain\Cell\Transfer\Entity\User;
 
-use Brain\Cell\Transfer\AbstractCollection;
+use Brain\Cell\Transfer\AbstractResourceCollection;
 use Brain\Cell\Transfer\AbstractResource;
 
 class AccessTokenResource extends AbstractResource
@@ -21,7 +21,7 @@ class AccessTokenResource extends AbstractResource
     }
 
     /**
-     * @return AbstractCollection[]
+     * @return AbstractResourceCollection[]
      */
     public function getAssociatedCollections()
     {

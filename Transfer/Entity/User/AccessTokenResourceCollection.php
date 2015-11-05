@@ -2,9 +2,9 @@
 
 namespace Brain\Cell\Transfer\Entity\User;
 
-use Brain\Cell\Transfer\AbstractCollection;
+use Brain\Cell\Transfer\AbstractResourceCollection;
 
-class AccessTokenCollection extends AbstractCollection
+class AccessTokenResourceCollection extends AbstractResourceCollection
 {
 
     /**

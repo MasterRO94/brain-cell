@@ -5,7 +5,7 @@ namespace Brain\Cell\Tests\Service\ResourceSerialiserService\Resource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\Meta\MetaResourceCollection;
 
-class SimpleAssociatedResourceMock extends AbstractResource
+class SimpleAssociatedCollectionMock extends AbstractResource
 {
 
     /** @var int */
@@ -14,16 +14,16 @@ class SimpleAssociatedResourceMock extends AbstractResource
     /** @var string */
     protected $name;
 
-    /** @var SimpleResourceMock */
-    protected $association;
+    /** @var SimpleResourceCollectionMock */
+    protected $associations;
 
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedCollections()
     {
         return [
-            'association' => SimpleResourceMock::CLASS
+            'associations' => SimpleResourceCollectionMock::CLASS
         ];
     }
 
@@ -54,21 +54,23 @@ class SimpleAssociatedResourceMock extends AbstractResource
     }
 
     /**
-     * @return SimpleResourceMock
+     * @return SimpleResourceCollectionMock
      */
-    public function getAssociation()
+    public function getAssociations()
     {
-        return $this->association;
+        return $this->associations;
     }
 
     /**
-     * @param SimpleResourceMock|MetaResourceCollection $association
+     * @param SimpleResourceCollectionMock|MetaResourceCollection $associations
      * @return $this
      */
-    public function setAssociation($association)
+    public function setAssociations($associations)
     {
-        $this->association = $association;
+        $this->associations = $associations;
         return $this;
     }
+
+
 
 }

@@ -1,16 +1,13 @@
 <?php
 
-namespace Brain\Cell\Transfer\Meta;
+namespace Brain\Cell\Transfer\Meta\Link;
 
+use Brain;
 use Brain\Cell\Transfer\AbstractResource;
 
-class LinkMetaResource extends AbstractResource
+class ResourceCollectionLink extends AbstractResource implements
+    Brain\Cell\Transfer\Meta\LinkInterface
 {
-
-    const REL_SELF = 'self';
-
-    /** @var int */
-    protected $id;
 
     /** @var string */
     protected $rel;
@@ -19,25 +16,13 @@ class LinkMetaResource extends AbstractResource
     protected $href;
 
     /**
-     * @param int $id
      * @param string $rel
      * @param string $href
-     * @return $this;
      */
-    public function setup($id, $rel, $href)
+    public function __construct($rel, $href)
     {
-        $this->id = $id;
         $this->rel = $rel;
         $this->href = $href;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

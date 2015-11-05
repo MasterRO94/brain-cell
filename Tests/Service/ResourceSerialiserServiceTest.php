@@ -4,12 +4,16 @@ namespace Brain\Cell\Tests\Service;
 
 use Brain\Cell\Service\ResourceSerialiserService;
 use Brain\Cell\Tests\BaseTestCase;
+use Brain\Cell\Tests\Service\ResourceSerialiserService\Resource\SimpleAssociatedCollectionMock;
 use Brain\Cell\Tests\Service\ResourceSerialiserService\Resource\SimpleAssociatedResourceMock;
 use Brain\Cell\Tests\Service\ResourceSerialiserService\Resource\SimpleResourceMock;
-use Brain\Cell\Transfer\Meta\LinkMetaResource;
+use Brain\Cell\Transfer\Meta\MetaResourceCollection;
+use Brain\Cell\Transfer\Meta\Link\ResourceLink;
+use Brain\Cell\Transfer\Meta\Link\ResourceCollectionLink;
 
 /**
  * @group cell
+ * @group transfer
  */
 class ResourceSerialiserServiceTest extends BaseTestCase
 {
@@ -133,19 +137,21 @@ class ResourceSerialiserServiceTest extends BaseTestCase
      */
     public function serviceUnderstandsMetaLinkResources()
     {
-        $link = new LinkMetaResource;
-        $link->setup(100, LinkMetaResource::REL_SELF, '/clients/100');
+        $link = new ResourceLink(100, ResourceLink::REL_SELF, '/clients/100');
 
         $this->assertEquals(100, $link->getId(), 'Link resource "id" getter failed');
-        $this->assertEquals(LinkMetaResource::REL_SELF, $link->getRel(), 'Link resource "rel" getter failed');
+        $this->assertEquals(ResourceLink::REL_SELF, $link->getRel(), 'Link resource "rel" getter failed');
         $this->assertEquals('/clients/100', $link->getHref(), 'Link resource "href" getter failed');
 
+        $links = new MetaResourceCollection;
+        $links->add($link);
+
         $resource = new SimpleAssociatedResourceMock;
-        $resource->setAssociation($link);
+        $resource->setAssociation($links);
 
         $json = $this->service->serialise($resource);
 
-        $expected = '{"id":null,"name":null,"association":{"id":100,"rel":"self","href":"\/clients\/100"}}';
+        $expected = '{"id":null,"name":null,"association":[{"id":100,"rel":"self","href":"\/clients\/100"}]}';
         $this->assertEquals($expected, $json, 'The serialised JSON is not as expected');
 
         $json = json_decode($json, true);
@@ -155,6 +161,26 @@ class ResourceSerialiserServiceTest extends BaseTestCase
 
         $this->assertInstanceOf(SimpleResourceMock::CLASS, $response->getAssociation());
         $this->assertEquals(100, $response->getAssociation()->getId());
+
+    }
+
+    /**
+     * @test
+     */
+    public function serviceUnderstandsMetaLinkCollections()
+    {
+        $link = new ResourceCollectionLink(ResourceCollectionLink::REL_SELF, '/resource/100/clients');
+
+        $links = new MetaResourceCollection;
+        $links->add($link);
+
+        $resource = new SimpleAssociatedCollectionMock;
+        $resource->setAssociations($links);
+
+        $json = $this->service->serialise($resource);
+
+        $expected = '{"id":null,"name":null,"associations":[{"rel":"self","href":"\/resource\/100\/clients"}]}';
+        $this->assertEquals($expected, $json, 'The serialised JSON is not as expected');
 
     }
 
@@ -173,9 +199,12 @@ class ResourceSerialiserServiceTest extends BaseTestCase
 
         $associated = new SimpleAssociatedResourceMock;
 
-        $link = new LinkMetaResource;
-        $link->setup(10, 'self', '/mans/iron');
-        $associated->setAssociation($link);
+        $link = new ResourceLink(10, 'self', '/mans/iron');
+
+        $links = new MetaResourceCollection;
+        $links->add($link);
+
+        $associated->setAssociation($links);
 
         /** @var SimpleAssociatedResourceMock $deserialised */
         $deserialised = $this->service->deserialise($this->service->serialise($associated), SimpleAssociatedResourceMock::CLASS);

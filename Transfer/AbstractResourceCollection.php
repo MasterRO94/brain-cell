@@ -5,7 +5,7 @@ namespace Brain\Cell\Transfer;
 use Brain;
 use Doctrine\Common\Collections\ArrayCollection;
 
-abstract class AbstractCollection extends ArrayCollection implements
+abstract class AbstractResourceCollection extends ArrayCollection implements
     Brain\Cell\TransferEntityInterface
 {
 

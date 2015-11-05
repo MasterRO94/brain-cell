@@ -2,8 +2,12 @@
 
 namespace Brain\Cell\Service;
 
-use Brain\Cell\Transfer\AbstractCollection;
+use Brain\Cell\Exception\RuntimeException;
+use Brain\Cell\Transfer\AbstractResourceCollection;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\Meta\Link\ResourceCollectionLink;
+use Brain\Cell\Transfer\Meta\Link\ResourceLink;
+use Brain\Cell\Transfer\Meta\LinkInterface;
 use Brain\Cell\TransferEntityInterface;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -79,17 +83,36 @@ class ResourceSerialiserService
         $accessor = PropertyAccess::createPropertyAccessor();
         if ($entity instanceof AbstractResource) {
 
-            if (!is_null($entity->getAssociatedResources())) {
-                foreach ($entity->getAssociatedResources() as $property => $resource) {
-                    $resource = $this->hydrateResourceEntity($data[$property], $resource);
+            if (!is_null($resources = $entity->getAssociatedResources())) {
+                foreach ($resources as $property => $resource) {
+                    $resourceData = $data[$property];
+
+                    if (is_null($resourceData)) {
+                        throw new RuntimeException(sprintf('Association returned was not as expected for "%s"', $property));
+                    }
+
+                    $link = null;
+
+                    if ($this->isResourceDataCollectionArray($resourceData)) {
+                        $link = $this->resolveResourceDataMetaLinkCollection($resourceData);
+
+                        $resourceData = [];
+                        if ($link instanceof ResourceLink) {
+                            $resourceData['id'] = $link->getId();
+                        }
+
+                    }
+
+                    $resource = $this->hydrateResourceEntity($resourceData, $resource, $link);
                     $accessor->setValue($entity, $property, $resource);
+
                 }
             }
 
-            if (!is_null($entity->getAssociatedCollections())) {
-                foreach ($entity->getAssociatedCollections() as $property => $collection) {
+            if (!is_null($collections = $entity->getAssociatedCollections())) {
+                foreach ($collections as $property => $collection) {
 
-                    /** @var AbstractCollection $collection */
+                    /** @var AbstractResourceCollection $collection */
                     $collection = new $collection;
 
                     foreach ($data[$property] as $resource) {
@@ -106,15 +129,18 @@ class ResourceSerialiserService
     /**
      * @param array $data
      * @param string $entityClassName
+     * @param null|LinkInterface $link
      * @return AbstractResource
      */
-    protected function hydrateResourceEntity(array $data, $entityClassName)
+    protected function hydrateResourceEntity(array $data, $entityClassName, LinkInterface $link = null)
     {
         $data = $this->removeAssociatedAttributes(new $entityClassName, $data);
+
+        /** @var AbstractResource $entity */
         $entity = $this->getSerialiser()->deserialize(json_encode($data), $entityClassName, 'json');
 
-        $link = (count($data) === 3) && isset($data['rel']) && isset($data['href']);
-        $this->setProtectedProperty($entity, '___isResourceFullyHydrated', !$link);
+        $hydrated = $link instanceof LinkInterface;
+        $this->setProtectedProperty($entity, '___isResourceFullyHydrated', !$hydrated);
         return $entity;
 
     }
@@ -153,6 +179,44 @@ class ResourceSerialiserService
         $encoded = new JsonEncoder;
 
         return new Serializer([$normaliser], [$encoded]);
+
+    }
+
+    /**
+     * @see http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential/265144#265144
+     *
+     * @param array $data
+     * @return bool
+     */
+    protected function isResourceDataCollectionArray(array $data)
+    {
+        return array_values($data) === $data;
+    }
+
+    /**
+     * @param array $data
+     * @return null|LinkInterface
+     */
+    protected function resolveResourceDataMetaLinkCollection(array $data)
+    {
+
+        if (!$this->isResourceDataCollectionArray($data)) {
+            return null;
+        }
+
+        $data = $data[0];
+
+        //  A resource related link with identity.
+        if ((count($data) === 3) && isset($data['id']) && isset($data['rel']) && isset($data['href'])) {
+            return new ResourceLink($data['id'], $data['rel'], $data['href']);
+        }
+
+        //  A resource collection related link without identity.
+        if ((count($data) === 2) && isset($data['rel']) && isset($data['href'])) {
+            return new ResourceCollectionLink($data['rel'], $data['href']);
+        }
+
+        return null;
 
     }
 
