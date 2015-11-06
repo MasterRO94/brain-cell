@@ -4,6 +4,7 @@ namespace Brain\Cell\Transfer\Entity;
 
 use Brain\Cell\Transfer\AbstractResourceCollection;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\Collection;
 use Brain\Cell\Transfer\Entity\User\AccessTokenResourceCollection;
 use Brain\Cell\Transfer\Meta\MetaResourceCollection;
 
@@ -73,8 +74,8 @@ class UserResource extends AbstractResource
     }
 
     /**
-     * @param AccessTokenResourceCollection|MetaResourceCollection $accessTokens
-     * @return UserResource
+     * @param Collection $accessTokens
+     * @return $this
      */
     public function setAccessTokens($accessTokens)
     {
@@ -91,8 +92,8 @@ class UserResource extends AbstractResource
     }
 
     /**
-     * @param ClientResource|MetaResourceCollection $client
-     * @return UserResource
+     * @param ClientResource $client
+     * @return $this
      */
     public function setClient($client)
     {

@@ -70,6 +70,8 @@ class ArrayEncoder
                 } else {
                     throw new RuntimeException(sprintf('The property "%s" has an unexpected TransferEntityInterface', $property->getName()));
                 }
+            } elseif (isset($collections[$property->getName()]) && (!$value instanceof Collection)) {
+                $value = $this->serialise(new Collection);
             }
 
             $response[$property->getName()] = $value;

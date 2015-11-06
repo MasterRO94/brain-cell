@@ -27,6 +27,10 @@ class ArrayDecoder
         if ($entity instanceof Collection) {
             $collection = $entity;
 
+            if (!isset($data['data'])) {
+                return $collection;
+            }
+
             foreach ($data['data'] as $resource) {
                 $entity = $collection->getEntityClass();
                 $entity = new $entity;
@@ -52,6 +56,11 @@ class ArrayDecoder
         }
 
         foreach ($data as $property => $value) {
+
+            if (!$class->hasProperty($property)) {
+                continue;
+            }
+
             $property = $class->getProperty($property);
 
             if (isset($resources[$property->getName()])) {

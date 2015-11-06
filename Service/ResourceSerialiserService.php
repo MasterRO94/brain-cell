@@ -10,6 +10,8 @@ use Brain\Cell\Transfer\Meta\Link\ResourceLink;
 use Brain\Cell\Transfer\Meta\LinkInterface;
 use Brain\Cell\TransferEntityInterface;
 
+use Brain\Cell\Transformer\ArrayDecoder;
+use Brain\Cell\Transformer\ArrayEncoder;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
@@ -24,29 +26,19 @@ class ResourceSerialiserService
      */
     public function serialise(TransferEntityInterface $entity)
     {
-        $serialiser = $this->getSerialiser();
-        return $serialiser->serialize($entity, 'json');
+        $encoder = new ArrayEncoder;
+        return $encoder->encode($entity);
     }
 
     /**
-     * @param array|string $json
-     * @param string $entityClassName
+     * @param TransferEntityInterface $entity
+     * @param array $data
      * @return AbstractResource
      */
-    public function deserialise($json, $entityClassName)
+    public function deserialise(TransferEntityInterface $entity, array $data)
     {
-
-        if (is_string($json)) {
-            $json = json_decode($json, true);
-        }
-
-        /** @var AbstractResource $entity */
-        $entity = $this->hydrateResourceEntity($json, $entityClassName);
-
-        $this->recursiveDeserialise($entity, $json);
-
-        return $entity;
-
+        $decoder = new ArrayDecoder;
+        return $decoder->decode($entity, $data);
     }
 
     /**
