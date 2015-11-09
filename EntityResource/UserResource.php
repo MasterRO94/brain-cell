@@ -4,20 +4,29 @@ namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Transfer\AbstractResource;
 
+/**
+ * A resource representing a user.
+ */
 class UserResource extends AbstractResource
 {
 
     /**
+     * The unique id.
+     *
      * @var int
      */
     protected $id;
 
     /**
+     * The email address.
+     *
      * @var string
      */
     protected $email;
 
     /**
+     * Return the id.
+     *
      * @return int
      */
     public function getId()
@@ -26,6 +35,8 @@ class UserResource extends AbstractResource
     }
 
     /**
+     * Return the email address.
+     *
      * @return string
      */
     public function getEmail()
@@ -34,6 +45,8 @@ class UserResource extends AbstractResource
     }
 
     /**
+     * Set the email address.
+     *
      * @param string $email
      * @return $this
      */

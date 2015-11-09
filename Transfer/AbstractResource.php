@@ -4,6 +4,9 @@ namespace Brain\Cell\Transfer;
 
 use Brain;
 
+/**
+ * An abstract resource.
+ */
 abstract class AbstractResource implements
     Brain\Cell\TransferEntityInterface
 {

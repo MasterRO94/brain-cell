@@ -5,7 +5,7 @@ namespace Brain\Cell\Tests\Service;
 use Brain\Cell\Service\ResourceHandlerService;
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
-use Brain\Cell\Transfer\EntityFactory;
+use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\TransformerDecoderInterface;
 use Brain\Cell\TransformerEncoderInterface;
 
@@ -18,7 +18,7 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
 class ResourceHandlerServiceTest extends BaseTestCase
 {
 
-    /** @var MockObject|EntityFactory */
+    /** @var MockObject|EntityResourceFactory */
     protected $factoryMock;
 
     /** @var MockObject|TransformerEncoderInterface */
@@ -40,7 +40,7 @@ class ResourceHandlerServiceTest extends BaseTestCase
     {
         $this->resource = new SimpleResourceMock;
 
-        $this->factoryMock = $this->getMock(EntityFactory::CLASS);
+        $this->factoryMock = $this->getMock(EntityResourceFactory::CLASS);
         $this->encoderMock = $this->getMock(TransformerEncoderInterface::CLASS);
         $this->decoderMock = $this->getMock(TransformerDecoderInterface::CLASS);
 

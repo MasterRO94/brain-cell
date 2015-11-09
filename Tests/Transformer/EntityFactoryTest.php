@@ -4,7 +4,7 @@ namespace Brain\Cell\Tests\Transformer;
 
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
-use Brain\Cell\Transfer\EntityFactory;
+use Brain\Cell\Transfer\EntityResourceFactory;
 
 /**
  * @group cell
@@ -13,7 +13,7 @@ use Brain\Cell\Transfer\EntityFactory;
 class EntityFactoryTest extends BaseTestCase
 {
 
-    /** @var EntityFactory */
+    /** @var EntityResourceFactory */
     protected $factory;
 
     /**
@@ -21,7 +21,7 @@ class EntityFactoryTest extends BaseTestCase
      */
     public function setUp()
     {
-        $this->factory = new EntityFactory;
+        $this->factory = new EntityResourceFactory;
     }
 
     /**

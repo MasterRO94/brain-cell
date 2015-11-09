@@ -4,10 +4,17 @@ namespace Brain\Cell\Transfer;
 
 use Brain\Cell\TransferEntityInterface;
 
-class EntityFactory
+/**
+ * A entity resource factory.
+ *
+ * A factory for creating and populating protected fields against {@link TransferEntityInterface} entities.
+ */
+class EntityResourceFactory
 {
 
     /**
+     * Create and return the given $class.
+     *
      * @param string $class
      * @param null|int $id
      * @return TransferEntityInterface
@@ -26,6 +33,8 @@ class EntityFactory
     }
 
     /**
+     * Set a protected property.
+     *
      * @param TransferEntityInterface $class
      * @param string $property
      * @param mixed $id

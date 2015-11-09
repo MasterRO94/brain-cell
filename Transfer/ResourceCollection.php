@@ -9,6 +9,11 @@ use Brain\Cell\TransferEntityInterface;
 use Doctrine;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * A collection of {@link TransferEntityInterface}.
+ *
+ * @see ArrayCollection
+ */
 class ResourceCollection extends ArrayCollection implements
     Brain\Cell\TransferEntityInterface
 {
@@ -17,6 +22,8 @@ class ResourceCollection extends ArrayCollection implements
     protected $entityClass;
 
     /**
+     * The entity class.
+     *
      * @return string
      *
      * @internal
@@ -27,6 +34,8 @@ class ResourceCollection extends ArrayCollection implements
     }
 
     /**
+     * Set the strict entity class.
+     *
      * @param string $entityClass
      *
      * @internal
@@ -46,10 +55,13 @@ class ResourceCollection extends ArrayCollection implements
     public function add($value)
     {
 
+        //  We only accept instance of TransferEntityInterface in these collections.
         if (!$value instanceof TransferEntityInterface) {
             throw new RuntimeException(sprintf('ResourceCollection::add() only accepts instances of TransferEntityInterface'));
         }
 
+        //  Optionally if there was a entity class specified against the collection then we need to be strict.
+        //  Rejecting all $values given that are not of the given type.
         if (!is_null($this->entityClass) && !is_a($value, $this->entityClass)) {
             throw new RuntimeException(sprintf('ResourceCollection::add() only accepts instances of "%s"', $this->entityClass));
         }
