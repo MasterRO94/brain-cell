@@ -9,21 +9,6 @@ abstract class AbstractResource implements
 {
 
     /**
-     * @var bool
-     */
-    protected $___isResourceFullyHydrated = false;
-
-    /**
-     * @return bool
-     *
-     * @internal
-     */
-    public function isResourceFullyHydrated()
-    {
-        return $this->___isResourceFullyHydrated;
-    }
-
-    /**
      * @return string[]|null
      *
      * @internal

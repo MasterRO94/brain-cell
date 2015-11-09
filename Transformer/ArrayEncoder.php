@@ -34,8 +34,8 @@ class ArrayEncoder implements
 
             foreach ($entity->getData() as $resource) {
 
-                if (!$resource instanceof TransferEntityInterface) {
-                    throw new RuntimeException('Um');
+                if (!$resource instanceof AbstractResource) {
+                    throw new RuntimeException('All entries within a ResourceCollection needs to be an instance of AbstractResource');
                 }
 
                 $data[] = $this->serialise($resource);
@@ -62,10 +62,6 @@ class ArrayEncoder implements
         $response = [];
         foreach ($properties as $property) {
 
-            if ($property->getDeclaringClass()->getName() === AbstractResource::CLASS) {
-                continue;
-            }
-
             $property->setAccessible(true);
             $value = $property->getValue($entity);
 
@@ -73,7 +69,11 @@ class ArrayEncoder implements
                 if (isset($resources[$property->getName()]) || isset($collections[$property->getName()])) {
                     $value = $this->serialise($value);
                 } else {
-                    throw new RuntimeException(sprintf('The property "%s" has an unexpected TransferEntityInterface', $property->getName()));
+                    throw new RuntimeException(sprintf(
+                        'Was not expected EntityResource at "%s" of "%s"',
+                        $property->getName(),
+                        get_class($entity)
+                    ));
                 }
             } elseif (isset($collections[$property->getName()]) && (!$value instanceof Collection)) {
                 $value = $this->serialise(new Collection);
