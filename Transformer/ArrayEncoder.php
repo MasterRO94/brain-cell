@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\Transformer;
 
+use Brain;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\Collection;
@@ -11,14 +12,18 @@ use ReflectionClass;
 use ReflectionMethod;
 use ReflectionProperty;
 
-class ArrayEncoder
+class ArrayEncoder implements
+    Brain\Cell\TransformerEncoderInterface
 {
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return array
+     */
     public function encode(TransferEntityInterface $entity)
     {
         return $this->serialise($entity);
-
-
     }
 
     protected function serialise(TransferEntityInterface $entity)

@@ -2,23 +2,23 @@
 
 namespace Brain\Cell\Transformer;
 
-use Brain\Cell\Exception\RuntimeException;
+use Brain;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\Collection;
 use Brain\Cell\TransferEntityInterface;
 
-use ReflectionClass;
-use ReflectionMethod;
-use ReflectionProperty;
-
-class ArrayDecoder
+class ArrayDecoder implements
+    Brain\Cell\TransformerDecoderInterface
 {
 
-    public function decode(TransferEntityInterface $entity, array $data)
+    /**
+     * {@inheritdoc}
+     *
+     * @param array $data
+     */
+    public function decode(TransferEntityInterface $entity, $data)
     {
         return $this->deserialise($entity, $data);
-
-
     }
 
     protected function deserialise(TransferEntityInterface $entity, array $data)
@@ -45,7 +45,7 @@ class ArrayDecoder
         }
 
 
-        $class = new ReflectionClass(get_class($entity));
+        $class = new \ReflectionClass(get_class($entity));
 
         $resources = [];
         $collections = [];
