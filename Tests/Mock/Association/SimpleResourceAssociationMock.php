@@ -26,6 +26,16 @@ class SimpleResourceAssociationMock extends AbstractResource
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'association' => SimpleResourceMock::CLASS
+        ];
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -60,16 +70,5 @@ class SimpleResourceAssociationMock extends AbstractResource
         $this->association = $association;
         return $this;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAssociatedResources()
-    {
-        return [
-            'association' => SimpleResourceMock::CLASS
-        ];
-    }
-
 
 }
