@@ -6,7 +6,7 @@ use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
-use Brain\Cell\Transfer\Collection;
+use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\Transformer\ArrayEncoder;
 
 /**
@@ -70,7 +70,7 @@ class ArrayEncoderTest extends BaseTestCase
     {
         $resource = SimpleResourceCollectionAssociationMock::create(10);
 
-        $resource->setAssociations(new Collection);
+        $resource->setAssociations(new ResourceCollection);
         $resource->getAssociations()->getData()->add(new ArrayEncoder);
 
         $this->encoder->encode($resource);

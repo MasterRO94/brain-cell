@@ -7,7 +7,7 @@ use Brain;
 use Doctrine;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Collection implements
+class ResourceCollection implements
     Brain\Cell\TransferEntityInterface
 {
 

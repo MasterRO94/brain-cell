@@ -4,7 +4,7 @@ namespace Brain\Cell\Tests\Mock\Association;
 
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\Transfer\Collection;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class SimpleResourceCollectionAssociationMock extends AbstractResource
 {
@@ -12,7 +12,7 @@ class SimpleResourceCollectionAssociationMock extends AbstractResource
     /** @var int */
     protected $id;
 
-    /** @var Collection|SimpleResourceMock[] */
+    /** @var ResourceCollection|SimpleResourceMock[] */
     protected $associations;
 
     /**
@@ -45,7 +45,7 @@ class SimpleResourceCollectionAssociationMock extends AbstractResource
     }
 
     /**
-     * @return Collection|SimpleResourceMock[]
+     * @return ResourceCollection|SimpleResourceMock[]
      */
     public function getAssociations()
     {
@@ -53,7 +53,7 @@ class SimpleResourceCollectionAssociationMock extends AbstractResource
     }
 
     /**
-     * @param Collection|SimpleResourceMock[] $associations
+     * @param ResourceCollection|SimpleResourceMock[] $associations
      * @return $this
      */
     public function setAssociations($associations)

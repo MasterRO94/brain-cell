@@ -5,7 +5,7 @@ namespace Brain\Cell\Transformer;
 use Brain;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\Transfer\Collection;
+use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 
 use ReflectionClass;
@@ -29,7 +29,7 @@ class ArrayEncoder implements
     protected function serialise(TransferEntityInterface $entity)
     {
 
-        if ($entity instanceof Collection) {
+        if ($entity instanceof ResourceCollection) {
             $data = [];
 
             foreach ($entity->getData() as $resource) {
@@ -75,8 +75,8 @@ class ArrayEncoder implements
                         get_class($entity)
                     ));
                 }
-            } elseif (isset($collections[$property->getName()]) && (!$value instanceof Collection)) {
-                $value = $this->serialise(new Collection);
+            } elseif (isset($collections[$property->getName()]) && (!$value instanceof ResourceCollection)) {
+                $value = $this->serialise(new ResourceCollection);
             }
 
             $response[$property->getName()] = $value;

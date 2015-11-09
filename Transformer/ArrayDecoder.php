@@ -4,7 +4,7 @@ namespace Brain\Cell\Transformer;
 
 use Brain;
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\Transfer\Collection;
+use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 
 class ArrayDecoder implements
@@ -24,7 +24,7 @@ class ArrayDecoder implements
     protected function deserialise(TransferEntityInterface $entity, array $data)
     {
 
-        if ($entity instanceof Collection) {
+        if ($entity instanceof ResourceCollection) {
             $collection = $entity;
 
             if (!isset($data['data'])) {
@@ -69,7 +69,7 @@ class ArrayDecoder implements
             }
 
             if (isset($collections[$property->getName()])) {
-                $collection = new Collection($collections[$property->getName()]);
+                $collection = new ResourceCollection($collections[$property->getName()]);
                 $value = $this->deserialise($collection, $value);
             }
 
