@@ -32,14 +32,8 @@ class ArrayEncoder implements
         if ($entity instanceof ResourceCollection) {
             $data = [];
 
-            foreach ($entity->getData() as $resource) {
-
-                if (!$resource instanceof AbstractResource) {
-                    throw new RuntimeException('All entries within a ResourceCollection needs to be an instance of AbstractResource');
-                }
-
+            foreach ($entity as $resource) {
                 $data[] = $this->serialise($resource);
-
             }
 
             return [

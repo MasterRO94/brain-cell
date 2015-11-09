@@ -5,7 +5,6 @@ namespace Brain\Cell\Service;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\EntityFactory;
 use Brain\Cell\TransferEntityInterface;
-
 use Brain\Cell\TransformerDecoderInterface;
 use Brain\Cell\TransformerEncoderInterface;
 

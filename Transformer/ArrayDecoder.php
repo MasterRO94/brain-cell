@@ -27,16 +27,12 @@ class ArrayDecoder implements
         if ($entity instanceof ResourceCollection) {
             $collection = $entity;
 
-            if (!isset($data['data'])) {
-                return $collection;
-            }
-
             foreach ($data['data'] as $resource) {
                 $entity = $collection->getEntityClass();
                 $entity = new $entity;
 
                 $entity = $this->deserialise($entity, $resource);
-                $collection->getData()->add($entity);
+                $collection->add($entity);
 
             }
 
@@ -69,7 +65,8 @@ class ArrayDecoder implements
             }
 
             if (isset($collections[$property->getName()])) {
-                $collection = new ResourceCollection($collections[$property->getName()]);
+                $collection = new ResourceCollection;
+                $collection->setEntityClass($collections[$property->getName()]);
                 $value = $this->deserialise($collection, $value);
             }
 

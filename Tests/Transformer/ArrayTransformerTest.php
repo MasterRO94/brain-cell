@@ -130,8 +130,8 @@ class ArrayTransformerTest extends BaseTestCase
     public function canEncodeSimpleResourceCollection()
     {
         $collection = new ResourceCollection;
-        $collection->getData()->add(SimpleResourceMock::create(1, 'one'));
-        $collection->getData()->add(SimpleResourceMock::create(2, 'two'));
+        $collection->add(SimpleResourceMock::create(1, 'one'));
+        $collection->add(SimpleResourceMock::create(2, 'two'));
 
         $expected = [
             'data' => [
@@ -155,16 +155,14 @@ class ArrayTransformerTest extends BaseTestCase
      */
     public function canDecodeSimpleResourceCollectionAfterEncoding(array $data)
     {
-        $collection = new ResourceCollection(SimpleResourceMock::CLASS);
+        $collection = new ResourceCollection;
+        $collection->setEntityClass(SimpleResourceMock::CLASS);
 
-        /** @var ResourceCollection $response */
-        $response = $this->decoder->decode($collection, $data);
-        $this->assertInstanceOf(ResourceCollection::CLASS, $response, 'Decoder should return the given TransferEntityInterface');
+        /** @var ResourceCollection $collection */
+        $collection = $this->decoder->decode($collection, $data);
+        $this->assertInstanceOf(ResourceCollection::CLASS, $collection, 'Decoder should return the given TransferEntityInterface');
 
-        /** @var ResourceCollection|SimpleResourceMock[] $resources */
-        $resources = $response->getData();
-
-        foreach ($resources as $resource) {
+        foreach ($collection as $resource) {
             $this->assertInstanceOf(SimpleResourceMock::CLASS, $resource);
             $this->assertNotNull($resource->getId());
             $this->assertNotNull($resource->getName());
@@ -180,9 +178,9 @@ class ArrayTransformerTest extends BaseTestCase
     public function canEncodeSimpleResourceCollectionAssociations()
     {
         $collection = new ResourceCollection;
-        $collection->getData()->add(SimpleResourceMock::create(1, 'one'));
-        $collection->getData()->add(SimpleResourceMock::create(2, 'two'));
-        $collection->getData()->add(SimpleResourceMock::create(3, 'three'));
+        $collection->add(SimpleResourceMock::create(1, 'one'));
+        $collection->add(SimpleResourceMock::create(2, 'two'));
+        $collection->add(SimpleResourceMock::create(3, 'three'));
 
         $resource = SimpleResourceCollectionAssociationMock::create(3);
         $resource->setAssociations($collection);
@@ -224,10 +222,7 @@ class ArrayTransformerTest extends BaseTestCase
         $collection = $response->getAssociations();
         $this->assertInstanceOf(ResourceCollection::CLASS, $collection, 'Collection should have been created');
 
-        /** @var ResourceCollection|SimpleResourceMock[] $resources */
-        $resources = $collection->getData();
-
-        foreach ($resources as $resource) {
+        foreach ($collection as $resource) {
             $this->assertInstanceOf(SimpleResourceMock::CLASS, $resource);
             $this->assertNotNull($resource->getId());
             $this->assertNotNull($resource->getName());

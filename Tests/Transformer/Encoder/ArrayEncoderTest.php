@@ -6,7 +6,6 @@ use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
-use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\Transformer\ArrayEncoder;
 
 /**
@@ -55,23 +54,6 @@ class ArrayEncoderTest extends BaseTestCase
     {
         $internal = SimpleResourceMock::create(1, 'Tony Stark');
         $resource = SimpleResourceMock::create(2, $internal);
-
-        $this->encoder->encode($resource);
-
-    }
-
-    /**
-     * @test
-     *
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage All entries within a ResourceCollection needs to be an instance of AbstractResource
-     */
-    public function encoderRefusesToEncodeInvalidEntityResourceCollectionEntries()
-    {
-        $resource = SimpleResourceCollectionAssociationMock::create(10);
-
-        $resource->setAssociations(new ResourceCollection);
-        $resource->getAssociations()->getData()->add(new ArrayEncoder);
 
         $this->encoder->encode($resource);
 
