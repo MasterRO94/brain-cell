@@ -231,9 +231,4 @@ class ArrayTransformerTest extends BaseTestCase
 
     }
 
-    public function canDecodeMissingCollection()
-    {
-
-    }
-
 }
