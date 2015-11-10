@@ -6,6 +6,7 @@ use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
+use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayEncoder;
 
 /**
@@ -25,6 +26,22 @@ class ArrayEncoderTest extends BaseTestCase
     public function setUp()
     {
         $this->encoder = new ArrayEncoder;
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage Unexpected TransferEntityInterface
+     */
+    public function encoderWillThrowOnInvalidTransferEntityInterface()
+    {
+
+        /** @var TransferEntityInterface $entity */
+        $entity = $this->getMock(TransferEntityInterface::CLASS);
+
+        $this->encoder->encode($entity);
+
     }
 
     /**

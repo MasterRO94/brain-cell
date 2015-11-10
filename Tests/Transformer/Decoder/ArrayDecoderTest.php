@@ -2,8 +2,11 @@
 
 namespace Brain\Cell\Tests\Transformer\Decoder;
 
+use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
+use Brain\Cell\Transfer\ResourceCollection;
+use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayDecoder;
 
 /**
@@ -23,6 +26,44 @@ class ArrayDecoderTest extends BaseTestCase
     public function setUp()
     {
         $this->decoder = new ArrayDecoder;
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage The given $data must be an array
+     */
+    public function decoderWillThrowOnInvalidData()
+    {
+        $this->decoder->decode(new SimpleResourceMock, null);
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage Unexpected TransferEntityInterface
+     */
+    public function decoderWillThrowOnInvalidTransferEntityInterface()
+    {
+
+        /** @var TransferEntityInterface $entity */
+        $entity = $this->getMock(TransferEntityInterface::CLASS);
+
+        $this->decoder->decode($entity, []);
+
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage The ResourceCollection $data is not formatted correctly
+     */
+    public function decoderWillThrowWithInvalidCollectionData()
+    {
+        $this->decoder->decode(new ResourceCollection, [1, 2, 3]);
     }
 
     /**
