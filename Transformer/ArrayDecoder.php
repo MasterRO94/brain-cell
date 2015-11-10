@@ -59,8 +59,8 @@ class ArrayDecoder implements
 
         //  Return any associations that we should be validating.
         //  Note also that these look "deprecated" but are actually "internal".
-        $resources = $resource->getAssociatedResources() ?: [];
-        $collections = $resource->getAssociatedCollections() ?: [];
+        $resources = $resource->getAssociatedResources();
+        $collections = $resource->getAssociatedCollections();
 
         foreach ($data as $property => $value) {
 
