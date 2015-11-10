@@ -8,10 +8,9 @@ use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 
-use ReflectionClass;
-use ReflectionMethod;
-use ReflectionProperty;
-
+/**
+ * An encoder for transforming {@link TransferEntityInterface} to arrays.
+ */
 class ArrayEncoder implements
     Brain\Cell\TransformerEncoderInterface
 {
@@ -23,61 +22,93 @@ class ArrayEncoder implements
      */
     public function encode(TransferEntityInterface $entity)
     {
-        return $this->serialise($entity);
+
+        //  If we are encoding a collection of resources..
+        if ($entity instanceof ResourceCollection) {
+            return $this->collection($entity);
+        }
+
+        //  If we are encoding a resource..
+        if ($entity instanceof AbstractResource) {
+            return $this->resource($entity);
+        }
+
+        //  The encoder may not support encoding all transfer entities.
+        throw new RuntimeException(sprintf('Unexpected TransferEntityInterface "%s"', get_class($entity)));
+
     }
 
-    protected function serialise(TransferEntityInterface $entity)
+    /**
+     * Serialise a {@link AbstractResource}.
+     *
+     * @param AbstractResource $resource
+     * @return array
+     */
+    protected function resource(AbstractResource $resource)
     {
+        $data = [];
 
-        if ($entity instanceof ResourceCollection) {
-            $data = [];
+        //  Serialisation is done on the properties of the transfer objects.
+        //  For this we need to make use of reflection to get the protected properties.
+        $class = new \ReflectionClass(get_class($resource));
+        $properties = $class->getProperties(\ReflectionProperty::IS_PROTECTED);
 
-            foreach ($entity as $resource) {
-                $data[] = $this->serialise($resource);
-            }
+        //  Return any associations that we should be validating.
+        //  Note also that these look "deprecated" but are actually "internal".
+        $resources = $resource->getAssociatedResources();
+        $collections = $resource->getAssociatedCollections();
 
-            return [
-                'data' => $data
-            ];
-
-        }
-
-        $class = new ReflectionClass(get_class($entity));
-        $properties = $class->getProperties(ReflectionProperty::IS_PROTECTED);
-
-        $resources = [];
-        $collections = [];
-
-        if ($entity instanceof AbstractResource) {
-            $resources = $entity->getAssociatedResources() ?: [];
-            $collections = $entity->getAssociatedCollections() ?: [];
-        }
-
-        $response = [];
         foreach ($properties as $property) {
 
+            //  As properties are protected we mark them as public and get their value using reflection.
             $property->setAccessible(true);
-            $value = $property->getValue($entity);
+            $value = $property->getValue($resource);
 
             if ($value instanceof TransferEntityInterface) {
+
+                //  Simply if the property value is marked as a resource or collection then serialise it.
                 if (isset($resources[$property->getName()]) || isset($collections[$property->getName()])) {
-                    $value = $this->serialise($value);
+                    $value = $this->encode($value);
                 } else {
                     throw new RuntimeException(sprintf(
                         'Was not expected EntityResource at "%s" of "%s"',
                         $property->getName(),
-                        get_class($entity)
+                        get_class($resource)
                     ));
                 }
+
+            //  In this case if the property is marked as a collection but isn't we replace it.
             } elseif (isset($collections[$property->getName()]) && (!$value instanceof ResourceCollection)) {
-                $value = $this->serialise(new ResourceCollection);
+                $value = $this->collection(new ResourceCollection);
             }
 
-            $response[$property->getName()] = $value;
+            $data[$property->getName()] = $value;
 
         }
 
-        return $response;
+        return $data;
+
+    }
+
+    /**
+     * Serialise a {@link ResourceCollection}.
+     *
+     * @param ResourceCollection $collection
+     * @return array
+     */
+    protected function collection(ResourceCollection $collection)
+    {
+        $data = [];
+
+        foreach ($collection as $resource) {
+            $data[] = $this->resource($resource);
+        }
+
+        //  The format for the collection is place all the data within "data".
+        //  This is for later formatting where we can attach things like "links" and "pagination".
+        return [
+            'data' => $data
+        ];
 
     }
 
