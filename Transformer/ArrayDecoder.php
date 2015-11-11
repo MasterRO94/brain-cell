@@ -3,6 +3,7 @@
 namespace Brain\Cell\Transformer;
 
 use Brain;
+use Brain\Cell\AbstractTransformer;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -11,7 +12,7 @@ use Brain\Cell\TransferEntityInterface;
 /**
  * A decoder for hydrating {@link TransferEntityInterface}'s from arrays.
  */
-class ArrayDecoder implements
+class ArrayDecoder extends AbstractTransformer implements
     Brain\Cell\TransformerDecoderInterface
 {
 

@@ -3,6 +3,7 @@
 namespace Brain\Cell\Tests\Transformer\Decoder;
 
 use Brain\Cell\Exception\RuntimeException;
+use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
@@ -22,12 +23,16 @@ class ArrayDecoderTest extends BaseTestCase
     /** @var ArrayDecoder */
     protected $decoder;
 
+    /** @var TransferEntityMetaManagerService */
+    protected $manager;
+
     /**
      * {@inheritdoc}
      */
     public function setUp()
     {
-        $this->decoder = new ArrayDecoder;
+        $this->manager = new TransferEntityMetaManagerService;
+        $this->decoder = new ArrayDecoder($this->manager);
     }
 
     /**

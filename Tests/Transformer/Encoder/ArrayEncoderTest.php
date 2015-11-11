@@ -3,10 +3,12 @@
 namespace Brain\Cell\Tests\Transformer\Encoder;
 
 use Brain\Cell\Exception\RuntimeException;
+use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
+use Brain\Cell\Transfer\EntityMeta\Link;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayEncoder;
@@ -22,12 +24,16 @@ class ArrayEncoderTest extends BaseTestCase
     /** @var ArrayEncoder */
     protected $encoder;
 
+    /** @var TransferEntityMetaManagerService */
+    protected $manager;
+
     /**
      * {@inheritdoc}
      */
     public function setUp()
     {
-        $this->encoder = new ArrayEncoder;
+        $this->manager = new TransferEntityMetaManagerService;
+        $this->encoder = new ArrayEncoder($this->manager);
     }
 
     /**
@@ -164,6 +170,51 @@ class ArrayEncoderTest extends BaseTestCase
         ];
 
         $response = $this->encoder->encode($resource);
+        $this->assertEquals($expected, $response);
+
+    }
+
+    /**
+     * @test
+     */
+    public function encodeSimpleResourceWithMetaLinks()
+    {
+        $resource = SimpleResourceMock::create(10, 'Tony Stark');
+        $this->manager->addMetaLink($resource, new Link(Link::REL_SELF, 'https://domain/path/self'));
+        $this->manager->addMetaLink($resource, new Link(Link::REL_CREATE, 'https://domain/path/create'));
+
+        $expected = [
+            'id' => 10,
+            'name' => 'Tony Stark',
+            '$links' => [
+                Link::REL_SELF => 'https://domain/path/self',
+                Link::REL_CREATE => 'https://domain/path/create'
+            ]
+        ];
+
+        $response = $this->encoder->encode($resource);
+        $this->assertEquals($expected, $response);
+
+    }
+
+    /**
+     * @test
+     */
+    public function encodeResourceCollectionWithMetaLinks()
+    {
+        $collection = new ResourceCollection;
+        $this->manager->addMetaLink($collection, new Link(Link::REL_SELF, 'https://domain/path/self'));
+        $this->manager->addMetaLink($collection, new Link(Link::REL_CREATE, 'https://domain/path/create'));
+
+        $expected = [
+            'data' => [],
+            '$links' => [
+                Link::REL_SELF => 'https://domain/path/self',
+                Link::REL_CREATE => 'https://domain/path/create'
+            ]
+        ];
+
+        $response = $this->encoder->encode($collection);
         $this->assertEquals($expected, $response);
 
     }

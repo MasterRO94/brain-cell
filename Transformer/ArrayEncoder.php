@@ -3,6 +3,7 @@
 namespace Brain\Cell\Transformer;
 
 use Brain;
+use Brain\Cell\AbstractTransformer;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -11,7 +12,7 @@ use Brain\Cell\TransferEntityInterface;
 /**
  * An encoder for transforming {@link TransferEntityInterface} to arrays.
  */
-class ArrayEncoder implements
+class ArrayEncoder extends AbstractTransformer implements
     Brain\Cell\TransformerEncoderInterface
 {
 
@@ -64,6 +65,11 @@ class ArrayEncoder implements
             $property->setAccessible(true);
             $value = $property->getValue($resource);
 
+            //  All properties that start with underscores should be ignored.
+            if (substr($property->getName(), 0, 2) === '__') {
+                continue;
+            }
+
             if ($value instanceof TransferEntityInterface) {
 
                 //  Simply if the property value is marked as a resource or collection then serialise it.
@@ -86,6 +92,19 @@ class ArrayEncoder implements
 
         }
 
+        //  We need to handle the meta data against the resource now.
+        if ($this->transferEntityMetaManager->hasMetaLinks($resource)) {
+            $meta = $this->transferEntityMetaManager->getMeta($resource);
+            $links = [];
+
+            foreach ($meta->getLinks() as $link) {
+                $links[$link->getRel()] = $link->getHref();
+            }
+
+            $data['$links'] = $links;
+
+        }
+
         return $data;
 
     }
@@ -98,17 +117,31 @@ class ArrayEncoder implements
      */
     protected function collection(ResourceCollection $collection)
     {
-        $data = [];
+        $resources = [];
 
+        //  Loop over all the resources in the collection and serialise them.
         foreach ($collection as $resource) {
-            $data[] = $this->resource($resource);
+            $resources[] = $this->resource($resource);
         }
 
-        //  The format for the collection is place all the data within "data".
-        //  This is for later formatting where we can attach things like "links" and "pagination".
-        return [
-            'data' => $data
-        ];
+        //  The format of that default collection should always be an array with a data array.
+        //  Meta can then be added to this collection without breaking the data.
+        $data = ['data' => $resources];
+
+        //  Add the meta links if we have any.
+        if ($this->transferEntityMetaManager->hasMetaLinks($collection)) {
+            $meta = $this->transferEntityMetaManager->getMeta($collection);
+            $links = [];
+
+            foreach ($meta->getLinks() as $link) {
+                $links[$link->getRel()] = $link->getHref();
+            }
+
+            $data['$links'] = $links;
+
+        }
+
+        return $data;
 
     }
 

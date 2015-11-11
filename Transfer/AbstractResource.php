@@ -8,8 +8,11 @@ use Brain;
  * An abstract resource.
  */
 abstract class AbstractResource implements
-    Brain\Cell\TransferEntityInterface
+    Brain\Cell\TransferEntityInterface,
+    Brain\Cell\Transfer\EntityMeta\MetaContainingInterface
 {
+
+    use Brain\Cell\Transfer\EntityMeta\MetaContainingTrait;
 
     /**
      * Return all the associations that should be considered single resources.

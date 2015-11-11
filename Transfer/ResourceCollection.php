@@ -15,14 +15,21 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @see ArrayCollection
  */
 class ResourceCollection extends ArrayCollection implements
-    Brain\Cell\TransferEntityInterface
+    Brain\Cell\TransferEntityInterface,
+    Brain\Cell\Transfer\EntityMeta\MetaContainingInterface
 {
 
-    /** @var string */
-    protected $entityClass;
+    use Brain\Cell\Transfer\EntityMeta\MetaContainingTrait;
 
     /**
      * The entity class.
+     *
+     * @var string
+     */
+    protected $entityClass;
+
+    /**
+     * Return the entity class.
      *
      * @return string
      *
