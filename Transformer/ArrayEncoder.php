@@ -66,7 +66,7 @@ class ArrayEncoder extends AbstractTransformer implements
             $value = $property->getValue($resource);
 
             //  All properties that start with underscores should be ignored.
-            if (substr($property->getName(), 0, 2) === '__') {
+            if (substr($property->getName(), 0, 5) === 'brain') {
                 continue;
             }
 
