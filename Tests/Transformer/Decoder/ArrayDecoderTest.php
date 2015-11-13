@@ -8,6 +8,7 @@ use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
+use Brain\Cell\Transfer\EntityMeta\Link;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayDecoder;
@@ -199,6 +200,65 @@ class ArrayDecoderTest extends BaseTestCase
             $this->assertNotNull($resource->getId());
             $this->assertNotNull($resource->getName());
         }
+
+    }
+
+    /**
+     * @test
+     */
+    public function decodeSimpleResourceWithMetaLinks()
+    {
+
+        $data = [
+            'id' => 10,
+            'name' => 'Tony Stark',
+            '$links' => [
+                Link::REL_SELF => 'https://domain/path/self',
+                Link::REL_CREATE => 'https://domain/path/create'
+            ]
+        ];
+
+        $response = $this->decoder->decode(new SimpleResourceMock, $data);
+        $this->assertTrue($this->manager->hasMetaLinks($response), 'Links should have been populated');
+
+        $links = $this->manager->getMeta($response)->getLinks();
+
+        $link = $links[0];
+        $this->assertEquals(Link::REL_SELF, $link->getRel(), 'The first link should be the self');
+        $this->assertEquals('https://domain/path/self', $link->getHref());
+
+        $link = $links[1];
+        $this->assertEquals(Link::REL_CREATE, $link->getRel(), 'The second link should be the create');
+        $this->assertEquals('https://domain/path/create', $link->getHref());
+
+    }
+
+    /**
+     * @test
+     */
+    public function decodeResourceCollectionWithMetaLinks()
+    {
+
+        $data = [
+            'data' => [],
+            '$links' => [
+                Link::REL_SELF => 'https://domain/path/self',
+                Link::REL_CREATE => 'https://domain/path/create'
+            ]
+        ];
+
+        $response = $this->decoder->decode(new ResourceCollection, $data);
+        $this->assertTrue($this->manager->hasMetaLinks($response), 'Links should have been populated');
+
+        $links = $this->manager->getMeta($response)->getLinks();
+
+        $link = $links[0];
+        $this->assertEquals(Link::REL_SELF, $link->getRel(), 'The first link should be the self');
+        $this->assertEquals('https://domain/path/self', $link->getHref());
+
+        $link = $links[1];
+        $this->assertEquals(Link::REL_CREATE, $link->getRel(), 'The second link should be the create');
+        $this->assertEquals('https://domain/path/create', $link->getHref());
 
     }
 

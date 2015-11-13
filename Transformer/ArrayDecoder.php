@@ -6,8 +6,10 @@ use Brain;
 use Brain\Cell\AbstractTransformer;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\EntityMeta\MetaContainingInterface;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
+use Brain\Cell\Transfer\EntityMeta\Link;
 
 /**
  * A decoder for hydrating {@link TransferEntityInterface}'s from arrays.
@@ -92,6 +94,7 @@ class ArrayDecoder extends AbstractTransformer implements
 
         }
 
+        $this->handleMetaLinks($resource, $data);
         return $resource;
     }
 
@@ -118,7 +121,28 @@ class ArrayDecoder extends AbstractTransformer implements
 
         }
 
+        $this->handleMetaLinks($collection, $data);
         return $collection;
+
+    }
+
+    /**
+     * Attach {@link Link}s that are found in the given $data.
+     *
+     * @param MetaContainingInterface $entity
+     * @param array $data
+     */
+    protected function handleMetaLinks(MetaContainingInterface $entity, array $data)
+    {
+
+        //  Check for the links property.
+        if (!isset($data['$links'])) {
+            return;
+        }
+
+        foreach ($data['$links'] as $rel => $href) {
+            $this->transferEntityMetaManager->addMetaLink($entity, new Link($rel, $href));
+        }
 
     }
 
