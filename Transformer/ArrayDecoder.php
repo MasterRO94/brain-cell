@@ -6,10 +6,10 @@ use Brain;
 use Brain\Cell\AbstractTransformer;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\EntityMeta\Link;
 use Brain\Cell\Transfer\EntityMeta\MetaContainingInterface;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
-use Brain\Cell\Transfer\EntityMeta\Link;
 
 /**
  * A decoder for hydrating {@link TransferEntityInterface}'s from arrays.
