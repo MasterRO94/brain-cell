@@ -33,12 +33,12 @@ class ArrayDecoder extends AbstractTransformer implements
 
         //  If we are decoding a collection of resources..
         if ($entity instanceof ResourceCollection) {
-            return $this->collection($entity, $data);
+            return $this->decodeCollection($entity, $data);
         }
 
         //  If we are decoding a resource..
         if ($entity instanceof AbstractResource) {
-            return $this->resource($entity, $data);
+            return $this->decodeResource($entity, $data);
         }
 
         //  The decoder may not support serialising all transfer entities.
@@ -53,7 +53,7 @@ class ArrayDecoder extends AbstractTransformer implements
      * @param array $data
      * @return AbstractResource
      */
-    protected function resource(AbstractResource $resource, array $data)
+    protected function decodeResource(AbstractResource $resource, array $data)
     {
 
         //  Serialisation is done on the properties of the transfer objects.
@@ -65,27 +65,26 @@ class ArrayDecoder extends AbstractTransformer implements
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
 
-        foreach ($data as $property => $value) {
+        foreach ($data as $propertyName => $value) {
 
             //  The encoder will ignore any values within the $data that are not against the object.
             //  At some point we might want to change this out so we are more strict.
-            if (!$class->hasProperty($property)) {
+            if (!$class->hasProperty($propertyName)) {
                 continue;
             }
 
-            $property = $class->getProperty($property);
+            $property = $class->getProperty($propertyName);
 
             //  Decode resources.
             if (isset($resources[$property->getName()])) {
                 $class = new $resources[$property->getName()];
-                $value = $this->resource($class, $value);
-            }
+                $value = $this->decodeResource($class, $value);
 
             //  Decode collections.
-            if (isset($collections[$property->getName()])) {
+            } elseif (isset($collections[$property->getName()])) {
                 $collection = new ResourceCollection;
                 $collection->setEntityClass($collections[$property->getName()]);
-                $value = $this->collection($collection, $value);
+                $value = $this->decodeCollection($collection, $value);
             }
 
             //  Using reflection set the protected property.
@@ -105,7 +104,7 @@ class ArrayDecoder extends AbstractTransformer implements
      * @param array $data
      * @return ResourceCollection
      */
-    protected function collection(ResourceCollection $collection, array $data)
+    protected function decodeCollection(ResourceCollection $collection, array $data)
     {
 
         if (!isset($data['data'])) {
@@ -116,7 +115,7 @@ class ArrayDecoder extends AbstractTransformer implements
             $entity = $collection->getEntityClass();
             $entity = new $entity;
 
-            $entity = $this->resource($entity, $resource);
+            $entity = $this->decodeResource($entity, $resource);
             $collection->add($entity);
 
         }

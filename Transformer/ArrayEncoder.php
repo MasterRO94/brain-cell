@@ -26,12 +26,12 @@ class ArrayEncoder extends AbstractTransformer implements
 
         //  If we are encoding a collection of resources..
         if ($entity instanceof ResourceCollection) {
-            return $this->collection($entity);
+            return $this->encodeCollection($entity);
         }
 
         //  If we are encoding a resource..
         if ($entity instanceof AbstractResource) {
-            return $this->resource($entity);
+            return $this->encodeResource($entity);
         }
 
         //  The encoder may not support encoding all transfer entities.
@@ -45,7 +45,7 @@ class ArrayEncoder extends AbstractTransformer implements
      * @param AbstractResource $resource
      * @return array
      */
-    protected function resource(AbstractResource $resource)
+    protected function encodeResource(AbstractResource $resource)
     {
         $data = [];
 
@@ -65,7 +65,8 @@ class ArrayEncoder extends AbstractTransformer implements
             $property->setAccessible(true);
             $value = $property->getValue($resource);
 
-            //  All properties that start with underscores should be ignored.
+            //  All properties prefixed with "brain" are to be ignored.
+            //  There is a reason why we cannot make use of special characters as I intended to do, cant remember.
             if (substr($property->getName(), 0, 5) === 'brain') {
                 continue;
             }
@@ -85,7 +86,7 @@ class ArrayEncoder extends AbstractTransformer implements
 
             //  In this case if the property is marked as a collection but isn't we replace it.
             } elseif (isset($collections[$property->getName()]) && (!$value instanceof ResourceCollection)) {
-                $value = $this->collection(new ResourceCollection);
+                $value = $this->encodeCollection(new ResourceCollection);
             }
 
             $data[$property->getName()] = $value;
@@ -115,13 +116,13 @@ class ArrayEncoder extends AbstractTransformer implements
      * @param ResourceCollection $collection
      * @return array
      */
-    protected function collection(ResourceCollection $collection)
+    protected function encodeCollection(ResourceCollection $collection)
     {
         $resources = [];
 
         //  Loop over all the resources in the collection and serialise them.
         foreach ($collection as $resource) {
-            $resources[] = $this->resource($resource);
+            $resources[] = $this->encodeResource($resource);
         }
 
         //  The format of that default collection should always be an array with a data array.

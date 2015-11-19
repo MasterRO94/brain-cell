@@ -219,10 +219,10 @@ class ArrayDecoderTest extends BaseTestCase
             ]
         ];
 
-        $response = $this->decoder->decode(new SimpleResourceMock, $data);
-        $this->assertTrue($this->manager->hasMetaLinks($response), 'Links should have been populated');
+        $resource = $this->decoder->decode(new SimpleResourceMock, $data);
+        $this->assertTrue($this->manager->hasMetaLinks($resource), 'Links should have been populated');
 
-        $links = $this->manager->getMeta($response)->getLinks();
+        $links = $this->manager->getMeta($resource)->getLinks();
 
         $link = $links[0];
         $this->assertEquals(Link::REL_SELF, $link->getRel(), 'The first link should be the self');
