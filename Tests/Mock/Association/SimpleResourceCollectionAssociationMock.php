@@ -22,7 +22,7 @@ class SimpleResourceCollectionAssociationMock extends AbstractResource
     public static function create($id)
     {
         $instance = new static;
-        $instance->setId($id);
+        $instance->id = $id;
         return $instance;
     }
 
@@ -42,16 +42,6 @@ class SimpleResourceCollectionAssociationMock extends AbstractResource
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**

@@ -21,8 +21,8 @@ class SimpleResourceMock extends AbstractResource
     public static function create($id, $name)
     {
         $instance = new static;
-        $instance->setId($id);
-        $instance->setName($name);
+        $instance->id = $id;
+        $instance->name = $name;
         return $instance;
     }
 
@@ -35,31 +35,11 @@ class SimpleResourceMock extends AbstractResource
     }
 
     /**
-     * @param int $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @param string $name
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
     }
 
 }
