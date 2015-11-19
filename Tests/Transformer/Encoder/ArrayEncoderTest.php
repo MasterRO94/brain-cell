@@ -61,7 +61,7 @@ class ArrayEncoderTest extends BaseTestCase
 
         $expected = [
             'id' => 10,
-            'associations' => ['data' => []]
+            'associatedCollection' => ['data' => []]
         ];
 
         $response = $this->encoder->encode($resource);
@@ -109,11 +109,11 @@ class ArrayEncoderTest extends BaseTestCase
         $resource = SimpleResourceMock::create(1, 'string');
 
         $parent = SimpleResourceAssociationMock::create(2);
-        $parent->setAssociation($resource);
+        $parent->setAssociatedResource($resource);
 
         $expected = [
             'id' => 2,
-            'association' => [
+            'associatedResource' => [
                 'id' => 1,
                 'name' => 'string'
             ]
@@ -156,11 +156,11 @@ class ArrayEncoderTest extends BaseTestCase
         $collection->add(SimpleResourceMock::create(3, 'three'));
 
         $resource = SimpleResourceCollectionAssociationMock::create(3);
-        $resource->setAssociations($collection);
+        $resource->setAssociatedCollection($collection);
 
         $expected = [
             'id' => 3,
-            'associations' => [
+            'associatedCollection' => [
                 'data' => [
                     ['id' => 1, 'name' => 'one'],
                     ['id' => 2, 'name' => 'two'],

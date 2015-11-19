@@ -12,7 +12,7 @@ class SimpleResourceAssociationMock extends AbstractResource
     protected $id;
 
     /** @var SimpleResourceMock */
-    protected $association;
+    protected $associatedResource;
 
     /**
      * @param int $id
@@ -31,7 +31,7 @@ class SimpleResourceAssociationMock extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'association' => SimpleResourceMock::CLASS
+            'associatedResource' => SimpleResourceMock::CLASS
         ];
     }
 
@@ -46,18 +46,18 @@ class SimpleResourceAssociationMock extends AbstractResource
     /**
      * @return SimpleResourceMock
      */
-    public function getAssociation()
+    public function getAssociatedResource()
     {
-        return $this->association;
+        return $this->associatedResource;
     }
 
     /**
-     * @param SimpleResourceMock $association
+     * @param SimpleResourceMock $associatedResource
      * @return $this
      */
-    public function setAssociation(SimpleResourceMock $association)
+    public function setAssociatedResource(SimpleResourceMock $associatedResource)
     {
-        $this->association = $association;
+        $this->associatedResource = $associatedResource;
         return $this;
     }
 

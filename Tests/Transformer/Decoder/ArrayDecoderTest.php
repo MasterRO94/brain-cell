@@ -122,7 +122,7 @@ class ArrayDecoderTest extends BaseTestCase
 
         $data = [
             'id' => 2,
-            'association' => [
+            'associatedResource' => [
                 'id' => 1,
                 'name' => 'string'
             ]
@@ -134,10 +134,11 @@ class ArrayDecoderTest extends BaseTestCase
 
         $this->assertEquals($data['id'], $response->getId());
 
-        $association = $response->getAssociation();
+        $association = $response->getAssociatedResource();
         $this->assertInstanceOf(SimpleResourceMock::CLASS, $association);
-        $this->assertEquals($data['association']['id'], $association->getId());
-        $this->assertEquals($data['association']['name'], $association->getName());
+        $this->assertArrayHasKey('associatedResource', $data);
+        $this->assertEquals($data['associatedResource']['id'], $association->getId());
+        $this->assertEquals($data['associatedResource']['name'], $association->getName());
 
     }
 
@@ -177,7 +178,7 @@ class ArrayDecoderTest extends BaseTestCase
 
         $data = [
             'id' => 3,
-            'associations' => [
+            'associatedCollection' => [
                 'data' => [
                     ['id' => 1, 'name' => 'one'],
                     ['id' => 2, 'name' => 'two'],
@@ -192,7 +193,7 @@ class ArrayDecoderTest extends BaseTestCase
 
         $this->assertEquals($data['id'], $response->getId());
 
-        $collection = $response->getAssociations();
+        $collection = $response->getAssociatedCollection();
         $this->assertInstanceOf(ResourceCollection::CLASS, $collection, 'Collection should have been created');
 
         foreach ($collection as $resource) {
