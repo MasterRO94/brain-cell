@@ -73,7 +73,7 @@ class ArrayEncoderTest extends BaseTestCase
      * @test
      *
      * @expectedException RuntimeException
-     * @expectedExceptionMessage Was not expected EntityResource at "name" of "Brain\Cell\Tests\Mock\SimpleResourceMock"
+     * @expectedExceptionMessage Did not expect TransferEntityInterface in "name" of "Brain\Cell\Tests\Mock\SimpleResourceMock"
      */
     public function encoderRefusesToEncodeInvalidEntityResourceProperties()
     {

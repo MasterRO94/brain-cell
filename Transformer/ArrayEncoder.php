@@ -78,7 +78,7 @@ class ArrayEncoder extends AbstractTransformer implements
                     $value = $this->encode($value);
                 } else {
                     throw new RuntimeException(sprintf(
-                        'Was not expected EntityResource at "%s" of "%s"',
+                        'Did not expect TransferEntityInterface in "%s" of "%s"',
                         $property->getName(),
                         get_class($resource)
                     ));

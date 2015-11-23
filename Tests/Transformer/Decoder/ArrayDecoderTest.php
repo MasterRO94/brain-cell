@@ -96,8 +96,11 @@ class ArrayDecoderTest extends BaseTestCase
 
     /**
      * @test
+     *
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage Additional property "occupation"
      */
-    public function decoderWillIgnoreExtraProperties()
+    public function decoderWillThrowWithAdditionalProperties()
     {
 
         $data = [
@@ -111,6 +114,23 @@ class ArrayDecoderTest extends BaseTestCase
 
         $this->assertEquals(100, $resource->getId());
         $this->assertEquals('Tony Stark', $resource->getName());
+
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage Missing property "name"
+     */
+    public function decoderWillThrowWithMissingProperties()
+    {
+
+        $data = [
+            'id' => 100
+        ];
+
+        $this->decoder->decode(new SimpleResourceMock, $data);
 
     }
 
