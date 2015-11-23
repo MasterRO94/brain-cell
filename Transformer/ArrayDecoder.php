@@ -36,11 +36,6 @@ class ArrayDecoder extends AbstractTransformer
     public function decode(TransferEntityInterface $entity, array $data)
     {
 
-        //  If the given $data is not an array we can throw.
-        if (!is_array($data)) {
-            throw new RuntimeException('The given $data must be an array');
-        }
-
         //  If we are decoding a collection of resources..
         if ($entity instanceof ResourceCollection) {
             return $this->decodeCollection($entity, $data);
