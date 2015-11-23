@@ -12,13 +12,13 @@ use Brain\Cell\TransferEntityInterface;
 /**
  * An encoder for transforming {@link TransferEntityInterface} to arrays.
  */
-class ArrayEncoder extends AbstractTransformer implements
-    Brain\Cell\TransformerEncoderInterface
+class ArrayEncoder extends AbstractTransformer
 {
 
     /**
-     * {@inheritdoc}
+     * Encode the given {@link TransferEntityInterface} and return the serialised view.
      *
+     * @param TransferEntityInterface $entity
      * @return array
      */
     public function encode(TransferEntityInterface $entity)

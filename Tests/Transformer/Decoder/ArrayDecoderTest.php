@@ -40,17 +40,6 @@ class ArrayDecoderTest extends BaseTestCase
      * @test
      *
      * @expectedException RuntimeException
-     * @expectedExceptionMessage The given $data must be an array
-     */
-    public function decoderWillThrowOnInvalidData()
-    {
-        $this->decoder->decode(new SimpleResourceMock, null);
-    }
-
-    /**
-     * @test
-     *
-     * @expectedException RuntimeException
      * @expectedExceptionMessage Unexpected TransferEntityInterface
      */
     public function decoderWillThrowOnInvalidTransferEntityInterface()

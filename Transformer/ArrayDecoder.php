@@ -14,8 +14,7 @@ use Brain\Cell\TransferEntityInterface;
 /**
  * A decoder for hydrating {@link TransferEntityInterface}'s from arrays.
  */
-class ArrayDecoder extends AbstractTransformer implements
-    Brain\Cell\TransformerDecoderInterface
+class ArrayDecoder extends AbstractTransformer
 {
 
     /**
@@ -28,11 +27,13 @@ class ArrayDecoder extends AbstractTransformer implements
     ];
 
     /**
-     * {@inheritdoc}
+     * Decode the given $data and populate the given {@link TransferEntityInterface}.
      *
+     * @param TransferEntityInterface $entity
      * @param array $data
+     * @return TransferEntityInterface
      */
-    public function decode(TransferEntityInterface $entity, $data)
+    public function decode(TransferEntityInterface $entity, array $data)
     {
 
         //  If the given $data is not an array we can throw.

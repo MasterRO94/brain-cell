@@ -5,8 +5,8 @@ namespace Brain\Cell\Service;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\TransferEntityInterface;
-use Brain\Cell\TransformerDecoderInterface;
-use Brain\Cell\TransformerEncoderInterface;
+use Brain\Cell\Transformer\ArrayDecoder;
+use Brain\Cell\Transformer\ArrayEncoder;
 
 /**
  * The resource handler service.
@@ -31,14 +31,14 @@ class ResourceHandlerService
     /**
      * The {@link TransformerEncoderInterface}.
      *
-     * @var TransformerEncoderInterface
+     * @var ArrayEncoder
      */
     protected $encoder;
 
     /**
      * The {@link TransformerDecoderInterface}.
      *
-     * @var TransformerDecoderInterface
+     * @var ArrayDecoder
      */
     protected $decoder;
 
@@ -46,14 +46,11 @@ class ResourceHandlerService
      * Construct a new {@link ResourceHandlerService}.
      *
      * @param EntityResourceFactory $entityFactory
-     * @param TransformerEncoderInterface $encoder
-     * @param TransformerDecoderInterface $decoder
+     * @param ArrayEncoder $encoder
+     * @param ArrayDecoder $decoder
      */
-    public function __construct(
-        EntityResourceFactory $entityFactory,
-        TransformerEncoderInterface $encoder,
-        TransformerDecoderInterface $decoder
-    ) {
+    public function __construct(EntityResourceFactory $entityFactory, ArrayEncoder $encoder, ArrayDecoder $decoder)
+    {
         $this->factory = $entityFactory;
         $this->encoder = $encoder;
         $this->decoder = $decoder;

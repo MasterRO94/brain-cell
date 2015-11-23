@@ -6,8 +6,8 @@ use Brain\Cell\Service\ResourceHandlerService;
 use Brain\Cell\Tests\BaseTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\EntityResourceFactory;
-use Brain\Cell\TransformerDecoderInterface;
-use Brain\Cell\TransformerEncoderInterface;
+use Brain\Cell\Transformer\ArrayDecoder;
+use Brain\Cell\Transformer\ArrayEncoder;
 
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
@@ -21,10 +21,10 @@ class ResourceHandlerServiceTest extends BaseTestCase
     /** @var MockObject|EntityResourceFactory */
     protected $factoryMock;
 
-    /** @var MockObject|TransformerEncoderInterface */
+    /** @var MockObject|ArrayEncoder */
     protected $encoderMock;
 
-    /** @var MockObject|TransformerDecoderInterface */
+    /** @var MockObject|ArrayDecoder */
     protected $decoderMock;
 
     /** @var ResourceHandlerService */
@@ -41,8 +41,14 @@ class ResourceHandlerServiceTest extends BaseTestCase
         $this->resource = new SimpleResourceMock;
 
         $this->factoryMock = $this->getMock(EntityResourceFactory::CLASS);
-        $this->encoderMock = $this->getMock(TransformerEncoderInterface::CLASS);
-        $this->decoderMock = $this->getMock(TransformerDecoderInterface::CLASS);
+
+        $builder = $this->getMockBuilder(ArrayEncoder::CLASS);
+        $builder->disableOriginalConstructor();
+        $this->encoderMock = $builder->getMock();
+
+        $builder = $this->getMockBuilder(ArrayDecoder::CLASS);
+        $builder->disableOriginalConstructor();
+        $this->decoderMock = $builder->getMock();
 
         $this->service = new ResourceHandlerService(
             $this->factoryMock,
