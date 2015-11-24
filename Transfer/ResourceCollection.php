@@ -32,12 +32,19 @@ class ResourceCollection extends ArrayCollection implements
      * Return the entity class.
      *
      * @return string
+     * @throws RuntimeException if entity class is not present.
      *
      * @internal
      */
-    public function getEntityClass()
+    public function getEntityClassOrThrow()
     {
+
+        if (is_null($this->entityClass)) {
+            throw new RuntimeException('Missing entity class for collection');
+        }
+
         return $this->entityClass;
+
     }
 
     /**

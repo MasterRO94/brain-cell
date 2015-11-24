@@ -157,7 +157,7 @@ class ArrayDecoder extends AbstractTransformer
         }
 
         foreach ($data['data'] as $resource) {
-            $entity = $collection->getEntityClass();
+            $entity = $collection->getEntityClassOrThrow();
             $entity = new $entity;
 
             $entity = $this->decodeResource($entity, $resource);

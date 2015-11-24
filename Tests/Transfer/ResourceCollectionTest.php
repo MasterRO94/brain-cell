@@ -30,6 +30,17 @@ class ResourceCollectionTest extends BaseTestCase
      * @test
      *
      * @expectedException RuntimeException
+     * @expectedExceptionMessage Missing entity class for collection
+     */
+    public function getEntityClassOrThrowWillThrow()
+    {
+        $this->collection->getEntityClassOrThrow();
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException RuntimeException
      * @expectedExceptionMessage ResourceCollection::add() only accepts instances of TransferEntityInterface
      */
     public function collectionRestrictsAddedEntriesToInstancesOfTransferEntityInterface()
