@@ -142,6 +142,19 @@ class ArrayEncoder extends AbstractTransformer
 
         }
 
+        //  Assign paginator to returning array
+        if ($this->transferEntityMetaManager->hasMetaPaginator($collection)) {
+            $meta = $this->transferEntityMetaManager->getMeta($collection);
+
+            $paginator = $meta->getPaginator();
+
+            $data['$pagination'] = [
+                'count' => $paginator->getNbResults(),
+                'limit' => $paginator->getMaxPerPage(),
+                'page' => $paginator->getCurrentPage()
+            ];
+        }
+
         return $data;
 
     }

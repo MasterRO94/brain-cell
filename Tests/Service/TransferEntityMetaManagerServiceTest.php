@@ -8,6 +8,9 @@ use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\EntityMeta\Link;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use Pagerfanta\Pagerfanta;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+
 /**
  * @group cell
  * @group service
@@ -18,12 +21,20 @@ class TransferEntityMetaManagerServiceTest extends BaseTestCase
     /** @var TransferEntityMetaManagerService */
     protected $manager;
 
+    /** @var MockObject|Pagerfanta */
+    protected $paginatorMock;
+
     /**
      * {@inheritdoc}
      */
     public function setUp()
     {
         $this->manager = new TransferEntityMetaManagerService;
+
+        $builder = $this->getMockBuilder(Pagerfanta::CLASS);
+        $builder->disableOriginalConstructor();
+
+        $this->paginatorMock = $builder->getMock();
     }
 
     /**
@@ -51,4 +62,15 @@ class TransferEntityMetaManagerServiceTest extends BaseTestCase
 
     }
 
+    /**
+     * @test
+     */
+    public function managerDetectsPaginatorAgainstTransferEntities()
+    {
+        $resource = new SimpleResourceMock;
+
+        $this->manager->setMetaPaginator($resource, $this->paginatorMock);
+        $response = $this->manager->hasMetaPaginator($resource);
+        $this->assertTrue($response, 'Manager should detect meta paginator');
+    }
 }

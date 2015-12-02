@@ -13,6 +13,9 @@ use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayEncoder;
 
+use Pagerfanta\Pagerfanta;
+use PHPUnit_Framework_MockObject_MockObject as MockObject;
+
 /**
  * @group cell
  * @group transformer
@@ -27,6 +30,9 @@ class ArrayEncoderTest extends BaseTestCase
     /** @var TransferEntityMetaManagerService */
     protected $manager;
 
+    /** @var MockObject|Pagerfanta */
+    protected $paginatorMock;
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +40,11 @@ class ArrayEncoderTest extends BaseTestCase
     {
         $this->manager = new TransferEntityMetaManagerService;
         $this->encoder = new ArrayEncoder($this->manager);
+
+        $builder = $this->getMockBuilder(Pagerfanta::CLASS);
+        $builder->disableOriginalConstructor();
+
+        $this->paginatorMock = $builder->getMock();
     }
 
     /**
@@ -217,6 +228,41 @@ class ArrayEncoderTest extends BaseTestCase
         $response = $this->encoder->encode($collection);
         $this->assertEquals($expected, $response);
 
+    }
+
+    /**
+     * @group asd
+     * @test
+     */
+    public function encodeResourceCollectionWithPaginator()
+    {
+        $collection = new ResourceCollection;
+
+        $this->paginatorMock->expects($this->once())
+            ->method('getNbResults')
+            ->willReturn(3);
+
+        $this->paginatorMock->expects($this->once())
+            ->method('getMaxPerPage')
+            ->willReturn(1);
+
+        $this->paginatorMock->expects($this->once())
+            ->method('getCurrentPage')
+            ->willReturn(1);
+
+        $this->manager->setMetaPaginator($collection, $this->paginatorMock);
+
+        $expected = [
+            'data' => [],
+            '$pagination' => [
+                'count' => 3,
+                'limit' => 1,
+                'page' => 1
+            ]
+        ];
+
+        $response = $this->encoder->encode($collection);
+        $this->assertEquals($expected, $response);
     }
 
 }

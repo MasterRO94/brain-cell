@@ -6,6 +6,8 @@ use Brain\Cell\Transfer\EntityMeta;
 use Brain\Cell\Transfer\EntityMeta\Link;
 use Brain\Cell\Transfer\EntityMeta\MetaContainingInterface;
 
+use Pagerfanta\Pagerfanta;
+
 /**
  * The transfer entity meta manager service.
  *
@@ -48,4 +50,25 @@ class TransferEntityMetaManagerService
         $this->getMeta($entity)->getLinks()->add($link);
     }
 
+    /**
+     * Check if given entity has paginator object
+     *
+     * @param MetaContainingInterface $entity
+     * @return bool
+     */
+    public function hasMetaPaginator(MetaContainingInterface $entity)
+    {
+        return $this->getMeta($entity)->getPaginator() !== null;
+    }
+
+    /**
+     * Set a new meta paginator object to the given entity
+     *
+     * @param MetaContainingInterface $entity
+     * @param Pagerfanta $pagerfanta
+     */
+    public function setMetaPaginator(MetaContainingInterface $entity, Pagerfanta $pagerfanta)
+    {
+        $this->getMeta($entity)->setPaginator($pagerfanta);
+    }
 }
