@@ -231,7 +231,6 @@ class ArrayEncoderTest extends BaseTestCase
     }
 
     /**
-     * @group asd
      * @test
      */
     public function encodeResourceCollectionWithPaginator()

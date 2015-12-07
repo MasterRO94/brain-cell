@@ -69,8 +69,14 @@ class TransferEntityMetaManagerServiceTest extends BaseTestCase
     {
         $resource = new SimpleResourceMock;
 
-        $this->manager->setMetaPaginator($resource, $this->paginatorMock);
         $response = $this->manager->hasMetaPaginator($resource);
+
+        $this->assertFalse($response, $this->paginatorMock, 'Manager should not detect meta paginator now');
+
+        $this->manager->setMetaPaginator($resource, $this->paginatorMock);
+
+        $response = $this->manager->hasMetaPaginator($resource);
+
         $this->assertTrue($response, 'Manager should detect meta paginator');
     }
 }
