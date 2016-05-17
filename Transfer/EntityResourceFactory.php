@@ -37,15 +37,15 @@ class EntityResourceFactory
      *
      * @param TransferEntityInterface $class
      * @param string $property
-     * @param mixed $id
+     * @param mixed $value
      * @return TransferEntityInterface
      */
-    public function setProperty($class, $property, $id)
+    public function setProperty($class, $property, $value)
     {
         $reflection = new \ReflectionClass(get_class($class));
         $property = $reflection->getProperty($property);
         $property->setAccessible(true);
-        $property->setValue($class, $id);
+        $property->setValue($class, $value);
         return $class;
     }
 
