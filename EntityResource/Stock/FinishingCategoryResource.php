@@ -25,7 +25,7 @@ class FinishingCategoryResource extends AbstractResource
     protected $label;
 
     /**
-     * @var FinishingRepository[]
+     * @var FinishingResource[]
      */
     protected $attributes = [];
 
@@ -35,7 +35,7 @@ class FinishingCategoryResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'attributes' => FinishingRepository::CLASS
+            'attributes' => FinishingResource::CLASS
         ];
     }
 
@@ -84,7 +84,7 @@ class FinishingCategoryResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|FinishingRepository[]
+     * @return ResourceCollection|FinishingResource[]
      */
     public function getAttributes()
     {
@@ -92,7 +92,7 @@ class FinishingCategoryResource extends AbstractResource
     }
 
     /**
-     * @param ResourceCollection|FinishingRepository[] $attributes
+     * @param ResourceCollection|FinishingResource[] $attributes
      * @return FinishingCategoryRepository
      */
     public function setAttributes(ResourceCollection $attributes)

@@ -4,10 +4,7 @@ namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\Transfer\AbstractResource;
 
-/**
- * A resource representing an attribute.
- */
-class AttributeRepository extends AbstractResource
+class FinishingResource extends AbstractResource
 {
 
     /**
@@ -43,7 +40,7 @@ class AttributeRepository extends AbstractResource
 
     /**
      * @param string $alias
-     * @return AttributeRepository
+     * @return FinishingResource
      */
     public function setAlias($alias)
     {
@@ -61,7 +58,7 @@ class AttributeRepository extends AbstractResource
 
     /**
      * @param string $label
-     * @return AttributeRepository
+     * @return FinishingResource
      */
     public function setLabel($label)
     {

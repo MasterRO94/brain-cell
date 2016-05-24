@@ -8,7 +8,7 @@ use Brain\Cell\Transfer\ResourceCollection;
 /**
  * A resource representing an attribute.
  */
-class AttributeCategoryRepository extends AbstractResource
+class AttributeCategoryResource extends AbstractResource
 {
 
     /**
@@ -27,7 +27,7 @@ class AttributeCategoryRepository extends AbstractResource
     protected $label;
 
     /**
-     * @var AttributeRepository[]
+     * @var AttributeResource[]
      */
     protected $attributes = [];
 
@@ -37,7 +37,7 @@ class AttributeCategoryRepository extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'attributes' => AttributeRepository::CLASS
+            'attributes' => AttributeResource::CLASS
         ];
     }
 
@@ -59,7 +59,7 @@ class AttributeCategoryRepository extends AbstractResource
 
     /**
      * @param string $alias
-     * @return AttributeCategoryRepository
+     * @return AttributeCategoryResource
      */
     public function setAlias($alias)
     {
@@ -77,7 +77,7 @@ class AttributeCategoryRepository extends AbstractResource
 
     /**
      * @param string $label
-     * @return AttributeCategoryRepository
+     * @return AttributeCategoryResource
      */
     public function setLabel($label)
     {
@@ -86,7 +86,7 @@ class AttributeCategoryRepository extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|AttributeRepository[]
+     * @return ResourceCollection|AttributeResource[]
      */
     public function getAttributes()
     {
@@ -94,8 +94,8 @@ class AttributeCategoryRepository extends AbstractResource
     }
 
     /**
-     * @param ResourceCollection|AttributeRepository[] $attributes
-     * @return AttributeCategoryRepository
+     * @param ResourceCollection|AttributeResource[] $attributes
+     * @return AttributeCategoryResource
      */
     public function setAttributes(ResourceCollection $attributes)
     {
