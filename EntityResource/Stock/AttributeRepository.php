@@ -1,13 +1,13 @@
 <?php
 
-namespace Brain\Cell\EntityResource;
+namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
- * A resource representing a type of product.
+ * A resource representing an attribute.
  */
-class ProductType extends AbstractResource
+class AttributeRepository extends AbstractResource
 {
 
     /**
@@ -23,7 +23,7 @@ class ProductType extends AbstractResource
     /**
      * @var string
      */
-    protected $name;
+    protected $label;
 
     /**
      * @return int
@@ -43,7 +43,7 @@ class ProductType extends AbstractResource
 
     /**
      * @param string $alias
-     * @return Attribute
+     * @return AttributeRepository
      */
     public function setAlias($alias)
     {
@@ -54,18 +54,18 @@ class ProductType extends AbstractResource
     /**
      * @return string
      */
-    public function getName()
+    public function getLabel()
     {
-        return $this->name;
+        return $this->label;
     }
 
     /**
-     * @param string $name
-     * @return $this
+     * @param string $label
+     * @return AttributeRepository
      */
-    public function setName($name)
+    public function setLabel($label)
     {
-        $this->name = $name;
+        $this->label = $label;
         return $this;
     }
 

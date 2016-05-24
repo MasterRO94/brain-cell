@@ -1,13 +1,10 @@
 <?php
 
-namespace Brain\Cell\EntityResource\WizardOption;
+namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\Transfer\AbstractResource;
 
-/**
- * A resource representing an attribute.
- */
-class Attribute extends AbstractResource
+class FinishingRepository extends AbstractResource
 {
 
     /**
@@ -43,7 +40,7 @@ class Attribute extends AbstractResource
 
     /**
      * @param string $alias
-     * @return Attribute
+     * @return FinishingRepository
      */
     public function setAlias($alias)
     {
@@ -61,7 +58,7 @@ class Attribute extends AbstractResource
 
     /**
      * @param string $label
-     * @return Attribute
+     * @return FinishingRepository
      */
     public function setLabel($label)
     {
