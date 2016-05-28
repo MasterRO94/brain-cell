@@ -6,9 +6,9 @@ use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 /**
- * A resource representing an attribute.
+ * {@inheritdoc}
  */
-class AttributeCategoryResource extends AbstractResource
+class OptionCategoryResource extends AbstractResource
 {
 
     /**
@@ -27,9 +27,9 @@ class AttributeCategoryResource extends AbstractResource
     protected $label;
 
     /**
-     * @var AttributeResource[]
+     * @var OptionResource[]
      */
-    protected $attributes = [];
+    protected $options = [];
 
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ class AttributeCategoryResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'attributes' => AttributeResource::CLASS
+            'options' => OptionResource::CLASS
         ];
     }
 
@@ -59,7 +59,7 @@ class AttributeCategoryResource extends AbstractResource
 
     /**
      * @param string $alias
-     * @return AttributeCategoryResource
+     * @return OptionCategoryResource
      */
     public function setAlias($alias)
     {
@@ -77,7 +77,7 @@ class AttributeCategoryResource extends AbstractResource
 
     /**
      * @param string $label
-     * @return AttributeCategoryResource
+     * @return OptionCategoryResource
      */
     public function setLabel($label)
     {
@@ -86,20 +86,20 @@ class AttributeCategoryResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|AttributeResource[]
+     * @return ResourceCollection|OptionResource[]
      */
-    public function getAttributes()
+    public function getOptions()
     {
-        return $this->attributes;
+        return $this->options;
     }
 
     /**
-     * @param ResourceCollection|AttributeResource[] $attributes
-     * @return AttributeCategoryResource
+     * @param ResourceCollection|OptionResource[] $options
+     * @return OptionCategoryResource
      */
-    public function setAttributes(ResourceCollection $attributes)
+    public function setOptions(ResourceCollection $options)
     {
-        $this->attributes = $attributes;
+        $this->options = $options;
         return $this;
     }
 

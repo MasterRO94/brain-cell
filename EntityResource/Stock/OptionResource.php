@@ -5,9 +5,9 @@ namespace Brain\Cell\EntityResource\Stock;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
- * A resource representing an attribute.
+ * {@inheritdoc}
  */
-class AttributeResource extends AbstractResource
+class OptionResource extends AbstractResource
 {
 
     /**
@@ -43,7 +43,7 @@ class AttributeResource extends AbstractResource
 
     /**
      * @param string $alias
-     * @return AttributeResource
+     * @return OptionResource
      */
     public function setAlias($alias)
     {
@@ -61,7 +61,7 @@ class AttributeResource extends AbstractResource
 
     /**
      * @param string $label
-     * @return AttributeResource
+     * @return OptionResource
      */
     public function setLabel($label)
     {
