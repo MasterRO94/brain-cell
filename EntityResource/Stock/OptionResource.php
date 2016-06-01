@@ -23,7 +23,7 @@ class OptionResource extends AbstractResource
     /**
      * @var string
      */
-    protected $label;
+    protected $name;
 
     /**
      * @return int
@@ -54,18 +54,18 @@ class OptionResource extends AbstractResource
     /**
      * @return string
      */
-    public function getLabel()
+    public function getName()
     {
-        return $this->label;
+        return $this->name;
     }
 
     /**
-     * @param string $label
+     * @param string $name
      * @return OptionResource
      */
-    public function setLabel($label)
+    public function setName($name)
     {
-        $this->label = $label;
+        $this->name = $name;
         return $this;
     }
 
