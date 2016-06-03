@@ -24,7 +24,7 @@ class EntityResourceFactory
         /** @var TransferEntityInterface $class */
         $class = new $class;
 
-        if (is_integer($id)) {
+        if (!is_null($id)) {
             $class = $this->setProperty($class, 'id', $id);
         }
 
