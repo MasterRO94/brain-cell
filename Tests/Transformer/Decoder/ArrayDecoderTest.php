@@ -60,7 +60,16 @@ class ArrayDecoderTest extends AbstractBrainCellTestCase
      */
     public function decoderWillThrowWithInvalidCollectionData()
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage(
+            sprintf(
+                'The "data" for "%s" (targeting "n/a") is missing',
+                ResourceCollection::class
+            )
+        );
+
         $this->decoder->decode(new ResourceCollection, [1, 2, 3]);
+
     }
 
     /**

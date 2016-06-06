@@ -153,7 +153,13 @@ class ArrayDecoder extends AbstractTransformer
     {
 
         if (!isset($data['data'])) {
-            throw new RuntimeException('The ResourceCollection $data is not formatted correctly');
+            throw new RuntimeException(
+                sprintf(
+                    'The "data" for "%s" (targeting "%s") is missing',
+                    get_class($collection),
+                    $collection->getEntityClass() ?: 'n/a'
+                )
+            );
         }
 
         foreach ($data['data'] as $resource) {
