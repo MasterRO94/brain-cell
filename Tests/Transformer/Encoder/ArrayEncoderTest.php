@@ -4,7 +4,7 @@ namespace Brain\Cell\Tests\Transformer\Encoder;
 
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Service\TransferEntityMetaManagerService;
-use Brain\Cell\Tests\BaseTestCase;
+use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
@@ -21,7 +21,7 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  * @group transformer
  * @group transformer-encoder
  */
-class ArrayEncoderTest extends BaseTestCase
+class ArrayEncoderTest extends AbstractBrainCellTestCase
 {
 
     /** @var ArrayEncoder */

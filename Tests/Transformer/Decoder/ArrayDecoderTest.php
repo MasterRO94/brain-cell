@@ -4,7 +4,7 @@ namespace Brain\Cell\Tests\Transformer\Decoder;
 
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Service\TransferEntityMetaManagerService;
-use Brain\Cell\Tests\BaseTestCase;
+use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
@@ -18,7 +18,7 @@ use Brain\Cell\Transformer\ArrayDecoder;
  * @group transformer
  * @group transformer-decoder
  */
-class ArrayDecoderTest extends BaseTestCase
+class ArrayDecoderTest extends AbstractBrainCellTestCase
 {
 
     /** @var ArrayDecoder */

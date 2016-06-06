@@ -2,7 +2,7 @@
 
 namespace Brain\Cell\Tests\Transfer\EntityMeta;
 
-use Brain\Cell\Tests\BaseTestCase;
+use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Transfer\EntityMeta\Link;
 
 /**
@@ -10,7 +10,7 @@ use Brain\Cell\Transfer\EntityMeta\Link;
  * @group transfer
  * @group transfer-meta
  */
-class LinkTest extends BaseTestCase
+class LinkTest extends AbstractBrainCellTestCase
 {
 
     /**

@@ -3,7 +3,7 @@
 namespace Brain\Cell\Tests\Service;
 
 use Brain\Cell\Service\TransferEntityMetaManagerService;
-use Brain\Cell\Tests\BaseTestCase;
+use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\EntityMeta\Link;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -15,7 +15,7 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  * @group cell
  * @group service
  */
-class TransferEntityMetaManagerServiceTest extends BaseTestCase
+class TransferEntityMetaManagerServiceTest extends AbstractBrainCellTestCase
 {
 
     /** @var TransferEntityMetaManagerService */

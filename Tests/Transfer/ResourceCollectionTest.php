@@ -3,7 +3,7 @@
 namespace Brain\Cell\Tests\Transfer;
 
 use Brain\Cell\Exception\RuntimeException;
-use Brain\Cell\Tests\BaseTestCase;
+use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -12,7 +12,7 @@ use Brain\Cell\Transfer\ResourceCollection;
  * @group cell
  * @group transfer
  */
-class ResourceCollectionTest extends BaseTestCase
+class ResourceCollectionTest extends AbstractBrainCellTestCase
 {
 
     /** @var ResourceCollection */

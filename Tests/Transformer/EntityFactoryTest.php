@@ -2,7 +2,7 @@
 
 namespace Brain\Cell\Tests\Transformer;
 
-use Brain\Cell\Tests\BaseTestCase;
+use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\EntityResourceFactory;
 
@@ -10,7 +10,7 @@ use Brain\Cell\Transfer\EntityResourceFactory;
  * @group cell
  * @group transformer
  */
-class EntityFactoryTest extends BaseTestCase
+class EntityFactoryTest extends AbstractBrainCellTestCase
 {
 
     /** @var EntityResourceFactory */
