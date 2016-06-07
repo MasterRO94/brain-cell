@@ -60,6 +60,18 @@ class ResourceCollection extends ArrayCollection implements
     }
 
     /**
+     * Return the strict entity class if defined.
+     *
+     * @return string
+     *
+     * @internal
+     */
+    public function getEntityClass()
+    {
+        return $this->entityClass;
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @param TransferEntityInterface $value

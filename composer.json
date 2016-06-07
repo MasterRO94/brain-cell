@@ -2,10 +2,18 @@
     "name": "brain/brain-cell",
     "description": "Brain SDK",
     "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "printed.com",
+            "email": "developers@printed.com"
+        }
+    ],
     "autoload": {
-      "psr-4": {
-        "Brain\\Cell\\": "."
-      }
+        "psr-4": {
+            "Brain\\Cell\\": "."
+        }
     },
     "require": {
         "guzzlehttp/guzzle": "^6.2",
@@ -14,13 +22,5 @@
     },
     "require-dev": {
         "phpunit/phpunit": "5.3.4"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "printed.com",
-            "email": "developers@printed.com"
-        }
-    ],
-    "minimum-stability": "stable"
+    }
 }
