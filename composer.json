@@ -16,11 +16,14 @@
         }
     },
     "require": {
-        "guzzlehttp/guzzle": "^6.2",
         "doctrine/collections": "^1.3",
         "pagerfanta/pagerfanta": "^1.0"
     },
     "require-dev": {
+        "guzzlehttp/guzzle": "^6.2",
         "phpunit/phpunit": "5.3.4"
+    },
+    "suggest": {
+        "guzzlehttp/guzzle": "Allow requests to be made using the GuzzleHttpRequestAdapter"
     }
 }
