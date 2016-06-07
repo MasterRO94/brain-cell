@@ -5,7 +5,6 @@ namespace Brain\Cell\Tests\Client;
 use Brain\Cell\Client\ClientConfiguration;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\RequestAdapterInterface;
-use Brain\Cell\Client\RequestContext;
 use Brain\Cell\EntityResource\Stock\OptionCategoryResource;
 use Brain\Cell\Service\ResourceHandlerService;
 use Brain\Cell\Service\TransferEntityMetaManagerService;
