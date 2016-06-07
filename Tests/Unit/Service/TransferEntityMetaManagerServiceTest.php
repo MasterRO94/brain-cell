@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\Tests\Service;
+namespace Brain\Cell\Tests\Unit\Service;
 
 use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;

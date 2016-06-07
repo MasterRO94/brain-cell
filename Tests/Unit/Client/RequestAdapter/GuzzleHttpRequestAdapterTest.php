@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\Tests\Client\RequestAdapter;
+namespace Brain\Cell\Tests\Unit\Client\RequestAdapter;
 
 use Brain\Cell\Client\RequestAdapter\GuzzleHttpRequestAdapter;
 use Brain\Cell\Client\RequestContext;

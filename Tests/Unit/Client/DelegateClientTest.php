@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\Tests\Client;
+namespace Brain\Cell\Tests\Unit\Client;
 
 use Brain\Cell\Client\ClientConfiguration;
 use Brain\Cell\Client\Delegate\StockDelegateClient;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\Tests\Transformer\Decoder;
+namespace Brain\Cell\Tests\Unit\Transformer\Decoder;
 
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Service\TransferEntityMetaManagerService;

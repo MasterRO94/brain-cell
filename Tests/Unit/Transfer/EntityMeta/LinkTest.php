@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\Tests\Transfer\EntityMeta;
+namespace Brain\Cell\Tests\Unit\Transfer\EntityMeta;
 
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Transfer\EntityMeta\Link;

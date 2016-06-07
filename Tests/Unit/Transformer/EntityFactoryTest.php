@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\Tests\Transformer;
+namespace Brain\Cell\Tests\Unit\Transformer;
 
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;

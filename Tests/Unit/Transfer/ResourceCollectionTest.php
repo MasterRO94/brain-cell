@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\Tests\Transfer;
+namespace Brain\Cell\Tests\Unit\Transfer;
 
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;

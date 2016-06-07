@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\Tests\Client;
+namespace Brain\Cell\Tests\Unit;
 
 use Brain\Cell\BrainClient;
 use Brain\Cell\Client\ClientConfiguration;
