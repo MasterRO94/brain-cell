@@ -70,4 +70,32 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
 
     }
 
+    /**
+     * @test
+     * @testdox Adapter can serialise filters.
+     */
+    public function request_withSuppliedFilters_requestIsMadeWithFilters()
+    {
+
+        $this->guzzle->expects($this->once())
+            ->method('request')
+            ->with(
+                Request::METHOD_GET,
+                sprintf('%s/end-point?filters[foo]=bar', self::BASE_PATH)
+            )
+            ->willReturn(
+                new Response(
+                    200,
+                    [],
+                    '{"hello":"world"}'
+                )
+            );
+
+        $this->context->prepareContextForGet('/end-point');
+        $this->context->getFilters()->set('foo', 'bar');
+
+        $this->adapter->request($this->context);
+
+    }
+
 }

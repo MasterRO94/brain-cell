@@ -45,10 +45,25 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
      */
     public function request(RequestContext $context)
     {
+        $path = $context->getPath();
+        $parameters = [];
+
+        if ($context->getFilters()->count()) {
+            $parameters = array_merge(
+                $parameters,
+                [
+                    'filters' => $context->getFilters()->all()
+                ]
+            );
+        }
+
+        if (count($parameters)) {
+            $path = sprintf('%s?%s', $path, urldecode(http_build_query($parameters)));
+        }
 
         $response = $this->guzzle->request(
             $context->getMethod(),
-            $context->getPath(),
+            $path,
             [
                 'headers' => $context->getHeaders()->all()
             ]
