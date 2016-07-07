@@ -36,7 +36,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
      */
     public function setUp()
     {
-        $this->guzzle = $this->getMock(GuzzleClient::class);
+        $this->guzzle = $this->createMock(GuzzleClient::class);
         $this->adapter = new GuzzleHttpRequestAdapter($this->guzzle);
         $this->context = new RequestContext(self::BASE_PATH);
     }

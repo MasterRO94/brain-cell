@@ -57,7 +57,7 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
     {
 
         /** @var TransferEntityInterface $entity */
-        $entity = $this->getMock(TransferEntityInterface::CLASS);
+        $entity = $this->createMock(TransferEntityInterface::CLASS);
 
         $this->encoder->encode($entity);
 

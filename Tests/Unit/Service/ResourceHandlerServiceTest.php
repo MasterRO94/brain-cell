@@ -40,7 +40,7 @@ class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
     {
         $this->resource = new SimpleResourceMock;
 
-        $this->factoryMock = $this->getMock(EntityResourceFactory::CLASS);
+        $this->factoryMock = $this->createMock(EntityResourceFactory::CLASS);
 
         $builder = $this->getMockBuilder(ArrayEncoder::CLASS);
         $builder->disableOriginalConstructor();
