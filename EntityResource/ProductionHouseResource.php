@@ -1,6 +1,6 @@
 <?php
 
-namespace Brain\Cell\EntityResource\Client;
+namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Transfer\AbstractResource;
 
