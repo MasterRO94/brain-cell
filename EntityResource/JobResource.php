@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\EntityResource\Job\WorkflowResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
@@ -26,13 +27,19 @@ class JobResource extends AbstractResource
     protected $shop;
 
     /**
+     * @var int
+     */
+    protected $status;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
             'productionHouse' => ProductionHouseResource::class,
-            'shop' => ShopResource::class
+            'shop' => ShopResource::class,
+            'workflow' => WorkflowResource::class
         ];
     }
 
@@ -79,6 +86,25 @@ class JobResource extends AbstractResource
     public function setShop(ShopResource $shop)
     {
         $this->shop = $shop;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     *
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
         return $this;
     }
 
