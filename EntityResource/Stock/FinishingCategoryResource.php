@@ -3,11 +3,12 @@
 namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\ResourceCollection;
 
 /**
  * {@inheritdoc}
  */
-class OptionResource extends AbstractResource
+class FinishingCategoryResource extends AbstractResource
 {
 
     /**
@@ -19,11 +20,26 @@ class OptionResource extends AbstractResource
      * @var string
      */
     protected $alias;
-
+    
     /**
      * @var string
      */
     protected $name;
+
+    /**
+     * @var FinishingItemResource[]
+     */
+    protected $options = [];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections()
+    {
+        return [
+            'options' => FinishingItemResource::CLASS
+        ];
+    }
 
     /**
      * @return int
@@ -43,7 +59,8 @@ class OptionResource extends AbstractResource
 
     /**
      * @param string $alias
-     * @return OptionResource
+     *
+*@return FinishingCategoryResource
      */
     public function setAlias($alias)
     {
@@ -61,11 +78,31 @@ class OptionResource extends AbstractResource
 
     /**
      * @param string $name
-     * @return OptionResource
+     *
+*@return FinishingCategoryResource
      */
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return ResourceCollection|FinishingItemResource[]
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param ResourceCollection|FinishingItemResource[] $options
+     *
+*@return FinishingCategoryResource
+     */
+    public function setOptions(ResourceCollection $options)
+    {
+        $this->options = $options;
         return $this;
     }
 

@@ -1,9 +1,11 @@
 <?php
 
-namespace Brain\Cell\EntityResource;
+namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\Job\WorkflowResource;
+use Brain\Cell\EntityResource\ProductionHouseResource;
+use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\ResourceCollection;
 
 /**
  * {@inheritdoc}
@@ -17,6 +19,11 @@ class JobResource extends AbstractResource
     protected $id;
 
     /**
+     * @var int
+     */
+    protected $status;
+
+    /**
      * @var ProductionHouseResource
      */
     protected $productionHouse;
@@ -27,9 +34,9 @@ class JobResource extends AbstractResource
     protected $shop;
 
     /**
-     * @var int
+     * @var ResourceCollection|JobPageResource[]
      */
-    protected $status;
+    protected $pages;
 
     /**
      * {@inheritdoc}
@@ -38,8 +45,17 @@ class JobResource extends AbstractResource
     {
         return [
             'productionHouse' => ProductionHouseResource::class,
-            'shop' => ShopResource::class,
-            'workflow' => WorkflowResource::class
+            'shop' => ShopResource::class
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections()
+    {
+        return [
+            'pages' => JobPageResource::class
         ];
     }
 
@@ -49,6 +65,25 @@ class JobResource extends AbstractResource
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     *
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
     }
 
     /**
@@ -90,21 +125,21 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return int
+     * @return ResourceCollection|JobPageResource[]
      */
-    public function getStatus()
+    public function getPages()
     {
-        return $this->status;
+        return $this->pages;
     }
 
     /**
-     * @param int $status
+     * @param ResourceCollection|JobPageResource[] $pages
      *
      * @return $this
      */
-    public function setStatus($status)
+    public function setPages(ResourceCollection $pages)
     {
-        $this->status = $status;
+        $this->pages = $pages;
         return $this;
     }
 

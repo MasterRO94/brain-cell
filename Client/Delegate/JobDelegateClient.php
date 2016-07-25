@@ -3,25 +3,25 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class StockDelegateClient extends DelegateClient
+class JobDelegateClient extends DelegateClient
 {
 
     /**
      * @param array $filters
      *
-     * @return ResourceCollection|FinishingCategoryResource[]
+     * @return ResourceCollection|JobResource[]
      */
     public function getFinishings(array $filters = [])
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/stock/finishings');
+        $context->prepareContextForGet('/jobs');
         $context->getFilters()->add($filters);
 
         $collection = new ResourceCollection;
-        $collection->setEntityClass(FinishingCategoryResource::class);
+        $collection->setEntityClass(JobResource::class);
 
         return $this->request(
             $context,

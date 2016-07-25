@@ -86,22 +86,6 @@ class RequestContext
     }
 
     /**
-     * @return ParameterBag
-     */
-    public function getSelections()
-    {
-        return $this->selections;
-    }
-
-    /**
-     * @return array
-     */
-    public function getPayload()
-    {
-        return $this->payload;
-    }
-
-    /**
      * @param string $path
      */
     public function prepareContextForGet($path)

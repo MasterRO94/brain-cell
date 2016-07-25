@@ -5,7 +5,7 @@ namespace Brain\Cell\Tests\Unit\Client;
 use Brain\Cell\Client\ClientConfiguration;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\RequestAdapterInterface;
-use Brain\Cell\EntityResource\Stock\OptionCategoryResource;
+use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
 use Brain\Cell\Service\ResourceHandlerService;
 use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
@@ -66,15 +66,15 @@ class DelegateClientTest extends AbstractBrainCellTestCase
         $this->configuration->setResourceHandler($resourceHandler);
 
         $delegate = new StockDelegateClient($this->configuration);
-        $collection = $delegate->getOptions();
+        $collection = $delegate->getFinishings();
 
         $this->assertInstanceOf(ResourceCollection::class, $collection);
         $this->assertEquals(1, $collection->count());
 
-        /** @var OptionCategoryResource $resource */
+        /** @var FinishingCategoryResource $resource */
         $resource = $collection->first();
 
-        $this->assertInstanceOf(OptionCategoryResource::class, $resource);
+        $this->assertInstanceOf(FinishingCategoryResource::class, $resource);
         $this->assertEquals('some-id', $resource->getId());
 
     }
