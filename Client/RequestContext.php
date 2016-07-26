@@ -86,11 +86,39 @@ class RequestContext
     }
 
     /**
+     * @return array
+     */
+    public function getPayload()
+    {
+        return $this->payload;
+    }
+
+    /**
+     * @param array $payload
+     *
+     * @return RequestContext
+     */
+    public function setPayload(array $payload)
+    {
+        $this->payload = $payload;
+        return $this;
+    }
+
+    /**
      * @param string $path
      */
     public function prepareContextForGet($path)
     {
         $this->method = Request::METHOD_GET;
+        $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
+    }
+
+    /**
+     * @param string $path
+     */
+    public function prepareContextForPost($path)
+    {
+        $this->method = Request::METHOD_POST;
         $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
     }
 

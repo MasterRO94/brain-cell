@@ -124,18 +124,18 @@ class ArrayDecoder extends AbstractTransformer
         }
 
         //  Validate that all properties were set in the object.
-        if (count($properties) > 0) {
-
-            /** @var \ReflectionProperty $property */
-            $property = array_shift($properties);
-
-            throw new RuntimeException(sprintf(
-                'Missing property "%s" was expected for "%s"',
-                $property->getName(),
-                get_class($resource)
-            ));
-
-        }
+        //if (count($properties) > 0) {
+        //
+        //    /** @var \ReflectionProperty $property */
+        //    $property = array_shift($properties);
+        //
+        //    throw new RuntimeException(sprintf(
+        //        'Missing property "%s" was expected for "%s"',
+        //        $property->getName(),
+        //        get_class($resource)
+        //    ));
+        //
+        //}
 
         $this->handleMetaLinks($resource, $data);
         return $resource;

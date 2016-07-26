@@ -7,6 +7,7 @@ use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\RequestAdapterException;
 
 use GuzzleHttp\ClientInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 {
@@ -61,12 +62,18 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             $path = sprintf('%s?%s', $path, urldecode(http_build_query($parameters)));
         }
 
+        $options = [
+            'headers' => $context->getHeaders()->all()
+        ];
+
+        if ($context->getMethod() === Request::METHOD_POST) {
+            $options['json'] = $context->getPayload();
+        }
+
         $response = $this->guzzle->request(
             $context->getMethod(),
             $path,
-            [
-                'headers' => $context->getHeaders()->all()
-            ]
+            $options
         );
 
         return json_decode($response->getBody(), true);

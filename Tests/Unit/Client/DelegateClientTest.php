@@ -3,8 +3,11 @@
 namespace Brain\Cell\Tests\Unit\Client;
 
 use Brain\Cell\Client\ClientConfiguration;
+use Brain\Cell\Client\Delegate\JobDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\RequestAdapterInterface;
+use Brain\Cell\Client\RequestContext;
+use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
 use Brain\Cell\Service\ResourceHandlerService;
 use Brain\Cell\Service\TransferEntityMetaManagerService;
@@ -76,6 +79,54 @@ class DelegateClientTest extends AbstractBrainCellTestCase
 
         $this->assertInstanceOf(FinishingCategoryResource::class, $resource);
         $this->assertEquals('some-id', $resource->getId());
+
+    }
+
+    /**
+     * @test
+     * @testdox Delegate can send post requests.
+     */
+    public function request_whenRequestingWithPost_sendsPayload()
+    {
+
+        $this->adapter->expects($this->once())
+            ->method('request')
+            ->with(
+                $this->callback(function (RequestContext $context) {
+                    /** @var RequestContext $context */
+                    $payload = $context->getPayload();
+
+                    //  Payload should be an array ..
+                    if (!is_array($payload)) {
+                        return false;
+                    }
+
+                    //  .. with resource keys at the root ..
+                    if (!isset($payload['status'])) {
+                        return false;
+                    }
+
+                    //  .. and values as set.
+                    return ($payload['status'] === 1);
+
+                })
+            )
+            ->willReturn(
+                [
+                    'status' => true
+                ]
+            );
+
+        $job = new JobResource;
+        $job->setStatus(1);
+
+        $resourceHandler = $this->getResourceHandler();
+        $this->configuration->setResourceHandler($resourceHandler);
+
+        $delegate = new JobDelegateClient($this->configuration);
+        $response = $delegate->postJob($job);
+
+
 
     }
 

@@ -116,7 +116,7 @@ class ArrayDecoderTest extends AbstractBrainCellTestCase
     }
 
     /**
-     * @test
+     * @disabled-test
      *
      * @expectedException RuntimeException
      * @expectedExceptionMessage Missing property "name"

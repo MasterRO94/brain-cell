@@ -14,7 +14,7 @@ class JobDelegateClient extends DelegateClient
      *
      * @return ResourceCollection|JobResource[]
      */
-    public function getFinishings(array $filters = [])
+    public function getJobs(array $filters = [])
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/jobs');
@@ -26,6 +26,26 @@ class JobDelegateClient extends DelegateClient
         return $this->request(
             $context,
             $collection
+        );
+
+    }
+
+    /**
+     * @param JobResource $resource
+     *
+     * @return array|\Brain\Cell\Transfer\AbstractResource
+     */
+    public function postJob(JobResource $resource)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/jobs');
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($resource));
+
+        return $this->request(
+            $context,
+            $resource
         );
 
     }
