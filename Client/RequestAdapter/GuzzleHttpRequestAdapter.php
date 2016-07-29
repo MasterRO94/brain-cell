@@ -6,8 +6,9 @@ use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\RequestAdapterException;
 
-use GuzzleHttp\ClientInterface;
 use Symfony\Component\HttpFoundation\Request;
+
+use GuzzleHttp\ClientInterface;
 
 class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 {

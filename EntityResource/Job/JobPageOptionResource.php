@@ -6,6 +6,8 @@ use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\Transfer\AbstractResource;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * {@inheritdoc}
  */
@@ -14,11 +16,17 @@ class JobPageOptionResource extends AbstractResource
 
     /**
      * @var FinishingCategoryResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
      */
     protected $finishingCategory;
 
     /**
      * @var FinishingItemResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
      */
     protected $finishingItem;
 

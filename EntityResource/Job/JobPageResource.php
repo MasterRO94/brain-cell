@@ -5,6 +5,8 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * {@inheritdoc}
  */
@@ -18,11 +20,19 @@ class JobPageResource extends AbstractResource
 
     /**
      * @var int
+     *
+     * @Assert\NotBlank()
      */
     protected $status;
 
     /**
      * @var ResourceCollection|JobPageOptionResource[]
+     *
+     * @Assert\Valid()
+     * @Assert\Expression(
+     *     expression="this.getOptions() && this.getOptions().count() > 0",
+     *     message="There must be options specified for the page"
+     * )
      */
     protected $options;
 

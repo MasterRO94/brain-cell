@@ -104,8 +104,8 @@ class ArrayDecoder extends AbstractTransformer
 
             //  Decode resources.
             if (isset($resources[$property->getName()])) {
-                $class = new $resources[$property->getName()];
-                $value = $this->decodeResource($class, $value);
+                $child = new $resources[$property->getName()];
+                $value = $this->decodeResource($child, $value);
 
             //  Decode collections.
             } elseif (isset($collections[$property->getName()])) {

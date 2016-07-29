@@ -5,6 +5,8 @@ namespace Brain\Cell\EntityResource\Stock;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * {@inheritdoc}
  */
@@ -18,6 +20,8 @@ class FinishingCategoryResource extends AbstractResource
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      */
     protected $alias;
     
@@ -60,7 +64,7 @@ class FinishingCategoryResource extends AbstractResource
     /**
      * @param string $alias
      *
-*@return FinishingCategoryResource
+     * @return FinishingCategoryResource
      */
     public function setAlias($alias)
     {
@@ -79,7 +83,7 @@ class FinishingCategoryResource extends AbstractResource
     /**
      * @param string $name
      *
-*@return FinishingCategoryResource
+     * @return FinishingCategoryResource
      */
     public function setName($name)
     {
@@ -98,7 +102,7 @@ class FinishingCategoryResource extends AbstractResource
     /**
      * @param ResourceCollection|FinishingItemResource[] $options
      *
-*@return FinishingCategoryResource
+     * @return FinishingCategoryResource
      */
     public function setOptions(ResourceCollection $options)
     {

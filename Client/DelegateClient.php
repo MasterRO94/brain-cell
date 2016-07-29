@@ -3,6 +3,7 @@
 namespace Brain\Cell\Client;
 
 use Brain\Cell\Transfer\AbstractResource;
+
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class DelegateClient

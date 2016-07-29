@@ -7,6 +7,8 @@ use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * {@inheritdoc}
  */
@@ -20,6 +22,8 @@ class JobResource extends AbstractResource
 
     /**
      * @var int
+     *
+     * @Assert\NotBlank()
      */
     protected $status;
 
@@ -35,6 +39,12 @@ class JobResource extends AbstractResource
 
     /**
      * @var ResourceCollection|JobPageResource[]
+     *
+     * @Assert\Valid()
+     * @Assert\Expression(
+     *     expression="this.getPages() && this.getPages().count() > 0",
+     *     message="There must be at least one page supplied"
+     * )
      */
     protected $pages;
 
