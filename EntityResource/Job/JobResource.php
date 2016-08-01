@@ -21,7 +21,7 @@ class JobResource extends AbstractResource
     protected $id;
 
     /**
-     * @var int
+     * @var string
      *
      * @Assert\NotBlank()
      */

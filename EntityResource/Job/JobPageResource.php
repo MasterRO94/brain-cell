@@ -26,6 +26,22 @@ class JobPageResource extends AbstractResource
     protected $status;
 
     /**
+     * @var int
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer")
+     */
+    protected $rangeStart;
+
+    /**
+     * @var int
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer")
+     */
+    protected $rangeEnd;
+
+    /**
      * @var ResourceCollection|JobPageOptionResource[]
      *
      * @Assert\Valid()
@@ -55,6 +71,25 @@ class JobPageResource extends AbstractResource
     }
 
     /**
+     * @return ResourceCollection|JobPageOptionResource[]
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param ResourceCollection|JobPageOptionResource[] $options
+     *
+     * @return JobPageResource
+     */
+    public function setOptions(ResourceCollection $options)
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getStatus()
@@ -74,21 +109,40 @@ class JobPageResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|JobPageOptionResource[]
+     * @return int
      */
-    public function getOptions()
+    public function getRangeStart()
     {
-        return $this->options;
+        return $this->rangeStart;
     }
 
     /**
-     * @param ResourceCollection|JobPageOptionResource[] $options
+     * @param int $rangeStart
      *
      * @return JobPageResource
      */
-    public function setOptions(ResourceCollection $options)
+    public function setRangeStart($rangeStart)
     {
-        $this->options = $options;
+        $this->rangeStart = $rangeStart;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRangeEnd()
+    {
+        return $this->rangeEnd;
+    }
+
+    /**
+     * @param int $rangeEnd
+     *
+     * @return JobPageResource
+     */
+    public function setRangeEnd($rangeEnd)
+    {
+        $this->rangeEnd = $rangeEnd;
         return $this;
     }
 
