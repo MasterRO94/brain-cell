@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class StockDelegateClient extends DelegateClient
@@ -23,10 +24,22 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection;
         $collection->setEntityClass(FinishingCategoryResource::class);
 
-        return $this->request(
-            $context,
-            $collection
-        );
+        return $this->request($context, $collection);
+
+    }
+
+    /**
+     * @return ResourceCollection|MaterialResource[]
+     */
+    public function getMaterials()
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet('/stock/materials');
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(MaterialResource::class);
+
+        return $this->request($context, $collection);
 
     }
 
