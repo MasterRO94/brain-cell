@@ -23,10 +23,21 @@ class JobDelegateClient extends DelegateClient
         $collection = new ResourceCollection;
         $collection->setEntityClass(JobResource::class);
 
-        return $this->request(
-            $context,
-            $collection
-        );
+        return $this->request($context, $collection);
+
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return JobResource
+     */
+    public function getJob($id)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/jobs/%s', $id));
+
+        return $this->request($context, new JobResource);
 
     }
 
@@ -43,10 +54,7 @@ class JobDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request(
-            $context,
-            $resource
-        );
+        return $this->request($context, $resource);
 
     }
 
