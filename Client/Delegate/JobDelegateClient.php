@@ -10,6 +10,9 @@ class JobDelegateClient extends DelegateClient
 {
 
     /**
+     * Filters available:
+     * * id = string|string[]
+     *
      * @param array $filters
      *
      * @return ResourceCollection|JobResource[]
