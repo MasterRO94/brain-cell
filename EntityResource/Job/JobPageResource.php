@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -51,6 +52,21 @@ class JobPageResource extends AbstractResource
      * )
      */
     protected $options;
+
+    /**
+     * @var ArtworkResource
+     */
+    protected $artwork;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'artwork' => ArtworkResource::class
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -143,6 +159,25 @@ class JobPageResource extends AbstractResource
     public function setRangeEnd($rangeEnd)
     {
         $this->rangeEnd = $rangeEnd;
+        return $this;
+    }
+
+    /**
+     * @return ArtworkResource
+     */
+    public function getArtwork()
+    {
+        return $this->artwork;
+    }
+
+    /**
+     * @param ArtworkResource $artwork
+     *
+     * @return JobPageResource
+     */
+    public function setArtwork(ArtworkResource $artwork)
+    {
+        $this->artwork = $artwork;
         return $this;
     }
 
