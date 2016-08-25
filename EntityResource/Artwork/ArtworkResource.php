@@ -24,13 +24,11 @@ class ArtworkResource extends AbstractResource
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Url()
      */
-    protected $remotePath;
-
-    /**
-     * @var string
-     */
-    protected $internalPath;
+    protected $path;
 
     /**
      * @return int
@@ -62,38 +60,19 @@ class ArtworkResource extends AbstractResource
     /**
      * @return string
      */
-    public function getRemotePath()
+    public function getPath()
     {
-        return $this->remotePath;
+        return $this->path;
     }
 
     /**
-     * @param string $remotePath
+     * @param string $path
      *
      * @return ArtworkResource
      */
-    public function setRemotePath(string $remotePath)
+    public function setPath(string $path)
     {
-        $this->remotePath = $remotePath;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getInternalPath()
-    {
-        return $this->internalPath;
-    }
-
-    /**
-     * @param string $internalPath
-     *
-     * @return ArtworkResource
-     */
-    public function setInternalPath(string $internalPath)
-    {
-        $this->internalPath = $internalPath;
+        $this->path = $path;
         return $this;
     }
 

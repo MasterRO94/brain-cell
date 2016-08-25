@@ -21,8 +21,6 @@ class JobPageResource extends AbstractResource
 
     /**
      * @var int
-     *
-     * @Assert\NotBlank()
      */
     protected $status;
 
@@ -55,6 +53,9 @@ class JobPageResource extends AbstractResource
 
     /**
      * @var ArtworkResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
      */
     protected $artwork;
 

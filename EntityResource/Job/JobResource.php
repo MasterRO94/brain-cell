@@ -22,8 +22,6 @@ class JobResource extends AbstractResource
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
      */
     protected $status;
 
