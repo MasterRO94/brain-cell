@@ -33,7 +33,7 @@ class ArrayDecoder extends AbstractTransformer
      * @param array $data
      * @return TransferEntityInterface
      */
-    public function decode(TransferEntityInterface $entity, array $data)
+    public function decode(TransferEntityInterface $entity, array $data = null)
     {
 
         //  If we are decoding a collection of resources..
@@ -58,8 +58,12 @@ class ArrayDecoder extends AbstractTransformer
      * @param array $data
      * @return AbstractResource
      */
-    protected function decodeResource(AbstractResource $resource, array $data)
+    protected function decodeResource(AbstractResource $resource, array $data = null)
     {
+
+        if (is_null($data)) {
+            return null;
+        }
 
         //  Serialisation is done on the properties of the transfer objects.
         //  For this we need to make use of reflection to get the protected properties.
