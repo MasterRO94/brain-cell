@@ -76,7 +76,7 @@ class MaterialResource extends AbstractResource
     /**
      * @param string $alias
      *
-     * @return FinishingItemResource
+     * @return MaterialResource
      */
     public function setAlias($alias)
     {
@@ -95,7 +95,7 @@ class MaterialResource extends AbstractResource
     /**
      * @param string $name
      *
-     * @return FinishingItemResource
+     * @return MaterialResource
      */
     public function setName($name)
     {

@@ -3,6 +3,8 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Stock\MaterialResource;
+use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -60,12 +62,30 @@ class JobPageResource extends AbstractResource
     protected $artwork;
 
     /**
+     * @var SizeResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $size;
+
+    /**
+     * @var MaterialResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $material;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
-            'artwork' => ArtworkResource::class
+            'artwork' => ArtworkResource::class,
+            'size' => SizeResource::class,
+            'material' => MaterialResource::class
         ];
     }
 
@@ -179,6 +199,44 @@ class JobPageResource extends AbstractResource
     public function setArtwork(ArtworkResource $artwork)
     {
         $this->artwork = $artwork;
+        return $this;
+    }
+
+    /**
+     * @return SizeResource
+     */
+    public function getSize(): SizeResource
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param SizeResource $size
+     *
+     * @return JobPageResource
+     */
+    public function setSize(SizeResource $size): JobPageResource
+    {
+        $this->size = $size;
+        return $this;
+    }
+
+    /**
+     * @return MaterialResource
+     */
+    public function getMaterial(): MaterialResource
+    {
+        return $this->material;
+    }
+
+    /**
+     * @param MaterialResource $material
+     *
+     * @return JobPageResource
+     */
+    public function setMaterial(MaterialResource$material): JobPageResource
+    {
+        $this->material = $material;
         return $this;
     }
 
