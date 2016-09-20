@@ -61,10 +61,6 @@ class ArrayDecoder extends AbstractTransformer
     protected function decodeResource(AbstractResource $resource, array $data = null)
     {
 
-        if (is_null($data)) {
-            return null;
-        }
-
         //  Serialisation is done on the properties of the transfer objects.
         //  For this we need to make use of reflection to get the protected properties.
         $class = new \ReflectionClass(get_class($resource));

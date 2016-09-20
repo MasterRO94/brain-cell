@@ -6,6 +6,7 @@ use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * {@inheritdoc}
@@ -22,6 +23,7 @@ class MaterialResource extends AbstractResource
      * @var string
      *
      * @Assert\NotBlank()
+     * @Assert\Type(type="string")
      */
     protected $alias;
 

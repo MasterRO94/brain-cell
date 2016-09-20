@@ -78,6 +78,11 @@ class JobPageResource extends AbstractResource
     protected $material;
 
     /**
+     * @var int
+     */
+    protected $weight;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -205,7 +210,7 @@ class JobPageResource extends AbstractResource
     /**
      * @return SizeResource
      */
-    public function getSize(): SizeResource
+    public function getSize()
     {
         return $this->size;
     }
@@ -215,7 +220,7 @@ class JobPageResource extends AbstractResource
      *
      * @return JobPageResource
      */
-    public function setSize(SizeResource $size): JobPageResource
+    public function setSize(SizeResource $size)
     {
         $this->size = $size;
         return $this;
@@ -224,7 +229,7 @@ class JobPageResource extends AbstractResource
     /**
      * @return MaterialResource
      */
-    public function getMaterial(): MaterialResource
+    public function getMaterial()
     {
         return $this->material;
     }
@@ -234,9 +239,28 @@ class JobPageResource extends AbstractResource
      *
      * @return JobPageResource
      */
-    public function setMaterial(MaterialResource$material): JobPageResource
+    public function setMaterial(MaterialResource $material)
     {
         $this->material = $material;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param int $weight
+     *
+     * @return JobPageResource
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
         return $this;
     }
 
