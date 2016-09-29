@@ -4,7 +4,7 @@ namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\Transfer\AbstractResource;
 
-class DeliveryRateResource extends AbstractResource
+class DeliveryServiceResource extends AbstractResource
 {
 
     /**
@@ -38,7 +38,7 @@ class DeliveryRateResource extends AbstractResource
     /**
      * @param string $id
      *
-     * @return DeliveryRateResource
+     * @return $this
      */
     public function setId($id)
     {
@@ -57,7 +57,7 @@ class DeliveryRateResource extends AbstractResource
     /**
      * @param string $carrier
      *
-     * @return DeliveryRateResource
+     * @return $this
      */
     public function setCarrier($carrier)
     {
@@ -76,7 +76,7 @@ class DeliveryRateResource extends AbstractResource
     /**
      * @param string $service
      *
-     * @return DeliveryRateResource
+     * @return $this
      */
     public function setService($service)
     {
@@ -95,7 +95,7 @@ class DeliveryRateResource extends AbstractResource
     /**
      * @param float $price
      *
-     * @return DeliveryRateResource
+     * @return $this
      */
     public function setPrice($price)
     {
