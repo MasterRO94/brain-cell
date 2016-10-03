@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Delivery\DeliveryResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\Transfer\AbstractResource;
@@ -52,13 +53,22 @@ class JobResource extends AbstractResource
     protected $pages;
 
     /**
+     * @var DeliveryResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $delivery;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
             'productionHouse' => ProductionHouseResource::class,
-            'shop' => ShopResource::class
+            'shop' => ShopResource::class,
+            'delivery' => DeliveryResource::class
         ];
     }
 
