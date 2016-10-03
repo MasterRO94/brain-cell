@@ -185,4 +185,23 @@ class JobResource extends AbstractResource
         return $this;
     }
 
+    /**
+     * @return DeliveryResource
+     */
+    public function getDelivery()
+    {
+        return $this->delivery;
+    }
+
+    /**
+     * @param DeliveryResource $delivery
+     *
+     * @return JobResource
+     */
+    public function setDelivery(DeliveryResource $delivery)
+    {
+        $this->delivery = $delivery;
+        return $this;
+    }
+
 }

@@ -5,7 +5,7 @@ namespace Brain\Cell\EntityResource\Delivery;
 use Brain\Cell\Transfer\AbstractResource;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AddressResource extends AbstractResource
+class DeliveryAddressResource extends AbstractResource
 {
 
     /**
@@ -68,7 +68,7 @@ class AddressResource extends AbstractResource
     /**
      * @param string $name
      *
-     * @return AddressResource
+     * @return DeliveryAddressResource
      */
     public function setName($name)
     {
@@ -87,7 +87,7 @@ class AddressResource extends AbstractResource
     /**
      * @param string $street
      *
-     * @return AddressResource
+     * @return DeliveryAddressResource
      */
     public function setStreet($street)
     {
@@ -106,7 +106,7 @@ class AddressResource extends AbstractResource
     /**
      * @param string $city
      *
-     * @return AddressResource
+     * @return DeliveryAddressResource
      */
     public function setCity($city)
     {
@@ -125,7 +125,7 @@ class AddressResource extends AbstractResource
     /**
      * @param string $countyState
      *
-     * @return AddressResource
+     * @return DeliveryAddressResource
      */
     public function setCountyState($countyState)
     {
@@ -144,7 +144,7 @@ class AddressResource extends AbstractResource
     /**
      * @param string $postcode
      *
-     * @return AddressResource
+     * @return DeliveryAddressResource
      */
     public function setPostcode($postcode)
     {
@@ -163,7 +163,7 @@ class AddressResource extends AbstractResource
     /**
      * @param string $country
      *
-     * @return AddressResource
+     * @return DeliveryAddressResource
      */
     public function setCountry($country)
     {
