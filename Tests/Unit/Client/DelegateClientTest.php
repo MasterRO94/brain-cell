@@ -124,9 +124,7 @@ class DelegateClientTest extends AbstractBrainCellTestCase
         $this->configuration->setResourceHandler($resourceHandler);
 
         $delegate = new JobDelegateClient($this->configuration);
-        $response = $delegate->postJob($job);
-
-
+        $delegate->postJob($job);
 
     }
 
