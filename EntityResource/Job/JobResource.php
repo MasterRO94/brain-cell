@@ -42,6 +42,11 @@ class JobResource extends AbstractResource
     protected $weight;
 
     /**
+     * @var int
+     */
+    protected $quantity;
+
+    /**
      * @var ResourceCollection|JobPageResource[]
      *
      * @Assert\Valid()
@@ -163,6 +168,24 @@ class JobResource extends AbstractResource
     public function setWeight($weight)
     {
         $this->weight = $weight;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param int $quantity
+     * @return JobResource
+     */
+    public function setQuantity(int $quantity)
+    {
+        $this->quantity = $quantity;
         return $this;
     }
 
