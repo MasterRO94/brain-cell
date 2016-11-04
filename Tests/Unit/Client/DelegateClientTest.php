@@ -52,14 +52,12 @@ class DelegateClientTest extends AbstractBrainCellTestCase
             ->method('request')
             ->willReturn(
                 [
-                    'data' => [
-                        [
-                            'id' => 'some-id',
-                            'alias' => 'some-alias',
-                            'name' => 'some-name',
-                            'options' => [
-                                'data' => []
-                            ]
+                    [
+                        'id' => 'some-id',
+                        'alias' => 'some-alias',
+                        'name' => 'some-name',
+                        'options' => [
+                            'data' => []
                         ]
                     ]
                 ]
