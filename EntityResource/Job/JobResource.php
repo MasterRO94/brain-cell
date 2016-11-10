@@ -58,6 +58,14 @@ class JobResource extends AbstractResource
     protected $pages;
 
     /**
+     * @var JobBatchResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $batch;
+
+    /**
      * @var DeliveryResource
      *
      * @Assert\Valid()
@@ -73,7 +81,8 @@ class JobResource extends AbstractResource
         return [
             'productionHouse' => ProductionHouseResource::class,
             'shop' => ShopResource::class,
-            'delivery' => DeliveryResource::class
+            'delivery' => DeliveryResource::class,
+            'batch' => JobBatchResource::class,
         ];
     }
 
@@ -149,6 +158,25 @@ class JobResource extends AbstractResource
     public function setShop(ShopResource $shop)
     {
         $this->shop = $shop;
+        return $this;
+    }
+
+    /**
+     * @return JobBatchResource
+     */
+    public function getBatch()
+    {
+        return $this->batch;
+    }
+
+    /**
+     * @param JobBatchResource $batch
+     *
+     * @return $this
+     */
+    public function setBatch($batch)
+    {
+        $this->batch = $batch;
         return $this;
     }
 
