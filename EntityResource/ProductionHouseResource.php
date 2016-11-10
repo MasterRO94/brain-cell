@@ -38,7 +38,7 @@ class ProductionHouseResource extends AbstractResource
 
     /**
      * @param string $name
-     * @return OptionResource
+     * @return ProductionHouseResource
      */
     public function setName($name)
     {

@@ -6,8 +6,6 @@ use Brain;
 use Brain\Cell\AbstractTransformer;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\Transfer\EntityMeta\Link;
-use Brain\Cell\Transfer\EntityMeta\MetaContainingInterface;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Doctrine\Common\Inflector\Inflector;
@@ -111,6 +109,9 @@ class ArrayDecoder extends AbstractTransformer
 
         }
 
+        // Store the raw data against the resource for use by the encoder
+        $resource->setData($data);
+
         return $resource;
     }
 
@@ -129,7 +130,6 @@ class ArrayDecoder extends AbstractTransformer
 
             $entity = $this->decodeResource($entity, $resource);
             $collection->add($entity);
-
         }
 
         return $collection;

@@ -8,6 +8,7 @@ use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
+use Doctrine\Common\Inflector\Inflector;
 
 /**
  * An encoder for transforming {@link TransferEntityInterface} to arrays.
@@ -58,6 +59,7 @@ class ArrayEncoder extends AbstractTransformer
         //  Note also that these look "deprecated" but are actually "internal".
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
+        $originalData = $resource->getData();
 
         foreach ($properties as $property) {
 
@@ -71,10 +73,18 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
+            if ($value === null) {
+                // Don't include missing values
+                continue;
+            }
+
             if ($value instanceof TransferEntityInterface) {
 
                 //  Simply if the property value is marked as a resource or collection then serialise it.
-                if (isset($resources[$property->getName()]) || isset($collections[$property->getName()])) {
+                if (
+                    isset($resources[$property->getName()])
+                    || isset($collections[$property->getName()])
+                ) {
                     $value = $this->encode($value);
                 } else {
                     throw new RuntimeException(sprintf(
@@ -85,25 +95,19 @@ class ArrayEncoder extends AbstractTransformer
                 }
 
             //  In this case if the property is marked as a collection but isn't we replace it.
-            } elseif (isset($collections[$property->getName()]) && (!$value instanceof ResourceCollection)) {
+            } elseif (
+                isset($collections[$property->getName()])
+                && (!$value instanceof ResourceCollection)
+            ) {
                 $value = $this->encodeCollection(new ResourceCollection);
+            } else {
+                if ($originalData !== null) {
+                    // @todo skip anything that hasn't changed
+                }
             }
 
-            $data[$property->getName()] = $value;
-
-        }
-
-        //  We need to handle the meta data against the resource now.
-        if ($this->transferEntityMetaManager->hasMetaLinks($resource)) {
-            $meta = $this->transferEntityMetaManager->getMeta($resource);
-            $links = [];
-
-            foreach ($meta->getLinks() as $link) {
-                $links[$link->getRel()] = $link->getHref();
-            }
-
-            $data['$links'] = $links;
-
+            $snakeCasePropertyName = Inflector::tableize($property->getName());
+            $data[$snakeCasePropertyName] = $value;
         }
 
         return $data;
@@ -125,38 +129,7 @@ class ArrayEncoder extends AbstractTransformer
             $resources[] = $this->encodeResource($resource);
         }
 
-        //  The format of that default collection should always be an array with a data array.
-        //  Meta can then be added to this collection without breaking the data.
-        $data = ['data' => $resources];
-
-        //  Add the meta links if we have any.
-        if ($this->transferEntityMetaManager->hasMetaLinks($collection)) {
-            $meta = $this->transferEntityMetaManager->getMeta($collection);
-            $links = [];
-
-            foreach ($meta->getLinks() as $link) {
-                $links[$link->getRel()] = $link->getHref();
-            }
-
-            $data['$links'] = $links;
-
-        }
-
-        //  Assign paginator to returning array
-        if ($this->transferEntityMetaManager->hasMetaPaginator($collection)) {
-            $meta = $this->transferEntityMetaManager->getMeta($collection);
-
-            $paginator = $meta->getPaginator();
-
-            $data['$pagination'] = [
-                'count' => $paginator->getNbResults(),
-                'limit' => $paginator->getMaxPerPage(),
-                'page' => $paginator->getCurrentPage()
-            ];
-        }
-
-        return $data;
-
+        return $resources;
     }
 
 }

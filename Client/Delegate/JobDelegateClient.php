@@ -58,7 +58,5 @@ class JobDelegateClient extends DelegateClient
         $context->setPayload($handler->serialise($resource));
 
         return $this->request($context, $resource);
-
     }
-
 }
