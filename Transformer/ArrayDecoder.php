@@ -17,16 +17,6 @@ use Doctrine\Common\Inflector\Inflector;
  */
 class ArrayDecoder extends AbstractTransformer
 {
-
-    /**
-     * All the meta properties that should be ignored from decoding.
-     *
-     * @var string[]
-     */
-    protected $metaProperties = [
-        '$links'
-    ];
-
     /**
      * Decode the given $data and populate the given {@link TransferEntityInterface}.
      *
@@ -90,20 +80,12 @@ class ArrayDecoder extends AbstractTransformer
             $camelCasePropertyName = Inflector::camelize($propertyName);
 
             //  We throw if the property is not available against the object and is not a meta property.
-            if (
-                !$class->hasProperty($camelCasePropertyName)
-                // @todo $links no longer returned from API :|
-                && !in_array($propertyName, $this->metaProperties)
-            ) {
+            if (!$class->hasProperty($camelCasePropertyName)) {
                 throw new RuntimeException(sprintf(
                     'Additional property "%s" was not expected for "%s"',
                     $propertyName,
                     get_class($resource)
                 ));
-
-            //  If it is meta property then we can skip it, its going to get handled later.
-            } elseif (in_array($propertyName, $this->metaProperties)) {
-                continue;
             }
 
             $property = $class->getProperty($camelCasePropertyName);
@@ -129,9 +111,7 @@ class ArrayDecoder extends AbstractTransformer
 
         }
 
-        $this->handleMetaLinks($resource, $data);
         return $resource;
-
     }
 
     /**
@@ -152,28 +132,6 @@ class ArrayDecoder extends AbstractTransformer
 
         }
 
-        $this->handleMetaLinks($collection, $data);
         return $collection;
-
-    }
-
-    /**
-     * Attach {@link Link}s that are found in the given $data.
-     *
-     * @param MetaContainingInterface $entity
-     * @param array $data
-     */
-    protected function handleMetaLinks(MetaContainingInterface $entity, array $data)
-    {
-
-        //  Check for the links property.
-        if (!isset($data['$links'])) {
-            return;
-        }
-
-        foreach ($data['$links'] as $rel => $href) {
-            $this->transferEntityMetaManager->addMetaLink($entity, new Link($rel, $href));
-        }
-
     }
 }
