@@ -3,6 +3,7 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
+use Brain\Cell\EntityResource\DimensionsResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\Transfer\AbstractResource;
@@ -15,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class JobResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -74,6 +74,14 @@ class JobResource extends AbstractResource
     protected $delivery;
 
     /**
+     * @var DimensionsResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $dimensions;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -83,6 +91,7 @@ class JobResource extends AbstractResource
             'shop' => ShopResource::class,
             'delivery' => DeliveryResource::class,
             'batch' => JobBatchResource::class,
+            'dimensions' => DimensionsResource::class,
         ];
     }
 
@@ -255,4 +264,21 @@ class JobResource extends AbstractResource
         return $this;
     }
 
+    /**
+     * @return DimensionsResource
+     */
+    public function getDimensions()
+    {
+        return $this->dimensions;
+    }
+
+    /**
+     * @param DimensionsResource $dimensions
+     * @return JobResource
+     */
+    public function setDimensions($dimensions)
+    {
+        $this->dimensions = $dimensions;
+        return $this;
+    }
 }

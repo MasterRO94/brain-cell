@@ -66,6 +66,7 @@ class ArrayEncoder extends AbstractTransformer
             //  As properties are protected we mark them as public and get their value using reflection.
             $property->setAccessible(true);
             $value = $property->getValue($resource);
+            $snakeCasePropertyName = Inflector::tableize($property->getName());
 
             //  All properties prefixed with "brain" are to be ignored.
             //  There is a reason why we cannot make use of special characters as I intended to do, cant remember.
@@ -73,10 +74,16 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
-            if ($value === null) {
-                // Don't include missing values
-                continue;
-            }
+//            if ($value === null) {
+//                // Don't include missing values
+//                continue;
+//            }
+//
+//            if ($originalData !== null && $property->getName() != 'data') {
+//                if ($originalData[$snakeCasePropertyName] == $value) {
+//                    continue;
+//                }
+//            }
 
             if ($value instanceof TransferEntityInterface) {
 
@@ -100,13 +107,8 @@ class ArrayEncoder extends AbstractTransformer
                 && (!$value instanceof ResourceCollection)
             ) {
                 $value = $this->encodeCollection(new ResourceCollection);
-            } else {
-                if ($originalData !== null) {
-                    // @todo skip anything that hasn't changed
-                }
             }
 
-            $snakeCasePropertyName = Inflector::tableize($property->getName());
             $data[$snakeCasePropertyName] = $value;
         }
 
