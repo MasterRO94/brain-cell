@@ -59,4 +59,22 @@ class JobDelegateClient extends DelegateClient
 
         return $this->request($context, $resource);
     }
+
+    /**
+     * @param JobResource $resource
+     *
+     * @return array|\Brain\Cell\Transfer\AbstractResource
+     */
+    public function patchJob(JobResource $resource)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPatch(sprintf(
+            '/jobs/%s', $resource->getId()
+        ));
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($resource));
+
+        return $this->request($context, $resource);
+    }
 }

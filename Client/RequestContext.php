@@ -122,4 +122,12 @@ class RequestContext
         $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
     }
 
+    /**
+     * @param string $path
+     */
+    public function prepareContextForPatch($path)
+    {
+        $this->method = Request::METHOD_PATCH;
+        $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
+    }
 }

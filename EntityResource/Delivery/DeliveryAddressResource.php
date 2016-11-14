@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Delivery;
 
+use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Palm\Bundle\Core\Logical\IdentityTrait;
@@ -11,167 +12,31 @@ class DeliveryAddressResource extends AbstractResource
 {
     use IdentityTrait;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     */
-    protected $name;
+    /** @var AddressResource $address */
+    protected $address;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     */
-    protected $street;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     */
-    protected $city;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     */
-    protected $countyState;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     */
-    protected $postcode;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     * @Assert\Length(min=2, max=2)
-     */
-    protected $country;
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getAssociatedResources()
     {
-        return $this->name;
+        return [
+            'address' => AddressResource::class,
+        ];
     }
 
     /**
-     * @param string $name
-     *
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
      * @return DeliveryAddressResource
      */
-    public function setName($name)
+    public function setAddress($address)
     {
-        $this->name = $name;
+        $this->address = $address;
         return $this;
     }
-
-    /**
-     * @return string
-     */
-    public function getStreet()
-    {
-        return $this->street;
-    }
-
-    /**
-     * @param string $street
-     *
-     * @return DeliveryAddressResource
-     */
-    public function setStreet($street)
-    {
-        $this->street = $street;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCity(): string
-    {
-        return $this->city;
-    }
-
-    /**
-     * @param string $city
-     *
-     * @return DeliveryAddressResource
-     */
-    public function setCity($city)
-    {
-        $this->city = $city;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountyState(): string
-    {
-        return $this->countyState;
-    }
-
-    /**
-     * @param string $countyState
-     *
-     * @return DeliveryAddressResource
-     */
-    public function setCountyState($countyState)
-    {
-        $this->countyState = $countyState;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPostcode(): string
-    {
-        return $this->postcode;
-    }
-
-    /**
-     * @param string $postcode
-     *
-     * @return DeliveryAddressResource
-     */
-    public function setPostcode($postcode)
-    {
-        $this->postcode = $postcode;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountry(): string
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param string $country
-     *
-     * @return DeliveryAddressResource
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-        return $this;
-    }
-
 }

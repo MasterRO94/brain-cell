@@ -74,6 +74,21 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
+            if ($property->getName() == 'status') {
+                continue;
+            }
+
+            // @todo what's the logic here? I don't understand...
+            // I think it's you either send the id alone or a whole object
+            // without the id but not both? Something like this?...
+            if ($property->getName() == 'id' || $property->getName() == 'dimensions') {
+                continue;
+            }
+
+            if (\in_array($snakeCasePropertyName, ['production_house', 'shop'])) {
+                continue;
+            }
+
 //            if ($value === null) {
 //                // Don't include missing values
 //                continue;
@@ -86,9 +101,22 @@ class ArrayEncoder extends AbstractTransformer
 //            }
 
             if ($value instanceof TransferEntityInterface) {
-
-                //  Simply if the property value is marked as a resource or collection then serialise it.
                 if (
+                    // @todo the resource itself could be aware of this - just
+                    // "getAssociatedResourcesToBeSentAsIdInsteadOfResource"
+                    (
+                        $resource instanceof Brain\Cell\EntityResource\Job\JobPageOptionResource
+                        && \in_array($snakeCasePropertyName, ['item', 'category'])
+                    ) || (
+                        $resource instanceof Brain\Cell\EntityResource\Job\JobPageResource
+                        && \in_array($snakeCasePropertyName, ['material', 'size'])
+                    ) || (
+                        $resource instanceof Brain\Cell\EntityResource\Job\JobResource
+                        && \in_array($snakeCasePropertyName, ['batch'])
+                    )
+                ) {
+                    $value = $value->getId();
+                } elseif (
                     isset($resources[$property->getName()])
                     || isset($collections[$property->getName()])
                 ) {
@@ -109,7 +137,9 @@ class ArrayEncoder extends AbstractTransformer
                 $value = $this->encodeCollection(new ResourceCollection);
             }
 
-            $data[$snakeCasePropertyName] = $value;
+            if ($snakeCasePropertyName != 'data') {
+                $data[$snakeCasePropertyName] = $value;
+            }
         }
 
         return $data;
