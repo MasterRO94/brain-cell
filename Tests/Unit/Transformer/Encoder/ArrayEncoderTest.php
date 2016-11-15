@@ -55,12 +55,10 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
      */
     public function encoderWillThrowOnInvalidTransferEntityInterface()
     {
-
         /** @var TransferEntityInterface $entity */
         $entity = $this->createMock(TransferEntityInterface::CLASS);
 
         $this->encoder->encode($entity);
-
     }
 
     /**
@@ -75,7 +73,6 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $resource = SimpleResourceMock::create(2, $internal);
 
         $this->encoder->encode($resource);
-
     }
 
     /**
@@ -158,38 +155,5 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $response = $this->encoder->encode($resource);
         $this->assertEquals($expected, $response);
 
-    }
-
-    /**
-     * @test
-     */
-    public function encodeSimpleResourceWithMetaLinks()
-    {
-        $resource = SimpleResourceMock::create(10, 'Tony Stark');
-        $this->manager->addMetaLink($resource, new Link(Link::REL_SELF, 'https://domain/path/self'));
-        $this->manager->addMetaLink($resource, new Link(Link::REL_CREATE, 'https://domain/path/create'));
-
-        $expected = [
-            'name' => 'Tony Stark',
-        ];
-
-        $response = $this->encoder->encode($resource);
-        $this->assertEquals($expected, $response);
-
-    }
-
-    /**
-     * @test
-     */
-    public function encodeResourceCollectionWithMetaLinks()
-    {
-        $collection = new ResourceCollection;
-        $this->manager->addMetaLink($collection, new Link(Link::REL_SELF, 'https://domain/path/self'));
-        $this->manager->addMetaLink($collection, new Link(Link::REL_CREATE, 'https://domain/path/create'));
-
-        $expected = [];
-
-        $response = $this->encoder->encode($collection);
-        $this->assertEquals($expected, $response);
     }
 }
