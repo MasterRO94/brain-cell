@@ -130,4 +130,12 @@ class RequestContext
         $this->method = Request::METHOD_PATCH;
         $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
     }
+
+    /**
+     * @return bool
+     */
+    public function hasPayload()
+    {
+        return $this->payload !== null;
+    }
 }

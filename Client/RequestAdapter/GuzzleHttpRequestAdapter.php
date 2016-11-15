@@ -69,7 +69,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             'headers' => $context->getHeaders()->all()
         ];
 
-        if ($context->getMethod() === Request::METHOD_POST) {
+        if ($context->hasPayload()) {
             $options['json'] = $context->getPayload();
         }
 
@@ -80,7 +80,5 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         );
 
         return json_decode($response->getBody(), true);
-
     }
-
 }
