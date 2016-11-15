@@ -4,11 +4,18 @@ namespace Brain\Cell\Transformer;
 
 use Brain;
 use Brain\Cell\AbstractTransformer;
+use Brain\Cell\EntityResource\Job\JobBatchResource;
+use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\MaterialResource;
+use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Doctrine\Common\Inflector\Inflector;
+use Reflection;
+use ReflectionProperty;
 
 /**
  * An encoder for transforming {@link TransferEntityInterface} to arrays.
@@ -62,65 +69,55 @@ class ArrayEncoder extends AbstractTransformer
         $originalData = $resource->getData();
 
         foreach ($properties as $property) {
-
-            //  As properties are protected we mark them as public and get their value using reflection.
+            // Use reflection to get protected property values
             $property->setAccessible(true);
             $value = $property->getValue($resource);
             $snakeCasePropertyName = Inflector::tableize($property->getName());
 
-            //  All properties prefixed with "brain" are to be ignored.
-            //  There is a reason why we cannot make use of special characters as I intended to do, cant remember.
+            // All properties prefixed with "brain" are to be ignored
             if (substr($property->getName(), 0, 5) === 'brain') {
                 continue;
             }
 
-            if ($property->getName() == 'status') {
+            // Certain fields can't be updated which is great
+            if (\in_array($property->getName(), [
+                'status', 'dimensions', 'productionHouse', 'shop'
+            ])) {
                 continue;
             }
 
-            // @todo what's the logic here? I don't understand...
-            // I think it's you either send the id alone or a whole object
-            // without the id but not both? Something like this?...
-            if ($property->getName() == 'id' || $property->getName() == 'dimensions') {
+            // @todo atm we have to send ID instead of object - we SHOULD be
+            // sending object with just ID instead - Kris has done this elsewhere
+            if ($property->getName() == 'id') {
                 continue;
             }
 
-            if (\in_array($snakeCasePropertyName, ['production_house', 'shop'])) {
+            // Don't include data
+            if ($property->getName() == 'data') {
                 continue;
             }
-
-//            if ($value === null) {
-//                // Don't include missing values
-//                continue;
-//            }
-//
-//            if ($originalData !== null && $property->getName() != 'data') {
-//                if ($originalData[$snakeCasePropertyName] == $value) {
-//                    continue;
-//                }
-//            }
 
             if ($value instanceof TransferEntityInterface) {
-                if (
-                    // @todo the resource itself could be aware of this - just
-                    // "getAssociatedResourcesToBeSentAsIdInsteadOfResource"
-                    (
-                        $resource instanceof Brain\Cell\EntityResource\Job\JobPageOptionResource
-                        && \in_array($snakeCasePropertyName, ['item', 'category'])
-                    ) || (
-                        $resource instanceof Brain\Cell\EntityResource\Job\JobPageResource
-                        && \in_array($snakeCasePropertyName, ['material', 'size'])
-                    ) || (
-                        $resource instanceof Brain\Cell\EntityResource\Job\JobResource
-                        && \in_array($snakeCasePropertyName, ['batch'])
-                    )
-                ) {
+                // Some associated have to be sent as id (see comment above)
+                if ($this->isIdResource($value)) {
                     $value = $value->getId();
-                } elseif (
-                    isset($resources[$property->getName()])
-                    || isset($collections[$property->getName()])
-                ) {
-                    $value = $this->encode($value);
+
+                // All other associated can be encoded hooray :)
+                } elseif (isset($resources[$property->getName()])) {
+                    $value = $this->encodeResource($value);
+                } elseif (isset($collections[$property->getName()])) {
+                    $result = [];
+
+                    // Discard empty elements of collection
+                    foreach ($this->encodeCollection($value) as $child) {
+                        if (!empty($child)) {
+                            $result[] = $child;
+                        }
+                    }
+
+                    $value = $result;
+
+                // Panic for unexpected transfer entity interface
                 } else {
                     throw new RuntimeException(sprintf(
                         'Did not expect TransferEntityInterface in "%s" of "%s"',
@@ -128,22 +125,85 @@ class ArrayEncoder extends AbstractTransformer
                         get_class($resource)
                     ));
                 }
-
-            //  In this case if the property is marked as a collection but isn't we replace it.
-            } elseif (
-                isset($collections[$property->getName()])
-                && (!$value instanceof ResourceCollection)
-            ) {
-                $value = $this->encodeCollection(new ResourceCollection);
             }
 
-            if ($snakeCasePropertyName != 'data') {
-                $data[$snakeCasePropertyName] = $value;
+            if (empty($value)) {
+                continue;
             }
+
+            // Don't include values that haven't changed
+            if ($this->valueIsUnchanged($originalData, $snakeCasePropertyName, $value)) {
+                continue;
+            }
+
+            $data[$snakeCasePropertyName] = $value;
+
+            // @todo this isn't really the place to do this - we need to
+            // confirm it's come back from the freakin API first :(
+            $originalData[$snakeCasePropertyName] = $value;
         }
 
+        $resource->setData($originalData);
         return $data;
+    }
 
+    /**
+     * Some associated resources have to be sent as a UUID rather than as an
+     * object. This fix has been implemented in PRWE
+     * @todo copy it across and kill this bogus-ass method with fire
+     * @param mixed $resource
+     * @return bool
+     */
+    protected function isIdResource($resource)
+    {
+        if (!$resource instanceof AbstractResource) {
+            return false;
+        }
+
+        return
+            $resource instanceof FinishingItemResource
+            || $resource instanceof FinishingCategoryResource
+            || $resource instanceof MaterialResource
+            || $resource instanceof SizeResource
+            || $resource instanceof JobBatchResource
+        ;
+    }
+
+    /**
+     * @param array|null $originalData
+     * @param string $snakeCasePropertyName
+     * @param mixed $value
+     * @return bool
+     */
+    protected function valueIsUnchanged($originalData, $snakeCasePropertyName, $value)
+    {
+        if ($value === null) {
+            return true;
+        }
+
+        if ($originalData === null) {
+            return false;
+        }
+
+        if (!\array_key_exists($snakeCasePropertyName, $originalData)) {
+            return false;
+        }
+
+        if ($originalData[$snakeCasePropertyName] == $value) {
+            return true;
+        }
+
+        // Bogus special case for ID objects (see method above)
+        // @todo remove this once fix implemented in Brain
+        if (
+            \is_array($originalData[$snakeCasePropertyName])
+            && \array_key_exists('id', $originalData[$snakeCasePropertyName])
+            && $originalData[$snakeCasePropertyName]['id'] == $value
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

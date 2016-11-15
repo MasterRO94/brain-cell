@@ -33,7 +33,10 @@ abstract class DelegateClient
     {
         $response = $this->configuration->getRequestAdapter()->request($context);
 
-        if ($context->getMethod() === Request::METHOD_POST) {
+        if (
+            $context->getMethod() == Request::METHOD_POST
+            || $context->getMethod() == Request::METHOD_PATCH
+        ) {
             return (bool) $response;
         }
 
