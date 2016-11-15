@@ -86,7 +86,6 @@ class DelegateClientTest extends AbstractBrainCellTestCase
      */
     public function request_whenRequestingWithPost_sendsPayload()
     {
-
         $this->adapter->expects($this->once())
             ->method('request')
             ->with(
@@ -100,12 +99,12 @@ class DelegateClientTest extends AbstractBrainCellTestCase
                     }
 
                     //  .. with resource keys at the root ..
-                    if (!isset($payload['status'])) {
+                    if (!isset($payload['weight'])) {
                         return false;
                     }
 
                     //  .. and values as set.
-                    return ($payload['status'] === 1);
+                    return ($payload['weight'] === 42);
 
                 })
             )
@@ -116,7 +115,7 @@ class DelegateClientTest extends AbstractBrainCellTestCase
             );
 
         $job = new JobResource;
-        $job->setStatus(1);
+        $job->setWeight(42);
 
         $resourceHandler = $this->getResourceHandler();
         $this->configuration->setResourceHandler($resourceHandler);
