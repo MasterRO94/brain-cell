@@ -81,7 +81,12 @@ class ArrayEncoder extends AbstractTransformer
 
             // Certain fields can't be updated which is great
             if (\in_array($property->getName(), [
-                'status', 'dimensions', 'weight', 'productionHouse', 'shop'
+                'status',
+                'dimensions',
+                'weight',
+                'productionHouse',
+                'shop',
+                'productionFinishDate',
             ])) {
                 continue;
             }
