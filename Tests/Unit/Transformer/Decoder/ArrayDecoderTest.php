@@ -56,14 +56,14 @@ class ArrayDecoderTest extends AbstractBrainCellTestCase
      * @test
      *
      * @expectedException RuntimeException
-     * @expectedExceptionMessage The ResourceCollection $data is not formatted correctly
+     * @expectedExceptionMessage The ResourceCollection has no entity class set
      */
-    public function decoderWillThrowWithInvalidCollectionData()
+    public function decoderWillThrowWithCollectionMissingEntityClass()
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
             sprintf(
-                'The "data" for "%s" (targeting "n/a") is missing',
+                'Missing entity class for collection',
                 ResourceCollection::class
             )
         );
@@ -167,10 +167,8 @@ class ArrayDecoderTest extends AbstractBrainCellTestCase
     {
 
         $data = [
-            'data' => [
-                ['id' => 1, 'name' => 'one'],
-                ['id' => 2, 'name' => 'two']
-            ]
+            ['id' => 1, 'name' => 'one'],
+            ['id' => 2, 'name' => 'two'],
         ];
 
         $collection = new ResourceCollection;
@@ -197,11 +195,9 @@ class ArrayDecoderTest extends AbstractBrainCellTestCase
         $data = [
             'id' => 3,
             'associatedCollection' => [
-                'data' => [
-                    ['id' => 1, 'name' => 'one'],
-                    ['id' => 2, 'name' => 'two'],
-                    ['id' => 3, 'name' => 'three']
-                ]
+                ['id' => 1, 'name' => 'one'],
+                ['id' => 2, 'name' => 'two'],
+                ['id' => 3, 'name' => 'three'],
             ]
         ];
 
@@ -221,64 +217,4 @@ class ArrayDecoderTest extends AbstractBrainCellTestCase
         }
 
     }
-
-    /**
-     * @test
-     */
-    public function decodeSimpleResourceWithMetaLinks()
-    {
-
-        $data = [
-            'id' => 10,
-            'name' => 'Tony Stark',
-            '$links' => [
-                Link::REL_SELF => 'https://domain/path/self',
-                Link::REL_CREATE => 'https://domain/path/create'
-            ]
-        ];
-
-        $resource = $this->decoder->decode(new SimpleResourceMock, $data);
-        $this->assertTrue($this->manager->hasMetaLinks($resource), 'Links should have been populated');
-
-        $links = $this->manager->getMeta($resource)->getLinks();
-
-        $link = $links[0];
-        $this->assertEquals(Link::REL_SELF, $link->getRel(), 'The first link should be the self');
-        $this->assertEquals('https://domain/path/self', $link->getHref());
-
-        $link = $links[1];
-        $this->assertEquals(Link::REL_CREATE, $link->getRel(), 'The second link should be the create');
-        $this->assertEquals('https://domain/path/create', $link->getHref());
-
-    }
-
-    /**
-     * @test
-     */
-    public function decodeResourceCollectionWithMetaLinks()
-    {
-
-        $data = [
-            'data' => [],
-            '$links' => [
-                Link::REL_SELF => 'https://domain/path/self',
-                Link::REL_CREATE => 'https://domain/path/create'
-            ]
-        ];
-
-        $response = $this->decoder->decode(new ResourceCollection, $data);
-        $this->assertTrue($this->manager->hasMetaLinks($response), 'Links should have been populated');
-
-        $links = $this->manager->getMeta($response)->getLinks();
-
-        $link = $links[0];
-        $this->assertEquals(Link::REL_SELF, $link->getRel(), 'The first link should be the self');
-        $this->assertEquals('https://domain/path/self', $link->getHref());
-
-        $link = $links[1];
-        $this->assertEquals(Link::REL_CREATE, $link->getRel(), 'The second link should be the create');
-        $this->assertEquals('https://domain/path/create', $link->getHref());
-
-    }
-
 }

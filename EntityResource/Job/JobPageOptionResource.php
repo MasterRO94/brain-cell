@@ -6,6 +6,7 @@ use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\Transfer\AbstractResource;
 
+use Palm\Bundle\Core\Logical\IdentityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class JobPageOptionResource extends AbstractResource
 {
+    use IdentityTrait;
 
     /**
      * @var FinishingCategoryResource
@@ -20,7 +22,7 @@ class JobPageOptionResource extends AbstractResource
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $finishingCategory;
+    protected $category;
 
     /**
      * @var FinishingItemResource
@@ -28,7 +30,7 @@ class JobPageOptionResource extends AbstractResource
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $finishingItem;
+    protected $item;
 
     /**
      * {@inheritdoc}
@@ -36,8 +38,8 @@ class JobPageOptionResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'finishingCategory' => FinishingCategoryResource::class,
-            'finishingItem' => FinishingItemResource::class
+            'category' => FinishingCategoryResource::class,
+            'item' => FinishingItemResource::class
         ];
     }
 
@@ -52,9 +54,9 @@ class JobPageOptionResource extends AbstractResource
     /**
      * @return FinishingCategoryResource
      */
-    public function getFinishingCategory()
+    public function getCategory()
     {
-        return $this->finishingCategory;
+        return $this->category;
     }
 
     /**
@@ -62,18 +64,18 @@ class JobPageOptionResource extends AbstractResource
      *
      * @return $this
      */
-    public function setFinishingCategory(FinishingCategoryResource $finishingCategory)
+    public function setCategory(FinishingCategoryResource $finishingCategory)
     {
-        $this->finishingCategory = $finishingCategory;
+        $this->category = $finishingCategory;
         return $this;
     }
 
     /**
      * @return FinishingItemResource
      */
-    public function getFinishingItem()
+    public function getItem()
     {
-        return $this->finishingItem;
+        return $this->item;
     }
 
     /**
@@ -81,10 +83,9 @@ class JobPageOptionResource extends AbstractResource
      *
      * @return $this
      */
-    public function setFinishingItem(FinishingItemResource $finishingItem)
+    public function setItem(FinishingItemResource $finishingItem)
     {
-        $this->finishingItem = $finishingItem;
+        $this->item = $finishingItem;
         return $this;
     }
-
 }
