@@ -59,6 +59,16 @@ abstract class AbstractResource implements
         return [];
     }
 
+    /**
+     * Return all properties that should be interpreted as \DateTime
+     *
+     * @return string[]
+     */
+    public function getDateTimeProperties()
+    {
+        return [];
+    }
+
     /** @var mixed $data */
     protected $data;
 

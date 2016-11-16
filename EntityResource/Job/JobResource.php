@@ -47,6 +47,11 @@ class JobResource extends AbstractResource
     protected $quantity;
 
     /**
+     * @var \DateTime
+     */
+    protected $productionFinishDate;
+
+    /**
      * @var ResourceCollection|JobPageResource[]
      *
      * @Assert\Valid()
@@ -101,7 +106,17 @@ class JobResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'pages' => JobPageResource::class
+            'pages' => JobPageResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDateTimeProperties()
+    {
+        return [
+            'productionFinishDate',
         ];
     }
 
@@ -223,6 +238,24 @@ class JobResource extends AbstractResource
     public function setQuantity(int $quantity)
     {
         $this->quantity = $quantity;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getProductionFinishDate()
+    {
+        return $this->productionFinishDate;
+    }
+
+    /**
+     * @param \DateTime $productionFinishDate
+     * @return JobResource
+     */
+    public function setProductionFinishDate(\DateTime $productionFinishDate)
+    {
+        $this->productionFinishDate = $productionFinishDate;
         return $this;
     }
 
