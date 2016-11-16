@@ -8,7 +8,6 @@ use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
-use Brain\Cell\Transfer\EntityMeta\Link;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayEncoder;
