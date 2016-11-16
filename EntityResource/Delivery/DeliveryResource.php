@@ -4,11 +4,11 @@ namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\Transfer\AbstractResource;
 
+use Palm\Bundle\Core\Logical\IdentityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class DeliveryResource extends AbstractResource
 {
-
     /**
      * @var string
      *

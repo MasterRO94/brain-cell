@@ -33,14 +33,8 @@ abstract class DelegateClient
     {
         $response = $this->configuration->getRequestAdapter()->request($context);
 
-        if ($context->getMethod() === Request::METHOD_POST) {
-            return (bool) $response;
-        }
-
         return $this->configuration->hasResourceHandler()
             ? $this->configuration->getResourceHandler()->deserialise($entity, $response)
             : $response;
-
     }
-
 }

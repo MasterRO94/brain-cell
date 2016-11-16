@@ -11,7 +11,6 @@ abstract class AbstractResource implements
     Brain\Cell\TransferEntityInterface,
     Brain\Cell\Transfer\EntityMeta\MetaContainingInterface
 {
-
     use Brain\Cell\Transfer\EntityMeta\MetaContainingTrait;
 
     /**
@@ -60,4 +59,29 @@ abstract class AbstractResource implements
         return [];
     }
 
+    /** @var mixed $data */
+    protected $data;
+
+    /**
+     * Store serialised data against the resource
+     *
+     * Used by encoder and decoder modules to represent serialised state -
+     * this is so the encoder can check what's changed since decode
+     *
+     * @param mixed $data
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * Retrieve serialised data stored against the resource
+     *
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
 }

@@ -48,7 +48,9 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     public function request(RequestContext $context)
     {
         $path = $context->getPath();
-        $parameters = [];
+        $parameters = [
+            // 'XDEBUG_SESSION_START' => 'phpstorm',
+        ];
 
         if ($context->getFilters()->count()) {
             $parameters = array_merge(
@@ -67,7 +69,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             'headers' => $context->getHeaders()->all()
         ];
 
-        if ($context->getMethod() === Request::METHOD_POST) {
+        if ($context->hasPayload()) {
             $options['json'] = $context->getPayload();
         }
 
@@ -78,7 +80,5 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         );
 
         return json_decode($response->getBody(), true);
-
     }
-
 }

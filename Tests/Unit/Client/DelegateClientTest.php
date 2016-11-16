@@ -52,14 +52,12 @@ class DelegateClientTest extends AbstractBrainCellTestCase
             ->method('request')
             ->willReturn(
                 [
-                    'data' => [
-                        [
-                            'id' => 'some-id',
-                            'alias' => 'some-alias',
-                            'name' => 'some-name',
-                            'options' => [
-                                'data' => []
-                            ]
+                    [
+                        'id' => 'some-id',
+                        'alias' => 'some-alias',
+                        'name' => 'some-name',
+                        'options' => [
+                            'data' => []
                         ]
                     ]
                 ]
@@ -88,12 +86,10 @@ class DelegateClientTest extends AbstractBrainCellTestCase
      */
     public function request_whenRequestingWithPost_sendsPayload()
     {
-
         $this->adapter->expects($this->once())
             ->method('request')
             ->with(
                 $this->callback(function (RequestContext $context) {
-                    /** @var RequestContext $context */
                     $payload = $context->getPayload();
 
                     //  Payload should be an array ..
@@ -102,32 +98,66 @@ class DelegateClientTest extends AbstractBrainCellTestCase
                     }
 
                     //  .. with resource keys at the root ..
-                    if (!isset($payload['status'])) {
+                    if (!isset($payload['quantity'])) {
                         return false;
                     }
 
                     //  .. and values as set.
-                    return ($payload['status'] === 1);
+                    return ($payload['quantity'] === 42);
 
                 })
             )
-            ->willReturn(
-                [
-                    'status' => true
-                ]
-            );
+            ->willReturn(['status' => true])
+        ;
 
         $job = new JobResource;
-        $job->setStatus(1);
+        $job->setQuantity(42);
 
         $resourceHandler = $this->getResourceHandler();
         $this->configuration->setResourceHandler($resourceHandler);
 
         $delegate = new JobDelegateClient($this->configuration);
-        $response = $delegate->postJob($job);
+        $delegate->postJob($job);
+    }
 
+    /**
+     * @test
+     * @testdox Delegate can send patch requests.
+     */
+    public function request_whenRequestingWithPatch_sendsPayload()
+    {
+        $this->adapter->expects($this->once())
+            ->method('request')
+            ->with(
+                $this->callback(function (RequestContext $context) {
+                    $payload = $context->getPayload();
 
+                    //  Payload should be an array ..
+                    if (!is_array($payload)) {
+                        return false;
+                    }
 
+                    //  .. with resource keys at the root ..
+                    if (!isset($payload['quantity'])) {
+                        return false;
+                    }
+
+                    //  .. and values as set.
+                    return ($payload['quantity'] === 66);
+
+                })
+            )
+            ->willReturn(['status' => true])
+        ;
+
+        $job = new JobResource;
+        $job->setQuantity(66);
+
+        $resourceHandler = $this->getResourceHandler();
+        $this->configuration->setResourceHandler($resourceHandler);
+
+        $delegate = new JobDelegateClient($this->configuration);
+        $delegate->patchJob($job);
     }
 
     /**
@@ -142,7 +172,5 @@ class DelegateClientTest extends AbstractBrainCellTestCase
             new ArrayEncoder($metaManager),
             new ArrayDecoder($metaManager)
         );
-
     }
-
 }

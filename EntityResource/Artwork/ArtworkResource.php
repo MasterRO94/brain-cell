@@ -75,5 +75,4 @@ class ArtworkResource extends AbstractResource
         $this->path = $path;
         return $this;
     }
-
 }

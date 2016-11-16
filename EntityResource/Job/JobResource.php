@@ -3,6 +3,7 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
+use Brain\Cell\EntityResource\DimensionsResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\Transfer\AbstractResource;
@@ -15,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class JobResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -42,6 +42,11 @@ class JobResource extends AbstractResource
     protected $weight;
 
     /**
+     * @var int
+     */
+    protected $quantity;
+
+    /**
      * @var ResourceCollection|JobPageResource[]
      *
      * @Assert\Valid()
@@ -53,12 +58,28 @@ class JobResource extends AbstractResource
     protected $pages;
 
     /**
+     * @var JobBatchResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $batch;
+
+    /**
      * @var DeliveryResource
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
     protected $delivery;
+
+    /**
+     * @var DimensionsResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $dimensions;
 
     /**
      * {@inheritdoc}
@@ -68,7 +89,9 @@ class JobResource extends AbstractResource
         return [
             'productionHouse' => ProductionHouseResource::class,
             'shop' => ShopResource::class,
-            'delivery' => DeliveryResource::class
+            'delivery' => DeliveryResource::class,
+            'batch' => JobBatchResource::class,
+            'dimensions' => DimensionsResource::class,
         ];
     }
 
@@ -148,6 +171,25 @@ class JobResource extends AbstractResource
     }
 
     /**
+     * @return JobBatchResource
+     */
+    public function getBatch()
+    {
+        return $this->batch;
+    }
+
+    /**
+     * @param JobBatchResource $batch
+     *
+     * @return $this
+     */
+    public function setBatch($batch)
+    {
+        $this->batch = $batch;
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getWeight()
@@ -163,6 +205,24 @@ class JobResource extends AbstractResource
     public function setWeight($weight)
     {
         $this->weight = $weight;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param int $quantity
+     * @return JobResource
+     */
+    public function setQuantity(int $quantity)
+    {
+        $this->quantity = $quantity;
         return $this;
     }
 
@@ -204,4 +264,21 @@ class JobResource extends AbstractResource
         return $this;
     }
 
+    /**
+     * @return DimensionsResource
+     */
+    public function getDimensions()
+    {
+        return $this->dimensions;
+    }
+
+    /**
+     * @param DimensionsResource $dimensions
+     * @return JobResource
+     */
+    public function setDimensions($dimensions)
+    {
+        $this->dimensions = $dimensions;
+        return $this;
+    }
 }
