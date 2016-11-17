@@ -48,9 +48,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     public function request(RequestContext $context)
     {
         $path = $context->getPath();
-        $parameters = [
-            // 'XDEBUG_SESSION_START' => 'phpstorm',
-        ];
+        $parameters = [];
 
         if ($context->getFilters()->count()) {
             $parameters = array_merge(

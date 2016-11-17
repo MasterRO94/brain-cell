@@ -11,6 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ArtworkResource extends AbstractResource
 {
+    const STATUS_NEW = 1;
+    const STATUS_PENDING_DOWNLOAD = 2;
+    const STATUS_PENDING_VALIDATION = 3;
+    const STATUS_INVALID_MIME_TYPE = 100;
+    const STATUS_VERIFIED = 200;
 
     /**
      * @var int
