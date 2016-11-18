@@ -59,6 +59,16 @@ class JobResource extends AbstractResource
     protected $productionFinishDate;
 
     /**
+     * @var \DateTime
+     */
+    protected $created;
+
+    /**
+     * @var \DateTime
+     */
+    protected $updated;
+
+    /**
      * @var ResourceCollection|JobPageResource[]
      *
      * @Assert\Valid()
@@ -123,6 +133,8 @@ class JobResource extends AbstractResource
     public function getDateTimeProperties()
     {
         return [
+            'created',
+            'updated',
             'productionFinishDate',
         ];
     }
@@ -321,4 +333,42 @@ class JobResource extends AbstractResource
         $this->dimensions = $dimensions;
         return $this;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     * @return JobResource
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param \DateTime $updated
+     * @return JobResource
+     */
+    public function setUpdated(\DateTime $updated)
+    {
+        $this->updated = $updated;
+        return $this;
+    }
+
+
 }
