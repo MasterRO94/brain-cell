@@ -80,8 +80,17 @@ class ArrayEncoder extends AbstractTransformer
             }
 
             // Certain fields can't be updated which is great
+            // @todo remove setters for these and check missing setters here
+            // @todo bear id in mind here - we need to be able to send id
             if (\in_array($property->getName(), [
-                'status', 'dimensions', 'weight', 'productionHouse', 'shop'
+                'status',
+                'created',
+                'updated',
+                'weight',
+                'dimensions',
+                'shop',
+                'productionHouse',
+                'productionFinishDate',
             ])) {
                 continue;
             }

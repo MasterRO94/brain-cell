@@ -15,6 +15,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class JobPageResource extends AbstractResource
 {
+    const STATUS_INVALID_OPTIONS = 1;
+    const STATUS_MISSING_ARTWORK = 2;
+    const STATUS_READY = 200;
 
     /**
      * @var int

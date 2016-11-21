@@ -58,6 +58,7 @@ class ArrayDecoder extends AbstractTransformer
         //  Note also that these look "deprecated" but are actually "internal".
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
+        $dateTimeProperties = $resource->getDateTimeProperties();
 
         //  A collection of properties against the object that we populated.
         //  Used later to validate missing properties.
@@ -98,6 +99,8 @@ class ArrayDecoder extends AbstractTransformer
                 $collection = new ResourceCollection;
                 $collection->setEntityClass($collections[$property->getName()]);
                 $value = $this->decodeCollection($collection, $value);
+            } elseif (\in_array($property->getName(), $dateTimeProperties)) {
+                $value = $value ? new \DateTime($value) : $value;
             }
 
             //  Using reflection set the protected property.
