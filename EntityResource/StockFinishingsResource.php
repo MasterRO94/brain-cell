@@ -41,4 +41,28 @@ class StockFinishingsResource extends AbstractResource
         ];
     }
 
+    /**
+     * @return ResourceCollection|FinishingCategoryResource[]
+     */
+    public function getFinishings()
+    {
+        return $this->finishings;
+    }
+
+    /**
+     * @return ResourceCollection|MaterialResource[]
+     */
+    public function getMaterials()
+    {
+        return $this->materials;
+    }
+
+    /**
+     * @return ResourceCollection|SizeResource[]
+     */
+    public function getSizes()
+    {
+        return $this->sizes;
+    }
+
 }
