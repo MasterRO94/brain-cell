@@ -71,7 +71,7 @@ class TransferEntityMetaManagerServiceTest extends AbstractBrainCellTestCase
 
         $response = $this->manager->hasMetaPaginator($resource);
 
-        $this->assertFalse($response, $this->paginatorMock, 'Manager should not detect meta paginator now');
+        $this->assertFalse($response, $this->paginatorMock);
 
         $this->manager->setMetaPaginator($resource, $this->paginatorMock);
 

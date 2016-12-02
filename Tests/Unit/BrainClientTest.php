@@ -4,7 +4,8 @@ namespace Brain\Cell\Tests\Unit;
 
 use Brain\Cell\BrainClient;
 use Brain\Cell\Client\ClientConfiguration;
-use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\Client\Delegate\JobDelegateClient;
+use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
 
@@ -34,19 +35,27 @@ class BrainClientTest extends AbstractBrainCellTestCase
 
     /**
      * @test
-     * @testdox Logical modules of code are represented with delegate clients
+     * @testdox Can return a delegate for stock.
      */
     public function stock_returnsDelegateClient()
     {
-
-        $this->adapter->expects($this->never())
-            ->method('request');
+        $this->adapter->expects($this->never())->method('request');
 
         $client = new BrainClient($this->configuration);
+        $this->assertInstanceOf(StockDelegateClient::class, $client->stock());
 
-        $delegate = $client->stock();
+    }
 
-        $this->assertInstanceOf(DelegateClient::class, $delegate);
+    /**
+     * @test
+     * @testdox Can return a delegate for job.
+     */
+    public function job_returnsDelegateClient()
+    {
+        $this->adapter->expects($this->never())->method('request');
+
+        $client = new BrainClient($this->configuration);
+        $this->assertInstanceOf(JobDelegateClient::class, $client->job());
 
     }
 

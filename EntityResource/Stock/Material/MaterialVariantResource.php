@@ -1,13 +1,13 @@
 <?php
 
-namespace Brain\Cell\EntityResource\Stock;
+namespace Brain\Cell\EntityResource\Stock\Material;
 
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
  */
-class OptionResource extends AbstractResource
+class MaterialVariantResource extends AbstractResource
 {
 
     /**
@@ -17,6 +17,8 @@ class OptionResource extends AbstractResource
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      */
     protected $alias;
 
@@ -43,7 +45,8 @@ class OptionResource extends AbstractResource
 
     /**
      * @param string $alias
-     * @return OptionResource
+     *
+     * @return FinishingItemResource
      */
     public function setAlias($alias)
     {
@@ -61,7 +64,8 @@ class OptionResource extends AbstractResource
 
     /**
      * @param string $name
-     * @return OptionResource
+     *
+     * @return FinishingItemResource
      */
     public function setName($name)
     {

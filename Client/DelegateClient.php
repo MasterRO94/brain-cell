@@ -2,6 +2,10 @@
 
 namespace Brain\Cell\Client;
 
+use Brain\Cell\Transfer\AbstractResource;
+
+use Symfony\Component\HttpFoundation\Request;
+
 abstract class DelegateClient
 {
 
@@ -20,4 +24,17 @@ abstract class DelegateClient
         $this->configuration = $configuration;
     }
 
+    /**
+     * @param RequestContext $context
+     * @param AbstractResource $entity
+     * @return AbstractResource|array|bool
+     */
+    protected function request(RequestContext $context, $entity = null)
+    {
+        $response = $this->configuration->getRequestAdapter()->request($context);
+
+        return $this->configuration->hasResourceHandler()
+            ? $this->configuration->getResourceHandler()->deserialise($entity, $response)
+            : $response;
+    }
 }

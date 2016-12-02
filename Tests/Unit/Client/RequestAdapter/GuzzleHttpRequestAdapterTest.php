@@ -36,7 +36,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
      */
     public function setUp()
     {
-        $this->guzzle = $this->getMock(GuzzleClient::class);
+        $this->guzzle = $this->createMock(GuzzleClient::class);
         $this->adapter = new GuzzleHttpRequestAdapter($this->guzzle);
         $this->context = new RequestContext(self::BASE_PATH);
     }
@@ -67,6 +67,34 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
 
         $this->assertInternalType('array', $response);
         $this->assertEquals(['hello' => 'world'], $response);
+
+    }
+
+    /**
+     * @test
+     * @testdox Adapter can serialise filters.
+     */
+    public function request_withSuppliedFilters_requestIsMadeWithFilters()
+    {
+
+        $this->guzzle->expects($this->once())
+            ->method('request')
+            ->with(
+                Request::METHOD_GET,
+                sprintf('%s/end-point?filters[foo]=bar', self::BASE_PATH)
+            )
+            ->willReturn(
+                new Response(
+                    200,
+                    [],
+                    '{"hello":"world"}'
+                )
+            );
+
+        $this->context->prepareContextForGet('/end-point');
+        $this->context->getFilters()->set('foo', 'bar');
+
+        $this->adapter->request($this->context);
 
     }
 

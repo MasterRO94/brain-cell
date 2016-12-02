@@ -86,19 +86,22 @@ class RequestContext
     }
 
     /**
-     * @return ParameterBag
-     */
-    public function getSelections()
-    {
-        return $this->selections;
-    }
-
-    /**
      * @return array
      */
     public function getPayload()
     {
         return $this->payload;
+    }
+
+    /**
+     * @param array $payload
+     *
+     * @return RequestContext
+     */
+    public function setPayload(array $payload)
+    {
+        $this->payload = $payload;
+        return $this;
     }
 
     /**
@@ -110,4 +113,29 @@ class RequestContext
         $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
     }
 
+    /**
+     * @param string $path
+     */
+    public function prepareContextForPost($path)
+    {
+        $this->method = Request::METHOD_POST;
+        $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
+    }
+
+    /**
+     * @param string $path
+     */
+    public function prepareContextForPatch($path)
+    {
+        $this->method = Request::METHOD_PATCH;
+        $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPayload()
+    {
+        return $this->payload !== null;
+    }
 }

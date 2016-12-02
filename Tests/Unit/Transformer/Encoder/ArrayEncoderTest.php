@@ -8,7 +8,6 @@ use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
-use Brain\Cell\Transfer\EntityMeta\Link;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayEncoder;
@@ -55,29 +54,10 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
      */
     public function encoderWillThrowOnInvalidTransferEntityInterface()
     {
-
         /** @var TransferEntityInterface $entity */
-        $entity = $this->getMock(TransferEntityInterface::CLASS);
+        $entity = $this->createMock(TransferEntityInterface::CLASS);
 
         $this->encoder->encode($entity);
-
-    }
-
-    /**
-     * @test
-     */
-    public function encoderPopulatesMissingCollections()
-    {
-        $resource = SimpleResourceCollectionAssociationMock::create(10);
-
-        $expected = [
-            'id' => 10,
-            'associatedCollection' => ['data' => []]
-        ];
-
-        $response = $this->encoder->encode($resource);
-        $this->assertEquals($expected, $response);
-
     }
 
     /**
@@ -92,7 +72,6 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $resource = SimpleResourceMock::create(2, $internal);
 
         $this->encoder->encode($resource);
-
     }
 
     /**
@@ -103,7 +82,6 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $resource = SimpleResourceMock::create(1, 'string');
 
         $expected = [
-            'id' => 1,
             'name' => 'string'
         ];
 
@@ -123,9 +101,7 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $parent->setAssociatedResource($resource);
 
         $expected = [
-            'id' => 2,
-            'associatedResource' => [
-                'id' => 1,
+            'associated_resource' => [
                 'name' => 'string'
             ]
         ];
@@ -145,10 +121,8 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $collection->add(SimpleResourceMock::create(2, 'two'));
 
         $expected = [
-            'data' => [
-                ['id' => 1, 'name' => 'one'],
-                ['id' => 2, 'name' => 'two']
-            ]
+            ['name' => 'one'],
+            ['name' => 'two'],
         ];
 
         $response = $this->encoder->encode($collection);
@@ -170,13 +144,10 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $resource->setAssociatedCollection($collection);
 
         $expected = [
-            'id' => 3,
-            'associatedCollection' => [
-                'data' => [
-                    ['id' => 1, 'name' => 'one'],
-                    ['id' => 2, 'name' => 'two'],
-                    ['id' => 3, 'name' => 'three']
-                ]
+            'associated_collection' => [
+                ['name' => 'one'],
+                ['name' => 'two'],
+                ['name' => 'three'],
             ]
         ];
 
@@ -184,84 +155,4 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $this->assertEquals($expected, $response);
 
     }
-
-    /**
-     * @test
-     */
-    public function encodeSimpleResourceWithMetaLinks()
-    {
-        $resource = SimpleResourceMock::create(10, 'Tony Stark');
-        $this->manager->addMetaLink($resource, new Link(Link::REL_SELF, 'https://domain/path/self'));
-        $this->manager->addMetaLink($resource, new Link(Link::REL_CREATE, 'https://domain/path/create'));
-
-        $expected = [
-            'id' => 10,
-            'name' => 'Tony Stark',
-            '$links' => [
-                Link::REL_SELF => 'https://domain/path/self',
-                Link::REL_CREATE => 'https://domain/path/create'
-            ]
-        ];
-
-        $response = $this->encoder->encode($resource);
-        $this->assertEquals($expected, $response);
-
-    }
-
-    /**
-     * @test
-     */
-    public function encodeResourceCollectionWithMetaLinks()
-    {
-        $collection = new ResourceCollection;
-        $this->manager->addMetaLink($collection, new Link(Link::REL_SELF, 'https://domain/path/self'));
-        $this->manager->addMetaLink($collection, new Link(Link::REL_CREATE, 'https://domain/path/create'));
-
-        $expected = [
-            'data' => [],
-            '$links' => [
-                Link::REL_SELF => 'https://domain/path/self',
-                Link::REL_CREATE => 'https://domain/path/create'
-            ]
-        ];
-
-        $response = $this->encoder->encode($collection);
-        $this->assertEquals($expected, $response);
-
-    }
-
-    /**
-     * @test
-     */
-    public function encodeResourceCollectionWithPaginator()
-    {
-        $collection = new ResourceCollection;
-
-        $this->paginatorMock->expects($this->once())
-            ->method('getNbResults')
-            ->willReturn(3);
-
-        $this->paginatorMock->expects($this->once())
-            ->method('getMaxPerPage')
-            ->willReturn(1);
-
-        $this->paginatorMock->expects($this->once())
-            ->method('getCurrentPage')
-            ->willReturn(1);
-
-        $this->manager->setMetaPaginator($collection, $this->paginatorMock);
-
-        $expected = [
-            'data' => [],
-            '$pagination' => [
-                'count' => 3,
-                'limit' => 1,
-                'page' => 1
-            ]
-        ];
-
-        $response = $this->encoder->encode($collection);
-        $this->assertEquals($expected, $response);
-    }
-
 }

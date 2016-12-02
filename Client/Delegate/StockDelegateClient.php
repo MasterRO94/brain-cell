@@ -3,43 +3,44 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\Client\RequestContext;
-use Brain\Cell\EntityResource\Stock\OptionCategoryResource;
-use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class StockDelegateClient extends DelegateClient
 {
 
     /**
-     * @return ResourceCollection|OptionCategoryResource[]
+     * @param array $filters
+     *
+     * @return ResourceCollection|FinishingCategoryResource[]
      */
-    public function getOptions()
+    public function getFinishings(array $filters = [])
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/stock/options');
+        $context->prepareContextForGet('/stock/finishings');
+        $context->getFilters()->add($filters);
 
         $collection = new ResourceCollection;
-        $collection->setEntityClass(OptionCategoryResource::class);
+        $collection->setEntityClass(FinishingCategoryResource::class);
 
-        return $this->request(
-            $context,
-            $collection
-        );
+        return $this->request($context, $collection);
 
     }
 
     /**
-     * @param RequestContext $context
-     * @param AbstractResource $entity
-     * @return AbstractResource|array
+     * @return ResourceCollection|MaterialResource[]
      */
-    protected function request(RequestContext $context, $entity = null)
+    public function getMaterials()
     {
-        $response = $this->configuration->getRequestAdapter()->request($context);
-        return $this->configuration->hasResourceHandler()
-            ? $this->configuration->getResourceHandler()->deserialise($entity, $response)
-            : $response;
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet('/stock/materials');
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(MaterialResource::class);
+
+        return $this->request($context, $collection);
+
     }
 
 }

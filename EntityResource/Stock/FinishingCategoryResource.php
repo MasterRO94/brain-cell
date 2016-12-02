@@ -5,10 +5,12 @@ namespace Brain\Cell\EntityResource\Stock;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * {@inheritdoc}
  */
-class OptionCategoryResource extends AbstractResource
+class FinishingCategoryResource extends AbstractResource
 {
 
     /**
@@ -18,6 +20,8 @@ class OptionCategoryResource extends AbstractResource
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
      */
     protected $alias;
     
@@ -27,7 +31,7 @@ class OptionCategoryResource extends AbstractResource
     protected $name;
 
     /**
-     * @var OptionResource[]
+     * @var FinishingItemResource[]
      */
     protected $options = [];
 
@@ -37,7 +41,7 @@ class OptionCategoryResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'options' => OptionResource::CLASS
+            'options' => FinishingItemResource::CLASS
         ];
     }
 
@@ -59,7 +63,8 @@ class OptionCategoryResource extends AbstractResource
 
     /**
      * @param string $alias
-     * @return OptionCategoryResource
+     *
+     * @return FinishingCategoryResource
      */
     public function setAlias($alias)
     {
@@ -77,7 +82,8 @@ class OptionCategoryResource extends AbstractResource
 
     /**
      * @param string $name
-     * @return OptionCategoryResource
+     *
+     * @return FinishingCategoryResource
      */
     public function setName($name)
     {
@@ -86,7 +92,7 @@ class OptionCategoryResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|OptionResource[]
+     * @return ResourceCollection|FinishingItemResource[]
      */
     public function getOptions()
     {
@@ -94,8 +100,9 @@ class OptionCategoryResource extends AbstractResource
     }
 
     /**
-     * @param ResourceCollection|OptionResource[] $options
-     * @return OptionCategoryResource
+     * @param ResourceCollection|FinishingItemResource[] $options
+     *
+     * @return FinishingCategoryResource
      */
     public function setOptions(ResourceCollection $options)
     {
