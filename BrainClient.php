@@ -3,6 +3,7 @@
 namespace Brain\Cell;
 
 use Brain\Cell\Client\Delegate\JobDelegateClient;
+use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 
@@ -23,6 +24,14 @@ class BrainClient extends DelegateClient
     public function job()
     {
         return new JobDelegateClient($this->configuration);
+    }
+
+    /**
+     * @return ProductDelegateClient
+     */
+    public function product()
+    {
+        return new ProductDelegateClient($this->configuration);
     }
 
 }
