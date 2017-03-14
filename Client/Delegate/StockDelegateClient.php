@@ -12,11 +12,11 @@ class StockDelegateClient extends DelegateClient
 {
 
     /**
-     * @param array $filters
+     * @param JobResource $jobResource
      *
      * @return StockFinishingsResource
      */
-    public function getFinishings(JobResource $jobResource, array $filters = [])
+    public function getFinishings(JobResource $jobResource)
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/stock/finishings');
