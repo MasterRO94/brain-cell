@@ -36,6 +36,11 @@ class FinishingCategoryResource extends AbstractResource
     protected $options = [];
 
     /**
+     * @var int
+     */
+    protected $assignmentLevel;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedCollections()
@@ -108,6 +113,22 @@ class FinishingCategoryResource extends AbstractResource
     {
         $this->options = $options;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAssignmentLevel()
+    {
+        return $this->assignementLevel;
+    }
+
+    /**
+     * @param int $assignementLevel
+     */
+    public function setAssignmentLevel(int $assignmentLevel)
+    {
+        $this->assignementLevel = $assignementLevel;
     }
 
 }
