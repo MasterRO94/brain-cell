@@ -30,6 +30,11 @@ class FinishingItemResource extends AbstractResource
     protected $name;
 
     /**
+     * @var bool
+     */
+    protected $default;
+
+    /**
      * @return int
      */
     public function getId()
@@ -73,6 +78,22 @@ class FinishingItemResource extends AbstractResource
     {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * @param bool $default
+     */
+    public function setDefault(bool $default)
+    {
+        $this->default = $default;
     }
 
 }

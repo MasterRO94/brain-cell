@@ -3,6 +3,7 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\StockFinishingsResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -11,15 +12,17 @@ class StockDelegateClient extends DelegateClient
 {
 
     /**
-     * @param array $filters
+     * @param JobResource $jobResource
      *
      * @return StockFinishingsResource
      */
-    public function getFinishings(array $filters = [])
+    public function getFinishings(JobResource $jobResource)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/stock/finishings');
-        $context->getFilters()->add($filters);
+        $context->prepareContextForPost('/stock/finishings');
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobResource));
 
         return $this->request($context, new StockFinishingsResource);
 

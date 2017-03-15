@@ -70,7 +70,7 @@ class DelegateClientTest extends AbstractBrainCellTestCase
         $this->configuration->setResourceHandler($resourceHandler);
 
         $delegate = new StockDelegateClient($this->configuration);
-        $resource = $delegate->getFinishings();
+        $resource = $delegate->getFinishings(new JobResource());
 
         $this->assertInstanceOf(StockFinishingsResource::class, $resource);
 
