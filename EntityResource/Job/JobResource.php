@@ -4,6 +4,7 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
 use Brain\Cell\EntityResource\DimensionsResource;
+use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\Transfer\AbstractResource;
@@ -37,6 +38,11 @@ class JobResource extends AbstractResource
      * @var ProductionHouseResource
      */
     protected $productionHouse;
+
+    /**
+     * @var ProductResource
+     */
+    protected $product;
 
     /**
      * @var ShopResource
@@ -111,6 +117,7 @@ class JobResource extends AbstractResource
         return [
             'productionHouse' => ProductionHouseResource::class,
             'shop' => ShopResource::class,
+            'product' => ProductResource::class,
             'delivery' => DeliveryResource::class,
             'batch' => JobBatchResource::class,
             'dimensions' => DimensionsResource::class,
@@ -182,6 +189,24 @@ class JobResource extends AbstractResource
     public function setProductionHouse(ProductionHouseResource $productionHouse)
     {
         $this->productionHouse = $productionHouse;
+        return $this;
+    }
+
+    /**
+     * @return ProductResource
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param ProductResource $product
+     * @return $this
+     */
+    public function setProduct(ProductResource $product)
+    {
+        $this->product = $product;
         return $this;
     }
 
