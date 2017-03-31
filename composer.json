@@ -19,6 +19,7 @@
         "doctrine/collections": "~1",
         "doctrine/common": "~2",
         "symfony/http-foundation": "^3.1",
+        "symfony/validator": "^3.1",
         "pagerfanta/pagerfanta": "^1.0"
     },
     "require-dev": {
