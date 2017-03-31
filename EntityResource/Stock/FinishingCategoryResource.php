@@ -36,9 +36,14 @@ class FinishingCategoryResource extends AbstractResource
     protected $options = [];
 
     /**
-     * @var int
+     * @var string
      */
     protected $assignmentLevel;
+
+    /**
+     * @var string
+     */
+    protected $applicationLevel;
 
     /**
      * {@inheritdoc}
@@ -116,19 +121,34 @@ class FinishingCategoryResource extends AbstractResource
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAssignmentLevel()
+    public function getAssignmentLevel(): string
     {
-        return $this->assignementLevel;
+        return $this->assignmentLevel;
     }
 
     /**
-     * @param int $assignementLevel
+     * @param string $assignmentLevel
      */
-    public function setAssignmentLevel(int $assignmentLevel)
+    public function setAssignmentLevel(string $assignmentLevel)
     {
-        $this->assignementLevel = $assignementLevel;
+        $this->assignmentLevel = $assignmentLevel;
     }
 
+    /**
+     * @return string
+     */
+    public function getApplicationLevel(): string
+    {
+        return $this->applicationLevel;
+    }
+
+    /**
+     * @param string $applicationLevel
+     */
+    public function setApplicationLevel(string $applicationLevel)
+    {
+        $this->applicationLevel = $applicationLevel;
+    }
 }
