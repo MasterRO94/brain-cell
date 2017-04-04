@@ -46,7 +46,7 @@ class JobComponentResource extends AbstractResource
     protected $rangeEnd;
 
     /**
-     * @var ResourceCollection|JobcomponentOptionResource[]
+     * @var ResourceCollection|JobComponentOptionResource[]
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -103,7 +103,7 @@ class JobComponentResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'options' => JobcomponentOptionResource::class
+            'options' => JobComponentOptionResource::class
         ];
     }
 
@@ -116,7 +116,7 @@ class JobComponentResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|JobcomponentOptionResource[]
+     * @return ResourceCollection|JobComponentOptionResource[]
      */
     public function getOptions()
     {
@@ -124,7 +124,7 @@ class JobComponentResource extends AbstractResource
     }
 
     /**
-     * @param ResourceCollection|JobcomponentOptionResource[] $options
+     * @param ResourceCollection|JobComponentOptionResource[] $options
      *
      * @return JobComponentResource
      */
