@@ -75,11 +75,11 @@ class JobResource extends AbstractResource
     protected $updated;
 
     /**
-     * @var ResourceCollection|JobcomponentResource[]
+     * @var ResourceCollection|JobComponentResource[]
      *
      * @Assert\Valid()
      * @Assert\Expression(
-     *     expression="this.getcomponents() && this.getcomponents().count() > 0",
+     *     expression="this.getComponents() && this.getComponents().count() > 0",
      *     message="There must be at least one component supplied"
      * )
      */
@@ -130,7 +130,7 @@ class JobResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'components' => JobcomponentResource::class,
+            'components' => JobComponentResource::class,
         ];
     }
 
@@ -304,19 +304,19 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|JobcomponentResource[]
+     * @return ResourceCollection|JobComponentResource[]
      */
-    public function getcomponents()
+    public function getComponents()
     {
         return $this->components;
     }
 
     /**
-     * @param ResourceCollection|JobcomponentResource[] $components
+     * @param ResourceCollection|JobComponentResource[] $components
      *
      * @return $this
      */
-    public function setcomponents(ResourceCollection $components)
+    public function setComponents(ResourceCollection $components)
     {
         $this->components = $components;
         return $this;
