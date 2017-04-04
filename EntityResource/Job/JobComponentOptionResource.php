@@ -6,16 +6,13 @@ use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\Transfer\AbstractResource;
 
-use Palm\Bundle\Core\Logical\IdentityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * {@inheritdoc}
  */
-class JobPageOptionResource extends AbstractResource
+class JobComponentOptionResource extends AbstractResource
 {
-    use IdentityTrait;
-
     /**
      * @var FinishingCategoryResource
      *
@@ -41,14 +38,6 @@ class JobPageOptionResource extends AbstractResource
             'category' => FinishingCategoryResource::class,
             'item' => FinishingItemResource::class
         ];
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

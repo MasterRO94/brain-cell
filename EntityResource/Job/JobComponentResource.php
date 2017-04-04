@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class JobPageResource extends AbstractResource
+class JobComponentResource extends AbstractResource
 {
     const STATUS_INVALID_OPTIONS = 1;
     const STATUS_MISSING_ARTWORK = 2;
@@ -46,12 +46,12 @@ class JobPageResource extends AbstractResource
     protected $rangeEnd;
 
     /**
-     * @var ResourceCollection|JobPageOptionResource[]
+     * @var ResourceCollection|JobcomponentOptionResource[]
      *
      * @Assert\Valid()
      * @Assert\Expression(
      *     expression="this.getOptions() && this.getOptions().count() > 0",
-     *     message="There must be options specified for the page"
+     *     message="There must be options specified for the component"
      * )
      */
     protected $options;
@@ -103,7 +103,7 @@ class JobPageResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'options' => JobPageOptionResource::class
+            'options' => JobcomponentOptionResource::class
         ];
     }
 
@@ -116,7 +116,7 @@ class JobPageResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|JobPageOptionResource[]
+     * @return ResourceCollection|JobcomponentOptionResource[]
      */
     public function getOptions()
     {
@@ -124,9 +124,9 @@ class JobPageResource extends AbstractResource
     }
 
     /**
-     * @param ResourceCollection|JobPageOptionResource[] $options
+     * @param ResourceCollection|JobcomponentOptionResource[] $options
      *
-     * @return JobPageResource
+     * @return JobComponentResource
      */
     public function setOptions(ResourceCollection $options)
     {
@@ -164,7 +164,7 @@ class JobPageResource extends AbstractResource
     /**
      * @param int $rangeStart
      *
-     * @return JobPageResource
+     * @return JobComponentResource
      */
     public function setRangeStart($rangeStart)
     {
@@ -183,7 +183,7 @@ class JobPageResource extends AbstractResource
     /**
      * @param int $rangeEnd
      *
-     * @return JobPageResource
+     * @return JobComponentResource
      */
     public function setRangeEnd($rangeEnd)
     {
@@ -202,7 +202,7 @@ class JobPageResource extends AbstractResource
     /**
      * @param ArtworkResource $artwork
      *
-     * @return JobPageResource
+     * @return JobComponentResource
      */
     public function setArtwork(ArtworkResource $artwork)
     {
@@ -221,7 +221,7 @@ class JobPageResource extends AbstractResource
     /**
      * @param SizeResource $size
      *
-     * @return JobPageResource
+     * @return JobComponentResource
      */
     public function setSize(SizeResource $size)
     {
@@ -240,7 +240,7 @@ class JobPageResource extends AbstractResource
     /**
      * @param MaterialResource $material
      *
-     * @return JobPageResource
+     * @return JobComponentResource
      */
     public function setMaterial(MaterialResource $material)
     {
@@ -259,7 +259,7 @@ class JobPageResource extends AbstractResource
     /**
      * @param int $weight
      *
-     * @return JobPageResource
+     * @return JobComponentResource
      */
     public function setWeight($weight)
     {

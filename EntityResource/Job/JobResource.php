@@ -75,15 +75,15 @@ class JobResource extends AbstractResource
     protected $updated;
 
     /**
-     * @var ResourceCollection|JobPageResource[]
+     * @var ResourceCollection|JobcomponentResource[]
      *
      * @Assert\Valid()
      * @Assert\Expression(
-     *     expression="this.getPages() && this.getPages().count() > 0",
-     *     message="There must be at least one page supplied"
+     *     expression="this.getcomponents() && this.getcomponents().count() > 0",
+     *     message="There must be at least one component supplied"
      * )
      */
-    protected $pages;
+    protected $components;
 
     /**
      * @var JobBatchResource
@@ -130,7 +130,7 @@ class JobResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'pages' => JobPageResource::class,
+            'components' => JobcomponentResource::class,
         ];
     }
 
@@ -304,21 +304,21 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|JobPageResource[]
+     * @return ResourceCollection|JobcomponentResource[]
      */
-    public function getPages()
+    public function getcomponents()
     {
-        return $this->pages;
+        return $this->components;
     }
 
     /**
-     * @param ResourceCollection|JobPageResource[] $pages
+     * @param ResourceCollection|JobcomponentResource[] $components
      *
      * @return $this
      */
-    public function setPages(ResourceCollection $pages)
+    public function setcomponents(ResourceCollection $components)
     {
-        $this->pages = $pages;
+        $this->components = $components;
         return $this;
     }
 
