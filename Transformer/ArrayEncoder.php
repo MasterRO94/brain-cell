@@ -202,16 +202,6 @@ class ArrayEncoder extends AbstractTransformer
             return true;
         }
 
-        // Bogus special case for ID objects (see method above)
-        // @todo remove this once fix implemented in Brain
-        if (
-            \is_array($originalData[$snakeCasePropertyName])
-            && \array_key_exists('id', $originalData[$snakeCasePropertyName])
-            && $originalData[$snakeCasePropertyName]['id'] == $value
-        ) {
-            return true;
-        }
-
         return false;
     }
 
