@@ -9,6 +9,7 @@ use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Client\RequestContext;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\StockFinishingsResource;
 use Brain\Cell\Service\ResourceHandlerService;
 use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
@@ -52,14 +53,16 @@ class DelegateClientTest extends AbstractBrainCellTestCase
             ->method('request')
             ->willReturn(
                 [
-                    [
-                        'id' => 'some-id',
-                        'alias' => 'some-alias',
-                        'name' => 'some-name',
-                        'options' => [
-                            'data' => []
+                    'finishings' => [
+                        [
+                            'id' => 'some-id',
+                            'alias' => 'some-alias',
+                            'name' => 'some-name',
+                            'options' => []
                         ]
-                    ]
+                    ],
+                    'materials' => [],
+                    'sizes' => []
                 ]
             );
 
@@ -67,16 +70,9 @@ class DelegateClientTest extends AbstractBrainCellTestCase
         $this->configuration->setResourceHandler($resourceHandler);
 
         $delegate = new StockDelegateClient($this->configuration);
-        $collection = $delegate->getFinishings();
+        $resource = $delegate->getFinishings(new JobResource());
 
-        $this->assertInstanceOf(ResourceCollection::class, $collection);
-        $this->assertEquals(1, $collection->count());
-
-        /** @var FinishingCategoryResource $resource */
-        $resource = $collection->first();
-
-        $this->assertInstanceOf(FinishingCategoryResource::class, $resource);
-        $this->assertEquals('some-id', $resource->getId());
+        $this->assertInstanceOf(StockFinishingsResource::class, $resource);
 
     }
 

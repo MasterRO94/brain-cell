@@ -4,6 +4,7 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
 use Brain\Cell\EntityResource\DimensionsResource;
+use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\Transfer\AbstractResource;
@@ -39,6 +40,11 @@ class JobResource extends AbstractResource
     protected $productionHouse;
 
     /**
+     * @var ProductResource
+     */
+    protected $product;
+
+    /**
      * @var ShopResource
      */
     protected $shop;
@@ -69,15 +75,15 @@ class JobResource extends AbstractResource
     protected $updated;
 
     /**
-     * @var ResourceCollection|JobPageResource[]
+     * @var ResourceCollection|JobComponentResource[]
      *
      * @Assert\Valid()
      * @Assert\Expression(
-     *     expression="this.getPages() && this.getPages().count() > 0",
-     *     message="There must be at least one page supplied"
+     *     expression="this.getComponents() && this.getComponents().count() > 0",
+     *     message="There must be at least one component supplied"
      * )
      */
-    protected $pages;
+    protected $components;
 
     /**
      * @var JobBatchResource
@@ -111,6 +117,7 @@ class JobResource extends AbstractResource
         return [
             'productionHouse' => ProductionHouseResource::class,
             'shop' => ShopResource::class,
+            'product' => ProductResource::class,
             'delivery' => DeliveryResource::class,
             'batch' => JobBatchResource::class,
             'dimensions' => DimensionsResource::class,
@@ -123,7 +130,7 @@ class JobResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'pages' => JobPageResource::class,
+            'components' => JobComponentResource::class,
         ];
     }
 
@@ -182,6 +189,24 @@ class JobResource extends AbstractResource
     public function setProductionHouse(ProductionHouseResource $productionHouse)
     {
         $this->productionHouse = $productionHouse;
+        return $this;
+    }
+
+    /**
+     * @return ProductResource
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param ProductResource $product
+     * @return $this
+     */
+    public function setProduct(ProductResource $product)
+    {
+        $this->product = $product;
         return $this;
     }
 
@@ -279,21 +304,21 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|JobPageResource[]
+     * @return ResourceCollection|JobComponentResource[]
      */
-    public function getPages()
+    public function getComponents()
     {
-        return $this->pages;
+        return $this->components;
     }
 
     /**
-     * @param ResourceCollection|JobPageResource[] $pages
+     * @param ResourceCollection|JobComponentResource[] $components
      *
      * @return $this
      */
-    public function setPages(ResourceCollection $pages)
+    public function setComponents(ResourceCollection $components)
     {
-        $this->pages = $pages;
+        $this->components = $components;
         return $this;
     }
 
