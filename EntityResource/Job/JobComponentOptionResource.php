@@ -14,6 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class JobComponentOptionResource extends AbstractResource
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var FinishingCategoryResource
      *
      * @Assert\Valid()

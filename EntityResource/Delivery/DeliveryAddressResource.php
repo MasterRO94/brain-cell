@@ -5,12 +5,14 @@ namespace Brain\Cell\EntityResource\Delivery;
 use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\Transfer\AbstractResource;
 
-use Palm\Bundle\Core\Logical\IdentityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class DeliveryAddressResource extends AbstractResource
 {
-    use IdentityTrait;
+    /**
+     * @var int
+     */
+    protected $id;
 
     /** @var AddressResource $address */
     protected $address;
