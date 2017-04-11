@@ -82,6 +82,7 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $resource = SimpleResourceMock::create(1, 'string');
 
         $expected = [
+            'id' => 1,
             'name' => 'string'
         ];
 
@@ -101,7 +102,9 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $parent->setAssociatedResource($resource);
 
         $expected = [
+            'id' => 2,
             'associated_resource' => [
+                'id' => 1,
                 'name' => 'string'
             ]
         ];
@@ -121,8 +124,8 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $collection->add(SimpleResourceMock::create(2, 'two'));
 
         $expected = [
-            ['name' => 'one'],
-            ['name' => 'two'],
+            ['id' => 1, 'name' => 'one'],
+            ['id' => 2, 'name' => 'two'],
         ];
 
         $response = $this->encoder->encode($collection);
@@ -140,14 +143,15 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $collection->add(SimpleResourceMock::create(2, 'two'));
         $collection->add(SimpleResourceMock::create(3, 'three'));
 
-        $resource = SimpleResourceCollectionAssociationMock::create(3);
+        $resource = SimpleResourceCollectionAssociationMock::create(4);
         $resource->setAssociatedCollection($collection);
 
         $expected = [
+            'id' => 4,
             'associated_collection' => [
-                ['name' => 'one'],
-                ['name' => 'two'],
-                ['name' => 'three'],
+                ['id' => 1, 'name' => 'one'],
+                ['id' => 2, 'name' => 'two'],
+                ['id' => 3, 'name' => 'three'],
             ]
         ];
 

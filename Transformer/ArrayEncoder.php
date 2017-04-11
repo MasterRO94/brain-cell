@@ -95,12 +95,6 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
-            // @todo atm we have to send ID instead of object - we SHOULD be
-            // sending object with just ID instead - Kris has done this elsewhere
-            if ($property->getName() == 'id') {
-                continue;
-            }
-
             // Don't include data
             if ($property->getName() == 'data') {
                 continue;
