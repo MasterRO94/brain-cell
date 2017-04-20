@@ -13,6 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class JobComponentOptionResource extends AbstractResource
 {
+    /** @var string $id */
+    protected $id;
+
     /**
      * @var FinishingCategoryResource
      *
@@ -38,6 +41,14 @@ class JobComponentOptionResource extends AbstractResource
             'category' => FinishingCategoryResource::class,
             'item' => FinishingItemResource::class
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**

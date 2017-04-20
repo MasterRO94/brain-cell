@@ -86,6 +86,11 @@ class JobComponentResource extends AbstractResource
     protected $weight;
 
     /**
+     * @var int $productionSheetCount
+     */
+    protected $productionSheetCount;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -267,4 +272,19 @@ class JobComponentResource extends AbstractResource
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getProductionSheetCount()
+    {
+        return $this->productionSheetCount;
+    }
+
+    /**
+     * @param int $productionSheetCount
+     */
+    public function setProductionSheetCount($productionSheetCount)
+    {
+        $this->productionSheetCount = $productionSheetCount;
+    }
 }
