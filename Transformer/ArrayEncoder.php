@@ -4,18 +4,11 @@ namespace Brain\Cell\Transformer;
 
 use Brain;
 use Brain\Cell\AbstractTransformer;
-use Brain\Cell\EntityResource\Job\JobBatchResource;
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
-use Brain\Cell\EntityResource\Stock\MaterialResource;
-use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Doctrine\Common\Inflector\Inflector;
-use Reflection;
-use ReflectionProperty;
 
 /**
  * An encoder for transforming {@link TransferEntityInterface} to arrays.
@@ -95,12 +88,6 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
-            // @todo atm we have to send ID instead of object - we SHOULD be
-            // sending object with just ID instead - Kris has done this elsewhere
-            if ($property->getName() == 'id') {
-                continue;
-            }
-
             // Don't include data
             if ($property->getName() == 'data') {
                 continue;
@@ -169,13 +156,7 @@ class ArrayEncoder extends AbstractTransformer
             return false;
         }
 
-        return
-            $resource instanceof FinishingItemResource
-            || $resource instanceof FinishingCategoryResource
-            || $resource instanceof MaterialResource
-            || $resource instanceof SizeResource
-            || $resource instanceof JobBatchResource
-        ;
+        return method_exists($resource, 'getId');
     }
 
     /**

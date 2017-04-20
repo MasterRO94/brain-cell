@@ -9,9 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class DeliveryAddressResource extends AbstractResource
 {
-    /**
-     * @var int
-     */
+    /** @var string $id */
     protected $id;
 
     /** @var AddressResource $address */
@@ -40,5 +38,13 @@ class DeliveryAddressResource extends AbstractResource
     {
         $this->address = $address;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }
