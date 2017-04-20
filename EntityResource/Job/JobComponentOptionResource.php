@@ -17,6 +17,11 @@ class JobComponentOptionResource extends AbstractResource
     protected $id;
 
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var FinishingCategoryResource
      *
      * @Assert\Valid()

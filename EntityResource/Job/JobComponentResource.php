@@ -46,6 +46,14 @@ class JobComponentResource extends AbstractResource
     protected $rangeEnd;
 
     /**
+     * @var int
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer")
+     */
+    protected $productionSheetCount;
+
+    /**
      * @var ResourceCollection|JobComponentOptionResource[]
      *
      * @Assert\Valid()
@@ -84,11 +92,6 @@ class JobComponentResource extends AbstractResource
      * @var int
      */
     protected $weight;
-
-    /**
-     * @var int $productionSheetCount
-     */
-    protected $productionSheetCount;
 
     /**
      * {@inheritdoc}
@@ -275,7 +278,7 @@ class JobComponentResource extends AbstractResource
     /**
      * @return int
      */
-    public function getProductionSheetCount()
+    public function getProductionSheetCount(): int
     {
         return $this->productionSheetCount;
     }
@@ -283,7 +286,7 @@ class JobComponentResource extends AbstractResource
     /**
      * @param int $productionSheetCount
      */
-    public function setProductionSheetCount($productionSheetCount)
+    public function setProductionSheetCount(int $productionSheetCount)
     {
         $this->productionSheetCount = $productionSheetCount;
     }
