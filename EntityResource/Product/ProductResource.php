@@ -14,6 +14,21 @@ class ProductResource extends AbstractResource
     protected $name;
 
     /**
+     * @var ProductGroupResource
+     */
+    protected $productGroup;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'productGroup' => ProductGroupResource::class,
+        ];
+    }
+
+    /**
      * @return string
      */
     public function getId()
@@ -43,6 +58,22 @@ class ProductResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return ProductGroupResource
+     */
+    public function getProductGroup()
+    {
+        return $this->productGroup;
+    }
+
+    /**
+     * @param ProductGroupResource $productGroup
+     */
+    public function setProductGroup($productGroup)
+    {
+        $this->productGroup = $productGroup;
     }
 
 }
