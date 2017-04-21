@@ -277,7 +277,7 @@ class JobResource extends AbstractResource
     /**
      * @return int
      */
-    public function getQuantity(): int
+    public function getQuantity()
     {
         return $this->quantity;
     }
