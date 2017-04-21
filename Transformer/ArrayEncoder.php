@@ -137,13 +137,8 @@ class ArrayEncoder extends AbstractTransformer
             }
 
             $data[$snakeCasePropertyName] = $value;
-
-            // @todo this isn't really the place to do this - we need to
-            // confirm it's come back from the freakin API first :(
-            $originalData[$snakeCasePropertyName] = $value;
         }
 
-        $resource->setData($originalData);
         return $data;
     }
 
