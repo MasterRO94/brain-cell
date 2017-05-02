@@ -418,5 +418,58 @@ class JobResource extends AbstractResource
         $this->price = $price;
     }
 
+    /**
+     * @return int
+     */
+    public function getPageCount()
+    {
+        $pages = 0;
+        foreach ($this->components as $component) {
+            $pages += $component->getRangeEnd() - $component->getRangeStart();
+        }
+        return $pages;
+    }
 
+    /**
+     * @return int
+     */
+    public function getSheetCount()
+    {
+        $sheets = 0;
+        foreach ($this->components as $component) {
+            $sheets += $component->getProductionSheetCount();
+        }
+        return $sheets;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSpecificationString()
+    {
+        $specificationString = '';
+        foreach ($this->components as $component) {
+            $specificationString .= $component->getSize()->getName(). ' ';
+            $specificationString .= $component->getMaterial()->getName() . ' ';
+            foreach ($component->getOptions() as $option) {
+                $specificationString .= $option->getItem()->getName() . ' ';
+            }
+        }
+        return rtrim($specificationString);
+    }
+
+    public function hasPersonalisation()
+    {
+        foreach ($this->components as $component) {
+            foreach ($component->getOptions() as $option) {
+                if (
+                    $option->getCategory()->getAlias() === 'personalisation'
+                    && ! $option->getItem()->isDefault()
+                ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
