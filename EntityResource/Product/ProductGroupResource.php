@@ -7,23 +7,11 @@ use Brain\Cell\Transfer\AbstractResource;
 /**
  * {@inheritdoc}
  */
-class ProductResource extends AbstractResource
+class ProductGroupResource extends AbstractResource
 {
     protected $id;
 
     protected $name;
-
-    protected $productGroup;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAssociatedResources()
-    {
-        return [
-            'productGroup' => ProductGroupResource::class,
-        ];
-    }
 
     /**
      * @return string
@@ -57,19 +45,4 @@ class ProductResource extends AbstractResource
         $this->name = $name;
     }
 
-    /**
-     * @return ProductGroupResource
-     */
-    public function getProductGroup()
-    {
-        return $this->productGroup;
-    }
-
-    /**
-     * @param ProductGroupResource $productGroup
-     */
-    public function setProductGroup($productGroup)
-    {
-        $this->productGroup = $productGroup;
-    }
 }
