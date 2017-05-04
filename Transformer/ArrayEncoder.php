@@ -4,18 +4,11 @@ namespace Brain\Cell\Transformer;
 
 use Brain;
 use Brain\Cell\AbstractTransformer;
-use Brain\Cell\EntityResource\Job\JobBatchResource;
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
-use Brain\Cell\EntityResource\Stock\MaterialResource;
-use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Doctrine\Common\Inflector\Inflector;
-use Reflection;
-use ReflectionProperty;
 
 /**
  * An encoder for transforming {@link TransferEntityInterface} to arrays.
@@ -103,7 +96,11 @@ class ArrayEncoder extends AbstractTransformer
             if ($value instanceof TransferEntityInterface) {
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResource($value)) {
-                    $value = $value->getId();
+                    if (method_exists($value, 'getAlias')) {
+                        $value = $value->getAlias();
+                    } else {
+                        $value = $value->getId();
+                    }
 
                 // All other associated can be encoded hooray :)
                 } elseif (isset($resources[$property->getName()])) {
@@ -140,13 +137,8 @@ class ArrayEncoder extends AbstractTransformer
             }
 
             $data[$snakeCasePropertyName] = $value;
-
-            // @todo this isn't really the place to do this - we need to
-            // confirm it's come back from the freakin API first :(
-            $originalData[$snakeCasePropertyName] = $value;
         }
 
-        $resource->setData($originalData);
         return $data;
     }
 
@@ -163,13 +155,7 @@ class ArrayEncoder extends AbstractTransformer
             return false;
         }
 
-        return
-            $resource instanceof FinishingItemResource
-            || $resource instanceof FinishingCategoryResource
-            || $resource instanceof MaterialResource
-            || $resource instanceof SizeResource
-            || $resource instanceof JobBatchResource
-        ;
+        return method_exists($resource, 'getId');
     }
 
     /**

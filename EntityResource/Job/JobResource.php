@@ -4,6 +4,7 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
 use Brain\Cell\EntityResource\DimensionsResource;
+use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
@@ -110,6 +111,11 @@ class JobResource extends AbstractResource
     protected $dimensions;
 
     /**
+     * @var PriceResource
+     */
+    protected $price;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -121,6 +127,7 @@ class JobResource extends AbstractResource
             'delivery' => DeliveryResource::class,
             'batch' => JobBatchResource::class,
             'dimensions' => DimensionsResource::class,
+            'price' => PriceResource::class,
         ];
     }
 
@@ -270,7 +277,7 @@ class JobResource extends AbstractResource
     /**
      * @return int
      */
-    public function getQuantity(): int
+    public function getQuantity()
     {
         return $this->quantity;
     }
@@ -393,6 +400,22 @@ class JobResource extends AbstractResource
     {
         $this->updated = $updated;
         return $this;
+    }
+
+    /**
+     * @return PriceResource
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param PriceResource $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
     }
 
 

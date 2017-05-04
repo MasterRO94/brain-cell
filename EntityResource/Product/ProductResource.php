@@ -13,6 +13,9 @@ class ProductResource extends AbstractResource
 
     protected $name;
 
+    /**
+     * @var ProductGroupResource
+     */
     protected $productGroup;
 
     /**
@@ -72,4 +75,5 @@ class ProductResource extends AbstractResource
     {
         $this->productGroup = $productGroup;
     }
+
 }
