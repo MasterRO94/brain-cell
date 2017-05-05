@@ -13,7 +13,7 @@ class FinishingItemResource extends AbstractResource
 {
 
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -35,7 +35,7 @@ class FinishingItemResource extends AbstractResource
     protected $default;
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

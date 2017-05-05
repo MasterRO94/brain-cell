@@ -14,7 +14,7 @@ class SizeResource extends AbstractResource
 {
 
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -44,7 +44,7 @@ class SizeResource extends AbstractResource
     protected $dimensions;
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
