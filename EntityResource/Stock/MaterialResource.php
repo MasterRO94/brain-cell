@@ -16,7 +16,7 @@ class MaterialResource extends AbstractResource
 {
 
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -61,7 +61,7 @@ class MaterialResource extends AbstractResource
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

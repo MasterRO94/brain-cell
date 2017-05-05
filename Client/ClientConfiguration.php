@@ -6,8 +6,7 @@ use Brain\Cell\Service\ResourceHandlerService;
 
 class ClientConfiguration
 {
-
-    const VERSION = '0.1';
+    const VERSION = 'v1';
 
     /**
      * @var RequestAdapterInterface
@@ -54,7 +53,7 @@ class ClientConfiguration
      */
     public function getBasePath()
     {
-        return $this->basePath;
+        return sprintf('%s/%s', $this->basePath, self::VERSION);
     }
 
     /**
