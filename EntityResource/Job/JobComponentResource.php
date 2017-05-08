@@ -20,7 +20,7 @@ class JobComponentResource extends AbstractResource
     const STATUS_READY = 200;
 
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -111,12 +111,12 @@ class JobComponentResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'options' => JobComponentOptionResource::class
+            'options' => JobComponentOptionResource::class,
         ];
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

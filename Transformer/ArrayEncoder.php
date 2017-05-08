@@ -99,7 +99,8 @@ class ArrayEncoder extends AbstractTransformer
                     if (method_exists($value, 'getAlias')) {
                         $value = $value->getAlias();
                     } else {
-                        $value = $value->getId();
+                        // but if we don't have an ID then it's new
+                        $value = $value->getId() ?: $value;
                     }
 
                 // All other associated can be encoded hooray :)
