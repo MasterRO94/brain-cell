@@ -116,6 +116,11 @@ class JobResource extends AbstractResource
     protected $price;
 
     /**
+     * @var string
+     */
+    protected $reference;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -418,5 +423,20 @@ class JobResource extends AbstractResource
         $this->price = $price;
     }
 
+    /**
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * @param string $reference
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+    }
 
 }
