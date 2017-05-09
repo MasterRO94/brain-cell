@@ -96,11 +96,16 @@ class ArrayEncoder extends AbstractTransformer
             if ($value instanceof TransferEntityInterface) {
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResource($value)) {
-                    if (method_exists($value, 'getAlias')) {
+                    if (method_exists($value, 'getAlias') && $value->getAlias()) {
+                        // always prefer alias
                         $value = $value->getAlias();
                     } else {
-                        // but if we don't have an ID then it's new
-                        $value = $value->getId() ?: $value;
+                        if ($value->getId()) {
+                            $value = $value->getId();
+                        } else {
+                            // no ID or alias so this is a new object...
+                            $value = $this->encodeResource($value);
+                        }
                     }
 
                 // All other associated can be encoded hooray :)
