@@ -452,7 +452,8 @@ class JobResource extends AbstractResource
             $specificationString .= $component->getSize()->getName(). ' ';
             $specificationString .= $component->getMaterial()->getName() . ' ';
             foreach ($component->getOptions() as $option) {
-                $specificationString .= $option->getItem()->getName() . ' ';
+                $specificationString .= $option->getCategory()->getAlias() . '=';
+                $specificationString .= $option->getItem()->getAlias() . ' ';
             }
         }
         return rtrim($specificationString);
@@ -470,6 +471,23 @@ class JobResource extends AbstractResource
                 }
             }
         }
+        return false;
+    }
+
+    public function isMultipage()
+    {
+        if ($this->components->count() > 1) {
+            return true;
+        }
+
+        if ($this->components->count() == 1) {
+            /** @var JobComponentResource $firstComponent */
+            $firstComponent = $this->components->first();
+            if ($firstComponent->getRangeEnd() > 1) {
+                return true;
+            }
+        }
+
         return false;
     }
 }
