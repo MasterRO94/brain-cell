@@ -18,7 +18,7 @@ class ArtworkResource extends AbstractResource
     const STATUS_VERIFIED = 200;
 
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -36,7 +36,7 @@ class ArtworkResource extends AbstractResource
     protected $path;
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {

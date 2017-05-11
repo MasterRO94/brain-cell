@@ -20,7 +20,7 @@ class JobComponentResource extends AbstractResource
     const STATUS_READY = 200;
 
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -44,6 +44,14 @@ class JobComponentResource extends AbstractResource
      * @Assert\Type(type="integer")
      */
     protected $rangeEnd;
+
+    /**
+     * @var int
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer")
+     */
+    protected $productionSheetCount;
 
     /**
      * @var ResourceCollection|JobComponentOptionResource[]
@@ -86,11 +94,6 @@ class JobComponentResource extends AbstractResource
     protected $weight;
 
     /**
-     * @var int $productionSheetCount
-     */
-    protected $productionSheetCount;
-
-    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -108,12 +111,12 @@ class JobComponentResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'options' => JobComponentOptionResource::class
+            'options' => JobComponentOptionResource::class,
         ];
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -275,7 +278,7 @@ class JobComponentResource extends AbstractResource
     /**
      * @return int
      */
-    public function getProductionSheetCount()
+    public function getProductionSheetCount(): int
     {
         return $this->productionSheetCount;
     }
@@ -283,7 +286,7 @@ class JobComponentResource extends AbstractResource
     /**
      * @param int $productionSheetCount
      */
-    public function setProductionSheetCount($productionSheetCount)
+    public function setProductionSheetCount(int $productionSheetCount)
     {
         $this->productionSheetCount = $productionSheetCount;
     }

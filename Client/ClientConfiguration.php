@@ -6,8 +6,7 @@ use Brain\Cell\Service\ResourceHandlerService;
 
 class ClientConfiguration
 {
-
-    const VERSION = '0.1';
+    const VERSION = 'v1';
 
     /**
      * @var RequestAdapterInterface
@@ -54,7 +53,7 @@ class ClientConfiguration
      */
     public function getBasePath()
     {
-        return $this->basePath;
+        return sprintf('%s/%s', $this->basePath, self::VERSION);
     }
 
     /**
@@ -95,7 +94,7 @@ class ClientConfiguration
     public function createRequestContext()
     {
         $context = new RequestContext($this->getBasePath());
-        $context->getHeaders()->set('Authorization', sprintf('Bearer %s', $this->apiKey));
+        $context->getHeaders()->set('Authorization', sprintf('Token %s', $this->apiKey));
         $context->getHeaders()->set('Api-Client-Version', self::VERSION);
         return $context;
     }

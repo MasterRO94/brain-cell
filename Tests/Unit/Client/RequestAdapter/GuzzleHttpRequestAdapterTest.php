@@ -20,7 +20,7 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
 class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
 {
 
-    const BASE_PATH = 'https://some.example.com/api';
+    const BASE_PATH = 'https://some.example.com/v1';
 
     /** @var MockObject|GuzzleClient */
     protected $guzzle;

@@ -96,7 +96,17 @@ class ArrayEncoder extends AbstractTransformer
             if ($value instanceof TransferEntityInterface) {
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResource($value)) {
-                    $value = $value->getId();
+                    if (method_exists($value, 'getAlias') && $value->getAlias()) {
+                        // always prefer alias
+                        $value = $value->getAlias();
+                    } else {
+                        if ($value->getId()) {
+                            $value = $value->getId();
+                        } else {
+                            // no ID or alias so this is a new object...
+                            $value = $this->encodeResource($value);
+                        }
+                    }
 
                 // All other associated can be encoded hooray :)
                 } elseif (isset($resources[$property->getName()])) {
@@ -133,13 +143,8 @@ class ArrayEncoder extends AbstractTransformer
             }
 
             $data[$snakeCasePropertyName] = $value;
-
-            // @todo this isn't really the place to do this - we need to
-            // confirm it's come back from the freakin API first :(
-            $originalData[$snakeCasePropertyName] = $value;
         }
 
-        $resource->setData($originalData);
         return $data;
     }
 

@@ -116,6 +116,11 @@ class JobResource extends AbstractResource
     protected $price;
 
     /**
+     * @var string
+     */
+    protected $reference;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -277,7 +282,7 @@ class JobResource extends AbstractResource
     /**
      * @return int
      */
-    public function getQuantity(): int
+    public function getQuantity()
     {
         return $this->quantity;
     }
@@ -419,6 +424,22 @@ class JobResource extends AbstractResource
     }
 
     /**
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * @param string $reference
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+    }
+
+    /**
      * @return int
      */
     public function getPageCount()
@@ -490,4 +511,5 @@ class JobResource extends AbstractResource
 
         return false;
     }
+
 }

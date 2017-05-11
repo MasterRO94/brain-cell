@@ -3,12 +3,21 @@
 namespace Brain\Cell;
 
 use Brain\Cell\Client\Delegate\JobDelegateClient;
+use Brain\Cell\Client\Delegate\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 
 class BrainClient extends DelegateClient
 {
+
+    /**
+     * @return PricingDelegateClient
+     */
+    public function pricing()
+    {
+        return new PricingDelegateClient($this->configuration);
+    }
 
     /**
      * @return StockDelegateClient
