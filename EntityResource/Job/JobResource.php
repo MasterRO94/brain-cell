@@ -463,23 +463,6 @@ class JobResource extends AbstractResource
         return $sheets;
     }
 
-    /**
-     * @return string
-     */
-    public function getSpecificationString()
-    {
-        $specificationString = '';
-        foreach ($this->components as $component) {
-            $specificationString .= $component->getSize()->getName(). ' ';
-            $specificationString .= $component->getMaterial()->getName() . ' ';
-            foreach ($component->getOptions() as $option) {
-                $specificationString .= $option->getCategory()->getAlias() . '=';
-                $specificationString .= $option->getItem()->getAlias() . ' ';
-            }
-        }
-        return rtrim($specificationString);
-    }
-
     public function hasPersonalisation()
     {
         foreach ($this->components as $component) {
