@@ -31,7 +31,7 @@ class JobResource extends AbstractResource
     protected $id;
 
     /**
-     * @var string
+     * @var JobStatusResource $status
      */
     protected $status;
 
@@ -133,6 +133,7 @@ class JobResource extends AbstractResource
             'batch' => JobBatchResource::class,
             'dimensions' => DimensionsResource::class,
             'price' => PriceResource::class,
+            'status' => JobStatusResource::class,
         ];
     }
 
@@ -167,7 +168,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return int
+     * @return JobStatusResource
      */
     public function getStatus()
     {
@@ -175,8 +176,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @param int $status
-     *
+     * @param JobStatusResource $status
      * @return $this
      */
     public function setStatus($status)
@@ -463,12 +463,16 @@ class JobResource extends AbstractResource
         return $sheets;
     }
 
-    public function hasPersonalisation()
+    /**
+     * @param string $optionCategoryAlias
+     * @return bool
+     */
+    protected function has($optionCategoryAlias)
     {
         foreach ($this->components as $component) {
             foreach ($component->getOptions() as $option) {
                 if (
-                    $option->getCategory()->getAlias() === 'personalisation'
+                    $option->getCategory()->getAlias() === $optionCategoryAlias
                     && ! $option->getItem()->isDefault()
                 ) {
                     return true;
@@ -476,6 +480,48 @@ class JobResource extends AbstractResource
             }
         }
         return false;
+    }
+
+    // @todo is this a very bad idea perhaps?
+
+    /**
+     * @return bool
+     */
+    public function hasWhiteInk()
+    {
+        return $this->has('white-ink');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFoiling()
+    {
+        return $this->has('foiling');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLaserCutting()
+    {
+        return $this->has('laser-cutting');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasReversePrinting()
+    {
+        return $this->has('reverse-printing');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPersonalisation()
+    {
+        return $this->has('personalisation');
     }
 
     public function isMultipage()

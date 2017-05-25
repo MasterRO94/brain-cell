@@ -290,4 +290,20 @@ class JobComponentResource extends AbstractResource
     {
         $this->productionSheetCount = $productionSheetCount;
     }
+
+    /**
+     * @todo this is a hack - set this in Brain based on size and material
+     * @return int
+     */
+    public function getPagesPerSheet()
+    {
+        // @todo this'll need to be set in Brain
+        $width = $this->getSize()->getDimensions()->getWidth();
+        $height = $this->getSize()->getDimensions()->getHeight();
+        $sra3Width = 450;
+        $sra3Height = 320;
+        return (int) floor(
+            ($sra3Height * $sra3Width) / ($width * $height)
+        );
+    }
 }
