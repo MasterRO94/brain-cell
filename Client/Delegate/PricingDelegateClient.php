@@ -21,7 +21,8 @@ class PricingDelegateClient extends DelegateClient
         $context->prepareContextForPost('/pricing');
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($jobResource));
+        $payload = $handler->serialise($jobResource);
+        $context->setPayload($payload);
 
         return $this->request($context, new JobResource);
 
