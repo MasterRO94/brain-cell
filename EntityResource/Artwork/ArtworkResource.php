@@ -36,6 +36,11 @@ class ArtworkResource extends AbstractResource
     protected $path;
 
     /**
+     * @var string
+     */
+    protected $mimeType;
+
+    /**
      * @return string
      */
     public function getId()
@@ -80,4 +85,21 @@ class ArtworkResource extends AbstractResource
         $this->path = $path;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    /**
+     * @param string $mimeType
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mimeType = $mimeType;
+    }
+
 }
