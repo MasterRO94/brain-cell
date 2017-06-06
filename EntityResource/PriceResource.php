@@ -92,5 +92,4 @@ class PriceResource extends AbstractResource
     {
         $this->currency = $currency;
     }
-
 }
