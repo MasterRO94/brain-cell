@@ -25,6 +25,11 @@ class PriceResource extends AbstractResource
     protected $formatted;
 
     /**
+     * @var string $currency
+     */
+    protected $currency;
+
+    /**
      * @return mixed
      */
     public function getBase()
@@ -70,5 +75,21 @@ class PriceResource extends AbstractResource
     public function setFormatted(string $formatted)
     {
         $this->formatted = $formatted;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param string $currency
+     */
+    public function setCurrency(string $currency)
+    {
+        $this->currency = $currency;
     }
 }
