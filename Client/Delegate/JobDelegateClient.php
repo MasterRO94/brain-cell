@@ -87,7 +87,8 @@ class JobDelegateClient extends DelegateClient
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPatch(sprintf(
-            '/jobs/%s', $resource->getId()
+            '/jobs/%s',
+            $resource->getId()
         ));
 
         $handler = $this->configuration->getResourceHandler();
