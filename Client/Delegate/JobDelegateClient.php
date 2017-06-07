@@ -60,7 +60,6 @@ class JobDelegateClient extends DelegateClient
         $context->prepareContextForGet(sprintf('/jobs/%s', $id));
 
         return $this->request($context, new JobResource);
-
     }
 
     /**
