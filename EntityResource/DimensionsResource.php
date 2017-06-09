@@ -36,7 +36,7 @@ class DimensionsResource extends AbstractResource
      * @param int $width
      * @return DimensionsResource
      */
-    public function setWidth(int $width)
+    public function setWidth($width)
     {
         $this->width = $width;
         return $this;
@@ -54,7 +54,7 @@ class DimensionsResource extends AbstractResource
      * @param int $height
      * @return DimensionsResource
      */
-    public function setHeight(int $height)
+    public function setHeight($height)
     {
         $this->height = $height;
         return $this;

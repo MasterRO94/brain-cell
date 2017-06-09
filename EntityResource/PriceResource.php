@@ -56,7 +56,7 @@ class PriceResource extends AbstractResource
     /**
      * @param float $value
      */
-    public function setValue(float $value)
+    public function setValue($value)
     {
         $this->value = $value;
     }
@@ -72,7 +72,7 @@ class PriceResource extends AbstractResource
     /**
      * @param string $formatted
      */
-    public function setFormatted(string $formatted)
+    public function setFormatted($formatted)
     {
         $this->formatted = $formatted;
     }
@@ -88,7 +88,7 @@ class PriceResource extends AbstractResource
     /**
      * @param string $currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency($currency)
     {
         $this->currency = $currency;
     }

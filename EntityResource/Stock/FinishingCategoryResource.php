@@ -114,7 +114,7 @@ class FinishingCategoryResource extends AbstractResource
      *
      * @return FinishingCategoryResource
      */
-    public function setOptions(ResourceCollection $options)
+    public function setOptions($options)
     {
         $this->options = $options;
         return $this;
@@ -131,7 +131,7 @@ class FinishingCategoryResource extends AbstractResource
     /**
      * @param string $assignmentLevel
      */
-    public function setAssignmentLevel(string $assignmentLevel)
+    public function setAssignmentLevel($assignmentLevel)
     {
         $this->assignmentLevel = $assignmentLevel;
     }
@@ -147,7 +147,7 @@ class FinishingCategoryResource extends AbstractResource
     /**
      * @param string $applicationLevel
      */
-    public function setApplicationLevel(string $applicationLevel)
+    public function setApplicationLevel($applicationLevel)
     {
         $this->applicationLevel = $applicationLevel;
     }
