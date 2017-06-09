@@ -15,6 +15,8 @@ use Doctrine\Common\Inflector\Inflector;
  */
 class ArrayDecoder extends AbstractTransformer
 {
+    const UUID_REGEX = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/';
+
     /**
      * Decode the given $data and populate the given {@link TransferEntityInterface}.
      *
@@ -96,13 +98,10 @@ class ArrayDecoder extends AbstractTransformer
                     // we have a full-fledged object...
                     $value = $this->decodeResource($child, $value);
                 } else {
-                    // we only have an ID or possibly an alias :(
-                    // @todo this is no good... what's a smart way to do this?
-                    if (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/', $value)) {
+                    // we only have an ID or possibly an alias
+                    if (preg_match(static::UUID_REGEX, $value)) {
                         $value = $this->decodeResource($child, ['id' => $value]);
                     } else {
-                        // @todo this is no good either - if we try to encode this again
-                        // we will be lacking an ID meaning it'll try to send the whole thing...
                         $value = $this->decodeResource($child, ['alias' => $value]);
                     }
                 }
