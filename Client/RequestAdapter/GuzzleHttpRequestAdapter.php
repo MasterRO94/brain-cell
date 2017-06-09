@@ -42,8 +42,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     }
 
     /**
-     * @param RequestContext $context
-     * @return array
+     * {@inheritdoc}
      */
     public function request(RequestContext $context)
     {
@@ -52,8 +51,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     }
 
     /**
-     * @param RequestContext $context
-     * @return StreamInterface
+     * {@inheritdoc}
      */
     public function stream(RequestContext $context)
     {
