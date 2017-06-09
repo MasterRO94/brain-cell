@@ -278,7 +278,7 @@ class JobComponentResource extends AbstractResource
     /**
      * @return int
      */
-    public function getProductionSheetCount(): int
+    public function getProductionSheetCount()
     {
         return $this->productionSheetCount;
     }

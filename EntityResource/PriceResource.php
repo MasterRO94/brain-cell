@@ -48,7 +48,7 @@ class PriceResource extends AbstractResource
     /**
      * @return float
      */
-    public function getValue(): float
+    public function getValue()
     {
         return $this->value;
     }
@@ -64,7 +64,7 @@ class PriceResource extends AbstractResource
     /**
      * @return string
      */
-    public function getFormatted(): string
+    public function getFormatted()
     {
         return $this->formatted;
     }
@@ -80,7 +80,7 @@ class PriceResource extends AbstractResource
     /**
      * @return string
      */
-    public function getCurrency(): string
+    public function getCurrency()
     {
         return $this->currency;
     }
