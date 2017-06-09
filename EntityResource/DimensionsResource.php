@@ -5,7 +5,6 @@
 
 namespace Brain\Cell\EntityResource;
 
-
 use Brain\Cell\Transfer\AbstractResource;
 
 class DimensionsResource extends AbstractResource

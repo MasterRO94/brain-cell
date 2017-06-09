@@ -7,7 +7,6 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\Transfer\AbstractResource;
 
-
 class JobBatchResource extends AbstractResource
 {
 

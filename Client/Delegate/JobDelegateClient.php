@@ -27,7 +27,26 @@ class JobDelegateClient extends DelegateClient
         $collection->setEntityClass(JobResource::class);
 
         return $this->request($context, $collection);
+    }
 
+    /**
+     * Filters available:
+     * * id = string|string[]
+     *
+     * @param array $filters
+     *
+     * @return ResourceCollection|JobResource[]
+     */
+    public function getJobIds(array $filters = [])
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet('/job-ids');
+        $context->getFilters()->add($filters);
+
+        $collection = new ResourceCollection;
+        $collection->setEntityClass(JobResource::class);
+
+        return $this->request($context, $collection);
     }
 
     /**
@@ -41,7 +60,6 @@ class JobDelegateClient extends DelegateClient
         $context->prepareContextForGet(sprintf('/jobs/%s', $id));
 
         return $this->request($context, new JobResource);
-
     }
 
     /**
@@ -69,7 +87,8 @@ class JobDelegateClient extends DelegateClient
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPatch(sprintf(
-            '/jobs/%s', $resource->getId()
+            '/jobs/%s',
+            $resource->getId()
         ));
 
         $handler = $this->configuration->getResourceHandler();
