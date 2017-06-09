@@ -7,7 +7,6 @@ use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\RequestAdapterException;
 
 use Psr\Http\Message\StreamInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 use GuzzleHttp\ClientInterface;
 
