@@ -61,6 +61,10 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         return $response->getBody();
     }
 
+    /**
+     * @param RequestContext $context
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     protected function getResponse(RequestContext $context)
     {
         $path = $context->getPath();
