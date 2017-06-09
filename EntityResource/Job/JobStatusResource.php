@@ -6,7 +6,6 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\Transfer\ResourceCollection;
 
 class JobStatusResource extends AbstractResource
 {
@@ -31,7 +30,7 @@ class JobStatusResource extends AbstractResource
     /**
      * @param string $state
      */
-    public function setState(string $state)
+    public function setState($state)
     {
         $this->state = $state;
     }
@@ -47,7 +46,7 @@ class JobStatusResource extends AbstractResource
     /**
      * @param string $message
      */
-    public function setMessage(string $message)
+    public function setMessage($message)
     {
         $this->message = $message;
     }
