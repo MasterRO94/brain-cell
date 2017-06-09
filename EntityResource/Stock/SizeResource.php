@@ -92,7 +92,7 @@ class SizeResource extends AbstractResource
     /**
      * @return DimensionsResource
      */
-    public function getDimensions(): DimensionsResource
+    public function getDimensions()
     {
         return $this->dimensions;
     }

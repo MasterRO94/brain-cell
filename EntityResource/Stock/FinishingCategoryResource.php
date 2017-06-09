@@ -123,7 +123,7 @@ class FinishingCategoryResource extends AbstractResource
     /**
      * @return string
      */
-    public function getAssignmentLevel(): string
+    public function getAssignmentLevel()
     {
         return $this->assignmentLevel;
     }
@@ -139,7 +139,7 @@ class FinishingCategoryResource extends AbstractResource
     /**
      * @return string
      */
-    public function getApplicationLevel(): string
+    public function getApplicationLevel()
     {
         return $this->applicationLevel;
     }

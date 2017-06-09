@@ -23,7 +23,7 @@ class JobStatusResource extends AbstractResource
     /**
      * @return string
      */
-    public function getState(): string
+    public function getState()
     {
         return $this->state;
     }
@@ -39,7 +39,7 @@ class JobStatusResource extends AbstractResource
     /**
      * @return string
      */
-    public function getMessage(): string
+    public function getMessage()
     {
         return $this->message;
     }
