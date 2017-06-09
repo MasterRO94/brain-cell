@@ -5,7 +5,6 @@
 
 namespace Brain\Cell\EntityResource;
 
-
 use Brain\Cell\Transfer\AbstractResource;
 
 class AddressResource extends AbstractResource
@@ -100,7 +99,7 @@ class AddressResource extends AbstractResource
     /**
      * @return string
      */
-    public function getCity(): string
+    public function getCity()
     {
         return $this->city;
     }
@@ -119,7 +118,7 @@ class AddressResource extends AbstractResource
     /**
      * @return string
      */
-    public function getCountyState(): string
+    public function getCountyState()
     {
         return $this->countyState;
     }
@@ -138,7 +137,7 @@ class AddressResource extends AbstractResource
     /**
      * @return string
      */
-    public function getPostcode(): string
+    public function getPostcode()
     {
         return $this->postcode;
     }
@@ -157,7 +156,7 @@ class AddressResource extends AbstractResource
     /**
      * @return string
      */
-    public function getCountry(): string
+    public function getCountry()
     {
         return $this->country;
     }

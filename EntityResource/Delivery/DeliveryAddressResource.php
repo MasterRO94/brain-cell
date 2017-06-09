@@ -23,7 +23,7 @@ class DeliveryAddressResource extends AbstractResource
     }
 
     /**
-     * @return mixed
+     * @return AddressResource
      */
     public function getAddress()
     {
@@ -31,7 +31,7 @@ class DeliveryAddressResource extends AbstractResource
     }
 
     /**
-     * @param mixed $address
+     * @param AddressResource $address
      * @return DeliveryAddressResource
      */
     public function setAddress($address)

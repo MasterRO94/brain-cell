@@ -6,6 +6,7 @@ use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\RequestAdapterException;
 
+use Psr\Http\Message\StreamInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 use GuzzleHttp\ClientInterface;
@@ -47,6 +48,22 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
      */
     public function request(RequestContext $context)
     {
+        $response = $this->getResponse($context);
+        return json_decode($response->getBody(), true);
+    }
+
+    /**
+     * @param RequestContext $context
+     * @return StreamInterface
+     */
+    public function stream(RequestContext $context)
+    {
+        $response = $this->getResponse($context);
+        return $response->getBody();
+    }
+
+    protected function getResponse(RequestContext $context)
+    {
         $path = $context->getPath();
         $parameters = [];
 
@@ -71,12 +88,10 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             $options['json'] = $context->getPayload();
         }
 
-        $response = $this->guzzle->request(
+        return $this->guzzle->request(
             $context->getMethod(),
             $path,
             $options
         );
-
-        return json_decode($response->getBody(), true);
     }
 }

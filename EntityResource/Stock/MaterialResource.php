@@ -157,7 +157,7 @@ class MaterialResource extends AbstractResource
      *
      * @return MaterialResource
      */
-    public function setWeight(MaterialWeightResource $weight): MaterialResource
+    public function setWeight(MaterialWeightResource $weight)
     {
         $this->weight = $weight;
         return $this;
