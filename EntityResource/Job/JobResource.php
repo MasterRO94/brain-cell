@@ -87,6 +87,11 @@ class JobResource extends AbstractResource
     protected $components;
 
     /**
+     * @var ResourceCollection|JobOptionResource[]
+     */
+    protected $options;
+
+    /**
      * @var JobBatchResource
      *
      * @Assert\Valid()
@@ -144,6 +149,7 @@ class JobResource extends AbstractResource
     {
         return [
             'components' => JobComponentResource::class,
+            'options' => JobOptionResource::class,
         ];
     }
 
@@ -332,6 +338,22 @@ class JobResource extends AbstractResource
     {
         $this->components = $components;
         return $this;
+    }
+
+    /**
+     * @return JobOptionResource[]|ResourceCollection
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param JobOptionResource[]|ResourceCollection $options
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
     }
 
     /**
