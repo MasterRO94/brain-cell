@@ -15,6 +15,8 @@ use Doctrine\Common\Inflector\Inflector;
  */
 class ArrayDecoder extends AbstractTransformer
 {
+    const UUID_REGEX = '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/';
+
     /**
      * Decode the given $data and populate the given {@link TransferEntityInterface}.
      *
@@ -92,7 +94,17 @@ class ArrayDecoder extends AbstractTransformer
             //  Decode resources.
             if (isset($resources[$property->getName()])) {
                 $child = new $resources[$property->getName()];
-                $value = $this->decodeResource($child, $value);
+                if (is_array($value)) {
+                    // we have a full-fledged object...
+                    $value = $this->decodeResource($child, $value);
+                } else {
+                    // we only have an ID or possibly an alias
+                    if (preg_match(static::UUID_REGEX, $value)) {
+                        $value = $this->decodeResource($child, ['id' => $value]);
+                    } else {
+                        $value = $this->decodeResource($child, ['alias' => $value]);
+                    }
+                }
 
             //  Decode collections.
             } elseif (isset($collections[$property->getName()])) {

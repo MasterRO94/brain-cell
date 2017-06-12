@@ -18,7 +18,7 @@ class ArtworkResource extends AbstractResource
     const STATUS_VERIFIED = 200;
 
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -36,7 +36,12 @@ class ArtworkResource extends AbstractResource
     protected $path;
 
     /**
-     * @return int
+     * @var string
+     */
+    protected $mimeType;
+
+    /**
+     * @return string
      */
     public function getId()
     {
@@ -80,4 +85,21 @@ class ArtworkResource extends AbstractResource
         $this->path = $path;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
+
+    /**
+     * @param string $mimeType
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mimeType = $mimeType;
+    }
+
 }

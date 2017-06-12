@@ -48,7 +48,7 @@ class PriceResource extends AbstractResource
     /**
      * @return float
      */
-    public function getValue(): float
+    public function getValue()
     {
         return $this->value;
     }
@@ -56,7 +56,7 @@ class PriceResource extends AbstractResource
     /**
      * @param float $value
      */
-    public function setValue(float $value)
+    public function setValue($value)
     {
         $this->value = $value;
     }
@@ -64,7 +64,7 @@ class PriceResource extends AbstractResource
     /**
      * @return string
      */
-    public function getFormatted(): string
+    public function getFormatted()
     {
         return $this->formatted;
     }
@@ -72,7 +72,7 @@ class PriceResource extends AbstractResource
     /**
      * @param string $formatted
      */
-    public function setFormatted(string $formatted)
+    public function setFormatted($formatted)
     {
         $this->formatted = $formatted;
     }
@@ -80,7 +80,7 @@ class PriceResource extends AbstractResource
     /**
      * @return string
      */
-    public function getCurrency(): string
+    public function getCurrency()
     {
         return $this->currency;
     }
@@ -88,8 +88,9 @@ class PriceResource extends AbstractResource
     /**
      * @param string $currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency($currency)
     {
         $this->currency = $currency;
     }
+
 }

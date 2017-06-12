@@ -46,7 +46,7 @@ class MaterialWeightResource extends AbstractResource
     /**
      * @param string $alias
      *
-     * @return FinishingItemResource
+     * @return MaterialWeightResource
      */
     public function setAlias($alias)
     {
@@ -65,7 +65,7 @@ class MaterialWeightResource extends AbstractResource
     /**
      * @param string $name
      *
-     * @return FinishingItemResource
+     * @return MaterialWeightResource
      */
     public function setName($name)
     {
