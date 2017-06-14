@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\Delivery\DeliveryResource;
 use Brain\Cell\EntityResource\DimensionsResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
@@ -100,14 +99,6 @@ class JobResource extends AbstractResource
     protected $batch;
 
     /**
-     * @var DeliveryResource
-     *
-     * @Assert\Valid()
-     * @Assert\NotBlank()
-     */
-    protected $delivery;
-
-    /**
      * @var DimensionsResource
      *
      * @Assert\Valid()
@@ -134,7 +125,6 @@ class JobResource extends AbstractResource
             'productionHouse' => ProductionHouseResource::class,
             'shop' => ShopResource::class,
             'product' => ProductResource::class,
-            'delivery' => DeliveryResource::class,
             'batch' => JobBatchResource::class,
             'dimensions' => DimensionsResource::class,
             'price' => PriceResource::class,
@@ -354,25 +344,6 @@ class JobResource extends AbstractResource
     public function setOptions($options)
     {
         $this->options = $options;
-    }
-
-    /**
-     * @return DeliveryResource
-     */
-    public function getDelivery()
-    {
-        return $this->delivery;
-    }
-
-    /**
-     * @param DeliveryResource $delivery
-     *
-     * @return JobResource
-     */
-    public function setDelivery(DeliveryResource $delivery)
-    {
-        $this->delivery = $delivery;
-        return $this;
     }
 
     /**
