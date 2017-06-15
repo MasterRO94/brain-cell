@@ -96,17 +96,7 @@ class ArrayEncoder extends AbstractTransformer
             if ($value instanceof TransferEntityInterface) {
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResource($value)) {
-                    if (method_exists($value, 'getAlias') && $value->getAlias()) {
-                        // always prefer alias
-                        $value = $value->getAlias();
-                    } else {
-                        if ($value->getId()) {
-                            $value = $value->getId();
-                        } else {
-                            // no ID or alias so this is a new object...
-                            $value = $this->encodeResource($value);
-                        }
-                    }
+                    $value = $this->getValueForIdResource($value);
 
                 // All other associated can be encoded hooray :)
                 } elseif (isset($resources[$property->getName()])) {
@@ -165,6 +155,28 @@ class ArrayEncoder extends AbstractTransformer
     }
 
     /**
+     * @param AbstractResource $resource
+     * @return array|string
+     */
+    protected function getValueForIdResource($resource)
+    {
+        // @todo create IdResource class/trait
+        assert(method_exists($resource, 'getId'));
+
+        // always prefer alias
+        if (method_exists($resource, 'getAlias') && $resource->getAlias()) {
+            return $resource->getAlias();
+        }
+
+        if ($resource->getId()) {
+            return $resource->getId();
+        }
+
+        // no ID or alias so this is a new object...
+        return $this->encodeResource($resource);
+    }
+
+    /**
      * @param array|null $originalData
      * @param string $snakeCasePropertyName
      * @param mixed $value
@@ -203,7 +215,11 @@ class ArrayEncoder extends AbstractTransformer
 
         //  Loop over all the resources in the collection and serialise them.
         foreach ($collection as $resource) {
-            $resources[] = $this->encodeResource($resource);
+            if ($this->isIdResource($resource)) {
+                $resources[] = $this->getValueForIdResource($resource);
+            } else {
+                $resources[] = $this->encodeResource($resource);
+            }
         }
 
         return $resources;

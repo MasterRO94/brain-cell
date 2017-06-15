@@ -7,6 +7,7 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class JobBatchResource extends AbstractResource
 {
@@ -25,6 +26,18 @@ class JobBatchResource extends AbstractResource
     protected $delivery;
 
     /**
+     * @var ResourceCollection|JobResource[]
+     *
+     * @Assert\Valid()
+     * @Assert\Expression(
+     *     expression="this.getJobs() && this.getJobs().count() > 0",
+     *     message="There must be jobs specified for the batch"
+     * )
+     */
+    protected $jobs;
+
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -33,6 +46,17 @@ class JobBatchResource extends AbstractResource
             'delivery' => DeliveryResource::class,
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections()
+    {
+        return [
+            'jobs' => JobResource::class,
+        ];
+    }
+
     /**
      * @return string
      */
@@ -59,4 +83,21 @@ class JobBatchResource extends AbstractResource
         $this->delivery = $delivery;
         return $this;
     }
+
+    /**
+     * @return JobResource[]|ResourceCollection
+     */
+    public function getJobs()
+    {
+        return $this->jobs;
+    }
+
+    /**
+     * @param JobResource[]|ResourceCollection $jobs
+     */
+    public function setJobs($jobs)
+    {
+        $this->jobs = $jobs;
+    }
+
 }
