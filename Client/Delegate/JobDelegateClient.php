@@ -65,7 +65,7 @@ class JobDelegateClient extends DelegateClient
     /**
      * @param JobResource $resource
      *
-     * @return array|\Brain\Cell\Transfer\AbstractResource
+     * @return JobResource
      */
     public function postJob(JobResource $resource)
     {
@@ -81,7 +81,7 @@ class JobDelegateClient extends DelegateClient
     /**
      * @param JobResource $resource
      *
-     * @return array|\Brain\Cell\Transfer\AbstractResource
+     * @return JobResource
      */
     public function patchJob(JobResource $resource)
     {
