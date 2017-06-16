@@ -437,7 +437,7 @@ class JobResource extends AbstractResource
      */
     public function getPageCount()
     {
-        $pages = 0;
+        $pages = 1;
         foreach ($this->components as $component) {
             $pages += $component->getRangeEnd() - $component->getRangeStart();
         }
