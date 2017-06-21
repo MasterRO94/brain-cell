@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\Delivery\DeliveryResource;
 use Brain\Cell\EntityResource\DimensionsResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
@@ -31,7 +30,7 @@ class JobResource extends AbstractResource
     protected $id;
 
     /**
-     * @var string
+     * @var JobStatusResource $status
      */
     protected $status;
 
@@ -87,20 +86,17 @@ class JobResource extends AbstractResource
     protected $components;
 
     /**
+     * @var ResourceCollection|JobOptionResource[]
+     */
+    protected $options;
+
+    /**
      * @var JobBatchResource
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
     protected $batch;
-
-    /**
-     * @var DeliveryResource
-     *
-     * @Assert\Valid()
-     * @Assert\NotBlank()
-     */
-    protected $delivery;
 
     /**
      * @var DimensionsResource
@@ -116,6 +112,11 @@ class JobResource extends AbstractResource
     protected $price;
 
     /**
+     * @var string
+     */
+    protected $reference;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -124,10 +125,10 @@ class JobResource extends AbstractResource
             'productionHouse' => ProductionHouseResource::class,
             'shop' => ShopResource::class,
             'product' => ProductResource::class,
-            'delivery' => DeliveryResource::class,
             'batch' => JobBatchResource::class,
             'dimensions' => DimensionsResource::class,
             'price' => PriceResource::class,
+            'status' => JobStatusResource::class,
         ];
     }
 
@@ -138,6 +139,7 @@ class JobResource extends AbstractResource
     {
         return [
             'components' => JobComponentResource::class,
+            'options' => JobOptionResource::class,
         ];
     }
 
@@ -162,7 +164,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return int
+     * @return JobStatusResource
      */
     public function getStatus()
     {
@@ -170,8 +172,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @param int $status
-     *
+     * @param JobStatusResource $status
      * @return $this
      */
     public function setStatus($status)
@@ -330,22 +331,19 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return DeliveryResource
+     * @return JobOptionResource[]|ResourceCollection
      */
-    public function getDelivery()
+    public function getOptions()
     {
-        return $this->delivery;
+        return $this->options;
     }
 
     /**
-     * @param DeliveryResource $delivery
-     *
-     * @return JobResource
+     * @param JobOptionResource[]|ResourceCollection $options
      */
-    public function setDelivery(DeliveryResource $delivery)
+    public function setOptions($options)
     {
-        $this->delivery = $delivery;
-        return $this;
+        $this->options = $options;
     }
 
     /**
@@ -418,5 +416,122 @@ class JobResource extends AbstractResource
         $this->price = $price;
     }
 
+    /**
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * @param string $reference
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageCount()
+    {
+        $pages = 1;
+        foreach ($this->components as $component) {
+            $pages += $component->getRangeEnd() - $component->getRangeStart();
+        }
+        return $pages;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSheetCount()
+    {
+        $sheets = 0;
+        foreach ($this->components as $component) {
+            $sheets += $component->getProductionSheetCount();
+        }
+        return $sheets;
+    }
+
+    /**
+     * @param string $optionCategoryAlias
+     * @return bool
+     */
+    protected function has($optionCategoryAlias)
+    {
+        foreach ($this->components as $component) {
+            foreach ($component->getOptions() as $option) {
+                if (
+                    $option->getCategory()->getAlias() === $optionCategoryAlias
+                    && ! $option->getItem()->isDefault()
+                ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // @todo is this a very bad idea perhaps?
+
+    /**
+     * @return bool
+     */
+    public function hasWhiteInk()
+    {
+        return $this->has('white-ink');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFoiling()
+    {
+        return $this->has('foiling');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLaserCutting()
+    {
+        return $this->has('laser-cutting');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasReversePrinting()
+    {
+        return $this->has('reverse-printing');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPersonalisation()
+    {
+        return $this->has('personalisation');
+    }
+
+    public function isMultipage()
+    {
+        if ($this->components->count() > 1) {
+            return true;
+        }
+
+        if ($this->components->count() == 1) {
+            /** @var JobComponentResource $firstComponent */
+            $firstComponent = $this->components->first();
+            if ($firstComponent->getRangeEnd() > 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

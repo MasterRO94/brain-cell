@@ -2,6 +2,8 @@
 
 namespace Brain\Cell;
 
+use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
+use Brain\Cell\Client\Delegate\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\JobDelegateClient;
 use Brain\Cell\Client\Delegate\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
@@ -36,6 +38,14 @@ class BrainClient extends DelegateClient
     }
 
     /**
+     * @return JobBatchDelegateClient
+     */
+    public function jobBatch()
+    {
+        return new JobBatchDelegateClient($this->configuration);
+    }
+
+    /**
      * @return ProductDelegateClient
      */
     public function product()
@@ -43,4 +53,11 @@ class BrainClient extends DelegateClient
         return new ProductDelegateClient($this->configuration);
     }
 
+    /**
+     * @return ArtworkDelegateClient
+     */
+    public function artwork()
+    {
+        return new ArtworkDelegateClient($this->configuration);
+    }
 }

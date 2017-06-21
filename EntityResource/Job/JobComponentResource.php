@@ -20,7 +20,7 @@ class JobComponentResource extends AbstractResource
     const STATUS_READY = 200;
 
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -111,12 +111,12 @@ class JobComponentResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'options' => JobComponentOptionResource::class
+            'options' => JobComponentOptionResource::class,
         ];
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -278,7 +278,7 @@ class JobComponentResource extends AbstractResource
     /**
      * @return int
      */
-    public function getProductionSheetCount(): int
+    public function getProductionSheetCount()
     {
         return $this->productionSheetCount;
     }
@@ -289,5 +289,20 @@ class JobComponentResource extends AbstractResource
     public function setProductionSheetCount(int $productionSheetCount)
     {
         $this->productionSheetCount = $productionSheetCount;
+    }
+
+    /**
+     * @todo stub - this will be calculated in Brain based on size and material
+     * @return int
+     */
+    public function getSizeCountPerMaterial()
+    {
+        $width = $this->getSize()->getDimensions()->getWidth();
+        $height = $this->getSize()->getDimensions()->getHeight();
+        $sra3Width = 450;
+        $sra3Height = 320;
+        return (int) floor(
+            ($sra3Height * $sra3Width) / ($width * $height)
+        );
     }
 }
