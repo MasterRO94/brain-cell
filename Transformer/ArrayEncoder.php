@@ -59,7 +59,6 @@ class ArrayEncoder extends AbstractTransformer
         //  Note also that these look "deprecated" but are actually "internal".
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
-        $originalData = $resource->getData();
 
         foreach ($properties as $property) {
             // Use reflection to get protected property values
