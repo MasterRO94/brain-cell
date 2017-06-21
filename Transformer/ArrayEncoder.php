@@ -127,11 +127,6 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
-            // Don't include values that haven't changed
-            if ($this->valueIsUnchanged($originalData, $snakeCasePropertyName, $value)) {
-                continue;
-            }
-
             $data[$snakeCasePropertyName] = $value;
         }
 
@@ -174,33 +169,6 @@ class ArrayEncoder extends AbstractTransformer
 
         // no ID or alias so this is a new object...
         return $this->encodeResource($resource);
-    }
-
-    /**
-     * @param array|null $originalData
-     * @param string $snakeCasePropertyName
-     * @param mixed $value
-     * @return bool
-     */
-    protected function valueIsUnchanged($originalData, $snakeCasePropertyName, $value)
-    {
-        if ($value === null) {
-            return true;
-        }
-
-        if ($originalData === null) {
-            return false;
-        }
-
-        if (!\array_key_exists($snakeCasePropertyName, $originalData)) {
-            return false;
-        }
-
-        if ($originalData[$snakeCasePropertyName] == $value) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
