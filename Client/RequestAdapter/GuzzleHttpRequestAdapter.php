@@ -48,7 +48,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     public function request(RequestContext $context)
     {
         $path = $context->getPath();
-        $parameters = [];
+        $parameters = $context->getParameters()->all();
 
         if ($context->getFilters()->count()) {
             $parameters = array_merge(

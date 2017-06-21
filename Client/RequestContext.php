@@ -35,6 +35,11 @@ class RequestContext
     protected $selections;
 
     /**
+     * @var ParameterBag
+     */
+    protected $parameters;
+
+    /**
      * @var array
      */
     protected $payload;
@@ -49,6 +54,7 @@ class RequestContext
         $this->headers = new HeaderBag;
         $this->filters = new ParameterBag;
         $this->selections = new ParameterBag;
+        $this->parameters = new ParameterBag;
         $this->payload = [];
         
     }
@@ -83,6 +89,14 @@ class RequestContext
     public function getFilters()
     {
         return $this->filters;
+    }
+
+    /**
+     * @return ParameterBag
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
     }
 
     /**
