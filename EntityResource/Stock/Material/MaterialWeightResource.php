@@ -28,6 +28,16 @@ class MaterialWeightResource extends AbstractResource
     protected $name;
 
     /**
+     * @var int
+     */
+    protected $weight;
+
+    /**
+     * @var string
+     */
+    protected $weightUnit;
+
+    /**
      * @return int
      */
     public function getId()
@@ -70,6 +80,44 @@ class MaterialWeightResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param int $weight
+     *
+     * @return FinishingItemResource
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeightUnit()
+    {
+        return $this->weightUnit;
+    }
+
+    /**
+     * @param string $weightUnit
+     *
+     * @return FinishingItemResource
+     */
+    public function setWeightUnit($weightUnit)
+    {
+        $this->weightUnit = $weightUnit;
         return $this;
     }
 
