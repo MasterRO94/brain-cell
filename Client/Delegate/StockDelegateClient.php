@@ -4,6 +4,8 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
+use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResource;
@@ -29,6 +31,62 @@ class StockDelegateClient extends DelegateClient
 
         return $this->request($context, new StockFinishingsResource);
 
+    }
+
+    /**
+     * @return ResourceCollection|FinishingCategoryResource[]
+     */
+    public function getFinishingCategories(array $parameters = [])
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet('/stock/finishing/categories');
+        $context->getParameters()->add($parameters);
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(FinishingCategoryResource::class);
+
+        return $this->request($context, $collection);
+    }
+
+    public function createFinishingCategory(FinishingCategoryResource $resource)
+    {
+        $handler = $this->configuration->getResourceHandler();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/stock/finishing/categories');
+        $context->setPayload($handler->serialise($resource));
+
+        return $this->request($context, new FinishingCategoryResource());
+    }
+
+    public function getFinishingOptions(array $parameters = [])
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet('/stock/finishing/options');
+        $context->getParameters()->add($parameters);
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(FinishingItemResource::class);
+
+        return $this->request($context, $collection);
+    }
+
+    /**
+     * @param FinishingCategoryResource $categoryResource
+     * @param FinishingItemResource $resource
+     * @return array|bool|FinishingItemResource
+     */
+    public function createFinishingOption(FinishingCategoryResource $categoryResource, FinishingItemResource $resource)
+    {
+        $categoryId = $categoryResource->getId();
+
+        $handler = $this->configuration->getResourceHandler();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost(sprintf('/stock/finishing/categories/%s/options', $categoryId));
+        $context->setPayload($handler->serialise($resource));
+
+        return $this->request($context, new FinishingItemResource());
     }
 
     /**

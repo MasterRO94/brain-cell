@@ -30,6 +30,16 @@ class FinishingItemResource extends AbstractResource
     protected $name;
 
     /**
+     * @var int
+     */
+    protected $weight;
+
+    /**
+     * @var string
+     */
+    protected $weightUnit;
+
+    /**
      * @var bool
      */
     protected $default;
@@ -94,6 +104,44 @@ class FinishingItemResource extends AbstractResource
     public function setDefault(bool $default)
     {
         $this->default = $default;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeight(): int
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param int $weight
+     * @return FinishingItemResource
+     */
+    public function setWeight(int $weight): FinishingItemResource
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeightUnit(): string
+    {
+        return $this->weightUnit;
+    }
+
+    /**
+     * @param string $weightUnit
+     * @return FinishingItemResource
+     */
+    public function setWeightUnit(string $weightUnit): FinishingItemResource
+    {
+        $this->weightUnit = $weightUnit;
+
+        return $this;
     }
 
 }
