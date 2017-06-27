@@ -23,18 +23,6 @@ class ThreeDimensionalResource extends AbstractResource implements ThreeDimensio
     protected $depth;
 
     /**
-     * @param int $width
-     * @param int $height
-     * @param int $depth
-     */
-    public function __construct($width, $height, $depth)
-    {
-        $this->width = $width;
-        $this->height = $height;
-        $this->depth = $depth;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getWidth()
