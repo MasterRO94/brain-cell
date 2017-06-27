@@ -18,16 +18,6 @@ class TwoDimensionalResource extends AbstractResource implements TwoDimensionalI
     protected $height;
 
     /**
-     * @param int $width
-     * @param int $height
-     */
-    public function __construct($width, $height)
-    {
-        $this->width = $width;
-        $this->height = $height;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getWidth()
@@ -36,10 +26,32 @@ class TwoDimensionalResource extends AbstractResource implements TwoDimensionalI
     }
 
     /**
+     * @param int $width
+     * @return TwoDimensionalResource
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getHeight()
     {
         return $this->height;
+    }
+
+    /**
+     * @param int $height
+     * @return TwoDimensionalResource
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
     }
 }

@@ -32,15 +32,20 @@ class SizeResource extends AbstractResource
      */
     protected $name;
 
+    /**
+     * @var string
+     */
+    protected $stockType;
+
     public function getAssociatedResources()
     {
         return [
-            'dimensions' => DimensionsResource::class,
+            'dimensions' => TwoDimensionalResource::class,
         ];
     }
 
     /**
-     * @var DimensionsResource
+     * @var TwoDimensionalResource
      */
     protected $dimensions;
 
@@ -91,6 +96,22 @@ class SizeResource extends AbstractResource
     }
 
     /**
+     * @return string
+     */
+    public function getStockType()
+    {
+        return $this->stockType;
+    }
+
+    /**
+     * @param string $stockType
+     */
+    public function setStockType($stockType)
+    {
+        $this->stockType = $stockType;
+    }
+
+    /**
      * @return TwoDimensionalResource
      */
     public function getDimensions()
@@ -107,4 +128,5 @@ class SizeResource extends AbstractResource
         $this->dimensions = $dimensions;
         return $this;
     }
+
 }
