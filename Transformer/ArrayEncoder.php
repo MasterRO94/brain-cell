@@ -78,7 +78,6 @@ class ArrayEncoder extends AbstractTransformer
                 'status',
                 'created',
                 'updated',
-                'dimensions',
                 'shop',
                 'productionHouse',
                 'productionFinishDate',
