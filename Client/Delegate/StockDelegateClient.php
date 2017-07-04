@@ -26,7 +26,7 @@ class StockDelegateClient extends DelegateClient
     public function getFinishings(JobResource $jobResource)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost('/stock/finishings');
+        $context->prepareContextForPost('/stock/options');
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobResource));
