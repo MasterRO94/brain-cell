@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
+use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class JobDelegateClient extends DelegateClient
@@ -14,7 +15,6 @@ class JobDelegateClient extends DelegateClient
      * * id = string|string[]
      *
      * @param array $filters
-     *
      * @return ResourceCollection|JobResource[]
      */
     public function getJobs(array $filters = [])
@@ -34,7 +34,6 @@ class JobDelegateClient extends DelegateClient
      * * id = string|string[]
      *
      * @param array $filters
-     *
      * @return ResourceCollection|JobResource[]
      */
     public function getJobIds(array $filters = [])
@@ -51,7 +50,6 @@ class JobDelegateClient extends DelegateClient
 
     /**
      * @param string $id
-     *
      * @return JobResource
      */
     public function getJob($id)
@@ -64,7 +62,6 @@ class JobDelegateClient extends DelegateClient
 
     /**
      * @param JobResource $resource
-     *
      * @return JobResource
      */
     public function postJob(JobResource $resource)
@@ -80,15 +77,27 @@ class JobDelegateClient extends DelegateClient
 
     /**
      * @param JobResource $resource
-     *
+     * @param string $status
      * @return JobResource
      */
-    public function patchJob(JobResource $resource)
+    public function updateStatus(JobResource $resource, $status)
     {
+        static $validStatuses = [
+            'production-queue',
+            'production-started',
+            'production-finished',
+            'production-dispatched',
+        ];
+
+        if (! in_array($status, $validStatuses)) {
+            throw new ClientException(sprintf('Invalid status [%s]', $status));
+        }
+
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPatch(sprintf(
-            '/jobs/%s',
-            $resource->getId()
+        $context->prepareContextForPut(sprintf(
+            '/jobs/%s/%s',
+            $resource->getId(),
+            $status
         ));
 
         $handler = $this->configuration->getResourceHandler();

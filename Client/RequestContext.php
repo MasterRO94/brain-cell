@@ -139,9 +139,9 @@ class RequestContext
     /**
      * @param string $path
      */
-    public function prepareContextForPatch($path)
+    public function prepareContextForPut($path)
     {
-        $this->method = Request::METHOD_PATCH;
+        $this->method = Request::METHOD_PUT;
         $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
     }
 
