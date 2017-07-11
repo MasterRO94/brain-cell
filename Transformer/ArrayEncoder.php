@@ -59,6 +59,7 @@ class ArrayEncoder extends AbstractTransformer
         //  Note also that these look "deprecated" but are actually "internal".
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
+        $unstructureds = $resource->getUnstructuredFields();
 
         foreach ($properties as $property) {
             // Use reflection to get protected property values
@@ -79,6 +80,8 @@ class ArrayEncoder extends AbstractTransformer
                 'created',
                 'updated',
                 'shop',
+                'category',
+                'productionSheetCount',
                 'productionHouse',
                 'productionFinishDate',
             ])) {
@@ -122,6 +125,10 @@ class ArrayEncoder extends AbstractTransformer
 
             // Ignore empty arrays, but don't ignore 0 or false
             if (is_array($value) && empty($value)) {
+                continue;
+            }
+
+            if ($value === null) {
                 continue;
             }
 

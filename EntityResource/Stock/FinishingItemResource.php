@@ -45,6 +45,26 @@ class FinishingItemResource extends AbstractResource
     protected $default;
 
     /**
+     * @var bool
+     */
+    protected $configurable;
+
+    /**
+     * @var array
+     */
+    protected $configuration;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUnstructuredFields()
+    {
+        return [
+            'configuration',
+        ];
+    }
+
+    /**
      * @return string
      */
     public function getId()
@@ -104,6 +124,38 @@ class FinishingItemResource extends AbstractResource
     public function setDefault(bool $default)
     {
         $this->default = $default;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfigurable()
+    {
+        return $this->configurable;
+    }
+
+    /**
+     * @param bool $configurable
+     */
+    public function setConfigurable(bool $configurable)
+    {
+        $this->configurable = $configurable;
+    }
+
+    /**
+     * @return array
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * @param array $configuration
+     */
+    public function setConfiguration($configuration)
+    {
+        $this->configuration = $configuration;
     }
 
     /**

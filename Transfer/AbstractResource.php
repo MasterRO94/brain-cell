@@ -60,6 +60,18 @@ abstract class AbstractResource implements
     }
 
     /**
+     * Return all embedded types that don't have a respective resource class.
+     *
+     * These should be used for unstructured data (i.e. jsonb on the brain side).
+     *
+     * @return string[]
+     */
+    public function getUnstructuredFields()
+    {
+        return [];
+    }
+
+    /**
      * Return all properties that should be interpreted as \DateTime
      *
      * @return string[]
