@@ -33,6 +33,21 @@ class JobComponentOptionResource extends AbstractResource
     protected $item;
 
     /**
+     * @var array
+     */
+    protected $configuration;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUnstructuredFields()
+    {
+        return [
+            'configuration',
+        ];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -88,4 +103,21 @@ class JobComponentOptionResource extends AbstractResource
         $this->item = $finishingItem;
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function getConfiguration()
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * @param array $configuration
+     */
+    public function setConfiguration($configuration)
+    {
+        $this->configuration = $configuration;
+    }
+
 }

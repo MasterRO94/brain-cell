@@ -15,6 +15,7 @@ class JobDelegateClient extends DelegateClient
      * * id = string|string[]
      *
      * @param array $filters
+     *
      * @return ResourceCollection|JobResource[]
      */
     public function getJobs(array $filters = [])
@@ -34,6 +35,7 @@ class JobDelegateClient extends DelegateClient
      * * id = string|string[]
      *
      * @param array $filters
+     *
      * @return ResourceCollection|JobResource[]
      */
     public function getJobIds(array $filters = [])
@@ -50,6 +52,7 @@ class JobDelegateClient extends DelegateClient
 
     /**
      * @param string $id
+     *
      * @return JobResource
      */
     public function getJob($id)
@@ -62,6 +65,7 @@ class JobDelegateClient extends DelegateClient
 
     /**
      * @param JobResource $resource
+     *
      * @return JobResource
      */
     public function postJob(JobResource $resource)
