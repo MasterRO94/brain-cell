@@ -17,13 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class JobResource extends AbstractResource
 {
-    const STATUS_INCOMPLETE = 1;
-    const STATUS_READY = 200;
-    const STATUS_PRODUCTION_QUEUED = 300;
-    const STATUS_PRODUCTION_STARTED = 310;
-    const STATUS_PRODUCTION_FINISHED = 320;
-    const STATUS_PRODUCTION_DISPATCHED = 380;
-
     /**
      * @var int
      */

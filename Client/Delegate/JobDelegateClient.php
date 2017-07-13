@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
+use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class JobDelegateClient extends DelegateClient
@@ -71,6 +72,37 @@ class JobDelegateClient extends DelegateClient
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/jobs');
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($resource));
+
+        return $this->request($context, $resource);
+    }
+
+    /**
+     * @param JobResource $resource
+     * @param string $status
+     * @return JobResource
+     */
+    public function updateStatus(JobResource $resource, $status)
+    {
+        static $validStatuses = [
+            'production-queue',
+            'production-started',
+            'production-finished',
+            'production-dispatched',
+        ];
+
+        if (! in_array($status, $validStatuses)) {
+            throw new ClientException(sprintf('Invalid status [%s]', $status));
+        }
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut(sprintf(
+            '/jobs/%s/%s',
+            $resource->getId(),
+            $status
+        ));
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($resource));
