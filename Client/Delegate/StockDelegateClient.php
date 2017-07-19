@@ -100,6 +100,19 @@ class StockDelegateClient extends DelegateClient
     }
 
     /**
+     * @param string $id
+     *
+     * @return MaterialResource[]|ResourceCollection
+     */
+    public function getMaterial($id)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/stock/materials/%s', $id));
+
+        return $this->request($context, new MaterialResource());
+    }
+
+    /**
      * @return ResourceCollection|MaterialResource[]
      */
     public function getMaterials(array $parameters = [])

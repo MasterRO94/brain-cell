@@ -60,6 +60,7 @@ class ArrayDecoder extends AbstractTransformer
         //  Note also that these look "deprecated" but are actually "internal".
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
+        $unstructureds = $resource->getUnstructuredFields();
         $dateTimeProperties = $resource->getDateTimeProperties();
 
         //  A collection of properties against the object that we populated.
@@ -111,6 +112,11 @@ class ArrayDecoder extends AbstractTransformer
                 $collection = new ResourceCollection;
                 $collection->setEntityClass($collections[$property->getName()]);
                 $value = $this->decodeCollection($collection, $value);
+
+            // Unstructured fields - a different decoder would convert to array
+            } elseif (in_array($property->getName(), $unstructureds)) {
+                // nothing to be done here
+
             } elseif (\in_array($property->getName(), $dateTimeProperties)) {
                 $value = $value ? new \DateTime($value) : $value;
             }
