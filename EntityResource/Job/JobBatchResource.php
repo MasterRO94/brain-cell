@@ -6,6 +6,7 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
+use Brain\Cell\EntityResource\Dispatch\DispatchResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -36,6 +37,13 @@ class JobBatchResource extends AbstractResource
      */
     protected $jobs;
 
+    /**
+     * @var ResourceCollection|DispatchResource[]
+     *
+     * @Assert\Valid()
+     */
+    protected $dispatches;
+
 
     /**
      * {@inheritdoc}
@@ -54,6 +62,7 @@ class JobBatchResource extends AbstractResource
     {
         return [
             'jobs' => JobResource::class,
+            'dispatches' => DispatchResource::class,
         ];
     }
 
@@ -98,6 +107,31 @@ class JobBatchResource extends AbstractResource
     public function setJobs($jobs)
     {
         $this->jobs = $jobs;
+    }
+
+    /**
+     * @param DispatchResource[]|ResourceCollection $dispatches
+     */
+    public function setDispatches($dispatches)
+    {
+        $this->dispatches = $dispatches;
+    }
+
+    /**
+     * @return DispatchResource[]|ResourceCollection
+     */
+    public function getDispatches()
+    {
+        return $this->dispatches;
+    }
+
+    /**
+     * @param DispatchResource $dispatch
+     */
+    public function addDispatch($dispatch)
+    {
+        $this->dispatches->add($dispatch);
+        $dispatch->setJobBatch($this);
     }
 
 }

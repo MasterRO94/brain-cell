@@ -48,7 +48,7 @@ class JobBatchDelegateClient extends DelegateClient
     public function createDispatch(string $batchId)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost(sprintf('/jobs/batches/%s/dispatch', $batchId));
+        $context->prepareContextForPut(sprintf('/jobs/batches/%s/dispatch', $batchId));
 
         return $this->request($context, new DispatchResource());
     }
