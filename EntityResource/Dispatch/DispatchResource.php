@@ -36,7 +36,7 @@ class DispatchResource extends AbstractResource
     /**
      * @var string
      */
-    protected $label;
+    protected $labelUrl;
 
     /**
      * {@inheritdoc}
@@ -96,16 +96,16 @@ class DispatchResource extends AbstractResource
     /**
      * @return string
      */
-    public function getLabel()
+    public function getLabelUrl()
     {
-        return $this->label;
+        return $this->labelUrl;
     }
 
     /**
-     * @param string $label
+     * @param string $labelUrl
      */
-    public function setLabel($label)
+    public function setLabelUrl($labelUrl)
     {
-        $this->label = $label;
+        $this->labelUrl = $labelUrl;
     }
 }
