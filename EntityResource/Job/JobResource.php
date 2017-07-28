@@ -527,4 +527,22 @@ class JobResource extends AbstractResource
         return false;
     }
 
+    public function isOutsource()
+    {
+        // @todo @see BRN-299
+        return false;
+    }
+
+    public function isLitho()
+    {
+        // @todo
+        return false;
+    }
+
+    public function isBespoke()
+    {
+        // @todo
+        return false;
+    }
+
 }

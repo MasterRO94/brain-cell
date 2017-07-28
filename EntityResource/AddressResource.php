@@ -172,4 +172,33 @@ class AddressResource extends AbstractResource
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAddressString()
+    {
+        return implode(', ', array_filter([
+            $this->name,
+            $this->street,
+            $this->city,
+            $this->countyState,
+            $this->postcode,
+            $this->country
+        ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDelimitedAddressString()
+    {
+        return implode(' | ', [
+            $this->name,
+            $this->street,
+            $this->city,
+            $this->countyState,
+            $this->postcode,
+            $this->country
+        ]);
+    }
 }
