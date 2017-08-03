@@ -82,6 +82,25 @@ class StockDelegateClient extends DelegateClient
     }
 
     /**
+     * @param FinishingCategoryResource $resource
+     * @param array $parameters
+     * @return array|bool|AbstractResource|FinishingItemResource[]
+     */
+    public function getFinishingCategoryOptions(FinishingCategoryResource $resource, array $parameters = [])
+    {
+        $categoryId = $resource->getId();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/stock/finishing/categories/%s/options', $categoryId));
+        $context->getParameters()->add($parameters);
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(FinishingItemResource::class);
+
+        return $this->request($context, $collection);
+    }
+
+    /**
      * @param FinishingCategoryResource $categoryResource
      * @param FinishingItemResource $resource
      * @return array|bool|FinishingItemResource
