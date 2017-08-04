@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class JobResource extends AbstractResource
 {
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -149,7 +149,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
