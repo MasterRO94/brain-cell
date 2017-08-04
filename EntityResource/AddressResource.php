@@ -19,11 +19,37 @@ class AddressResource extends AbstractResource
 
     /**
      * @var string
+     */
+    protected $company;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    protected $email;
+
+    /**
+     * @var string
      *
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
      */
-    protected $street;
+    protected $phone;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     */
+    protected $addressLine1;
+
+    /**
+     * @var string
+     */
+    protected $addressLine2;
 
     /**
      * @var string
@@ -35,9 +61,6 @@ class AddressResource extends AbstractResource
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $countyState;
 
@@ -80,19 +103,90 @@ class AddressResource extends AbstractResource
     /**
      * @return string
      */
-    public function getStreet()
+    public function getCompany()
     {
-        return $this->street;
+        return $this->company;
     }
 
     /**
-     * @param string $street
-     *
+     * @param string $company
      * @return AddressResource
      */
-    public function setStreet($street)
+    public function setCompany($company)
     {
-        $this->street = $street;
+        $this->company = $company;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return AddressResource
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     * @return AddressResource
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressLine1()
+    {
+        return $this->addressLine1;
+    }
+
+    /**
+     * @param string $addressLine1
+     * @return AddressResource
+     */
+    public function setAddressLine1($addressLine1)
+    {
+        $this->addressLine1 = $addressLine1;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressLine2()
+    {
+        return $this->addressLine2;
+    }
+
+    /**
+     * @param string $addressLine2
+     * @return AddressResource
+     */
+    public function setAddressLine2($addressLine2)
+    {
+        $this->addressLine2 = $addressLine2;
         return $this;
     }
 
@@ -179,7 +273,8 @@ class AddressResource extends AbstractResource
     {
         return implode(', ', array_filter([
             $this->name,
-            $this->street,
+            $this->addressLine1,
+            $this->addressLine2,
             $this->city,
             $this->countyState,
             $this->postcode,
@@ -194,7 +289,8 @@ class AddressResource extends AbstractResource
     {
         return implode(' | ', [
             $this->name,
-            $this->street,
+            $this->addressLine1,
+            $this->addressLine2,
             $this->city,
             $this->countyState,
             $this->postcode,
