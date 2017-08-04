@@ -15,6 +15,24 @@ class AddressResource extends AbstractResource
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
      */
+    protected $id;
+
+    /**
+     * @var \DateTime
+     */
+    protected $created;
+
+    /**
+     * @var \DateTime
+     */
+    protected $updated;
+
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     */
     protected $name;
 
     /**
@@ -264,6 +282,38 @@ class AddressResource extends AbstractResource
     {
         $this->country = $country;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @param \DateTime $updated
+     */
+    public function setUpdated(\DateTime $updated)
+    {
+        $this->updated = $updated;
     }
 
     /**
