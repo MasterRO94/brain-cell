@@ -2,9 +2,9 @@
 
 namespace Brain\Cell\EntityResource\Delivery;
 
+use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\Transfer\AbstractResource;
 
-use Palm\Bundle\Core\Logical\IdentityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class DeliveryResource extends AbstractResource
@@ -34,7 +34,7 @@ class DeliveryResource extends AbstractResource
     protected $customerPhone;
 
     /**
-     * @var DeliveryAddressResource
+     * @var AddressResource
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -47,7 +47,7 @@ class DeliveryResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'address' => DeliveryAddressResource::class
+            'address' => AddressResource::class
         ];
     }
 
@@ -109,7 +109,7 @@ class DeliveryResource extends AbstractResource
     }
 
     /**
-     * @return DeliveryAddressResource
+     * @return AddressResource
      */
     public function getAddress()
     {
@@ -117,11 +117,11 @@ class DeliveryResource extends AbstractResource
     }
 
     /**
-     * @param DeliveryAddressResource $address
+     * @param AddressResource $address
      *
      * @return DeliveryResource
      */
-    public function setAddress(DeliveryAddressResource $address)
+    public function setAddress(AddressResource $address)
     {
         $this->address = $address;
         return $this;
