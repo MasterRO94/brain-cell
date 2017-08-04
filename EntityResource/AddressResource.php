@@ -11,9 +11,6 @@ class AddressResource extends AbstractResource
 {
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $id;
 
@@ -29,9 +26,6 @@ class AddressResource extends AbstractResource
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $name;
 
@@ -42,25 +36,16 @@ class AddressResource extends AbstractResource
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Email()
      */
     protected $email;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $phone;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $addressLine1;
 
@@ -71,9 +56,6 @@ class AddressResource extends AbstractResource
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $city;
 
@@ -84,20 +66,21 @@ class AddressResource extends AbstractResource
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $postcode;
 
     /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     * @Assert\Length(min=2, max=2)
+     * @var array
      */
     protected $country;
+
+    public function getUnstructuredFields()
+    {
+        // @todo this is bogus - write a CountryResource
+        return [
+            'country'
+        ];
+    }
 
     /**
      * @return string
@@ -266,7 +249,7 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getCountry()
     {
@@ -274,7 +257,7 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @param string $country
+     * @param array $country
      *
      * @return AddressResource
      */
