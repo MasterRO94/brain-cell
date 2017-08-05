@@ -3,7 +3,10 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\Product\ProductFinishingAssignmentResource;
+use Brain\Cell\EntityResource\Product\ProductMaterialAssignmentResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
+use Brain\Cell\EntityResource\Product\ProductSizeAssignmentResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -50,5 +53,38 @@ class ProductDelegateClient extends DelegateClient
         $context->setPayload($handler->serialise($resource));
 
         return $this->request($context, new ProductResource());
+    }
+
+    public function createProductSizeAssignment(ProductResource $productResource, ProductSizeAssignmentResource $assignmentResource)
+    {
+        $handler = $this->configuration->getResourceHandler();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost(sprintf('/products/%s/sizes', $productResource->getId()));
+        $context->setPayload($handler->serialise($assignmentResource));
+
+        return $this->request($context, new ProductSizeAssignmentResource());
+    }
+
+    public function createProductMaterialAssignment(ProductResource $productResource, ProductMaterialAssignmentResource $assignmentResource)
+    {
+        $handler = $this->configuration->getResourceHandler();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost(sprintf('/products/%s/materials', $productResource->getId()));
+        $context->setPayload($handler->serialise($assignmentResource));
+
+        return $this->request($context, new ProductMaterialAssignmentResource());
+    }
+
+    public function createProductFinishingAssignment(ProductResource $productResource, ProductFinishingAssignmentResource $assignmentResource)
+    {
+        $handler = $this->configuration->getResourceHandler();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost(sprintf('/products/%s/finishings', $productResource->getId()));
+        $context->setPayload($handler->serialise($assignmentResource));
+
+        return $this->request($context, new ProductFinishingAssignmentResource());
     }
 }
