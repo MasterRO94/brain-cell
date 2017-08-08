@@ -17,15 +17,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class JobResource extends AbstractResource
 {
-    const STATUS_INCOMPLETE = 1;
-    const STATUS_READY = 200;
-    const STATUS_PRODUCTION_QUEUED = 300;
-    const STATUS_PRODUCTION_STARTED = 310;
-    const STATUS_PRODUCTION_FINISHED = 320;
-    const STATUS_PRODUCTION_DISPATCHED = 380;
-
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -156,7 +149,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -531,6 +524,24 @@ class JobResource extends AbstractResource
             }
         }
 
+        return false;
+    }
+
+    public function isOutsource()
+    {
+        // @todo @see BRN-299
+        return false;
+    }
+
+    public function isLitho()
+    {
+        // @todo
+        return false;
+    }
+
+    public function isBespoke()
+    {
+        // @todo
         return false;
     }
 
