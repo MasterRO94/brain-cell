@@ -5,6 +5,7 @@ namespace Brain\Cell\Client\Delegate;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\FinishingCombinationResource;
 use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
@@ -286,4 +287,18 @@ class StockDelegateClient extends DelegateClient
         return $this->request($context, new SizeResource());
     }
 
+    /**
+     * @param FinishingCombinationResource $resource
+     * @return AbstractResource|FinishingCategoryResource
+     */
+    public function createFinishingCombination(FinishingCombinationResource $resource)
+    {
+        $handler = $this->configuration->getResourceHandler();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/stock/finishing-combinations');
+        $context->setPayload($handler->serialise($resource));
+
+        return $this->request($context, new FinishingCombinationResource());
+    }
 }
