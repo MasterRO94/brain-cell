@@ -11,52 +11,76 @@ class AddressResource extends AbstractResource
 {
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
+     */
+    protected $id;
+
+    /**
+     * @var \DateTime
+     */
+    protected $created;
+
+    /**
+     * @var \DateTime
+     */
+    protected $updated;
+
+    /**
+     * @var string
      */
     protected $name;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
-    protected $street;
+    protected $company;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
+     */
+    protected $email;
+
+    /**
+     * @var string
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     */
+    protected $addressLine1;
+
+    /**
+     * @var string
+     */
+    protected $addressLine2;
+
+    /**
+     * @var string
      */
     protected $city;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $countyState;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
      */
     protected $postcode;
 
     /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     * @Assert\Length(min=2, max=2)
+     * @var array
      */
     protected $country;
+
+    public function getUnstructuredFields()
+    {
+        // @todo this is bogus - write a CountryResource
+        return [
+            'country'
+        ];
+    }
 
     /**
      * @return string
@@ -80,19 +104,90 @@ class AddressResource extends AbstractResource
     /**
      * @return string
      */
-    public function getStreet()
+    public function getCompany()
     {
-        return $this->street;
+        return $this->company;
     }
 
     /**
-     * @param string $street
-     *
+     * @param string $company
      * @return AddressResource
      */
-    public function setStreet($street)
+    public function setCompany($company)
     {
-        $this->street = $street;
+        $this->company = $company;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return AddressResource
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     * @return AddressResource
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressLine1()
+    {
+        return $this->addressLine1;
+    }
+
+    /**
+     * @param string $addressLine1
+     * @return AddressResource
+     */
+    public function setAddressLine1($addressLine1)
+    {
+        $this->addressLine1 = $addressLine1;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressLine2()
+    {
+        return $this->addressLine2;
+    }
+
+    /**
+     * @param string $addressLine2
+     * @return AddressResource
+     */
+    public function setAddressLine2($addressLine2)
+    {
+        $this->addressLine2 = $addressLine2;
         return $this;
     }
 
@@ -154,7 +249,7 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getCountry()
     {
@@ -162,7 +257,7 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @param string $country
+     * @param array $country
      *
      * @return AddressResource
      */
@@ -172,4 +267,67 @@ class AddressResource extends AbstractResource
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @param \DateTime $updated
+     */
+    public function setUpdated(\DateTime $updated)
+    {
+        $this->updated = $updated;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAddressString()
+    {
+        return implode(', ', array_filter([
+            $this->name,
+            $this->addressLine1,
+            $this->addressLine2,
+            $this->city,
+            $this->countyState,
+            $this->postcode,
+            $this->country
+        ]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDelimitedAddressString()
+    {
+        return implode(' | ', [
+            $this->name,
+            $this->addressLine1,
+            $this->addressLine2,
+            $this->city,
+            $this->countyState,
+            $this->postcode,
+            $this->country
+        ]);
+    }
 }
