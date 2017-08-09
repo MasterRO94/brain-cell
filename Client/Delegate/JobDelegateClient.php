@@ -80,6 +80,18 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
+     * @param string $jobId
+     * @return JobResource
+     */
+    public function cloneJob($jobId)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut(sprintf('/jobs/%s/clone', $jobId));
+
+        return $this->request($context, new JobResource);
+    }
+
+    /**
      * @param JobResource $resource
      * @param string $status
      * @return JobResource
@@ -91,6 +103,7 @@ class JobDelegateClient extends DelegateClient
             'production-started',
             'production-finished',
             'production-dispatched',
+            'cancelled',
         ];
 
         if (! in_array($status, $validStatuses)) {
