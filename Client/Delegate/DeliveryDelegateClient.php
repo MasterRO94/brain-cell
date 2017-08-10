@@ -4,7 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
-use Brain\Cell\EntityResource\Job\DeliveryJobBatchResource;
+use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 /**

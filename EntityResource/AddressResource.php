@@ -70,17 +70,9 @@ class AddressResource extends AbstractResource
     protected $postcode;
 
     /**
-     * @var array
+     * @var string
      */
     protected $country;
-
-    public function getUnstructuredFields()
-    {
-        // @todo this is bogus - write a CountryResource
-        return [
-            'country'
-        ];
-    }
 
     /**
      * @return string
@@ -92,13 +84,10 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $name
-     *
-     * @return AddressResource
      */
     public function setName($name)
     {
         $this->name = $name;
-        return $this;
     }
 
     /**
@@ -111,12 +100,10 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $company
-     * @return AddressResource
      */
     public function setCompany($company)
     {
         $this->company = $company;
-        return $this;
     }
 
     /**
@@ -129,12 +116,10 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $email
-     * @return AddressResource
      */
     public function setEmail($email)
     {
         $this->email = $email;
-        return $this;
     }
 
     /**
@@ -147,12 +132,10 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $phone
-     * @return AddressResource
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
-        return $this;
     }
 
     /**
@@ -165,12 +148,10 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $addressLine1
-     * @return AddressResource
      */
     public function setAddressLine1($addressLine1)
     {
         $this->addressLine1 = $addressLine1;
-        return $this;
     }
 
     /**
@@ -183,12 +164,10 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $addressLine2
-     * @return AddressResource
      */
     public function setAddressLine2($addressLine2)
     {
         $this->addressLine2 = $addressLine2;
-        return $this;
     }
 
     /**
@@ -201,13 +180,10 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $city
-     *
-     * @return AddressResource
      */
     public function setCity($city)
     {
         $this->city = $city;
-        return $this;
     }
 
     /**
@@ -220,13 +196,10 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $countyState
-     *
-     * @return AddressResource
      */
     public function setCountyState($countyState)
     {
         $this->countyState = $countyState;
-        return $this;
     }
 
     /**
@@ -239,17 +212,14 @@ class AddressResource extends AbstractResource
 
     /**
      * @param string $postcode
-     *
-     * @return AddressResource
      */
     public function setPostcode($postcode)
     {
         $this->postcode = $postcode;
-        return $this;
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getCountry()
     {
@@ -257,14 +227,11 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @param array $country
-     *
-     * @return AddressResource
+     * @param string $country
      */
     public function setCountry($country)
     {
         $this->country = $country;
-        return $this;
     }
 
     /**
