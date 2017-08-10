@@ -4,28 +4,50 @@ namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\Transfer\AbstractResource;
 
+/**
+ * {@inheritdoc}
+ */
 class DeliveryServiceResource extends AbstractResource
 {
-
     /**
      * @var int
      */
     protected $id;
 
     /**
-     * @var string
+     * @var DeliveryCarrierResource
      */
-    protected $carrier;
+    protected $deliveryCarrier;
 
     /**
      * @var string
      */
-    protected $service;
+    protected $serviceCode;
 
     /**
      * @var float
      */
     protected $price;
+
+    /**
+     * @var bool
+     */
+    protected $isTracked;
+
+    /**
+     * @var bool
+     */
+    protected $isSignedFor;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'deliveryCarrier' => DeliveryCarrierResource::class,
+        ];
+    }
 
     /**
      * @return string
@@ -36,52 +58,35 @@ class DeliveryServiceResource extends AbstractResource
     }
 
     /**
-     * @param string $id
-     *
-     * @return $this
+     * @return string
      */
-    public function setId($id)
+    public function getDeliveryCarrier()
     {
-        $this->id = $id;
-        return $this;
+        return $this->deliveryCarrier;
+    }
+
+    /**
+     * @param $deliveryCarrier
+     */
+    public function setDeliveryCarrier($deliveryCarrier)
+    {
+        $this->deliveryCarrier = $deliveryCarrier;
     }
 
     /**
      * @return string
      */
-    public function getCarrier()
+    public function getServiceCode()
     {
-        return $this->carrier;
+        return $this->serviceCode;
     }
 
     /**
-     * @param string $carrier
-     *
-     * @return $this
+     * @param string $serviceCode
      */
-    public function setCarrier($carrier)
+    public function setServiceCode(string $serviceCode)
     {
-        $this->carrier = $carrier;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getService()
-    {
-        return $this->service;
-    }
-
-    /**
-     * @param string $service
-     *
-     * @return $this
-     */
-    public function setService($service)
-    {
-        $this->service = $service;
-        return $this;
+        $this->serviceCode = $serviceCode;
     }
 
     /**
@@ -94,13 +99,41 @@ class DeliveryServiceResource extends AbstractResource
 
     /**
      * @param float $price
-     *
-     * @return $this
      */
     public function setPrice($price)
     {
         $this->price = $price;
-        return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function isIsTracked()
+    {
+        return $this->isTracked;
+    }
+
+    /**
+     * @param bool $isTracked
+     */
+    public function setIsTracked(bool $isTracked)
+    {
+        $this->isTracked = $isTracked;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsSignedFor()
+    {
+        return $this->isSignedFor;
+    }
+
+    /**
+     * @param bool $isSignedFor
+     */
+    public function setIsSignedFor(bool $isSignedFor)
+    {
+        $this->isSignedFor = $isSignedFor;
+    }
 }

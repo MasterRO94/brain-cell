@@ -5,6 +5,7 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
 use Brain\Cell\EntityResource\Dispatch\DispatchResource;
 use Brain\Cell\Transfer\AbstractResource;
@@ -20,11 +21,16 @@ class JobBatchResource extends AbstractResource
 
     /**
      * @var DeliveryResource
+     */
+    protected $delivery;
+
+    /**
+     * @var AddressResource
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $delivery;
+    protected $address;
 
     /**
      * @var ResourceCollection|JobResource[]
@@ -52,6 +58,7 @@ class JobBatchResource extends AbstractResource
     {
         return [
             'delivery' => DeliveryResource::class,
+            'address' => AddressResource::class,
         ];
     }
 
@@ -91,6 +98,26 @@ class JobBatchResource extends AbstractResource
     {
         $this->delivery = $delivery;
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return AddressResource
+     */
+    public function getAddress(): AddressResource
+    {
+        return $this->address;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param AddressResource $address
+     */
+    public function setAddress(AddressResource $address)
+    {
+        $this->address = $address;
     }
 
     /**
