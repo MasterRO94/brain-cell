@@ -237,7 +237,7 @@ class AddressResource extends AbstractResource
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
@@ -245,7 +245,7 @@ class AddressResource extends AbstractResource
     /**
      * @return \DateTime
      */
-    public function getCreated(): \DateTime
+    public function getCreated()
     {
         return $this->created;
     }
