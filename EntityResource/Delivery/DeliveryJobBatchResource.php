@@ -1,9 +1,6 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
-namespace Brain\Cell\EntityResource\Job;
+namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\Transfer\AbstractResource;
