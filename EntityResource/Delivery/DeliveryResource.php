@@ -7,6 +7,11 @@ use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * {@inheritdoc}
+ *
+ * @deprecated Potentially temporary.
+ */
 class DeliveryResource extends AbstractResource
 {
     /**

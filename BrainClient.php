@@ -3,6 +3,7 @@
 namespace Brain\Cell;
 
 use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
+use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
 use Brain\Cell\Client\Delegate\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\JobDelegateClient;
 use Brain\Cell\Client\Delegate\PricingDelegateClient;
@@ -10,9 +11,11 @@ use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 
+/**
+ * {@inheritdoc}
+ */
 class BrainClient extends DelegateClient
 {
-
     /**
      * @return PricingDelegateClient
      */
@@ -27,6 +30,14 @@ class BrainClient extends DelegateClient
     public function stock()
     {
         return new StockDelegateClient($this->configuration);
+    }
+
+    /**
+     * @return DeliveryDelegateClient
+     */
+    public function delivery()
+    {
+        return new DeliveryDelegateClient($this->configuration);
     }
 
     /**
