@@ -4,7 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
-use Brain\Cell\EntityResource\Job\JobBatchResource;
+use Brain\Cell\EntityResource\Job\DeliveryJobBatchResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 /**
@@ -13,11 +13,11 @@ use Brain\Cell\Transfer\ResourceCollection;
 class DeliveryDelegateClient extends DelegateClient
 {
     /**
-     * @param JobBatchResource $batch
+     * @param DeliveryJobBatchResource $batch
      *
      * @return ResourceCollection|DeliveryOptionResource[]
      */
-    public function getDeliveryOptions(JobBatchResource $batch)
+    public function getDeliveryOptions(DeliveryJobBatchResource $batch)
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/delivery/options');

@@ -5,26 +5,30 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\Delivery\DeliveryResource;
-use Brain\Cell\EntityResource\Dispatch\DispatchResource;
+use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class JobBatchResource extends AbstractResource
+/**
+ * {@inheritdoc}
+ *
+ * This is only temporary as we have an inconsistency with payloads.
+ * Will be fixed soon.
+ */
+class DeliveryJobBatchResource extends AbstractResource
 {
-
     /**
      * @var string
      */
     protected $id;
 
     /**
-     * @var DeliveryResource
+     * @var AddressResource
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $delivery;
+    protected $address;
 
     /**
      * @var ResourceCollection|JobResource[]
@@ -38,20 +42,12 @@ class JobBatchResource extends AbstractResource
     protected $jobs;
 
     /**
-     * @var ResourceCollection|DispatchResource[]
-     *
-     * @Assert\Valid()
-     */
-    protected $dispatches;
-
-
-    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
-            'delivery' => DeliveryResource::class,
+            'address' => AddressResource::class,
         ];
     }
 
@@ -62,7 +58,6 @@ class JobBatchResource extends AbstractResource
     {
         return [
             'jobs' => JobResource::class,
-            'dispatches' => DispatchResource::class,
         ];
     }
 
@@ -75,22 +70,19 @@ class JobBatchResource extends AbstractResource
     }
 
     /**
-     * @return DeliveryResource
+     * @return AddressResource
      */
-    public function getDelivery()
+    public function getAddress()
     {
-        return $this->delivery;
+        return $this->address;
     }
 
     /**
-     * @param DeliveryResource $delivery
-     *
-     * @return JobBatchResource
+     * @param AddressResource $address
      */
-    public function setDelivery(DeliveryResource $delivery)
+    public function setAddress(AddressResource $address)
     {
-        $this->delivery = $delivery;
-        return $this;
+        $this->address = $address;
     }
 
     /**
@@ -108,30 +100,4 @@ class JobBatchResource extends AbstractResource
     {
         $this->jobs = $jobs;
     }
-
-    /**
-     * @param DispatchResource[]|ResourceCollection $dispatches
-     */
-    public function setDispatches($dispatches)
-    {
-        $this->dispatches = $dispatches;
-    }
-
-    /**
-     * @return DispatchResource[]|ResourceCollection
-     */
-    public function getDispatches()
-    {
-        return $this->dispatches;
-    }
-
-    /**
-     * @param DispatchResource $dispatch
-     */
-    public function addDispatch($dispatch)
-    {
-        $this->dispatches->add($dispatch);
-        $dispatch->setJobBatch($this);
-    }
-
 }
