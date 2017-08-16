@@ -6,7 +6,6 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\Dispatch\DispatchResource;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 
 class JobBatchDelegateClient extends DelegateClient
@@ -39,17 +38,5 @@ class JobBatchDelegateClient extends DelegateClient
         $context->setPayload($handler->serialise($resource));
 
         return $this->request($context, $resource);
-    }
-
-    /**
-     * @param string $batchId
-     * @return DispatchResource
-     */
-    public function createDispatch(string $batchId)
-    {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPut(sprintf('/jobs/batches/%s/dispatch', $batchId));
-
-        return $this->request($context, new DispatchResource());
     }
 }

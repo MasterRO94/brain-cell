@@ -31,4 +31,16 @@ class DeliveryDelegateClient extends DelegateClient
 
         return $this->request($context, $collection);
     }
+
+    /**
+     * @param DispatchResource $dispatch
+     * @return DispatchResource
+     */
+    public function createDispatch($dispatch)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/delivery/dispatch');
+        $context->setPayload($dispatch);
+        return $this->request($context, new DispatchResource());
+    }
 }

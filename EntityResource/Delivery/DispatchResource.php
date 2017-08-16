@@ -39,12 +39,27 @@ class DispatchResource extends AbstractResource
     protected $labelUrl;
 
     /**
+     * @var DispatchParcelResource[] $parcels
+     */
+    protected $parcels;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
             'jobBatch' => JobBatchResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections()
+    {
+        return [
+            'parcels' => DispatchParcelResource::class,
         ];
     }
 
@@ -91,6 +106,22 @@ class DispatchResource extends AbstractResource
     public function setTrackingCode($trackingCode)
     {
         $this->trackingCode = $trackingCode;
+    }
+
+    /**
+     * @return DispatchParcelResource[]
+     */
+    public function getParcels()
+    {
+        return $this->parcels;
+    }
+
+    /**
+     * @param DispatchParcelResource[] $parcels
+     */
+    public function setParcels($parcels)
+    {
+        $this->parcels = $parcels;
     }
 
     /**
