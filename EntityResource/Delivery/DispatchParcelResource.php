@@ -3,7 +3,7 @@
  * @maintainer Alex Moon <alex.moon@printed.com>
  */
 
-namespace Brain\Cell\EntityResource\Dispatch;
+namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\Transfer\AbstractResource;
 

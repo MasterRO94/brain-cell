@@ -7,10 +7,11 @@
  * Time: 11:58
  */
 
-namespace Brain\Cell\EntityResource\Dispatch;
+namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class DispatchResource extends AbstractResource
 {
@@ -109,7 +110,7 @@ class DispatchResource extends AbstractResource
     }
 
     /**
-     * @return DispatchParcelResource[]
+     * @return DispatchParcelResource[]|ResourceCollection
      */
     public function getParcels()
     {
