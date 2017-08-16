@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\DimensionsResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
@@ -110,6 +111,14 @@ class JobResource extends AbstractResource
     protected $reference;
 
     /**
+     * @var ArtworkResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $artwork;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -122,6 +131,7 @@ class JobResource extends AbstractResource
             'dimensions' => DimensionsResource::class,
             'price' => PriceResource::class,
             'status' => JobStatusResource::class,
+            'artwork' => ArtworkResource::class,
         ];
     }
 
@@ -543,6 +553,22 @@ class JobResource extends AbstractResource
     {
         // @todo
         return false;
+    }
+
+    /**
+     * @return ArtworkResource
+     */
+    public function getArtwork()
+    {
+        return $this->artwork;
+    }
+
+    /**
+     * @param ArtworkResource $artwork
+     */
+    public function setArtwork(ArtworkResource $artwork)
+    {
+        $this->artwork = $artwork;
     }
 
 }
