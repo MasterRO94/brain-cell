@@ -45,7 +45,6 @@ class DeliveryDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($dispatch);
         $context->setPayload($payload);
-
         return $this->request($context, new DispatchResource());
     }
 }

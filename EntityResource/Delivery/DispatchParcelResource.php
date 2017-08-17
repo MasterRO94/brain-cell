@@ -5,26 +5,31 @@
 
 namespace Brain\Cell\EntityResource\Delivery;
 
+use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
 class DispatchParcelResource extends AbstractResource
 {
-    /** @var int $height */
-    protected $height;
+    /**
+     * @var string
+     */
+    protected $id;
 
-    /** @var int $width */
-    protected $width;
-
-    /** @var int $depth */
-    protected $depth;
+    /**
+     * @var ThreeDimensionalResource $dimensions
+     */
+    protected $dimensions;
 
     /** @var int $weight */
     protected $weight;
 
     /** @var DispatchResource $dispatch */
     protected $dispatch;
+
+    /** @var string $postageLabelUrl */
+    protected $postageLabelUrl;
 
     /**
      * {@inheritdoc}
@@ -33,55 +38,24 @@ class DispatchParcelResource extends AbstractResource
     {
         return [
             'dispatch' => DispatchResource::class,
+            'dimensions' => ThreeDimensionalResource::class
         ];
     }
 
     /**
-     * @return int
+     * @return ThreeDimensionalResource
      */
-    public function getHeight()
+    public function getDimensions()
     {
-        return $this->height;
+        return $this->dimensions;
     }
 
     /**
-     * @param int $height
+     * @param ThreeDimensionalResource $dimensions
      */
-    public function setHeight($height)
+    public function setDimensions($dimensions)
     {
-        $this->height = $height;
-    }
-
-    /**
-     * @return int
-     */
-    public function getWidth()
-    {
-        return $this->width;
-    }
-
-    /**
-     * @param int $width
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
-    }
-
-    /**
-     * @return int
-     */
-    public function getDepth()
-    {
-        return $this->depth;
-    }
-
-    /**
-     * @param int $depth
-     */
-    public function setDepth($depth)
-    {
-        $this->depth = $depth;
+        $this->dimensions = $dimensions;
     }
 
     /**
@@ -114,5 +88,37 @@ class DispatchParcelResource extends AbstractResource
     public function setDispatch($dispatch)
     {
         $this->dispatch = $dispatch;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPostageLabelUrl(): string
+    {
+        return $this->postageLabelUrl;
+    }
+
+    /**
+     * @param string $postageLabelUrl
+     */
+    public function setPostageLabelUrl(string $postageLabelUrl)
+    {
+        $this->postageLabelUrl = $postageLabelUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 }

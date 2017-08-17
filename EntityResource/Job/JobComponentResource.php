@@ -3,7 +3,6 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
-use Brain\Cell\EntityResource\DimensionsResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\EntityResource\TwoDimensionalResource;

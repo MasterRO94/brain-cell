@@ -118,7 +118,7 @@ class DispatchResource extends AbstractResource
     }
 
     /**
-     * @param DispatchParcelResource[] $parcels
+     * @param DispatchParcelResource[]|ResourceCollection $parcels
      */
     public function setParcels($parcels)
     {
