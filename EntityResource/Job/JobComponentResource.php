@@ -94,6 +94,11 @@ class JobComponentResource extends AbstractResource
     protected $weight;
 
     /**
+     * @var string
+     */
+    protected $label;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -323,5 +328,21 @@ class JobComponentResource extends AbstractResource
     public function setDimensions(TwoDimensionalResource $dimensions)
     {
         $this->dimensions = $dimensions;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
     }
 }
