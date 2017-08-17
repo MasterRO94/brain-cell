@@ -7,10 +7,11 @@
  * Time: 11:58
  */
 
-namespace Brain\Cell\EntityResource\Dispatch;
+namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class DispatchResource extends AbstractResource
 {
@@ -39,12 +40,27 @@ class DispatchResource extends AbstractResource
     protected $labelUrl;
 
     /**
+     * @var DispatchParcelResource[] $parcels
+     */
+    protected $parcels;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
             'jobBatch' => JobBatchResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections()
+    {
+        return [
+            'parcels' => DispatchParcelResource::class,
         ];
     }
 
@@ -91,6 +107,22 @@ class DispatchResource extends AbstractResource
     public function setTrackingCode($trackingCode)
     {
         $this->trackingCode = $trackingCode;
+    }
+
+    /**
+     * @return DispatchParcelResource[]|ResourceCollection
+     */
+    public function getParcels()
+    {
+        return $this->parcels;
+    }
+
+    /**
+     * @param DispatchParcelResource[]|ResourceCollection $parcels
+     */
+    public function setParcels($parcels)
+    {
+        $this->parcels = $parcels;
     }
 
     /**

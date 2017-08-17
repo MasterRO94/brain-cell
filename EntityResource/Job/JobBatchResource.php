@@ -6,7 +6,7 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryResource;
-use Brain\Cell\EntityResource\Dispatch\DispatchResource;
+use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 

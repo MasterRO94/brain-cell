@@ -5,6 +5,7 @@ namespace Brain\Cell\Client\Delegate;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
+use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 /**
@@ -30,5 +31,20 @@ class DeliveryDelegateClient extends DelegateClient
         $collection->setEntityClass(DeliveryOptionResource::class);
 
         return $this->request($context, $collection);
+    }
+
+    /**
+     * @param DispatchResource $dispatch
+     * @return DispatchResource
+     */
+    public function createDispatch($dispatch)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/delivery/dispatch');
+
+        $handler = $this->configuration->getResourceHandler();
+        $payload = $handler->serialise($dispatch);
+        $context->setPayload($payload);
+        return $this->request($context, new DispatchResource());
     }
 }

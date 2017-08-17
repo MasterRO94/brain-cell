@@ -3,6 +3,7 @@
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\AddressResource;
+use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 

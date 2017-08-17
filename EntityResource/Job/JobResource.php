@@ -3,11 +3,11 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
-use Brain\Cell\EntityResource\DimensionsResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
+use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -93,7 +93,7 @@ class JobResource extends AbstractResource
     protected $batch;
 
     /**
-     * @var DimensionsResource
+     * @var ThreeDimensionalResource
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -128,7 +128,7 @@ class JobResource extends AbstractResource
             'shop' => ShopResource::class,
             'product' => ProductResource::class,
             'batch' => JobBatchResource::class,
-            'dimensions' => DimensionsResource::class,
+            'dimensions' => ThreeDimensionalResource::class,
             'price' => PriceResource::class,
             'status' => JobStatusResource::class,
             'artwork' => ArtworkResource::class,
@@ -350,7 +350,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return DimensionsResource
+     * @return ThreeDimensionalResource
      */
     public function getDimensions()
     {
@@ -358,7 +358,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @param DimensionsResource $dimensions
+     * @param ThreeDimensionalResource $dimensions
      * @return JobResource
      */
     public function setDimensions($dimensions)
