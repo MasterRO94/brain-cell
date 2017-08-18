@@ -34,7 +34,24 @@ class DeliveryDelegateClient extends DelegateClient
     }
 
     /**
+     * @param string $id
+     *
+     * @return DeliveryOptionResource
+     */
+    public function getDeliveryOption($id)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/delivery/options/%s', $id));
+
+        /** @var DeliveryOptionResource $resource */
+        $resource = $this->request($context, new DeliveryOptionResource());
+
+        return $resource;
+    }
+
+    /**
      * @param DispatchResource $dispatch
+     *
      * @return DispatchResource
      */
     public function createDispatch($dispatch)
@@ -45,6 +62,10 @@ class DeliveryDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($dispatch);
         $context->setPayload($payload);
-        return $this->request($context, new DispatchResource());
+
+        /** @var DispatchResource $resource */
+        $resource = $this->request($context, new DispatchResource());
+
+        return $resource;
     }
 }
