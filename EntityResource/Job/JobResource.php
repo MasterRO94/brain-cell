@@ -119,6 +119,11 @@ class JobResource extends AbstractResource
     protected $artwork;
 
     /**
+     * @var JobResource
+     */
+    protected $clonedFrom;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -132,6 +137,7 @@ class JobResource extends AbstractResource
             'price' => PriceResource::class,
             'status' => JobStatusResource::class,
             'artwork' => ArtworkResource::class,
+            'clonedFrom' => JobResource::class,
         ];
     }
 
@@ -571,4 +577,11 @@ class JobResource extends AbstractResource
         $this->artwork = $artwork;
     }
 
+    /**
+     * @return JobResource
+     */
+    public function getClonedFrom()
+    {
+        return $this->clonedFrom;
+    }
 }
