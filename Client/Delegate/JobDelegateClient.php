@@ -35,14 +35,16 @@ class JobDelegateClient extends DelegateClient
      * * id = string|string[]
      *
      * @param array $filters
+     * @param $parameters
      *
      * @return ResourceCollection|JobResource[]
      */
-    public function getJobIds(array $filters = [])
+    public function getJobIds(array $filters = [], $parameters = [])
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/job-ids');
         $context->getFilters()->add($filters);
+        $context->getParameters()->add($parameters);
 
         $collection = new ResourceCollection;
         $collection->setEntityClass(JobResource::class);
