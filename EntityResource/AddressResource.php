@@ -229,7 +229,7 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @return CountryResource
+     * @return string
      */
     public function getCountry()
     {
@@ -237,7 +237,7 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @param CountryResource $country
+     * @param string $country
      */
     public function setCountry($country)
     {

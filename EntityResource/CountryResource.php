@@ -38,7 +38,7 @@ class CountryResource extends AbstractResource
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -46,7 +46,7 @@ class CountryResource extends AbstractResource
     /**
      * @param string $name
      */
-    public function setName(string $name): void
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -54,7 +54,7 @@ class CountryResource extends AbstractResource
     /**
      * @return string
      */
-    public function getIso(): string
+    public function getIso()
     {
         return $this->iso;
     }
@@ -62,7 +62,7 @@ class CountryResource extends AbstractResource
     /**
      * @param string $iso
      */
-    public function setIso(string $iso): void
+    public function setIso($iso)
     {
         $this->iso = $iso;
     }
@@ -70,7 +70,7 @@ class CountryResource extends AbstractResource
     /**
      * @return string
      */
-    public function getIso3(): string
+    public function getIso3()
     {
         return $this->iso3;
     }
@@ -78,7 +78,7 @@ class CountryResource extends AbstractResource
     /**
      * @param string $iso3
      */
-    public function setIso3(string $iso3): void
+    public function setIso3($iso3)
     {
         $this->iso3 = $iso3;
     }
