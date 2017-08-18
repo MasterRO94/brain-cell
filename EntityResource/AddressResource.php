@@ -70,9 +70,19 @@ class AddressResource extends AbstractResource
     protected $postcode;
 
     /**
-     * @var string
+     * @var CountryResource
      */
     protected $country;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'country' => CountryResource::class,
+        ];
+    }
 
     /**
      * @return string
@@ -219,7 +229,7 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @return string
+     * @return CountryResource
      */
     public function getCountry()
     {
@@ -227,7 +237,7 @@ class AddressResource extends AbstractResource
     }
 
     /**
-     * @param string $country
+     * @param CountryResource $country
      */
     public function setCountry($country)
     {
@@ -278,7 +288,7 @@ class AddressResource extends AbstractResource
             $this->city,
             $this->countyState,
             $this->postcode,
-            $this->country
+            $this->country->getName()
         ]));
     }
 
@@ -294,7 +304,7 @@ class AddressResource extends AbstractResource
             $this->city,
             $this->countyState,
             $this->postcode,
-            $this->country
+            $this->country->getName()
         ]);
     }
 }
