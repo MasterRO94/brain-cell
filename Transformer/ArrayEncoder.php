@@ -123,7 +123,7 @@ class ArrayEncoder extends AbstractTransformer
             }
 
             // Ignore empty arrays, but don't ignore 0 or false
-            if (is_array($value) && empty($value)) {
+            if ($value === null || (is_array($value) && empty($value))) {
                 continue;
             }
 

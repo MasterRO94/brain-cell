@@ -5,6 +5,7 @@ namespace Brain\Cell\Client\Delegate;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\FinishingCombinationResource;
 use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
@@ -87,6 +88,25 @@ class StockDelegateClient extends DelegateClient
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/stock/finishing/options');
+        $context->getParameters()->add($parameters);
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(FinishingItemResource::class);
+
+        return $this->request($context, $collection);
+    }
+
+    /**
+     * @param FinishingCategoryResource $resource
+     * @param array $parameters
+     * @return array|bool|AbstractResource|FinishingItemResource[]
+     */
+    public function getFinishingCategoryOptions(FinishingCategoryResource $resource, array $parameters = [])
+    {
+        $categoryId = $resource->getId();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/stock/finishing/categories/%s/options', $categoryId));
         $context->getParameters()->add($parameters);
 
         $collection = new ResourceCollection();
@@ -281,4 +301,18 @@ class StockDelegateClient extends DelegateClient
         return $this->request($context, new SizeResource());
     }
 
+    /**
+     * @param FinishingCombinationResource $resource
+     * @return AbstractResource|FinishingCategoryResource
+     */
+    public function createFinishingCombination(FinishingCombinationResource $resource)
+    {
+        $handler = $this->configuration->getResourceHandler();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/stock/finishing-combinations');
+        $context->setPayload($handler->serialise($resource));
+
+        return $this->request($context, new FinishingCombinationResource());
+    }
 }

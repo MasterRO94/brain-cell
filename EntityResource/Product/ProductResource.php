@@ -3,6 +3,7 @@
 namespace Brain\Cell\EntityResource\Product;
 
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\EntityResource\Change\ChangeSetResource;
 
 /**
  * {@inheritdoc}
@@ -14,7 +15,12 @@ class ProductResource extends AbstractResource
     protected $name;
 
     /**
-     * @var ProductGroupResource
+     * @var ChangeSetResource|null
+     */
+    protected $changeSet;
+
+    /**
+     * @var ProductGroupResource|null
      */
     protected $productGroup;
 
@@ -24,6 +30,7 @@ class ProductResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
+            'changeSet' => ChangeSetResource::class,
             'productGroup' => ProductGroupResource::class,
         ];
     }
@@ -61,7 +68,23 @@ class ProductResource extends AbstractResource
     }
 
     /**
-     * @return ProductGroupResource
+     * @return ChangeSetResource|null
+     */
+    public function getChangeSet()
+    {
+        return $this->changeSet;
+    }
+
+    /**
+     * @param ChangeSetResource $changeSet
+     */
+    public function setChangeSet($changeSet)
+    {
+        $this->changeSet = $changeSet;
+    }
+
+    /**
+     * @return ProductGroupResource|null
      */
     public function getProductGroup()
     {

@@ -3,6 +3,7 @@
 namespace Brain\Cell;
 
 use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
+use Brain\Cell\Client\Delegate\ChangeDelegateClient;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
 use Brain\Cell\Client\Delegate\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\JobDelegateClient;
@@ -70,5 +71,13 @@ class BrainClient extends DelegateClient
     public function artwork()
     {
         return new ArtworkDelegateClient($this->configuration);
+    }
+
+    /**
+     * @return ChangeDelegateClient
+     */
+    public function change()
+    {
+        return new ChangeDelegateClient($this->configuration);
     }
 }
