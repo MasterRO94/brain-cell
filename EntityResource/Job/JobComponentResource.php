@@ -5,6 +5,7 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\SizeResource;
+use Brain\Cell\EntityResource\TwoDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -65,14 +66,6 @@ class JobComponentResource extends AbstractResource
     protected $options;
 
     /**
-     * @var ArtworkResource
-     *
-     * @Assert\Valid()
-     * @Assert\NotBlank()
-     */
-    protected $artwork;
-
-    /**
      * @var SizeResource
      *
      * @Assert\Valid()
@@ -89,9 +82,21 @@ class JobComponentResource extends AbstractResource
     protected $material;
 
     /**
+     * @var TwoDimensionalResource
+     *
+     * @Assert\Valid()
+     */
+    protected $dimensions;
+
+    /**
      * @var int
      */
     protected $weight;
+
+    /**
+     * @var string
+     */
+    protected $label;
 
     /**
      * {@inheritdoc}
@@ -99,9 +104,9 @@ class JobComponentResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'artwork' => ArtworkResource::class,
             'size' => SizeResource::class,
-            'material' => MaterialResource::class
+            'material' => MaterialResource::class,
+            'dimensions' => TwoDimensionalResource::class,
         ];
     }
 
@@ -204,7 +209,9 @@ class JobComponentResource extends AbstractResource
      */
     public function getArtwork()
     {
-        return $this->artwork;
+        throw new \BadMethodCallException(
+            sprintf('The method "%1$s" has been moved to "%2$s::%1$s".', __METHOD__, JobResource::class)
+        );
     }
 
     /**
@@ -214,8 +221,9 @@ class JobComponentResource extends AbstractResource
      */
     public function setArtwork(ArtworkResource $artwork)
     {
-        $this->artwork = $artwork;
-        return $this;
+        throw new \BadMethodCallException(
+            sprintf('The method "%1$s" has been moved to "%2$s::%1$s".', __METHOD__, JobResource::class)
+        );
     }
 
     /**
@@ -304,5 +312,37 @@ class JobComponentResource extends AbstractResource
         return (int) floor(
             ($sra3Height * $sra3Width) / ($width * $height)
         );
+    }
+
+    /**
+     * @return TwoDimensionalResource
+     */
+    public function getDimensions()
+    {
+        return $this->dimensions;
+    }
+
+    /**
+     * @param TwoDimensionalResource $dimensions
+     */
+    public function setDimensions(TwoDimensionalResource $dimensions)
+    {
+        $this->dimensions = $dimensions;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
     }
 }

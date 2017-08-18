@@ -18,22 +18,36 @@ use Brain\Cell\Transfer\ResourceCollection;
 
 class StockDelegateClient extends DelegateClient
 {
-
     /**
      * @param JobResource $jobResource
      *
      * @return AbstractResource|array|bool|StockFinishingsResource
+     *
+     * @deprecated Please use "getStockOptions" from now on.
      */
     public function getFinishings(JobResource $jobResource)
+    {
+        return $this->getStockOptions($jobResource);
+    }
+
+    /**
+     * @param JobResource $jobResource
+     *
+     * @return StockFinishingsResource
+     */
+    public function getStockOptions(JobResource $jobResource)
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/stock/options');
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($jobResource));
+        $payload = $handler->serialise($jobResource);
+        $context->setPayload($payload);
 
-        return $this->request($context, new StockFinishingsResource);
+        /** @var StockFinishingsResource $resource */
+        $resource = $this->request($context, new StockFinishingsResource);
 
+        return $resource;
     }
 
     /**

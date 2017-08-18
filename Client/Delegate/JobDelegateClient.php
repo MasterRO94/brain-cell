@@ -35,14 +35,16 @@ class JobDelegateClient extends DelegateClient
      * * id = string|string[]
      *
      * @param array $filters
+     * @param $parameters
      *
      * @return ResourceCollection|JobResource[]
      */
-    public function getJobIds(array $filters = [])
+    public function getJobIds(array $filters = [], $parameters = [])
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/job-ids');
         $context->getFilters()->add($filters);
+        $context->getParameters()->add($parameters);
 
         $collection = new ResourceCollection;
         $collection->setEntityClass(JobResource::class);
@@ -80,6 +82,18 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
+     * @param string $jobId
+     * @return JobResource
+     */
+    public function cloneJob($jobId)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut(sprintf('/jobs/%s/clone', $jobId));
+
+        return $this->request($context, new JobResource);
+    }
+
+    /**
      * @param JobResource $resource
      * @param string $status
      * @return JobResource
@@ -91,6 +105,7 @@ class JobDelegateClient extends DelegateClient
             'production-started',
             'production-finished',
             'production-dispatched',
+            'cancelled',
         ];
 
         if (! in_array($status, $validStatuses)) {
