@@ -8,6 +8,7 @@ use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\ResourceCollection;
+use Psr\Http\Message\StreamInterface;
 
 /**
  * {@inheritdoc}
@@ -83,5 +84,17 @@ class DeliveryDelegateClient extends DelegateClient
         $resource = $this->request($context, new DispatchResource());
 
         return $resource;
+    }
+
+    /**
+     * @param string $dispatchId
+     *
+     * @return StreamInterface
+     */
+    public function downloadLabel($dispatchId)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/delivery/dispatch/%s/label', $dispatchId));
+        return $this->stream($context);
     }
 }
