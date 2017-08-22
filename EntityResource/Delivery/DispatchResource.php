@@ -27,7 +27,7 @@ class DispatchResource extends AbstractResource
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $jobBatch;
+    protected $batch;
 
     /**
      * @var string
@@ -50,7 +50,7 @@ class DispatchResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'jobBatch' => JobBatchResource::class,
+            'batch' => JobBatchResource::class,
         ];
     }
 
@@ -75,22 +75,22 @@ class DispatchResource extends AbstractResource
     /**
      * @return JobBatchResource|null
      */
-    public function getJobBatch()
+    public function getBatch()
     {
-        return $this->jobBatch;
+        return $this->batch;
     }
 
     /**
-     * @param JobBatchResource|null $jobBatch
+     * @param JobBatchResource|null $batch
      */
-    public function setJobBatch(JobBatchResource $jobBatch = null)
+    public function setBatch(JobBatchResource $batch = null)
     {
-        $this->jobBatch = $jobBatch;
+        $this->batch = $batch;
     }
 
-    public function clearJobBatch()
+    public function clearBatch()
     {
-        $this->jobBatch = null;
+        $this->batch = null;
     }
 
     /**
