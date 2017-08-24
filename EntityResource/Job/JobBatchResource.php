@@ -5,7 +5,8 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\Delivery\DeliveryResource;
+use Brain\Cell\EntityResource\AddressResource;
+use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -19,12 +20,17 @@ class JobBatchResource extends AbstractResource
     protected $id;
 
     /**
-     * @var DeliveryResource
+     * @var AddressResource
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $delivery;
+    protected $address;
+
+    /**
+     * @var DeliveryOptionResource $deliveryOption
+     */
+    protected $deliveryOption;
 
     /**
      * @var ResourceCollection|JobResource[]
@@ -51,7 +57,8 @@ class JobBatchResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'delivery' => DeliveryResource::class,
+            'address' => AddressResource::class,
+            'deliveryOption' => DeliveryOptionResource::class,
         ];
     }
 
@@ -75,22 +82,35 @@ class JobBatchResource extends AbstractResource
     }
 
     /**
-     * @return DeliveryResource
+     * @return AddressResource
      */
-    public function getDelivery()
+    public function getAddress()
     {
-        return $this->delivery;
+        return $this->address;
     }
 
     /**
-     * @param DeliveryResource $delivery
-     *
-     * @return JobBatchResource
+     * @param AddressResource $address
      */
-    public function setDelivery(DeliveryResource $delivery)
+    public function setAddress(AddressResource $address)
     {
-        $this->delivery = $delivery;
-        return $this;
+        $this->address = $address;
+    }
+
+    /**
+     * @return DeliveryOptionResource
+     */
+    public function getDeliveryOption()
+    {
+        return $this->deliveryOption;
+    }
+
+    /**
+     * @param DeliveryOptionResource $deliveryOption
+     */
+    public function setDeliveryOption($deliveryOption)
+    {
+        $this->deliveryOption = $deliveryOption;
     }
 
     /**
