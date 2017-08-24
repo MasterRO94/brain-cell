@@ -15,30 +15,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class DeliveryResource extends AbstractResource
 {
     /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     */
-    protected $customerName;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     */
-    protected $customerEmail;
-
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Type(type="string")
-     */
-    protected $customerPhone;
-
-    /**
      * @var AddressResource
      *
      * @Assert\Valid()
@@ -47,12 +23,18 @@ class DeliveryResource extends AbstractResource
     protected $address;
 
     /**
+     * @var DeliveryOptionResource $deliveryOption
+     */
+    protected $deliveryOption;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
-            'address' => AddressResource::class
+            'address' => AddressResource::class,
+            'deliveryOption' => DeliveryOptionResource::class,
         ];
     }
 
@@ -73,6 +55,22 @@ class DeliveryResource extends AbstractResource
     {
         $this->address = $address;
         return $this;
+    }
+
+    /**
+     * @return DeliveryOptionResource
+     */
+    public function getDeliveryOption()
+    {
+        return $this->deliveryOption;
+    }
+
+    /**
+     * @param DeliveryOptionResource $deliveryOption
+     */
+    public function setDeliveryOption($deliveryOption)
+    {
+        $this->deliveryOption = $deliveryOption;
     }
 
 }
