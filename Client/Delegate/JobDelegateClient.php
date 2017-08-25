@@ -101,7 +101,9 @@ class JobDelegateClient extends DelegateClient
     public function updateStatus(JobResource $resource, $status)
     {
         static $validStatuses = [
-            'production-queue',
+            'imposition-queued',
+            'imposition-manual',
+            'production-queued',
             'production-started',
             'production-finished',
             'production-dispatched',
