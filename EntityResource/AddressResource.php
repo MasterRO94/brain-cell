@@ -283,6 +283,7 @@ class AddressResource extends AbstractResource
     {
         return implode(', ', array_filter([
             $this->name,
+            $this->company,
             $this->addressLine1,
             $this->addressLine2,
             $this->city,
@@ -299,6 +300,7 @@ class AddressResource extends AbstractResource
     {
         return implode(' | ', [
             $this->name,
+            $this->company,
             $this->addressLine1,
             $this->addressLine2,
             $this->city,
