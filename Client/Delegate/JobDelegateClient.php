@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
+use Brain\Cell\Enum\JobStatusEnum;
 use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -100,15 +101,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function updateStatus(JobResource $resource, $status)
     {
-        static $validStatuses = [
-            'production-queue',
-            'production-started',
-            'production-finished',
-            'production-dispatched',
-            'cancelled',
-        ];
-
-        if (! in_array($status, $validStatuses)) {
+        if (! in_array($status, JobStatusEnum::getAll())) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));
         }
 
@@ -116,7 +109,7 @@ class JobDelegateClient extends DelegateClient
         $context->prepareContextForPut(sprintf(
             '/jobs/%s/%s',
             $resource->getId(),
-            $status
+            str_replace('_', '-', $status)
         ));
 
         $handler = $this->configuration->getResourceHandler();
