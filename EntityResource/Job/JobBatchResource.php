@@ -20,6 +20,11 @@ class JobBatchResource extends AbstractResource
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $status;
+
+    /**
      * @var AddressResource
      *
      * @Assert\Valid()
@@ -49,7 +54,6 @@ class JobBatchResource extends AbstractResource
      * @Assert\Valid()
      */
     protected $dispatches;
-
 
     /**
      * {@inheritdoc}
@@ -152,6 +156,22 @@ class JobBatchResource extends AbstractResource
     {
         $this->dispatches->add($dispatch);
         $dispatch->setJobBatch($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
 }

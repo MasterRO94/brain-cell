@@ -7,7 +7,7 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\Transfer\AbstractResource;
 
-class JobStatusResource extends AbstractResource
+class StatusResource extends AbstractResource
 {
     /**
      * @var string $state
