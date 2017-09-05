@@ -112,9 +112,6 @@ class JobDelegateClient extends DelegateClient
             str_replace('_', '-', $status)
         ));
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($resource));
-
         return $this->request($context, $resource);
     }
 }
