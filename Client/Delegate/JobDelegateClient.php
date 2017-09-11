@@ -14,6 +14,7 @@ class JobDelegateClient extends DelegateClient
     /**
      * Filters available:
      * * id = string|string[]
+     * * batch = string
      *
      * @param array $filters
      *
@@ -29,6 +30,18 @@ class JobDelegateClient extends DelegateClient
         $collection->setEntityClass(JobResource::class);
 
         return $this->request($context, $collection);
+    }
+
+    /**
+     * @param string $batchId
+     *
+     * @return ResourceCollection|JobResource[]
+     */
+    public function getJobsByBatchId($batchId)
+    {
+        return $this->getJobs([
+            'batch' => $batchId,
+        ]);
     }
 
     /**
