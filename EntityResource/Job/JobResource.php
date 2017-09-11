@@ -8,6 +8,7 @@ use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
+use Brain\Cell\Enum\JobStatusEnum;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -583,5 +584,15 @@ class JobResource extends AbstractResource
     public function getClonedFrom()
     {
         return $this->clonedFrom;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInImposition()
+    {
+        return $this->status === JobStatusEnum::STATUS_IMPOSITION_QUEUED
+            || $this->status === JobStatusEnum::STATUS_IMPOSITION_MANUAL
+        ;
     }
 }

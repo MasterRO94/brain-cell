@@ -4,10 +4,11 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\CountryResource;
-use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
+use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\ResourceCollection;
+
 use Psr\Http\Message\StreamInterface;
 
 /**

@@ -6,9 +6,8 @@ use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\RequestAdapterException;
 
-use Psr\Http\Message\StreamInterface;
-
 use GuzzleHttp\ClientInterface;
+use Psr\Http\Message\StreamInterface;
 
 class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 {

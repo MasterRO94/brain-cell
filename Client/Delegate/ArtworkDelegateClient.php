@@ -6,6 +6,7 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+
 use Psr\Http\Message\StreamInterface;
 
 class ArtworkDelegateClient extends DelegateClient

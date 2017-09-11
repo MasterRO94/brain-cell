@@ -2,8 +2,8 @@
 
 namespace Brain\Cell\EntityResource\Product;
 
-use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\EntityResource\Change\ChangeSetResource;
+use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
