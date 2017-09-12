@@ -3,6 +3,7 @@
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\Transfer\AbstractResource;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

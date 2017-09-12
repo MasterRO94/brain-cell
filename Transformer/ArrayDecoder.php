@@ -8,6 +8,7 @@ use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
+
 use Doctrine\Common\Inflector\Inflector;
 
 /**
