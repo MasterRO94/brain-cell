@@ -28,6 +28,11 @@ class ProductionHouseResource extends AbstractResource
     /**
      * @var string
      */
+    protected $phone;
+
+    /**
+     * @var string
+     */
     protected $email;
 
 
@@ -73,6 +78,14 @@ class ProductionHouseResource extends AbstractResource
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 
     /**
