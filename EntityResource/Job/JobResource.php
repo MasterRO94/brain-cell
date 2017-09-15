@@ -121,11 +121,6 @@ class JobResource extends AbstractResource
     protected $artwork;
 
     /**
-     * @var CurrencyResource
-     */
-    protected $pricingCurrency;
-
-    /**
      * @var JobResource
      */
     protected $clonedFrom;
@@ -145,7 +140,6 @@ class JobResource extends AbstractResource
             'status' => StatusResource::class,
             'artwork' => ArtworkResource::class,
             'clonedFrom' => JobResource::class,
-            'pricingCurrency' => CurrencyResource::class,
         ];
     }
 
@@ -583,14 +577,6 @@ class JobResource extends AbstractResource
     public function setArtwork(ArtworkResource $artwork)
     {
         $this->artwork = $artwork;
-    }
-
-    /**
-     * @return CurrencyResource
-     */
-    public function getPricingCurrency()
-    {
-        $this->pricingCurrency;
     }
 
     /**
