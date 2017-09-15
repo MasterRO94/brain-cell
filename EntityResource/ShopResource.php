@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\Logical\EmailAwareTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
@@ -9,7 +10,6 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class ShopResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -23,12 +23,12 @@ class ShopResource extends AbstractResource
     /**
      * @var string
      */
-    protected $email;
+    protected $phone;
 
     /**
      * @var string
      */
-    protected $phone;
+    protected $email;
 
     /**
      * @return int
@@ -36,23 +36,6 @@ class ShopResource extends AbstractResource
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-
     }
 
     /**
@@ -71,5 +54,22 @@ class ShopResource extends AbstractResource
     {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+
     }
 }
