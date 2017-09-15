@@ -21,11 +21,38 @@ class ShopResource extends AbstractResource
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $email;
+
+    /**
+     * @var string
+     */
+    protected $phone;
+
+    /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+
     }
 
     /**
@@ -45,5 +72,4 @@ class ShopResource extends AbstractResource
         $this->name = $name;
         return $this;
     }
-
 }

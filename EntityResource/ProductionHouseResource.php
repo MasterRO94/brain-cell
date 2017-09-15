@@ -21,6 +21,21 @@ class ProductionHouseResource extends AbstractResource
     protected $name;
 
     /**
+     * @var AddressResource
+     */
+    protected $address;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'address' => AddressResource::class,
+        ];
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -44,6 +59,14 @@ class ProductionHouseResource extends AbstractResource
     {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+     * @return AddressResource
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 
 }
