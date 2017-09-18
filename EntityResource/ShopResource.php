@@ -21,6 +21,11 @@ class ShopResource extends AbstractResource
     protected $name;
 
     /**
+     * @var AddressResource
+     */
+    protected $address;
+
+    /**
      * @var string
      */
     protected $phone;
@@ -29,6 +34,16 @@ class ShopResource extends AbstractResource
      * @var string
      */
     protected $email;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'address' => AddressResource::class,
+        ];
+    }
 
     /**
      * @return int
@@ -54,6 +69,14 @@ class ShopResource extends AbstractResource
     {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+     * @return AddressResource
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 
     /**
