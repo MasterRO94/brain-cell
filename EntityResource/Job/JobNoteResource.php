@@ -6,12 +6,6 @@ use Brain\Cell\Transfer\AbstractResource;
 
 class JobNoteResource extends AbstractResource
 {
-
-    /**
-     * @var string
-     */
-    protected $id;
-
     /**
      * @var string
      */
@@ -27,14 +21,6 @@ class JobNoteResource extends AbstractResource
 //     * @var string
 //     */
 //    protected $target;
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
 
     /**
      * @return string
