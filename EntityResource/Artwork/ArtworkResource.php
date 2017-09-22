@@ -23,7 +23,7 @@ class ArtworkResource extends AbstractResource
     protected $id;
 
     /**
-     * @var string
+     * @var ArtworkStatusResource
      */
     protected $status;
 
@@ -41,6 +41,16 @@ class ArtworkResource extends AbstractResource
     protected $mimeType;
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'status' => ArtworkStatusResource::class,
+        ];
+    }
+
+    /**
      * @return string
      */
     public function getId()
@@ -49,7 +59,7 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @return string
+     * @return ArtworkStatusResource
      */
     public function getStatus()
     {
@@ -57,11 +67,11 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @param string $status
+     * @param ArtworkStatusResource $status
      *
      * @return ArtworkResource
      */
-    public function setStatus($status)
+    public function setStatus(ArtworkStatusResource $status)
     {
         $this->status = $status;
         return $this;
