@@ -25,7 +25,7 @@ class JobResource extends AbstractResource
     protected $id;
 
     /**
-     * @var StatusResource $status
+     * @var JobStatusResource $status
      */
     protected $status;
 
@@ -136,7 +136,7 @@ class JobResource extends AbstractResource
             'batch' => JobBatchResource::class,
             'dimensions' => ThreeDimensionalResource::class,
             'price' => PriceResource::class,
-            'status' => StatusResource::class,
+            'status' => JobStatusResource::class,
             'artwork' => ArtworkResource::class,
             'clonedFrom' => JobResource::class,
         ];
@@ -174,7 +174,7 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @return StatusResource
+     * @return JobStatusResource
      */
     public function getStatus()
     {
@@ -182,10 +182,11 @@ class JobResource extends AbstractResource
     }
 
     /**
-     * @param StatusResource $status
+     * @param JobStatusResource $status
+     *
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(JobStatusResource $status)
     {
         $this->status = $status;
         return $this;
