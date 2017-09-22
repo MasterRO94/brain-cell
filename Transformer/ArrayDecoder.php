@@ -27,7 +27,6 @@ class ArrayDecoder extends AbstractTransformer
      */
     public function decode(TransferEntityInterface $entity, array $data)
     {
-
         //  If we are decoding a collection of resources..
         if ($entity instanceof ResourceCollection) {
             return $this->decodeCollection($entity, $data);
@@ -40,7 +39,6 @@ class ArrayDecoder extends AbstractTransformer
 
         //  The decoder may not support serialising all transfer entities.
         throw new RuntimeException(sprintf('Unexpected TransferEntityInterface "%s"', get_class($entity)));
-
     }
 
     /**
@@ -52,7 +50,6 @@ class ArrayDecoder extends AbstractTransformer
      */
     protected function decodeResource(AbstractResource $resource, array $data)
     {
-
         //  Serialisation is done on the properties of the transfer objects.
         //  For this we need to make use of reflection to get the protected properties.
         $class = new \ReflectionClass(get_class($resource));
@@ -82,13 +79,11 @@ class ArrayDecoder extends AbstractTransformer
         foreach ($data as $propertyName => $value) {
             $camelCasePropertyName = Inflector::camelize($propertyName);
 
-            //  We throw if the property is not available against the object and is not a meta property.
+            //  The API will change and throwing in the case of an unexpected property was a great idea at first,
+            //  but actually its a pain to handle. Instead just ignore properties returned, if the property is needed
+            //  then people can upgrade to the latest release.
             if (!$class->hasProperty($camelCasePropertyName)) {
-                throw new RuntimeException(sprintf(
-                    'Additional property "%s" was not expected for "%s"',
-                    $propertyName,
-                    get_class($resource)
-                ));
+                continue;
             }
 
             $property = $class->getProperty($camelCasePropertyName);
