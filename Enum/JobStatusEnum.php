@@ -9,6 +9,8 @@ namespace Brain\Cell\Enum;
 /**
  * Copy-paste of Brain/Component/Job/Enum/JobStatusEnum.php in Brain
  * Please keep these synchronised
+ *
+ * @deprecated use JobStatusResource constants instead.
  */
 class JobStatusEnum
 {

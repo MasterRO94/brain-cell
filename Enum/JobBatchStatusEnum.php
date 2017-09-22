@@ -8,6 +8,8 @@ namespace Brain\Cell\Enum;
 /**
  * Copy-paste of Brain/Component/Job/Enum/JobBatchStatusEnum.php in Brain
  * Please keep these synchronised
+ *
+ * @deprecated use JobBatchStatusResource constants instead.
  */
 class JobBatchStatusEnum
 {
