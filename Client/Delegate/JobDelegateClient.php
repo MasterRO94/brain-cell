@@ -134,14 +134,10 @@ class JobDelegateClient extends DelegateClient
             $jobId
         ));
 
-        //todo what happens if the client is configured not to have a resourceHandler?
-        // - it has been assumed everywhere  sets a payload that a resource handler is
-        //provided, So I am just running with the same assumption.
-
+        //todo assumed that the user has configured to have a resource handler.
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobNoteResource));
 
-        //todo I think that this is used so that you know that you are getting back a resource.
         $collection = new ResourceCollection();
         $collection->setEntityClass(JobNoteResource::class);
 
