@@ -16,6 +16,16 @@ class JobNoteResource extends AbstractResource
      */
     protected $description;
 
+    /**
+     * @var \DateTime
+     */
+    protected $created;
+
+    /**
+     * @var \DateTime
+     */
+    protected $updated;
+
     //todo this would be helpful
 //    /**
 //     * @var string
@@ -52,6 +62,22 @@ class JobNoteResource extends AbstractResource
     public function setDescription(string $description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 
     //todo this would be helpful

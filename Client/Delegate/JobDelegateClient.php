@@ -3,6 +3,7 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\Enum\JobStatusEnum;
 use Brain\Cell\Exception\ClientException;
@@ -116,5 +117,34 @@ class JobDelegateClient extends DelegateClient
         ));
 
         return $this->request($context, $resource);
+    }
+
+    /**
+     * @param string $jobId
+     * @param JobNoteResource $jobNoteResource
+     * @return ResourceCollection|JobNoteResource[]
+     */
+    public function submitJobNote(
+        string $jobId,
+        JobNoteResource $jobNoteResource
+    ) {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost(sprintf(
+            '/jobs/%s/notes',
+            $jobId
+        ));
+
+        //todo what happens if the client is configured not to have a resourceHandler?
+        // - it has been assumed everywhere  sets a payload that a resource handler is
+        //provided, So I am just running with the same assumption.
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobNoteResource));
+
+        //todo I think that this is used so that you know that you are getting back a resource.
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(JobNoteResource::class);
+
+        return $this->request($context, $collection);
     }
 }
