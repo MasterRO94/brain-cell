@@ -3,6 +3,7 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\Enum\JobStatusEnum;
 use Brain\Cell\Exception\ClientException;
@@ -116,5 +117,30 @@ class JobDelegateClient extends DelegateClient
         ));
 
         return $this->request($context, $resource);
+    }
+
+    /**
+     * @param string $jobId
+     * @param JobNoteResource $jobNoteResource
+     * @return ResourceCollection|JobNoteResource[]
+     */
+    public function submitJobNote(
+        string $jobId,
+        JobNoteResource $jobNoteResource
+    ) {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost(sprintf(
+            '/jobs/%s/notes',
+            $jobId
+        ));
+
+        //todo assumed that the user has configured to have a resource handler.
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobNoteResource));
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(JobNoteResource::class);
+
+        return $this->request($context, $collection);
     }
 }

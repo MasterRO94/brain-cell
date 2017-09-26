@@ -86,6 +86,11 @@ class JobResource extends AbstractResource
     protected $options;
 
     /**
+     * @var ResourceCollection|JobNoteResource[]
+     */
+    protected $notes;
+
+    /**
      * @var JobBatchResource
      *
      * @Assert\Valid()
@@ -150,6 +155,7 @@ class JobResource extends AbstractResource
         return [
             'components' => JobComponentResource::class,
             'options' => JobOptionResource::class,
+            'notes' => JobNoteResource::class,
         ];
     }
 
@@ -355,6 +361,22 @@ class JobResource extends AbstractResource
     public function setOptions($options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @return JobNoteResource[]|ResourceCollection
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * @param JobNoteResource[]|ResourceCollection $notes
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
     }
 
     /**
