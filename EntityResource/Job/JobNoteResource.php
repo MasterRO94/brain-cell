@@ -9,6 +9,11 @@ class JobNoteResource extends AbstractResource
     /**
      * @var string
      */
+    protected $id;
+
+    /**
+     * @var string
+     */
     protected $summary;
 
     /**
@@ -31,6 +36,11 @@ class JobNoteResource extends AbstractResource
 //     * @var string
 //     */
 //    protected $target;
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
 
     /**
      * @return string

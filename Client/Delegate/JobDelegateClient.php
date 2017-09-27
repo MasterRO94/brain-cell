@@ -122,7 +122,7 @@ class JobDelegateClient extends DelegateClient
     /**
      * @param string $jobId
      * @param JobNoteResource $jobNoteResource
-     * @return ResourceCollection|JobNoteResource[]
+     * @return JobResource
      */
     public function submitJobNote(
         string $jobId,
@@ -134,13 +134,9 @@ class JobDelegateClient extends DelegateClient
             $jobId
         ));
 
-        //todo assumed that the user has configured to have a resource handler.
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobNoteResource));
 
-        $collection = new ResourceCollection();
-        $collection->setEntityClass(JobNoteResource::class);
-
-        return $this->request($context, $collection);
+        return $this->request($context, new JobResource);
     }
 }
