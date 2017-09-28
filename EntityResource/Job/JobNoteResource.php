@@ -37,7 +37,7 @@ class JobNoteResource extends AbstractResource
 //     */
 //    protected $target;
 
-    public function getId(): string
+    public function getId()
     {
         return $this->id;
     }
@@ -45,7 +45,7 @@ class JobNoteResource extends AbstractResource
     /**
      * @return string
      */
-    public function getSummary(): string
+    public function getSummary()
     {
         return $this->summary;
     }
@@ -61,7 +61,7 @@ class JobNoteResource extends AbstractResource
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->description;
     }
