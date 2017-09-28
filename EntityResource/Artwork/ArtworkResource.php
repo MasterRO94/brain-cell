@@ -11,19 +11,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ArtworkResource extends AbstractResource
 {
-    const STATUS_NEW = 1;
-    const STATUS_PENDING_DOWNLOAD = 2;
-    const STATUS_PENDING_VALIDATION = 3;
-    const STATUS_INVALID_MIME_TYPE = 100;
-    const STATUS_VERIFIED = 200;
-
     /**
      * @var string
      */
     protected $id;
 
     /**
-     * @var string
+     * @var ArtworkStatusResource
      */
     protected $status;
 
@@ -41,6 +35,16 @@ class ArtworkResource extends AbstractResource
     protected $mimeType;
 
     /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'status' => ArtworkStatusResource::class,
+        ];
+    }
+
+    /**
      * @return string
      */
     public function getId()
@@ -49,7 +53,7 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @return string
+     * @return ArtworkStatusResource
      */
     public function getStatus()
     {
@@ -57,11 +61,11 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @param string $status
+     * @param ArtworkStatusResource $status
      *
      * @return ArtworkResource
      */
-    public function setStatus($status)
+    public function setStatus(ArtworkStatusResource $status)
     {
         $this->status = $status;
         return $this;

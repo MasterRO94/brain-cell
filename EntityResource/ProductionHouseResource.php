@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\Logical\EmailAwareTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
@@ -9,7 +10,6 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class ProductionHouseResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -19,6 +19,32 @@ class ProductionHouseResource extends AbstractResource
      * @var string
      */
     protected $name;
+
+    /**
+     * @var AddressResource
+     */
+    protected $address;
+
+    /**
+     * @var string
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     */
+    protected $email;
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'address' => AddressResource::class,
+        ];
+    }
 
     /**
      * @return int
@@ -46,4 +72,28 @@ class ProductionHouseResource extends AbstractResource
         return $this;
     }
 
+    /**
+     * @return AddressResource
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+
+    }
 }
