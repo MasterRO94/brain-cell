@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 class JobNoteResource extends AbstractResource
@@ -32,7 +33,7 @@ class JobNoteResource extends AbstractResource
     protected $updated;
 
     /**
-     * @var string
+     * @var  ClientResource
      */
     protected $origin;
 
@@ -41,6 +42,16 @@ class JobNoteResource extends AbstractResource
 //     * @var string
 //     */
 //    protected $target;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources()
+    {
+        return [
+            'origin' => ClientResource::class,
+        ];
+    }
 
     public function getId()
     {
@@ -96,19 +107,11 @@ class JobNoteResource extends AbstractResource
     }
 
     /**
-     * @return bool
+     * @return ClientResource
      */
-    public function hasOriginShop()
+    public function getOrigin()
     {
-        return $this->origin === 'Shop';
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasOriginProductionHouse()
-    {
-        return $this->origin === 'Production House';
+        return $this->origin;
     }
 
     //todo this would be helpful
