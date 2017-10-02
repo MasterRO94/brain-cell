@@ -31,6 +31,11 @@ class JobNoteResource extends AbstractResource
      */
     protected $updated;
 
+    /**
+     * @var string
+     */
+    protected $origin;
+
     //todo this would be helpful
 //    /**
 //     * @var string
@@ -88,6 +93,22 @@ class JobNoteResource extends AbstractResource
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOriginShop()
+    {
+        return $this->origin === 'Shop';
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasOriginProductionHouse()
+    {
+        return $this->origin === 'Production House';
     }
 
     //todo this would be helpful
