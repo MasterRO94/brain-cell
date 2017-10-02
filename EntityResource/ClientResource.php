@@ -4,6 +4,9 @@ namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Transfer\AbstractResource;
 
+/**
+ * {@inheritdoc}
+ */
 class ClientResource extends AbstractResource
 {
     /**

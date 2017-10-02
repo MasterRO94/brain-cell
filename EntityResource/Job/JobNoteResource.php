@@ -5,6 +5,9 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\Transfer\AbstractResource;
 
+/**
+ * {@inheritdoc}
+ */
 class JobNoteResource extends AbstractResource
 {
     /**

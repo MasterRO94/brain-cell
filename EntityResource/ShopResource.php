@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\EntityResource;
 
-
 /**
  * {@inheritdoc}
  */
