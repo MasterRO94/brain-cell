@@ -10,6 +10,7 @@ use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class JobBatchResource extends AbstractResource
 {
@@ -27,15 +28,20 @@ class JobBatchResource extends AbstractResource
     /**
      * @var AddressResource
      *
-     * @Assert\Valid()
-     * @Assert\NotBlank()
+     * @deprecated Will be removed very soon. Please update your code. Use the $deliveryOption
+     *   in status "incomplete" or the $batchDelivery in statuses past the status "incomplete".
      */
     protected $address;
 
     /**
-     * @var DeliveryOptionResource $deliveryOption
+     * @var DeliveryOptionResource|null This might be null only in the "incomplete" status
      */
     protected $deliveryOption;
+
+    /**
+     * @var JobBatchBatchDeliveryResource|null This is null only in the "incomplete" status
+     */
+    protected $batchDelivery;
 
     /**
      * @var ResourceCollection|JobResource[]
@@ -55,14 +61,26 @@ class JobBatchResource extends AbstractResource
      */
     protected $dispatches;
 
+    public function __construct()
+    {
+        $this->dispatches = new ArrayCollection();
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
+            /*
+             * Will be removed soon
+             *
+             * @deprecated
+             */
             'address' => AddressResource::class,
+
             'deliveryOption' => DeliveryOptionResource::class,
+            'batchDelivery' => JobBatchBatchDeliveryResource::class,
         ];
     }
 
@@ -86,6 +104,8 @@ class JobBatchResource extends AbstractResource
     }
 
     /**
+     * @deprecated
+     *
      * @return AddressResource
      */
     public function getAddress()
@@ -94,6 +114,8 @@ class JobBatchResource extends AbstractResource
     }
 
     /**
+     * @deprecated
+     *
      * @param AddressResource $address
      */
     public function setAddress(AddressResource $address)
@@ -102,7 +124,7 @@ class JobBatchResource extends AbstractResource
     }
 
     /**
-     * @return DeliveryOptionResource
+     * @return DeliveryOptionResource|null
      */
     public function getDeliveryOption()
     {
@@ -112,9 +134,25 @@ class JobBatchResource extends AbstractResource
     /**
      * @param DeliveryOptionResource $deliveryOption
      */
-    public function setDeliveryOption($deliveryOption)
+    public function setDeliveryOption(DeliveryOptionResource $deliveryOption = null)
     {
         $this->deliveryOption = $deliveryOption;
+    }
+
+    /**
+     * @return JobBatchBatchDeliveryResource|null
+     */
+    public function getBatchDelivery()
+    {
+        return $this->batchDelivery;
+    }
+
+    /**
+     * @param JobBatchBatchDeliveryResource $batchDelivery
+     */
+    public function setBatchDelivery(JobBatchBatchDeliveryResource $batchDelivery)
+    {
+        $this->batchDelivery = $batchDelivery;
     }
 
     /**
@@ -155,7 +193,7 @@ class JobBatchResource extends AbstractResource
     public function addDispatch($dispatch)
     {
         $this->dispatches->add($dispatch);
-        $dispatch->setJobBatch($this);
+        $dispatch->setBatch($this);
     }
 
     /**
@@ -173,5 +211,4 @@ class JobBatchResource extends AbstractResource
     {
         $this->status = $status;
     }
-
 }

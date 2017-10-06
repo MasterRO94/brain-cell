@@ -123,8 +123,7 @@ class RequestContext
      */
     public function prepareContextForGet($path)
     {
-        $this->method = Request::METHOD_GET;
-        $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
+        $this->prepareContext(Request::METHOD_GET, $path);
     }
 
     /**
@@ -132,8 +131,7 @@ class RequestContext
      */
     public function prepareContextForPost($path)
     {
-        $this->method = Request::METHOD_POST;
-        $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
+        $this->prepareContext(Request::METHOD_POST, $path);
     }
 
     /**
@@ -141,7 +139,24 @@ class RequestContext
      */
     public function prepareContextForPut($path)
     {
-        $this->method = Request::METHOD_PUT;
+        $this->prepareContext(Request::METHOD_PUT, $path);
+    }
+
+    /**
+     * @param string $path
+     */
+    public function prepareContextForPatch($path)
+    {
+        $this->prepareContext(Request::METHOD_PATCH, $path);
+    }
+
+    /**
+     * @param string $httpRequestMethod
+     * @param string $path
+     */
+    public function prepareContext($httpRequestMethod, $path)
+    {
+        $this->method = $httpRequestMethod;
         $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
     }
 

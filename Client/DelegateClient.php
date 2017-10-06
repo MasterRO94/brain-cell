@@ -40,6 +40,18 @@ abstract class DelegateClient
 
     /**
      * @param RequestContext $context
+     * @param AbstractResource $resource
+     * @return AbstractResource
+     */
+    protected function requestAndDeserialise(RequestContext $context, AbstractResource $resource)
+    {
+        $response = $this->configuration->getRequestAdapter()->request($context);
+
+        return $this->configuration->getResourceHandler()->deserialise($resource, $response);
+    }
+
+    /**
+     * @param RequestContext $context
      * @return StreamInterface
      */
     protected function stream(RequestContext $context)

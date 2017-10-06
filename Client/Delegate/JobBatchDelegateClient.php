@@ -6,9 +6,12 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
+use Brain\Cell\EntityResource\Job\JobBatchBatchDeliveryResource;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\Enum\JobBatchStatusEnum;
 use Brain\Cell\Exception\ClientException;
+use Symfony\Component\HttpFoundation\Request;
 
 class JobBatchDelegateClient extends DelegateClient
 {
@@ -40,6 +43,53 @@ class JobBatchDelegateClient extends DelegateClient
         $context->setPayload($handler->serialise($resource));
 
         return $this->request($context, $resource);
+    }
+
+    /**
+     * @param string $jobBatchId
+     * @param DeliveryOptionResource $deliveryOptionResource
+     *
+     * @return JobBatchResource
+     */
+    public function updateJobBatchDeliveryOption(
+        $jobBatchId,
+        DeliveryOptionResource $deliveryOptionResource
+    ) {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut("/jobs/batches/{$jobBatchId}/delivery-option");
+
+        $payload = [
+            'delivery_option' => $deliveryOptionResource->getIdOrThrow(),
+        ];
+
+        $context->setPayload($payload);
+
+        /** @var JobBatchResource $result */
+        $result = $this->requestAndDeserialise($context, new JobBatchResource());
+
+        return $result;
+    }
+
+    /**
+     * @param string $jobBatchId
+     * @param JobBatchBatchDeliveryResource $batchDeliveryResource
+     *
+     * @return JobBatchResource
+     */
+    public function updateJobBatchBatchDelivery(
+        $jobBatchId,
+        JobBatchBatchDeliveryResource $batchDeliveryResource
+    ) {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPatch("/jobs/batches/{$jobBatchId}/batch-delivery");
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($batchDeliveryResource));
+
+        /** @var JobBatchResource $result */
+        $result = $this->requestAndDeserialise($context, new JobBatchResource());
+
+        return $result;
     }
 
     /**
