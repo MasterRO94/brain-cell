@@ -219,7 +219,7 @@ class ArrayEncoder extends AbstractTransformer
 
         //  Loop over all the resources in the collection and serialise them.
         foreach ($collection as $resource) {
-            $resource[] = $this->isIdResourceAndShouldSerialiseAsId($resource, $options)
+            $resources[] = $this->isIdResourceAndShouldSerialiseAsId($resource, $options)
                 ? $this->getValueForIdResource($resource, $options)
                 : $this->encodeResource($resource, $options);
         }
