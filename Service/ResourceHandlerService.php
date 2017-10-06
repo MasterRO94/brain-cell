@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\Service;
 
+use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\TransferEntityInterface;
@@ -60,11 +61,14 @@ class ResourceHandlerService
      * Serialise the given {@link TransferEntityInterface}.
      *
      * @param TransferEntityInterface $entity
+     * @param ArrayEncoderSerialisationOptions|null $options
      * @return mixed
      */
-    public function serialise(TransferEntityInterface $entity)
-    {
-        return $this->encoder->encode($entity);
+    public function serialise(
+        TransferEntityInterface $entity,
+        ArrayEncoderSerialisationOptions $options = null
+    ) {
+        return $this->encoder->encode($entity, $options);
     }
 
     /**

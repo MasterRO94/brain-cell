@@ -11,7 +11,7 @@ use Brain\Cell\EntityResource\Job\JobBatchBatchDeliveryResource;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\Enum\JobBatchStatusEnum;
 use Brain\Cell\Exception\ClientException;
-use Symfony\Component\HttpFoundation\Request;
+use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 
 class JobBatchDelegateClient extends DelegateClient
 {
@@ -84,7 +84,12 @@ class JobBatchDelegateClient extends DelegateClient
         $context->prepareContextForPatch("/jobs/batches/{$jobBatchId}/batch-delivery");
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($batchDeliveryResource));
+        $context->setPayload($handler->serialise(
+            $batchDeliveryResource,
+            new ArrayEncoderSerialisationOptions([
+                'preferSerialisingResourceAliasOverId' => false,
+            ])
+        ));
 
         /** @var JobBatchResource $result */
         $result = $this->requestAndDeserialise($context, new JobBatchResource());
