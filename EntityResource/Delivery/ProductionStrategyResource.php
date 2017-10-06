@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Delivery;
 
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,10 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProductionStrategyResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var string
@@ -27,14 +25,6 @@ class ProductionStrategyResource extends AbstractResource
      * @var string
      */
     protected $name;
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * @return string
