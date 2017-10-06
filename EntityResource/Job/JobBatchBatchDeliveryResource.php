@@ -18,7 +18,7 @@ use Brain\Cell\Transfer\AbstractResource;
 class JobBatchBatchDeliveryResource extends AbstractResource
 {
     /** @var AddressResource|null */
-    protected $address;
+    protected $deliveryAddress;
 
     /** @var ProductionStrategyResource|null */
     protected $productionStrategy;
@@ -53,7 +53,7 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'address' => AddressResource::class,
+            'deliveryAddress' => AddressResource::class,
             'productionStrategy' => ProductionStrategyResource::class,
             'deliveryService' => DeliveryServiceResource::class,
         ];
@@ -71,6 +71,22 @@ class JobBatchBatchDeliveryResource extends AbstractResource
             'deliveryDateLatest',
             'deliveryDateEarliest',
         ];
+    }
+
+    /**
+     * @return AddressResource|null
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->deliveryAddress;
+    }
+
+    /**
+     * @param AddressResource $deliveryAddress
+     */
+    public function setDeliveryAddress(AddressResource $deliveryAddress)
+    {
+        $this->deliveryAddress = $deliveryAddress;
     }
 
     /**

@@ -17,7 +17,7 @@ class DeliveryOptionResource extends AbstractResource
     /**
      * @var AddressResource
      */
-    protected $address;
+    protected $deliveryAddress;
 
     /**
      * @var ProductionStrategyResource
@@ -100,7 +100,7 @@ class DeliveryOptionResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'address' => AddressResource::class,
+            'deliveryAddress' => AddressResource::class,
             'productionStrategy' => ProductionStrategyResource::class,
             'deliveryService' => DeliveryServiceResource::class,
             'productionStrategyPrice' => PriceResource::class,
@@ -124,6 +124,22 @@ class DeliveryOptionResource extends AbstractResource
             'deliveryDateLatest',
             'deliveryDateEarliest',
         ];
+    }
+
+    /**
+     * @return AddressResource
+     */
+    public function getDeliveryAddress(): AddressResource
+    {
+        return $this->deliveryAddress;
+    }
+
+    /**
+     * @param AddressResource $deliveryAddress
+     */
+    public function setDeliveryAddress(AddressResource $deliveryAddress)
+    {
+        $this->deliveryAddress = $deliveryAddress;
     }
 
     /**
