@@ -26,7 +26,7 @@ class DeliveryJobBatchResource extends AbstractResource
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $address;
+    protected $deliveryAddress;
 
     /**
      * @var ResourceCollection|JobResource[]
@@ -45,7 +45,7 @@ class DeliveryJobBatchResource extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'address' => AddressResource::class,
+            'deliveryAddress' => AddressResource::class,
         ];
     }
 
@@ -70,17 +70,37 @@ class DeliveryJobBatchResource extends AbstractResource
     /**
      * @return AddressResource
      */
-    public function getAddress()
+    public function getDeliveryAddress(): AddressResource
     {
-        return $this->address;
+        return $this->deliveryAddress;
     }
 
     /**
+     * @param AddressResource $deliveryAddress
+     */
+    public function setDeliveryAddress(AddressResource $deliveryAddress)
+    {
+        $this->deliveryAddress = $deliveryAddress;
+    }
+
+    /**
+     * @deprecated Left for BC
+     *
+     * @return AddressResource
+     */
+    public function getAddress()
+    {
+        return $this->deliveryAddress;
+    }
+
+    /**
+     * @deprecated Left for BC
+     *
      * @param AddressResource $address
      */
     public function setAddress(AddressResource $address)
     {
-        $this->address = $address;
+        $this->deliveryAddress = $address;
     }
 
     /**
