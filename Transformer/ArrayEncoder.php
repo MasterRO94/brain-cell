@@ -121,6 +121,8 @@ class ArrayEncoder extends AbstractTransformer
                         get_class($resource)
                     ));
                 }
+            } elseif ($value instanceof \DateTime) {
+                $value = $value->format('c');
             }
 
             // Ignore empty arrays, but don't ignore 0 or false
