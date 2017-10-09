@@ -3,7 +3,6 @@
 namespace Brain\Cell\Service;
 
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
-use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayDecoder;
@@ -76,7 +75,7 @@ class ResourceHandlerService
      *
      * @param TransferEntityInterface $entity
      * @param mixed $data
-     * @return AbstractResource
+     * @return TransferEntityInterface
      */
     public function deserialise(TransferEntityInterface $entity, $data)
     {

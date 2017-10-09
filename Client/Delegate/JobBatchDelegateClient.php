@@ -65,7 +65,7 @@ class JobBatchDelegateClient extends DelegateClient
         $context->setPayload($payload);
 
         /** @var JobBatchResource $result */
-        $result = $this->requestAndDeserialise($context, new JobBatchResource());
+        $result = $this->request($context, new JobBatchResource());
 
         return $result;
     }
@@ -92,7 +92,7 @@ class JobBatchDelegateClient extends DelegateClient
         ));
 
         /** @var JobBatchResource $result */
-        $result = $this->requestAndDeserialise($context, new JobBatchResource());
+        $result = $this->request($context, new JobBatchResource());
 
         return $result;
     }

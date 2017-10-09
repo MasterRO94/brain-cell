@@ -2,16 +2,12 @@
 
 namespace Brain\Cell\Client;
 
-use Brain\Cell\Transfer\AbstractResource;
-
+use Brain\Cell\TransferEntityInterface;
 use Psr\Http\Message\StreamInterface;
 
 abstract class DelegateClient
 {
-
-    /**
-     * @var ClientConfiguration
-     */
+    /** @var ClientConfiguration */
     protected $configuration;
 
     /**
@@ -26,24 +22,10 @@ abstract class DelegateClient
 
     /**
      * @param RequestContext $context
-     * @param AbstractResource $entity
-     * @return AbstractResource|array|bool
+     * @param TransferEntityInterface $resource
+     * @return TransferEntityInterface
      */
-    protected function request(RequestContext $context, $entity = null)
-    {
-        $response = $this->configuration->getRequestAdapter()->request($context);
-
-        return $this->configuration->hasResourceHandler()
-            ? $this->configuration->getResourceHandler()->deserialise($entity, $response)
-            : $response;
-    }
-
-    /**
-     * @param RequestContext $context
-     * @param AbstractResource $resource
-     * @return AbstractResource
-     */
-    protected function requestAndDeserialise(RequestContext $context, AbstractResource $resource)
+    protected function request(RequestContext $context, TransferEntityInterface $resource = null)
     {
         $response = $this->configuration->getRequestAdapter()->request($context);
 
