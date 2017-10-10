@@ -77,6 +77,10 @@ class ClientConfiguration
      */
     public function getResourceHandler()
     {
+        if (!$this->resourceHandler) {
+            throw new \RuntimeException("Can't retrieve a Cell resource handler, because it's not been set.");
+        }
+
         return $this->resourceHandler;
     }
 

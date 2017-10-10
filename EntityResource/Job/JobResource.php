@@ -8,6 +8,7 @@ use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Enum\JobStatusEnum;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -19,10 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class JobResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var JobStatusResource $status
@@ -169,14 +167,6 @@ class JobResource extends AbstractResource
             'updated',
             'productionFinishDate',
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Delivery;
 
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
@@ -9,10 +10,7 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class DeliveryServiceResource extends AbstractResource
 {
-    /**
-     * @var int
-     */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var DeliveryCarrierResource
@@ -47,14 +45,6 @@ class DeliveryServiceResource extends AbstractResource
         return [
             'deliveryCarrier' => DeliveryCarrierResource::class,
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

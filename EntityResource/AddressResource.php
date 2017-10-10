@@ -5,14 +5,12 @@
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 class AddressResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var \DateTime
@@ -242,14 +240,6 @@ class AddressResource extends AbstractResource
     public function setCountry($country)
     {
         $this->country = $country;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

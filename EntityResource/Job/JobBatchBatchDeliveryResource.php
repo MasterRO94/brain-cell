@@ -1,98 +1,51 @@
 <?php
 
-namespace Brain\Cell\EntityResource\Delivery;
+namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\AddressResource;
-use Brain\Cell\EntityResource\PriceResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
+use Brain\Cell\EntityResource\Delivery\ProductionStrategyResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
- * {@inheritdoc}
+ * Class JobBatchBatchDeliveryResource
+ *
+ * All fields in this resource are nullable, but you are guaranteed, that the api will never
+ * return nulls for any of these fields.
+ *
+ * These fields are nullable, because you can send this object "partially" to the api.
  */
-class DeliveryOptionResource extends AbstractResource
+class JobBatchBatchDeliveryResource extends AbstractResource
 {
-    use ResourcePublicIdTrait;
-
-    /**
-     * @var AddressResource
-     */
+    /** @var AddressResource|null */
     protected $deliveryAddress;
 
-    /**
-     * @var ProductionStrategyResource
-     */
+    /** @var ProductionStrategyResource|null */
     protected $productionStrategy;
 
-    /**
-     * @var DeliveryServiceResource
-     */
+    /** @var DeliveryServiceResource|null */
     protected $deliveryService;
 
-    /**
-     * @var \DateTime
-     */
-    protected $evaluationDate;
-
-    /**
-     * @var \DateTime
-     */
+    /** @var \DateTime|null */
     protected $assumedStartOfProductionDate;
 
-    /**
-     * @var \DateTime
-     */
+    /** @var \DateTime|null */
     protected $endOfProductionDate;
 
-    /**
-     * @var \DateTime
-     */
-    protected $deliveryDateEarliest;
-
-    /**
-     * @var \DateTime
-     */
+    /** @var \DateTime|null */
     protected $deliveryCollectionDate;
 
-    /**
-     * @var \DateTime
-     */
+    /** @var \DateTime|null */
+    protected $deliveryDateEarliest;
+
+    /** @var \DateTime|null */
     protected $deliveryDateLatest;
 
-    /**
-     * @var string
-     */
+    /** @var string|null E.g. "08:30" */
     protected $deliveryTimeFrameEarliest;
 
-    /**
-     * @var string
-     */
+    /** @var string|null E.g. "21:44" */
     protected $deliveryTimeFrameLatest;
-
-    /**
-     * @var PriceResource
-     */
-    protected $productionStrategyPrice;
-
-    /**
-     * @var PriceResource
-     */
-    protected $deliveryServicePrice;
-
-    /**
-     * @var PriceResource
-     */
-    protected $price;
-
-    /**
-     * @var \DateTime
-     */
-    protected $lifetimeFinishDate;
-
-    /**
-     * @var \DateTime
-     */
-    protected $created;
 
     /**
      * {@inheritdoc}
@@ -103,9 +56,6 @@ class DeliveryOptionResource extends AbstractResource
             'deliveryAddress' => AddressResource::class,
             'productionStrategy' => ProductionStrategyResource::class,
             'deliveryService' => DeliveryServiceResource::class,
-            'productionStrategyPrice' => PriceResource::class,
-            'deliveryServicePrice' => PriceResource::class,
-            'price' => PriceResource::class,
         ];
     }
 
@@ -115,21 +65,18 @@ class DeliveryOptionResource extends AbstractResource
     public function getDateTimeProperties()
     {
         return [
-            'created',
-            'evaluationDate',
             'assumedStartOfProductionDate',
             'endOfProductionDate',
             'deliveryCollectionDate',
-            'lifetimeFinishDate',
             'deliveryDateLatest',
             'deliveryDateEarliest',
         ];
     }
 
     /**
-     * @return AddressResource
+     * @return AddressResource|null
      */
-    public function getDeliveryAddress(): AddressResource
+    public function getDeliveryAddress()
     {
         return $this->deliveryAddress;
     }
@@ -143,7 +90,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return ProductionStrategyResource
+     * @return ProductionStrategyResource|null
      */
     public function getProductionStrategy()
     {
@@ -159,7 +106,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return DeliveryServiceResource
+     * @return DeliveryServiceResource|null
      */
     public function getDeliveryService()
     {
@@ -175,23 +122,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getEvaluationDate()
-    {
-        return $this->evaluationDate;
-    }
-
-    /**
-     * @param \DateTime $evaluationDate
-     */
-    public function setEvaluationDate(\DateTime $evaluationDate)
-    {
-        $this->evaluationDate = $evaluationDate;
-    }
-
-    /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getAssumedStartOfProductionDate()
     {
@@ -207,7 +138,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getEndOfProductionDate()
     {
@@ -223,7 +154,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDeliveryCollectionDate()
     {
@@ -239,7 +170,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDeliveryDateEarliest()
     {
@@ -255,7 +186,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getDeliveryDateLatest()
     {
@@ -271,7 +202,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDeliveryTimeFrameEarliest()
     {
@@ -287,7 +218,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDeliveryTimeFrameLatest()
     {
@@ -300,85 +231,5 @@ class DeliveryOptionResource extends AbstractResource
     public function setDeliveryTimeFrameLatest($deliveryTimeFrameLatest)
     {
         $this->deliveryTimeFrameLatest = $deliveryTimeFrameLatest;
-    }
-
-    /**
-     * @return PriceResource
-     */
-    public function getProductionStrategyPrice()
-    {
-        return $this->productionStrategyPrice;
-    }
-
-    /**
-     * @param PriceResource $productionStrategyPrice
-     */
-    public function setProductionStrategyPrice($productionStrategyPrice)
-    {
-        $this->productionStrategyPrice = $productionStrategyPrice;
-    }
-
-    /**
-     * @return PriceResource
-     */
-    public function getDeliveryServicePrice()
-    {
-        return $this->deliveryServicePrice;
-    }
-
-    /**
-     * @param PriceResource $deliveryServicePrice
-     */
-    public function setDeliveryServicePrice($deliveryServicePrice)
-    {
-        $this->deliveryServicePrice = $deliveryServicePrice;
-    }
-
-    /**
-     * @return PriceResource
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param PriceResource $price
-     */
-    public function setPrice(PriceResource $price)
-    {
-        $this->price = $price;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getLifetimeFinishDate()
-    {
-        return $this->lifetimeFinishDate;
-    }
-
-    /**
-     * @param \DateTime $lifetimeFinishDate
-     */
-    public function setLifetimeFinishDate(\DateTime $lifetimeFinishDate)
-    {
-        $this->lifetimeFinishDate = $lifetimeFinishDate;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param \DateTime $created
-     */
-    public function setCreated(\DateTime $created)
-    {
-        $this->created = $created;
     }
 }
