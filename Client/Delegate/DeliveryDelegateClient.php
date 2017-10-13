@@ -6,6 +6,7 @@ use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\CountryResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
+use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -62,6 +63,23 @@ class DeliveryDelegateClient extends DelegateClient
 
         $collection = new ResourceCollection();
         $collection->setEntityClass(CountryResource::class);
+        $resource = $this->request($context, $collection);
+
+        return $resource;
+    }
+
+    /**
+     * @param array $parameters
+     * @return DeliveryServiceResource[]
+     */
+    public function getServices($parameters = [])
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet('/delivery/services');
+        $context->getParameters()->add($parameters);
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(DeliveryServiceResource::class);
         $resource = $this->request($context, $collection);
 
         return $resource;
