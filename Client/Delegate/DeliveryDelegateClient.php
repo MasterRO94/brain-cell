@@ -69,12 +69,14 @@ class DeliveryDelegateClient extends DelegateClient
     }
 
     /**
+     * @param array $parameters
      * @return DeliveryServiceResource[]
      */
-    public function getServices()
+    public function getServices($parameters = [])
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/delivery/services');
+        $context->getParameters()->add($parameters);
 
         $collection = new ResourceCollection();
         $collection->setEntityClass(DeliveryServiceResource::class);
