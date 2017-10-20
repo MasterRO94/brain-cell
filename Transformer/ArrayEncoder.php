@@ -91,6 +91,7 @@ class ArrayEncoder extends AbstractTransformer
                 'productionSheetCount',
                 'productionHouse',
                 'productionFinishDate',
+                'dispatches',
             ])) {
                 continue;
             }

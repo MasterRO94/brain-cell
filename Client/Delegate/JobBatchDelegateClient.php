@@ -40,7 +40,8 @@ class JobBatchDelegateClient extends DelegateClient
         $context->prepareContextForPost('/jobs/batches');
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($resource));
+        $payload = $handler->serialise($resource);
+        $context->setPayload($payload);
 
         return $this->request($context, $resource);
     }
