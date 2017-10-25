@@ -15,11 +15,6 @@ class AbstractNoteResource extends AbstractResource
     /**
      * @var string
      */
-    protected $canonical;
-
-    /**
-     * @var string
-     */
     protected $description;
 
     /**
@@ -50,22 +45,6 @@ class AbstractNoteResource extends AbstractResource
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCanonical()
-    {
-        return $this->canonical;
-    }
-
-    /**
-     * @param string $canonical
-     */
-    public function setCanonical(string $canonical)
-    {
-        $this->canonical = $canonical;
     }
 
     /**
