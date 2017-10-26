@@ -103,7 +103,7 @@ class JobDelegateClient extends DelegateClient
      * @param string $status
      * @return JobResource
      */
-    public function updateStatus($resource, $status)
+    public function updateStatus(JobResource $resource, $status)
     {
         if (! in_array($status, JobStatusEnum::getAll())) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));
