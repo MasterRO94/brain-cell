@@ -3,14 +3,16 @@
 namespace Brain\Cell\EntityResource\Product;
 
 use Brain\Cell\EntityResource\Change\ChangeSetResource;
+use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
  */
-class ProductResource extends AbstractResource
+class ProductResource extends AbstractResource implements ResourcePublicIdInterface
 {
-    protected $id;
+    use ResourcePublicIdTrait;
 
     protected $name;
 
@@ -33,22 +35,6 @@ class ProductResource extends AbstractResource
             'changeSet' => ChangeSetResource::class,
             'productGroup' => ProductGroupResource::class,
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
