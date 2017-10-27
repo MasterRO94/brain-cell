@@ -33,6 +33,11 @@ class AbstractNoteResource extends AbstractResource
     protected $origin;
 
     /**
+     * @var string
+     */
+    protected $canonical;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -85,6 +90,23 @@ class AbstractNoteResource extends AbstractResource
     public function getOrigin()
     {
         return $this->origin;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getCanonical()
+    {
+        return $this->canonical;
+    }
+
+    /**
+     * @param string $canonical
+     */
+    public function setCanonical(string $canonical)
+    {
+        $this->canonical = $canonical;
     }
 
 }
