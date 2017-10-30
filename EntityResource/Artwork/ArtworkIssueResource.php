@@ -6,5 +6,4 @@ use Brain\Cell\EntityResource\AbstractNoteResource;
 
 class ArtworkIssueResource extends AbstractNoteResource
 {
-
 }

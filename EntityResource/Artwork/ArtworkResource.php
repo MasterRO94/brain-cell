@@ -4,6 +4,7 @@ namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\Transfer\AbstractResource;
 
+use Brain\Cell\Transfer\ResourceCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -35,12 +36,27 @@ class ArtworkResource extends AbstractResource
     protected $mimeType;
 
     /**
+     * @var ResourceCollection|ArtworkIssueResource[]
+     */
+    protected $issues;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
     {
         return [
             'status' => ArtworkStatusResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections()
+    {
+        return [
+            'issues' => ArtworkIssueResource::class,
         ];
     }
 
@@ -106,4 +122,11 @@ class ArtworkResource extends AbstractResource
         $this->mimeType = $mimeType;
     }
 
+    /**
+     * @return ArtworkIssueResource[]|ResourceCollection
+     */
+    public function getIssues()
+    {
+        return $this->issues;
+    }
 }
