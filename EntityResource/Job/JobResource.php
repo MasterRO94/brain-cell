@@ -54,6 +54,10 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $quantity;
 
     /**
+     * @deprecated
+     * use JobBatchBatchDeliveryResource::$endOfProductionDate
+     * instead
+     *
      * @var \DateTime
      */
     protected $productionFinishDate;
@@ -302,6 +306,10 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
+     * @deprecated
+     * use JobBatchBatchDeliveryResource::getEndOfProductionDate
+     * instead
+     *
      * @return \DateTime
      */
     public function getProductionFinishDate()
@@ -310,6 +318,9 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
+     * @deprecated
+     * use JobBatchBatchDeliveryResource::setEndOfProductionDate
+     *
      * @param \DateTime $productionFinishDate
      * @return JobResource
      */
