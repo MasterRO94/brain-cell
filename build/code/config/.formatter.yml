@@ -1,0 +1,14 @@
+strict: true
+use-sort:
+  group:
+    - [Brain]
+    - Symfony
+    - Doctrine
+    - _main
+  group-type: each
+  group-skip-empty: false
+  sort-type: alph
+  sort-direction: asc
+
+header: |
+
