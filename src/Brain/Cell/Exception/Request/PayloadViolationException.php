@@ -16,13 +16,13 @@ class PayloadViolationException extends BadRequestException
      * @param string $message
      * @param array|null $requestPayload
      * @param array|null $responsePayload
-     * @param \Throwable $previous
+     * @param \Throwable|null $previous
      */
     public function __construct(
         string $message,
         ?array $requestPayload,
         ?array $responsePayload,
-        \Throwable $previous
+        ?\Throwable $previous = null
     ) {
         parent::__construct(
             $message,

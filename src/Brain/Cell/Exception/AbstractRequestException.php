@@ -18,14 +18,14 @@ abstract class AbstractRequestException extends \RuntimeException
      * @param int $statusCode
      * @param array|null $requestPayload
      * @param array|null $responsePayload
-     * @param \Throwable $previous
+     * @param \Throwable|null $previous
      */
     public function __construct(
         string $message,
         int $statusCode,
         ?array $requestPayload,
         ?array $responsePayload,
-        \Throwable $previous
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $statusCode, $previous);
 
