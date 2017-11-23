@@ -7,7 +7,6 @@ namespace Brain\Cell\Transfer\EntityMeta;
  */
 interface LinkRelationInterface
 {
-
     /**
      * Used to provide the absolute link to itself.
      */
@@ -17,5 +16,4 @@ interface LinkRelationInterface
      * Used to provide the absolute link to create an instance of itself.
      */
     const REL_CREATE = 'create';
-
 }

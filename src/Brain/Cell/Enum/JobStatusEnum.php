@@ -1,14 +1,10 @@
 <?php
 
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
-
 namespace Brain\Cell\Enum;
 
 /**
  * Copy-paste of Brain/Component/Job/Enum/JobStatusEnum.php in Brain
- * Please keep these synchronised
+ * Please keep these synchronised.
  *
  * @deprecated use JobStatusResource constants instead.
  */
@@ -24,9 +20,7 @@ class JobStatusEnum
     const STATUS_PRODUCTION_DISPATCHED = 'production_dispatched';
     const STATUS_CANCELLED = 'cancelled';
 
-    /**
-     * {@inheritdoc}
-     */
+
     public static function getAll(): array
     {
         return [

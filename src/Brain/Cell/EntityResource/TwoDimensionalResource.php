@@ -27,6 +27,7 @@ class TwoDimensionalResource extends AbstractResource implements TwoDimensionalI
 
     /**
      * @param int $width
+     *
      * @return TwoDimensionalResource
      */
     public function setWidth($width)
@@ -46,6 +47,7 @@ class TwoDimensionalResource extends AbstractResource implements TwoDimensionalI
 
     /**
      * @param int $height
+     *
      * @return TwoDimensionalResource
      */
     public function setHeight($height)

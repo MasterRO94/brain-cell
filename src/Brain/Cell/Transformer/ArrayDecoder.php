@@ -23,6 +23,7 @@ class ArrayDecoder extends AbstractTransformer
      *
      * @param TransferEntityInterface $entity
      * @param array $data
+     *
      * @return TransferEntityInterface
      */
     public function decode(TransferEntityInterface $entity, array $data)
@@ -46,6 +47,7 @@ class ArrayDecoder extends AbstractTransformer
      *
      * @param AbstractResource $resource
      * @param array $data
+     *
      * @return AbstractResource
      */
     protected function decodeResource(AbstractResource $resource, array $data)
@@ -68,12 +70,11 @@ class ArrayDecoder extends AbstractTransformer
 
             //  All properties prefixed with "brain" are to be ignored.
             //  There is a reason why we cannot make use of special characters as I intended to do, cant remember.
-            if (substr($property->getName(), 0, 5) === 'brain') {
+            if ('brain' === substr($property->getName(), 0, 5)) {
                 continue;
             }
 
             $properties[$property->getName()] = $property;
-
         }
 
         foreach ($data as $propertyName => $value) {
@@ -90,7 +91,7 @@ class ArrayDecoder extends AbstractTransformer
 
             //  Decode resources.
             if (isset($resources[$property->getName()])) {
-                $child = new $resources[$property->getName()];
+                $child = new $resources[$property->getName()]();
                 if (is_array($value)) {
                     // we have a full-fledged object...
                     $value = $this->decodeResource($child, $value);
@@ -103,16 +104,15 @@ class ArrayDecoder extends AbstractTransformer
                     }
                 }
 
-            //  Decode collections.
+                //  Decode collections.
             } elseif (isset($collections[$property->getName()])) {
-                $collection = new ResourceCollection;
+                $collection = new ResourceCollection();
                 $collection->setEntityClass($collections[$property->getName()]);
                 $value = $this->decodeCollection($collection, $value);
 
-            // Unstructured fields - a different decoder would convert to array
+                // Unstructured fields - a different decoder would convert to array
             } elseif (in_array($property->getName(), $unstructureds)) {
                 // nothing to be done here
-
             } elseif (\in_array($property->getName(), $dateTimeProperties)) {
                 $value = $value ? new \DateTime($value) : $value;
             }
@@ -123,7 +123,6 @@ class ArrayDecoder extends AbstractTransformer
 
             //  Remove each property so we can see whats left.
             unset($properties[$camelCasePropertyName]);
-
         }
 
         // Store the raw data against the resource for use by the encoder
@@ -137,13 +136,14 @@ class ArrayDecoder extends AbstractTransformer
      *
      * @param ResourceCollection $collection
      * @param array $data
+     *
      * @return ResourceCollection
      */
     protected function decodeCollection(ResourceCollection $collection, array $data)
     {
         foreach ($data as $resource) {
             $entity = $collection->getEntityClassOrThrow();
-            $entity = new $entity;
+            $entity = new $entity();
 
             $entity = $this->decodeResource($entity, $resource);
             $collection->add($entity);

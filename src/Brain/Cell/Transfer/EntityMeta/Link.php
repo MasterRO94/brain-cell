@@ -12,7 +12,6 @@ use Brain;
 class Link implements
     Brain\Cell\Transfer\EntityMeta\LinkRelationInterface
 {
-
     /**
      * The rel.
      *
@@ -60,5 +59,4 @@ class Link implements
     {
         return $this->href;
     }
-
 }

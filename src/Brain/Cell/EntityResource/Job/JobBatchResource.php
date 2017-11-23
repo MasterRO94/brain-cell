@@ -1,7 +1,4 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\EntityResource\Job;
 
@@ -10,11 +7,11 @@ use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
+
 use Doctrine\Common\Collections\ArrayCollection;
 
 class JobBatchResource extends AbstractResource
 {
-
     /**
      * @var string
      */

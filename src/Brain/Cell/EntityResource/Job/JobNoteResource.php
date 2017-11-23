@@ -3,8 +3,6 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\AbstractNoteResource;
-use Brain\Cell\EntityResource\ClientResource;
-use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}

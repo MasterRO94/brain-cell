@@ -20,7 +20,6 @@ use Brain\Cell\Transformer\ArrayEncoder;
  */
 class ResourceHandlerService
 {
-
     /**
      * The {@link EntityResourceFactory}.
      *
@@ -61,6 +60,7 @@ class ResourceHandlerService
      *
      * @param TransferEntityInterface $entity
      * @param ArrayEncoderSerialisationOptions|null $options
+     *
      * @return mixed
      */
     public function serialise(
@@ -75,6 +75,7 @@ class ResourceHandlerService
      *
      * @param TransferEntityInterface $entity
      * @param mixed $data
+     *
      * @return TransferEntityInterface
      */
     public function deserialise(TransferEntityInterface $entity, $data)
@@ -87,11 +88,11 @@ class ResourceHandlerService
      *
      * @param string $class
      * @param null|int $id
+     *
      * @return TransferEntityInterface
      */
     public function create($class, $id = null)
     {
         return $this->factory->create($class, $id);
     }
-
 }

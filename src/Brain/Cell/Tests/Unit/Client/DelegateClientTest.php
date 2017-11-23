@@ -8,13 +8,11 @@ use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Client\RequestContext;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
 use Brain\Cell\EntityResource\StockFinishingsResource;
 use Brain\Cell\Service\ResourceHandlerService;
 use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Transfer\EntityResourceFactory;
-use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\Transformer\ArrayDecoder;
 use Brain\Cell\Transformer\ArrayEncoder;
 
@@ -26,7 +24,6 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  */
 class DelegateClientTest extends AbstractBrainCellTestCase
 {
-
     /** @var MockObject|RequestAdapterInterface */
     protected $adapter;
 
@@ -48,7 +45,6 @@ class DelegateClientTest extends AbstractBrainCellTestCase
      */
     public function request_whenRequestingWithResourceHandler_returnsHydratedResources()
     {
-
         $this->adapter->expects($this->once())
             ->method('request')
             ->willReturn(
@@ -58,11 +54,11 @@ class DelegateClientTest extends AbstractBrainCellTestCase
                             'id' => 'some-id',
                             'alias' => 'some-alias',
                             'name' => 'some-name',
-                            'options' => []
-                        ]
+                            'options' => [],
+                        ],
                     ],
                     'materials' => [],
-                    'sizes' => []
+                    'sizes' => [],
                 ]
             );
 
@@ -73,7 +69,6 @@ class DelegateClientTest extends AbstractBrainCellTestCase
         $resource = $delegate->getFinishings(new JobResource());
 
         $this->assertInstanceOf(StockFinishingsResource::class, $resource);
-
     }
 
     /**
@@ -99,14 +94,12 @@ class DelegateClientTest extends AbstractBrainCellTestCase
                     }
 
                     //  .. and values as set.
-                    return ($payload['quantity'] === 42);
-
+                    return 42 === $payload['quantity'];
                 })
             )
-            ->willReturn(['status' => true])
-        ;
+            ->willReturn(['status' => true]);
 
-        $job = new JobResource;
+        $job = new JobResource();
         $job->setQuantity(42);
 
         $resourceHandler = $this->getResourceHandler();
@@ -121,10 +114,10 @@ class DelegateClientTest extends AbstractBrainCellTestCase
      */
     protected function getResourceHandler()
     {
-        $metaManager = new TransferEntityMetaManagerService;
+        $metaManager = new TransferEntityMetaManagerService();
 
         return new ResourceHandlerService(
-            new EntityResourceFactory,
+            new EntityResourceFactory(),
             new ArrayEncoder($metaManager),
             new ArrayDecoder($metaManager)
         );

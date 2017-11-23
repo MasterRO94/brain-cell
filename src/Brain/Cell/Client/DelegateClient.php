@@ -3,6 +3,7 @@
 namespace Brain\Cell\Client;
 
 use Brain\Cell\TransferEntityInterface;
+
 use Psr\Http\Message\StreamInterface;
 
 abstract class DelegateClient
@@ -11,8 +12,6 @@ abstract class DelegateClient
     protected $configuration;
 
     /**
-     * {@inheritdoc}
-     *
      * @param ClientConfiguration $configuration
      */
     public function __construct(ClientConfiguration $configuration)
@@ -23,6 +22,7 @@ abstract class DelegateClient
     /**
      * @param RequestContext $context
      * @param TransferEntityInterface $resource
+     *
      * @return TransferEntityInterface
      */
     protected function request(RequestContext $context, TransferEntityInterface $resource = null)
@@ -34,6 +34,7 @@ abstract class DelegateClient
 
     /**
      * @param RequestContext $context
+     *
      * @return StreamInterface
      */
     protected function stream(RequestContext $context)

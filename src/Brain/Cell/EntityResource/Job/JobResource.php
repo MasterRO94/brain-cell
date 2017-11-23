@@ -146,7 +146,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             'price' => PriceResource::class,
             'status' => JobStatusResource::class,
             'artwork' => ArtworkResource::class,
-            'clonedFrom' => JobResource::class,
+            'clonedFrom' => self::class,
         ];
     }
 
@@ -190,6 +190,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setStatus(JobStatusResource $status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -209,6 +210,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setProductionHouse(ProductionHouseResource $productionHouse)
     {
         $this->productionHouse = $productionHouse;
+
         return $this;
     }
 
@@ -222,11 +224,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
 
     /**
      * @param ProductResource $product
+     *
      * @return $this
      */
     public function setProduct(ProductResource $product)
     {
         $this->product = $product;
+
         return $this;
     }
 
@@ -246,6 +250,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setShop(ShopResource $shop)
     {
         $this->shop = $shop;
+
         return $this;
     }
 
@@ -265,6 +270,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setBatch($batch)
     {
         $this->batch = $batch;
+
         return $this;
     }
 
@@ -284,6 +290,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
         return $this;
     }
 
@@ -297,11 +304,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
 
     /**
      * @param int $quantity
+     *
      * @return JobResource
      */
     public function setQuantity(int $quantity)
     {
         $this->quantity = $quantity;
+
         return $this;
     }
 
@@ -322,11 +331,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      * use JobBatchBatchDeliveryResource::setEndOfProductionDate
      *
      * @param \DateTime $productionFinishDate
+     *
      * @return JobResource
      */
     public function setProductionFinishDate(\DateTime $productionFinishDate)
     {
         $this->productionFinishDate = $productionFinishDate;
+
         return $this;
     }
 
@@ -346,6 +357,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setComponents(ResourceCollection $components)
     {
         $this->components = $components;
+
         return $this;
     }
 
@@ -391,11 +403,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
 
     /**
      * @param ThreeDimensionalResource $dimensions
+     *
      * @return JobResource
      */
     public function setDimensions($dimensions)
     {
         $this->dimensions = $dimensions;
+
         return $this;
     }
 
@@ -409,11 +423,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
 
     /**
      * @param \DateTime $created
+     *
      * @return JobResource
      */
     public function setCreated(\DateTime $created)
     {
         $this->created = $created;
+
         return $this;
     }
 
@@ -427,11 +443,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
 
     /**
      * @param \DateTime $updated
+     *
      * @return JobResource
      */
     public function setUpdated(\DateTime $updated)
     {
         $this->updated = $updated;
+
         return $this;
     }
 
@@ -476,6 +494,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         foreach ($this->components as $component) {
             $pages += $component->getRangeEnd() - $component->getRangeStart();
         }
+
         return $pages;
     }
 
@@ -488,11 +507,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         foreach ($this->components as $component) {
             $sheets += $component->getProductionSheetCount();
         }
+
         return $sheets;
     }
 
     /**
      * @param string $optionCategoryAlias
+     *
      * @return bool
      */
     protected function has($optionCategoryAlias)
@@ -501,12 +522,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             foreach ($component->getOptions() as $option) {
                 if (
                     $option->getCategory()->getAlias() === $optionCategoryAlias
-                    && ! $option->getItem()->isDefault()
+                    && !$option->getItem()->isDefault()
                 ) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
@@ -558,7 +580,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             return true;
         }
 
-        if ($this->components->count() == 1) {
+        if (1 == $this->components->count()) {
             /** @var JobComponentResource $firstComponent */
             $firstComponent = $this->components->first();
             if ($firstComponent->getRangeEnd() > 1) {
@@ -616,8 +638,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function isInImposition()
     {
-        return $this->status === JobStatusEnum::STATUS_IMPOSITION_QUEUED
-            || $this->status === JobStatusEnum::STATUS_IMPOSITION_MANUAL
-        ;
+        return JobStatusEnum::STATUS_IMPOSITION_QUEUED === $this->status
+            || JobStatusEnum::STATUS_IMPOSITION_MANUAL === $this->status;
     }
 }

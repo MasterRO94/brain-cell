@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Transfer\AbstractResource;
@@ -92,7 +91,6 @@ class AbstractNoteResource extends AbstractResource
         return $this->origin;
     }
 
-
     /**
      * @return string
      */
@@ -108,5 +106,4 @@ class AbstractNoteResource extends AbstractResource
     {
         $this->canonical = $canonical;
     }
-
 }

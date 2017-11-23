@@ -34,7 +34,6 @@ class ClientResource extends AbstractResource
      */
     protected $email;
 
-
     /**
      * {@inheritdoc}
      */
@@ -67,7 +66,6 @@ class ClientResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
-
     }
 
     /**
@@ -92,6 +90,5 @@ class ClientResource extends AbstractResource
     public function getEmail()
     {
         return $this->email;
-
     }
 }

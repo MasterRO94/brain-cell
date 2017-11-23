@@ -9,7 +9,6 @@ use Brain\Cell\Transfer\EntityMeta;
  */
 interface MetaContainingInterface
 {
-
     /**
      * Return the internal stored meta.
      *
@@ -18,5 +17,4 @@ interface MetaContainingInterface
      * @internal
      */
     public function getResourceMeta();
-
 }

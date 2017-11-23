@@ -9,7 +9,6 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class MaterialVariantResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -51,6 +50,7 @@ class MaterialVariantResource extends AbstractResource
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
@@ -70,7 +70,7 @@ class MaterialVariantResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
-
 }

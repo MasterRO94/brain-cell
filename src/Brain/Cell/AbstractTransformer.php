@@ -9,7 +9,6 @@ use Brain\Cell\Service\TransferEntityMetaManagerService;
  */
 abstract class AbstractTransformer
 {
-
     /**
      * The {@link TransferEntityMetaManagerService}.
      *
@@ -26,5 +25,4 @@ abstract class AbstractTransformer
     {
         $this->transferEntityMetaManager = $manager;
     }
-
 }

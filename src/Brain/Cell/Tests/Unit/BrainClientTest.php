@@ -17,7 +17,6 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  */
 class BrainClientTest extends AbstractBrainCellTestCase
 {
-
     /** @var MockObject|RequestAdapterInterface */
     protected $adapter;
 
@@ -43,7 +42,6 @@ class BrainClientTest extends AbstractBrainCellTestCase
 
         $client = new BrainClient($this->configuration);
         $this->assertInstanceOf(StockDelegateClient::class, $client->stock());
-
     }
 
     /**
@@ -56,7 +54,5 @@ class BrainClientTest extends AbstractBrainCellTestCase
 
         $client = new BrainClient($this->configuration);
         $this->assertInstanceOf(JobDelegateClient::class, $client->job());
-
     }
-
 }

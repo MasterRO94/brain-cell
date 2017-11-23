@@ -13,7 +13,6 @@ use Pagerfanta\Pagerfanta;
  */
 class EntityMeta
 {
-
     /**
      * The meta links.
      *
@@ -22,7 +21,7 @@ class EntityMeta
     protected $links;
 
     /**
-     * The meta paginator object
+     * The meta paginator object.
      *
      * @var Pagerfanta
      */
@@ -33,7 +32,7 @@ class EntityMeta
      */
     public function __construct()
     {
-        $this->links = new ArrayCollection;
+        $this->links = new ArrayCollection();
     }
 
     /**
@@ -47,7 +46,7 @@ class EntityMeta
     }
 
     /**
-     * Return paginator object
+     * Return paginator object.
      *
      * @return Pagerfanta
      */
@@ -57,9 +56,10 @@ class EntityMeta
     }
 
     /**
-     * Set paginator object
+     * Set paginator object.
      *
      * @param Pagerfanta $pagerfanta
+     *
      * @return $this
      */
     public function setPaginator(Pagerfanta $pagerfanta)

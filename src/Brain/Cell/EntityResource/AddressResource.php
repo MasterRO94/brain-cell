@@ -1,7 +1,4 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\EntityResource;
 
@@ -279,7 +276,7 @@ class AddressResource extends AbstractResource
             $this->city,
             $this->countyState,
             $this->postcode,
-            $this->country->getName()
+            $this->country->getName(),
         ]));
     }
 
@@ -296,7 +293,7 @@ class AddressResource extends AbstractResource
             $this->city,
             $this->countyState,
             $this->postcode,
-            $this->country->getName()
+            $this->country->getName(),
         ]);
     }
 }

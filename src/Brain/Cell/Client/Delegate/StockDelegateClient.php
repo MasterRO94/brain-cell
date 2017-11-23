@@ -45,7 +45,7 @@ class StockDelegateClient extends DelegateClient
         $context->setPayload($payload);
 
         /** @var StockFinishingsResource $resource */
-        $resource = $this->request($context, new StockFinishingsResource);
+        $resource = $this->request($context, new StockFinishingsResource());
 
         return $resource;
     }
@@ -67,6 +67,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param FinishingCategoryResource $resource
+     *
      * @return array|bool|AbstractResource|FinishingCategoryResource
      */
     public function createFinishingCategory(FinishingCategoryResource $resource)
@@ -82,6 +83,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param array $parameters
+     *
      * @return ResourceCollection|FinishingItemResource[]
      */
     public function getFinishingOptions(array $parameters = [])
@@ -99,6 +101,7 @@ class StockDelegateClient extends DelegateClient
     /**
      * @param FinishingCategoryResource $resource
      * @param array $parameters
+     *
      * @return array|bool|AbstractResource|FinishingItemResource[]
      */
     public function getFinishingCategoryOptions(FinishingCategoryResource $resource, array $parameters = [])
@@ -118,6 +121,7 @@ class StockDelegateClient extends DelegateClient
     /**
      * @param FinishingCategoryResource $categoryResource
      * @param FinishingItemResource $resource
+     *
      * @return array|bool|FinishingItemResource
      */
     public function createFinishingOption(FinishingCategoryResource $categoryResource, FinishingItemResource $resource)
@@ -159,11 +163,11 @@ class StockDelegateClient extends DelegateClient
         $collection->setEntityClass(MaterialResource::class);
 
         return $this->request($context, $collection);
-
     }
 
     /**
      * @param array $parameters
+     *
      * @return ResourceCollection|MaterialBaseResource[]
      */
     public function getMaterialBases(array $parameters = [])
@@ -180,6 +184,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param array $parameters
+     *
      * @return ResourceCollection|MaterialVariantResource[]
      */
     public function getMaterialVariants(array $parameters = [])
@@ -196,6 +201,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param array $parameters
+     *
      * @return ResourceCollection|MaterialWeightResource[]
      */
     public function getMaterialWeights(array $parameters = [])
@@ -212,6 +218,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param MaterialBaseResource $resource
+     *
      * @return AbstractResource|array|bool|MaterialBaseResource
      */
     public function createMaterialBase(MaterialBaseResource $resource)
@@ -227,6 +234,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param MaterialWeightResource $resource
+     *
      * @return AbstractResource|array|bool|MaterialWeightResource
      */
     public function createMaterialWeight(MaterialWeightResource $resource)
@@ -242,6 +250,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param MaterialVariantResource $resource
+     *
      * @return AbstractResource|array|bool|MaterialVariantResource
      */
     public function createMaterialVariant(MaterialVariantResource $resource)
@@ -257,6 +266,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param MaterialResource $resource
+     *
      * @return array|bool|AbstractResource|MaterialResource
      */
     public function createMaterial(MaterialResource $resource)
@@ -272,6 +282,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param array $parameters
+     *
      * @return ResourceCollection|SizeResource[]
      */
     public function getSizes(array $parameters = [])
@@ -288,6 +299,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param SizeResource $resource
+     *
      * @return array|bool|AbstractResource|SizeResource
      */
     public function createSize(SizeResource $resource)
@@ -303,6 +315,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param FinishingCombinationResource $resource
+     *
      * @return AbstractResource|FinishingCategoryResource
      */
     public function createFinishingCombination(FinishingCombinationResource $resource)

@@ -9,7 +9,6 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class UserResource extends AbstractResource
 {
-
     /**
      * The unique id.
      *
@@ -48,12 +47,13 @@ class UserResource extends AbstractResource
      * Set the email address.
      *
      * @param string $email
+     *
      * @return $this
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
-
 }

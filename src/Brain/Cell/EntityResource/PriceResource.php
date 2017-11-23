@@ -1,7 +1,4 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\EntityResource;
 
@@ -92,5 +89,4 @@ class PriceResource extends AbstractResource
     {
         $this->currency = $currency;
     }
-
 }

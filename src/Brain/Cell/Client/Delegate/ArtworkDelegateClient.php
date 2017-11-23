@@ -1,7 +1,4 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\Client\Delegate;
 
@@ -20,6 +17,7 @@ class ArtworkDelegateClient extends DelegateClient
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/artworks/%s/download', $id));
+
         return $this->stream($context);
     }
 }

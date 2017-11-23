@@ -1,14 +1,9 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
-
-use Symfony\Component\Validator\Constraints as Assert;
 
 class DispatchParcelResource extends AbstractResource
 {
@@ -38,7 +33,7 @@ class DispatchParcelResource extends AbstractResource
     {
         return [
             'dispatch' => DispatchResource::class,
-            'dimensions' => ThreeDimensionalResource::class
+            'dimensions' => ThreeDimensionalResource::class,
         ];
     }
 

@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class FinishingCategoryResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -24,7 +23,7 @@ class FinishingCategoryResource extends AbstractResource
      * @Assert\NotBlank()
      */
     protected $alias;
-    
+
     /**
      * @var string
      */
@@ -51,7 +50,7 @@ class FinishingCategoryResource extends AbstractResource
     public function getAssociatedCollections()
     {
         return [
-            'options' => FinishingItemResource::CLASS
+            'options' => FinishingItemResource::class,
         ];
     }
 
@@ -79,6 +78,7 @@ class FinishingCategoryResource extends AbstractResource
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
@@ -98,6 +98,7 @@ class FinishingCategoryResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -117,6 +118,7 @@ class FinishingCategoryResource extends AbstractResource
     public function setOptions($options)
     {
         $this->options = $options;
+
         return $this;
     }
 

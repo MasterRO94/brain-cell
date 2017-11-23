@@ -7,7 +7,6 @@ use Brain\Cell\Transfer\AbstractResource;
 
 class SimpleResourceAssociationMock extends AbstractResource
 {
-
     /** @var int */
     protected $id;
 
@@ -16,12 +15,14 @@ class SimpleResourceAssociationMock extends AbstractResource
 
     /**
      * @param int $id
+     *
      * @return static
      */
     public static function create($id)
     {
-        $instance = new static;
+        $instance = new static();
         $instance->id = $id;
+
         return $instance;
     }
 
@@ -31,7 +32,7 @@ class SimpleResourceAssociationMock extends AbstractResource
     public function getAssociatedResources()
     {
         return [
-            'associatedResource' => SimpleResourceMock::CLASS
+            'associatedResource' => SimpleResourceMock::class,
         ];
     }
 
@@ -53,12 +54,13 @@ class SimpleResourceAssociationMock extends AbstractResource
 
     /**
      * @param SimpleResourceMock $associatedResource
+     *
      * @return $this
      */
     public function setAssociatedResource(SimpleResourceMock $associatedResource)
     {
         $this->associatedResource = $associatedResource;
+
         return $this;
     }
-
 }

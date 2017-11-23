@@ -3,8 +3,8 @@
 namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\Transfer\AbstractResource;
-
 use Brain\Cell\Transfer\ResourceCollection;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -84,6 +84,7 @@ class ArtworkResource extends AbstractResource
     public function setStatus(ArtworkStatusResource $status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -103,6 +104,7 @@ class ArtworkResource extends AbstractResource
     public function setPath(string $path)
     {
         $this->path = $path;
+
         return $this;
     }
 

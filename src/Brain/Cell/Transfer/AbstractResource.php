@@ -72,7 +72,7 @@ abstract class AbstractResource implements
     }
 
     /**
-     * Return all properties that should be interpreted as \DateTime
+     * Return all properties that should be interpreted as \DateTime.
      *
      * @return string[]
      */
@@ -85,7 +85,7 @@ abstract class AbstractResource implements
     protected $data;
 
     /**
-     * Store serialised data against the resource
+     * Store serialised data against the resource.
      *
      * Used by encoder and decoder modules to represent serialised state -
      * this is so the encoder can check what's changed since decode
@@ -98,7 +98,7 @@ abstract class AbstractResource implements
     }
 
     /**
-     * Retrieve serialised data stored against the resource
+     * Retrieve serialised data stored against the resource.
      *
      * @return mixed
      */

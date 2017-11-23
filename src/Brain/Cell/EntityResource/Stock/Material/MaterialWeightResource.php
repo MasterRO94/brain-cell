@@ -9,7 +9,6 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class MaterialWeightResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -61,6 +60,7 @@ class MaterialWeightResource extends AbstractResource
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
@@ -80,6 +80,7 @@ class MaterialWeightResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -99,6 +100,7 @@ class MaterialWeightResource extends AbstractResource
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
         return $this;
     }
 
@@ -118,7 +120,7 @@ class MaterialWeightResource extends AbstractResource
     public function setWeightUnit($weightUnit)
     {
         $this->weightUnit = $weightUnit;
+
         return $this;
     }
-
 }

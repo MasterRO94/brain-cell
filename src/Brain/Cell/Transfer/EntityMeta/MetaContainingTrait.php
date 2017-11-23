@@ -6,7 +6,6 @@ use Brain\Cell\Transfer\EntityMeta;
 
 trait MetaContainingTrait
 {
-
     /**
      * @var EntityMeta
      */
@@ -20,7 +19,6 @@ trait MetaContainingTrait
     public function getResourceMeta()
     {
         return $this->brainMetaResource
-            ?: $this->brainMetaResource = new EntityMeta;
+            ?: $this->brainMetaResource = new EntityMeta();
     }
-
 }

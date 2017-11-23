@@ -14,6 +14,7 @@ class ProductDelegateClient extends DelegateClient
 {
     /**
      * @param array $parameters
+     *
      * @return ProductResource[]|ResourceCollection
      */
     public function getProducts(array $parameters = [])
@@ -22,7 +23,7 @@ class ProductDelegateClient extends DelegateClient
         $context->prepareContextForGet('/products');
         $context->getParameters()->add($parameters);
 
-        $collection = new ResourceCollection;
+        $collection = new ResourceCollection();
         $collection->setEntityClass(ProductResource::class);
 
         return $this->request($context, $collection);
@@ -30,6 +31,7 @@ class ProductDelegateClient extends DelegateClient
 
     /**
      * @param string $id
+     *
      * @return AbstractResource|ProductResource
      */
     public function getProduct($id)
@@ -42,6 +44,7 @@ class ProductDelegateClient extends DelegateClient
 
     /**
      * @param ProductResource $resource
+     *
      * @return AbstractResource|ProductResource
      */
     public function createProduct(ProductResource $resource)

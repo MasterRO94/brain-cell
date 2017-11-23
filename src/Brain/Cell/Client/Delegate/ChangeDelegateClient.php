@@ -11,6 +11,7 @@ class ChangeDelegateClient extends DelegateClient
 {
     /**
      * @param array $parameters
+     *
      * @return ResourceCollection|ChangeSetResource[]
      */
     public function getChangeSets(array $parameters = [])
@@ -27,6 +28,7 @@ class ChangeDelegateClient extends DelegateClient
 
     /**
      * @param $version
+     *
      * @return AbstractResource|ChangeSetResource
      */
     public function getChangeSet($version)
@@ -39,6 +41,7 @@ class ChangeDelegateClient extends DelegateClient
 
     /**
      * @param ChangeSetResource $resource
+     *
      * @return AbstractResource|ChangeSetResource
      */
     public function createChangeSet(ChangeSetResource $resource)

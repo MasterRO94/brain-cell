@@ -9,7 +9,6 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class QueueTaskResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -44,7 +43,7 @@ class QueueTaskResource extends AbstractResource
     public function setStatus($status)
     {
         $this->status = $status;
+
         return $this;
     }
-
 }

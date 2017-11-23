@@ -8,12 +8,14 @@ interface RequestAdapterInterface
 {
     /**
      * @param RequestContext $context
+     *
      * @return array
      */
     public function request(RequestContext $context);
 
     /**
      * @param RequestContext $context
+     *
      * @return StreamInterface
      */
     public function stream(RequestContext $context);

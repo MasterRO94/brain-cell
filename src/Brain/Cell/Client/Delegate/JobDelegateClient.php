@@ -12,11 +12,10 @@ use Brain\Cell\Transfer\ResourceCollection;
 
 class JobDelegateClient extends DelegateClient
 {
-
     /**
      * Filters available:
      * * id = string|string[]
-     * * batch = string
+     * * batch = string.
      *
      * @param array $filters
      * @param array $parameters
@@ -30,7 +29,7 @@ class JobDelegateClient extends DelegateClient
         $context->getFilters()->add($filters);
         $context->getParameters()->add($parameters);
 
-        $collection = new ResourceCollection;
+        $collection = new ResourceCollection();
         $collection->setEntityClass(JobResource::class);
 
         return $this->request($context, $collection);
@@ -38,7 +37,7 @@ class JobDelegateClient extends DelegateClient
 
     /**
      * Filters available:
-     * * id = string|string[]
+     * * id = string|string[].
      *
      * @param array $filters
      * @param array $parameters
@@ -52,7 +51,7 @@ class JobDelegateClient extends DelegateClient
         $context->getFilters()->add($filters);
         $context->getParameters()->add($parameters);
 
-        $collection = new ResourceCollection;
+        $collection = new ResourceCollection();
         $collection->setEntityClass(JobResource::class);
 
         return $this->request($context, $collection);
@@ -68,7 +67,7 @@ class JobDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/jobs/%s', $id));
 
-        return $this->request($context, new JobResource);
+        return $this->request($context, new JobResource());
     }
 
     /**
@@ -89,6 +88,7 @@ class JobDelegateClient extends DelegateClient
 
     /**
      * @param string $jobId
+     *
      * @return JobResource
      */
     public function cloneJob($jobId)
@@ -96,17 +96,18 @@ class JobDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf('/jobs/%s/clone', $jobId));
 
-        return $this->request($context, new JobResource);
+        return $this->request($context, new JobResource());
     }
 
     /**
      * @param JobResource $resource
      * @param string $status
+     *
      * @return JobResource
      */
     public function updateStatus(JobResource $resource, $status)
     {
-        if (! in_array($status, JobStatusEnum::getAll())) {
+        if (!in_array($status, JobStatusEnum::getAll())) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));
         }
 
@@ -123,6 +124,7 @@ class JobDelegateClient extends DelegateClient
     /**
      * @param JobResource $resource
      * @param ArtworkResource $artwork
+     *
      * @return JobResource
      */
     public function updateArtwork(JobResource $resource, ArtworkResource $artwork)
@@ -142,6 +144,7 @@ class JobDelegateClient extends DelegateClient
     /**
      * @param string $jobId
      * @param JobNoteResource $jobNoteResource
+     *
      * @return JobResource
      */
     public function submitJobNote(
@@ -157,6 +160,6 @@ class JobDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobNoteResource));
 
-        return $this->request($context, new JobResource);
+        return $this->request($context, new JobResource());
     }
 }

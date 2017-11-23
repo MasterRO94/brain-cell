@@ -1,13 +1,10 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\Enum;
 
 /**
  * Copy-paste of Brain/Component/Job/Enum/JobBatchStatusEnum.php in Brain
- * Please keep these synchronised
+ * Please keep these synchronised.
  *
  * @deprecated use JobBatchStatusResource constants instead.
  */
@@ -16,9 +13,7 @@ class JobBatchStatusEnum
     const STATUS_INCOMPLETE = 'incomplete';
     const STATUS_READY = 'ready';
 
-    /**
-     * {@inheritdoc}
-     */
+
     public static function getAll(): array
     {
         return [

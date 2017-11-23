@@ -32,6 +32,7 @@ class ThreeDimensionalResource extends AbstractResource implements ThreeDimensio
 
     /**
      * @param int $width
+     *
      * @return ThreeDimensionalResource
      */
     public function setWidth($width)
@@ -51,6 +52,7 @@ class ThreeDimensionalResource extends AbstractResource implements ThreeDimensio
 
     /**
      * @param int $height
+     *
      * @return ThreeDimensionalResource
      */
     public function setHeight($height)
@@ -70,6 +72,7 @@ class ThreeDimensionalResource extends AbstractResource implements ThreeDimensio
 
     /**
      * @param int $depth
+     *
      * @return ThreeDimensionalResource
      */
     public function setDepth($depth)

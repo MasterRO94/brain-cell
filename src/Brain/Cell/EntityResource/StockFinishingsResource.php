@@ -13,7 +13,6 @@ use Brain\Cell\Transfer\ResourceCollection;
  */
 class StockFinishingsResource extends AbstractResource
 {
-
     /**
      * @var ResourceCollection|FinishingCategoryResource[]
      */
@@ -37,7 +36,7 @@ class StockFinishingsResource extends AbstractResource
         return [
             'finishings' => FinishingCategoryResource::class,
             'materials' => MaterialResource::class,
-            'sizes' => SizeResource::class
+            'sizes' => SizeResource::class,
         ];
     }
 
@@ -64,5 +63,4 @@ class StockFinishingsResource extends AbstractResource
     {
         return $this->sizes;
     }
-
 }

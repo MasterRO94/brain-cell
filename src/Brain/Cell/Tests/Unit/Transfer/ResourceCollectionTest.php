@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\Tests\Unit\Transfer;
 
-use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
@@ -14,7 +13,6 @@ use Brain\Cell\Transfer\ResourceCollection;
  */
 class ResourceCollectionTest extends AbstractBrainCellTestCase
 {
-
     /** @var ResourceCollection */
     protected $collection;
 
@@ -23,13 +21,13 @@ class ResourceCollectionTest extends AbstractBrainCellTestCase
      */
     public function setUp()
     {
-        $this->collection = new ResourceCollection;
+        $this->collection = new ResourceCollection();
     }
 
     /**
      * @test
      *
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      * @expectedExceptionMessage Missing entity class for collection
      */
     public function getEntityClassOrThrowWillThrow()
@@ -40,12 +38,12 @@ class ResourceCollectionTest extends AbstractBrainCellTestCase
     /**
      * @test
      *
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      * @expectedExceptionMessage ResourceCollection::add() only accepts instances of TransferEntityInterface
      */
     public function collectionRestrictsAddedEntriesToInstancesOfTransferEntityInterface()
     {
-        $resource = new SimpleResourceMock;
+        $resource = new SimpleResourceMock();
 
         $this->collection->add($resource);
         $this->assertCount(1, $this->collection, 'Resource was not added to the ResourceCollection');
@@ -55,29 +53,26 @@ class ResourceCollectionTest extends AbstractBrainCellTestCase
 
         $this->collection->add($resource);
         $this->fail('Collection should not accept anything but TransferEntityInterface');
-
     }
 
     /**
      * @test
      *
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      * @expectedExceptionMessage ResourceCollection::add() only accepts instances of "Brain\Cell\Tests\Mock\SimpleResourceMock"
      */
     public function collectionOptionallyRestrictsAddedEntriesToInstancesOfSetEntityClass()
     {
-        $resource = new SimpleResourceMock;
+        $resource = new SimpleResourceMock();
 
         //  Setting this should now tell the collection to be super strict on added resources.
-        $this->collection->setEntityClass(SimpleResourceMock::CLASS);
+        $this->collection->setEntityClass(SimpleResourceMock::class);
 
         //  Lets try it out.
         $this->collection->add($resource);
         $this->assertCount(1, $this->collection, 'Resource was not added to the ResourceCollection');
 
-        $this->collection->add(new SimpleResourceAssociationMock);
+        $this->collection->add(new SimpleResourceAssociationMock());
         $this->fail('Collection should not accept anything but the set entity class (SimpleResourceMock)');
-
     }
-
 }

@@ -70,6 +70,7 @@ class DeliveryDelegateClient extends DelegateClient
 
     /**
      * @param array $parameters
+     *
      * @return DeliveryServiceResource[]
      */
     public function getServices($parameters = [])
@@ -114,6 +115,7 @@ class DeliveryDelegateClient extends DelegateClient
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/delivery/dispatch/%s/label', $dispatchId));
+
         return $this->stream($context);
     }
 }

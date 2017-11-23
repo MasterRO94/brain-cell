@@ -15,11 +15,11 @@ use Pagerfanta\Pagerfanta;
  */
 class TransferEntityMetaManagerService
 {
-
     /**
      * Return the internal {@link EntityMeta} from the given $entity.
      *
      * @param MetaContainingInterface $entity
+     *
      * @return EntityMeta
      */
     public function getMeta(MetaContainingInterface $entity)
@@ -32,11 +32,12 @@ class TransferEntityMetaManagerService
      * Check if the given $entity has meta links.
      *
      * @param MetaContainingInterface $entity
+     *
      * @return bool
      */
     public function hasMetaLinks(MetaContainingInterface $entity)
     {
-        return (boolean) $this->getMeta($entity)->getLinks()->count();
+        return (bool) $this->getMeta($entity)->getLinks()->count();
     }
 
     /**
@@ -51,18 +52,19 @@ class TransferEntityMetaManagerService
     }
 
     /**
-     * Check if given entity has paginator object
+     * Check if given entity has paginator object.
      *
      * @param MetaContainingInterface $entity
+     *
      * @return bool
      */
     public function hasMetaPaginator(MetaContainingInterface $entity)
     {
-        return $this->getMeta($entity)->getPaginator() !== null;
+        return null !== $this->getMeta($entity)->getPaginator();
     }
 
     /**
-     * Set a new meta paginator object to the given entity
+     * Set a new meta paginator object to the given entity.
      *
      * @param MetaContainingInterface $entity
      * @param Pagerfanta $pagerfanta

@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\Tests\Unit\Transformer\Encoder;
 
-use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
@@ -22,7 +21,6 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  */
 class ArrayEncoderTest extends AbstractBrainCellTestCase
 {
-
     /** @var ArrayEncoder */
     protected $encoder;
 
@@ -37,10 +35,10 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
      */
     public function setUp()
     {
-        $this->manager = new TransferEntityMetaManagerService;
+        $this->manager = new TransferEntityMetaManagerService();
         $this->encoder = new ArrayEncoder($this->manager);
 
-        $builder = $this->getMockBuilder(Pagerfanta::CLASS);
+        $builder = $this->getMockBuilder(Pagerfanta::class);
         $builder->disableOriginalConstructor();
 
         $this->paginatorMock = $builder->getMock();
@@ -49,13 +47,13 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
     /**
      * @test
      *
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      * @expectedExceptionMessage Unexpected TransferEntityInterface
      */
     public function encoderWillThrowOnInvalidTransferEntityInterface()
     {
         /** @var TransferEntityInterface $entity */
-        $entity = $this->createMock(TransferEntityInterface::CLASS);
+        $entity = $this->createMock(TransferEntityInterface::class);
 
         $this->encoder->encode($entity);
     }
@@ -80,12 +78,11 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
 
         $expected = [
             'id' => 1,
-            'name' => 'string'
+            'name' => 'string',
         ];
 
         $response = $this->encoder->encode($resource);
         $this->assertEquals($expected, $response);
-
     }
 
     /**
@@ -100,12 +97,11 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
 
         $expected = [
             'id' => 2,
-            'associated_resource' => 1
+            'associated_resource' => 1,
         ];
 
         $response = $this->encoder->encode($parent);
         $this->assertEquals($expected, $response);
-
     }
 
     /**
@@ -113,7 +109,7 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
      */
     public function encodeSimpleResourceCollections()
     {
-        $collection = new ResourceCollection;
+        $collection = new ResourceCollection();
         $collection->add(SimpleResourceMock::create(1, 'one'));
         $collection->add(SimpleResourceMock::create(2, 'two'));
 
@@ -124,7 +120,6 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
 
         $response = $this->encoder->encode($collection);
         $this->assertEquals($expected, $response);
-
     }
 
     /**
@@ -132,7 +127,7 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
      */
     public function encodeSimpleResourceCollectionsAsAssociations()
     {
-        $collection = new ResourceCollection;
+        $collection = new ResourceCollection();
         $collection->add(SimpleResourceMock::create(1, 'one'));
         $collection->add(SimpleResourceMock::create(2, 'two'));
         $collection->add(SimpleResourceMock::create(3, 'three'));
@@ -146,11 +141,10 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
                 1,
                 2,
                 3,
-            ]
+            ],
         ];
 
         $response = $this->encoder->encode($resource);
         $this->assertEquals($expected, $response);
-
     }
 }

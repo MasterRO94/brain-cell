@@ -54,7 +54,7 @@ class JobComponentOptionResource extends AbstractResource
     {
         return [
             'category' => FinishingCategoryResource::class,
-            'item' => FinishingItemResource::class
+            'item' => FinishingItemResource::class,
         ];
     }
 
@@ -82,6 +82,7 @@ class JobComponentOptionResource extends AbstractResource
     public function setCategory(FinishingCategoryResource $finishingCategory)
     {
         $this->category = $finishingCategory;
+
         return $this;
     }
 
@@ -101,6 +102,7 @@ class JobComponentOptionResource extends AbstractResource
     public function setItem(FinishingItemResource $finishingItem)
     {
         $this->item = $finishingItem;
+
         return $this;
     }
 
@@ -119,5 +121,4 @@ class JobComponentOptionResource extends AbstractResource
     {
         $this->configuration = $configuration;
     }
-
 }

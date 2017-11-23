@@ -7,11 +7,9 @@ use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\RequestAdapterException;
 
 use GuzzleHttp\ClientInterface;
-use Psr\Http\Message\StreamInterface;
 
 class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 {
-
     const VERSION_MINIMUM = 6.2;
 
     /**
@@ -37,7 +35,6 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
                 )
             );
         }
-
     }
 
     /**
@@ -46,6 +43,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     public function request(RequestContext $context)
     {
         $response = $this->getResponse($context);
+
         return json_decode($response->getBody(), true);
     }
 
@@ -55,11 +53,13 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     public function stream(RequestContext $context)
     {
         $response = $this->getResponse($context);
+
         return $response->getBody();
     }
 
     /**
      * @param RequestContext $context
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     protected function getResponse(RequestContext $context)
@@ -71,7 +71,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             $parameters = array_merge(
                 $parameters,
                 [
-                    'filters' => $context->getFilters()->all()
+                    'filters' => $context->getFilters()->all(),
                 ]
             );
         }
@@ -81,7 +81,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         }
 
         $options = [
-            'headers' => $context->getHeaders()->all()
+            'headers' => $context->getHeaders()->all(),
         ];
 
         if ($context->hasPayload()) {

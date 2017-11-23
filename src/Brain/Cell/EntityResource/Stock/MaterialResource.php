@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MaterialResource extends AbstractResource
 {
-
     /**
      * @var string
      */
@@ -56,7 +55,7 @@ class MaterialResource extends AbstractResource
         return [
             'base' => MaterialBaseResource::class,
             'variant' => MaterialVariantResource::class,
-            'weight' => MaterialWeightResource::class
+            'weight' => MaterialWeightResource::class,
         ];
     }
 
@@ -84,6 +83,7 @@ class MaterialResource extends AbstractResource
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
@@ -103,6 +103,7 @@ class MaterialResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -122,6 +123,7 @@ class MaterialResource extends AbstractResource
     public function setBase(MaterialBaseResource $base)
     {
         $this->base = $base;
+
         return $this;
     }
 
@@ -141,6 +143,7 @@ class MaterialResource extends AbstractResource
     public function setVariant(MaterialVariantResource $variant)
     {
         $this->variant = $variant;
+
         return $this;
     }
 
@@ -160,7 +163,7 @@ class MaterialResource extends AbstractResource
     public function setWeight(MaterialWeightResource $weight)
     {
         $this->weight = $weight;
+
         return $this;
     }
-
 }

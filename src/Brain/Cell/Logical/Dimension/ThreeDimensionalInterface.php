@@ -5,7 +5,6 @@ namespace Brain\Cell\Logical\Dimension;
 use Brain\Cell\Logical\Dimension\Column\DepthDimensionInterface;
 use Brain\Cell\Logical\Dimension\Column\HeightDimensionInterface;
 use Brain\Cell\Logical\Dimension\Column\WidthDimensionInterface;
-use Brain\Cell\Logical\Dimension\DimensionInterface;
 
 /**
  * Representing a three dimensional object.

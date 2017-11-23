@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\EntityResource\Stock;
 
-use Brain\Cell\EntityResource\DimensionsResource;
 use Brain\Cell\EntityResource\TwoDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
 
@@ -13,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SizeResource extends AbstractResource
 {
-
     /**
      * @var string
      */
@@ -73,6 +71,7 @@ class SizeResource extends AbstractResource
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
@@ -92,6 +91,7 @@ class SizeResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -121,12 +121,13 @@ class SizeResource extends AbstractResource
 
     /**
      * @param TwoDimensionalResource $dimensions
+     *
      * @return SizeResource
      */
     public function setDimensions(TwoDimensionalResource $dimensions)
     {
         $this->dimensions = $dimensions;
+
         return $this;
     }
-
 }

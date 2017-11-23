@@ -12,7 +12,6 @@ use Brain\Cell\Transfer\EntityResourceFactory;
  */
 class EntityFactoryTest extends AbstractBrainCellTestCase
 {
-
     /** @var EntityResourceFactory */
     protected $factory;
 
@@ -21,7 +20,7 @@ class EntityFactoryTest extends AbstractBrainCellTestCase
      */
     public function setUp()
     {
-        $this->factory = new EntityResourceFactory;
+        $this->factory = new EntityResourceFactory();
     }
 
     /**
@@ -31,12 +30,10 @@ class EntityFactoryTest extends AbstractBrainCellTestCase
     {
 
         /** @var SimpleResourceMock $response */
-        $response = $this->factory->create(SimpleResourceMock::CLASS);
+        $response = $this->factory->create(SimpleResourceMock::class);
         $this->assertNull($response->getId(), 'The id should not have been set on construction');
 
-        $response = $this->factory->create(SimpleResourceMock::CLASS, 1);
+        $response = $this->factory->create(SimpleResourceMock::class, 1);
         $this->assertEquals(1, $response->getId(), 'The id should have been set on construction');
-
     }
-
 }

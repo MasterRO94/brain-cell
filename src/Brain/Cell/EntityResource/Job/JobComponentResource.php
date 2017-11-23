@@ -140,6 +140,7 @@ class JobComponentResource extends AbstractResource
     public function setOptions(ResourceCollection $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -159,6 +160,7 @@ class JobComponentResource extends AbstractResource
     public function setStatus($status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -178,6 +180,7 @@ class JobComponentResource extends AbstractResource
     public function setRangeStart($rangeStart)
     {
         $this->rangeStart = $rangeStart;
+
         return $this;
     }
 
@@ -197,6 +200,7 @@ class JobComponentResource extends AbstractResource
     public function setRangeEnd($rangeEnd)
     {
         $this->rangeEnd = $rangeEnd;
+
         return $this;
     }
 
@@ -238,6 +242,7 @@ class JobComponentResource extends AbstractResource
     public function setSize(SizeResource $size)
     {
         $this->size = $size;
+
         return $this;
     }
 
@@ -257,6 +262,7 @@ class JobComponentResource extends AbstractResource
     public function setMaterial(MaterialResource $material)
     {
         $this->material = $material;
+
         return $this;
     }
 
@@ -276,6 +282,7 @@ class JobComponentResource extends AbstractResource
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
         return $this;
     }
 
@@ -297,6 +304,7 @@ class JobComponentResource extends AbstractResource
 
     /**
      * @todo stub - this will be calculated in Brain based on size and material
+     *
      * @return int
      */
     public function getSizeCountPerMaterial()
@@ -305,6 +313,7 @@ class JobComponentResource extends AbstractResource
         $height = $this->getSize()->getDimensions()->getHeight();
         $sra3Width = 450;
         $sra3Height = 320;
+
         return (int) floor(
             ($sra3Height * $sra3Width) / ($width * $height)
         );

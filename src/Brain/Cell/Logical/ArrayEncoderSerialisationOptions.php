@@ -3,7 +3,7 @@
 namespace Brain\Cell\Logical;
 
 /**
- * Class ArrayEncoderSerialisationOptions
+ * Class ArrayEncoderSerialisationOptions.
  *
  * Options for the ArrayEncoder serialisation process.
  */

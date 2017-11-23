@@ -1,7 +1,4 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\EntityResource\Job;
 
@@ -54,7 +51,7 @@ class JobOptionResource extends AbstractResource
     {
         return [
             'category' => FinishingCategoryResource::class,
-            'item' => FinishingItemResource::class
+            'item' => FinishingItemResource::class,
         ];
     }
 
@@ -82,6 +79,7 @@ class JobOptionResource extends AbstractResource
     public function setCategory(FinishingCategoryResource $finishingCategory)
     {
         $this->category = $finishingCategory;
+
         return $this;
     }
 
@@ -101,6 +99,7 @@ class JobOptionResource extends AbstractResource
     public function setItem(FinishingItemResource $finishingItem)
     {
         $this->item = $finishingItem;
+
         return $this;
     }
 
@@ -119,5 +118,4 @@ class JobOptionResource extends AbstractResource
     {
         $this->configuration = $configuration;
     }
-
 }

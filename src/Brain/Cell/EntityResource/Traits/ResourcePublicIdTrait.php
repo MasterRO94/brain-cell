@@ -3,7 +3,7 @@
 namespace Brain\Cell\EntityResource\Traits;
 
 /**
- * Trait ResourcePublicIdTrait
+ * Trait ResourcePublicIdTrait.
  *
  * A trait for resources with uuid public id.
  */

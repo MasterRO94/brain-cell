@@ -44,5 +44,4 @@ class ProductGroupResource extends AbstractResource
     {
         $this->name = $name;
     }
-
 }

@@ -17,7 +17,6 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  */
 class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
 {
-
     /** @var MockObject|EntityResourceFactory */
     protected $factoryMock;
 
@@ -38,15 +37,15 @@ class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
      */
     public function setUp()
     {
-        $this->resource = new SimpleResourceMock;
+        $this->resource = new SimpleResourceMock();
 
-        $this->factoryMock = $this->createMock(EntityResourceFactory::CLASS);
+        $this->factoryMock = $this->createMock(EntityResourceFactory::class);
 
-        $builder = $this->getMockBuilder(ArrayEncoder::CLASS);
+        $builder = $this->getMockBuilder(ArrayEncoder::class);
         $builder->disableOriginalConstructor();
         $this->encoderMock = $builder->getMock();
 
-        $builder = $this->getMockBuilder(ArrayDecoder::CLASS);
+        $builder = $this->getMockBuilder(ArrayDecoder::class);
         $builder->disableOriginalConstructor();
         $this->decoderMock = $builder->getMock();
 
@@ -55,7 +54,6 @@ class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
             $this->encoderMock,
             $this->decoderMock
         );
-
     }
 
     /**
@@ -63,14 +61,12 @@ class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
      */
     public function serviceEncoderDependency()
     {
-
         $this->encoderMock->expects($this->once())
             ->method('encode')
             ->willReturn('encoded');
 
         $response = $this->service->serialise($this->resource);
         $this->assertEquals('encoded', $response, 'Service is not returning the response from the TransformerEncoderInterface');
-
     }
 
     /**
@@ -78,14 +74,12 @@ class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
      */
     public function serviceDecoderDependency()
     {
-
         $this->decoderMock->expects($this->once())
             ->method('decode')
             ->willReturn($this->resource);
 
         $response = $this->service->deserialise($this->resource, []);
         $this->assertEquals($this->resource, $response, 'Service is not returning the response from the TransformerDecoderInterface');
-
     }
 
     /**
@@ -93,14 +87,11 @@ class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
      */
     public function serviceEntityFactoryDependency()
     {
-
         $this->factoryMock->expects($this->once())
             ->method('create')
             ->willReturn($this->resource);
 
         $response = $this->service->create('class', 1);
         $this->assertEquals($this->resource, $response, 'Service is not returning the response from the EntityFactory');
-
     }
-
 }

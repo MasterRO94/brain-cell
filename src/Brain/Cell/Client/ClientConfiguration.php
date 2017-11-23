@@ -29,8 +29,6 @@ class ClientConfiguration
     private $apiKey;
 
     /**
-     * {@inheritdoc}
-     *
      * @param RequestAdapterInterface $requestAdapter
      * @param string $apiKey
      */
@@ -89,7 +87,7 @@ class ClientConfiguration
      */
     public function hasResourceHandler()
     {
-        return ($this->resourceHandler instanceof ResourceHandlerService);
+        return $this->resourceHandler instanceof ResourceHandlerService;
     }
 
     /**
@@ -100,7 +98,7 @@ class ClientConfiguration
         $context = new RequestContext($this->getBasePath());
         $context->getHeaders()->set('Authorization', sprintf('Token %s', $this->apiKey));
         $context->getHeaders()->set('Api-Client-Version', self::VERSION);
+
         return $context;
     }
-
 }

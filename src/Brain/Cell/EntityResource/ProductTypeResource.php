@@ -9,7 +9,6 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class ProductTypeResource extends AbstractResource
 {
-
     /**
      * @var int
      */
@@ -43,11 +42,13 @@ class ProductTypeResource extends AbstractResource
 
     /**
      * @param string $alias
+     *
      * @return Attribute
      */
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
@@ -61,12 +62,13 @@ class ProductTypeResource extends AbstractResource
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
-
 }

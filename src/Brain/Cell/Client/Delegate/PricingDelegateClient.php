@@ -1,7 +1,4 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\Client\Delegate;
 
@@ -10,9 +7,9 @@ use Brain\Cell\EntityResource\Job\JobResource;
 
 class PricingDelegateClient extends DelegateClient
 {
-
     /**
      * @param JobResource $jobResource
+     *
      * @return JobResource
      */
     public function getPricing(JobResource $jobResource)
@@ -24,7 +21,6 @@ class PricingDelegateClient extends DelegateClient
         $payload = $handler->serialise($jobResource);
         $context->setPayload($payload);
 
-        return $this->request($context, new JobResource);
-
+        return $this->request($context, new JobResource());
     }
 }

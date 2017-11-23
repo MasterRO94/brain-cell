@@ -6,7 +6,6 @@ use Brain;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\TransferEntityInterface;
 
-use Doctrine;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -18,7 +17,6 @@ class ResourceCollection extends ArrayCollection implements
     Brain\Cell\TransferEntityInterface,
     Brain\Cell\Transfer\EntityMeta\MetaContainingInterface
 {
-
     use Brain\Cell\Transfer\EntityMeta\MetaContainingTrait;
 
     /**
@@ -32,19 +30,18 @@ class ResourceCollection extends ArrayCollection implements
      * Return the entity class.
      *
      * @return string
+     *
      * @throws RuntimeException if entity class is not present.
      *
      * @internal
      */
     public function getEntityClassOrThrow()
     {
-
         if (is_null($this->entityClass)) {
             throw new RuntimeException('Missing entity class for collection');
         }
 
         return $this->entityClass;
-
     }
 
     /**
@@ -72,9 +69,10 @@ class ResourceCollection extends ArrayCollection implements
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @param TransferEntityInterface $value
+     *
      * @throws RuntimeException when $value is not an instance of TransferEntityInterface
      * @throws RuntimeException when $value is not an instance of the set entity class
      */
@@ -93,8 +91,5 @@ class ResourceCollection extends ArrayCollection implements
         }
 
         return parent::add($value);
-
     }
-
-
 }

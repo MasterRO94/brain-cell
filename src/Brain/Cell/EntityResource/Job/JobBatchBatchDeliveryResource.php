@@ -8,7 +8,7 @@ use Brain\Cell\EntityResource\Delivery\ProductionStrategyResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
- * Class JobBatchBatchDeliveryResource
+ * Class JobBatchBatchDeliveryResource.
  *
  * All fields in this resource are nullable, but you are guaranteed, that the api will never
  * return nulls for any of these fields.

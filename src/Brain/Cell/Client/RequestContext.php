@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RequestContext
 {
-
     /**
      * @var string
      */
@@ -44,19 +43,16 @@ class RequestContext
      */
     protected $payload;
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function __construct($path)
     {
         $this->path = $path;
 
-        $this->headers = new HeaderBag;
-        $this->filters = new ParameterBag;
-        $this->selections = new ParameterBag;
-        $this->parameters = new ParameterBag;
+        $this->headers = new HeaderBag();
+        $this->filters = new ParameterBag();
+        $this->selections = new ParameterBag();
+        $this->parameters = new ParameterBag();
         $this->payload = [];
-        
     }
 
     /**
@@ -115,6 +111,7 @@ class RequestContext
     public function setPayload(array $payload)
     {
         $this->payload = $payload;
+
         return $this;
     }
 
@@ -165,6 +162,6 @@ class RequestContext
      */
     public function hasPayload()
     {
-        return $this->payload !== null;
+        return null !== $this->payload;
     }
 }

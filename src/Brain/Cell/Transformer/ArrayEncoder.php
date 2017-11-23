@@ -17,12 +17,12 @@ use Doctrine\Common\Inflector\Inflector;
  */
 class ArrayEncoder extends AbstractTransformer
 {
-
     /**
      * Encode the given {@link TransferEntityInterface} and return the serialised view.
      *
      * @param TransferEntityInterface $entity
      * @param ArrayEncoderSerialisationOptions|null $options
+     *
      * @return array
      */
     public function encode(
@@ -45,7 +45,6 @@ class ArrayEncoder extends AbstractTransformer
 
         //  The encoder may not support encoding all transfer entities.
         throw new RuntimeException(sprintf('Unexpected TransferEntityInterface "%s"', get_class($entity)));
-
     }
 
     /**
@@ -53,6 +52,7 @@ class ArrayEncoder extends AbstractTransformer
      *
      * @param AbstractResource $resource
      * @param ArrayEncoderSerialisationOptions $options
+     *
      * @return array
      */
     protected function encodeResource(AbstractResource $resource, ArrayEncoderSerialisationOptions $options)
@@ -76,7 +76,7 @@ class ArrayEncoder extends AbstractTransformer
             $snakeCasePropertyName = Inflector::tableize($property->getName());
 
             // All properties prefixed with "brain" are to be ignored
-            if (substr($property->getName(), 0, 5) === 'brain') {
+            if ('brain' === substr($property->getName(), 0, 5)) {
                 continue;
             }
 
@@ -97,7 +97,7 @@ class ArrayEncoder extends AbstractTransformer
             }
 
             // Don't include data
-            if ($property->getName() == 'data') {
+            if ('data' == $property->getName()) {
                 continue;
             }
 
@@ -106,7 +106,7 @@ class ArrayEncoder extends AbstractTransformer
                 if ($this->isIdResourceAndShouldSerialiseAsId($value, $options)) {
                     $value = $this->getValueForIdResource($value, $options);
 
-                // All other associated can be encoded hooray :)
+                    // All other associated can be encoded hooray :)
                 } elseif (isset($resources[$property->getName()])) {
                     $value = $this->encodeResource($value, $options);
                 } elseif (isset($collections[$property->getName()])) {
@@ -121,7 +121,7 @@ class ArrayEncoder extends AbstractTransformer
 
                     $value = $result;
 
-                // Panic for unexpected transfer entity interface
+                    // Panic for unexpected transfer entity interface
                 } else {
                     throw new RuntimeException(sprintf(
                         'Did not expect TransferEntityInterface in "%s" of "%s"',
@@ -134,11 +134,11 @@ class ArrayEncoder extends AbstractTransformer
             }
 
             // Ignore empty arrays, but don't ignore 0 or false
-            if ($value === null || (is_array($value) && empty($value))) {
+            if (null === $value || (is_array($value) && empty($value))) {
                 continue;
             }
 
-            if ($value === null) {
+            if (null === $value) {
                 continue;
             }
 
@@ -150,9 +150,12 @@ class ArrayEncoder extends AbstractTransformer
 
     /**
      * Some associated resources have to be sent as a UUID rather than as an
-     * object. This fix has been implemented in PRWE
+     * object. This fix has been implemented in PRWE.
+     *
      * @todo copy it across and kill this bogus-ass method with fire
+     *
      * @param mixed $resource
+     *
      * @return bool
      */
     protected function isIdResource($resource)
@@ -167,6 +170,7 @@ class ArrayEncoder extends AbstractTransformer
     /**
      * @param mixed $resource
      * @param ArrayEncoderSerialisationOptions $options
+     *
      * @return bool
      */
     protected function isIdResourceAndShouldSerialiseAsId(
@@ -180,6 +184,7 @@ class ArrayEncoder extends AbstractTransformer
     /**
      * @param AbstractResource $resource
      * @param ArrayEncoderSerialisationOptions $options
+     *
      * @return array|string
      */
     protected function getValueForIdResource(
@@ -210,6 +215,7 @@ class ArrayEncoder extends AbstractTransformer
      *
      * @param ResourceCollection $collection
      * @param ArrayEncoderSerialisationOptions $options
+     *
      * @return array
      */
     protected function encodeCollection(
@@ -227,5 +233,4 @@ class ArrayEncoder extends AbstractTransformer
 
         return $resources;
     }
-
 }

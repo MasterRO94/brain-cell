@@ -12,7 +12,6 @@ use Brain\Cell\Transfer\EntityMeta\Link;
  */
 class LinkTest extends AbstractBrainCellTestCase
 {
-
     /**
      * @test
      */
@@ -22,7 +21,5 @@ class LinkTest extends AbstractBrainCellTestCase
 
         $this->assertEquals(Link::REL_SELF, $link->getRel());
         $this->assertEquals('Tony Stark', $link->getHref());
-
     }
-
 }

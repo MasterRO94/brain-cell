@@ -84,5 +84,4 @@ class ProductResource extends AbstractResource implements ResourcePublicIdInterf
     {
         $this->productGroup = $productGroup;
     }
-
 }

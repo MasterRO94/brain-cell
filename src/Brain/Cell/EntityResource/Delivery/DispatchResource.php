@@ -8,7 +8,6 @@ use Brain\Cell\Transfer\ResourceCollection;
 
 class DispatchResource extends AbstractResource
 {
-
     /**
      * @var string
      */

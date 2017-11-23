@@ -19,7 +19,6 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  */
 class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
 {
-
     const BASE_PATH = 'https://some.example.com/v1';
 
     /** @var MockObject|GuzzleClient */
@@ -47,7 +46,6 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
      */
     public function request_adapterReturnsSuccessResponse_deserialisedArrayIsReturned()
     {
-
         $this->guzzle->expects($this->once())
             ->method('request')
             ->with(
@@ -67,7 +65,6 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
 
         $this->assertInternalType('array', $response);
         $this->assertEquals(['hello' => 'world'], $response);
-
     }
 
     /**
@@ -76,7 +73,6 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
      */
     public function request_withSuppliedFilters_requestIsMadeWithFilters()
     {
-
         $this->guzzle->expects($this->once())
             ->method('request')
             ->with(
@@ -95,7 +91,5 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
         $this->context->getFilters()->set('foo', 'bar');
 
         $this->adapter->request($this->context);
-
     }
-
 }

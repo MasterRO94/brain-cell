@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class FinishingItemResource extends AbstractResource
 {
-
     /**
      * @var string
      */
@@ -88,6 +87,7 @@ class FinishingItemResource extends AbstractResource
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
         return $this;
     }
 
@@ -107,6 +107,7 @@ class FinishingItemResource extends AbstractResource
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -168,9 +169,10 @@ class FinishingItemResource extends AbstractResource
 
     /**
      * @param int $weight
+     *
      * @return FinishingItemResource
      */
-    public function setWeight(int $weight): FinishingItemResource
+    public function setWeight(int $weight): self
     {
         $this->weight = $weight;
 
@@ -187,13 +189,13 @@ class FinishingItemResource extends AbstractResource
 
     /**
      * @param string $weightUnit
+     *
      * @return FinishingItemResource
      */
-    public function setWeightUnit(string $weightUnit): FinishingItemResource
+    public function setWeightUnit(string $weightUnit): self
     {
         $this->weightUnit = $weightUnit;
 
         return $this;
     }
-
 }

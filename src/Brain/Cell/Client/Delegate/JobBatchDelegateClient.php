@@ -1,7 +1,4 @@
 <?php
-/**
- * @maintainer Alex Moon <alex.moon@printed.com>
- */
 
 namespace Brain\Cell\Client\Delegate;
 
@@ -15,7 +12,6 @@ use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 
 class JobBatchDelegateClient extends DelegateClient
 {
-
     /**
      * @param string $id
      *
@@ -26,7 +22,7 @@ class JobBatchDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/jobs/batches/%s', $id));
 
-        return $this->request($context, new JobBatchResource);
+        return $this->request($context, new JobBatchResource());
     }
 
     /**
@@ -101,11 +97,12 @@ class JobBatchDelegateClient extends DelegateClient
     /**
      * @param JobBatchResource $resource
      * @param string $status
+     *
      * @return JobBatchResource
      */
     public function updateStatus(JobBatchResource $resource, $status)
     {
-        if (! in_array($status, JobBatchStatusEnum::getAll())) {
+        if (!in_array($status, JobBatchStatusEnum::getAll())) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));
         }
 
