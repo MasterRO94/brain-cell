@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Brain\\Cell\\": "."
+            "Brain\\Cell\\": "src/Brain/Cell"
         }
     },
     "require": {
@@ -25,7 +25,10 @@
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.2",
-        "phpunit/phpunit": "5.6.1"
+        "phpunit/phpunit": "5.6.1",
+
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "mmoreram/php-formatter": "^1.3"
     },
     "suggest": {
         "guzzlehttp/guzzle": "Allow requests to be made using the GuzzleHttpRequestAdapter"
