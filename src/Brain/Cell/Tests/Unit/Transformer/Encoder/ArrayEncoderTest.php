@@ -62,9 +62,6 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
 
     /**
      * @test
-     *
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Did not expect TransferEntityInterface in "name" of "Brain\Cell\Tests\Mock\SimpleResourceMock"
      */
     public function encoderRefusesToEncodeInvalidEntityResourceProperties()
     {
@@ -103,10 +100,7 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
 
         $expected = [
             'id' => 2,
-            'associated_resource' => [
-                'id' => 1,
-                'name' => 'string'
-            ]
+            'associated_resource' => 1
         ];
 
         $response = $this->encoder->encode($parent);
@@ -124,8 +118,8 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $collection->add(SimpleResourceMock::create(2, 'two'));
 
         $expected = [
-            ['id' => 1, 'name' => 'one'],
-            ['id' => 2, 'name' => 'two'],
+            1,
+            2,
         ];
 
         $response = $this->encoder->encode($collection);
@@ -149,9 +143,9 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $expected = [
             'id' => 4,
             'associated_collection' => [
-                ['id' => 1, 'name' => 'one'],
-                ['id' => 2, 'name' => 'two'],
-                ['id' => 3, 'name' => 'three'],
+                1,
+                2,
+                3,
             ]
         ];
 

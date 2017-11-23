@@ -94,11 +94,8 @@ class ArrayDecoderTest extends AbstractBrainCellTestCase
 
     /**
      * @test
-     *
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Additional property "occupation"
      */
-    public function decoderWillThrowWithAdditionalProperties()
+    public function decoderWillNotThrowWithAdditionalData()
     {
 
         $data = [
