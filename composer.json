@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Brain\\Cell\\": "."
+            "Brain\\Cell\\": "src/Brain/Cell"
         }
     },
     "require": {
