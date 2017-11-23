@@ -146,8 +146,10 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             //  Bad Request.
             case 400:
                 if (ErrorMessageEnum::ERROR_PAYLOAD_VIOLATION === $canonical) {
+                    $violations = json_encode($responsePayload['violations'] ?? []);
+
                     return new PayloadViolationException(
-                        sprintf('%s %s: %s', $method, $uri, $responseContent),
+                        sprintf('%s %s: %s', $method, $uri, $violations),
                         $requestPayload,
                         $responsePayload,
                         $exception

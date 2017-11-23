@@ -151,6 +151,9 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                     'error' => [
                         'canonical' => ErrorMessageEnum::ERROR_PAYLOAD_VIOLATION,
                     ],
+                    'violations' => [
+                        'tony' => 'stark',
+                    ],
                 ]
             ));
 
@@ -169,7 +172,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
             ->with()
             ->willThrowException(
                 new ClientException(
-                    'guzzle-error-message',
+                    'guzzle-errokr-message',
                     $guzzleRequest,
                     $guzzleResponse
                 )
@@ -178,7 +181,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
         $this->context->prepareContextForPost('/end-point');
 
         self::expectException(PayloadViolationException::class);
-        self::expectExceptionMessage('POST /end-point: {"error":{"canonical":"api.request.error.payload"}}');
+        self::expectExceptionMessage('POST /end-point: {"tony":"stark"}');
 
         $this->adapter->request($this->context);
     }
