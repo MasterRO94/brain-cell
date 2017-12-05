@@ -151,10 +151,63 @@ class JobDelegateClient extends DelegateClient
         string $jobId,
         JobNoteResource $jobNoteResource
     ) {
+        return $this->submitNote(
+            $jobId,
+            $jobNoteResource,
+            'notes'
+        );
+    }
+
+    /**
+     * @param string $jobId
+     * @param JobNoteResource $jobNoteResource
+     *
+     * @return JobResource
+     */
+    public function submitQueryJobNote(
+        string $jobId,
+        JobNoteResource $jobNoteResource
+    ) {
+        return $this->submitNote(
+            $jobId,
+            $jobNoteResource,
+            'query'
+        );
+    }
+
+    /**
+     * @param string $jobId
+     * @param JobNoteResource $jobNoteResource
+     *
+     * @return JobResource
+     */
+    public function submitQueryResolvedJobNote(
+        string $jobId,
+        JobNoteResource $jobNoteResource
+    ) {
+        return $this->submitNote(
+            $jobId,
+            $jobNoteResource,
+            'query-resolution'
+        );
+    }
+
+    /**
+     * @param string $jobId
+     * @param JobNoteResource $jobNoteResource
+     *
+     * @return JobResource
+     */
+    protected function submitNote(
+        string $jobId,
+        JobNoteResource $jobNoteResource,
+        string $endpoint
+    ) {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf(
-            '/jobs/%s/notes',
-            $jobId
+            '/jobs/%s/%s',
+            $jobId,
+            $endpoint
         ));
 
         $handler = $this->configuration->getResourceHandler();
