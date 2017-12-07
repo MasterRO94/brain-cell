@@ -32,7 +32,7 @@ class ArtworkDelegateClient extends DelegateClient
     public function downloadPreview($id, $pageNumber, $width = null, $height = null)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/artworks/%s/preview/%s', $id, $pageNumber));
+        $context->prepareContextForGet(sprintf('/artworks/%s/pages/%s/preview', $id, $pageNumber));
 
         if ($width) {
             $context->getParameters()->set('width', $width);
