@@ -23,7 +23,6 @@ class ArtworkDelegateClient extends DelegateClient
 
     /**
      * @param string $id
-     *
      * @param int $pageNumber
      * @param int|null $width
      * @param int|null $height
