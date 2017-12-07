@@ -29,7 +29,7 @@ class ArtworkDelegateClient extends DelegateClient
      * @param int|null $height
      * @return StreamInterface
      */
-    public function downloadPreview($id, $pageNumber, $width = null, $height = null)
+    public function downloadPreview(string $id, int $pageNumber, int $width = null, int $height = null): StreamInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/artworks/%s/pages/%s/preview', $id, $pageNumber));
