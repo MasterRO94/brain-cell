@@ -73,6 +73,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $updated;
 
     /**
+     * @var bool
+     */
+    protected $hasQuery;
+
+    /**
      * @var ResourceCollection|JobComponentResource[]
      *
      * @Assert\Valid()
@@ -451,6 +456,22 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         $this->updated = $updated;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasQuery()
+    {
+        return $this->hasQuery;
+    }
+
+    /**
+     * @param bool $hasQuery
+     */
+    public function setHasQuery($hasQuery)
+    {
+        $this->hasQuery = $hasQuery;
     }
 
     /**
