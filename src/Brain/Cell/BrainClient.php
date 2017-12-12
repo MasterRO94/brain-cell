@@ -11,6 +11,7 @@ use Brain\Cell\Client\Delegate\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
 
 /**
  * {@inheritdoc}
@@ -79,5 +80,13 @@ class BrainClient extends DelegateClient
     public function change()
     {
         return new ChangeDelegateClient($this->configuration);
+    }
+
+    /**
+     * @return ArtifactDelegateClient
+     */
+    public function artifact()
+    {
+        return new ArtifactDelegateClient($this->configuration);
     }
 }
