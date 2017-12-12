@@ -195,6 +195,7 @@ class JobDelegateClient extends DelegateClient
     /**
      * @param string $jobId
      * @param JobNoteResource $jobNoteResource
+     * @param string $endpoint
      *
      * @return JobResource
      */
