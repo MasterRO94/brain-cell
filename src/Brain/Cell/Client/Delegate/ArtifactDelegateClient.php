@@ -5,14 +5,15 @@ namespace Brain\Cell\Client\Delegate;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\TransferEntityInterface;
 
 class ArtifactDelegateClient extends DelegateClient
 {
     /**
      * @param ArtifactResource $artifactResource
-     * @return AbstractResource|ArtifactResource
+     * @return ArtifactResource|AbstractResource|TransferEntityInterface
      */
-    public function createArtifact(ArtifactResource $artifactResource)
+    public function createArtifact(ArtifactResource $artifactResource): ArtifactResource
     {
         $handler = $this->configuration->getResourceHandler();
 

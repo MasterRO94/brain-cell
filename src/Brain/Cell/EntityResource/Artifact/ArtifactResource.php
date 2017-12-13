@@ -50,7 +50,7 @@ class ArtifactResource extends AbstractResource
     /**
      * @param string $id
      */
-    public function setId($id)
+    public function setId(string $id)
     {
         $this->id = $id;
     }
@@ -66,7 +66,7 @@ class ArtifactResource extends AbstractResource
     /**
      * @param string $path
      */
-    public function setPath($path)
+    public function setPath(string $path)
     {
         $this->path = $path;
     }
@@ -82,7 +82,7 @@ class ArtifactResource extends AbstractResource
     /**
      * @param string $status
      */
-    public function setStatus($status)
+    public function setStatus(string $status)
     {
         $this->status = $status;
     }
@@ -98,7 +98,7 @@ class ArtifactResource extends AbstractResource
     /**
      * @param \DateTime $created
      */
-    public function setCreated($created)
+    public function setCreated(\DateTime $created)
     {
         $this->created = $created;
     }
@@ -114,7 +114,7 @@ class ArtifactResource extends AbstractResource
     /**
      * @param \DateTime $updated
      */
-    public function setUpdated($updated)
+    public function setUpdated(\DateTime $updated)
     {
         $this->updated = $updated;
     }
