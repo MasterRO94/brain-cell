@@ -656,7 +656,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @return ArtifactResource[]|ResourceCollection
      */
-    public function getArtifacts()
+    public function getArtifacts(): ResourceCollection
     {
         return $this->artifacts;
     }
@@ -664,7 +664,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @param ArtifactResource[]|ResourceCollection $artifacts
      */
-    public function setArtifacts($artifacts)
+    public function setArtifacts(ResourceCollection $artifacts)
     {
         $this->artifacts = $artifacts;
     }
