@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\PriceResource;
@@ -133,6 +134,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $artwork;
 
     /**
+     * @var ResourceCollection|ArtifactResource[]
+     */
+    protected $artifacts;
+
+    /**
      * @var JobResource
      */
     protected $clonedFrom;
@@ -164,6 +170,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             'components' => JobComponentResource::class,
             'options' => JobOptionResource::class,
             'notes' => JobNoteResource::class,
+            'artifacts' => ArtifactResource::class,
         ];
     }
 
@@ -644,6 +651,22 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setArtwork(ArtworkResource $artwork)
     {
         $this->artwork = $artwork;
+    }
+
+    /**
+     * @return ArtifactResource[]|ResourceCollection
+     */
+    public function getArtifacts()
+    {
+        return $this->artifacts;
+    }
+
+    /**
+     * @param ArtifactResource[]|ResourceCollection $artifacts
+     */
+    public function setArtifacts($artifacts)
+    {
+        $this->artifacts = $artifacts;
     }
 
     /**
