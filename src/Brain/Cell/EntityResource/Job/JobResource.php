@@ -587,6 +587,9 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return $this->has('reverse-printing');
     }
 
+    /**
+     * @return bool
+     */
     public function hasRoundCorners()
     {
         return $this->has('finishing-corners');
