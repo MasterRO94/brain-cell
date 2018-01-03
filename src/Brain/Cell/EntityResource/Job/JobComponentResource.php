@@ -262,15 +262,6 @@ class JobComponentResource extends AbstractResource
     }
 
     /**
-     * todo are you able to remove the setters for all of the classes as they are not needed.
-     * @param StockDefinitionResource $stockDefinition
-     */
-    public function setStockDefinition(StockDefinitionResource $stockDefinition)
-    {
-        $this->stockDefinition = $stockDefinition;
-    }
-
-    /**
      * @return MaterialResource
      */
     public function getMaterial()
