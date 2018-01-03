@@ -595,24 +595,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return $this->has('personalisation');
     }
 
-    /**
-     * @return  bool
-     */
-    public function isLargeFormat()
-    {
-        foreach($this->components as $component)
-        {
-            //todo use stock definition instead
-            if ($component->getDimensions()->getHeight() > 320
-                || $component->getDimensions()->getWidth() > 450
-            ) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public function isMultipage()
     {
         if ($this->components->count() > 1) {
