@@ -11,6 +11,7 @@ use Brain\Cell\Client\Delegate\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
 
 /**
  * {@inheritdoc}
@@ -20,7 +21,7 @@ class BrainClient extends DelegateClient
     /**
      * @return PricingDelegateClient
      */
-    public function pricing()
+    public function pricing(): PricingDelegateClient
     {
         return new PricingDelegateClient($this->configuration);
     }
@@ -28,7 +29,7 @@ class BrainClient extends DelegateClient
     /**
      * @return StockDelegateClient
      */
-    public function stock()
+    public function stock(): StockDelegateClient
     {
         return new StockDelegateClient($this->configuration);
     }
@@ -36,7 +37,7 @@ class BrainClient extends DelegateClient
     /**
      * @return DeliveryDelegateClient
      */
-    public function delivery()
+    public function delivery(): DeliveryDelegateClient
     {
         return new DeliveryDelegateClient($this->configuration);
     }
@@ -44,7 +45,7 @@ class BrainClient extends DelegateClient
     /**
      * @return JobDelegateClient
      */
-    public function job()
+    public function job(): JobDelegateClient
     {
         return new JobDelegateClient($this->configuration);
     }
@@ -52,7 +53,7 @@ class BrainClient extends DelegateClient
     /**
      * @return JobBatchDelegateClient
      */
-    public function jobBatch()
+    public function jobBatch(): JobBatchDelegateClient
     {
         return new JobBatchDelegateClient($this->configuration);
     }
@@ -60,7 +61,7 @@ class BrainClient extends DelegateClient
     /**
      * @return ProductDelegateClient
      */
-    public function product()
+    public function product(): ProductDelegateClient
     {
         return new ProductDelegateClient($this->configuration);
     }
@@ -68,7 +69,7 @@ class BrainClient extends DelegateClient
     /**
      * @return ArtworkDelegateClient
      */
-    public function artwork()
+    public function artwork(): ArtworkDelegateClient
     {
         return new ArtworkDelegateClient($this->configuration);
     }
@@ -76,8 +77,16 @@ class BrainClient extends DelegateClient
     /**
      * @return ChangeDelegateClient
      */
-    public function change()
+    public function change(): ChangeDelegateClient
     {
         return new ChangeDelegateClient($this->configuration);
+    }
+
+    /**
+     * @return ArtifactDelegateClient
+     */
+    public function artifact(): ArtifactDelegateClient
+    {
+        return new ArtifactDelegateClient($this->configuration);
     }
 }
