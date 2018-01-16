@@ -81,7 +81,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             $parameters = array_merge(
                 $parameters,
                 [
-                    'filters' => $context->getFilters()->all(),
+                    'filter' => $context->getFilters()->all(),
                 ]
             );
         }
