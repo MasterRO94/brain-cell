@@ -46,15 +46,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function getJobIds(array $filters = [], $parameters = [])
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/job-ids');
-        $context->getFilters()->add($filters);
-        $context->getParameters()->add($parameters);
-
-        $collection = new ResourceCollection();
-        $collection->setEntityClass(JobResource::class);
-
-        return $this->request($context, $collection);
+        throw new \RuntimeException("Do not use getJobIds - use getJobs instead");
     }
 
     /**
