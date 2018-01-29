@@ -602,6 +602,14 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return $this->has('personalisation');
     }
 
+    /**
+     * @return bool
+     */
+    public function hasCorners()
+    {
+        return $this->has('corners');
+    }
+
     public function isMultipage()
     {
         if ($this->components->count() > 1) {
