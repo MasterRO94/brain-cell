@@ -11,7 +11,6 @@ use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
-use Brain\Cell\Enum\JobStatusEnum;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -690,7 +689,8 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function isInImposition()
     {
-        return JobStatusEnum::STATUS_IMPOSITION_QUEUED === $this->status
-            || JobStatusEnum::STATUS_IMPOSITION_MANUAL === $this->status;
+        return JobStatusResource::STATUS_IMPOSITION_QUEUED === $this->status->getCanonical()
+            || JobStatusResource::STATUS_IMPOSITION_MANUAL === $this->status->getCanonical()
+        ;
     }
 }

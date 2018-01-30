@@ -6,7 +6,7 @@ use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\Enum\JobStatusEnum;
+use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -99,7 +99,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function updateStatus(JobResource $resource, $status)
     {
-        if (!in_array($status, JobStatusEnum::getAll())) {
+        if (!in_array($status, JobStatusResource::getAllCanonicals())) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));
         }
 
@@ -107,7 +107,7 @@ class JobDelegateClient extends DelegateClient
         $context->prepareContextForPut(sprintf(
             '/jobs/%s/%s',
             $resource->getId(),
-            str_replace('_', '-', $status)
+            str_replace('job.status.', '', str_replace('_', '-', $status))
         ));
 
         return $this->request($context, $resource);

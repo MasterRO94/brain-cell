@@ -16,4 +16,19 @@ class JobStatusResource extends StatusResource
     const STATUS_PRODUCTION_FINISHED = 'job.status.production_finished';
     const STATUS_PRODUCTION_DISPATCHED = 'job.status.production_dispatched';
     const STATUS_CANCELLED = 'job.status.cancelled';
+
+    public static function getAllCanonicals()
+    {
+        return [
+            static::STATUS_INCOMPLETE,
+            static::STATUS_READY,
+            static::STATUS_IMPOSITION_QUEUED,
+            static::STATUS_IMPOSITION_MANUAL,
+            static::STATUS_PRODUCTION_QUEUED,
+            static::STATUS_PRODUCTION_STARTED,
+            static::STATUS_PRODUCTION_FINISHED,
+            static::STATUS_PRODUCTION_DISPATCHED,
+            static::STATUS_CANCELLED,
+        ];
+    }
 }
