@@ -566,7 +566,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function hasWhiteInk()
     {
-        return $this->has('white-ink');
+        return $this->has('finishing-white-ink');
     }
 
     /**
@@ -574,7 +574,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function hasFoiling()
     {
-        return $this->has('foiling');
+        return $this->has('finishing-foiling');
     }
 
     /**
@@ -582,7 +582,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function hasLaserCutting()
     {
-        return $this->has('laser-cutting');
+        return $this->has('finishing-laser-cutting');
     }
 
     /**
@@ -590,7 +590,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function hasReversePrinting()
     {
-        return $this->has('reverse-printing');
+        return $this->has('finishing-reverse-printing');
     }
 
     /**
@@ -606,15 +606,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function hasPersonalisation()
     {
-        return $this->has('personalisation');
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasCorners()
-    {
-        return $this->has('corners');
+        return $this->has('finishing-personalisation');
     }
 
     public function isMultipage()
