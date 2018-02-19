@@ -596,6 +596,14 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @return bool
      */
+    public function hasRoundCorners()
+    {
+        return $this->has('finishing-corners');
+    }
+
+    /**
+     * @return bool
+     */
     public function hasPersonalisation()
     {
         return $this->has('personalisation');
