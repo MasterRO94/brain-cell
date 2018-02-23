@@ -7,6 +7,8 @@ use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\TransferEntityInterface;
 
+use Psr\Http\Message\StreamInterface;
+
 class ArtifactDelegateClient extends DelegateClient
 {
     /**
@@ -22,5 +24,18 @@ class ArtifactDelegateClient extends DelegateClient
         $context->setPayload($handler->serialise($artifactResource));
 
         return $this->request($context, new ArtifactResource());
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return StreamInterface
+     */
+    public function downloadArtifact($id)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/artifacts/%s/download', $id));
+
+        return $this->stream($context);
     }
 }
