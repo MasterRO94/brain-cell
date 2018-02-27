@@ -7,6 +7,7 @@ use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\Request\BadRequestException;
 use Brain\Cell\Exception\Request\NotFoundException;
 use Brain\Cell\Exception\Request\PayloadViolationException;
+use Brain\Cell\Exception\Request\StatusTransitionException;
 use Brain\Cell\Exception\Request\UnknownRequestException;
 use Brain\Cell\Exception\RequestAdapterException;
 use Brain\Cell\Response\ErrorMessageEnum;
@@ -145,23 +146,54 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 
             //  Bad Request.
             case 400:
-                if (ErrorMessageEnum::ERROR_PAYLOAD_VIOLATION === $canonical) {
-                    $violations = json_encode($responsePayload['violations'] ?? []);
-
-                    return new PayloadViolationException(
-                        sprintf('%s %s: %s', $method, $uri, $violations),
+                if (null === $canonical) {
+                    return new BadRequestException(
+                        sprintf('%s %s: %s', $method, $uri, $responseContent),
                         $requestPayload,
                         $responsePayload,
                         $exception
                     );
                 }
 
-                return new BadRequestException(
-                    sprintf('%s %s: %s', $method, $uri, $responseContent),
-                    $requestPayload,
-                    $responsePayload,
-                    $exception
-                );
+                //  If we don't recognise the canonical we can still use the message
+                $message = $responsePayload['error']['message'] ?? null;
+                switch ($canonical) {
+                    case ErrorMessageEnum::ERROR_PAYLOAD_VIOLATION:
+                        $violations = json_encode($responsePayload['violations'] ?? []);
+
+                        return new PayloadViolationException(
+                            sprintf('%s %s: %s', $method, $uri, $violations),
+                            $requestPayload,
+                            $responsePayload,
+                            $exception
+                        );
+
+                    case ErrorMessageEnum::ERROR_STATUS_TRANSITION:
+                        return new StatusTransitionException(
+                            sprintf(
+                                '%s %s: %s',
+                                $method,
+                                $uri,
+                                $message ?? $responseContent
+                            ),
+                            $requestPayload,
+                            $responsePayload,
+                            $exception
+                        );
+
+                    default:
+                        return new BadRequestException(
+                            sprintf(
+                                '%s %s: %s',
+                                $method,
+                                $uri,
+                                $message ?? $responseContent
+                            ),
+                            $requestPayload,
+                            $responsePayload,
+                            $exception
+                        );
+                }
 
             //  Not Found.
             case 404:
