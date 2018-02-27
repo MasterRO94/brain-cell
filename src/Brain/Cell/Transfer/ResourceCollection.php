@@ -13,11 +13,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @see ArrayCollection
  */
-class ResourceCollection extends ArrayCollection implements
-    Brain\Cell\TransferEntityInterface,
-    Brain\Cell\Transfer\EntityMeta\MetaContainingInterface
+class ResourceCollection extends ArrayCollection implements TransferEntityInterface
 {
-    use Brain\Cell\Transfer\EntityMeta\MetaContainingTrait;
 
     /**
      * The entity class.

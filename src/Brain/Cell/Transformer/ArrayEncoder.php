@@ -96,11 +96,6 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
-            // Don't include data
-            if ('data' == $property->getName()) {
-                continue;
-            }
-
             if ($value instanceof TransferEntityInterface) {
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResourceAndShouldSerialiseAsId($value, $options)) {
