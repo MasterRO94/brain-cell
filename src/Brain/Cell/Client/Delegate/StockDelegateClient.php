@@ -32,13 +32,15 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param JobResource $jobResource
+     * @param array $parameters
      *
      * @return StockFinishingsResource
      */
-    public function getStockOptions(JobResource $jobResource)
+    public function getStockOptions(JobResource $jobResource, array $parameters = [])
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/stock/options');
+        $context->getParameters()->replace($parameters);
 
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($jobResource);
