@@ -33,7 +33,7 @@ class ArtifactDelegateClient extends DelegateClient
     public function getPresignedAsset(): PresignedAssetResource
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/presigned-assets');
+        $context->prepareContextForPost('/presigned-assets');
 
         return $this->request($context, new PresignedAssetResource());
     }
