@@ -10,7 +10,6 @@ use Brain\Cell\Client\RequestContext;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\StockFinishingsResource;
 use Brain\Cell\Service\ResourceHandlerService;
-use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\Transformer\ArrayDecoder;
@@ -114,12 +113,10 @@ class DelegateClientTest extends AbstractBrainCellTestCase
      */
     protected function getResourceHandler()
     {
-        $metaManager = new TransferEntityMetaManagerService();
-
         return new ResourceHandlerService(
             new EntityResourceFactory(),
-            new ArrayEncoder($metaManager),
-            new ArrayDecoder($metaManager)
+            new ArrayEncoder(),
+            new ArrayDecoder()
         );
     }
 }

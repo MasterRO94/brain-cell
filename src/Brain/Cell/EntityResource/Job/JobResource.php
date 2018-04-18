@@ -143,6 +143,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $clonedFrom;
 
     /**
+     * @var JobMetaResource
+     */
+    protected $meta;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -157,6 +162,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             'status' => JobStatusResource::class,
             'artwork' => ArtworkResource::class,
             'clonedFrom' => self::class,
+            'meta' => JobMetaResource::class,
         ];
     }
 
@@ -692,5 +698,21 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return JobStatusResource::STATUS_IMPOSITION_QUEUED === $this->status->getCanonical()
             || JobStatusResource::STATUS_IMPOSITION_MANUAL === $this->status->getCanonical()
         ;
+    }
+
+    /**
+     * @return JobMetaResource
+     */
+    public function getMeta(): JobMetaResource
+    {
+        return $this->meta;
+    }
+
+    /**
+     * @param JobMetaResource $meta
+     */
+    public function setMeta(JobMetaResource $meta)
+    {
+        $this->meta = $meta;
     }
 }

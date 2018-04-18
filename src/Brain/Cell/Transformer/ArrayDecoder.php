@@ -126,7 +126,7 @@ class ArrayDecoder extends AbstractTransformer
         }
 
         // Store the raw data against the resource for use by the encoder
-        $resource->setData($data);
+        $resource->setBrainData($data);
 
         return $resource;
     }
