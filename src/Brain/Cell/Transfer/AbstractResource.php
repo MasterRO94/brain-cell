@@ -2,17 +2,13 @@
 
 namespace Brain\Cell\Transfer;
 
-use Brain;
+use Brain\Cell\TransferEntityInterface;
 
 /**
  * An abstract resource.
  */
-abstract class AbstractResource implements
-    Brain\Cell\TransferEntityInterface,
-    Brain\Cell\Transfer\EntityMeta\MetaContainingInterface
+abstract class AbstractResource implements TransferEntityInterface
 {
-    use Brain\Cell\Transfer\EntityMeta\MetaContainingTrait;
-
     /**
      * Return all the associations that should be considered single resources.
      *
@@ -81,8 +77,8 @@ abstract class AbstractResource implements
         return [];
     }
 
-    /** @var mixed $data */
-    protected $data;
+    /** @var mixed $brainData */
+    protected $brainData;
 
     /**
      * Store serialised data against the resource.
@@ -90,11 +86,11 @@ abstract class AbstractResource implements
      * Used by encoder and decoder modules to represent serialised state -
      * this is so the encoder can check what's changed since decode
      *
-     * @param mixed $data
+     * @param mixed $brainData
      */
-    public function setData($data)
+    public function setBrainData($brainData)
     {
-        $this->data = $data;
+        $this->brainData = $brainData;
     }
 
     /**
@@ -102,8 +98,8 @@ abstract class AbstractResource implements
      *
      * @return mixed
      */
-    public function getData()
+    public function getBrainData()
     {
-        return $this->data;
+        return $this->brainData;
     }
 }

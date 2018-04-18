@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\Tests\Unit\Transformer\Encoder;
 
-use Brain\Cell\Service\TransferEntityMetaManagerService;
 use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
@@ -10,9 +9,6 @@ use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayEncoder;
-
-use Pagerfanta\Pagerfanta;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * @group cell
@@ -24,24 +20,12 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
     /** @var ArrayEncoder */
     protected $encoder;
 
-    /** @var TransferEntityMetaManagerService */
-    protected $manager;
-
-    /** @var MockObject|Pagerfanta */
-    protected $paginatorMock;
-
     /**
      * {@inheritdoc}
      */
     public function setUp()
     {
-        $this->manager = new TransferEntityMetaManagerService();
-        $this->encoder = new ArrayEncoder($this->manager);
-
-        $builder = $this->getMockBuilder(Pagerfanta::class);
-        $builder->disableOriginalConstructor();
-
-        $this->paginatorMock = $builder->getMock();
+        $this->encoder = new ArrayEncoder();
     }
 
     /**
