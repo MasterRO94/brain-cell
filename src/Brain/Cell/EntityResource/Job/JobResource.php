@@ -14,7 +14,9 @@ use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use phpDocumentor\Reflection\Types\Resource;
 use Symfony\Component\Validator\Constraints as Assert;
+use vendor\brain\cell\src\Brain\Cell\EntityResource\Job\JobQueryResource;
 
 /**
  * {@inheritdoc}
@@ -73,9 +75,9 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $updated;
 
     /**
-     * @var bool
+     * @var JobQueryResource[]
      */
-    protected $hasQuery;
+    protected $queries;
 
     /**
      * @var ResourceCollection|JobComponentResource[]
@@ -176,6 +178,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             'options' => JobOptionResource::class,
             'notes' => JobNoteResource::class,
             'artifacts' => ArtifactResource::class,
+            'queries' => JobQueryResource::class,
         ];
     }
 
@@ -714,5 +717,21 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setMeta(JobMetaResource $meta)
     {
         $this->meta = $meta;
+    }
+
+    /**
+     * @return JobQueryResource[]|ResourceCollection
+     */
+    public function getQueries(): ResourceCollection
+    {
+        return $this->queries;
+    }
+
+    /**
+     * @param JobQueryResource[]|ResourceCollection $queries
+     */
+    public function setQueries(ResourceCollection $queries)
+    {
+        $this->queries = $queries;
     }
 }
