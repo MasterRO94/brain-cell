@@ -67,6 +67,16 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
         ];
     }
 
+    public function getDateTimeProperties()
+    {
+        return [
+            'created',
+            'updated',
+            'resolved',
+            'progressStarted',
+        ];
+    }
+
     /**
      * @return string
      */
@@ -116,33 +126,33 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getResolved(): \DateTime
+    public function getResolved(): ?\DateTime
     {
         return $this->resolved;
     }
 
     /**
-     * @param \DateTime $resolved
+     * @param \DateTime|null $resolved
      */
-    public function setResolved(\DateTime $resolved)
+    public function setResolved(?\DateTime $resolved)
     {
         $this->resolved = $resolved;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getProgressStarted(): \DateTime
+    public function getProgressStarted(): ?\DateTime
     {
         return $this->progressStarted;
     }
 
     /**
-     * @param \DateTime $progressStarted
+     * @param \DateTime|null $progressStarted
      */
-    public function setProgressStarted(\DateTime $progressStarted)
+    public function setProgressStarted(?\DateTime $progressStarted)
     {
         $this->progressStarted = $progressStarted;
     }
