@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\brain\cell\src\Brain\Cell\EntityResource\Job;
+namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;

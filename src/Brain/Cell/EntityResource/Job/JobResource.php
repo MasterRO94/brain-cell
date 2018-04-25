@@ -14,9 +14,7 @@ use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-use phpDocumentor\Reflection\Types\Resource;
 use Symfony\Component\Validator\Constraints as Assert;
-use vendor\brain\cell\src\Brain\Cell\EntityResource\Job\JobQueryResource;
 
 /**
  * {@inheritdoc}
