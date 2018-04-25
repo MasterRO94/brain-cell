@@ -16,12 +16,15 @@
         }
     },
     "require": {
-        "php": "^7.0",
-        "doctrine/collections": "~1",
-        "doctrine/common": "~2",
-        "symfony/http-foundation": "^3.1",
-        "symfony/validator": "^3.1",
-        "pagerfanta/pagerfanta": "^1.0"
+        "php": ">=7.0",
+
+        "doctrine/collections": "~1.0",
+        "doctrine/common": "~2.0",
+
+        "symfony/http-foundation": "~3.1 || ~4.0",
+        "symfony/validator": "~3.1 || ~4.0",
+
+        "pagerfanta/pagerfanta": "~1.0"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^6.2",
