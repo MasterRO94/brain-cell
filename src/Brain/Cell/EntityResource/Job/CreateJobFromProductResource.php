@@ -53,4 +53,44 @@ final class CreateJobFromProductResource extends AbstractResource
             'artwork' => ArtworkResource::class,
         ];
     }
+
+    public function getReference(): string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): void
+    {
+        $this->reference = $reference;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): void
+    {
+        $this->quantity = $quantity;
+    }
+
+    public function getProductSku(): string
+    {
+        return $this->productSku;
+    }
+
+    public function setProductSku(string $productSku): void
+    {
+        $this->productSku = $productSku;
+    }
+
+    public function getArtwork(): ArtworkResource
+    {
+        return $this->artwork;
+    }
+
+    public function setArtwork(ArtworkResource $artwork): void
+    {
+        $this->artwork = $artwork;
+    }
 }
