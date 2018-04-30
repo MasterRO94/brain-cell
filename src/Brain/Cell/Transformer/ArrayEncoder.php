@@ -84,7 +84,6 @@ class ArrayEncoder extends AbstractTransformer
             // @todo remove setters for these and check missing setters here
             // @todo bear id in mind here - we need to be able to send id
             if (\in_array($property->getName(), [
-                'status',
                 'created',
                 'updated',
                 'shop',
@@ -100,6 +99,8 @@ class ArrayEncoder extends AbstractTransformer
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResourceAndShouldSerialiseAsId($value, $options)) {
                     $value = $this->getValueForIdResource($value, $options);
+                } elseif ($property->getName() === 'status') {
+                    $value = $value->getCanonical();
 
                     // All other associated can be encoded hooray :)
                 } elseif (isset($resources[$property->getName()])) {

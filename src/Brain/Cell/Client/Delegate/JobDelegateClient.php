@@ -109,11 +109,14 @@ class JobDelegateClient extends DelegateClient
             $resource->getId()
         ));
 
+        // @todo better way of doing this probably...? JobStatusUpdateResource?
         $statusResource = new JobStatusResource();
         $statusResource->setCanonical($status);
+        $emptyJobResource = new JobResource();
+        $emptyJobResource->setStatus($statusResource);
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($statusResource));
+        $context->setPayload($handler->serialise($emptyJobResource));
 
         return $this->request($context, $resource);
     }

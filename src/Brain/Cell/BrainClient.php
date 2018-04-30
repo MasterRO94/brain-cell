@@ -12,6 +12,7 @@ use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
+use Brain\Cell\Client\Delegate\JobQueryDelegateClient;
 
 /**
  * {@inheritdoc}
@@ -48,6 +49,14 @@ class BrainClient extends DelegateClient
     public function job(): JobDelegateClient
     {
         return new JobDelegateClient($this->configuration);
+    }
+
+    /**
+     * @return JobQueryDelegateClient
+     */
+    public function jobQuery(): JobQueryDelegateClient
+    {
+        return new JobQueryDelegateClient($this->configuration);
     }
 
     /**
