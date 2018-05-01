@@ -100,7 +100,7 @@ class JobDelegateClient extends DelegateClient
         $context->setPayload($payload);
 
         /** @var JobResource $response */
-        $response = $this->request($context, $resource);
+        $response = $this->request($context, new JobResource());
 
         return $response;
     }
