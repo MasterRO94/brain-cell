@@ -218,9 +218,12 @@ class JobDelegateClient extends DelegateClient
             $jobId
         ));
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($meta));
+        $newResource = new JobResource();
+        $newResource->setMeta($meta);
 
-        return $this->request($context, new JobResource());
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($newResource));
+
+        return $this->request($context, $newResource);
     }
 }
