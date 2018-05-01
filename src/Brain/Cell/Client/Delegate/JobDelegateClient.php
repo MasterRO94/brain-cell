@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
 use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
@@ -75,7 +76,29 @@ class JobDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, $resource);
+        /** @var JobResource $response */
+        $response = $this->request($context, $resource);
+
+        return $response;
+    }
+
+    /**
+     * @param CreateJobFromProductResource $resource
+     *
+     * @return JobResource
+     */
+    public function createJobFromProduct(CreateJobFromProductResource $resource): JobResource
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/jobs');
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($resource));
+
+        /** @var JobResource $response */
+        $response = $this->request($context, $resource);
+
+        return $response;
     }
 
     /**
