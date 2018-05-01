@@ -74,7 +74,9 @@ class JobDelegateClient extends DelegateClient
         $context->prepareContextForPost('/jobs');
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($resource));
+        $payload = $handler->serialise($resource);
+
+        $context->setPayload($payload);
 
         /** @var JobResource $response */
         $response = $this->request($context, $resource);
@@ -93,7 +95,9 @@ class JobDelegateClient extends DelegateClient
         $context->prepareContextForPost('/jobs');
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($resource));
+        $payload = $handler->serialise($resource);
+
+        $context->setPayload($payload);
 
         /** @var JobResource $response */
         $response = $this->request($context, $resource);
