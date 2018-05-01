@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Job\JobMetaResource;
 use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
@@ -205,6 +206,20 @@ class JobDelegateClient extends DelegateClient
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobNoteResource));
+
+        return $this->request($context, new JobResource());
+    }
+
+    public function submitJobMeta(string $jobId, JobMetaResource $meta)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut(sprintf(
+            '/jobs/%s/meta',
+            $jobId
+        ));
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($meta));
 
         return $this->request($context, new JobResource());
     }
