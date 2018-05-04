@@ -87,7 +87,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
             ->method('request')
             ->with(
                 Request::METHOD_GET,
-                sprintf('%s/end-point?filters[foo]=bar', self::BASE_PATH)
+                sprintf('%s/end-point?filter[foo]=bar', self::BASE_PATH)
             )
             ->willReturn(
                 new Response(
