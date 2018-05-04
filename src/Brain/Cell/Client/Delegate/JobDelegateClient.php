@@ -22,7 +22,7 @@ class JobDelegateClient extends DelegateClient
      * @param array $filters
      * @param array $parameters
      *
-     * @return ResourceCollection|JobResource[]
+     * @return JobResource[]|ResourceCollection
      */
     public function getJobs(array $filters = [], $parameters = [])
     {
@@ -44,11 +44,11 @@ class JobDelegateClient extends DelegateClient
      * @param array $filters
      * @param array $parameters
      *
-     * @return ResourceCollection|JobResource[]
+     * @return JobResource[]|ResourceCollection
      */
     public function getJobIds(array $filters = [], $parameters = [])
     {
-        throw new \RuntimeException("Do not use getJobIds - use getJobs instead");
+        throw new \RuntimeException('Do not use getJobIds - use getJobs instead');
     }
 
     /**

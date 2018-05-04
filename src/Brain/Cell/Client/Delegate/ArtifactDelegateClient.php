@@ -14,7 +14,8 @@ class ArtifactDelegateClient extends DelegateClient
 {
     /**
      * @param ArtifactResource $artifactResource
-     * @return ArtifactResource|AbstractResource|TransferEntityInterface
+     *
+     * @return AbstractResource|ArtifactResource|TransferEntityInterface
      */
     public function createArtifact(ArtifactResource $artifactResource): ArtifactResource
     {
@@ -28,7 +29,7 @@ class ArtifactDelegateClient extends DelegateClient
     }
 
     /**
-     * @return PresignedAssetResource|AbstractResource|TransferEntityInterface
+     * @return AbstractResource|PresignedAssetResource|TransferEntityInterface
      */
     public function getPresignedAsset(): PresignedAssetResource
     {

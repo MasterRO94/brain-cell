@@ -23,7 +23,7 @@ class ArtifactResource extends AbstractResource
      *  - pending_download
      *  - downloaded
      *  - failed_download
-     *  - failed_invalid_mime_type
+     *  - failed_invalid_mime_type.
      *
      * @var string
      */

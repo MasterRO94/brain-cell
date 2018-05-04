@@ -11,7 +11,7 @@ class FinishingCombinationResource extends AbstractResource
     protected $stockDefinition;
 
     /**
-     * @var ResourceCollection|FinishingCombinationAssignmentResource[]
+     * @var FinishingCombinationAssignmentResource[]|ResourceCollection
      */
     protected $assignments;
 

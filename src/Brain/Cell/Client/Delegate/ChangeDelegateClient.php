@@ -12,7 +12,7 @@ class ChangeDelegateClient extends DelegateClient
     /**
      * @param array $parameters
      *
-     * @return ResourceCollection|ChangeSetResource[]
+     * @return ChangeSetResource[]|ResourceCollection
      */
     public function getChangeSets(array $parameters = [])
     {

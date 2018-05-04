@@ -28,7 +28,6 @@ class EntityFactoryTest extends AbstractBrainCellTestCase
      */
     public function factoryConstructsNewTransferEntities()
     {
-
         /** @var SimpleResourceMock $response */
         $response = $this->factory->create(SimpleResourceMock::class);
         $this->assertNull($response->getId(), 'The id should not have been set on construction');

@@ -29,7 +29,7 @@ class DeliveryJobBatchResource extends AbstractResource
     protected $deliveryAddress;
 
     /**
-     * @var ResourceCollection|JobResource[]
+     * @var JobResource[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(

@@ -37,7 +37,6 @@ class ArrayDecoderTest extends AbstractBrainCellTestCase
      */
     public function decoderWillThrowOnInvalidTransferEntityInterface()
     {
-
         /** @var TransferEntityInterface $entity */
         $entity = $this->createMock(TransferEntityInterface::class);
 

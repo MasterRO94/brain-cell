@@ -69,9 +69,9 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     /**
      * @param RequestContext $context
      *
-     * @return ResponseInterface
-     *
      * @throws \Exception
+     *
+     * @return ResponseInterface
      */
     protected function getResponse(RequestContext $context)
     {
@@ -143,7 +143,6 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 
         //  Decorate exceptions according to status code and potentially canonical.
         switch ($exception->getResponse()->getStatusCode()) {
-
             //  Bad Request.
             case 400:
                 if (null === $canonical) {
@@ -196,6 +195,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
                 }
 
             //  Not Found.
+            // no break
             case 404:
                 return new NotFoundException(
                     sprintf('%s %s', $method, $uri),
@@ -212,7 +212,6 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
                     $responsePayload,
                     $exception
                 );
-
         }
     }
 }

@@ -31,7 +31,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
 {
     const BASE_PATH = 'https://some.example.com/v1';
 
-    /** @var MockObject|GuzzleClient */
+    /** @var GuzzleClient|MockObject */
     protected $guzzle;
 
     /** @var GuzzleHttpRequestAdapter */
@@ -114,13 +114,13 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
      */
     public function wrapsExceptionPayloadViolation(): void
     {
-        /** @var UriInterface|MockObject $uri */
+        /** @var MockObject|UriInterface $uri */
         $uri = $this->createMock(UriInterface::class);
         $uri->expects(self::any())
             ->method('__toString')
             ->willReturn('/end-point');
 
-        /** @var StreamInterface|MockObject $requestStream */
+        /** @var MockObject|StreamInterface $requestStream */
         $requestStream = $this->createMock(StreamInterface::class);
         $requestStream->expects(self::any())
             ->method('getContents')
@@ -128,7 +128,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                 []
             ));
 
-        /** @var RequestInterface|MockObject $guzzleRequest */
+        /** @var MockObject|RequestInterface $guzzleRequest */
         $guzzleRequest = $this->createMock(RequestInterface::class);
         $guzzleRequest->expects(self::any())
             ->method('getUri')
@@ -142,7 +142,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
             ->method('getMethod')
             ->willReturn('POST');
 
-        /** @var StreamInterface|MockObject $responseStream */
+        /** @var MockObject|StreamInterface $responseStream */
         $responseStream = $this->createMock(StreamInterface::class);
         $responseStream->expects(self::any())
             ->method('getContents')
@@ -157,7 +157,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                 ]
             ));
 
-        /** @var ResponseInterface|MockObject $guzzleResponse */
+        /** @var MockObject|ResponseInterface $guzzleResponse */
         $guzzleResponse = $this->createMock(ResponseInterface::class);
         $guzzleResponse->expects(self::any())
             ->method('getBody')
@@ -197,13 +197,13 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
      */
     public function wrapsExceptionBadRequest(): void
     {
-        /** @var UriInterface|MockObject $uri */
+        /** @var MockObject|UriInterface $uri */
         $uri = $this->createMock(UriInterface::class);
         $uri->expects(self::any())
             ->method('__toString')
             ->willReturn('/end-point');
 
-        /** @var StreamInterface|MockObject $requestStream */
+        /** @var MockObject|StreamInterface $requestStream */
         $requestStream = $this->createMock(StreamInterface::class);
         $requestStream->expects(self::any())
             ->method('getContents')
@@ -211,7 +211,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                 []
             ));
 
-        /** @var RequestInterface|MockObject $guzzleRequest */
+        /** @var MockObject|RequestInterface $guzzleRequest */
         $guzzleRequest = $this->createMock(RequestInterface::class);
         $guzzleRequest->expects(self::any())
             ->method('getUri')
@@ -225,7 +225,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
             ->method('getMethod')
             ->willReturn('POST');
 
-        /** @var StreamInterface|MockObject $responseStream */
+        /** @var MockObject|StreamInterface $responseStream */
         $responseStream = $this->createMock(StreamInterface::class);
         $responseStream->expects(self::any())
             ->method('getContents')
@@ -237,7 +237,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                 ]
             ));
 
-        /** @var ResponseInterface|MockObject $guzzleResponse */
+        /** @var MockObject|ResponseInterface $guzzleResponse */
         $guzzleResponse = $this->createMock(ResponseInterface::class);
         $guzzleResponse->expects(self::any())
             ->method('getBody')
@@ -277,13 +277,13 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
      */
     public function wrapsExceptionNotFound(): void
     {
-        /** @var UriInterface|MockObject $uri */
+        /** @var MockObject|UriInterface $uri */
         $uri = $this->createMock(UriInterface::class);
         $uri->expects(self::any())
             ->method('__toString')
             ->willReturn('/end-point');
 
-        /** @var StreamInterface|MockObject $requestStream */
+        /** @var MockObject|StreamInterface $requestStream */
         $requestStream = $this->createMock(StreamInterface::class);
         $requestStream->expects(self::any())
             ->method('getContents')
@@ -291,7 +291,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                 []
             ));
 
-        /** @var RequestInterface|MockObject $guzzleRequest */
+        /** @var MockObject|RequestInterface $guzzleRequest */
         $guzzleRequest = $this->createMock(RequestInterface::class);
         $guzzleRequest->expects(self::any())
             ->method('getUri')
@@ -305,7 +305,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
             ->method('getMethod')
             ->willReturn('POST');
 
-        /** @var StreamInterface|MockObject $responseStream */
+        /** @var MockObject|StreamInterface $responseStream */
         $responseStream = $this->createMock(StreamInterface::class);
         $responseStream->expects(self::any())
             ->method('getContents')
@@ -317,7 +317,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                 ]
             ));
 
-        /** @var ResponseInterface|MockObject $guzzleResponse */
+        /** @var MockObject|ResponseInterface $guzzleResponse */
         $guzzleResponse = $this->createMock(ResponseInterface::class);
         $guzzleResponse->expects(self::any())
             ->method('getBody')
@@ -357,13 +357,13 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
      */
     public function wrapsGenericException(): void
     {
-        /** @var UriInterface|MockObject $uri */
+        /** @var MockObject|UriInterface $uri */
         $uri = $this->createMock(UriInterface::class);
         $uri->expects(self::any())
             ->method('__toString')
             ->willReturn('/end-point');
 
-        /** @var StreamInterface|MockObject $requestStream */
+        /** @var MockObject|StreamInterface $requestStream */
         $requestStream = $this->createMock(StreamInterface::class);
         $requestStream->expects(self::any())
             ->method('getContents')
@@ -371,7 +371,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                 []
             ));
 
-        /** @var RequestInterface|MockObject $guzzleRequest */
+        /** @var MockObject|RequestInterface $guzzleRequest */
         $guzzleRequest = $this->createMock(RequestInterface::class);
         $guzzleRequest->expects(self::any())
             ->method('getUri')
@@ -385,7 +385,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
             ->method('getMethod')
             ->willReturn('POST');
 
-        /** @var StreamInterface|MockObject $responseStream */
+        /** @var MockObject|StreamInterface $responseStream */
         $responseStream = $this->createMock(StreamInterface::class);
         $responseStream->expects(self::any())
             ->method('getContents')
@@ -397,7 +397,7 @@ class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
                 ]
             ));
 
-        /** @var ResponseInterface|MockObject $guzzleResponse */
+        /** @var MockObject|ResponseInterface $guzzleResponse */
         $guzzleResponse = $this->createMock(ResponseInterface::class);
         $guzzleResponse->expects(self::any())
             ->method('getBody')

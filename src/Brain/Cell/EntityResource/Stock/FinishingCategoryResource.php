@@ -103,7 +103,7 @@ class FinishingCategoryResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|FinishingItemResource[]
+     * @return FinishingItemResource[]|ResourceCollection
      */
     public function getOptions()
     {
@@ -111,7 +111,7 @@ class FinishingCategoryResource extends AbstractResource
     }
 
     /**
-     * @param ResourceCollection|FinishingItemResource[] $options
+     * @param FinishingItemResource[]|ResourceCollection $options
      *
      * @return FinishingCategoryResource
      */

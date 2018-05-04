@@ -17,13 +17,13 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
  */
 class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
 {
-    /** @var MockObject|EntityResourceFactory */
+    /** @var EntityResourceFactory|MockObject */
     protected $factoryMock;
 
-    /** @var MockObject|ArrayEncoder */
+    /** @var ArrayEncoder|MockObject */
     protected $encoderMock;
 
-    /** @var MockObject|ArrayDecoder */
+    /** @var ArrayDecoder|MockObject */
     protected $decoderMock;
 
     /** @var ResourceHandlerService */

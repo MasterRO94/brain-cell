@@ -87,7 +87,7 @@ class ResourceHandlerService
      * A shortcut method for the {@link EntityResourceFactory::create()} method.
      *
      * @param string $class
-     * @param null|int $id
+     * @param int|null $id
      *
      * @return TransferEntityInterface
      */

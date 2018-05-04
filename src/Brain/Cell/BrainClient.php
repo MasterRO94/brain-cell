@@ -2,6 +2,7 @@
 
 namespace Brain\Cell;
 
+use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
 use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
 use Brain\Cell\Client\Delegate\ChangeDelegateClient;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
@@ -11,7 +12,6 @@ use Brain\Cell\Client\Delegate\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
 
 /**
  * {@inheritdoc}

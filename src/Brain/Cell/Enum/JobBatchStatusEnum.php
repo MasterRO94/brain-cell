@@ -13,7 +13,6 @@ class JobBatchStatusEnum
     const STATUS_INCOMPLETE = 'incomplete';
     const STATUS_READY = 'ready';
 
-
     public static function getAll(): array
     {
         return [

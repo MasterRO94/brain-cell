@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\Transfer;
 
-use Brain;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\TransferEntityInterface;
 
@@ -15,7 +14,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class ResourceCollection extends ArrayCollection implements TransferEntityInterface
 {
-
     /**
      * The entity class.
      *
@@ -26,9 +24,9 @@ class ResourceCollection extends ArrayCollection implements TransferEntityInterf
     /**
      * Return the entity class.
      *
-     * @return string
-     *
      * @throws RuntimeException if entity class is not present.
+     *
+     * @return string
      *
      * @internal
      */
@@ -75,7 +73,6 @@ class ResourceCollection extends ArrayCollection implements TransferEntityInterf
      */
     public function add($value)
     {
-
         //  We only accept instance of TransferEntityInterface in these collections.
         if (!$value instanceof TransferEntityInterface) {
             throw new RuntimeException(sprintf('ResourceCollection::add() only accepts instances of TransferEntityInterface'));

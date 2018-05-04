@@ -3,8 +3,8 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-
 use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
+
 use Psr\Http\Message\StreamInterface;
 
 class ArtworkDelegateClient extends DelegateClient
@@ -27,6 +27,7 @@ class ArtworkDelegateClient extends DelegateClient
      * @param int $pageNumber
      * @param int|null $width
      * @param int|null $height
+     *
      * @return StreamInterface
      */
     public function downloadPreview(string $id, int $pageNumber, int $width = null, int $height = null): StreamInterface

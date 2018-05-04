@@ -14,12 +14,12 @@ use Brain\Cell\Transfer\ResourceCollection;
 class StockFinishingsResource extends AbstractResource
 {
     /**
-     * @var ResourceCollection|FinishingCategoryResource[]
+     * @var FinishingCategoryResource[]|ResourceCollection
      */
     protected $finishings;
 
     /**
-     * @var ResourceCollection|MaterialResource[]
+     * @var MaterialResource[]|ResourceCollection
      */
     protected $materials;
 
@@ -41,7 +41,7 @@ class StockFinishingsResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|FinishingCategoryResource[]
+     * @return FinishingCategoryResource[]|ResourceCollection
      */
     public function getFinishings()
     {
@@ -49,7 +49,7 @@ class StockFinishingsResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|MaterialResource[]
+     * @return MaterialResource[]|ResourceCollection
      */
     public function getMaterials()
     {

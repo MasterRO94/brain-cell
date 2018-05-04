@@ -20,7 +20,7 @@ class DeliveryDelegateClient extends DelegateClient
     /**
      * @param DeliveryJobBatchResource $batch
      *
-     * @return ResourceCollection|DeliveryOptionResource[]
+     * @return DeliveryOptionResource[]|ResourceCollection
      */
     public function getDeliveryOptions(DeliveryJobBatchResource $batch)
     {

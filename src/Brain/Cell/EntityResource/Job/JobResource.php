@@ -78,7 +78,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $hasQuery;
 
     /**
-     * @var ResourceCollection|JobComponentResource[]
+     * @var JobComponentResource[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -89,12 +89,12 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $components;
 
     /**
-     * @var ResourceCollection|JobOptionResource[]
+     * @var JobOptionResource[]|ResourceCollection
      */
     protected $options;
 
     /**
-     * @var ResourceCollection|JobNoteResource[]
+     * @var JobNoteResource[]|ResourceCollection
      */
     protected $notes;
 
@@ -133,7 +133,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $artwork;
 
     /**
-     * @var ResourceCollection|ArtifactResource[]
+     * @var ArtifactResource[]|ResourceCollection
      */
     protected $artifacts;
 
@@ -212,7 +212,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return null|ProductionHouseResource
+     * @return ProductionHouseResource|null
      */
     public function getProductionHouse()
     {
@@ -359,7 +359,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return ResourceCollection|JobComponentResource[]
+     * @return JobComponentResource[]|ResourceCollection
      */
     public function getComponents()
     {
@@ -367,7 +367,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @param ResourceCollection|JobComponentResource[] $components
+     * @param JobComponentResource[]|ResourceCollection $components
      *
      * @return $this
      */
@@ -696,8 +696,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function isInImposition()
     {
         return JobStatusResource::STATUS_IMPOSITION_QUEUED === $this->status->getCanonical()
-            || JobStatusResource::STATUS_IMPOSITION_MANUAL === $this->status->getCanonical()
-        ;
+            || JobStatusResource::STATUS_IMPOSITION_MANUAL === $this->status->getCanonical();
     }
 
     /**

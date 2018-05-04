@@ -36,7 +36,7 @@ class ArtworkResource extends AbstractResource
     protected $mimeType;
 
     /**
-     * @var ResourceCollection|ArtworkIssueResource[]
+     * @var ArtworkIssueResource[]|ResourceCollection
      */
     protected $issues;
 
