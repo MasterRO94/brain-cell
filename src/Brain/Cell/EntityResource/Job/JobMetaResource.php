@@ -78,5 +78,4 @@ class JobMetaResource extends AbstractResource
     {
         $this->note = $note;
     }
-
 }

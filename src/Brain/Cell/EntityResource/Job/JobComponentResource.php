@@ -51,7 +51,7 @@ class JobComponentResource extends AbstractResource
     protected $productionSheetCount;
 
     /**
-     * @var ResourceCollection|JobComponentOptionResource[]
+     * @var JobComponentOptionResource[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -125,7 +125,7 @@ class JobComponentResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|JobComponentOptionResource[]
+     * @return JobComponentOptionResource[]|ResourceCollection
      */
     public function getOptions()
     {
@@ -133,7 +133,7 @@ class JobComponentResource extends AbstractResource
     }
 
     /**
-     * @param ResourceCollection|JobComponentOptionResource[] $options
+     * @param JobComponentOptionResource[]|ResourceCollection $options
      *
      * @return JobComponentResource
      */

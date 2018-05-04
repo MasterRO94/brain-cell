@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\Transformer;
 
-use Brain;
 use Brain\Cell\AbstractTransformer;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;

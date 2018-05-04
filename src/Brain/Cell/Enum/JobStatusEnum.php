@@ -20,7 +20,6 @@ class JobStatusEnum
     const STATUS_PRODUCTION_DISPATCHED = 'production_dispatched';
     const STATUS_CANCELLED = 'cancelled';
 
-
     public static function getAll(): array
     {
         return [

@@ -17,11 +17,23 @@ return PhpCsFixer\Config::create()
 
             'no_multiline_whitespace_before_semicolons' => true,
             'no_extra_consecutive_blank_lines' => false,
+            'yoda_style' => false,
+
+            'protected_to_private' => true,
+
+            'phpdoc_add_missing_param_annotation' => [
+                'only_untyped' => false,
+            ],
             'phpdoc_inline_tag' => true,
             'phpdoc_align' => false,
             'phpdoc_indent' => false,
+            'phpdoc_order' => true,
+            'phpdoc_separation' => true,
             'phpdoc_annotation_without_dot' => false,
             'phpdoc_var_without_name' => false,
+            'phpdoc_types_order' => [
+                'null_adjustment' => 'always_last'
+            ]
         ]
     )
     ->setFinder(

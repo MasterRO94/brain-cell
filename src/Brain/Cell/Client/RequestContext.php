@@ -43,7 +43,6 @@ class RequestContext
      */
     protected $payload;
 
-
     public function __construct($path)
     {
         $this->path = $path;

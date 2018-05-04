@@ -42,5 +42,4 @@ class PresignedAssetResource extends AbstractResource
     {
         return $this->expiresAt;
     }
-
 }

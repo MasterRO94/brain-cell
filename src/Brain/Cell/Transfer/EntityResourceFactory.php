@@ -15,7 +15,7 @@ class EntityResourceFactory
      * Create and return the given $class.
      *
      * @param string $class
-     * @param null|int $id
+     * @param int|null $id
      *
      * @return TransferEntityInterface
      */

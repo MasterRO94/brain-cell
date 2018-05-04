@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
 use Brain\Cell\EntityResource\Job\JobMetaResource;
 use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
@@ -21,7 +22,7 @@ class JobDelegateClient extends DelegateClient
      * @param array $filters
      * @param array $parameters
      *
-     * @return ResourceCollection|JobResource[]
+     * @return JobResource[]|ResourceCollection
      */
     public function getJobs(array $filters = [], $parameters = [])
     {
@@ -43,11 +44,11 @@ class JobDelegateClient extends DelegateClient
      * @param array $filters
      * @param array $parameters
      *
-     * @return ResourceCollection|JobResource[]
+     * @return JobResource[]|ResourceCollection
      */
     public function getJobIds(array $filters = [], $parameters = [])
     {
-        throw new \RuntimeException("Do not use getJobIds - use getJobs instead");
+        throw new \RuntimeException('Do not use getJobIds - use getJobs instead');
     }
 
     /**
@@ -74,9 +75,35 @@ class JobDelegateClient extends DelegateClient
         $context->prepareContextForPost('/jobs');
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($resource));
+        $payload = $handler->serialise($resource);
 
-        return $this->request($context, $resource);
+        $context->setPayload($payload);
+
+        /** @var JobResource $response */
+        $response = $this->request($context, $resource);
+
+        return $response;
+    }
+
+    /**
+     * @param CreateJobFromProductResource $resource
+     *
+     * @return JobResource
+     */
+    public function createJobFromProduct(CreateJobFromProductResource $resource): JobResource
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/jobs');
+
+        $handler = $this->configuration->getResourceHandler();
+        $payload = $handler->serialise($resource);
+
+        $context->setPayload($payload);
+
+        /** @var JobResource $response */
+        $response = $this->request($context, new JobResource());
+
+        return $response;
     }
 
     /**

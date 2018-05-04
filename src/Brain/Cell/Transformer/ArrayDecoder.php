@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\Transformer;
 
-use Brain;
 use Brain\Cell\AbstractTransformer;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
@@ -67,7 +66,6 @@ class ArrayDecoder extends AbstractTransformer
         //  Used later to validate missing properties.
         $properties = [];
         foreach ($class->getProperties() as $property) {
-
             //  All properties prefixed with "brain" are to be ignored.
             //  There is a reason why we cannot make use of special characters as I intended to do, cant remember.
             if ('brain' === substr($property->getName(), 0, 5)) {

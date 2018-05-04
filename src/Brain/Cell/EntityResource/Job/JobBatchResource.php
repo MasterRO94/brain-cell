@@ -41,7 +41,7 @@ class JobBatchResource extends AbstractResource
     protected $batchDelivery;
 
     /**
-     * @var ResourceCollection|JobResource[]
+     * @var JobResource[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -52,7 +52,7 @@ class JobBatchResource extends AbstractResource
     protected $jobs;
 
     /**
-     * @var ResourceCollection|DispatchResource[]
+     * @var DispatchResource[]|ResourceCollection
      *
      * @Assert\Valid()
      */

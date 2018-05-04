@@ -7,5 +7,4 @@ namespace Brain\Cell;
  */
 abstract class AbstractTransformer
 {
-
 }

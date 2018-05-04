@@ -7,5 +7,4 @@ namespace Brain\Cell\Exception\Request;
  */
 class StatusTransitionException extends BadRequestException
 {
-
 }
