@@ -73,9 +73,9 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $updated;
 
     /**
-     * @var bool
+     * @var JobQueryResource[]
      */
-    protected $hasQuery;
+    protected $queries;
 
     /**
      * @var JobComponentResource[]|ResourceCollection
@@ -176,6 +176,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             'options' => JobOptionResource::class,
             'notes' => JobNoteResource::class,
             'artifacts' => ArtifactResource::class,
+            'queries' => JobQueryResource::class,
         ];
     }
 
@@ -713,5 +714,21 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setMeta(JobMetaResource $meta)
     {
         $this->meta = $meta;
+    }
+
+    /**
+     * @return JobQueryResource[]|ResourceCollection
+     */
+    public function getQueries(): ResourceCollection
+    {
+        return $this->queries;
+    }
+
+    /**
+     * @param JobQueryResource[]|ResourceCollection $queries
+     */
+    public function setQueries(ResourceCollection $queries)
+    {
+        $this->queries = $queries;
     }
 }

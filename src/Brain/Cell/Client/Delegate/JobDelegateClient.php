@@ -133,10 +133,18 @@ class JobDelegateClient extends DelegateClient
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
-            '/jobs/%s/%s',
-            $resource->getId(),
-            str_replace('job.status.', '', str_replace('_', '-', $status))
+            '/jobs/%s/status',
+            $resource->getId()
         ));
+
+        // @todo better way of doing this probably...? JobStatusUpdateResource?
+        $statusResource = new JobStatusResource();
+        $statusResource->setCanonical($status);
+        $emptyJobResource = new JobResource();
+        $emptyJobResource->setStatus($statusResource);
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($emptyJobResource));
 
         return $this->request($context, $resource);
     }

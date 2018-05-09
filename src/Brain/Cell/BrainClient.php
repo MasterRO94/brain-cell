@@ -8,6 +8,7 @@ use Brain\Cell\Client\Delegate\ChangeDelegateClient;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
 use Brain\Cell\Client\Delegate\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\JobDelegateClient;
+use Brain\Cell\Client\Delegate\JobQueryDelegateClient;
 use Brain\Cell\Client\Delegate\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
@@ -48,6 +49,14 @@ class BrainClient extends DelegateClient
     public function job(): JobDelegateClient
     {
         return new JobDelegateClient($this->configuration);
+    }
+
+    /**
+     * @return JobQueryDelegateClient
+     */
+    public function jobQuery(): JobQueryDelegateClient
+    {
+        return new JobQueryDelegateClient($this->configuration);
     }
 
     /**
