@@ -38,20 +38,6 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
-     * Filters available:
-     * * id = string|string[].
-     *
-     * @param array $filters
-     * @param array $parameters
-     *
-     * @return JobResource[]|ResourceCollection
-     */
-    public function getJobIds(array $filters = [], $parameters = [])
-    {
-        throw new \RuntimeException('Do not use getJobIds - use getJobs instead');
-    }
-
-    /**
      * @param string $id
      *
      * @return JobResource
@@ -120,33 +106,33 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
-     * @param JobResource $resource
-     * @param string $status
+     * @param JobResource $jobResource
+     * @param JobStatusResource $statusResource
      *
      * @return JobResource
      */
-    public function updateStatus(JobResource $resource, $status)
+    public function updateStatus(JobResource $jobResource, JobStatusResource $statusResource)
     {
-        if (!in_array($status, JobStatusResource::getAllCanonicals())) {
-            throw new ClientException(sprintf('Invalid status [%s]', $status));
+        if (!in_array(
+            $statusResource->getCanonical(),
+            JobStatusResource::getAllCanonicals()
+        )) {
+            throw new ClientException(sprintf(
+                'Invalid status canonical [%s]',
+                $statusResource->getCanonical()
+            ));
         }
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
             '/jobs/%s/status',
-            $resource->getId()
+            $jobResource->getId()
         ));
 
-        // @todo better way of doing this probably...? JobStatusUpdateResource?
-        $statusResource = new JobStatusResource();
-        $statusResource->setCanonical($status);
-        $emptyJobResource = new JobResource();
-        $emptyJobResource->setStatus($statusResource);
-
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($emptyJobResource));
+        $context->setPayload($handler->serialise($jobResource));
 
-        return $this->request($context, $resource);
+        return $this->request($context, $jobResource);
     }
 
     /**
@@ -170,73 +156,16 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
-     * @param string $jobId
+     * @param JobResource $job
      * @param JobNoteResource $jobNoteResource
      *
      * @return JobResource
      */
-    public function submitJobNote(
-        string $jobId,
-        JobNoteResource $jobNoteResource
-    ) {
-        return $this->submitNote(
-            $jobId,
-            $jobNoteResource,
-            'notes'
-        );
-    }
-
-    /**
-     * @param string $jobId
-     * @param JobNoteResource $jobNoteResource
-     *
-     * @return JobResource
-     */
-    public function submitQueryJobNote(
-        string $jobId,
-        JobNoteResource $jobNoteResource
-    ) {
-        return $this->submitNote(
-            $jobId,
-            $jobNoteResource,
-            'query'
-        );
-    }
-
-    /**
-     * @param string $jobId
-     * @param JobNoteResource $jobNoteResource
-     *
-     * @return JobResource
-     */
-    public function submitQueryResolvedJobNote(
-        string $jobId,
-        JobNoteResource $jobNoteResource
-    ) {
-        return $this->submitNote(
-            $jobId,
-            $jobNoteResource,
-            'query-resolution'
-        );
-    }
-
-    /**
-     * @param string $jobId
-     * @param JobNoteResource $jobNoteResource
-     * @param string $endpoint
-     *
-     * @return JobResource
-     */
-    protected function submitNote(
-        string $jobId,
-        JobNoteResource $jobNoteResource,
-        string $endpoint
-    ) {
+    public function submitJobNote(JobResource $job, JobNoteResource $jobNoteResource) {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf(
-            '/jobs/%s/%s',
-            $jobId,
-            $endpoint
+            '/jobs/%s/notes',
+            $job->getId()
         ));
 
         $handler = $this->configuration->getResourceHandler();
@@ -245,12 +174,18 @@ class JobDelegateClient extends DelegateClient
         return $this->request($context, new JobResource());
     }
 
-    public function submitJobMeta(string $jobId, JobMetaResource $meta)
+    /**
+     * @param JobResource $job
+     * @param JobMetaResource $meta
+     *
+     * @return JobResource
+     */
+    public function submitJobMeta(JobResource $job, JobMetaResource $meta)
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
             '/jobs/%s/meta',
-            $jobId
+            $job->getId()
         ));
 
         $newResource = new JobResource();

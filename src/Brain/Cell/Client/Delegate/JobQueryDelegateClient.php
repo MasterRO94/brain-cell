@@ -3,8 +3,10 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Job\JobQueryNoteResource;
 use Brain\Cell\EntityResource\Job\JobQueryResource;
+use Brain\Cell\EntityResource\Job\JobResource;
 
 class JobQueryDelegateClient extends DelegateClient
 {
@@ -13,7 +15,7 @@ class JobQueryDelegateClient extends DelegateClient
      *
      * @return JobQueryResource
      */
-    public function getJobQuery($id)
+    public function getJobQuery(string $id)
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/queries/%s', $id));
@@ -22,43 +24,86 @@ class JobQueryDelegateClient extends DelegateClient
     }
 
     /**
-     * @param string $jobId
-     * @param JobQueryResource $resource
+     * @param JobResource $jobResource
+     * @param JobQueryResource $jobQueryResource
      *
      * @return JobQueryResource
      */
-    public function postJobQuery(string $jobId, JobQueryResource $resource)
+    public function postJobQuery(JobResource $jobResource, JobQueryResource $jobQueryResource)
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf(
             '/jobs/%s/queries',
-            $jobId
+            $jobResource->getId()
         ));
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($handler->serialise($jobQueryResource));
 
-        return $this->request($context, $resource);
+        return $this->request($context, $jobQueryResource);
     }
 
     /**
-     * @param string $queryId
-     * @param JobQueryNoteResource $resource
+     * @param JobQueryResource $jobQueryResource
+     * @param JobQueryNoteResource $jobQueryNoteResource
      *
      * @return JobQueryNoteResource
      */
-    public function postJobQueryNote(string $queryId, JobQueryNoteResource $resource)
+    public function postJobQueryNote(JobQueryResource $jobQueryResource, JobQueryNoteResource $jobQueryNoteResource)
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf(
             '/queries/%s/notes',
-            $queryId
+            $jobQueryResource->getId()
         ));
 
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($handler->serialise($jobQueryNoteResource));
 
-        return $this->request($context, $resource);
+        return $this->request($context, $jobQueryNoteResource);
+    }
+
+    /**
+     * @param JobQueryResource $jobQueryResource
+     * @param ClientResource $clientResource
+     *
+     * @return JobQueryResource
+     */
+    public function putJobQueryAssignee(JobQueryResource $jobQueryResource, ClientResource $clientResource)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut(sprintf(
+            '/queries/%s/assignee',
+            $jobQueryResource->getId()
+        ));
+
+        $jobQueryResource->setAssignee($clientResource);
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobQueryResource));
+
+        return $this->request($context, $jobQueryResource);
+    }
+
+    /**
+     * @param JobQueryResource $jobQueryResource
+     *
+     * @return JobQueryResource
+     */
+    public function removeJobQueryAssignee(JobQueryResource $jobQueryResource)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut(sprintf(
+            '/queries/%s/assignee',
+            $jobQueryResource->getId()
+        ));
+
+        $jobQueryResource->setAssignee(null);
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobQueryResource));
+
+        return $this->request($context, $jobQueryResource);
     }
 
 }
