@@ -93,12 +93,10 @@ class JobQueryDelegateClient extends DelegateClient
     public function removeJobQueryAssignee(JobQueryResource $jobQueryResource)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPut(sprintf(
+        $context->prepareContextForDelete(sprintf(
             '/queries/%s/assignee',
             $jobQueryResource->getId()
         ));
-
-        $jobQueryResource->setAssignee(null);
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobQueryResource));

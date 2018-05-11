@@ -141,6 +141,14 @@ class RequestContext
     /**
      * @param string $path
      */
+    public function prepareContextForDelete($path)
+    {
+        $this->prepareContext(Request::METHOD_DELETE, $path);
+    }
+
+    /**
+     * @param string $path
+     */
     public function prepareContextForPatch($path)
     {
         $this->prepareContext(Request::METHOD_PATCH, $path);
