@@ -104,4 +104,41 @@ class JobQueryDelegateClient extends DelegateClient
         return $this->request($context, $jobQueryResource);
     }
 
+    /**
+     * @param JobQueryResource $jobQueryResource
+     *
+     * @return JobQueryResource
+     */
+    public function putJobQueryInProgress(JobQueryResource $jobQueryResource)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForDelete(sprintf(
+            '/queries/%s/in-progress',
+            $jobQueryResource->getId()
+        ));
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobQueryResource));
+
+        return $this->request($context, $jobQueryResource);
+    }
+
+    /**
+     * @param JobQueryResource $jobQueryResource
+     *
+     * @return JobQueryResource
+     */
+    public function putJobQueryResolved(JobQueryResource $jobQueryResource)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForDelete(sprintf(
+            '/queries/%s/resolved',
+            $jobQueryResource->getId()
+        ));
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobQueryResource));
+
+        return $this->request($context, $jobQueryResource);
+    }
 }
