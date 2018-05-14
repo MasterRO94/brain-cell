@@ -112,7 +112,7 @@ class JobQueryDelegateClient extends DelegateClient
     public function putJobQueryInProgress(JobQueryResource $jobQueryResource)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForDelete(sprintf(
+        $context->prepareContextForPut(sprintf(
             '/queries/%s/in-progress',
             $jobQueryResource->getId()
         ));
@@ -131,7 +131,7 @@ class JobQueryDelegateClient extends DelegateClient
     public function putJobQueryResolved(JobQueryResource $jobQueryResource)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForDelete(sprintf(
+        $context->prepareContextForPut(sprintf(
             '/queries/%s/resolved',
             $jobQueryResource->getId()
         ));
