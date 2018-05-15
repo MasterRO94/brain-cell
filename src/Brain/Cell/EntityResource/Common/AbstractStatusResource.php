@@ -70,7 +70,6 @@ abstract class AbstractStatusResource extends AbstractResource
         $this->canonical = $canonical;
     }
 
-
     /**
      * Return the localised translation.
      *
