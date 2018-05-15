@@ -46,6 +46,14 @@ class AbstractNoteResource extends AbstractResource
         ];
     }
 
+    public function getDateTimeProperties()
+    {
+        return [
+            'created',
+            'updated',
+        ];
+    }
+
     public function getId()
     {
         return $this->id;

@@ -61,6 +61,17 @@ abstract class AbstractStatusResource extends AbstractResource
     }
 
     /**
+     * Set the canonical status string.
+     *
+     * @param string $canonical
+     */
+    public function setCanonical(string $canonical)
+    {
+        $this->canonical = $canonical;
+    }
+
+
+    /**
      * Return the localised translation.
      *
      * @return string
