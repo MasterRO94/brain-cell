@@ -161,7 +161,8 @@ class JobDelegateClient extends DelegateClient
      *
      * @return JobResource
      */
-    public function submitJobNote(JobResource $job, JobNoteResource $jobNoteResource) {
+    public function submitJobNote(JobResource $job, JobNoteResource $jobNoteResource)
+    {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf(
             '/jobs/%s/notes',
