@@ -129,8 +129,11 @@ class JobDelegateClient extends DelegateClient
             $jobResource->getId()
         ));
 
+        $jobStatusResource = new JobResource();
+        $jobStatusResource->setStatus($statusResource);
+
         $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($jobResource));
+        $context->setPayload($handler->serialise($jobStatusResource));
 
         return $this->request($context, $jobResource);
     }
