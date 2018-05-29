@@ -2,17 +2,16 @@
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
  */
-class ClientResource extends AbstractResource
+class ClientResource extends AbstractResource implements ResourcePublicIdInterface
 {
-    /**
-     * @var int
-     */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var string
@@ -42,22 +41,6 @@ class ClientResource extends AbstractResource
         return [
             'address' => AddressResource::class,
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setId(string $id): void
-    {
-        $this->id = $id;
     }
 
     /**
