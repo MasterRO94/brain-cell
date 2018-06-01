@@ -5,17 +5,16 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
+use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class JobBatchResource extends AbstractResource
+class JobBatchResource extends AbstractResource implements ResourcePublicIdInterface
 {
-    /**
-     * @var string
-     */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var string
@@ -90,14 +89,6 @@ class JobBatchResource extends AbstractResource
             'jobs' => JobResource::class,
             'dispatches' => DispatchResource::class,
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
