@@ -309,8 +309,8 @@ class JobComponentResource extends AbstractResource
      */
     public function getSizeCountPerMaterial()
     {
-        $width = $this->getSize()->getDimensions()->getWidth();
-        $height = $this->getSize()->getDimensions()->getHeight();
+        $width = $this->getDimensions()->getWidth();
+        $height = $this->getDimensions()->getHeight();
         $sra3Width = 450;
         $sra3Height = 320;
 
