@@ -11,6 +11,7 @@ use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class JobBatchResource extends AbstractResource implements ResourcePublicIdInterface
 {
