@@ -96,7 +96,7 @@ class ClientConfiguration
     public function createRequestContext()
     {
         $context = new RequestContext($this->getBasePath());
-        $context->getHeaders()->set('Authorization', sprintf('Token %s', $this->apiKey));
+        $context->getHeaders()->set('Authorization', sprintf('Bearer %s', $this->apiKey));
         $context->getHeaders()->set('Api-Client-Version', self::VERSION);
 
         return $context;
