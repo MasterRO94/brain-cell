@@ -60,6 +60,7 @@ class DeliveryDelegateClient extends DelegateClient
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/countries');
+        $context->getParameters()->add(['limit' => 500]);
 
         $collection = new ResourceCollection();
         $collection->setEntityClass(CountryResource::class);
