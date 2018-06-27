@@ -139,6 +139,29 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
+     * @param JobResource $jobResource
+     * @param JobStatusResource $statusResource
+     *
+     * @return JobResource
+     */
+    public function updatePhase(JobResource $jobResource, JobStatusResource $statusResource)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut(sprintf(
+            '/jobs/%s/phase',
+            $jobResource->getId()
+        ));
+
+        $jobPhaseResource = new JobResource();
+        $jobPhaseResource->setStatus($statusResource);
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobPhaseResource));
+
+        return $this->request($context, $jobResource);
+    }
+
+    /**
      * @param JobResource $resource
      * @param ArtworkResource $artwork
      *
