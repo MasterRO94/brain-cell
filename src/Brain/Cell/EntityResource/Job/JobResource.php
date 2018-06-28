@@ -5,6 +5,7 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
@@ -148,6 +149,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $meta;
 
     /**
+     * @var PhaseResource
+     */
+    protected $phase;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources()
@@ -163,6 +169,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             'artwork' => ArtworkResource::class,
             'clonedFrom' => self::class,
             'meta' => JobMetaResource::class,
+            'phase' => PhaseResource::class,
         ];
     }
 
@@ -731,4 +738,22 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     {
         $this->queries = $queries;
     }
+
+    /**
+     * @return PhaseResource
+     */
+    public function getPhase(): PhaseResource
+    {
+        return $this->phase;
+    }
+
+    /**
+     * @param PhaseResource $phase
+     */
+    public function setPhase(PhaseResource $phase): void
+    {
+        $this->phase = $phase;
+    }
+
+
 }

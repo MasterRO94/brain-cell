@@ -1,6 +1,6 @@
 <?php
 
-namespace vendor\brain\cell\src\Brain\Cell\EntityResource\Traits;
+namespace Brain\Cell\EntityResource\Traits;
 
 /**
  * A trait for resources with a created and updated datetime.
