@@ -742,7 +742,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @return PhaseResource
      */
-    public function getPhase(): PhaseResource
+    public function getPhase(): ?PhaseResource
     {
         return $this->phase;
     }
@@ -750,7 +750,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @param PhaseResource $phase
      */
-    public function setPhase(PhaseResource $phase): void
+    public function setPhase(?PhaseResource $phase): void
     {
         $this->phase = $phase;
     }
