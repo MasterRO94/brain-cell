@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
 use Brain\Cell\EntityResource\Job\JobMetaResource;
 use Brain\Cell\EntityResource\Job\JobNoteResource;
@@ -134,6 +135,29 @@ class JobDelegateClient extends DelegateClient
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobStatusResource));
+
+        return $this->request($context, $jobResource);
+    }
+
+    /**
+     * @param JobResource $jobResource
+     * @param PhaseResource $phaseResource
+     *
+     * @return JobResource
+     */
+    public function updatePhase(JobResource $jobResource, PhaseResource $phaseResource)
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPut(sprintf(
+            '/jobs/%s/phase',
+            $jobResource->getId()
+        ));
+
+        $jobPhaseResource = new JobResource();
+        $jobPhaseResource->setPhase($phaseResource);
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($jobPhaseResource));
 
         return $this->request($context, $jobResource);
     }

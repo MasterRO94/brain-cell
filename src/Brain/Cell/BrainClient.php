@@ -5,6 +5,7 @@ namespace Brain\Cell;
 use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
 use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
 use Brain\Cell\Client\Delegate\ChangeDelegateClient;
+use Brain\Cell\Client\Delegate\ClientWorkflowDelegateClient;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
 use Brain\Cell\Client\Delegate\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\JobDelegateClient;
@@ -97,5 +98,13 @@ class BrainClient extends DelegateClient
     public function artifact(): ArtifactDelegateClient
     {
         return new ArtifactDelegateClient($this->configuration);
+    }
+
+    /**
+     * @return ClientWorkflowDelegateClient
+     */
+    public function clientWorkflow(): ClientWorkflowDelegateClient
+    {
+        return new ClientWorkflowDelegateClient($this->configuration);
     }
 }
