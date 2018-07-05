@@ -25,6 +25,14 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     use ResourcePublicIdTrait;
 
     /**
+     * @todo more general implementation
+     * @see https://projects.printed.systems/browse/BRN-742
+     */
+    const PREFLIGHT_FAILURE_POLICY_FIX = 'fix';
+    const PREFLIGHT_FAILURE_POLICY_CANCEL = 'cancel';
+    const PREFLIGHT_FAILURE_POLICY_IGNORE = 'ignore';
+
+    /**
      * @var JobStatusResource $status
      */
     protected $status;
@@ -152,6 +160,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      * @var PhaseResource
      */
     protected $phase;
+
+    /**
+     * @var string
+     */
+    protected $preflightFailurePolicy;
 
     /**
      * {@inheritdoc}
@@ -753,5 +766,21 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setPhase(?PhaseResource $phase): void
     {
         $this->phase = $phase;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreflightFailurePolicy(): string
+    {
+        return $this->preflightFailurePolicy;
+    }
+
+    /**
+     * @param string $preflightFailurePolicy
+     */
+    public function setPreflightFailurePolicy(string $preflightFailurePolicy): void
+    {
+        $this->preflightFailurePolicy = $preflightFailurePolicy;
     }
 }
