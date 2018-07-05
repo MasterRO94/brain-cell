@@ -2,14 +2,13 @@
 
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
-use Brain\Cell\EntityResource\Traits\ResourceCreatedUpdatedTrait;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
+use Brain\Cell\EntityResource\Traits\ResourceCreatedUpdatedTrait;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-use Symfony\Component\Validator\Constraints as Assert;
 
 class ClientWorkflowResource extends AbstractResource implements ResourcePublicIdInterface
 {

@@ -3,7 +3,6 @@
 namespace Brain\Cell\Transformer;
 
 use Brain\Cell\AbstractTransformer;
-use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;

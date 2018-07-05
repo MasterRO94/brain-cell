@@ -7,7 +7,6 @@ use Brain\Cell\EntityResource\Job\ClientWorkflow\ClientWorkflowResource;
 
 class ClientWorkflowDelegateClient extends DelegateClient
 {
-
     /**
      * @param string $id
      *

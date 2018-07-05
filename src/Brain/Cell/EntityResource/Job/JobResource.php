@@ -754,6 +754,4 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     {
         $this->phase = $phase;
     }
-
-
 }

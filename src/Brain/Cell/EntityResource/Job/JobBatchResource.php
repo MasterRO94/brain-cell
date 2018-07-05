@@ -10,8 +10,9 @@ use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+
+use Doctrine\Common\Collections\ArrayCollection;
 
 class JobBatchResource extends AbstractResource implements ResourcePublicIdInterface
 {

@@ -2,13 +2,12 @@
 
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
-use Brain\Cell\EntityResource\Traits\ResourceCreatedUpdatedTrait;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Traits\ResourceCreatedUpdatedTrait;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-use Symfony\Component\Validator\Constraints as Assert;
 
 class PhaseResource extends AbstractResource implements ResourcePublicIdInterface
 {
@@ -31,7 +30,7 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
     protected $isEntryPoint;
 
     /**
-     * @var TransitionResource[]|ResourceCollection
+     * @var ResourceCollection|TransitionResource[]
      */
     protected $transitions;
 
@@ -96,7 +95,7 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsEntryPoint(): bool
     {
@@ -104,7 +103,7 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
     }
 
     /**
-     * @param boolean $isEntryPoint
+     * @param bool $isEntryPoint
      */
     public function setIsEntryPoint(bool $isEntryPoint)
     {
@@ -112,7 +111,7 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
     }
 
     /**
-     * @return TransitionResource[]|ResourceCollection
+     * @return ResourceCollection|TransitionResource[]
      */
     public function getTransitions()
     {
@@ -120,7 +119,7 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
     }
 
     /**
-     * @param TransitionResource[]|ResourceCollection $transitions
+     * @param ResourceCollection|TransitionResource[] $transitions
      */
     public function setTransitions($transitions)
     {
