@@ -24,6 +24,14 @@ class TransitionResource extends AbstractResource implements ResourcePublicIdInt
      */
     protected $to;
 
+    public function getAssociatedResources()
+    {
+        return [
+            'from' => PhaseResource::class,
+            'to' => PhaseResource::class,
+        ];
+    }
+
     /**
      * @return PhaseResource
      */

@@ -111,5 +111,35 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
         $this->isEntryPoint = $isEntryPoint;
     }
 
+    /**
+     * @return TransitionResource[]|ResourceCollection
+     */
+    public function getTransitions()
+    {
+        return $this->transitions;
+    }
 
+    /**
+     * @param TransitionResource[]|ResourceCollection $transitions
+     */
+    public function setTransitions($transitions)
+    {
+        $this->transitions = $transitions;
+    }
+
+    /**
+     * @return ClientWorkflowResource
+     */
+    public function getClientWorkflow(): ClientWorkflowResource
+    {
+        return $this->clientWorkflow;
+    }
+
+    /**
+     * @param ClientWorkflowResource $clientWorkflow
+     */
+    public function setClientWorkflow(ClientWorkflowResource $clientWorkflow)
+    {
+        $this->clientWorkflow = $clientWorkflow;
+    }
 }
