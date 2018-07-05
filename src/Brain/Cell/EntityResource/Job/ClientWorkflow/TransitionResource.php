@@ -7,7 +7,6 @@ use Brain\Cell\EntityResource\Traits\ResourceCreatedUpdatedTrait;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-
 class TransitionResource extends AbstractResource implements ResourcePublicIdInterface
 {
     use ResourcePublicIdTrait;

@@ -8,7 +8,6 @@ use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-
 class PhaseResource extends AbstractResource implements ResourcePublicIdInterface
 {
     use ResourcePublicIdTrait;
