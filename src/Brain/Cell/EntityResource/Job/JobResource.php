@@ -26,6 +26,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
 
     /**
      * @todo more general implementation
+     *
      * @see https://projects.printed.systems/browse/BRN-742
      */
     const PREFLIGHT_FAILURE_POLICY_FIX = 'fix';
