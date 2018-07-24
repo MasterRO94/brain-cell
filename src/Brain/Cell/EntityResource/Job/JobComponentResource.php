@@ -5,6 +5,7 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\SizeResource;
+use Brain\Cell\EntityResource\StockDefinitionResource;
 use Brain\Cell\EntityResource\TwoDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -70,6 +71,11 @@ class JobComponentResource extends AbstractResource
     protected $size;
 
     /**
+     * @var StockDefinitionResource
+     */
+    protected $stockDefinition;
+
+    /**
      * @var MaterialResource
      *
      * @Assert\Valid()
@@ -103,6 +109,7 @@ class JobComponentResource extends AbstractResource
             'size' => SizeResource::class,
             'material' => MaterialResource::class,
             'dimensions' => TwoDimensionalResource::class,
+            'stockDefinition' => StockDefinitionResource::class,
         ];
     }
 
@@ -244,6 +251,14 @@ class JobComponentResource extends AbstractResource
         $this->size = $size;
 
         return $this;
+    }
+
+    /**
+     * @return StockDefinitionResource
+     */
+    public function getStockDefinition()
+    {
+        return $this->stockDefinition;
     }
 
     /**
