@@ -2,26 +2,15 @@
 
 namespace Brain\Cell\EntityResource;
 
-use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\PriceResource;
-use Brain\Cell\EntityResource\Product\ProductResource;
-use Brain\Cell\EntityResource\ProductionHouseResource;
-use Brain\Cell\EntityResource\ShopResource;
-use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
-use Brain\Cell\Enum\JobStatusEnum;
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\Transfer\ResourceCollection;
-
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * {@inheritdoc}
  */
 class StockDefinitionResource extends AbstractResource implements ResourcePublicIdInterface
 {
-
     use ResourcePublicIdTrait;
 
     /**

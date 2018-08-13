@@ -3,8 +3,10 @@
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\AddressResource;
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
@@ -13,6 +15,7 @@ use Brain\Cell\Transfer\AbstractResource;
 class DeliveryOptionResource extends AbstractResource
 {
     use ResourcePublicIdTrait;
+    use CreatedAtTrait;
 
     /**
      * @var AddressResource
@@ -30,32 +33,32 @@ class DeliveryOptionResource extends AbstractResource
     protected $deliveryService;
 
     /**
-     * @var \DateTime
+     * @var DateResource
      */
     protected $evaluationDate;
 
     /**
-     * @var \DateTime
+     * @var DateResource
      */
     protected $assumedStartOfProductionDate;
 
     /**
-     * @var \DateTime
+     * @var DateResource
      */
     protected $endOfProductionDate;
 
     /**
-     * @var \DateTime
+     * @var DateResource
      */
     protected $deliveryDateEarliest;
 
     /**
-     * @var \DateTime
+     * @var DateResource
      */
     protected $deliveryCollectionDate;
 
     /**
-     * @var \DateTime
+     * @var DateResource
      */
     protected $deliveryDateLatest;
 
@@ -85,19 +88,14 @@ class DeliveryOptionResource extends AbstractResource
     protected $price;
 
     /**
-     * @var \DateTime
+     * @var DateResource
      */
     protected $lifetimeFinishDate;
 
     /**
-     * @var \DateTime
-     */
-    protected $created;
-
-    /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'deliveryAddress' => AddressResource::class,
@@ -106,23 +104,14 @@ class DeliveryOptionResource extends AbstractResource
             'productionStrategyPrice' => PriceResource::class,
             'deliveryServicePrice' => PriceResource::class,
             'price' => PriceResource::class,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDateTimeProperties()
-    {
-        return [
-            'created',
-            'evaluationDate',
-            'assumedStartOfProductionDate',
-            'endOfProductionDate',
-            'deliveryCollectionDate',
-            'lifetimeFinishDate',
-            'deliveryDateLatest',
-            'deliveryDateEarliest',
+            'evaluationDate' => DateResource::class,
+            'assumedStartOfProductionDate' => DateResource::class,
+            'endOfProductionDate' => DateResource::class,
+            'deliveryCollectionDate' => DateResource::class,
+            'lifetimeFinishDate' => DateResource::class,
+            'deliveryDateLatest' => DateResource::class,
+            'deliveryDateEarliest' => DateResource::class,
+            'createdAt' => DateResource::class,
         ];
     }
 
@@ -175,7 +164,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime
+     * @return DateResource
      */
     public function getEvaluationDate()
     {
@@ -183,15 +172,15 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $evaluationDate
+     * @param DateResource $evaluationDate
      */
-    public function setEvaluationDate(\DateTime $evaluationDate)
+    public function setEvaluationDate(DateResource $evaluationDate)
     {
         $this->evaluationDate = $evaluationDate;
     }
 
     /**
-     * @return \DateTime
+     * @return DateResource
      */
     public function getAssumedStartOfProductionDate()
     {
@@ -199,15 +188,15 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $assumedStartOfProductionDate
+     * @param DateResource $assumedStartOfProductionDate
      */
-    public function setAssumedStartOfProductionDate(\DateTime $assumedStartOfProductionDate)
+    public function setAssumedStartOfProductionDate(DateResource $assumedStartOfProductionDate)
     {
         $this->assumedStartOfProductionDate = $assumedStartOfProductionDate;
     }
 
     /**
-     * @return \DateTime
+     * @return DateResource
      */
     public function getEndOfProductionDate()
     {
@@ -215,15 +204,15 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $endOfProductionDate
+     * @param DateResource $endOfProductionDate
      */
-    public function setEndOfProductionDate(\DateTime $endOfProductionDate)
+    public function setEndOfProductionDate(DateResource $endOfProductionDate)
     {
         $this->endOfProductionDate = $endOfProductionDate;
     }
 
     /**
-     * @return \DateTime
+     * @return DateResource
      */
     public function getDeliveryCollectionDate()
     {
@@ -231,15 +220,15 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $deliveryCollectionDate
+     * @param DateResource $deliveryCollectionDate
      */
-    public function setDeliveryCollectionDate(\DateTime $deliveryCollectionDate)
+    public function setDeliveryCollectionDate(DateResource $deliveryCollectionDate)
     {
         $this->deliveryCollectionDate = $deliveryCollectionDate;
     }
 
     /**
-     * @return \DateTime
+     * @return DateResource
      */
     public function getDeliveryDateEarliest()
     {
@@ -247,15 +236,15 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $deliveryDateEarliest
+     * @param DateResource $deliveryDateEarliest
      */
-    public function setDeliveryDateEarliest(\DateTime $deliveryDateEarliest)
+    public function setDeliveryDateEarliest(DateResource $deliveryDateEarliest)
     {
         $this->deliveryDateEarliest = $deliveryDateEarliest;
     }
 
     /**
-     * @return \DateTime
+     * @return DateResource
      */
     public function getDeliveryDateLatest()
     {
@@ -263,9 +252,9 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $deliveryDateLatest
+     * @param DateResource $deliveryDateLatest
      */
-    public function setDeliveryDateLatest(\DateTime $deliveryDateLatest)
+    public function setDeliveryDateLatest(DateResource $deliveryDateLatest)
     {
         $this->deliveryDateLatest = $deliveryDateLatest;
     }
@@ -351,7 +340,7 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime
+     * @return DateResource
      */
     public function getLifetimeFinishDate()
     {
@@ -359,26 +348,10 @@ class DeliveryOptionResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $lifetimeFinishDate
+     * @param DateResource $lifetimeFinishDate
      */
-    public function setLifetimeFinishDate(\DateTime $lifetimeFinishDate)
+    public function setLifetimeFinishDate(DateResource $lifetimeFinishDate)
     {
         $this->lifetimeFinishDate = $lifetimeFinishDate;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param \DateTime $created
-     */
-    public function setCreated(\DateTime $created)
-    {
-        $this->created = $created;
     }
 }

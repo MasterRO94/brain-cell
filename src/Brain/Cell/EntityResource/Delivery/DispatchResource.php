@@ -39,7 +39,7 @@ class DispatchResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'batch' => JobBatchResource::class,
@@ -49,7 +49,7 @@ class DispatchResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
             'parcels' => DispatchParcelResource::class,

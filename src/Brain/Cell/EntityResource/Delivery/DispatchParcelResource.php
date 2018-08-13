@@ -29,7 +29,7 @@ class DispatchParcelResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'dispatch' => DispatchResource::class,

@@ -2,10 +2,16 @@
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
+use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 class AbstractNoteResource extends AbstractResource
 {
+    use CreatedAtTrait;
+    use DeletedAtTrait;
+
     /**
      * @var string
      */
@@ -15,16 +21,6 @@ class AbstractNoteResource extends AbstractResource
      * @var string
      */
     protected $description;
-
-    /**
-     * @var \DateTime
-     */
-    protected $created;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updated;
 
     /**
      * @var  ClientResource
@@ -39,18 +35,12 @@ class AbstractNoteResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'origin' => ClientResource::class,
-        ];
-    }
-
-    public function getDateTimeProperties()
-    {
-        return [
-            'created',
-            'updated',
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
         ];
     }
 
@@ -73,22 +63,6 @@ class AbstractNoteResource extends AbstractResource
     public function setDescription(string $description)
     {
         $this->description = $description;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
     }
 
     /**

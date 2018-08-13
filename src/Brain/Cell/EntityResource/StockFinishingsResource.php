@@ -31,7 +31,7 @@ class StockFinishingsResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
             'finishings' => FinishingCategoryResource::class,

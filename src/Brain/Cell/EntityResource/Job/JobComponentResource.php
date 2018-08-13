@@ -101,22 +101,31 @@ class JobComponentResource extends AbstractResource
     protected $label;
 
     /**
+     * @var ArtworkResource
+     *
+     * @Assert\Valid()
+     * @Assert\NotBlank()
+     */
+    protected $artwork;
+
+    /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'size' => SizeResource::class,
             'material' => MaterialResource::class,
             'dimensions' => TwoDimensionalResource::class,
             'stockDefinition' => StockDefinitionResource::class,
+            'artwork' => ArtworkResource::class,
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
             'options' => JobComponentOptionResource::class,
@@ -216,9 +225,7 @@ class JobComponentResource extends AbstractResource
      */
     public function getArtwork()
     {
-        throw new \BadMethodCallException(
-            sprintf('The method "%1$s" has been moved to "%2$s::%1$s".', __METHOD__, JobResource::class)
-        );
+        return $this->artwork;
     }
 
     /**
@@ -228,9 +235,7 @@ class JobComponentResource extends AbstractResource
      */
     public function setArtwork(ArtworkResource $artwork)
     {
-        throw new \BadMethodCallException(
-            sprintf('The method "%1$s" has been moved to "%2$s::%1$s".', __METHOD__, JobResource::class)
-        );
+        $this->artwork = $artwork;
     }
 
     /**

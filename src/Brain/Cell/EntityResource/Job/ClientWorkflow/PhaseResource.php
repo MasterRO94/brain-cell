@@ -2,16 +2,19 @@
 
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourceCreatedUpdatedTrait;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
+use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class PhaseResource extends AbstractResource implements ResourcePublicIdInterface
 {
     use ResourcePublicIdTrait;
-    use ResourceCreatedUpdatedTrait;
+    use CreatedAtTrait;
+    use DeletedAtTrait;
 
     /**
      * @var string
@@ -41,17 +44,19 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'clientWorkflow' => ClientWorkflowResource::class,
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
             'transitions' => TransitionResource::class,

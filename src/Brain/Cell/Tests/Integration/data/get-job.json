@@ -1,0 +1,1153 @@
+{
+  "id": "d4685b74-90ac-44c1-8686-ced0259ac624",
+  "reference": "auto-345e2ade-6a36-4714-bb38-364e54c8ca86",
+  "status": {
+    "id": "aa13abe7-abb5-475f-8479-38268989efb1",
+    "canonical": "job.status.incomplete",
+    "translation": {
+      "locale": "en",
+      "name": "Pending",
+      "summary": "The job is pending verification from the system.",
+      "action": {
+        "name": "Mark Pending",
+        "summary": "Mark the job as pending indicating that it requires system attention."
+      }
+    },
+    "reason": "Initial Job Creation",
+    "user": {
+      "id": "printed-user-tester-uuid",
+      "email": "tester@printed.com",
+      "name": "Alice Tester",
+      "job_title": "Software Tester",
+      "created_at": {
+        "iso": "1984-03-17T21:11:39+0000",
+        "timezone": "UTC",
+        "unix": 448405899
+      },
+      "updated_at": {
+        "iso": "2018-08-13T11:32:21+0000",
+        "timezone": "UTC",
+        "unix": 1534159941
+      }
+    },
+    "created_at": {
+      "iso": "2018-08-13T11:36:08+0000",
+      "timezone": "UTC",
+      "unix": 1534160168
+    }
+  },
+  "statuses": [
+    {
+      "id": "aa13abe7-abb5-475f-8479-38268989efb1",
+      "canonical": "job.status.incomplete",
+      "translation": {
+        "locale": "en",
+        "name": "Pending",
+        "summary": "The job is pending verification from the system.",
+        "action": {
+          "name": "Mark Pending",
+          "summary": "Mark the job as pending indicating that it requires system attention."
+        }
+      },
+      "reason": "Initial Job Creation",
+      "user": {
+        "id": "printed-user-tester-uuid",
+        "email": "tester@printed.com",
+        "name": "Alice Tester",
+        "job_title": "Software Tester",
+        "created_at": {
+          "iso": "1984-03-17T21:11:39+0000",
+          "timezone": "UTC",
+          "unix": 448405899
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:32:21+0000",
+          "timezone": "UTC",
+          "unix": 1534159941
+        }
+      },
+      "created_at": {
+        "iso": "2018-08-13T11:36:08+0000",
+        "timezone": "UTC",
+        "unix": 1534160168
+      }
+    }
+  ],
+  "clients": [
+    {
+      "id": "7d700b40-1125-4af5-bdca-e4c1b54f9889",
+      "role": "origin",
+      "client": {
+        "id": "printed-uuid",
+        "type": "shop",
+        "name": "printed.com",
+        "email": "client@printed.com",
+        "phone_number": "+44(0)856239464",
+        "created_at": {
+          "iso": "1976-12-26T10:37:44+0000",
+          "timezone": "UTC",
+          "unix": 220444664
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:32:21+0000",
+          "timezone": "UTC",
+          "unix": 1534159941
+        }
+      },
+      "is_primary": true,
+      "is_active": true,
+      "created_at": {
+        "iso": "2018-08-13T11:36:08+0000",
+        "timezone": "UTC",
+        "unix": 1534160168
+      },
+      "updated_at": {
+        "iso": "2018-08-13T11:36:08+0000",
+        "timezone": "UTC",
+        "unix": 1534160168
+      }
+    },
+    {
+      "id": "cdf271d3-bcef-4339-b33a-371a26440fd9",
+      "role": "production",
+      "client": {
+        "id": "ravensworth-uuid",
+        "type": "production-house",
+        "name": "Ravensworth",
+        "email": "client@ravensworth.com",
+        "phone_number": "+44(0)695517982",
+        "created_at": {
+          "iso": "2003-09-03T02:58:01+0000",
+          "timezone": "UTC",
+          "unix": 1062557881
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:32:26+0000",
+          "timezone": "UTC",
+          "unix": 1534159946
+        }
+      },
+      "is_primary": true,
+      "is_active": true,
+      "created_at": {
+        "iso": "2018-08-13T11:36:08+0000",
+        "timezone": "UTC",
+        "unix": 1534160168
+      },
+      "updated_at": {
+        "iso": "2018-08-13T11:36:08+0000",
+        "timezone": "UTC",
+        "unix": 1534160168
+      }
+    },
+    {
+      "id": "85e800f9-abe2-4f6a-94b6-eda740684541",
+      "role": "prepress",
+      "client": {
+        "id": "ravensworth-prepress-uuid",
+        "type": "prepress-team",
+        "name": "Printed.com Prepress",
+        "email": "client@tangentprintservices.co.uk",
+        "phone_number": "02553 31836",
+        "created_at": {
+          "iso": "1999-08-07T02:32:10+0000",
+          "timezone": "UTC",
+          "unix": 933993130
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:32:18+0000",
+          "timezone": "UTC",
+          "unix": 1534159938
+        }
+      },
+      "is_primary": true,
+      "is_active": true,
+      "created_at": {
+        "iso": "2018-08-13T11:36:08+0000",
+        "timezone": "UTC",
+        "unix": 1534160168
+      },
+      "updated_at": {
+        "iso": "2018-08-13T11:36:08+0000",
+        "timezone": "UTC",
+        "unix": 1534160168
+      }
+    }
+  ],
+  "artifacts": [],
+  "quantity": 50,
+  "weight": 1150,
+  "dimensions": {
+    "width": 297,
+    "height": 210,
+    "depth": 1
+  },
+  "options": [
+    {
+      "id": "f681d13d-5808-4069-a019-b5f7f917109b",
+      "finishing_category": {
+        "id": "ffc-Binding-uuid",
+        "alias": "finishing-binding",
+        "name": "Binding",
+        "assignment_level": "job",
+        "created_at": {
+          "iso": "2018-03-01T21:14:44+0000",
+          "timezone": "UTC",
+          "unix": 1519938884
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:32:15+0000",
+          "timezone": "UTC",
+          "unix": 1534159935
+        }
+      },
+      "finishing_item": {
+        "id": "6073a6ab-c1fe-3070-99cd-bbd20c676f01",
+        "alias": "finishing-binding-no-binding",
+        "name": "No-Binding",
+        "is_default": true,
+        "is_configurable": false,
+        "configuration": [],
+        "is_artwork_required": false,
+        "artwork_labels": [],
+        "weight": 1,
+        "weight_unit": "none",
+        "created_at": {
+          "iso": "2018-03-25T02:28:24+0000",
+          "timezone": "UTC",
+          "unix": 1521944904
+        },
+        "updated_at": {
+          "iso": "2018-04-13T08:35:20+0000",
+          "timezone": "UTC",
+          "unix": 1523608520
+        }
+      },
+      "meta": {}
+    }
+  ],
+  "components": [
+    {
+      "id": "232d6698-5378-4be1-804e-71f86b37b687",
+      "label": "general",
+      "range_start": 1,
+      "range_end": 1,
+      "artwork": {
+        "id": "ede24014-66d4-450e-b705-801fab463f3b",
+        "status": {
+          "canonical": "artwork.status.new",
+          "translation": {
+            "locale": "en",
+            "name": "Pending",
+            "summary": "The artwork is pending system attention.",
+            "action": {
+              "name": "Mark Pending",
+              "summary": "Mark the artwork as pending indicating it requires system attention."
+            }
+          }
+        },
+        "files": [
+          {
+            "id": "96c5f39b-5c8e-43cc-85e6-094ef84fbe43",
+            "label": "ink",
+            "file": {
+              "id": "5bced1fb-3d37-497e-968c-4318777fd02b",
+              "path": "https://brain.dev/v1/files/5bced1fb-3d37-497e-968c-4318777fd02b/download",
+              "mime_type": "application/pdf",
+              "created_at": {
+                "iso": "2018-08-13T11:36:03+0000",
+                "timezone": "UTC",
+                "unix": 1534160163
+              },
+              "updated_at": {
+                "iso": "2018-08-13T11:36:03+0000",
+                "timezone": "UTC",
+                "unix": 1534160163
+              }
+            },
+            "finishing_item": {
+              "id": "ffi-ink-Single-uuid",
+              "alias": "finishing-ink-single",
+              "name": "Single",
+              "is_default": true,
+              "is_configurable": false,
+              "configuration": [],
+              "is_artwork_required": true,
+              "artwork_labels": [
+                "ink"
+              ],
+              "weight": 1,
+              "weight_unit": "none",
+              "created_at": {
+                "iso": "2018-03-29T07:18:58+0000",
+                "timezone": "UTC",
+                "unix": 1522307938
+              },
+              "updated_at": {
+                "iso": "2018-04-01T12:46:19+0000",
+                "timezone": "UTC",
+                "unix": 1522586779
+              }
+            },
+            "created_at": {
+              "iso": "2018-08-13T11:36:03+0000",
+              "timezone": "UTC",
+              "unix": 1534160163
+            }
+          }
+        ],
+        "created_at": {
+          "iso": "2018-08-13T11:36:03+0000",
+          "timezone": "UTC",
+          "unix": 1534160163
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:36:08+0000",
+          "timezone": "UTC",
+          "unix": 1534160168
+        },
+        "issues": []
+      },
+      "artwork_history": {
+        "id": "5a89decb-4e0e-44fb-aef1-1833c46dfbab",
+        "user": {
+          "id": "printed-user-tester-uuid",
+          "email": "tester@printed.com",
+          "name": "Alice Tester",
+          "job_title": "Software Tester",
+          "created_at": {
+            "iso": "1984-03-17T21:11:39+0000",
+            "timezone": "UTC",
+            "unix": 448405899
+          },
+          "updated_at": {
+            "iso": "2018-08-13T11:32:21+0000",
+            "timezone": "UTC",
+            "unix": 1534159941
+          }
+        },
+        "client": {
+          "id": "printed-uuid",
+          "type": "shop",
+          "name": "printed.com",
+          "email": "client@printed.com",
+          "phone_number": "+44(0)856239464",
+          "created_at": {
+            "iso": "1976-12-26T10:37:44+0000",
+            "timezone": "UTC",
+            "unix": 220444664
+          },
+          "updated_at": {
+            "iso": "2018-08-13T11:32:21+0000",
+            "timezone": "UTC",
+            "unix": 1534159941
+          }
+        },
+        "artwork": {
+          "id": "ede24014-66d4-450e-b705-801fab463f3b",
+          "status": {
+            "canonical": "artwork.status.new",
+            "translation": {
+              "locale": "en",
+              "name": "Pending",
+              "summary": "The artwork is pending system attention.",
+              "action": {
+                "name": "Mark Pending",
+                "summary": "Mark the artwork as pending indicating it requires system attention."
+              }
+            }
+          },
+          "files": [
+            {
+              "id": "96c5f39b-5c8e-43cc-85e6-094ef84fbe43",
+              "label": "ink",
+              "file": {
+                "id": "5bced1fb-3d37-497e-968c-4318777fd02b",
+                "path": "https://brain.dev/v1/files/5bced1fb-3d37-497e-968c-4318777fd02b/download",
+                "mime_type": "application/pdf",
+                "created_at": {
+                  "iso": "2018-08-13T11:36:03+0000",
+                  "timezone": "UTC",
+                  "unix": 1534160163
+                },
+                "updated_at": {
+                  "iso": "2018-08-13T11:36:03+0000",
+                  "timezone": "UTC",
+                  "unix": 1534160163
+                }
+              },
+              "finishing_item": {
+                "id": "ffi-ink-Single-uuid",
+                "alias": "finishing-ink-single",
+                "name": "Single",
+                "is_default": true,
+                "is_configurable": false,
+                "configuration": [],
+                "is_artwork_required": true,
+                "artwork_labels": [
+                  "ink"
+                ],
+                "weight": 1,
+                "weight_unit": "none",
+                "created_at": {
+                  "iso": "2018-03-29T07:18:58+0000",
+                  "timezone": "UTC",
+                  "unix": 1522307938
+                },
+                "updated_at": {
+                  "iso": "2018-04-01T12:46:19+0000",
+                  "timezone": "UTC",
+                  "unix": 1522586779
+                }
+              },
+              "created_at": {
+                "iso": "2018-08-13T11:36:03+0000",
+                "timezone": "UTC",
+                "unix": 1534160163
+              }
+            }
+          ],
+          "created_at": {
+            "iso": "2018-08-13T11:36:03+0000",
+            "timezone": "UTC",
+            "unix": 1534160163
+          },
+          "updated_at": {
+            "iso": "2018-08-13T11:36:08+0000",
+            "timezone": "UTC",
+            "unix": 1534160168
+          },
+          "issues": []
+        },
+        "created_at": {
+          "iso": "2018-08-13T11:36:08+0000",
+          "timezone": "UTC",
+          "unix": 1534160168
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:36:08+0000",
+          "timezone": "UTC",
+          "unix": 1534160168
+        }
+      },
+      "dimensions": {
+        "width": 297,
+        "height": 210
+      },
+      "material": {
+        "id": "039cc638-514e-3076-b410-a6328be865dc",
+        "alias": "material-recycled-standard-350gsm",
+        "name": "Recycled Standard 350gsm",
+        "base": {
+          "id": "d80557c9-6335-3cbc-8330-b4ff202a3db7",
+          "alias": "material-base-recycled",
+          "name": "Recycled",
+          "created_at": {
+            "iso": "2018-04-12T05:58:32+0000",
+            "timezone": "UTC",
+            "unix": 1523512712
+          },
+          "updated_at": {
+            "iso": "2018-08-13T11:32:15+0000",
+            "timezone": "UTC",
+            "unix": 1534159935
+          }
+        },
+        "variant": {
+          "id": "smv-standard-uuid",
+          "alias": "material-variant-standard",
+          "name": "Standard",
+          "created_at": {
+            "iso": "2018-03-30T01:02:52+0000",
+            "timezone": "UTC",
+            "unix": 1522371772
+          },
+          "updated_at": {
+            "iso": "2018-08-13T11:32:15+0000",
+            "timezone": "UTC",
+            "unix": 1534159935
+          }
+        },
+        "weight": {
+          "id": "smw-gsm-350-uuid",
+          "alias": "material-weight-350gsm",
+          "name": "350gsm",
+          "created_at": {
+            "iso": "2018-03-04T23:00:34+0000",
+            "timezone": "UTC",
+            "unix": 1520204434
+          },
+          "updated_at": {
+            "iso": "2018-08-13T11:32:15+0000",
+            "timezone": "UTC",
+            "unix": 1534159935
+          },
+          "weight": 350,
+          "weight_unit": "grams-sqm"
+        },
+        "created_at": {
+          "iso": "2018-03-02T22:52:24+0000",
+          "timezone": "UTC",
+          "unix": 1520031144
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:32:20+0000",
+          "timezone": "UTC",
+          "unix": 1534159940
+        }
+      },
+      "options": [
+        {
+          "id": "b1b4ac98-4a2e-465e-8453-59e22c4a4247",
+          "category": {
+            "id": "ffc-Orientation-uuid",
+            "alias": "finishing-orientation",
+            "name": "Orientation",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-04-02T18:03:00+0000",
+              "timezone": "UTC",
+              "unix": 1522692180
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "bb992db4-c193-3304-91f6-e114ed97b94c",
+            "alias": "finishing-orientation-portrait",
+            "name": "Portrait",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-04-10T01:30:40+0000",
+              "timezone": "UTC",
+              "unix": 1523323840
+            },
+            "updated_at": {
+              "iso": "2018-06-21T04:57:31+0000",
+              "timezone": "UTC",
+              "unix": 1529557051
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "d97f8117-09db-43ea-9d7a-925ad4b540c8",
+          "category": {
+            "id": "ffc-Ink-uuid",
+            "alias": "finishing-ink",
+            "name": "Ink",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-04-05T12:45:36+0000",
+              "timezone": "UTC",
+              "unix": 1522932336
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "ffi-ink-Single-uuid",
+            "alias": "finishing-ink-single",
+            "name": "Single",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": true,
+            "artwork_labels": [
+              "ink"
+            ],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-03-29T07:18:58+0000",
+              "timezone": "UTC",
+              "unix": 1522307938
+            },
+            "updated_at": {
+              "iso": "2018-04-01T12:46:19+0000",
+              "timezone": "UTC",
+              "unix": 1522586779
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "82a5d9f8-779b-4c0e-9e6a-981db731b40b",
+          "category": {
+            "id": "ffc-Cutting-uuid",
+            "alias": "finishing-cutting",
+            "name": "Cutting",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-02-25T06:49:10+0000",
+              "timezone": "UTC",
+              "unix": 1519541350
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "3b18d6e5-b78b-37d5-a862-0a32dec410e4",
+            "alias": "finishing-cutting-yes",
+            "name": "Yes",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-02-25T13:33:26+0000",
+              "timezone": "UTC",
+              "unix": 1519565606
+            },
+            "updated_at": {
+              "iso": "2018-07-09T19:33:39+0000",
+              "timezone": "UTC",
+              "unix": 1531164819
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "486b750f-5b57-4be3-a4aa-b54508255248",
+          "category": {
+            "id": "ffc-Lamination-uuid",
+            "alias": "finishing-lamination",
+            "name": "Lamination",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-02-22T19:47:25+0000",
+              "timezone": "UTC",
+              "unix": 1519328845
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "7929ad85-f8e1-3b4e-b88c-333124aff3f1",
+            "alias": "finishing-lamination-gloss-single",
+            "name": "Gloss-Single",
+            "is_default": false,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 11,
+            "weight_unit": "grams-sqm",
+            "created_at": {
+              "iso": "2018-02-24T06:01:08+0000",
+              "timezone": "UTC",
+              "unix": 1519452068
+            },
+            "updated_at": {
+              "iso": "2018-03-21T08:06:04+0000",
+              "timezone": "UTC",
+              "unix": 1521619564
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "b4fb7d76-d894-4a2f-8b4f-9d576f2f81fa",
+          "category": {
+            "id": "ffc-Folding-uuid",
+            "alias": "finishing-folding",
+            "name": "Folding",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-04-03T09:12:52+0000",
+              "timezone": "UTC",
+              "unix": 1522746772
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "f0c3cecf-4e0a-37a4-8bda-6853fac515ea",
+            "alias": "finishing-folding-no-folding",
+            "name": "No-Folding",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-03-18T19:58:24+0000",
+              "timezone": "UTC",
+              "unix": 1521403104
+            },
+            "updated_at": {
+              "iso": "2018-06-23T08:30:27+0000",
+              "timezone": "UTC",
+              "unix": 1529742627
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "3266c4a3-7f23-4149-af99-bbecb43577ee",
+          "category": {
+            "id": "ffc-Capacity-Pocket-uuid",
+            "alias": "finishing-capacity-pocket",
+            "name": "Capacity-Pocket",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-03-05T22:39:18+0000",
+              "timezone": "UTC",
+              "unix": 1520289558
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "7bcd8b74-5cd2-30de-8837-e163b83d651a",
+            "alias": "finishing-capacity-pocket-no-capacity-pocket",
+            "name": "No-Capacity-Pocket",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-04-11T18:31:57+0000",
+              "timezone": "UTC",
+              "unix": 1523471517
+            },
+            "updated_at": {
+              "iso": "2018-06-29T17:59:39+0000",
+              "timezone": "UTC",
+              "unix": 1530295179
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "3f1d32a8-cdc4-4dd1-ac83-088a4b421f2e",
+          "category": {
+            "id": "ffc-Business-Card-Slot-uuid",
+            "alias": "finishing-business-card-slot",
+            "name": "Business-Card-Slot",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-03-01T02:40:43+0000",
+              "timezone": "UTC",
+              "unix": 1519872043
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "7a8fb36c-f86a-3121-8b80-97745639a090",
+            "alias": "finishing-business-card-slot-no-business-card-slot",
+            "name": "No-Business-Card-Slot",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-02-18T20:40:18+0000",
+              "timezone": "UTC",
+              "unix": 1518986418
+            },
+            "updated_at": {
+              "iso": "2018-05-05T11:09:45+0000",
+              "timezone": "UTC",
+              "unix": 1525518585
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "0778ca9f-65d9-4261-907c-30ed6ca481be",
+          "category": {
+            "id": "ffc-Corners-uuid",
+            "alias": "finishing-corners",
+            "name": "Corners",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-02-17T02:23:16+0000",
+              "timezone": "UTC",
+              "unix": 1518834196
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "049588c5-bd08-3509-8a8e-6db9d1834960",
+            "alias": "finishing-corners-square-corners",
+            "name": "Square-Corners",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-02-26T07:51:57+0000",
+              "timezone": "UTC",
+              "unix": 1519631517
+            },
+            "updated_at": {
+              "iso": "2018-05-10T04:33:31+0000",
+              "timezone": "UTC",
+              "unix": 1525926811
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "2ce1e296-92c3-4a7c-9477-48aabb3d57fd",
+          "category": {
+            "id": "ffc-Personalisation-uuid",
+            "alias": "finishing-personalisation",
+            "name": "Personalisation",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-03-04T06:44:11+0000",
+              "timezone": "UTC",
+              "unix": 1520145851
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "ebb0e744-9894-34f1-b32e-b2e5a55f30ee",
+            "alias": "finishing-personalisation-no-personalisation",
+            "name": "No-Personalisation",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-02-22T02:39:00+0000",
+              "timezone": "UTC",
+              "unix": 1519267140
+            },
+            "updated_at": {
+              "iso": "2018-03-18T10:57:10+0000",
+              "timezone": "UTC",
+              "unix": 1521370630
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "44738a92-513c-43a6-9d9a-c022279aaae7",
+          "category": {
+            "id": "ffc-Substrate-uuid",
+            "alias": "finishing-substrate",
+            "name": "Substrate",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-03-13T04:09:26+0000",
+              "timezone": "UTC",
+              "unix": 1520914166
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "a29f830b-5c41-324e-a905-928836cd42c2",
+            "alias": "finishing-substrate-no-mounting",
+            "name": "No-Mounting",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-03-31T07:51:00+0000",
+              "timezone": "UTC",
+              "unix": 1522482660
+            },
+            "updated_at": {
+              "iso": "2018-07-10T03:49:39+0000",
+              "timezone": "UTC",
+              "unix": 1531194579
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "55957c9d-f483-4548-b013-589a78e3241d",
+          "category": {
+            "id": "ffc-Eyelets-uuid",
+            "alias": "finishing-eyelets",
+            "name": "Eyelets",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-02-14T00:17:14+0000",
+              "timezone": "UTC",
+              "unix": 1518567434
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "0ce3d3e7-b37b-337f-8d60-a0f153445c75",
+            "alias": "finishing-eyelets-no-eyelets",
+            "name": "No-Eyelets",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-02-19T04:26:42+0000",
+              "timezone": "UTC",
+              "unix": 1519014402
+            },
+            "updated_at": {
+              "iso": "2018-07-08T08:09:53+0000",
+              "timezone": "UTC",
+              "unix": 1531037393
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "2c8a9f1a-70be-46b4-87fc-446f3095f02a",
+          "category": {
+            "id": "ffc-Struts-uuid",
+            "alias": "finishing-struts",
+            "name": "Struts",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-03-20T13:05:29+0000",
+              "timezone": "UTC",
+              "unix": 1521551129
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "52f2fd38-8b81-354c-897e-2df102bbebf8",
+            "alias": "finishing-struts-no-struts",
+            "name": "No-Struts",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-02-24T07:18:57+0000",
+              "timezone": "UTC",
+              "unix": 1519456737
+            },
+            "updated_at": {
+              "iso": "2018-03-26T22:12:41+0000",
+              "timezone": "UTC",
+              "unix": 1522102361
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "9100c311-c626-4a85-954c-0f60b0e2c5fa",
+          "category": {
+            "id": "ffc-Cellophane-Bags-uuid",
+            "alias": "finishing-cellophane-bags",
+            "name": "Cellophane-Bags",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-03-26T00:42:17+0000",
+              "timezone": "UTC",
+              "unix": 1522024937
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "e0680714-9653-39e3-a1d1-7a335dca55f5",
+            "alias": "finishing-cellophane-bags-no-cellophane-bag",
+            "name": "No-Cellophane-Bag",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-03-20T20:49:25+0000",
+              "timezone": "UTC",
+              "unix": 1521578965
+            },
+            "updated_at": {
+              "iso": "2018-07-02T17:54:32+0000",
+              "timezone": "UTC",
+              "unix": 1530554072
+            }
+          },
+          "meta": {},
+          "configuration": []
+        },
+        {
+          "id": "baa7cc8e-bea0-4f91-a155-5f9156a2e998",
+          "category": {
+            "id": "ffc-Perforation-uuid",
+            "alias": "finishing-perforation",
+            "name": "Perforation",
+            "assignment_level": "job-component",
+            "created_at": {
+              "iso": "2018-02-26T20:32:46+0000",
+              "timezone": "UTC",
+              "unix": 1519677166
+            },
+            "updated_at": {
+              "iso": "2018-08-13T11:32:15+0000",
+              "timezone": "UTC",
+              "unix": 1534159935
+            }
+          },
+          "item": {
+            "id": "6eec1474-8998-3298-8415-ae648fa72abd",
+            "alias": "finishing-perforation-no-perforation",
+            "name": "No-Perforation",
+            "is_default": true,
+            "is_configurable": false,
+            "configuration": [],
+            "is_artwork_required": false,
+            "artwork_labels": [],
+            "weight": 1,
+            "weight_unit": "none",
+            "created_at": {
+              "iso": "2018-03-31T21:34:06+0000",
+              "timezone": "UTC",
+              "unix": 1522532046
+            },
+            "updated_at": {
+              "iso": "2018-07-09T05:04:56+0000",
+              "timezone": "UTC",
+              "unix": 1531112696
+            }
+          },
+          "meta": {},
+          "configuration": []
+        }
+      ],
+      "production_sheet_count": 25,
+      "weight": 23,
+      "stock_definition": {
+        "id": "253b4beb-07b2-3649-84ab-1751a4978d8c",
+        "name": "SRA3",
+        "type": "sheet",
+        "width": 450,
+        "height": 320,
+        "created_at": {
+          "iso": "2018-02-16T02:45:43+0000",
+          "timezone": "UTC",
+          "unix": 1518749143
+        },
+        "updated_at": {
+          "iso": "2018-08-13T11:32:21+0000",
+          "timezone": "UTC",
+          "unix": 1534159941
+        }
+      }
+    }
+  ],
+  "price": {
+    "base": 1680,
+    "value": 16.8,
+    "formatted": "£16.80",
+    "currency": "GBP"
+  },
+  "meta": {
+    "data": []
+  },
+  "production_finish_date": {
+    "iso": "2018-08-15T11:36:08+0000",
+    "timezone": "UTC",
+    "unix": 1534332968
+  },
+  "created_at": {
+    "iso": "2018-08-13T11:36:02+0000",
+    "timezone": "UTC",
+    "unix": 1534160162
+  },
+  "updated_at": {
+    "iso": "2018-08-13T11:36:08+0000",
+    "timezone": "UTC",
+    "unix": 1534160168
+  },
+  "notes": [],
+  "queries": [],
+  "preflight_failure_policy": "fix"
+}

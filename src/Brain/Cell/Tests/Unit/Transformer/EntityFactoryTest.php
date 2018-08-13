@@ -2,15 +2,18 @@
 
 namespace Brain\Cell\Tests\Unit\Transformer;
 
-use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\EntityResourceFactory;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group cell
  * @group transformer
+ *
+ * @covers \Brain\Cell\Transfer\EntityResourceFactory
  */
-class EntityFactoryTest extends AbstractBrainCellTestCase
+final class EntityFactoryTest extends TestCase
 {
     /** @var EntityResourceFactory */
     protected $factory;

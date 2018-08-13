@@ -23,7 +23,7 @@ class ProductSizeAssignmentResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'product' => ProductResource::class,

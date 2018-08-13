@@ -24,7 +24,7 @@ class JobMetaResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getUnstructuredFields()
+    public function getUnstructuredFields(): array
     {
         return [
             'data',

@@ -3,15 +3,15 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
-use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
-use Brain\Cell\EntityResource\ProductionHouseResource;
-use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -23,6 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class JobResource extends AbstractResource implements ResourcePublicIdInterface
 {
     use ResourcePublicIdTrait;
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
 
     /**
      * @todo more general implementation
@@ -33,54 +35,27 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     const PREFLIGHT_FAILURE_POLICY_CANCEL = 'cancel';
     const PREFLIGHT_FAILURE_POLICY_IGNORE = 'ignore';
 
-    /**
-     * @var JobStatusResource $status
-     */
+    /** @var JobClientResource[]|ResourceCollection */
+    protected $clients;
+
+    /** @var JobStatusResource $status */
     protected $status;
 
-    /**
-     * @var ProductionHouseResource
-     */
-    protected $productionHouse;
-
-    /**
-     * @var ProductResource
-     */
+    /** @var ProductResource */
     protected $product;
 
-    /**
-     * @var ShopResource
-     */
-    protected $shop;
-
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $weight;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $quantity;
 
     /**
-     * @deprecated
-     * use JobBatchBatchDeliveryResource::$endOfProductionDate
-     * instead
+     * @deprecated use JobBatchBatchDeliveryResource::$endOfProductionDate instead
      *
-     * @var \DateTime
+     * @var DateResource
      */
     protected $productionFinishDate;
-
-    /**
-     * @var \DateTime
-     */
-    protected $created;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updated;
 
     /**
      * @var JobQueryResource[]
@@ -135,14 +110,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     protected $reference;
 
     /**
-     * @var ArtworkResource
-     *
-     * @Assert\Valid()
-     * @Assert\NotBlank()
-     */
-    protected $artwork;
-
-    /**
      * @var ArtifactResource[]|ResourceCollection
      */
     protected $artifacts;
@@ -170,46 +137,35 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
-            'productionHouse' => ProductionHouseResource::class,
-            'shop' => ShopResource::class,
             'product' => ProductResource::class,
             'batch' => JobBatchResource::class,
             'dimensions' => ThreeDimensionalResource::class,
             'price' => PriceResource::class,
             'status' => JobStatusResource::class,
-            'artwork' => ArtworkResource::class,
             'clonedFrom' => self::class,
             'meta' => JobMetaResource::class,
             'phase' => PhaseResource::class,
+            'productionFinishDate' => DateResource::class,
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
+            'clients' => JobClientResource::class,
             'components' => JobComponentResource::class,
             'options' => JobOptionResource::class,
             'notes' => JobNoteResource::class,
             'artifacts' => ArtifactResource::class,
             'queries' => JobQueryResource::class,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDateTimeProperties()
-    {
-        return [
-            'created',
-            'updated',
-            'productionFinishDate',
         ];
     }
 
@@ -234,23 +190,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return ProductionHouseResource|null
+     * @return JobClientResource[]|ResourceCollection
      */
-    public function getProductionHouse()
+    public function getClients(): ResourceCollection
     {
-        return $this->productionHouse;
-    }
-
-    /**
-     * @param ProductionHouseResource $productionHouse
-     *
-     * @return $this
-     */
-    public function setProductionHouse(ProductionHouseResource $productionHouse)
-    {
-        $this->productionHouse = $productionHouse;
-
-        return $this;
+        return $this->clients;
     }
 
     /**
@@ -269,26 +213,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setProduct(ProductResource $product)
     {
         $this->product = $product;
-
-        return $this;
-    }
-
-    /**
-     * @return ShopResource
-     */
-    public function getShop()
-    {
-        return $this->shop;
-    }
-
-    /**
-     * @param ShopResource $shop
-     *
-     * @return $this
-     */
-    public function setShop(ShopResource $shop)
-    {
-        $this->shop = $shop;
 
         return $this;
     }
@@ -358,7 +282,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      * use JobBatchBatchDeliveryResource::getEndOfProductionDate
      * instead
      *
-     * @return \DateTime
+     * @return DateResource
      */
     public function getProductionFinishDate()
     {
@@ -369,11 +293,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      * @deprecated
      * use JobBatchBatchDeliveryResource::setEndOfProductionDate
      *
-     * @param \DateTime $productionFinishDate
+     * @param DateResource $productionFinishDate
      *
      * @return JobResource
      */
-    public function setProductionFinishDate(\DateTime $productionFinishDate)
+    public function setProductionFinishDate(DateResource $productionFinishDate)
     {
         $this->productionFinishDate = $productionFinishDate;
 
@@ -448,46 +372,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     public function setDimensions($dimensions)
     {
         $this->dimensions = $dimensions;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param \DateTime $created
-     *
-     * @return JobResource
-     */
-    public function setCreated(\DateTime $created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
-
-    /**
-     * @param \DateTime $updated
-     *
-     * @return JobResource
-     */
-    public function setUpdated(\DateTime $updated)
-    {
-        $this->updated = $updated;
 
         return $this;
     }
@@ -577,7 +461,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             foreach ($component->getOptions() as $option) {
                 if (
                     $option->getCategory()->getAlias() === $optionCategoryAlias
-                    && !$option->getItem()->isDefault()
+                    && !$option->getFinishingItem()->isDefault()
                 ) {
                     return true;
                 }
@@ -670,22 +554,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     {
         // @todo
         return false;
-    }
-
-    /**
-     * @return ArtworkResource
-     */
-    public function getArtwork()
-    {
-        return $this->artwork;
-    }
-
-    /**
-     * @param ArtworkResource $artwork
-     */
-    public function setArtwork(ArtworkResource $artwork)
-    {
-        $this->artwork = $artwork;
     }
 
     /**

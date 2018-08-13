@@ -19,7 +19,7 @@ class JobOptionResource extends AbstractResource
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $category;
+    protected $finishingCategory;
 
     /**
      * @var FinishingItemResource
@@ -27,7 +27,7 @@ class JobOptionResource extends AbstractResource
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $item;
+    protected $finishingItem;
 
     /**
      * @var array
@@ -37,21 +37,21 @@ class JobOptionResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getUnstructuredFields()
+    public function getAssociatedResources(): array
     {
         return [
-            'configuration',
+            'finishingCategory' => FinishingCategoryResource::class,
+            'finishingItem' => FinishingItemResource::class,
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getUnstructuredFields(): array
     {
         return [
-            'category' => FinishingCategoryResource::class,
-            'item' => FinishingItemResource::class,
+            'configuration',
         ];
     }
 
@@ -66,9 +66,9 @@ class JobOptionResource extends AbstractResource
     /**
      * @return FinishingCategoryResource
      */
-    public function getCategory()
+    public function getFinishingCategory()
     {
-        return $this->category;
+        return $this->finishingCategory;
     }
 
     /**
@@ -76,9 +76,9 @@ class JobOptionResource extends AbstractResource
      *
      * @return $this
      */
-    public function setCategory(FinishingCategoryResource $finishingCategory)
+    public function setFinishingCategory(FinishingCategoryResource $finishingCategory)
     {
-        $this->category = $finishingCategory;
+        $this->finishingCategory = $finishingCategory;
 
         return $this;
     }
@@ -86,9 +86,9 @@ class JobOptionResource extends AbstractResource
     /**
      * @return FinishingItemResource
      */
-    public function getItem()
+    public function getFinishingItem()
     {
-        return $this->item;
+        return $this->finishingItem;
     }
 
     /**
@@ -96,9 +96,9 @@ class JobOptionResource extends AbstractResource
      *
      * @return $this
      */
-    public function setItem(FinishingItemResource $finishingItem)
+    public function setFinishingItem(FinishingItemResource $finishingItem)
     {
-        $this->item = $finishingItem;
+        $this->finishingItem = $finishingItem;
 
         return $this;
     }

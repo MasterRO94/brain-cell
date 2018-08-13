@@ -3,19 +3,21 @@
 namespace Brain\Cell\Tests\Unit\Service;
 
 use Brain\Cell\Service\ResourceHandlerService;
-use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\Transformer\ArrayDecoder;
 use Brain\Cell\Transformer\ArrayEncoder;
 
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * @group cell
  * @group service
+ *
+ * @covers \Brain\Cell\Service\ResourceHandlerService
  */
-class ResourceHandlerServiceTest extends AbstractBrainCellTestCase
+final class ResourceHandlerServiceTest extends TestCase
 {
     /** @var EntityResourceFactory|MockObject */
     protected $factoryMock;

@@ -13,6 +13,9 @@ class ClientResource extends AbstractResource implements ResourcePublicIdInterfa
 {
     use ResourcePublicIdTrait;
 
+    /** @var string */
+    protected $type;
+
     /**
      * @var string
      */
@@ -36,11 +39,19 @@ class ClientResource extends AbstractResource implements ResourcePublicIdInterfa
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'address' => AddressResource::class,
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
     }
 
     /**
