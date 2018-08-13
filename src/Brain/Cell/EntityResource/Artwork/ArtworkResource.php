@@ -55,6 +55,14 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
+     * @param ArtworkFileResource[]|ResourceCollection $files
+     */
+    public function setFiles(ResourceCollection $files): void
+    {
+        $this->files = $files;
+    }
+
+    /**
      * @return ArtworkStatusResource
      */
     public function getStatus(): ArtworkStatusResource
