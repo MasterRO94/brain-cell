@@ -7,7 +7,6 @@ use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
-use Brain\Cell\EntityResource\PrepressTeamResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
@@ -43,12 +42,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /** @var JobStatusResource $status */
     protected $status;
 
-    /** @var PrepressTeamResource
-     */
-    protected $prepressTeam;
-
-    /**
-     * @var ProductResource */
+    /** @var ProductResource */
     protected $product;
 
     /** @var int */
@@ -215,19 +209,27 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return PrepressTeamResource|null
+     * @deprecated Client now belongs in the clients collection.
      */
-    public function getPrepressTeam()
+    public function getShop(): void
     {
-        return $this->prepressTeam;
+        return null;
     }
 
     /**
-     * @param PrepressTeamResource $prepressTeam
+     * @deprecated Client now belongs in the clients collection.
      */
-    public function setPrepressTeam(PrepressTeamResource $prepressTeam)
+    public function getProductionHouse(): void
     {
-        $this->prepressTeam = $prepressTeam;
+        return null;
+    }
+
+    /**
+     * @deprecated Client now belongs in the clients collection.
+     */
+    public function getPrepressTeam(): void
+    {
+        return null;
     }
 
     /**
