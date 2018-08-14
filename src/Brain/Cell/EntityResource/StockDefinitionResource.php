@@ -6,7 +6,6 @@ use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-
 /**
  * {@inheritdoc}
  */
