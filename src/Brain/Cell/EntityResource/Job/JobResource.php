@@ -261,7 +261,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return ProductionHouseResource|null
+     * @return PrepressTeamResource|null
      */
     public function getPrepressTeam()
     {
