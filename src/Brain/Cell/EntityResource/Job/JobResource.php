@@ -9,6 +9,7 @@ use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\ProductionHouseResource;
+use Brain\Cell\EntityResource\PrepressTeamResource;
 use Brain\Cell\EntityResource\ShopResource;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
@@ -42,6 +43,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      * @var ProductionHouseResource
      */
     protected $productionHouse;
+
+    /**
+     * @var PrepressTeamResource
+     */
+    protected $prepressTeam;
 
     /**
      * @var ProductResource
@@ -174,6 +180,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     {
         return [
             'productionHouse' => ProductionHouseResource::class,
+            'prepressTeam' => PrepressTeamResource::class,
             'shop' => ShopResource::class,
             'product' => ProductResource::class,
             'batch' => JobBatchResource::class,
@@ -251,6 +258,22 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         $this->productionHouse = $productionHouse;
 
         return $this;
+    }
+
+    /**
+     * @return PrepressTeamResource|null
+     */
+    public function getPrepressTeam()
+    {
+        return $this->prepressTeam;
+    }
+
+    /**
+     * @param PrepressTeamResource $prepressTeam
+     */
+    public function setPrepressTeam(PrepressTeamResource $prepressTeam)
+    {
+        $this->prepressTeam = $prepressTeam;
     }
 
     /**
