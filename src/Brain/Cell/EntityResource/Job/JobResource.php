@@ -3,6 +3,7 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
+use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
@@ -167,6 +168,16 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             'artifacts' => ArtifactResource::class,
             'queries' => JobQueryResource::class,
         ];
+    }
+
+    /**
+     * Return the artwork of the first component against the job.
+     *
+     * @deprecated This is a BC method and should not be used.
+     */
+    public function getArtwork(): ArtworkResource
+    {
+        return $this->components[0]->getArtwork();
     }
 
     /**
