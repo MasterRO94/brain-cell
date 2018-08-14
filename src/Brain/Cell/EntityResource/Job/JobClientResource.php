@@ -15,6 +15,10 @@ final class JobClientResource extends AbstractResource
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
+    public const ROLE_ORIGIN = 'origin';
+    public const ROLE_PRODUCTION = 'production';
+    public const ROLE_PREPRESS = 'prepress';
+
     /** @var string */
     protected $role;
 
