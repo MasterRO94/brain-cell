@@ -213,7 +213,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function getShop(): void
     {
-        return null;
     }
 
     /**
@@ -221,7 +220,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function getProductionHouse(): void
     {
-        return null;
     }
 
     /**
@@ -229,7 +227,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     public function getPrepressTeam(): void
     {
-        return null;
     }
 
     /**
