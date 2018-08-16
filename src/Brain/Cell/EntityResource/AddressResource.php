@@ -2,22 +2,17 @@
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 class AddressResource extends AbstractResource
 {
     use ResourcePublicIdTrait;
-
-    /**
-     * @var \DateTime
-     */
-    protected $created;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updated;
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
 
     /**
      * @var string
@@ -72,10 +67,12 @@ class AddressResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'country' => CountryResource::class,
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
         ];
     }
 
@@ -237,30 +234,6 @@ class AddressResource extends AbstractResource
     public function setCountry($country)
     {
         $this->country = $country;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param \DateTime $created
-     */
-    public function setCreated(\DateTime $created)
-    {
-        $this->created = $created;
-    }
-
-    /**
-     * @param \DateTime $updated
-     */
-    public function setUpdated(\DateTime $updated)
-    {
-        $this->updated = $updated;
     }
 
     /**

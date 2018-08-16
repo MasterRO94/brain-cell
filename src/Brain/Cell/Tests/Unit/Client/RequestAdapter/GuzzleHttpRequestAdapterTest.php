@@ -9,13 +9,13 @@ use Brain\Cell\Exception\Request\NotFoundException;
 use Brain\Cell\Exception\Request\PayloadViolationException;
 use Brain\Cell\Exception\Request\UnknownRequestException;
 use Brain\Cell\Response\ErrorMessageEnum;
-use Brain\Cell\Tests\AbstractBrainCellTestCase;
 
 use Symfony\Component\HttpFoundation\Request;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -26,8 +26,10 @@ use Psr\Http\Message\UriInterface;
  * @group cell
  * @group client
  * @group client-adapter
+ *
+ * @covers \Brain\Cell\Client\RequestAdapter\GuzzleHttpRequestAdapter
  */
-class GuzzleHttpRequestAdapterTest extends AbstractBrainCellTestCase
+final class GuzzleHttpRequestAdapterTest extends TestCase
 {
     const BASE_PATH = 'https://some.example.com/v1';
 

@@ -35,4 +35,4 @@ code.fix:
 # Test
 
 test:
-	vendor/bin/phpunit -v --colors=always --columns=50 --coverage-html="build/coverage"
+	vendor/bin/phpunit --colors=always --columns=50 --coverage-html="build/coverage"

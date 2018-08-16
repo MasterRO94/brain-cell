@@ -3,24 +3,19 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class JobQueryResource extends AbstractResource implements ResourcePublicIdInterface
 {
     use ResourcePublicIdTrait;
-
-    /**
-     * @var \DateTime $created
-     */
-    protected $created;
-
-    /**
-     * @var \DateTime $updated
-     */
-    protected $updated;
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
 
     /**
      * @var \DateTime $resolved
@@ -50,7 +45,19 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedResources(): array
+    {
+        return [
+            'assignee' => ClientResource::class,
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections(): array
     {
         return [
             'notes' => JobQueryNoteResource::class,
@@ -60,18 +67,9 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getDateTimeProperties(): array
     {
         return [
-            'assignee' => ClientResource::class,
-        ];
-    }
-
-    public function getDateTimeProperties()
-    {
-        return [
-            'created',
-            'updated',
             'resolved',
             'progressStarted',
         ];
@@ -91,38 +89,6 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     public function setSummary(string $summary)
     {
         $this->summary = $summary;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreated(): \DateTime
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param \DateTime $created
-     */
-    public function setCreated(\DateTime $created)
-    {
-        $this->created = $created;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdated(): \DateTime
-    {
-        return $this->updated;
-    }
-
-    /**
-     * @param \DateTime $updated
-     */
-    public function setUpdated(\DateTime $updated)
-    {
-        $this->updated = $updated;
     }
 
     /**

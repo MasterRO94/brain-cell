@@ -10,18 +10,18 @@ use Brain\Cell\Client\RequestContext;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\StockFinishingsResource;
 use Brain\Cell\Service\ResourceHandlerService;
-use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\Transformer\ArrayDecoder;
 use Brain\Cell\Transformer\ArrayEncoder;
 
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * @group cell
  * @group client
  */
-class DelegateClientTest extends AbstractBrainCellTestCase
+final class DelegateClientTest extends TestCase
 {
     /** @var MockObject|RequestAdapterInterface */
     protected $adapter;

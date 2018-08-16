@@ -67,7 +67,7 @@ class JobBatchResource extends AbstractResource implements ResourcePublicIdInter
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             /*
@@ -85,7 +85,7 @@ class JobBatchResource extends AbstractResource implements ResourcePublicIdInter
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
             'jobs' => JobResource::class,

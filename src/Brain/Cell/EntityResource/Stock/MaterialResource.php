@@ -50,7 +50,7 @@ class MaterialResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'base' => MaterialBaseResource::class,

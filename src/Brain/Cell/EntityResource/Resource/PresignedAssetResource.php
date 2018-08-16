@@ -12,7 +12,7 @@ class PresignedAssetResource extends AbstractResource
 
     protected $expiresAt;
 
-    public function getDateTimeProperties()
+    public function getDateTimeProperties(): array
     {
         return [
             'expiresAt',

@@ -47,7 +47,7 @@ class FinishingCategoryResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
             'options' => FinishingItemResource::class,

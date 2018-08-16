@@ -19,7 +19,7 @@ class JobQueryNoteResource extends AbstractNoteResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'artwork' => ArtworkResource::class,

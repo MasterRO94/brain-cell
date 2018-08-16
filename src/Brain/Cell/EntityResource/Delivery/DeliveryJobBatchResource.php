@@ -42,7 +42,7 @@ class DeliveryJobBatchResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'deliveryAddress' => AddressResource::class,
@@ -52,7 +52,7 @@ class DeliveryJobBatchResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
             'jobs' => JobResource::class,

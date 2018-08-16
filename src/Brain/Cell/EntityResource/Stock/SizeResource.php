@@ -35,7 +35,10 @@ class SizeResource extends AbstractResource
      */
     protected $stockType;
 
-    public function getAssociatedResources()
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources(): array
     {
         return [
             'dimensions' => TwoDimensionalResource::class,

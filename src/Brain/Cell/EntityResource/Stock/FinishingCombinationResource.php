@@ -33,7 +33,7 @@ class FinishingCombinationResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'minimumDimension' => TwoDimensionalResource::class,
@@ -44,7 +44,7 @@ class FinishingCombinationResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
             'assignments' => FinishingCombinationAssignmentResource::class,

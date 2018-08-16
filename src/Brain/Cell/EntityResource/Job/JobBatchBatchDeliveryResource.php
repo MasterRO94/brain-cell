@@ -50,7 +50,7 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'deliveryAddress' => AddressResource::class,
@@ -62,7 +62,7 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getDateTimeProperties()
+    public function getDateTimeProperties(): array
     {
         return [
             'assumedStartOfProductionDate',

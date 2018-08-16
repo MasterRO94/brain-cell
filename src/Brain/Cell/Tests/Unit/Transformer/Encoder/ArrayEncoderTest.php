@@ -2,7 +2,6 @@
 
 namespace Brain\Cell\Tests\Unit\Transformer\Encoder;
 
-use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
@@ -10,12 +9,16 @@ use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayEncoder;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @group cell
  * @group transformer
  * @group transformer-encoder
+ *
+ * @covers \Brain\Cell\Transformer\ArrayEncoder
  */
-class ArrayEncoderTest extends AbstractBrainCellTestCase
+final class ArrayEncoderTest extends TestCase
 {
     /** @var ArrayEncoder */
     protected $encoder;
@@ -40,17 +43,6 @@ class ArrayEncoderTest extends AbstractBrainCellTestCase
         $entity = $this->createMock(TransferEntityInterface::class);
 
         $this->encoder->encode($entity);
-    }
-
-    /**
-     * @test
-     */
-    public function encoderRefusesToEncodeInvalidEntityResourceProperties()
-    {
-        $internal = SimpleResourceMock::create(1, 'Tony Stark');
-        $resource = SimpleResourceMock::create(2, $internal);
-
-        $this->encoder->encode($resource);
     }
 
     /**

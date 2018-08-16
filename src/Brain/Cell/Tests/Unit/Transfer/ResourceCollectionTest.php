@@ -2,16 +2,19 @@
 
 namespace Brain\Cell\Tests\Unit\Transfer;
 
-use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @group cell
  * @group transfer
+ *
+ * @covers \Brain\Cell\Transfer\ResourceCollection
  */
-class ResourceCollectionTest extends AbstractBrainCellTestCase
+final class ResourceCollectionTest extends TestCase
 {
     /** @var ResourceCollection */
     protected $collection;

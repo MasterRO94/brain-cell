@@ -2,48 +2,33 @@
 
 namespace Brain\Cell\EntityResource\Artwork;
 
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
-
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * {@inheritdoc}
  */
 class ArtworkResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
+    use ResourcePublicIdTrait;
+
+    /** @var string */
     protected $id;
 
-    /**
-     * @var ArtworkStatusResource
-     */
+    /** @var ArtworkStatusResource */
     protected $status;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Url()
-     */
-    protected $path;
+    /** @var ArtworkFileResource[]|ResourceCollection */
+    protected $files;
 
-    /**
-     * @var string
-     */
-    protected $mimeType;
-
-    /**
-     * @var ArtworkIssueResource[]|ResourceCollection
-     */
+    /** @var ArtworkIssueResource[]|ResourceCollection */
     protected $issues;
 
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'status' => ArtworkStatusResource::class,
@@ -53,81 +38,50 @@ class ArtworkResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [
+            'files' => ArtworkFileResource::class,
             'issues' => ArtworkIssueResource::class,
         ];
     }
 
     /**
-     * @return string
+     * @return ArtworkFileResource[]|ResourceCollection
      */
-    public function getId()
+    public function getFiles(): ResourceCollection
     {
-        return $this->id;
+        return $this->files;
+    }
+
+    /**
+     * @param ArtworkFileResource[]|ResourceCollection $files
+     */
+    public function setFiles(ResourceCollection $files): void
+    {
+        $this->files = $files;
     }
 
     /**
      * @return ArtworkStatusResource
      */
-    public function getStatus()
+    public function getStatus(): ArtworkStatusResource
     {
         return $this->status;
     }
 
     /**
      * @param ArtworkStatusResource $status
-     *
-     * @return ArtworkResource
      */
-    public function setStatus(ArtworkStatusResource $status)
+    public function setStatus(ArtworkStatusResource $status): void
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return ArtworkResource
-     */
-    public function setPath(string $path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->mimeType;
-    }
-
-    /**
-     * @param string $mimeType
-     */
-    public function setMimeType($mimeType)
-    {
-        $this->mimeType = $mimeType;
     }
 
     /**
      * @return ArtworkIssueResource[]|ResourceCollection
      */
-    public function getIssues()
+    public function getIssues(): ResourceCollection
     {
         return $this->issues;
     }

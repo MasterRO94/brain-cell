@@ -29,7 +29,7 @@ class SimpleResourceAssociationMock extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'associatedResource' => SimpleResourceMock::class,

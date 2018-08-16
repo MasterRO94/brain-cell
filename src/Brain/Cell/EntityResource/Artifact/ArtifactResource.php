@@ -2,10 +2,16 @@
 
 namespace Brain\Cell\EntityResource\Artifact;
 
+use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 class ArtifactResource extends AbstractResource
 {
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
+
     /**
      * @var string
      */
@@ -30,14 +36,15 @@ class ArtifactResource extends AbstractResource
     protected $status;
 
     /**
-     * @var \DateTime
+     * {@inheritdoc}
      */
-    protected $created;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updated;
+    public function getAssociatedResources(): array
+    {
+        return [
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
+        ];
+    }
 
     /**
      * @return string
@@ -85,37 +92,5 @@ class ArtifactResource extends AbstractResource
     public function setStatus(string $status)
     {
         $this->status = $status;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * @param \DateTime $created
-     */
-    public function setCreated(\DateTime $created)
-    {
-        $this->created = $created;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
-
-    /**
-     * @param \DateTime $updated
-     */
-    public function setUpdated(\DateTime $updated)
-    {
-        $this->updated = $updated;
     }
 }

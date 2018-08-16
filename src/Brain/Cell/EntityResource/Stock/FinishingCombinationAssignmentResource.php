@@ -19,7 +19,7 @@ class FinishingCombinationAssignmentResource extends AbstractResource
     /**
      * {@inheritdoc}
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [
             'stockFinishingCategory' => FinishingCategoryResource::class,

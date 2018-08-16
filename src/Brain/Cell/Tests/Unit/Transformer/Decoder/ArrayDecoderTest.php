@@ -3,7 +3,6 @@
 namespace Brain\Cell\Tests\Unit\Transformer\Decoder;
 
 use Brain\Cell\Exception\RuntimeException;
-use Brain\Cell\Tests\AbstractBrainCellTestCase;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
 use Brain\Cell\Tests\Mock\Association\SimpleResourceCollectionAssociationMock;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
@@ -11,12 +10,16 @@ use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayDecoder;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @group cell
  * @group transformer
  * @group transformer-decoder
+ *
+ * @covers \Brain\Cell\Transformer\ArrayDecoder
  */
-class ArrayDecoderTest extends AbstractBrainCellTestCase
+final class ArrayDecoderTest extends TestCase
 {
     /** @var ArrayDecoder */
     protected $decoder;

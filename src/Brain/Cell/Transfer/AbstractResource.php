@@ -27,7 +27,7 @@ abstract class AbstractResource implements TransferEntityInterface
      *
      * @internal
      */
-    public function getAssociatedResources()
+    public function getAssociatedResources(): array
     {
         return [];
     }
@@ -50,7 +50,7 @@ abstract class AbstractResource implements TransferEntityInterface
      *
      * @internal
      */
-    public function getAssociatedCollections()
+    public function getAssociatedCollections(): array
     {
         return [];
     }
@@ -62,7 +62,7 @@ abstract class AbstractResource implements TransferEntityInterface
      *
      * @return string[]
      */
-    public function getUnstructuredFields()
+    public function getUnstructuredFields(): array
     {
         return [];
     }
@@ -71,8 +71,10 @@ abstract class AbstractResource implements TransferEntityInterface
      * Return all properties that should be interpreted as \DateTime.
      *
      * @return string[]
+     *
+     * @deprecated
      */
-    public function getDateTimeProperties()
+    public function getDateTimeProperties(): array
     {
         return [];
     }

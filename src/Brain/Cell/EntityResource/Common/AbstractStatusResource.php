@@ -9,46 +9,11 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 abstract class AbstractStatusResource extends AbstractResource
 {
-    /**
-     * The canonical status string.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $canonical;
 
-    /**
-     * @var string
-     *
-     * @deprecated To be removed in 2.0, use canonical instead.
-     */
-    protected $state;
-
-    /**
-     * The localised translation.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $message;
-
-    /**
-     * @return string
-     *
-     * @deprecated To be removed in 2.0, use canonical instead.
-     */
-    public function getState()
-    {
-        return $this->state;
-    }
-
-    /**
-     * @param string $state
-     *
-     * @deprecated To be removed in 2.0, use canonical instead.
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-    }
 
     /**
      * Return the canonical status string.
