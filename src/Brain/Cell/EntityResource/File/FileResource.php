@@ -17,7 +17,7 @@ final class FileResource extends AbstractResource
     use DeletedAtTrait;
 
     /** @var string */
-    protected $sourcePath;
+    protected $source;
 
     /** @var string */
     protected $mimeType;
@@ -42,19 +42,19 @@ final class FileResource extends AbstractResource
      *
      * @internal This property is never returned from the API.
      */
-    public function getSourcePath(): string
+    public function getSource(): string
     {
-        return $this->sourcePath;
+        return $this->source;
     }
 
     /**
      * Set the source path for the file.
      *
-     * @param string $sourcePath
+     * @param string $source
      */
-    public function setSourcePath(string $sourcePath): void
+    public function setSource(string $source): void
     {
-        $this->sourcePath = $sourcePath;
+        $this->source = $source;
     }
 
     /**
