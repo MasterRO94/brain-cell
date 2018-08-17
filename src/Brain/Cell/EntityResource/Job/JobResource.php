@@ -503,10 +503,8 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return false;
     }
 
-    // @todo is this a very bad idea perhaps?
-
     /**
-     * @return bool
+     * @deprecated Use domain models in your project for this.
      */
     public function hasWhiteInk()
     {
@@ -514,7 +512,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return bool
+     * @deprecated Use domain models in your project for this.
      */
     public function hasFoiling()
     {
@@ -522,7 +520,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return bool
+     * @deprecated Use domain models in your project for this.
      */
     public function hasLaserCutting()
     {
@@ -530,7 +528,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return bool
+     * @deprecated Use domain models in your project for this.
      */
     public function hasReversePrinting()
     {
@@ -538,7 +536,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return bool
+     * @deprecated Use domain models in your project for this.
      */
     public function hasCorners()
     {
@@ -546,13 +544,16 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @return bool
+     * @deprecated Use domain models in your project for this.
      */
     public function hasPersonalisation()
     {
         return $this->has('finishing-personalisation');
     }
 
+    /**
+     * @deprecated Use domain models in your project for this.
+     */
     public function isMultipage()
     {
         if ($this->components->count() > 1) {
@@ -570,21 +571,27 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return false;
     }
 
+    /**
+     * @deprecated Use domain models in your project for this.
+     */
     public function isOutsource()
     {
-        // @todo @see BRN-299
         return false;
     }
 
+    /**
+     * @deprecated Use domain models in your project for this.
+     */
     public function isLitho()
     {
-        // @todo
         return false;
     }
 
+    /**
+     * @deprecated Use domain models in your project for this.
+     */
     public function isBespoke()
     {
-        // @todo
         return false;
     }
 
