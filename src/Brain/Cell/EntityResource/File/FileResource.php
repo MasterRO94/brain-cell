@@ -8,6 +8,7 @@ use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\ResourceCollection;
 
 final class FileResource extends AbstractResource
 {
@@ -25,6 +26,9 @@ final class FileResource extends AbstractResource
     /** @var string */
     protected $path;
 
+    /** @var ResourceCollection|FilePreviewResource[] */
+    protected $previews;
+
     /**
      * {@inheritdoc}
      */
@@ -34,6 +38,16 @@ final class FileResource extends AbstractResource
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
             'deletedAt' => DateResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections(): array
+    {
+        return [
+            'previews' => FilePreviewResource::class,
         ];
     }
 
@@ -83,5 +97,21 @@ final class FileResource extends AbstractResource
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    /**
+     * @return ResourceCollection|FilePreviewResource[]
+     */
+    public function getPreviews(): ResourceCollection
+    {
+        return $this->previews;
+    }
+
+    /**
+     * @param ResourceCollection|FilePreviewResource[] $previews
+     */
+    public function setPreviews(ResourceCollection $previews)
+    {
+        $this->previews = $previews;
     }
 }
