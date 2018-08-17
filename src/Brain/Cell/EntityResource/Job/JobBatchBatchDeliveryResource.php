@@ -6,6 +6,7 @@ use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
 use Brain\Cell\EntityResource\Delivery\ProductionStrategyResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\EntityResource\Common\DateResource;
 
 /**
  * Class JobBatchBatchDeliveryResource.
@@ -26,19 +27,19 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     /** @var DeliveryServiceResource|null */
     protected $deliveryService;
 
-    /** @var \DateTime|null */
+    /** @var DateResource|null */
     protected $assumedStartOfProductionDate;
 
-    /** @var \DateTime|null */
+    /** @var DateResource|null */
     protected $endOfProductionDate;
 
-    /** @var \DateTime|null */
+    /** @var DateResource|null */
     protected $deliveryCollectionDate;
 
-    /** @var \DateTime|null */
+    /** @var DateResource|null */
     protected $deliveryDateEarliest;
 
-    /** @var \DateTime|null */
+    /** @var DateResource|null */
     protected $deliveryDateLatest;
 
     /** @var string|null E.g. "08:30" */
@@ -56,20 +57,11 @@ class JobBatchBatchDeliveryResource extends AbstractResource
             'deliveryAddress' => AddressResource::class,
             'productionStrategy' => ProductionStrategyResource::class,
             'deliveryService' => DeliveryServiceResource::class,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDateTimeProperties(): array
-    {
-        return [
-            'assumedStartOfProductionDate',
-            'endOfProductionDate',
-            'deliveryCollectionDate',
-            'deliveryDateLatest',
-            'deliveryDateEarliest',
+            'assumedStartOfProductionDate' => DateResource::class,
+            'endOfProductionDate' => DateResource::class,
+            'deliveryCollectionDate' => DateResource::class,
+            'deliveryDateEarliest' => DateResource::class,
+            'deliveryDateLatest' => DateResource::class,
         ];
     }
 
@@ -122,7 +114,7 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateResource|null
      */
     public function getAssumedStartOfProductionDate()
     {
@@ -130,15 +122,15 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $assumedStartOfProductionDate
+     * @param DateResource $assumedStartOfProductionDate
      */
-    public function setAssumedStartOfProductionDate(\DateTime $assumedStartOfProductionDate)
+    public function setAssumedStartOfProductionDate(DateResource $assumedStartOfProductionDate)
     {
         $this->assumedStartOfProductionDate = $assumedStartOfProductionDate;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateResource|null
      */
     public function getEndOfProductionDate()
     {
@@ -146,15 +138,15 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $endOfProductionDate
+     * @param DateResource $endOfProductionDate
      */
-    public function setEndOfProductionDate(\DateTime $endOfProductionDate)
+    public function setEndOfProductionDate(DateResource $endOfProductionDate)
     {
         $this->endOfProductionDate = $endOfProductionDate;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateResource|null
      */
     public function getDeliveryCollectionDate()
     {
@@ -162,15 +154,15 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $deliveryCollectionDate
+     * @param DateResource $deliveryCollectionDate
      */
-    public function setDeliveryCollectionDate(\DateTime $deliveryCollectionDate)
+    public function setDeliveryCollectionDate(DateResource $deliveryCollectionDate)
     {
         $this->deliveryCollectionDate = $deliveryCollectionDate;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateResource|null
      */
     public function getDeliveryDateEarliest()
     {
@@ -178,15 +170,15 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $deliveryDateEarliest
+     * @param DateResource $deliveryDateEarliest
      */
-    public function setDeliveryDateEarliest(\DateTime $deliveryDateEarliest)
+    public function setDeliveryDateEarliest(DateResource $deliveryDateEarliest)
     {
         $this->deliveryDateEarliest = $deliveryDateEarliest;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateResource|null
      */
     public function getDeliveryDateLatest()
     {
@@ -194,9 +186,9 @@ class JobBatchBatchDeliveryResource extends AbstractResource
     }
 
     /**
-     * @param \DateTime $deliveryDateLatest
+     * @param DateResource $deliveryDateLatest
      */
-    public function setDeliveryDateLatest(\DateTime $deliveryDateLatest)
+    public function setDeliveryDateLatest(DateResource $deliveryDateLatest)
     {
         $this->deliveryDateLatest = $deliveryDateLatest;
     }
