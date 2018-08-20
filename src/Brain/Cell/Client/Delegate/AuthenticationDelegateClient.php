@@ -3,7 +3,7 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\ClientResource;
+use Brain\Cell\EntityResource\WhoAmIResponseResource;
 
 class AuthenticationDelegateClient extends DelegateClient
 {
@@ -12,6 +12,6 @@ class AuthenticationDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/whoami');
 
-        return $this->request($context, new ClientResource());
+        return $this->request($context, new WhoAmIResponseResource());
     }
 }
