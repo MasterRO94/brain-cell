@@ -209,7 +209,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
-     * @param ResourceCollection $clients
+     * @param JobClientResource[]|ResourceCollection $clients
      */
     public function setClients(ResourceCollection $clients): void
     {
