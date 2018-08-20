@@ -4,6 +4,7 @@ namespace Brain\Cell;
 
 use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
 use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
+use Brain\Cell\Client\Delegate\AuthenticationDelegateClient;
 use Brain\Cell\Client\Delegate\ChangeDelegateClient;
 use Brain\Cell\Client\Delegate\ClientWorkflowDelegateClient;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
@@ -20,6 +21,14 @@ use Brain\Cell\Client\DelegateClient;
  */
 class BrainClient extends DelegateClient
 {
+    /**
+     * @return AuthenticationDelegateClient
+     */
+    public function authentication(): AuthenticationDelegateClient
+    {
+        return new AuthenticationDelegateClient($this->configuration);
+    }
+
     /**
      * @return PricingDelegateClient
      */
