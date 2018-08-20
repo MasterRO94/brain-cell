@@ -209,6 +209,14 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     }
 
     /**
+     * @param ResourceCollection $clients
+     */
+    public function setClients(ResourceCollection $clients): void
+    {
+        $this->clients = $clients;
+    }
+
+    /**
      * @deprecated Client now belongs in the clients collection.
      */
     public function getShop(): void
