@@ -43,8 +43,8 @@ class JobComponentOptionResource extends AbstractResource
     public function getAssociatedResources(): array
     {
         return [
-            'category' => FinishingCategoryResource::class,
-            'item' => FinishingItemResource::class,
+            'finishingCategory' => FinishingCategoryResource::class,
+            'finishingItem' => FinishingItemResource::class,
         ];
     }
 
