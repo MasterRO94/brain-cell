@@ -7,7 +7,10 @@ use Brain\Cell\EntityResource\WhoAmIResponseResource;
 
 class AuthenticationDelegateClient extends DelegateClient
 {
-    public function getMe()
+    /**
+     * @return WhoAmIResponseResource
+     */
+    public function getMe(): WhoAmIResponseResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/whoami');

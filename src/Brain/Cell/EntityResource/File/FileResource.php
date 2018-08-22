@@ -110,7 +110,7 @@ final class FileResource extends AbstractResource
     /**
      * @param ResourceCollection|FilePreviewResource[] $previews
      */
-    public function setPreviews(ResourceCollection $previews)
+    public function setPreviews(ResourceCollection $previews): void
     {
         $this->previews = $previews;
     }

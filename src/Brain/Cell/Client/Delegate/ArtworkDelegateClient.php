@@ -11,6 +11,8 @@ use Psr\Http\Message\StreamInterface;
 class ArtworkDelegateClient extends DelegateClient
 {
     /**
+     * @deprecated use downloadFile instead
+     *
      * @param string $id
      *
      * @return StreamInterface

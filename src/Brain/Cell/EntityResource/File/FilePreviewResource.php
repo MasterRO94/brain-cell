@@ -55,7 +55,7 @@ class FilePreviewResource extends AbstractResource
     /**
      * @param int $index
      */
-    public function setIndex(int $index)
+    public function setIndex(int $index): void
     {
         $this->index = $index;
     }
