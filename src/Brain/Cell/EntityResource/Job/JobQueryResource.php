@@ -18,12 +18,12 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     use UpdatedAtTrait;
 
     /**
-     * @var \DateTime $resolved
+     * @var DateResource $resolved
      */
     protected $resolved;
 
     /**
-     * @var \DateTime $progressStarted
+     * @var DateResource $progressStarted
      */
     protected $progressStarted;
 
@@ -65,17 +65,6 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getDateTimeProperties(): array
-    {
-        return [
-            'resolved',
-            'progressStarted',
-        ];
-    }
-
-    /**
      * @return string
      */
     public function getSummary(): string
@@ -92,33 +81,33 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateResource|null
      */
-    public function getResolved(): ?\DateTime
+    public function getResolved(): ?DateResource
     {
         return $this->resolved;
     }
 
     /**
-     * @param \DateTime|null $resolved
+     * @param DateResource|null $resolved
      */
-    public function setResolved(?\DateTime $resolved)
+    public function setResolved(?DateResource $resolved)
     {
         $this->resolved = $resolved;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateResource|null
      */
-    public function getProgressStarted(): ?\DateTime
+    public function getProgressStarted(): ?DateResource
     {
         return $this->progressStarted;
     }
 
     /**
-     * @param \DateTime|null $progressStarted
+     * @param DateResource|null $progressStarted
      */
-    public function setProgressStarted(?\DateTime $progressStarted)
+    public function setProgressStarted(?DateResource $progressStarted)
     {
         $this->progressStarted = $progressStarted;
     }
