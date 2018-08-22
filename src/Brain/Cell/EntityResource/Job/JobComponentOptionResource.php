@@ -22,7 +22,7 @@ class JobComponentOptionResource extends AbstractResource
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
-    protected $category;
+    protected $finishingCategory;
 
     /**
      * @var FinishingItemResource
@@ -43,8 +43,8 @@ class JobComponentOptionResource extends AbstractResource
     public function getAssociatedResources(): array
     {
         return [
-            'category' => FinishingCategoryResource::class,
-            'item' => FinishingItemResource::class,
+            'finishingCategory' => FinishingCategoryResource::class,
+            'finishingItem' => FinishingItemResource::class,
         ];
     }
 
@@ -69,9 +69,9 @@ class JobComponentOptionResource extends AbstractResource
     /**
      * @return FinishingCategoryResource
      */
-    public function getCategory()
+    public function getFinishingCategory()
     {
-        return $this->category;
+        return $this->finishingCategory;
     }
 
     /**
@@ -79,9 +79,9 @@ class JobComponentOptionResource extends AbstractResource
      *
      * @return $this
      */
-    public function setCategory(FinishingCategoryResource $finishingCategory)
+    public function setFinishingCategory(FinishingCategoryResource $finishingCategory)
     {
-        $this->category = $finishingCategory;
+        $this->finishingCategory = $finishingCategory;
 
         return $this;
     }

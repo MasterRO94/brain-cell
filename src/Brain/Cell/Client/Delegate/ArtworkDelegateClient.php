@@ -5,11 +5,14 @@ namespace Brain\Cell\Client\Delegate;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
 
+use Brain\Cell\EntityResource\File\FileResource;
 use Psr\Http\Message\StreamInterface;
 
 class ArtworkDelegateClient extends DelegateClient
 {
     /**
+     * @deprecated use downloadFile instead
+     *
      * @param string $id
      *
      * @return StreamInterface
@@ -24,24 +27,26 @@ class ArtworkDelegateClient extends DelegateClient
 
     /**
      * @param string $id
-     * @param int $pageNumber
-     * @param int|null $width
-     * @param int|null $height
+     *
+     * @return FileResource
+     */
+    public function getFile(string $id): FileResource
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/files/%s', $id));
+
+        return $this->request($context, new FileResource());
+    }
+
+    /**
+     * @param string $id
      *
      * @return StreamInterface
      */
-    public function downloadPreview(string $id, int $pageNumber, int $width = null, int $height = null): StreamInterface
+    public function downloadFile(string $id): StreamInterface
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/artworks/%s/pages/%s/preview', $id, $pageNumber));
-
-        if ($width) {
-            $context->getParameters()->set('width', $width);
-        }
-
-        if ($height) {
-            $context->getParameters()->set('height', $height);
-        }
+        $context->prepareContextForGet(sprintf('/files/%s/download', $id));
 
         return $this->stream($context);
     }

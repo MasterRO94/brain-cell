@@ -41,7 +41,7 @@ class FinishingItemResource extends AbstractResource
     /**
      * @var bool
      */
-    protected $default;
+    protected $isDefault;
 
     /**
      * @var bool
@@ -116,15 +116,15 @@ class FinishingItemResource extends AbstractResource
      */
     public function isDefault()
     {
-        return $this->default;
+        return $this->isDefault;
     }
 
     /**
-     * @param bool $default
+     * @param bool $isDefault
      */
-    public function setDefault(bool $default)
+    public function setIsDefault(bool $isDefault)
     {
-        $this->default = $default;
+        $this->isDefault = $isDefault;
     }
 
     /**

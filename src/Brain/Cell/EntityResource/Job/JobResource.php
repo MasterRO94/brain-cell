@@ -500,7 +500,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         foreach ($this->components as $component) {
             foreach ($component->getOptions() as $option) {
                 if (
-                    $option->getCategory()->getAlias() === $optionCategoryAlias
+                    $option->getFinishingCategory()->getAlias() === $optionCategoryAlias
                     && !$option->getFinishingItem()->isDefault()
                 ) {
                     return true;
