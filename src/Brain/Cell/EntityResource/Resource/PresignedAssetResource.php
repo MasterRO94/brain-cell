@@ -3,6 +3,7 @@
 namespace Brain\Cell\EntityResource\Resource;
 
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\EntityResource\Common\DateResource;
 
 class PresignedAssetResource extends AbstractResource
 {
@@ -11,13 +12,6 @@ class PresignedAssetResource extends AbstractResource
     protected $presignedUrl;
 
     protected $expiresAt;
-
-    public function getDateTimeProperties(): array
-    {
-        return [
-            'expiresAt',
-        ];
-    }
 
     /**
      * @return string
@@ -36,7 +30,7 @@ class PresignedAssetResource extends AbstractResource
     }
 
     /**
-     * @return \DateTime
+     * @return DateResource
      */
     public function getExpiresAt()
     {
