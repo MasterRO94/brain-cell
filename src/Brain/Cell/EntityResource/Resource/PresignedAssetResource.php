@@ -13,6 +13,13 @@ class PresignedAssetResource extends AbstractResource
 
     protected $expiresAt;
 
+    public function getAssociatedResources(): array
+    {
+        return [
+            'expiresAt' => DateResource::class,
+        ];
+    }
+
     /**
      * @return string
      */
