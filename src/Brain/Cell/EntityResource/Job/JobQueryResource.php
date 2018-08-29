@@ -51,6 +51,8 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
             'assignee' => ClientResource::class,
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
+            'progressStarted'  => DateResource::class,
+            'resolved' => DateResource::class,
         ];
     }
 
