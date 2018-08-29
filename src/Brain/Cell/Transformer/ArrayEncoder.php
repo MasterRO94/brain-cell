@@ -3,6 +3,7 @@
 namespace Brain\Cell\Transformer;
 
 use Brain\Cell\AbstractTransformer;
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 use Brain\Cell\Transfer\AbstractResource;
@@ -103,7 +104,11 @@ class ArrayEncoder extends AbstractTransformer
 
                     // All other associated can be encoded hooray :)
                 } elseif (isset($resources[$property->getName()])) {
-                    $value = $this->encodeResource($value, $options);
+                    if ($resources[$property->getName()] === DateResource::class) {
+                        $value = $value->getIso();
+                    } else {
+                        $value = $this->encodeResource($value, $options);
+                    }
                 } elseif (isset($collections[$property->getName()])) {
                     $result = [];
 
