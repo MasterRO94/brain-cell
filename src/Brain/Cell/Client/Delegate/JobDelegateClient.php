@@ -11,6 +11,7 @@ use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\Exception\ClientException;
+use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class JobDelegateClient extends DelegateClient
@@ -140,6 +141,20 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
+     * @param JobResource $resource
+     * @param ArtworkResource $artwork
+     *
+     * @throws RuntimeException
+     */
+    public function updateArtwork(JobResource $resource, ArtworkResource $artwork)
+    {
+        throw new RuntimeException(
+            "JobDelegateClient::updateArtwork is no longer functional. "
+            . "Use JobComponentDelegateClient::updateArtwork instead."
+        );
+    }
+
+    /**
      * @param JobResource $jobResource
      * @param PhaseResource $phaseResource
      *
@@ -160,26 +175,6 @@ class JobDelegateClient extends DelegateClient
         $context->setPayload($handler->serialise($jobPhaseResource));
 
         return $this->request($context, $jobResource);
-    }
-
-    /**
-     * @param JobResource $resource
-     * @param ArtworkResource $artwork
-     *
-     * @return JobResource
-     */
-    public function updateArtwork(JobResource $resource, ArtworkResource $artwork)
-    {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPut(sprintf(
-            '/jobs/%s/artwork',
-            $resource->getId()
-        ));
-
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($artwork));
-
-        return $this->request($context, $artwork);
     }
 
     /**
