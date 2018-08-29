@@ -4,8 +4,8 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
-
 use Brain\Cell\EntityResource\File\FileResource;
+
 use Psr\Http\Message\StreamInterface;
 
 class ArtworkDelegateClient extends DelegateClient

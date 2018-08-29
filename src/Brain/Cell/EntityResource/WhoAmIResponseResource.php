@@ -30,7 +30,7 @@ class WhoAmIResponseResource extends AbstractResource
     {
         return [
             'application',
-            'environment'
+            'environment',
         ];
     }
 

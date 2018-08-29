@@ -26,7 +26,7 @@ final class FileResource extends AbstractResource
     /** @var string */
     protected $path;
 
-    /** @var ResourceCollection|FilePreviewResource[] */
+    /** @var FilePreviewResource[]|ResourceCollection */
     protected $previews;
 
     /**
@@ -100,7 +100,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * @return ResourceCollection|FilePreviewResource[]
+     * @return FilePreviewResource[]|ResourceCollection
      */
     public function getPreviews(): ResourceCollection
     {
@@ -108,7 +108,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * @param ResourceCollection|FilePreviewResource[] $previews
+     * @param FilePreviewResource[]|ResourceCollection $previews
      */
     public function setPreviews(ResourceCollection $previews): void
     {

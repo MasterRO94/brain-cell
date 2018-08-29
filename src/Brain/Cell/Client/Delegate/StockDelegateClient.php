@@ -32,6 +32,7 @@ class StockDelegateClient extends DelegateClient
 
     /**
      * @param mixed[] $parameters
+     * @param JobResource $jobResource
      *
      * @return StockFinishingsResource
      */

@@ -149,8 +149,8 @@ class JobDelegateClient extends DelegateClient
     public function updateArtwork(JobResource $resource, ArtworkResource $artwork)
     {
         throw new RuntimeException(
-            "JobDelegateClient::updateArtwork is no longer functional. "
-            . "Use JobComponentDelegateClient::updateArtwork instead."
+            'JobDelegateClient::updateArtwork is no longer functional. '
+            . 'Use JobComponentDelegateClient::updateArtwork instead.'
         );
     }
 
