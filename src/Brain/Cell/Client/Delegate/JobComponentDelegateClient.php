@@ -13,7 +13,7 @@ class JobComponentDelegateClient extends DelegateClient
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
-            '/jobs/{{job_id}}/components/{{job_component_id}}/artwork',
+            '/jobs/%s/components/%s/artwork',
             $job->getId(),
             $component->getId()
         ));
