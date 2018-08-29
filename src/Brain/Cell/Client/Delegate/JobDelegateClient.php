@@ -3,7 +3,6 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
 use Brain\Cell\EntityResource\Job\JobMetaResource;
@@ -160,26 +159,6 @@ class JobDelegateClient extends DelegateClient
         $context->setPayload($handler->serialise($jobPhaseResource));
 
         return $this->request($context, $jobResource);
-    }
-
-    /**
-     * @param JobResource $resource
-     * @param ArtworkResource $artwork
-     *
-     * @return JobResource
-     */
-    public function updateArtwork(JobResource $resource, ArtworkResource $artwork)
-    {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPut(sprintf(
-            '/jobs/%s/artwork',
-            $resource->getId()
-        ));
-
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($artwork));
-
-        return $this->request($context, $artwork);
     }
 
     /**
