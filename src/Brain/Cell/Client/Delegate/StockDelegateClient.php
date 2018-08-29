@@ -31,8 +31,7 @@ class StockDelegateClient extends DelegateClient
     }
 
     /**
-     * @param JobResource $jobResource
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return StockFinishingsResource
      */
@@ -53,7 +52,7 @@ class StockDelegateClient extends DelegateClient
     }
 
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return FinishingCategoryResource[]|ResourceCollection
      */
@@ -179,7 +178,7 @@ class StockDelegateClient extends DelegateClient
     public function getMaterialBases(array $parameters = [])
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/stock/materials/bases');
+        $context->prepareContextForGet('/stock/material/bases');
         $context->getParameters()->add($parameters);
 
         $collection = new ResourceCollection();
@@ -196,7 +195,7 @@ class StockDelegateClient extends DelegateClient
     public function getMaterialVariants(array $parameters = [])
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/stock/materials/variants');
+        $context->prepareContextForGet('/stock/material/variants');
         $context->getParameters()->add($parameters);
 
         $collection = new ResourceCollection();
@@ -213,7 +212,7 @@ class StockDelegateClient extends DelegateClient
     public function getMaterialWeights(array $parameters = [])
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/stock/materials/weights');
+        $context->prepareContextForGet('/stock/material/weights');
         $context->getParameters()->add($parameters);
 
         $collection = new ResourceCollection();
@@ -232,7 +231,7 @@ class StockDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
 
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost('/stock/materials/bases');
+        $context->prepareContextForPost('/stock/material/bases');
         $context->setPayload($handler->serialise($resource));
 
         return $this->request($context, new MaterialBaseResource());
@@ -248,7 +247,7 @@ class StockDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
 
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost('/stock/materials/weights');
+        $context->prepareContextForPost('/stock/material/weights');
         $context->setPayload($handler->serialise($resource));
 
         return $this->request($context, new MaterialWeightResource());
@@ -264,7 +263,7 @@ class StockDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
 
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost('/stock/materials/variants');
+        $context->prepareContextForPost('/stock/material/variants');
         $context->setPayload($handler->serialise($resource));
 
         return $this->request($context, new MaterialVariantResource());
