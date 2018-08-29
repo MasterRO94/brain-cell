@@ -3,6 +3,7 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
 use Brain\Cell\EntityResource\Job\JobMetaResource;
@@ -10,6 +11,7 @@ use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\Exception\ClientException;
+use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class JobDelegateClient extends DelegateClient
@@ -136,6 +138,20 @@ class JobDelegateClient extends DelegateClient
         $context->setPayload($handler->serialise($jobStatusResource));
 
         return $this->request($context, $jobResource);
+    }
+
+    /**
+     * @param JobResource $resource
+     * @param ArtworkResource $artwork
+     *
+     * @throws RuntimeException
+     */
+    public function updateArtwork(JobResource $resource, ArtworkResource $artwork)
+    {
+        throw new RuntimeException(
+            "JobDelegateClient::updateArtwork is no longer functional. "
+            . "Use JobComponentDelegateClient::updateArtwork instead."
+        );
     }
 
     /**
