@@ -2,8 +2,8 @@
 
 namespace Brain\Cell\EntityResource\Resource;
 
-use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\Transfer\AbstractResource;
 
 class PresignedAssetResource extends AbstractResource
 {
