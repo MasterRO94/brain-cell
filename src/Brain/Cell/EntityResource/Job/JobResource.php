@@ -32,9 +32,9 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      *
      * @see https://projects.printed.systems/browse/BRN-742
      */
-    const PREFLIGHT_FAILURE_POLICY_FIX = 'fix';
-    const PREFLIGHT_FAILURE_POLICY_CANCEL = 'cancel';
-    const PREFLIGHT_FAILURE_POLICY_IGNORE = 'ignore';
+    const PREFLIGHT_FAILURE_POLICY_FIX = 'job.preflight_failure_policy.fix';
+    const PREFLIGHT_FAILURE_POLICY_CANCEL = 'job.preflight_failure_policy.cancel';
+    const PREFLIGHT_FAILURE_POLICY_IGNORE = 'job.preflight_failure_policy.ignore';
 
     /** @var JobClientResource[]|ResourceCollection */
     protected $clients;
