@@ -36,6 +36,9 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     const PREFLIGHT_FAILURE_POLICY_CANCEL = 'job.preflight_failure_policy.cancel';
     const PREFLIGHT_FAILURE_POLICY_IGNORE = 'job.preflight_failure_policy.ignore';
 
+    /** @var string|null */
+    protected $hash;
+
     /** @var JobClientResource[]|ResourceCollection */
     protected $clients;
 
@@ -168,6 +171,17 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
             'artifacts' => ArtifactResource::class,
             'queries' => JobQueryResource::class,
         ];
+    }
+
+    /**
+     * The shorthand hash of the Job.
+     * This will be NULL on non-persisted entities.
+     *
+     * @return string|null
+     */
+    public function getHash(): ?string
+    {
+        return $this->hash;
     }
 
     /**
