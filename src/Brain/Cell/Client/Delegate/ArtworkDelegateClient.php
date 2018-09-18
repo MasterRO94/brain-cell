@@ -4,6 +4,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
+use Brain\Cell\EntityResource\File\FileDownloadPathResource;
 use Brain\Cell\EntityResource\File\FileResource;
 
 use Psr\Http\Message\StreamInterface;
@@ -36,6 +37,19 @@ class ArtworkDelegateClient extends DelegateClient
         $context->prepareContextForGet(sprintf('/files/%s', $id));
 
         return $this->request($context, new FileResource());
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return FileDownloadPathResource
+     */
+    public function getFileDownloadPath(string $id): FileDownloadPathResource
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/files/%s/download-path', $id));
+
+        return $this->request($context, new FileDownloadPathResource());
     }
 
     /**
