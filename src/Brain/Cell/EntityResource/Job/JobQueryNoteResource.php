@@ -2,6 +2,8 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\ClientResource;
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\AbstractNoteResource;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 
@@ -23,6 +25,9 @@ class JobQueryNoteResource extends AbstractNoteResource
     {
         return [
             'artwork' => ArtworkResource::class,
+            'origin' => ClientResource::class,
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
         ];
     }
 
