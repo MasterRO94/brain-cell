@@ -5,12 +5,14 @@ namespace Brain\Cell\EntityResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 class AbstractNoteResource extends AbstractResource
 {
     use CreatedAtTrait;
     use DeletedAtTrait;
+    use UpdatedAtTrait;
 
     /**
      * @var string
