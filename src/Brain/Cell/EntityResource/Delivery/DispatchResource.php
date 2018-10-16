@@ -6,6 +6,8 @@ use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class DispatchResource extends AbstractResource
 {
     /**
