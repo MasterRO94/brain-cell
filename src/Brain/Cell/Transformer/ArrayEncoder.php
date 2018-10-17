@@ -86,6 +86,8 @@ class ArrayEncoder extends AbstractTransformer
             if (\in_array($property->getName(), [
                 'created',
                 'updated',
+                'createdAt',
+                'updatedAt',
                 'shop',
                 'productionSheetCount',
                 'productionHouse',
