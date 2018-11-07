@@ -2,8 +2,10 @@
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\FinishingItemResource;
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,10 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class JobComponentOptionResource extends AbstractResource
+class JobComponentOptionResource extends AbstractResource implements ResourcePublicIdInterface
 {
-    /** @var string $id */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var FinishingCategoryResource
@@ -56,14 +57,6 @@ class JobComponentOptionResource extends AbstractResource
         return [
             'configuration',
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

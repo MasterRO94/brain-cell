@@ -2,6 +2,8 @@
 
 namespace Brain\Cell\EntityResource\Stock;
 
+use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -10,12 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class FinishingCategoryResource extends AbstractResource
+class FinishingCategoryResource extends AbstractResource implements ResourcePublicIdInterface
 {
-    /**
-     * @var int
-     */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var string
@@ -52,14 +51,6 @@ class FinishingCategoryResource extends AbstractResource
         return [
             'options' => FinishingItemResource::class,
         ];
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
