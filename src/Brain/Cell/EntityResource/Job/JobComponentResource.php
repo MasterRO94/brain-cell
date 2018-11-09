@@ -3,9 +3,11 @@
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\EntityResource\StockDefinitionResource;
+use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\EntityResource\TwoDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -15,12 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class JobComponentResource extends AbstractResource
+class JobComponentResource extends AbstractResource implements ResourcePublicIdInterface
 {
-    /**
-     * @var string
-     */
-    protected $id;
+    use ResourcePublicIdTrait;
 
     /**
      * @var string
@@ -130,14 +129,6 @@ class JobComponentResource extends AbstractResource
         return [
             'options' => JobComponentOptionResource::class,
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
