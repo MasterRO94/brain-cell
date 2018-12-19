@@ -4,6 +4,7 @@ namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\File\FileResource;
+use Brain\Cell\EntityResource\File\FileResourceInterface;
 use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
@@ -57,7 +58,7 @@ final class ArtworkFileResource extends AbstractResource
     /**
      * Return the artwork file.
      */
-    public function getFile(): FileResource
+    public function getFile(): FileResourceInterface
     {
         return $this->file;
     }
@@ -65,9 +66,9 @@ final class ArtworkFileResource extends AbstractResource
     /**
      * Set the artwork file.
      *
-     * @param FileResource $file
+     * @param FileResourceInterface $file
      */
-    public function setFile(FileResource $file): void
+    public function setFile(FileResourceInterface $file): void
     {
         $this->file = $file;
     }

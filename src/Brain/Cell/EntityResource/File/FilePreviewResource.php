@@ -28,18 +28,12 @@ class FilePreviewResource extends AbstractResource
      */
     protected $index;
 
-    /**
-     * @return FileResource
-     */
-    public function getFile(): FileResource
+    public function getFile(): FileResourceInterface
     {
         return $this->file;
     }
 
-    /**
-     * @param FileResource $file
-     */
-    public function setFile(FileResource $file): void
+    public function setFile(FileResourceInterface $file): void
     {
         $this->file = $file;
     }

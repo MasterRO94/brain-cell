@@ -10,7 +10,11 @@ use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-final class FileResource extends AbstractResource
+/**
+ * A file.
+ */
+final class FileResource extends AbstractResource implements
+    FileResourceInterface
 {
     use ResourcePublicIdTrait;
     use CreatedAtTrait;
@@ -52,9 +56,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * Return the source path.
-     *
-     * @internal This property is never returned from the API.
+     * {@inheritdoc}
      */
     public function getSource(): string
     {
@@ -72,7 +74,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * Return the mime type of the file.
+     * {@inheritdoc}
      */
     public function getMimeType(): string
     {
@@ -90,9 +92,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * Return the download path.
-     *
-     * This property is a virtual property and will only be returned from the API.
+     * {@inheritdoc}
      */
     public function getPath(): string
     {
@@ -100,7 +100,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * @return FilePreviewResource[]|ResourceCollection
+     * {@inheritdoc}
      */
     public function getPreviews(): ResourceCollection
     {
