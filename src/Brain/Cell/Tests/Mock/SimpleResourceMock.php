@@ -1,24 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Mock;
 
 use Brain\Cell\Transfer\AbstractResource;
 
 class SimpleResourceMock extends AbstractResource
 {
-    /** @var int */
+    /** @var int|null */
     protected $id;
 
     /** @var string */
     protected $name;
 
     /**
-     * @param int $id
-     * @param string $name
-     *
      * @return static
      */
-    public static function create($id, $name)
+    public static function create(int $id, string $name)
     {
         $instance = new static();
         $instance->id = $id;
@@ -27,18 +26,12 @@ class SimpleResourceMock extends AbstractResource
         return $instance;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

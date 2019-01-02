@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
@@ -10,12 +12,7 @@ use Brain\Cell\EntityResource\Job\JobResource;
 
 class JobQueryDelegateClient extends DelegateClient
 {
-    /**
-     * @param string $id
-     *
-     * @return JobQueryResource
-     */
-    public function getJobQuery(string $id)
+    public function getJobQuery(string $id): JobQueryResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/queries/%s', $id));
@@ -23,13 +20,7 @@ class JobQueryDelegateClient extends DelegateClient
         return $this->request($context, new JobQueryResource());
     }
 
-    /**
-     * @param JobResource $jobResource
-     * @param JobQueryResource $jobQueryResource
-     *
-     * @return JobQueryResource
-     */
-    public function postJobQuery(JobResource $jobResource, JobQueryResource $jobQueryResource)
+    public function postJobQuery(JobResource $jobResource, JobQueryResource $jobQueryResource): JobQueryResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf(
@@ -43,13 +34,7 @@ class JobQueryDelegateClient extends DelegateClient
         return $this->request($context, $jobQueryResource);
     }
 
-    /**
-     * @param JobQueryResource $jobQueryResource
-     * @param JobQueryNoteResource $jobQueryNoteResource
-     *
-     * @return JobQueryNoteResource
-     */
-    public function postJobQueryNote(JobQueryResource $jobQueryResource, JobQueryNoteResource $jobQueryNoteResource)
+    public function postJobQueryNote(JobQueryResource $jobQueryResource, JobQueryNoteResource $jobQueryNoteResource): JobQueryNoteResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf(
@@ -63,13 +48,7 @@ class JobQueryDelegateClient extends DelegateClient
         return $this->request($context, $jobQueryNoteResource);
     }
 
-    /**
-     * @param JobQueryResource $jobQueryResource
-     * @param ClientResource $clientResource
-     *
-     * @return JobQueryResource
-     */
-    public function putJobQueryAssignee(JobQueryResource $jobQueryResource, ClientResource $clientResource)
+    public function putJobQueryAssignee(JobQueryResource $jobQueryResource, ClientResource $clientResource): JobQueryResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
@@ -85,12 +64,7 @@ class JobQueryDelegateClient extends DelegateClient
         return $this->request($context, $jobQueryResource);
     }
 
-    /**
-     * @param JobQueryResource $jobQueryResource
-     *
-     * @return JobQueryResource
-     */
-    public function removeJobQueryAssignee(JobQueryResource $jobQueryResource)
+    public function removeJobQueryAssignee(JobQueryResource $jobQueryResource): JobQueryResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForDelete(sprintf(
@@ -104,12 +78,7 @@ class JobQueryDelegateClient extends DelegateClient
         return $this->request($context, $jobQueryResource);
     }
 
-    /**
-     * @param JobQueryResource $jobQueryResource
-     *
-     * @return JobQueryResource
-     */
-    public function putJobQueryInProgress(JobQueryResource $jobQueryResource)
+    public function putJobQueryInProgress(JobQueryResource $jobQueryResource): JobQueryResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
@@ -123,12 +92,7 @@ class JobQueryDelegateClient extends DelegateClient
         return $this->request($context, $jobQueryResource);
     }
 
-    /**
-     * @param JobQueryResource $jobQueryResource
-     *
-     * @return JobQueryResource
-     */
-    public function putJobQueryResolved(JobQueryResource $jobQueryResource)
+    public function putJobQueryResolved(JobQueryResource $jobQueryResource): JobQueryResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(

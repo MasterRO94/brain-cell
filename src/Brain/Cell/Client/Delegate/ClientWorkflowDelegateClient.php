@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
@@ -7,12 +9,7 @@ use Brain\Cell\EntityResource\Job\ClientWorkflow\ClientWorkflowResource;
 
 class ClientWorkflowDelegateClient extends DelegateClient
 {
-    /**
-     * @param string $id
-     *
-     * @return ClientWorkflowResource
-     */
-    public function getClientWorkflow(string $id)
+    public function getClientWorkflow(string $id): ClientWorkflowResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/workflows/%s', $id));
@@ -20,12 +17,7 @@ class ClientWorkflowDelegateClient extends DelegateClient
         return $this->request($context, new ClientWorkflowResource());
     }
 
-    /**
-     * @param ClientWorkflowResource $clientWorkflowResource
-     *
-     * @return ClientWorkflowResource
-     */
-    public function postClientWorkflow(ClientWorkflowResource $clientWorkflowResource)
+    public function postClientWorkflow(ClientWorkflowResource $clientWorkflowResource): ClientWorkflowResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/workflows');

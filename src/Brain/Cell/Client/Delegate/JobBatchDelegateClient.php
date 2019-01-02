@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
@@ -12,12 +14,7 @@ use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 
 class JobBatchDelegateClient extends DelegateClient
 {
-    /**
-     * @param string $id
-     *
-     * @return JobBatchResource
-     */
-    public function getJobBatch($id)
+    public function getJobBatch(string $id): JobBatchResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/jobs/batches/%s', $id));
@@ -25,12 +22,7 @@ class JobBatchDelegateClient extends DelegateClient
         return $this->request($context, new JobBatchResource());
     }
 
-    /**
-     * @param JobBatchResource $resource
-     *
-     * @return JobBatchResource
-     */
-    public function postJobBatch(JobBatchResource $resource)
+    public function postJobBatch(JobBatchResource $resource): JobBatchResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/jobs/batches');
@@ -42,18 +34,12 @@ class JobBatchDelegateClient extends DelegateClient
         return $this->request($context, $resource);
     }
 
-    /**
-     * @param string $jobBatchId
-     * @param DeliveryOptionResource $deliveryOptionResource
-     *
-     * @return JobBatchResource
-     */
     public function updateJobBatchDeliveryOption(
-        $jobBatchId,
+        string $jobBatchId,
         DeliveryOptionResource $deliveryOptionResource
-    ) {
+    ): JobBatchResource {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPut("/jobs/batches/{$jobBatchId}/delivery-option");
+        $context->prepareContextForPut(sprintf('/jobs/batches/%s/delivery-option', $jobBatchId));
 
         $payload = [
             'delivery_option' => $deliveryOptionResource->getIdOrThrow(),
@@ -67,18 +53,12 @@ class JobBatchDelegateClient extends DelegateClient
         return $result;
     }
 
-    /**
-     * @param string $jobBatchId
-     * @param JobBatchBatchDeliveryResource $batchDeliveryResource
-     *
-     * @return JobBatchResource
-     */
     public function updateJobBatchBatchDelivery(
-        $jobBatchId,
+        string $jobBatchId,
         JobBatchBatchDeliveryResource $batchDeliveryResource
-    ) {
+    ): JobBatchResource {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPatch("/jobs/batches/{$jobBatchId}/batch-delivery");
+        $context->prepareContextForPatch(sprintf('/jobs/batches/%s/batch-delivery', $jobBatchId));
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise(
@@ -94,13 +74,7 @@ class JobBatchDelegateClient extends DelegateClient
         return $result;
     }
 
-    /**
-     * @param JobBatchResource $resource
-     * @param string $status
-     *
-     * @return JobBatchResource
-     */
-    public function updateStatus(JobBatchResource $resource, $status)
+    public function updateStatus(JobBatchResource $resource, string $status): JobBatchResource
     {
         if (!in_array($status, JobBatchStatusEnum::getAll())) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));

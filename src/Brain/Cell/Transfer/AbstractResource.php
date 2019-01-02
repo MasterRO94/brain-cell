@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Transfer;
 
 use Brain\Cell\TransferEntityInterface;
@@ -90,7 +92,7 @@ abstract class AbstractResource implements TransferEntityInterface
      *
      * @param mixed $brainData
      */
-    public function setBrainData($brainData)
+    public function setBrainData($brainData): void
     {
         $this->brainData = $brainData;
     }

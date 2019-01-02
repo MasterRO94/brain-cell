@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\File;
 
 use Brain\Cell\Transfer\AbstractResource;
@@ -25,8 +27,6 @@ final class FileDownloadPathResource extends AbstractResource implements
      * @deprecated Do not use this, if its for test then mock the interface.
      *
      * Set the download path.
-     *
-     * @param string $path
      */
     public function setPath(string $path): void
     {

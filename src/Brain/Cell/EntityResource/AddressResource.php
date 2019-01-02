@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\EntityResource\Common\DateResource;
@@ -14,54 +16,34 @@ class AddressResource extends AbstractResource
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $company;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $email;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $phone;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $addressLine1;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $addressLine2;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $city;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $countyState;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $postcode;
 
-    /**
-     * @var CountryResource
-     */
+    /** @var CountryResource */
     protected $country;
 
     /**
@@ -76,162 +58,102 @@ class AddressResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
 
-    /**
-     * @param string $company
-     */
-    public function setCompany($company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * @return string
-     */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
 
-    /**
-     * @param string $phone
-     */
-    public function setPhone($phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressLine1()
+    public function getAddressLine1(): string
     {
         return $this->addressLine1;
     }
 
-    /**
-     * @param string $addressLine1
-     */
-    public function setAddressLine1($addressLine1)
+    public function setAddressLine1(string $addressLine1): void
     {
         $this->addressLine1 = $addressLine1;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressLine2()
+    public function getAddressLine2(): string
     {
         return $this->addressLine2;
     }
 
-    /**
-     * @param string $addressLine2
-     */
-    public function setAddressLine2($addressLine2)
+    public function setAddressLine2(string $addressLine2): void
     {
         $this->addressLine2 = $addressLine2;
     }
 
-    /**
-     * @return string
-     */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * @param string $city
-     */
-    public function setCity($city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
 
-    /**
-     * @return string
-     */
-    public function getCountyState()
+    public function getCountyState(): string
     {
         return $this->countyState;
     }
 
-    /**
-     * @param string $countyState
-     */
-    public function setCountyState($countyState)
+    public function setCountyState(string $countyState): void
     {
         $this->countyState = $countyState;
     }
 
-    /**
-     * @return string
-     */
-    public function getPostcode()
+    public function getPostcode(): string
     {
         return $this->postcode;
     }
 
-    /**
-     * @param string $postcode
-     */
-    public function setPostcode($postcode)
+    public function setPostcode(string $postcode): void
     {
         $this->postcode = $postcode;
     }
 
-    /**
-     * @return string
-     */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
 
-    /**
-     * @param string $country
-     */
-    public function setCountry($country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Transfer\AbstractResource;
@@ -12,12 +14,15 @@ class WhoAmIResponseResource extends AbstractResource
     /** @var ClientResource */
     protected $client;
 
-    /** @var array */
+    /** @var mixed[] */
     protected $application;
 
-    /** @var array */
+    /** @var mixed[] */
     protected $environment;
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAssociatedResources(): array
     {
         return [
@@ -26,6 +31,9 @@ class WhoAmIResponseResource extends AbstractResource
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getUnstructuredFields(): array
     {
         return [
@@ -34,40 +42,28 @@ class WhoAmIResponseResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return UserResource
-     */
     public function getUser(): UserResource
     {
         return $this->user;
     }
 
-    /**
-     * @param UserResource $user
-     */
-    public function setUser(UserResource $user)
+    public function setUser(UserResource $user): void
     {
         $this->user = $user;
     }
 
-    /**
-     * @return ClientResource
-     */
     public function getClient(): ClientResource
     {
         return $this->client;
     }
 
-    /**
-     * @param ClientResource $client
-     */
-    public function setClient(ClientResource $client)
+    public function setClient(ClientResource $client): void
     {
         $this->client = $client;
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getApplication(): array
     {
@@ -75,15 +71,15 @@ class WhoAmIResponseResource extends AbstractResource
     }
 
     /**
-     * @param array $application
+     * @param mixed[] $application
      */
-    public function setApplication(array $application)
+    public function setApplication(array $application): void
     {
         $this->application = $application;
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function getEnvironment(): array
     {
@@ -91,9 +87,9 @@ class WhoAmIResponseResource extends AbstractResource
     }
 
     /**
-     * @param array $environment
+     * @param mixed[] $environment
      */
-    public function setEnvironment(array $environment)
+    public function setEnvironment(array $environment): void
     {
         $this->environment = $environment;
     }

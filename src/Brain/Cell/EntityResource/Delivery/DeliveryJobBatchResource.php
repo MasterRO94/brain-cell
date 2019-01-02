@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\AddressResource;
@@ -15,9 +17,7 @@ use Brain\Cell\Transfer\ResourceCollection;
  */
 class DeliveryJobBatchResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $id;
 
     /**
@@ -59,46 +59,33 @@ class DeliveryJobBatchResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return AddressResource
-     */
     public function getDeliveryAddress(): AddressResource
     {
         return $this->deliveryAddress;
     }
 
-    /**
-     * @param AddressResource $deliveryAddress
-     */
-    public function setDeliveryAddress(AddressResource $deliveryAddress)
+    public function setDeliveryAddress(AddressResource $deliveryAddress): void
     {
         $this->deliveryAddress = $deliveryAddress;
     }
 
     /**
      * @deprecated Left for BC
-     *
-     * @return AddressResource
      */
-    public function getAddress()
+    public function getAddress(): AddressResource
     {
         return $this->deliveryAddress;
     }
 
     /**
      * @deprecated Left for BC
-     *
-     * @param AddressResource $address
      */
-    public function setAddress(AddressResource $address)
+    public function setAddress(AddressResource $address): void
     {
         $this->deliveryAddress = $address;
     }
@@ -114,7 +101,7 @@ class DeliveryJobBatchResource extends AbstractResource
     /**
      * @param JobResource[]|ResourceCollection $jobs
      */
-    public function setJobs($jobs)
+    public function setJobs($jobs): void
     {
         $this->jobs = $jobs;
     }

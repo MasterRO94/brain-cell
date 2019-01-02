@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\EntityResource\Common\DateResource;
@@ -14,24 +16,16 @@ class AbstractNoteResource extends AbstractResource
     use DeletedAtTrait;
     use UpdatedAtTrait;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $id;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description;
 
-    /**
-     * @var  ClientResource
-     */
+    /** @var  ClientResource */
     protected $origin;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $canonical;
 
     /**
@@ -46,47 +40,32 @@ class AbstractNoteResource extends AbstractResource
         ];
     }
 
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return ClientResource
-     */
-    public function getOrigin()
+    public function getOrigin(): ClientResource
     {
         return $this->origin;
     }
 
-    /**
-     * @return string
-     */
-    public function getCanonical()
+    public function getCanonical(): string
     {
         return $this->canonical;
     }
 
-    /**
-     * @param string $canonical
-     */
-    public function setCanonical(string $canonical)
+    public function setCanonical(string $canonical): void
     {
         $this->canonical = $canonical;
     }

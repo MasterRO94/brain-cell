@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Unit\Transformer\Decoder;
 
 use Brain\Cell\Exception\RuntimeException;
@@ -38,7 +40,7 @@ final class ArrayDecoderTest extends TestCase
      * @expectedException \RuntimeException
      * @expectedExceptionMessage Unexpected TransferEntityInterface
      */
-    public function decoderWillThrowOnInvalidTransferEntityInterface()
+    public function decoderWillThrowOnInvalidTransferEntityInterface(): void
     {
         /** @var TransferEntityInterface $entity */
         $entity = $this->createMock(TransferEntityInterface::class);
@@ -52,7 +54,7 @@ final class ArrayDecoderTest extends TestCase
      * @expectedException \RuntimeException
      * @expectedExceptionMessage The ResourceCollection has no entity class set
      */
-    public function decoderWillThrowWithCollectionMissingEntityClass()
+    public function decoderWillThrowWithCollectionMissingEntityClass(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage(
@@ -68,7 +70,7 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decodingSimpleResources()
+    public function decodingSimpleResources(): void
     {
         $data = [
             'id' => 1,
@@ -86,7 +88,7 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decoderWillNotThrowWithAdditionalData()
+    public function decoderWillNotThrowWithAdditionalData(): void
     {
         $data = [
             'id' => 100,
@@ -101,13 +103,7 @@ final class ArrayDecoderTest extends TestCase
         $this->assertEquals('Tony Stark', $resource->getName());
     }
 
-    /**
-     * @disabled-test
-     *
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Missing property "name"
-     */
-    public function decoderWillThrowWithMissingProperties()
+    public function decoderWillThrowWithMissingProperties(): void
     {
         $data = [
             'id' => 100,
@@ -119,7 +115,7 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decodeSimpleResourcesWithAssociations()
+    public function decodeSimpleResourcesWithAssociations(): void
     {
         $data = [
             'id' => 2,
@@ -145,7 +141,7 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decodeSimpleResourceCollections()
+    public function decodeSimpleResourceCollections(): void
     {
         $data = [
             ['id' => 1, 'name' => 'one'],
@@ -169,7 +165,7 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decodeSimpleResourceCollectionsAsAssociations()
+    public function decodeSimpleResourceCollectionsAsAssociations(): void
     {
         $data = [
             'id' => 3,

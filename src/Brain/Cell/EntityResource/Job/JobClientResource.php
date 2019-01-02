@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
@@ -43,65 +45,41 @@ final class JobClientResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return string
-     */
     public function getRole(): string
     {
         return $this->role;
     }
 
-    /**
-     * @param string $role
-     */
     public function setRole(string $role): void
     {
         $this->role = $role;
     }
 
-    /**
-     * @return ClientResource
-     */
     public function getClient(): ClientResource
     {
         return $this->client;
     }
 
-    /**
-     * @param ClientResource $client
-     */
     public function setClient(ClientResource $client): void
     {
         $this->client = $client;
     }
 
-    /**
-     * @return bool
-     */
     public function isPrimary(): bool
     {
         return $this->isPrimary;
     }
 
-    /**
-     * @param bool $isPrimary
-     */
     public function setIsPrimary(bool $isPrimary): void
     {
         $this->isPrimary = $isPrimary;
     }
 
-    /**
-     * @return bool
-     */
     public function isActive(): bool
     {
         return $this->isActive;
     }
 
-    /**
-     * @param bool $isActive
-     */
     public function setIsActive(bool $isActive): void
     {
         $this->isActive = $isActive;

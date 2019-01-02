@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
@@ -12,29 +14,19 @@ class DeliveryServiceResource extends AbstractResource
 {
     use ResourcePublicIdTrait;
 
-    /**
-     * @var DeliveryCarrierResource
-     */
+    /** @var DeliveryCarrierResource */
     protected $deliveryCarrier;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $serviceCode;
 
-    /**
-     * @var float
-     */
+    /** @var float */
     protected $price;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $isTracked;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $isSignedFor;
 
     /**
@@ -47,82 +39,52 @@ class DeliveryServiceResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getDeliveryCarrier()
+    public function getDeliveryCarrier(): DeliveryCarrierResource
     {
         return $this->deliveryCarrier;
     }
 
-    /**
-     * @param $deliveryCarrier
-     */
-    public function setDeliveryCarrier($deliveryCarrier)
+    public function setDeliveryCarrier(DeliveryCarrierResource $deliveryCarrier): void
     {
         $this->deliveryCarrier = $deliveryCarrier;
     }
 
-    /**
-     * @return string
-     */
-    public function getServiceCode()
+    public function getServiceCode(): string
     {
         return $this->serviceCode;
     }
 
-    /**
-     * @param string $serviceCode
-     */
-    public function setServiceCode(string $serviceCode)
+    public function setServiceCode(string $serviceCode): void
     {
         $this->serviceCode = $serviceCode;
     }
 
-    /**
-     * @return float
-     */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * @param float $price
-     */
-    public function setPrice($price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * @return bool
-     */
-    public function isIsTracked()
+    public function isIsTracked(): bool
     {
         return $this->isTracked;
     }
 
-    /**
-     * @param bool $isTracked
-     */
-    public function setIsTracked(bool $isTracked)
+    public function setIsTracked(bool $isTracked): void
     {
         $this->isTracked = $isTracked;
     }
 
-    /**
-     * @return bool
-     */
-    public function getIsSignedFor()
+    public function getIsSignedFor(): bool
     {
         return $this->isSignedFor;
     }
 
-    /**
-     * @param bool $isSignedFor
-     */
-    public function setIsSignedFor(bool $isSignedFor)
+    public function setIsSignedFor(bool $isSignedFor): void
     {
         $this->isSignedFor = $isSignedFor;
     }

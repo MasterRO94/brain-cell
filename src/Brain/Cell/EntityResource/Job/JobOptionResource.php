@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
@@ -30,9 +32,7 @@ class JobOptionResource extends AbstractResource implements ResourcePublicIdInte
      */
     protected $finishingItem;
 
-    /**
-     * @var array
-     */
+    /** @var mixed[] */
     protected $configuration;
 
     /**
@@ -56,58 +56,38 @@ class JobOptionResource extends AbstractResource implements ResourcePublicIdInte
         ];
     }
 
-    /**
-     * @return FinishingCategoryResource
-     */
-    public function getFinishingCategory()
+    public function getFinishingCategory(): FinishingCategoryResource
     {
         return $this->finishingCategory;
     }
 
-    /**
-     * @param FinishingCategoryResource $finishingCategory
-     *
-     * @return $this
-     */
-    public function setFinishingCategory(FinishingCategoryResource $finishingCategory)
+    public function setFinishingCategory(FinishingCategoryResource $finishingCategory): void
     {
         $this->finishingCategory = $finishingCategory;
-
-        return $this;
     }
 
-    /**
-     * @return FinishingItemResource
-     */
-    public function getFinishingItem()
+    public function getFinishingItem(): FinishingItemResource
     {
         return $this->finishingItem;
     }
 
-    /**
-     * @param FinishingItemResource $finishingItem
-     *
-     * @return $this
-     */
-    public function setFinishingItem(FinishingItemResource $finishingItem)
+    public function setFinishingItem(FinishingItemResource $finishingItem): void
     {
         $this->finishingItem = $finishingItem;
-
-        return $this;
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function getConfiguration()
+    public function getConfiguration(): array
     {
         return $this->configuration;
     }
 
     /**
-     * @param array $configuration
+     * @param mixed[] $configuration
      */
-    public function setConfiguration($configuration)
+    public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
     }

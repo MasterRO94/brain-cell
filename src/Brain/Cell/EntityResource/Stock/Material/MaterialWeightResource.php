@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Stock\Material;
 
 use Brain\Cell\Transfer\AbstractResource;
@@ -11,9 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MaterialWeightResource extends AbstractResource
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $id;
 
     /**
@@ -23,106 +23,57 @@ class MaterialWeightResource extends AbstractResource
      */
     protected $alias;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $weight;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $weightUnit;
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }
 
-    /**
-     * @param string $alias
-     *
-     * @return MaterialWeightResource
-     */
-    public function setAlias($alias)
+    public function setAlias(string $alias): void
     {
         $this->alias = $alias;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return MaterialWeightResource
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getWeight()
+    public function getWeight(): int
     {
         return $this->weight;
     }
 
-    /**
-     * @param int $weight
-     *
-     * @return FinishingItemResource
-     */
-    public function setWeight($weight)
+    public function setWeight(int $weight): void
     {
         $this->weight = $weight;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getWeightUnit()
+    public function getWeightUnit(): string
     {
         return $this->weightUnit;
     }
 
-    /**
-     * @param string $weightUnit
-     *
-     * @return FinishingItemResource
-     */
-    public function setWeightUnit($weightUnit)
+    public function setWeightUnit(string $weightUnit): void
     {
         $this->weightUnit = $weightUnit;
-
-        return $this;
     }
 }

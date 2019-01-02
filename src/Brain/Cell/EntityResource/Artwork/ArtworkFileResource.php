@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\EntityResource\Common\DateResource;
@@ -47,8 +49,6 @@ final class ArtworkFileResource extends AbstractResource
 
     /**
      * Set the artwork file label.
-     *
-     * @param string $label
      */
     public function setLabel(string $label): void
     {
@@ -65,8 +65,6 @@ final class ArtworkFileResource extends AbstractResource
 
     /**
      * Set the artwork file.
-     *
-     * @param FileResourceInterface $file
      */
     public function setFile(FileResourceInterface $file): void
     {
@@ -83,8 +81,6 @@ final class ArtworkFileResource extends AbstractResource
 
     /**
      * Set the associated finishing item.
-     *
-     * @param FinishingItemResource $finishingItem
      */
     public function setFinishingItem(FinishingItemResource $finishingItem): void
     {

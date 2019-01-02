@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
@@ -32,9 +34,9 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      *
      * @see https://projects.printed.systems/browse/BRN-742
      */
-    const PREFLIGHT_FAILURE_POLICY_FIX = 'job.preflight_failure_policy.fix';
-    const PREFLIGHT_FAILURE_POLICY_CANCEL = 'job.preflight_failure_policy.cancel';
-    const PREFLIGHT_FAILURE_POLICY_IGNORE = 'job.preflight_failure_policy.ignore';
+    public const PREFLIGHT_FAILURE_POLICY_FIX = 'job.preflight_failure_policy.fix';
+    public const PREFLIGHT_FAILURE_POLICY_CANCEL = 'job.preflight_failure_policy.cancel';
+    public const PREFLIGHT_FAILURE_POLICY_IGNORE = 'job.preflight_failure_policy.ignore';
 
     /** @var string|null */
     protected $hash;
@@ -61,9 +63,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     protected $productionFinishDate;
 
-    /**
-     * @var JobQueryResource[]
-     */
+    /** @var JobQueryResource[] */
     protected $queries;
 
     /**
@@ -77,14 +77,10 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     protected $components;
 
-    /**
-     * @var JobOptionResource[]|ResourceCollection
-     */
+    /** @var JobOptionResource[]|ResourceCollection */
     protected $options;
 
-    /**
-     * @var JobNoteResource[]|ResourceCollection
-     */
+    /** @var JobNoteResource[]|ResourceCollection */
     protected $notes;
 
     /**
@@ -103,39 +99,25 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
      */
     protected $dimensions;
 
-    /**
-     * @var PriceResource
-     */
+    /** @var PriceResource */
     protected $price;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $reference;
 
-    /**
-     * @var ArtifactResource[]|ResourceCollection
-     */
+    /** @var ArtifactResource[]|ResourceCollection */
     protected $artifacts;
 
-    /**
-     * @var JobResource
-     */
+    /** @var JobResource */
     protected $clonedFrom;
 
-    /**
-     * @var JobMetaResource
-     */
+    /** @var JobMetaResource */
     protected $meta;
 
-    /**
-     * @var PhaseResource
-     */
+    /** @var PhaseResource */
     protected $phase;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $preflightFailurePolicy;
 
     /**
@@ -176,8 +158,6 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * The shorthand hash of the Job.
      * This will be NULL on non-persisted entities.
-     *
-     * @return string|null
      */
     public function getHash(): ?string
     {
@@ -194,24 +174,14 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return $this->components[0]->getArtwork();
     }
 
-    /**
-     * @return JobStatusResource
-     */
-    public function getStatus()
+    public function getStatus(): JobStatusResource
     {
         return $this->status;
     }
 
-    /**
-     * @param JobStatusResource $status
-     *
-     * @return $this
-     */
-    public function setStatus(JobStatusResource $status)
+    public function setStatus(JobStatusResource $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 
     /**
@@ -251,137 +221,82 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     {
     }
 
-    /**
-     * @return ProductResource
-     */
-    public function getProduct()
+    public function getProduct(): ProductResource
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductResource $product
-     *
-     * @return $this
-     */
-    public function setProduct(ProductResource $product)
+    public function setProduct(ProductResource $product): void
     {
         $this->product = $product;
-
-        return $this;
     }
 
-    /**
-     * @return JobBatchResource
-     */
-    public function getBatch()
+    public function getBatch(): JobBatchResource
     {
         return $this->batch;
     }
 
-    /**
-     * @param JobBatchResource $batch
-     *
-     * @return $this
-     */
-    public function setBatch($batch)
+    public function setBatch(JobBatchResource $batch): void
     {
         $this->batch = $batch;
-
-        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getWeight()
+    public function getWeight(): int
     {
         return $this->weight;
     }
 
-    /**
-     * @param int $weight
-     *
-     * @return JobResource
-     */
-    public function setWeight($weight)
+    public function setWeight(int $weight): void
     {
         $this->weight = $weight;
-
-        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getQuantity()
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
-    /**
-     * @param int $quantity
-     *
-     * @return JobResource
-     */
-    public function setQuantity(int $quantity)
+    public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
-
-        return $this;
     }
 
     /**
-     * @deprecated
-     * use JobBatchBatchDeliveryResource::getEndOfProductionDate
-     * instead
-     *
-     * @return DateResource
+     * @deprecated use JobBatchBatchDeliveryResource::getEndOfProductionDate instead.
      */
-    public function getProductionFinishDate()
+    public function getProductionFinishDate(): DateResource
     {
         return $this->productionFinishDate;
     }
 
     /**
-     * @deprecated
-     * use JobBatchBatchDeliveryResource::setEndOfProductionDate
-     *
-     * @param DateResource $productionFinishDate
-     *
-     * @return JobResource
+     * @deprecated use JobBatchBatchDeliveryResource::setEndOfProductionDate instead.
      */
-    public function setProductionFinishDate(DateResource $productionFinishDate)
+    public function setProductionFinishDate(DateResource $productionFinishDate): void
     {
         $this->productionFinishDate = $productionFinishDate;
-
-        return $this;
     }
 
     /**
      * @return JobComponentResource[]|ResourceCollection
      */
-    public function getComponents()
+    public function getComponents(): ResourceCollection
     {
         return $this->components;
     }
 
     /**
      * @param JobComponentResource[]|ResourceCollection $components
-     *
-     * @return $this
      */
-    public function setComponents(ResourceCollection $components)
+    public function setComponents(ResourceCollection $components): void
     {
         $this->components = $components;
-
-        return $this;
     }
 
     /**
      * @return JobOptionResource[]|ResourceCollection
      */
-    public function getOptions()
+    public function getOptions(): ResourceCollection
     {
         return $this->options;
     }
@@ -389,7 +304,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @param JobOptionResource[]|ResourceCollection $options
      */
-    public function setOptions($options)
+    public function setOptions(ResourceCollection $options): void
     {
         $this->options = $options;
     }
@@ -397,7 +312,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @return JobNoteResource[]|ResourceCollection
      */
-    public function getNotes()
+    public function getNotes(): ResourceCollection
     {
         return $this->notes;
     }
@@ -405,83 +320,57 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @param JobNoteResource[]|ResourceCollection $notes
      */
-    public function setNotes($notes)
+    public function setNotes(ResourceCollection $notes): void
     {
         $this->notes = $notes;
     }
 
-    /**
-     * @return ThreeDimensionalResource
-     */
-    public function getDimensions()
+    public function getDimensions(): ThreeDimensionalResource
     {
         return $this->dimensions;
     }
 
-    /**
-     * @param ThreeDimensionalResource $dimensions
-     *
-     * @return JobResource
-     */
-    public function setDimensions($dimensions)
+    public function setDimensions(ThreeDimensionalResource $dimensions): void
     {
         $this->dimensions = $dimensions;
-
-        return $this;
     }
 
     /**
-     * @return bool
+     * @deprecated This has no implementation.
      */
-    public function hasQuery()
+    public function hasQuery(): bool
     {
-        return $this->hasQuery;
+        return false;
     }
 
     /**
-     * @param bool $hasQuery
+     * @deprecated This has no implementation.
      */
-    public function setHasQuery($hasQuery)
+    public function setHasQuery(bool $hasQuery): void
     {
-        $this->hasQuery = $hasQuery;
     }
 
-    /**
-     * @return PriceResource
-     */
-    public function getPrice()
+    public function getPrice(): PriceResource
     {
         return $this->price;
     }
 
-    /**
-     * @param PriceResource $price
-     */
-    public function setPrice($price)
+    public function setPrice(PriceResource $price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * @return string
-     */
-    public function getReference()
+    public function getReference(): string
     {
         return $this->reference;
     }
 
-    /**
-     * @param string $reference
-     */
-    public function setReference($reference)
+    public function setReference(string $reference): void
     {
         $this->reference = $reference;
     }
 
-    /**
-     * @return int
-     */
-    public function getPageCount()
+    public function getPageCount(): int
     {
         $pages = 1;
         foreach ($this->components as $component) {
@@ -491,10 +380,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return $pages;
     }
 
-    /**
-     * @return int
-     */
-    public function getSheetCount()
+    public function getSheetCount(): int
     {
         $sheets = 0;
         foreach ($this->components as $component) {
@@ -504,17 +390,11 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
         return $sheets;
     }
 
-    /**
-     * @param string $optionCategoryAlias
-     *
-     * @return bool
-     */
-    protected function has($optionCategoryAlias)
+    protected function has(string $optionCategoryAlias): bool
     {
         foreach ($this->components as $component) {
             foreach ($component->getOptions() as $option) {
-                if (
-                    $option->getFinishingCategory()->getAlias() === $optionCategoryAlias
+                if ($option->getFinishingCategory()->getAlias() === $optionCategoryAlias
                     && !$option->getFinishingItem()->isDefault()
                 ) {
                     return true;
@@ -528,7 +408,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function hasWhiteInk()
+    public function hasWhiteInk(): bool
     {
         return $this->has('finishing-white-ink');
     }
@@ -536,7 +416,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function hasFoiling()
+    public function hasFoiling(): bool
     {
         return $this->has('finishing-foiling');
     }
@@ -544,7 +424,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function hasLaserCutting()
+    public function hasLaserCutting(): bool
     {
         return $this->has('finishing-laser-cutting');
     }
@@ -552,7 +432,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function hasReversePrinting()
+    public function hasReversePrinting(): bool
     {
         return $this->has('finishing-reverse-printing');
     }
@@ -560,7 +440,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function hasCorners()
+    public function hasCorners(): bool
     {
         return $this->has('finishing-corners');
     }
@@ -568,7 +448,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function hasPersonalisation()
+    public function hasPersonalisation(): bool
     {
         return $this->has('finishing-personalisation');
     }
@@ -576,13 +456,13 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function isMultipage()
+    public function isMultipage(): bool
     {
         if ($this->components->count() > 1) {
             return true;
         }
 
-        if (1 == $this->components->count()) {
+        if ($this->components->count() === 1) {
             /** @var JobComponentResource $firstComponent */
             $firstComponent = $this->components->first();
             if ($firstComponent->getRangeEnd() > 1) {
@@ -596,7 +476,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function isOutsource()
+    public function isOutsource(): bool
     {
         return false;
     }
@@ -604,7 +484,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function isLitho()
+    public function isLitho(): bool
     {
         return false;
     }
@@ -612,7 +492,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @deprecated Use domain models in your project for this.
      */
-    public function isBespoke()
+    public function isBespoke(): bool
     {
         return false;
     }
@@ -628,40 +508,28 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @param ArtifactResource[]|ResourceCollection $artifacts
      */
-    public function setArtifacts(ResourceCollection $artifacts)
+    public function setArtifacts(ResourceCollection $artifacts): void
     {
         $this->artifacts = $artifacts;
     }
 
-    /**
-     * @return JobResource
-     */
-    public function getClonedFrom()
+    public function getClonedFrom(): JobResource
     {
         return $this->clonedFrom;
     }
 
-    /**
-     * @return bool
-     */
-    public function isInImposition()
+    public function isInImposition(): bool
     {
-        return JobStatusResource::STATUS_IMPOSITION_QUEUED === $this->status->getCanonical()
-            || JobStatusResource::STATUS_IMPOSITION_MANUAL === $this->status->getCanonical();
+        return $this->status->getCanonical() === JobStatusResource::STATUS_IMPOSITION_QUEUED
+            || $this->status->getCanonical() === JobStatusResource::STATUS_IMPOSITION_MANUAL;
     }
 
-    /**
-     * @return JobMetaResource
-     */
     public function getMeta(): JobMetaResource
     {
         return $this->meta;
     }
 
-    /**
-     * @param JobMetaResource $meta
-     */
-    public function setMeta(JobMetaResource $meta)
+    public function setMeta(JobMetaResource $meta): void
     {
         $this->meta = $meta;
     }
@@ -677,38 +545,26 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /**
      * @param JobQueryResource[]|ResourceCollection $queries
      */
-    public function setQueries(ResourceCollection $queries)
+    public function setQueries(ResourceCollection $queries): void
     {
         $this->queries = $queries;
     }
 
-    /**
-     * @return PhaseResource
-     */
     public function getPhase(): ?PhaseResource
     {
         return $this->phase;
     }
 
-    /**
-     * @param PhaseResource $phase
-     */
     public function setPhase(?PhaseResource $phase): void
     {
         $this->phase = $phase;
     }
 
-    /**
-     * @return string
-     */
     public function getPreflightFailurePolicy(): string
     {
         return $this->preflightFailurePolicy;
     }
 
-    /**
-     * @param string $preflightFailurePolicy
-     */
     public function setPreflightFailurePolicy(string $preflightFailurePolicy): void
     {
         $this->preflightFailurePolicy = $preflightFailurePolicy;

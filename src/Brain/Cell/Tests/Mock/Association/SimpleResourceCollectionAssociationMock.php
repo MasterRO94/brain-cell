@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Mock\Association;
 
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
@@ -15,11 +17,9 @@ class SimpleResourceCollectionAssociationMock extends AbstractResource
     protected $associatedCollection;
 
     /**
-     * @param int $id
-     *
      * @return static
      */
-    public static function create($id)
+    public static function create(int $id)
     {
         $instance = new static();
         $instance->id = $id;
@@ -37,10 +37,7 @@ class SimpleResourceCollectionAssociationMock extends AbstractResource
         ];
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }

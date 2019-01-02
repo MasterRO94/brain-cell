@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
@@ -11,7 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class FinishingItemResource extends AbstractResource implements ResourcePublicIdInterface
+class FinishingItemResource extends AbstractResource implements
+    ResourcePublicIdInterface
 {
     use ResourcePublicIdTrait;
 
@@ -22,34 +25,22 @@ class FinishingItemResource extends AbstractResource implements ResourcePublicId
      */
     protected $alias;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $weight;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $weightUnit;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $isDefault;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $configurable;
 
-    /**
-     * @var array
-     */
+    /** @var mixed[] */
     protected $configuration;
 
     /**
@@ -62,131 +53,79 @@ class FinishingItemResource extends AbstractResource implements ResourcePublicId
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }
 
-    /**
-     * @param string $alias
-     *
-     * @return FinishingItemResource
-     */
-    public function setAlias($alias)
+    public function setAlias(string $alias): void
     {
         $this->alias = $alias;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return FinishingItemResource
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isDefault()
+    public function isDefault(): bool
     {
         return $this->isDefault;
     }
 
-    /**
-     * @param bool $isDefault
-     */
-    public function setIsDefault(bool $isDefault)
+    public function setIsDefault(bool $isDefault): void
     {
         $this->isDefault = $isDefault;
     }
 
-    /**
-     * @return bool
-     */
-    public function isConfigurable()
+    public function isConfigurable(): bool
     {
         return $this->configurable;
     }
 
-    /**
-     * @param bool $configurable
-     */
-    public function setConfigurable(bool $configurable)
+    public function setConfigurable(bool $configurable): void
     {
         $this->configurable = $configurable;
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function getConfiguration()
+    public function getConfiguration(): array
     {
         return $this->configuration;
     }
 
     /**
-     * @param array $configuration
+     * @param mixed[] $configuration
      */
-    public function setConfiguration($configuration)
+    public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
     }
 
-    /**
-     * @return int
-     */
     public function getWeight(): int
     {
         return $this->weight;
     }
 
-    /**
-     * @param int $weight
-     *
-     * @return FinishingItemResource
-     */
     public function setWeight(int $weight): self
     {
         $this->weight = $weight;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getWeightUnit(): string
     {
         return $this->weightUnit;
     }
 
-    /**
-     * @param string $weightUnit
-     *
-     * @return FinishingItemResource
-     */
     public function setWeightUnit(string $weightUnit): self
     {
         $this->weightUnit = $weightUnit;
-
-        return $this;
     }
 }

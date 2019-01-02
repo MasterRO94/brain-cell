@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
@@ -13,8 +15,6 @@ use Psr\Http\Message\StreamInterface;
 class ArtifactDelegateClient extends DelegateClient
 {
     /**
-     * @param ArtifactResource $artifactResource
-     *
      * @return AbstractResource|ArtifactResource|TransferEntityInterface
      */
     public function createArtifact(ArtifactResource $artifactResource): ArtifactResource
@@ -39,12 +39,7 @@ class ArtifactDelegateClient extends DelegateClient
         return $this->request($context, new PresignedAssetResource());
     }
 
-    /**
-     * @param string $id
-     *
-     * @return StreamInterface
-     */
-    public function downloadArtifact($id)
+    public function downloadArtifact(string $id): StreamInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/artifacts/%s/download', $id));

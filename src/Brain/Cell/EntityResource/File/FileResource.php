@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\File;
 
 use Brain\Cell\EntityResource\Common\DateResource;
@@ -65,8 +67,6 @@ final class FileResource extends AbstractResource implements
 
     /**
      * Set the source path for the file.
-     *
-     * @param string $source
      */
     public function setSource(string $source): void
     {
@@ -83,8 +83,6 @@ final class FileResource extends AbstractResource implements
 
     /**
      * Set the mime type of the file.
-     *
-     * @param string $mimeType
      */
     public function setMimeType(string $mimeType): void
     {

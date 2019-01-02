@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Mock\Association;
 
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
@@ -14,11 +16,9 @@ class SimpleResourceAssociationMock extends AbstractResource
     protected $associatedResource;
 
     /**
-     * @param int $id
-     *
      * @return static
      */
-    public static function create($id)
+    public static function create(int $id)
     {
         $instance = new static();
         $instance->id = $id;
@@ -36,25 +36,17 @@ class SimpleResourceAssociationMock extends AbstractResource
         ];
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return SimpleResourceMock
-     */
-    public function getAssociatedResource()
+    public function getAssociatedResource(): SimpleResourceMock
     {
         return $this->associatedResource;
     }
 
     /**
-     * @param SimpleResourceMock $associatedResource
-     *
      * @return $this
      */
     public function setAssociatedResource(SimpleResourceMock $associatedResource)

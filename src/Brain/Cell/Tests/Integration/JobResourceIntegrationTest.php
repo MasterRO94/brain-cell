@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Integration;
 
 use Brain\Cell\BrainClient;

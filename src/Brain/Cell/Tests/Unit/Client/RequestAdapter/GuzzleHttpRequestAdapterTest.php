@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Unit\Client\RequestAdapter;
 
 use Brain\Cell\Client\RequestAdapter\GuzzleHttpRequestAdapter;
@@ -31,7 +33,7 @@ use Psr\Http\Message\UriInterface;
  */
 final class GuzzleHttpRequestAdapterTest extends TestCase
 {
-    const BASE_PATH = 'https://some.example.com/v1';
+    public const BASE_PATH = 'https://some.example.com/v1';
 
     /** @var GuzzleClient|MockObject */
     protected $guzzle;
@@ -56,7 +58,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
      * @test
      * @testdox Adapter can understand success JSON responses
      */
-    public function request_adapterReturnsSuccessResponse_deserialisedArrayIsReturned()
+    public function requestAdapterReturnsSuccessResponseDeserialisedArrayIsReturned(): void
     {
         $this->guzzle->expects($this->once())
             ->method('request')
@@ -83,7 +85,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
      * @test
      * @testdox Adapter can serialise filters.
      */
-    public function request_withSuppliedFilters_requestIsMadeWithFilters()
+    public function requestWithSuppliedFiltersRequestIsMadeWithFilters(): void
     {
         $this->guzzle->expects($this->once())
             ->method('request')

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Transfer\AbstractResource;
@@ -11,9 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CountryResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
     /**
@@ -37,50 +37,32 @@ class CountryResource extends AbstractResource
      */
     protected $iso3;
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getIso()
+    public function getIso(): string
     {
         return $this->iso;
     }
 
-    /**
-     * @param string $iso
-     */
-    public function setIso($iso)
+    public function setIso(string $iso): void
     {
         $this->iso = $iso;
     }
 
-    /**
-     * @return string
-     */
-    public function getIso3()
+    public function getIso3(): string
     {
         return $this->iso3;
     }
 
-    /**
-     * @param string $iso3
-     */
-    public function setIso3($iso3)
+    public function setIso3(string $iso3): void
     {
         $this->iso3 = $iso3;
     }

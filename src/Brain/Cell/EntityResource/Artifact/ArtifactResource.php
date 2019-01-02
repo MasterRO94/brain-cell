@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Artifact;
 
 use Brain\Cell\EntityResource\Common\DateResource;
@@ -12,27 +14,13 @@ class ArtifactResource extends AbstractResource
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $id;
 
-    /**
-     * Remote URL to the Artifact.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $path;
 
-    /**
-     * One of:
-     *  - pending_download
-     *  - downloaded
-     *  - failed_download
-     *  - failed_invalid_mime_type.
-     *
-     * @var string
-     */
+    /** @var string */
     protected $status;
 
     /**
@@ -46,50 +34,32 @@ class ArtifactResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @param string $id
-     */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @param string $path
-     */
-    public function setPath(string $path)
+    public function setPath(string $path): void
     {
         $this->path = $path;
     }
 
-    /**
-     * @return string
-     */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }

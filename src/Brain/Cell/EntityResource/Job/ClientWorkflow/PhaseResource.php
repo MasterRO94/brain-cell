@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
 use Brain\Cell\EntityResource\Common\DateResource;
@@ -16,29 +18,19 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
     use CreatedAtTrait;
     use DeletedAtTrait;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $canonical;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $readable;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $isEntryPoint;
 
-    /**
-     * @var ResourceCollection|TransitionResource[]
-     */
+    /** @var ResourceCollection|TransitionResource[] */
     protected $transitions;
 
-    /**
-     * @var ClientWorkflowResource
-     */
+    /** @var ClientWorkflowResource */
     protected $clientWorkflow;
 
     /**
@@ -65,30 +57,24 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
 
     /**
      * Return the canonical status string.
-     *
-     * @return string
      */
-    public function getCanonical()
+    public function getCanonical(): string
     {
         return $this->canonical;
     }
 
     /**
      * Set the canonical status string.
-     *
-     * @param string $canonical
      */
-    public function setCanonical(string $canonical)
+    public function setCanonical(string $canonical): void
     {
         $this->canonical = $canonical;
     }
 
     /**
      * Return the localised translation.
-     *
-     * @return string
      */
-    public function getReadable()
+    public function getReadable(): string
     {
         return $this->readable;
     }
@@ -98,18 +84,12 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
         $this->readable = $readable;
     }
 
-    /**
-     * @return bool
-     */
     public function isIsEntryPoint(): bool
     {
         return $this->isEntryPoint;
     }
 
-    /**
-     * @param bool $isEntryPoint
-     */
-    public function setIsEntryPoint(bool $isEntryPoint)
+    public function setIsEntryPoint(bool $isEntryPoint): void
     {
         $this->isEntryPoint = $isEntryPoint;
     }
@@ -125,23 +105,17 @@ class PhaseResource extends AbstractResource implements ResourcePublicIdInterfac
     /**
      * @param ResourceCollection|TransitionResource[] $transitions
      */
-    public function setTransitions($transitions)
+    public function setTransitions($transitions): void
     {
         $this->transitions = $transitions;
     }
 
-    /**
-     * @return ClientWorkflowResource
-     */
     public function getClientWorkflow(): ClientWorkflowResource
     {
         return $this->clientWorkflow;
     }
 
-    /**
-     * @param ClientWorkflowResource $clientWorkflow
-     */
-    public function setClientWorkflow(ClientWorkflowResource $clientWorkflow)
+    public function setClientWorkflow(ClientWorkflowResource $clientWorkflow): void
     {
         $this->clientWorkflow = $clientWorkflow;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Unit\Transformer;
 
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
@@ -29,7 +31,7 @@ final class EntityFactoryTest extends TestCase
     /**
      * @test
      */
-    public function factoryConstructsNewTransferEntities()
+    public function factoryConstructsNewTransferEntities(): void
     {
         /** @var SimpleResourceMock $response */
         $response = $this->factory->create(SimpleResourceMock::class);

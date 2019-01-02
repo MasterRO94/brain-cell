@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
 use Brain\Cell\EntityResource\Common\DateResource;
@@ -15,14 +17,10 @@ class TransitionResource extends AbstractResource implements ResourcePublicIdInt
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /**
-     * @var PhaseResource
-     */
+    /** @var PhaseResource */
     protected $from;
 
-    /**
-     * @var PhaseResource
-     */
+    /** @var PhaseResource */
     protected $to;
 
     /**
@@ -38,33 +36,21 @@ class TransitionResource extends AbstractResource implements ResourcePublicIdInt
         ];
     }
 
-    /**
-     * @return PhaseResource
-     */
     public function getFrom(): PhaseResource
     {
         return $this->from;
     }
 
-    /**
-     * @param PhaseResource $from
-     */
     public function setFrom(PhaseResource $from): void
     {
         $this->from = $from;
     }
 
-    /**
-     * @return PhaseResource
-     */
     public function getTo(): PhaseResource
     {
         return $this->to;
     }
 
-    /**
-     * @param PhaseResource $to
-     */
     public function setTo(PhaseResource $to): void
     {
         $this->to = $to;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Logical\Dimension;
 
 use Brain\Cell\Logical\Dimension\Column\HeightDimensionInterface;

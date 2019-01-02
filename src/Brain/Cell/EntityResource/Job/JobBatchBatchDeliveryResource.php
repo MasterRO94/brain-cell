@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\AddressResource;
@@ -65,162 +67,102 @@ class JobBatchBatchDeliveryResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return AddressResource|null
-     */
-    public function getDeliveryAddress()
+    public function getDeliveryAddress(): ?AddressResource
     {
         return $this->deliveryAddress;
     }
 
-    /**
-     * @param AddressResource $deliveryAddress
-     */
-    public function setDeliveryAddress(AddressResource $deliveryAddress)
+    public function setDeliveryAddress(AddressResource $deliveryAddress): void
     {
         $this->deliveryAddress = $deliveryAddress;
     }
 
-    /**
-     * @return ProductionStrategyResource|null
-     */
-    public function getProductionStrategy()
+    public function getProductionStrategy(): ?ProductionStrategyResource
     {
         return $this->productionStrategy;
     }
 
-    /**
-     * @param ProductionStrategyResource $productionStrategy
-     */
-    public function setProductionStrategy(ProductionStrategyResource $productionStrategy)
+    public function setProductionStrategy(ProductionStrategyResource $productionStrategy): void
     {
         $this->productionStrategy = $productionStrategy;
     }
 
-    /**
-     * @return DeliveryServiceResource|null
-     */
-    public function getDeliveryService()
+    public function getDeliveryService(): ?DeliveryServiceResource
     {
         return $this->deliveryService;
     }
 
-    /**
-     * @param DeliveryServiceResource $deliveryService
-     */
-    public function setDeliveryService(DeliveryServiceResource $deliveryService)
+    public function setDeliveryService(DeliveryServiceResource $deliveryService): void
     {
         $this->deliveryService = $deliveryService;
     }
 
-    /**
-     * @return DateResource|null
-     */
-    public function getAssumedStartOfProductionDate()
+    public function getAssumedStartOfProductionDate(): ?DateResource
     {
         return $this->assumedStartOfProductionDate;
     }
 
-    /**
-     * @param DateResource $assumedStartOfProductionDate
-     */
-    public function setAssumedStartOfProductionDate(DateResource $assumedStartOfProductionDate)
+    public function setAssumedStartOfProductionDate(DateResource $assumedStartOfProductionDate): void
     {
         $this->assumedStartOfProductionDate = $assumedStartOfProductionDate;
     }
 
-    /**
-     * @return DateResource|null
-     */
-    public function getEndOfProductionDate()
+    public function getEndOfProductionDate(): ?DateResource
     {
         return $this->endOfProductionDate;
     }
 
-    /**
-     * @param DateResource $endOfProductionDate
-     */
-    public function setEndOfProductionDate(DateResource $endOfProductionDate)
+    public function setEndOfProductionDate(DateResource $endOfProductionDate): void
     {
         $this->endOfProductionDate = $endOfProductionDate;
     }
 
-    /**
-     * @return DateResource|null
-     */
-    public function getDeliveryCollectionDate()
+    public function getDeliveryCollectionDate(): ?DateResource
     {
         return $this->deliveryCollectionDate;
     }
 
-    /**
-     * @param DateResource $deliveryCollectionDate
-     */
-    public function setDeliveryCollectionDate(DateResource $deliveryCollectionDate)
+    public function setDeliveryCollectionDate(DateResource $deliveryCollectionDate): void
     {
         $this->deliveryCollectionDate = $deliveryCollectionDate;
     }
 
-    /**
-     * @return DateResource|null
-     */
-    public function getDeliveryDateEarliest()
+    public function getDeliveryDateEarliest(): ?DateResource
     {
         return $this->deliveryDateEarliest;
     }
 
-    /**
-     * @param DateResource $deliveryDateEarliest
-     */
-    public function setDeliveryDateEarliest(DateResource $deliveryDateEarliest)
+    public function setDeliveryDateEarliest(DateResource $deliveryDateEarliest): void
     {
         $this->deliveryDateEarliest = $deliveryDateEarliest;
     }
 
-    /**
-     * @return DateResource|null
-     */
-    public function getDeliveryDateLatest()
+    public function getDeliveryDateLatest(): ?DateResource
     {
         return $this->deliveryDateLatest;
     }
 
-    /**
-     * @param DateResource $deliveryDateLatest
-     */
-    public function setDeliveryDateLatest(DateResource $deliveryDateLatest)
+    public function setDeliveryDateLatest(DateResource $deliveryDateLatest): void
     {
         $this->deliveryDateLatest = $deliveryDateLatest;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDeliveryTimeFrameEarliest()
+    public function getDeliveryTimeFrameEarliest(): ?string
     {
         return $this->deliveryTimeFrameEarliest;
     }
 
-    /**
-     * @param string $deliveryTimeFrameEarliest
-     */
-    public function setDeliveryTimeFrameEarliest($deliveryTimeFrameEarliest)
+    public function setDeliveryTimeFrameEarliest(string $deliveryTimeFrameEarliest): void
     {
         $this->deliveryTimeFrameEarliest = $deliveryTimeFrameEarliest;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDeliveryTimeFrameLatest()
+    public function getDeliveryTimeFrameLatest(): ?string
     {
         return $this->deliveryTimeFrameLatest;
     }
 
-    /**
-     * @param string $deliveryTimeFrameLatest
-     */
-    public function setDeliveryTimeFrameLatest($deliveryTimeFrameLatest)
+    public function setDeliveryTimeFrameLatest(string $deliveryTimeFrameLatest): void
     {
         $this->deliveryTimeFrameLatest = $deliveryTimeFrameLatest;
     }

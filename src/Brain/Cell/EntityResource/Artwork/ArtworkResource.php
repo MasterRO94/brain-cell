@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
@@ -62,17 +64,11 @@ class ArtworkResource extends AbstractResource
         $this->files = $files;
     }
 
-    /**
-     * @return ArtworkStatusResource
-     */
     public function getStatus(): ArtworkStatusResource
     {
         return $this->status;
     }
 
-    /**
-     * @param ArtworkStatusResource $status
-     */
     public function setStatus(ArtworkStatusResource $status): void
     {
         $this->status = $status;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\EntityResource\TwoDimensionalResource;
@@ -10,24 +12,16 @@ class FinishingCombinationResource extends AbstractResource
 {
     protected $stockDefinition;
 
-    /**
-     * @var FinishingCombinationAssignmentResource[]|ResourceCollection
-     */
+    /** @var FinishingCombinationAssignmentResource[]|ResourceCollection */
     protected $assignments;
 
-    /**
-     * @var MaterialResource
-     */
+    /** @var MaterialResource */
     protected $stockMaterial;
 
-    /**
-     * @var TwoDimensionalResource
-     */
+    /** @var TwoDimensionalResource */
     protected $minimumDimension;
 
-    /**
-     * @var TwoDimensionalResource
-     */
+    /** @var TwoDimensionalResource */
     protected $maximumDimension;
 
     /**
@@ -62,23 +56,17 @@ class FinishingCombinationResource extends AbstractResource
     /**
      * @param mixed $stockDefinition
      */
-    public function setStockDefinition($stockDefinition)
+    public function setStockDefinition($stockDefinition): void
     {
         $this->stockDefinition = $stockDefinition;
     }
 
-    /**
-     * @return MaterialResource
-     */
-    public function getStockMaterial()
+    public function getStockMaterial(): MaterialResource
     {
         return $this->stockMaterial;
     }
 
-    /**
-     * @param MaterialResource $stockMaterial
-     */
-    public function setStockMaterial(MaterialResource $stockMaterial)
+    public function setStockMaterial(MaterialResource $stockMaterial): void
     {
         $this->stockMaterial = $stockMaterial;
     }
@@ -94,39 +82,27 @@ class FinishingCombinationResource extends AbstractResource
     /**
      * @param FinishingCombinationAssignmentResource[]|ResourceCollection $assignments
      */
-    public function setAssignments($assignments)
+    public function setAssignments($assignments): void
     {
         $this->assignments = $assignments;
     }
 
-    /**
-     * @return TwoDimensionalResource
-     */
-    public function getMinimumDimension()
+    public function getMinimumDimension(): TwoDimensionalResource
     {
         return $this->minimumDimension;
     }
 
-    /**
-     * @param TwoDimensionalResource $minimumDimension
-     */
-    public function setMinimumDimension(TwoDimensionalResource $minimumDimension)
+    public function setMinimumDimension(TwoDimensionalResource $minimumDimension): void
     {
         $this->minimumDimension = $minimumDimension;
     }
 
-    /**
-     * @return TwoDimensionalResource
-     */
-    public function getMaximumDimension()
+    public function getMaximumDimension(): TwoDimensionalResource
     {
         return $this->maximumDimension;
     }
 
-    /**
-     * @param TwoDimensionalResource $maximumDimension
-     */
-    public function setMaximumDimension(TwoDimensionalResource $maximumDimension)
+    public function setMaximumDimension(TwoDimensionalResource $maximumDimension): void
     {
         $this->maximumDimension = $maximumDimension;
     }

@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
 use Brain\Cell\EntityResource\Job\JobMetaResource;
@@ -11,22 +12,17 @@ use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\Exception\ClientException;
-use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class JobDelegateClient extends DelegateClient
 {
     /**
-     * Filters available:
-     * * id = string|string[]
-     * * batch = string.
-     *
-     * @param array $filters
-     * @param array $parameters
+     * @param mixed[] $filters
+     * @param mixed[] $parameters
      *
      * @return JobResource[]|ResourceCollection
      */
-    public function getJobs(array $filters = [], $parameters = [])
+    public function getJobs(array $filters = [], array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/jobs');
@@ -36,28 +32,24 @@ class JobDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(JobResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
-    /**
-     * @param string $id
-     *
-     * @return JobResource
-     */
-    public function getJob($id)
+    public function getJob(string $id): JobResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/jobs/%s', $id));
 
-        return $this->request($context, new JobResource());
+        /** @var JobResource $resource */
+        $resource = $this->request($context, new JobResource());
+
+        return $resource;
     }
 
-    /**
-     * @param JobResource $resource
-     *
-     * @return JobResource
-     */
-    public function postJob(JobResource $resource)
+    public function postJob(JobResource $resource): JobResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/jobs');
@@ -73,11 +65,6 @@ class JobDelegateClient extends DelegateClient
         return $response;
     }
 
-    /**
-     * @param CreateJobFromProductResource $resource
-     *
-     * @return JobResource
-     */
     public function createJobFromProduct(CreateJobFromProductResource $resource): JobResource
     {
         $context = $this->configuration->createRequestContext();
@@ -94,73 +81,45 @@ class JobDelegateClient extends DelegateClient
         return $response;
     }
 
-    /**
-     * @param string $jobId
-     *
-     * @return JobResource
-     */
-    public function cloneJob($jobId)
+    public function cloneJob(string $jobId): JobResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf('/jobs/%s/clone', $jobId));
 
-        return $this->request($context, new JobResource());
+        /** @var JobResource $resource */
+        $resource = $this->request($context, new JobResource());
+
+        return $resource;
     }
 
-    /**
-     * @param JobResource $jobResource
-     * @param JobStatusResource $statusResource
-     *
-     * @return JobResource
-     */
-    public function updateStatus(JobResource $jobResource, JobStatusResource $statusResource)
+    public function updateStatus(JobResource $resource, JobStatusResource $status): JobResource
     {
-        if (!in_array(
-            $statusResource->getCanonical(),
-            JobStatusResource::getAllCanonicals()
-        )) {
+        if (!in_array($status->getCanonical(), JobStatusResource::getAllCanonicals())) {
             throw new ClientException(sprintf(
                 'Invalid status canonical [%s]',
-                $statusResource->getCanonical()
+                $status->getCanonical()
             ));
         }
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
             '/jobs/%s/status',
-            $jobResource->getId()
+            $resource->getId()
         ));
 
         $jobStatusResource = new JobResource();
-        $jobStatusResource->setStatus($statusResource);
+        $jobStatusResource->setStatus($status);
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobStatusResource));
 
-        return $this->request($context, $jobResource);
+        /** @var JobResource $resource */
+        $resource = $this->request($context, $resource);
+
+        return $resource;
     }
 
-    /**
-     * @param JobResource $resource
-     * @param ArtworkResource $artwork
-     *
-     * @throws RuntimeException
-     */
-    public function updateArtwork(JobResource $resource, ArtworkResource $artwork)
-    {
-        throw new RuntimeException(
-            'JobDelegateClient::updateArtwork is no longer functional. '
-            . 'Use JobComponentDelegateClient::updateArtwork instead.'
-        );
-    }
-
-    /**
-     * @param JobResource $jobResource
-     * @param PhaseResource $phaseResource
-     *
-     * @return JobResource
-     */
-    public function updatePhase(JobResource $jobResource, PhaseResource $phaseResource)
+    public function updatePhase(JobResource $jobResource, PhaseResource $phaseResource): JobResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
@@ -177,13 +136,7 @@ class JobDelegateClient extends DelegateClient
         return $this->request($context, $jobResource);
     }
 
-    /**
-     * @param JobResource $job
-     * @param JobNoteResource $jobNoteResource
-     *
-     * @return JobResource
-     */
-    public function submitJobNote(JobResource $job, JobNoteResource $jobNoteResource)
+    public function submitJobNote(JobResource $job, JobNoteResource $jobNoteResource): JobResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf(
@@ -191,20 +144,13 @@ class JobDelegateClient extends DelegateClient
             $job->getId()
         ));
 
-
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($jobNoteResource));
 
         return $this->request($context, new JobResource());
     }
 
-    /**
-     * @param JobResource $job
-     * @param JobMetaResource $meta
-     *
-     * @return JobResource
-     */
-    public function submitJobMeta(JobResource $job, JobMetaResource $meta)
+    public function submitJobMeta(JobResource $job, JobMetaResource $meta): JobResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(

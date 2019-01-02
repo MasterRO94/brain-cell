@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
@@ -13,12 +15,8 @@ class ArtworkDelegateClient extends DelegateClient
 {
     /**
      * @deprecated use use file()->download() instead.
-     *
-     * @param string $id
-     *
-     * @return StreamInterface
      */
-    public function downloadArtwork($id)
+    public function downloadArtwork(string $id): StreamInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/artworks/%s/download', $id));
@@ -28,8 +26,6 @@ class ArtworkDelegateClient extends DelegateClient
 
     /**
      * @deprecated use file()->get() instead.
-     *
-     * @param string $id
      */
     public function getFile(string $id): FileResourceInterface
     {
@@ -38,8 +34,6 @@ class ArtworkDelegateClient extends DelegateClient
 
     /**
      * @deprecated use file()->getDownloadPath() instead.
-     *
-     * @param string $id
      */
     public function getFileDownloadPath(string $id): FileDownloadPathResourceInterface
     {
@@ -48,21 +42,13 @@ class ArtworkDelegateClient extends DelegateClient
 
     /**
      * @deprecated use file()->download() instead.
-     *
-     * @param string $id
      */
     public function downloadFile(string $id): StreamInterface
     {
         return (new FileDelegateClient($this->configuration))->download($id);
     }
 
-    /**
-     * @param string $id
-     * @param ArtworkIssueResource $issue
-     *
-     * @return ArtworkIssueResource
-     */
-    public function createArtworkIssue(string $id, ArtworkIssueResource $issue)
+    public function createArtworkIssue(string $id, ArtworkIssueResource $issue): ArtworkIssueResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf('/artworks/%s/issues', $id));

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
@@ -17,8 +19,6 @@ use Psr\Http\Message\StreamInterface;
 {
     /**
      * Return a file by id.
-     *
-     * @param string $id
      */
     public function get(string $id): FileResourceInterface
     {
@@ -33,8 +33,6 @@ use Psr\Http\Message\StreamInterface;
 
     /**
      * Return the file download path (S3) by id.
-     *
-     * @param string $id
      */
     public function getDownloadPath(string $id): FileDownloadPathResourceInterface
     {
@@ -49,8 +47,6 @@ use Psr\Http\Message\StreamInterface;
 
     /**
      * Download a file by id.
-     *
-     * @param string $id
      */
     public function download(string $id): StreamInterface
     {

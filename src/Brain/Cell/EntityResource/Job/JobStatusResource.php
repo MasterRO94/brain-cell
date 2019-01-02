@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 /**
@@ -7,28 +9,31 @@ namespace Brain\Cell\EntityResource\Job;
  */
 class JobStatusResource extends StatusResource
 {
-    const STATUS_INCOMPLETE = 'job.status.incomplete';
-    const STATUS_READY = 'job.status.ready';
-    const STATUS_IMPOSITION_QUEUED = 'job.status.imposition_queued';
-    const STATUS_IMPOSITION_MANUAL = 'job.status.imposition_manual';
-    const STATUS_PRODUCTION_QUEUED = 'job.status.production_queued';
-    const STATUS_PRODUCTION_STARTED = 'job.status.production_started';
-    const STATUS_PRODUCTION_FINISHED = 'job.status.production_finished';
-    const STATUS_PRODUCTION_DISPATCHED = 'job.status.production_dispatched';
-    const STATUS_CANCELLED = 'job.status.cancelled';
+    public const STATUS_INCOMPLETE = 'job.status.incomplete';
+    public const STATUS_READY = 'job.status.ready';
+    public const STATUS_IMPOSITION_QUEUED = 'job.status.imposition_queued';
+    public const STATUS_IMPOSITION_MANUAL = 'job.status.imposition_manual';
+    public const STATUS_PRODUCTION_QUEUED = 'job.status.production_queued';
+    public const STATUS_PRODUCTION_STARTED = 'job.status.production_started';
+    public const STATUS_PRODUCTION_FINISHED = 'job.status.production_finished';
+    public const STATUS_PRODUCTION_DISPATCHED = 'job.status.production_dispatched';
+    public const STATUS_CANCELLED = 'job.status.cancelled';
 
-    public static function getAllCanonicals()
+    /**
+     * @return string[]
+     */
+    public static function getAllCanonicals(): array
     {
         return [
-            static::STATUS_INCOMPLETE,
-            static::STATUS_READY,
-            static::STATUS_IMPOSITION_QUEUED,
-            static::STATUS_IMPOSITION_MANUAL,
-            static::STATUS_PRODUCTION_QUEUED,
-            static::STATUS_PRODUCTION_STARTED,
-            static::STATUS_PRODUCTION_FINISHED,
-            static::STATUS_PRODUCTION_DISPATCHED,
-            static::STATUS_CANCELLED,
+            self::STATUS_INCOMPLETE,
+            self::STATUS_READY,
+            self::STATUS_IMPOSITION_QUEUED,
+            self::STATUS_IMPOSITION_MANUAL,
+            self::STATUS_PRODUCTION_QUEUED,
+            self::STATUS_PRODUCTION_STARTED,
+            self::STATUS_PRODUCTION_FINISHED,
+            self::STATUS_PRODUCTION_DISPATCHED,
+            self::STATUS_CANCELLED,
         ];
     }
 }

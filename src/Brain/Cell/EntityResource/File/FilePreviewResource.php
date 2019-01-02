@@ -1,16 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\File;
 
 use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-class FilePreviewResource extends AbstractResource
+/**
+ * A file preview.
+ */
+final class FilePreviewResource extends AbstractResource implements
+    FilePreviewResourceInterface
 {
     use ResourcePublicIdTrait;
     use CreatedAtTrait;
 
+    /** @var int */
+    protected $index;
+
+    /** @var FileResource */
+    protected $file;
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAssociatedResources(): array
     {
         return [
@@ -19,27 +34,7 @@ class FilePreviewResource extends AbstractResource
     }
 
     /**
-     * @var FileResource
-     */
-    protected $file;
-
-    /**
-     * @var int
-     */
-    protected $index;
-
-    public function getFile(): FileResourceInterface
-    {
-        return $this->file;
-    }
-
-    public function setFile(FileResourceInterface $file): void
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getIndex(): int
     {
@@ -47,10 +42,26 @@ class FilePreviewResource extends AbstractResource
     }
 
     /**
-     * @param int $index
+     * Set the index.
      */
     public function setIndex(int $index): void
     {
         $this->index = $index;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFile(): FileResourceInterface
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set the preview file.
+     */
+    public function setFile(FileResourceInterface $file): void
+    {
+        $this->file = $file;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Common\AbstractStatusResource;
@@ -9,6 +11,6 @@ use Brain\Cell\EntityResource\Common\AbstractStatusResource;
  */
 class JobBatchStatusResource extends AbstractStatusResource
 {
-    const STATUS_INCOMPLETE = 'job_batch.status.incomplete';
-    const STATUS_READY = 'job_batch.status.ready';
+    public const STATUS_INCOMPLETE = 'job_batch.status.incomplete';
+    public const STATUS_READY = 'job_batch.status.ready';
 }

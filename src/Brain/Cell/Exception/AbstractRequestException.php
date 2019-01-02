@@ -1,31 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Exception;
+
+use RuntimeException;
+use Throwable;
 
 /**
  * An abstract request exception.
  */
-abstract class AbstractRequestException extends \RuntimeException
+abstract class AbstractRequestException extends RuntimeException
 {
     private $statusCode;
     private $requestPayload;
     private $responsePayload;
 
     /**
-     * Constructor.
-     *
-     * @param string $message
-     * @param int $statusCode
-     * @param array|null $requestPayload
-     * @param array|null $responsePayload
-     * @param \Throwable|null $previous
+     * @param mixed[]|null $requestPayload
+     * @param mixed[]|null $responsePayload
      */
     public function __construct(
         string $message,
         int $statusCode,
         ?array $requestPayload,
         ?array $responsePayload,
-        ?\Throwable $previous = null
+        ?Throwable $previous = null
     ) {
         parent::__construct($message, $statusCode, $previous);
 
@@ -36,8 +36,6 @@ abstract class AbstractRequestException extends \RuntimeException
 
     /**
      * Return the status code.
-     *
-     * @return int
      */
     public function getStatusCode(): int
     {
@@ -47,7 +45,7 @@ abstract class AbstractRequestException extends \RuntimeException
     /**
      * Return the request payload.
      *
-     * @return array|null
+     * @return mixed[]|null
      */
     public function getRequestPayload(): ?array
     {
@@ -57,7 +55,7 @@ abstract class AbstractRequestException extends \RuntimeException
     /**
      * Return the response payload.
      *
-     * @return array|null
+     * @return mixed[]|null
      */
     public function getResponsePayload(): ?array
     {

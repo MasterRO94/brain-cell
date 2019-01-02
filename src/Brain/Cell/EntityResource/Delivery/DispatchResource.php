@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Job\JobBatchResource;
@@ -10,9 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class DispatchResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $id;
 
     /**
@@ -23,19 +23,13 @@ class DispatchResource extends AbstractResource
      */
     protected $batch;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $trackingCode;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $labelUrl;
 
-    /**
-     * @var DispatchParcelResource[] $parcels
-     */
+    /** @var DispatchParcelResource[] $parcels */
     protected $parcels;
 
     /**
@@ -58,47 +52,32 @@ class DispatchResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return JobBatchResource|null
-     */
-    public function getBatch()
+    public function getBatch(): ?JobBatchResource
     {
         return $this->batch;
     }
 
-    /**
-     * @param JobBatchResource|null $batch
-     */
-    public function setBatch(JobBatchResource $batch = null)
+    public function setBatch(?JobBatchResource $batch = null): void
     {
         $this->batch = $batch;
     }
 
-    public function clearBatch()
+    public function clearBatch(): void
     {
         $this->batch = null;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getTrackingCode()
+    public function getTrackingCode(): ?string
     {
         return $this->trackingCode;
     }
 
-    /**
-     * @param string $trackingCode
-     */
-    public function setTrackingCode($trackingCode)
+    public function setTrackingCode(string $trackingCode): void
     {
         $this->trackingCode = $trackingCode;
     }
@@ -114,23 +93,17 @@ class DispatchResource extends AbstractResource
     /**
      * @param DispatchParcelResource[]|ResourceCollection $parcels
      */
-    public function setParcels($parcels)
+    public function setParcels($parcels): void
     {
         $this->parcels = $parcels;
     }
 
-    /**
-     * @return string
-     */
-    public function getLabelUrl()
+    public function getLabelUrl(): string
     {
         return $this->labelUrl;
     }
 
-    /**
-     * @param string $labelUrl
-     */
-    public function setLabelUrl($labelUrl)
+    public function setLabelUrl(string $labelUrl): void
     {
         $this->labelUrl = $labelUrl;
     }

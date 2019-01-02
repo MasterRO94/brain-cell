@@ -1,84 +1,60 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Logical\Dimension\ThreeDimensionalInterface;
 use Brain\Cell\Transfer\AbstractResource;
 
-class ThreeDimensionalResource extends AbstractResource implements ThreeDimensionalInterface
+class ThreeDimensionalResource extends AbstractResource implements
+    ThreeDimensionalInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $width;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $height;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $depth;
 
     /**
      * {@inheritdoc}
      */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
 
-    /**
-     * @param int $width
-     *
-     * @return ThreeDimensionalResource
-     */
-    public function setWidth($width)
+    public function setWidth(int $width): void
     {
         $this->width = $width;
-
-        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getHeight()
+    public function getHeight(): int
     {
         return $this->height;
     }
 
-    /**
-     * @param int $height
-     *
-     * @return ThreeDimensionalResource
-     */
-    public function setHeight($height)
+    public function setHeight(int $height): void
     {
         $this->height = $height;
-
-        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDepth()
+    public function getDepth(): int
     {
         return $this->depth;
     }
 
-    /**
-     * @param int $depth
-     *
-     * @return ThreeDimensionalResource
-     */
-    public function setDepth($depth)
+    public function setDepth(int $depth): void
     {
         $this->depth = $depth;
-
-        return $this;
     }
 }

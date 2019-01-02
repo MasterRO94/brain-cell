@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Unit\Client;
 
 use Brain\Cell\Client\ClientConfiguration;
@@ -42,7 +44,7 @@ final class DelegateClientTest extends TestCase
      * @test
      * @testdox Delegate hydrates resources as objects if there is a resource handler configured
      */
-    public function request_whenRequestingWithResourceHandler_returnsHydratedResources()
+    public function requestWhenRequestingWithResourceHandlerReturnsHydratedResources(): void
     {
         $this->adapter->expects($this->once())
             ->method('request')
@@ -74,7 +76,7 @@ final class DelegateClientTest extends TestCase
      * @test
      * @testdox Delegate can send post requests.
      */
-    public function request_whenRequestingWithPost_sendsPayload()
+    public function requestWhenRequestingWithPostSendsPayload(): void
     {
         $this->adapter->expects($this->once())
             ->method('request')
@@ -82,18 +84,18 @@ final class DelegateClientTest extends TestCase
                 $this->callback(function (RequestContext $context) {
                     $payload = $context->getPayload();
 
-                    //  Payload should be an array ..
+                    // Payload should be an array ..
                     if (!is_array($payload)) {
                         return false;
                     }
 
-                    //  .. with resource keys at the root ..
+                    // .. with resource keys at the root ..
                     if (!isset($payload['quantity'])) {
                         return false;
                     }
 
-                    //  .. and values as set.
-                    return 42 === $payload['quantity'];
+                    // .. and values as set.
+                    return $payload['quantity'] === 42;
                 })
             )
             ->willReturn(['status' => true]);
@@ -108,10 +110,7 @@ final class DelegateClientTest extends TestCase
         $delegate->postJob($job);
     }
 
-    /**
-     * @return ResourceHandlerService
-     */
-    protected function getResourceHandler()
+    protected function getResourceHandler(): ResourceHandlerService
     {
         return new ResourceHandlerService(
             new EntityResourceFactory(),

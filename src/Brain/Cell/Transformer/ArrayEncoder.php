@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Transformer;
 
 use Brain\Cell\AbstractTransformer;
@@ -12,6 +14,11 @@ use Brain\Cell\TransferEntityInterface;
 
 use Doctrine\Common\Inflector\Inflector;
 
+use DateTime;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionProperty;
+
 /**
  * An encoder for transforming {@link TransferEntityInterface} to arrays.
  */
@@ -20,52 +27,48 @@ class ArrayEncoder extends AbstractTransformer
     /**
      * Encode the given {@link TransferEntityInterface} and return the serialised view.
      *
-     * @param TransferEntityInterface $entity
-     * @param ArrayEncoderSerialisationOptions|null $options
-     *
-     * @return array
+     * @return mixed[]
      */
     public function encode(
         TransferEntityInterface $entity,
-        ArrayEncoderSerialisationOptions $options = null
-    ) {
+        ?ArrayEncoderSerialisationOptions $options = null
+    ): array {
         if (!$options) {
             $options = new ArrayEncoderSerialisationOptions();
         }
 
-        //  If we are encoding a collection of resources..
+        // If we are encoding a collection of resources..
         if ($entity instanceof ResourceCollection) {
             return $this->encodeCollection($entity, $options);
         }
 
-        //  If we are encoding a resource..
+        // If we are encoding a resource..
         if ($entity instanceof AbstractResource) {
             return $this->encodeResource($entity, $options);
         }
 
-        //  The encoder may not support encoding all transfer entities.
+        // The encoder may not support encoding all transfer entities.
         throw new RuntimeException(sprintf('Unexpected TransferEntityInterface "%s"', get_class($entity)));
     }
 
     /**
      * Serialise a {@link AbstractResource}.
      *
-     * @param AbstractResource $resource
-     * @param ArrayEncoderSerialisationOptions $options
+     * @return mixed[]
      *
-     * @return array
+     * @throws ReflectionException
      */
-    protected function encodeResource(AbstractResource $resource, ArrayEncoderSerialisationOptions $options)
+    protected function encodeResource(AbstractResource $resource, ArrayEncoderSerialisationOptions $options): array
     {
         $data = [];
 
-        //  Serialisation is done on the properties of the transfer objects.
-        //  For this we need to make use of reflection to get the protected properties.
-        $class = new \ReflectionClass(get_class($resource));
-        $properties = $class->getProperties(\ReflectionProperty::IS_PROTECTED);
+        // Serialisation is done on the properties of the transfer objects.
+        // For this we need to make use of reflection to get the protected properties.
+        $class = new ReflectionClass(get_class($resource));
+        $properties = $class->getProperties(ReflectionProperty::IS_PROTECTED);
 
-        //  Return any associations that we should be validating.
-        //  Note also that these look "deprecated" but are actually "internal".
+        // Return any associations that we should be validating.
+        // Note also that these look "deprecated" but are actually "internal".
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
 
@@ -76,7 +79,7 @@ class ArrayEncoder extends AbstractTransformer
             $snakeCasePropertyName = Inflector::tableize($property->getName());
 
             // All properties prefixed with "brain" are to be ignored
-            if ('brain' === substr($property->getName(), 0, 5)) {
+            if (substr($property->getName(), 0, 5) === 'brain') {
                 continue;
             }
 
@@ -116,9 +119,11 @@ class ArrayEncoder extends AbstractTransformer
 
                     // Discard empty elements of collection
                     foreach ($this->encodeCollection($value, $options) as $child) {
-                        if (!empty($child)) {
-                            $result[] = $child;
+                        if (empty($child)) {
+                            continue;
                         }
+
+                        $result[] = $child;
                     }
 
                     $value = $result;
@@ -131,16 +136,16 @@ class ArrayEncoder extends AbstractTransformer
                         get_class($resource)
                     ));
                 }
-            } elseif ($value instanceof \DateTime) {
+            } elseif ($value instanceof DateTime) {
                 $value = $value->format('c');
             }
 
             // Ignore empty arrays, but don't ignore 0 or false
-            if (null === $value || (is_array($value) && empty($value))) {
+            if ($value === null || (is_array($value) && empty($value))) {
                 continue;
             }
 
-            if (null === $value) {
+            if ($value === null) {
                 continue;
             }
 
@@ -157,10 +162,8 @@ class ArrayEncoder extends AbstractTransformer
      * @todo copy it across and kill this bogus-ass method with fire
      *
      * @param mixed $resource
-     *
-     * @return bool
      */
-    protected function isIdResource($resource)
+    protected function isIdResource($resource): bool
     {
         if (!$resource instanceof AbstractResource) {
             return false;
@@ -171,23 +174,19 @@ class ArrayEncoder extends AbstractTransformer
 
     /**
      * @param mixed $resource
-     * @param ArrayEncoderSerialisationOptions $options
-     *
-     * @return bool
      */
     protected function isIdResourceAndShouldSerialiseAsId(
         $resource,
         ArrayEncoderSerialisationOptions $options
-    ) {
+    ): bool {
         return $options['serialiseResourceIdInsteadOfWholeBodyIfPossible']
             && $this->isIdResource($resource);
     }
 
     /**
-     * @param AbstractResource $resource
-     * @param ArrayEncoderSerialisationOptions $options
+     * @return mixed[]|string
      *
-     * @return array|string
+     * @throws ReflectionException
      */
     protected function getValueForIdResource(
         AbstractResource $resource,
@@ -196,8 +195,7 @@ class ArrayEncoder extends AbstractTransformer
         // @todo create IdResource class/trait
         assert(method_exists($resource, 'getId'));
 
-        if (
-            $options['preferSerialisingResourceAliasOverId']
+        if ($options['preferSerialisingResourceAliasOverId']
             && method_exists($resource, 'getAlias')
             && $resource->getAlias()
         ) {
@@ -215,18 +213,17 @@ class ArrayEncoder extends AbstractTransformer
     /**
      * Serialise a {@link ResourceCollection}.
      *
-     * @param ResourceCollection $collection
-     * @param ArrayEncoderSerialisationOptions $options
+     * @return mixed[]
      *
-     * @return array
+     * @throws ReflectionException
      */
     protected function encodeCollection(
         ResourceCollection $collection,
         ArrayEncoderSerialisationOptions $options
-    ) {
+    ): array {
         $resources = [];
 
-        //  Loop over all the resources in the collection and serialise them.
+        // Loop over all the resources in the collection and serialise them.
         foreach ($collection as $resource) {
             $resources[] = $this->isIdResourceAndShouldSerialiseAsId($resource, $options)
                 ? $this->getValueForIdResource($resource, $options)

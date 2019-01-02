@@ -1,21 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Interfaces;
 
 interface ResourcePublicIdInterface
 {
-    /**
-     * @return string|null
-     */
-    public function getId();
+    public function getId(): ?string;
 
-    /**
-     * @return string
-     */
-    public function getIdOrThrow();
+    public function getIdOrThrow(): string;
 
-    /**
-     * @param string $id
-     */
-    public function setId(string $id);
+    public function setId(string $id): void;
 }

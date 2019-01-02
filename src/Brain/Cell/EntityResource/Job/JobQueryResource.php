@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
@@ -17,29 +19,19 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /**
-     * @var DateResource $resolved
-     */
+    /** @var DateResource $resolved */
     protected $resolved;
 
-    /**
-     * @var DateResource $progressStarted
-     */
+    /** @var DateResource $progressStarted */
     protected $progressStarted;
 
-    /**
-     * @var ClientResource $assignee
-     */
+    /** @var ClientResource $assignee */
     protected $assignee;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $summary;
 
-    /**
-     * @var JobQueryNoteResource[]|ResourceCollection
-     */
+    /** @var JobQueryNoteResource[]|ResourceCollection */
     protected $notes;
 
     /**
@@ -66,66 +58,42 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
         ];
     }
 
-    /**
-     * @return string
-     */
     public function getSummary(): string
     {
         return $this->summary;
     }
 
-    /**
-     * @param string $summary
-     */
-    public function setSummary(string $summary)
+    public function setSummary(string $summary): void
     {
         $this->summary = $summary;
     }
 
-    /**
-     * @return DateResource|null
-     */
     public function getResolved(): ?DateResource
     {
         return $this->resolved;
     }
 
-    /**
-     * @param DateResource|null $resolved
-     */
-    public function setResolved(?DateResource $resolved)
+    public function setResolved(?DateResource $resolved): void
     {
         $this->resolved = $resolved;
     }
 
-    /**
-     * @return DateResource|null
-     */
     public function getProgressStarted(): ?DateResource
     {
         return $this->progressStarted;
     }
 
-    /**
-     * @param DateResource|null $progressStarted
-     */
-    public function setProgressStarted(?DateResource $progressStarted)
+    public function setProgressStarted(?DateResource $progressStarted): void
     {
         $this->progressStarted = $progressStarted;
     }
 
-    /**
-     * @return ClientResource
-     */
     public function getAssignee(): ClientResource
     {
         return $this->assignee;
     }
 
-    /**
-     * @param ClientResource $assignee
-     */
-    public function setAssignee(ClientResource $assignee)
+    public function setAssignee(ClientResource $assignee): void
     {
         $this->assignee = $assignee;
     }
@@ -141,7 +109,7 @@ class JobQueryResource extends AbstractResource implements ResourcePublicIdInter
     /**
      * @param JobQueryNoteResource[]|ResourceCollection $notes
      */
-    public function setNotes(ResourceCollection $notes)
+    public function setNotes(ResourceCollection $notes): void
     {
         $this->notes = $notes;
     }

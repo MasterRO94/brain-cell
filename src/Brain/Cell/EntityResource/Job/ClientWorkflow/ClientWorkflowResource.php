@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
 use Brain\Cell\EntityResource\Common\DateResource;
@@ -45,17 +47,11 @@ class ClientWorkflowResource extends AbstractResource implements ResourcePublicI
         ];
     }
 
-    /**
-     * @return JobStatusResource
-     */
     public function getStatus(): JobStatusResource
     {
         return $this->status;
     }
 
-    /**
-     * @param JobStatusResource $status
-     */
     public function setStatus(JobStatusResource $status): void
     {
         $this->status = $status;

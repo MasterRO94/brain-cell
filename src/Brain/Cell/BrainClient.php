@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell;
 
 use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
@@ -22,9 +24,6 @@ use Brain\Cell\Client\DelegateClient;
  */
 class BrainClient extends DelegateClient
 {
-    /**
-     * @return AuthenticationDelegateClient
-     */
     public function authentication(): AuthenticationDelegateClient
     {
         return new AuthenticationDelegateClient($this->configuration);
@@ -35,89 +34,56 @@ class BrainClient extends DelegateClient
         return new FileDelegateClient($this->configuration);
     }
 
-    /**
-     * @return PricingDelegateClient
-     */
     public function pricing(): PricingDelegateClient
     {
         return new PricingDelegateClient($this->configuration);
     }
 
-    /**
-     * @return StockDelegateClient
-     */
     public function stock(): StockDelegateClient
     {
         return new StockDelegateClient($this->configuration);
     }
 
-    /**
-     * @return DeliveryDelegateClient
-     */
     public function delivery(): DeliveryDelegateClient
     {
         return new DeliveryDelegateClient($this->configuration);
     }
 
-    /**
-     * @return JobDelegateClient
-     */
     public function job(): JobDelegateClient
     {
         return new JobDelegateClient($this->configuration);
     }
 
-    /**
-     * @return JobComponentDelegateClient
-     */
     public function jobComponent(): JobComponentDelegateClient
     {
         return new JobComponentDelegateClient($this->configuration);
     }
 
-    /**
-     * @return JobQueryDelegateClient
-     */
     public function jobQuery(): JobQueryDelegateClient
     {
         return new JobQueryDelegateClient($this->configuration);
     }
 
-    /**
-     * @return JobBatchDelegateClient
-     */
     public function jobBatch(): JobBatchDelegateClient
     {
         return new JobBatchDelegateClient($this->configuration);
     }
 
-    /**
-     * @return ProductDelegateClient
-     */
     public function product(): ProductDelegateClient
     {
         return new ProductDelegateClient($this->configuration);
     }
 
-    /**
-     * @return ArtworkDelegateClient
-     */
     public function artwork(): ArtworkDelegateClient
     {
         return new ArtworkDelegateClient($this->configuration);
     }
 
-    /**
-     * @return ArtifactDelegateClient
-     */
     public function artifact(): ArtifactDelegateClient
     {
         return new ArtifactDelegateClient($this->configuration);
     }
 
-    /**
-     * @return ClientWorkflowDelegateClient
-     */
     public function clientWorkflow(): ClientWorkflowDelegateClient
     {
         return new ClientWorkflowDelegateClient($this->configuration);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
@@ -14,9 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MaterialResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $id;
 
     /**
@@ -27,24 +27,16 @@ class MaterialResource extends AbstractResource
      */
     protected $alias;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var MaterialBaseResource
-     */
+    /** @var MaterialBaseResource */
     protected $base;
 
-    /**
-     * @var MaterialVariantResource
-     */
+    /** @var MaterialVariantResource */
     protected $variant;
 
-    /**
-     * @var MaterialWeightResource
-     */
+    /** @var MaterialWeightResource */
     protected $weight;
 
     /**
@@ -59,111 +51,58 @@ class MaterialResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }
 
-    /**
-     * @param string $alias
-     *
-     * @return MaterialResource
-     */
-    public function setAlias($alias)
+    public function setAlias(string $alias): void
     {
         $this->alias = $alias;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return MaterialResource
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    /**
-     * @return MaterialBaseResource
-     */
-    public function getBase()
+    public function getBase(): MaterialBaseResource
     {
         return $this->base;
     }
 
-    /**
-     * @param MaterialBaseResource $base
-     *
-     * @return MaterialResource
-     */
-    public function setBase(MaterialBaseResource $base)
+    public function setBase(MaterialBaseResource $base): void
     {
         $this->base = $base;
-
-        return $this;
     }
 
-    /**
-     * @return MaterialVariantResource
-     */
-    public function getVariant()
+    public function getVariant(): MaterialVariantResource
     {
         return $this->variant;
     }
 
-    /**
-     * @param MaterialVariantResource $variant
-     *
-     * @return MaterialResource
-     */
-    public function setVariant(MaterialVariantResource $variant)
+    public function setVariant(MaterialVariantResource $variant): void
     {
         $this->variant = $variant;
-
-        return $this;
     }
 
-    /**
-     * @return MaterialWeightResource
-     */
-    public function getWeight()
+    public function getWeight(): MaterialWeightResource
     {
         return $this->weight;
     }
 
-    /**
-     * @param MaterialWeightResource $weight
-     *
-     * @return MaterialResource
-     */
-    public function setWeight(MaterialWeightResource $weight)
+    public function setWeight(MaterialWeightResource $weight): void
     {
         $this->weight = $weight;
-
-        return $this;
     }
 }

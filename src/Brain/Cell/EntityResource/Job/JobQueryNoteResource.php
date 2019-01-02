@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\AbstractNoteResource;
@@ -9,13 +11,11 @@ use Brain\Cell\EntityResource\Common\DateResource;
 
 class JobQueryNoteResource extends AbstractNoteResource
 {
-    const CANONICAL_GENERIC = 'job_query_note.canonical.generic';
-    const CANONICAL_CREATION = 'job_query_note.canonical.creation';
-    const CANONICAL_RESOLUTION = 'job_query_note.canonical.resolution';
+    public const CANONICAL_GENERIC = 'job_query_note.canonical.generic';
+    public const CANONICAL_CREATION = 'job_query_note.canonical.creation';
+    public const CANONICAL_RESOLUTION = 'job_query_note.canonical.resolution';
 
-    /**
-     * @var ArtworkResource
-     */
+    /** @var ArtworkResource */
     protected $artwork;
 
     /**
@@ -31,18 +31,12 @@ class JobQueryNoteResource extends AbstractNoteResource
         ];
     }
 
-    /**
-     * @return ArtworkResource
-     */
     public function getArtwork(): ArtworkResource
     {
         return $this->artwork;
     }
 
-    /**
-     * @param ArtworkResource $artwork
-     */
-    public function setArtwork(ArtworkResource $artwork)
+    public function setArtwork(ArtworkResource $artwork): void
     {
         $this->artwork = $artwork;
     }

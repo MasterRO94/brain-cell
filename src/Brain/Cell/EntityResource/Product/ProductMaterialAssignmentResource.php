@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Product;
 
 use Brain\Cell\EntityResource\Stock\MaterialResource;
@@ -10,14 +12,10 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class ProductMaterialAssignmentResource extends AbstractResource
 {
-    /**
-     * @var ProductResource
-     */
+    /** @var ProductResource */
     protected $product;
 
-    /**
-     * @var MaterialResource
-     */
+    /** @var MaterialResource */
     protected $stockMaterial;
 
     /**
@@ -31,34 +29,22 @@ class ProductMaterialAssignmentResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return ProductResource
-     */
-    public function getProduct()
+    public function getProduct(): ProductResource
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductResource $product
-     */
-    public function setProduct($product)
+    public function setProduct(ProductResource $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * @return MaterialResource
-     */
-    public function getStockMaterial()
+    public function getStockMaterial(): MaterialResource
     {
         return $this->stockMaterial;
     }
 
-    /**
-     * @param MaterialResource $stockMaterial
-     */
-    public function setStockMaterial($stockMaterial)
+    public function setStockMaterial(MaterialResource $stockMaterial): void
     {
         $this->stockMaterial = $stockMaterial;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\AbstractNoteResource;
@@ -9,42 +11,28 @@ use Brain\Cell\EntityResource\AbstractNoteResource;
  */
 class JobNoteResource extends AbstractNoteResource
 {
-    const JOB_NOTE_CANONICAL_GENERIC = 'generic';
-    const JOB_NOTE_CANONICAL_QUERY = 'query';
+    public const JOB_NOTE_CANONICAL_GENERIC = 'generic';
+    public const JOB_NOTE_CANONICAL_QUERY = 'query';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $summary;
 
-    /**
-     * @return string
-     */
-    public function getSummary()
+    public function getSummary(): string
     {
         return $this->summary;
     }
 
-    /**
-     * @param string $summary
-     */
-    public function setSummary(string $summary)
+    public function setSummary(string $summary): void
     {
         $this->summary = $summary;
     }
 
-    /**
-     * @return bool
-     */
-    public function isQuery()
+    public function isQuery(): bool
     {
         return $this->canonical === self::JOB_NOTE_CANONICAL_QUERY;
     }
 
-    /**
-     * @return bool
-     */
-    public function isGeneric()
+    public function isGeneric(): bool
     {
         return $this->canonical === self::JOB_NOTE_CANONICAL_GENERIC;
     }

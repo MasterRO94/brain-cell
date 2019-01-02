@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Unit\Transformer\Encoder;
 
 use Brain\Cell\Tests\Mock\Association\SimpleResourceAssociationMock;
@@ -37,7 +39,7 @@ final class ArrayEncoderTest extends TestCase
      * @expectedException \RuntimeException
      * @expectedExceptionMessage Unexpected TransferEntityInterface
      */
-    public function encoderWillThrowOnInvalidTransferEntityInterface()
+    public function encoderWillThrowOnInvalidTransferEntityInterface(): void
     {
         /** @var TransferEntityInterface $entity */
         $entity = $this->createMock(TransferEntityInterface::class);
@@ -48,7 +50,7 @@ final class ArrayEncoderTest extends TestCase
     /**
      * @test
      */
-    public function encodeSimpleResources()
+    public function encodeSimpleResources(): void
     {
         $resource = SimpleResourceMock::create(1, 'string');
 
@@ -64,7 +66,7 @@ final class ArrayEncoderTest extends TestCase
     /**
      * @test
      */
-    public function encodeSimpleResourcesWithAssociations()
+    public function encodeSimpleResourcesWithAssociations(): void
     {
         $resource = SimpleResourceMock::create(1, 'string');
 
@@ -83,7 +85,7 @@ final class ArrayEncoderTest extends TestCase
     /**
      * @test
      */
-    public function encodeSimpleResourceCollections()
+    public function encodeSimpleResourceCollections(): void
     {
         $collection = new ResourceCollection();
         $collection->add(SimpleResourceMock::create(1, 'one'));
@@ -101,7 +103,7 @@ final class ArrayEncoderTest extends TestCase
     /**
      * @test
      */
-    public function encodeSimpleResourceCollectionsAsAssociations()
+    public function encodeSimpleResourceCollectionsAsAssociations(): void
     {
         $collection = new ResourceCollection();
         $collection->add(SimpleResourceMock::create(1, 'one'));

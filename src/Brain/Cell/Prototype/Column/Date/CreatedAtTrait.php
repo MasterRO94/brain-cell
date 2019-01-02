@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Prototype\Column\Date;
 
 use Brain\Cell\EntityResource\Common\DateResource;
 
+use DateTime;
 use DateTimeInterface;
 
 trait CreatedAtTrait
@@ -23,8 +26,6 @@ trait CreatedAtTrait
      * Set the date created at.
      *
      * @internal Note this has no affect when posting resources.
-     *
-     * @param DateResource $createdAt
      */
     public function setCreatedAt(DateResource $createdAt): void
     {
@@ -42,11 +43,9 @@ trait CreatedAtTrait
     }
 
     /**
-     * @param \DateTime $created
-     *
      * @deprecated This method will be removed.
      */
-    public function setCreated(\DateTime $created): void
+    public function setCreated(DateTime $created): void
     {
     }
 }

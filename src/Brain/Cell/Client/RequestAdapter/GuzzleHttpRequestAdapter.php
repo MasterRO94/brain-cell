@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\RequestAdapter;
 
 use Brain\Cell\Client\RequestAdapterInterface;
@@ -9,57 +11,43 @@ use Brain\Cell\Exception\Request\NotFoundException;
 use Brain\Cell\Exception\Request\PayloadViolationException;
 use Brain\Cell\Exception\Request\StatusTransitionException;
 use Brain\Cell\Exception\Request\UnknownRequestException;
-use Brain\Cell\Exception\RequestAdapterException;
 use Brain\Cell\Response\ErrorMessageEnum;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
+use Throwable;
 
 /**
  * {@inheritdoc}
  */
 class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 {
-    const VERSION_MINIMUM = 6.2;
+    public const VERSION_MINIMUM = 6.2;
 
     protected $guzzle;
 
-    /**
-     * Constructor.
-     *
-     * @param ClientInterface $guzzle
-     */
     public function __construct(ClientInterface $guzzle)
     {
         $this->guzzle = $guzzle;
-
-        if (version_compare($guzzle::VERSION, static::VERSION_MINIMUM) === -1) {
-            throw new RequestAdapterException(
-                sprintf(
-                    'The minimum supported version of "GuzzleHttp" is "%s" where "%s" was supplied',
-                    static::VERSION_MINIMUM,
-                    $guzzle::VERSION
-                )
-            );
-        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function request(RequestContext $context)
+    public function request(RequestContext $context): array
     {
         $response = $this->getResponse($context);
 
-        return json_decode($response->getBody(), true);
+        return json_decode((string) $response->getBody(), true);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function stream(RequestContext $context)
+    public function stream(RequestContext $context): StreamInterface
     {
         $response = $this->getResponse($context);
 
@@ -67,13 +55,9 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     }
 
     /**
-     * @param RequestContext $context
-     *
-     * @throws \Exception
-     *
-     * @return ResponseInterface
+     * @throws Throwable
      */
-    protected function getResponse(RequestContext $context)
+    protected function getResponse(RequestContext $context): ResponseInterface
     {
         $path = $context->getPath();
         $parameters = $context->getParameters()->all();
@@ -113,14 +97,10 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 
     /**
      * Wrap the exception from Guzzle.
-     *
-     * @param \Exception $exception
-     *
-     * @return \Exception
      */
-    protected function wrapResponseException(\Exception $exception): \Exception
+    protected function wrapResponseException(Throwable $exception): Throwable
     {
-        //  If the exception isn't from Guzzle then return the original.
+        // If the exception isn't from Guzzle then return the original.
         if (!$exception instanceof RequestException) {
             return $exception;
         }
@@ -133,19 +113,19 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         $requestPayload = json_decode($requestContent, true);
         $responsePayload = json_decode($responseContent, true);
 
-        //  If we cannot read the body of the response then throw the original error.
-        if (is_null($responsePayload)) {
+        // If we cannot read the body of the response then throw the original error.
+        if ($responsePayload === null) {
             return $exception;
         }
 
-        //  Attempt to fetch the canonical error, we can map exceptions on that.
+        // Attempt to fetch the canonical error, we can map exceptions on that.
         $canonical = $responsePayload['error']['canonical'] ?? null;
 
-        //  Decorate exceptions according to status code and potentially canonical.
+        // Decorate exceptions according to status code and potentially canonical.
         switch ($exception->getResponse()->getStatusCode()) {
-            //  Bad Request.
+            // Bad Request.
             case 400:
-                if (null === $canonical) {
+                if ($canonical === null) {
                     return new BadRequestException(
                         sprintf('%s %s: %s', $method, $uri, $responseContent),
                         $requestPayload,
@@ -154,7 +134,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
                     );
                 }
 
-                //  If we don't recognise the canonical we can still use the message
+                // If we don't recognise the canonical we can still use the message
                 $message = $responsePayload['error']['message'] ?? null;
                 switch ($canonical) {
                     case ErrorMessageEnum::ERROR_PAYLOAD_VIOLATION:
@@ -194,7 +174,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
                         );
                 }
 
-            //  Not Found.
+            // Not Found.
             // no break
             case 404:
                 return new NotFoundException(

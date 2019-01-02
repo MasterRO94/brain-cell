@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
@@ -23,24 +25,16 @@ class FinishingCategoryResource extends AbstractResource implements ResourcePubl
      */
     protected $alias;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var FinishingItemResource[]
-     */
+    /** @var FinishingItemResource[] */
     protected $options = [];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $assignmentLevel;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $applicationLevel;
 
     /**
@@ -53,94 +47,58 @@ class FinishingCategoryResource extends AbstractResource implements ResourcePubl
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }
 
-    /**
-     * @param string $alias
-     *
-     * @return FinishingCategoryResource
-     */
-    public function setAlias($alias)
+    public function setAlias(string $alias): void
     {
         $this->alias = $alias;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return FinishingCategoryResource
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * @return FinishingItemResource[]|ResourceCollection
      */
-    public function getOptions()
+    public function getOptions(): ResourceCollection
     {
         return $this->options;
     }
 
     /**
      * @param FinishingItemResource[]|ResourceCollection $options
-     *
-     * @return FinishingCategoryResource
      */
-    public function setOptions($options)
+    public function setOptions(ResourceCollection $options): void
     {
         $this->options = $options;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAssignmentLevel()
+    public function getAssignmentLevel(): string
     {
         return $this->assignmentLevel;
     }
 
-    /**
-     * @param string $assignmentLevel
-     */
-    public function setAssignmentLevel($assignmentLevel)
+    public function setAssignmentLevel(string $assignmentLevel): void
     {
         $this->assignmentLevel = $assignmentLevel;
     }
 
-    /**
-     * @return string
-     */
-    public function getApplicationLevel()
+    public function getApplicationLevel(): string
     {
         return $this->applicationLevel;
     }
 
-    /**
-     * @param string $applicationLevel
-     */
-    public function setApplicationLevel($applicationLevel)
+    public function setApplicationLevel(string $applicationLevel): void
     {
         $this->applicationLevel = $applicationLevel;
     }

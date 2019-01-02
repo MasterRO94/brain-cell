@@ -1,23 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Enum;
 
+use Brain\Cell\EntityResource\Job\JobBatchStatusResource;
+
 /**
- * Copy-paste of Brain/Component/Job/Enum/JobBatchStatusEnum.php in Brain
- * Please keep these synchronised.
- *
  * @deprecated use JobBatchStatusResource constants instead.
  */
-class JobBatchStatusEnum
+final class JobBatchStatusEnum extends JobBatchStatusResource
 {
-    const STATUS_INCOMPLETE = 'incomplete';
-    const STATUS_READY = 'ready';
-
+    /**
+     * Return all statuses.
+     *
+     * @return string[]
+     */
     public static function getAll(): array
     {
         return [
-            static::STATUS_INCOMPLETE,
-            static::STATUS_READY,
+            JobBatchStatusResource::STATUS_INCOMPLETE,
+            JobBatchStatusResource::STATUS_READY,
         ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Transfer;
 
 use Brain\Cell\Exception\RuntimeException;
@@ -12,7 +14,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @see ArrayCollection
  */
-class ResourceCollection extends ArrayCollection implements TransferEntityInterface
+class ResourceCollection extends ArrayCollection implements
+    TransferEntityInterface
 {
     /**
      * The entity class.
@@ -24,15 +27,13 @@ class ResourceCollection extends ArrayCollection implements TransferEntityInterf
     /**
      * Return the entity class.
      *
-     * @throws RuntimeException if entity class is not present.
-     *
-     * @return string
+     * @throws RuntimeException When entity class is not present.
      *
      * @internal
      */
-    public function getEntityClassOrThrow()
+    public function getEntityClassOrThrow(): string
     {
-        if (is_null($this->entityClass)) {
+        if ($this->entityClass === null) {
             throw new RuntimeException('Missing entity class for collection');
         }
 
@@ -42,11 +43,9 @@ class ResourceCollection extends ArrayCollection implements TransferEntityInterf
     /**
      * Set the strict entity class.
      *
-     * @param string $entityClass
-     *
      * @internal
      */
-    public function setEntityClass($entityClass)
+    public function setEntityClass(string $entityClass): void
     {
         $this->entityClass = $entityClass;
     }
@@ -54,11 +53,9 @@ class ResourceCollection extends ArrayCollection implements TransferEntityInterf
     /**
      * Return the strict entity class if defined.
      *
-     * @return string
-     *
      * @internal
      */
-    public function getEntityClass()
+    public function getEntityClass(): string
     {
         return $this->entityClass;
     }
@@ -68,19 +65,19 @@ class ResourceCollection extends ArrayCollection implements TransferEntityInterf
      *
      * @param TransferEntityInterface $value
      *
-     * @throws RuntimeException when $value is not an instance of TransferEntityInterface
-     * @throws RuntimeException when $value is not an instance of the set entity class
+     * @throws RuntimeException When $value is not an instance of TransferEntityInterface.
+     * @throws RuntimeException When $value is not an instance of the set entity class.
      */
     public function add($value)
     {
-        //  We only accept instance of TransferEntityInterface in these collections.
+        // We only accept instance of TransferEntityInterface in these collections.
         if (!$value instanceof TransferEntityInterface) {
             throw new RuntimeException(sprintf('ResourceCollection::add() only accepts instances of TransferEntityInterface'));
         }
 
-        //  Optionally if there was a entity class specified against the collection then we need to be strict.
-        //  Rejecting all $values given that are not of the given type.
-        if (!is_null($this->entityClass) && !is_a($value, $this->entityClass)) {
+        // Optionally if there was a entity class specified against the collection then we need to be strict.
+        // Rejecting all $values given that are not of the given type.
+        if ($this->entityClass !== null && !is_a($value, $this->entityClass)) {
             throw new RuntimeException(sprintf('ResourceCollection::add() only accepts instances of "%s"', $this->entityClass));
         }
 

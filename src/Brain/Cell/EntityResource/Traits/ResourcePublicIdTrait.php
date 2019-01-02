@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Traits;
+
+use RuntimeException;
 
 /**
  * Trait ResourcePublicIdTrait.
@@ -12,30 +16,21 @@ trait ResourcePublicIdTrait
     /** @var string|null */
     protected $id;
 
-    /**
-     * @return string|null
-     */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getIdOrThrow()
+    public function getIdOrThrow(): string
     {
-        if (!$this->id) {
-            throw new \RuntimeException("Couldn't retrieve resource's id, because it's not set.");
+        if ($this->id === null) {
+            throw new RuntimeException("Couldn't retrieve resource's id, because it's not set.");
         }
 
         return $this->id;
     }
 
-    /**
-     * @param string $id
-     */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }

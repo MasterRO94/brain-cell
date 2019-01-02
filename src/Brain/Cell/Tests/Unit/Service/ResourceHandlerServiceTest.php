@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Unit\Service;
 
 use Brain\Cell\Service\ResourceHandlerService;
@@ -61,20 +63,25 @@ final class ResourceHandlerServiceTest extends TestCase
     /**
      * @test
      */
-    public function serviceEncoderDependency()
+    public function serviceEncoderDependency(): void
     {
+        $data = [
+            'encoded' => true,
+        ];
+
         $this->encoderMock->expects($this->once())
             ->method('encode')
-            ->willReturn('encoded');
+            ->willReturn($data);
 
         $response = $this->service->serialise($this->resource);
-        $this->assertEquals('encoded', $response, 'Service is not returning the response from the TransformerEncoderInterface');
+
+        $this->assertEquals($data, $response, 'Service is not returning the response from the TransformerEncoderInterface');
     }
 
     /**
      * @test
      */
-    public function serviceDecoderDependency()
+    public function serviceDecoderDependency(): void
     {
         $this->decoderMock->expects($this->once())
             ->method('decode')
@@ -87,7 +94,7 @@ final class ResourceHandlerServiceTest extends TestCase
     /**
      * @test
      */
-    public function serviceEntityFactoryDependency()
+    public function serviceEntityFactoryDependency(): void
     {
         $this->factoryMock->expects($this->once())
             ->method('create')
