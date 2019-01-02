@@ -19,25 +19,25 @@ class AddressResource extends AbstractResource
     /** @var string */
     protected $name;
 
-    /** @var string */
+    /** @var string|null */
     protected $company;
 
     /** @var string */
     protected $email;
 
-    /** @var string */
+    /** @var string|null */
     protected $phone;
 
     /** @var string */
     protected $addressLine1;
 
-    /** @var string */
+    /** @var string|null */
     protected $addressLine2;
 
     /** @var string */
     protected $city;
 
-    /** @var string */
+    /** @var string|null */
     protected $countyState;
 
     /** @var string */
@@ -68,12 +68,12 @@ class AddressResource extends AbstractResource
         $this->name = $name;
     }
 
-    public function getCompany(): string
+    public function getCompany(): ?string
     {
         return $this->company;
     }
 
-    public function setCompany(string $company): void
+    public function setCompany(?string $company): void
     {
         $this->company = $company;
     }
@@ -88,12 +88,12 @@ class AddressResource extends AbstractResource
         $this->email = $email;
     }
 
-    public function getPhone(): string
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(string $phone): void
+    public function setPhone(?string $phone): void
     {
         $this->phone = $phone;
     }
@@ -108,12 +108,12 @@ class AddressResource extends AbstractResource
         $this->addressLine1 = $addressLine1;
     }
 
-    public function getAddressLine2(): string
+    public function getAddressLine2(): ?string
     {
         return $this->addressLine2;
     }
 
-    public function setAddressLine2(string $addressLine2): void
+    public function setAddressLine2(?string $addressLine2): void
     {
         $this->addressLine2 = $addressLine2;
     }
@@ -128,12 +128,12 @@ class AddressResource extends AbstractResource
         $this->city = $city;
     }
 
-    public function getCountyState(): string
+    public function getCountyState(): ?string
     {
         return $this->countyState;
     }
 
-    public function setCountyState(string $countyState): void
+    public function setCountyState(?string $countyState): void
     {
         $this->countyState = $countyState;
     }
