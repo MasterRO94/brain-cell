@@ -1,35 +1,40 @@
-default: \
-	composer \
-	code \
-	test
+default: build
 
 build: \
-	composer \
 	code \
 	test
 
 # --------------------
-# Utility
-
-composer:
-	composer install
+# Code Monitoring
 
 code: \
 	code.format.header \
 	code.format.use \
-	code.fix
+	code.sniff.report
+
+code.fix: \
+	code.format.header \
+	code.format.use \
+	code.sniff.fix \
+	code.sniff.report
 
 code.format.header:
 	vendor/bin/php-formatter formatter:header:fix src --ansi --config="build/code/config"
 
-code.format.strict:
-	vendor/bin/php-formatter formatter:strict:fix src --ansi --config="build/code/config"
-
 code.format.use:
 	vendor/bin/php-formatter formatter:use:sort src --ansi --config="build/code/config"
 
-code.fix:
-	vendor/bin/php-cs-fixer fix -v --ansi --config="build/code/config/.php_cs.php"
+code.sniff.report:
+	vendor/bin/phpcs --report=diff --report-full src
+
+code.sniff.report.only.full:
+	vendor/bin/phpcs --report-full src
+
+code.sniff.report.only.diff:
+	vendor/bin/phpcs --report=diff src
+
+code.sniff.fix:
+	vendor/bin/phpcbf src
 
 # --------------------
 # Test
