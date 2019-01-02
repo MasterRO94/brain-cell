@@ -47,7 +47,7 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     /** @var JobStatusResource $status */
     protected $status;
 
-    /** @var ProductResource */
+    /** @var ProductResource|null */
     protected $product;
 
     /** @var int */
@@ -221,12 +221,12 @@ class JobResource extends AbstractResource implements ResourcePublicIdInterface
     {
     }
 
-    public function getProduct(): ProductResource
+    public function getProduct(): ?ProductResource
     {
         return $this->product;
     }
 
-    public function setProduct(ProductResource $product): void
+    public function setProduct(?ProductResource $product): void
     {
         $this->product = $product;
     }
