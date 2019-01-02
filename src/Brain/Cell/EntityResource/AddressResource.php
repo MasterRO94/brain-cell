@@ -148,12 +148,12 @@ class AddressResource extends AbstractResource
         $this->postcode = $postcode;
     }
 
-    public function getCountry(): string
+    public function getCountry(): CountryResource
     {
         return $this->country;
     }
 
-    public function setCountry(string $country): void
+    public function setCountry(CountryResource $country): void
     {
         $this->country = $country;
     }
