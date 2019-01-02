@@ -4,15 +4,17 @@ namespace Brain\Cell\EntityResource\File;
 
 use Brain\Cell\Transfer\AbstractResource;
 
-class FileDownloadPathResource extends AbstractResource
+/**
+ * An exposed file download path.
+ */
+final class FileDownloadPathResource extends AbstractResource implements
+    FileDownloadPathResourceInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $path;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getPath(): string
     {
@@ -20,6 +22,10 @@ class FileDownloadPathResource extends AbstractResource
     }
 
     /**
+     * @deprecated Do not use this, if its for test then mock the interface.
+     *
+     * Set the download path.
+     *
      * @param string $path
      */
     public function setPath(string $path): void

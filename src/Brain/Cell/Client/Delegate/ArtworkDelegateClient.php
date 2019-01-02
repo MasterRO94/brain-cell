@@ -4,15 +4,15 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
-use Brain\Cell\EntityResource\File\FileDownloadPathResource;
-use Brain\Cell\EntityResource\File\FileResource;
+use Brain\Cell\EntityResource\File\FileDownloadPathResourceInterface;
+use Brain\Cell\EntityResource\File\FileResourceInterface;
 
 use Psr\Http\Message\StreamInterface;
 
 class ArtworkDelegateClient extends DelegateClient
 {
     /**
-     * @deprecated use downloadFile instead
+     * @deprecated use use file()->download() instead.
      *
      * @param string $id
      *
@@ -27,42 +27,33 @@ class ArtworkDelegateClient extends DelegateClient
     }
 
     /**
-     * @param string $id
+     * @deprecated use file()->get() instead.
      *
-     * @return FileResource
+     * @param string $id
      */
-    public function getFile(string $id): FileResource
+    public function getFile(string $id): FileResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/files/%s', $id));
-
-        return $this->request($context, new FileResource());
+        return (new FileDelegateClient($this->configuration))->get($id);
     }
 
     /**
-     * @param string $id
+     * @deprecated use file()->getDownloadPath() instead.
      *
-     * @return FileDownloadPathResource
+     * @param string $id
      */
-    public function getFileDownloadPath(string $id): FileDownloadPathResource
+    public function getFileDownloadPath(string $id): FileDownloadPathResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/files/%s/download-path', $id));
-
-        return $this->request($context, new FileDownloadPathResource());
+        return (new FileDelegateClient($this->configuration))->getDownloadPath($id);
     }
 
     /**
-     * @param string $id
+     * @deprecated use file()->download() instead.
      *
-     * @return StreamInterface
+     * @param string $id
      */
     public function downloadFile(string $id): StreamInterface
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/files/%s/download', $id));
-
-        return $this->stream($context);
+        return (new FileDelegateClient($this->configuration))->download($id);
     }
 
     /**

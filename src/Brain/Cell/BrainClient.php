@@ -5,9 +5,9 @@ namespace Brain\Cell;
 use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
 use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
 use Brain\Cell\Client\Delegate\AuthenticationDelegateClient;
-use Brain\Cell\Client\Delegate\ChangeDelegateClient;
 use Brain\Cell\Client\Delegate\ClientWorkflowDelegateClient;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
+use Brain\Cell\Client\Delegate\FileDelegateClient;
 use Brain\Cell\Client\Delegate\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\JobComponentDelegateClient;
 use Brain\Cell\Client\Delegate\JobDelegateClient;
@@ -28,6 +28,11 @@ class BrainClient extends DelegateClient
     public function authentication(): AuthenticationDelegateClient
     {
         return new AuthenticationDelegateClient($this->configuration);
+    }
+
+    public function file(): FileDelegateClient
+    {
+        return new FileDelegateClient($this->configuration);
     }
 
     /**
@@ -100,14 +105,6 @@ class BrainClient extends DelegateClient
     public function artwork(): ArtworkDelegateClient
     {
         return new ArtworkDelegateClient($this->configuration);
-    }
-
-    /**
-     * @return ChangeDelegateClient
-     */
-    public function change(): ChangeDelegateClient
-    {
-        return new ChangeDelegateClient($this->configuration);
     }
 
     /**
