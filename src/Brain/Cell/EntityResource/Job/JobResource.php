@@ -23,7 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class JobResource extends AbstractResource implements ResourcePublicIdInterface
+class JobResource extends AbstractResource implements
+    ResourcePublicIdInterface
 {
     use ResourcePublicIdTrait;
     use CreatedAtTrait;
