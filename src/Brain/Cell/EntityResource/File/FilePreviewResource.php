@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\File;
 
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
@@ -14,7 +14,7 @@ use Brain\Cell\Transfer\AbstractResource;
 final class FilePreviewResource extends AbstractResource implements
     FilePreviewResourceInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
 
     /** @var int */

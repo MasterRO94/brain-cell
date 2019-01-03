@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brain\Cell\Client\Delegate;
+namespace Brain\Cell\Client\Delegate\Job;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;

@@ -6,7 +6,7 @@ namespace Brain\Cell\Tests\Unit;
 
 use Brain\Cell\BrainClient;
 use Brain\Cell\Client\ClientConfiguration;
-use Brain\Cell\Client\Delegate\JobDelegateClient;
+use Brain\Cell\Client\Delegate\Job\JobDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\RequestAdapterInterface;
 

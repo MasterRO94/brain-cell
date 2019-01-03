@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\Client\Delegate;
 
+use Brain\Cell\Client\Delegate\File\FileDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
 use Brain\Cell\EntityResource\File\FileDownloadPathResourceInterface;

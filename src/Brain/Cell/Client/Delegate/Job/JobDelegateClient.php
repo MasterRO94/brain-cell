@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Brain\Cell\Client\Delegate;
+namespace Brain\Cell\Client\Delegate\Job;
 
+use Brain\Cell\Client\Delegate\Job\Status\JobStatusDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
@@ -14,8 +15,19 @@ use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Transfer\ResourceCollection;
 
+/**
+ * API client for operating on jobs.
+ */
 class JobDelegateClient extends DelegateClient
 {
+    /**
+     * Operate on job statuses.
+     */
+    public function status(): JobStatusDelegateClient
+    {
+        return new JobStatusDelegateClient($this->configuration);
+    }
+
     /**
      * @param mixed[] $filters
      * @param mixed[] $parameters

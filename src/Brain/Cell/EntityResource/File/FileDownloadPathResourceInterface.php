@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\File;
 
-interface FileDownloadPathResourceInterface
+use Brain\Cell\TransferEntityInterface;
+
+interface FileDownloadPathResourceInterface extends
+    TransferEntityInterface
 {
     /**
      * Return the download path.

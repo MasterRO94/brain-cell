@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class PhaseResource extends AbstractResource implements ResourcePublicIdInterface
+class PhaseResource extends AbstractResource implements ResourceIdentityInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use DeletedAtTrait;
 

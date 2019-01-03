@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Stock;
 
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -14,9 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class FinishingCategoryResource extends AbstractResource implements ResourcePublicIdInterface
+class FinishingCategoryResource extends AbstractResource implements ResourceIdentityInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
     /**
      * @var string

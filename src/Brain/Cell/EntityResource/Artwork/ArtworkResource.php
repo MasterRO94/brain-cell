@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Artwork;
 
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -13,7 +13,7 @@ use Brain\Cell\Transfer\ResourceCollection;
  */
 class ArtworkResource extends AbstractResource
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
     /** @var string */
     protected $id;

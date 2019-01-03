@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\File;
 
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\Transfer\ResourceCollection;
+use Brain\Cell\TransferEntityInterface;
 
-interface FileResourceInterface extends ResourcePublicIdInterface
+interface FileResourceInterface extends
+    TransferEntityInterface,
+    ResourceIdentityInterface
 {
     /**
      * Return the source path.

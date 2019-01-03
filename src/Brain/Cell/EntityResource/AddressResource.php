@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 class AddressResource extends AbstractResource
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use UpdatedAtTrait;
 

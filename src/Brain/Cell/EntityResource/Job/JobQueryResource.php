@@ -6,16 +6,16 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class JobQueryResource extends AbstractResource implements ResourcePublicIdInterface
+class JobQueryResource extends AbstractResource implements ResourceIdentityInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use UpdatedAtTrait;
 

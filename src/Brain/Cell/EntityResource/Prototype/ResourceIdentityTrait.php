@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Brain\Cell\EntityResource\Traits;
+namespace Brain\Cell\EntityResource\Prototype;
 
 use RuntimeException;
 
 /**
- * Trait ResourcePublicIdTrait.
- *
  * A trait for resources with uuid public id.
  */
-trait ResourcePublicIdTrait
+trait ResourceIdentityTrait
 {
     /** @var string|null */
     protected $id;
@@ -30,6 +28,9 @@ trait ResourcePublicIdTrait
         return $this->id;
     }
 
+    /**
+     * Set the identity.
+     */
     public function setId(string $id): void
     {
         $this->id = $id;

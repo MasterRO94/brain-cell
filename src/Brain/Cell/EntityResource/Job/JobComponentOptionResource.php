@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\FinishingItemResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,9 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * {@inheritdoc}
  */
 class JobComponentOptionResource extends AbstractResource implements
-    ResourcePublicIdInterface
+    ResourceIdentityInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
     /**
      * @var FinishingCategoryResource

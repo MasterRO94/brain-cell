@@ -7,7 +7,7 @@ namespace Brain\Cell\EntityResource\Delivery;
 use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\PriceResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
@@ -16,7 +16,7 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class DeliveryOptionResource extends AbstractResource
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
 
     /** @var AddressResource */

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 final class CreateJobFromProductResource extends AbstractResource
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
     /**
      * @Assert\NotBlank()

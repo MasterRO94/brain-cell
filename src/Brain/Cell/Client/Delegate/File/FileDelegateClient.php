@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Brain\Cell\Client\Delegate;
+namespace Brain\Cell\Client\Delegate\File;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\File\FileDownloadPathResource;
@@ -13,7 +13,7 @@ use Brain\Cell\EntityResource\File\FileResourceInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * A delegate client for operating on file resources.
+ * {@inheritdoc}
  */
 /* final */class FileDelegateClient extends DelegateClient
 {

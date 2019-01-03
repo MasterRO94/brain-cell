@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Delivery;
 
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
@@ -12,7 +12,7 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class DeliveryServiceResource extends AbstractResource
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
     /** @var DeliveryCarrierResource */
     protected $deliveryCarrier;

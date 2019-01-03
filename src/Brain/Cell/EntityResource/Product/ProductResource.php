@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Product;
 
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
  */
-class ProductResource extends AbstractResource implements ResourcePublicIdInterface
+class ProductResource extends AbstractResource implements ResourceIdentityInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
     protected $name;
 

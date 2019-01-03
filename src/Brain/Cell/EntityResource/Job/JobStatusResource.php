@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Common\AbstractStatusResource;
+
 /**
  * {@inheritdoc}
  */
-class JobStatusResource extends StatusResource
+final class JobStatusResource extends AbstractStatusResource
 {
     public const STATUS_INCOMPLETE = 'job.status.incomplete';
     public const STATUS_READY = 'job.status.ready';

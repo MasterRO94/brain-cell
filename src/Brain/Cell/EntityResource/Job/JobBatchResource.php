@@ -7,8 +7,8 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -16,9 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class JobBatchResource extends AbstractResource implements ResourcePublicIdInterface
+class JobBatchResource extends AbstractResource implements ResourceIdentityInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
     /** @var string */
     protected $status;

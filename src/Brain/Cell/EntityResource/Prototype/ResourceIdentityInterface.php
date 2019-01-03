@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Brain\Cell\EntityResource\Interfaces;
+namespace Brain\Cell\EntityResource\Prototype;
 
-interface ResourcePublicIdInterface
+interface ResourceIdentityInterface
 {
     public function getId(): ?string;
 

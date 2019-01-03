@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\File;
 
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
@@ -18,7 +18,7 @@ use Brain\Cell\Transfer\ResourceCollection;
 final class FileResource extends AbstractResource implements
     FileResourceInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use UpdatedAtTrait;
     use DeletedAtTrait;

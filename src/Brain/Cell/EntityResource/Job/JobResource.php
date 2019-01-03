@@ -7,12 +7,11 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
@@ -24,9 +23,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * {@inheritdoc}
  */
 class JobResource extends AbstractResource implements
-    ResourcePublicIdInterface
+    JobResourceInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
@@ -157,8 +156,7 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * The shorthand hash of the Job.
-     * This will be NULL on non-persisted entities.
+     * {@inheritdoc}
      */
     public function getHash(): ?string
     {

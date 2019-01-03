@@ -6,14 +6,14 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 final class JobClientResource extends AbstractResource
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use UpdatedAtTrait;
 

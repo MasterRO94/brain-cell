@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\Tests\Unit\Client;
 
 use Brain\Cell\Client\ClientConfiguration;
-use Brain\Cell\Client\Delegate\JobDelegateClient;
+use Brain\Cell\Client\Delegate\Job\JobDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Client\RequestContext;
