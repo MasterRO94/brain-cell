@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Brain\Cell\Client\Delegate\Job;
 
+use Brain\Cell\Client\Delegate\Job\Note\JobNoteDelegateClient;
 use Brain\Cell\Client\Delegate\Job\Status\JobStatusDelegateClient;
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\Client\Request\RequestFilter;
+use Brain\Cell\Client\Request\RequestFilterInterface;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
 use Brain\Cell\EntityResource\Job\JobMetaResource;
 use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
+use Brain\Cell\EntityResource\Job\JobResourceInterface;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -29,28 +33,35 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
-     * @param mixed[] $filters
-     * @param mixed[] $parameters
-     *
-     * @return JobResource[]|ResourceCollection
+     * Operate on job notes.
      */
-    public function getJobs(array $filters = [], array $parameters = []): ResourceCollection
+    public function notes(): JobNoteDelegateClient
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet('/jobs');
-        $context->getFilters()->add($filters);
-        $context->getParameters()->add($parameters);
-
-        $collection = new ResourceCollection();
-        $collection->setEntityClass(JobResource::class);
-
-        /** @var ResourceCollection $resource */
-        $resource = $this->request($context, $collection);
-
-        return $resource;
+        return new JobNoteDelegateClient($this->configuration);
     }
 
-    public function getJob(string $id): JobResource
+    /**
+     * Create a job.
+     */
+    public function create(JobResourceInterface $job): JobResourceInterface
+    {
+        $handler = $this->configuration->getResourceHandler();
+        $payload = $handler->serialise($job);
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/jobs');
+        $context->setPayload($payload);
+
+        /** @var JobResource $response */
+        $response = $this->request($context, $job);
+
+        return $response;
+    }
+
+    /**
+     * Return a job by id.
+     */
+    public function get(string $id): JobResourceInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/jobs/%s', $id));
@@ -61,18 +72,65 @@ class JobDelegateClient extends DelegateClient
         return $resource;
     }
 
-    public function postJob(JobResource $resource): JobResource
+    /**
+     * List all jobs.
+     *
+     * @return JobResource[]|ResourceCollection
+     */
+    public function all(RequestFilterInterface $filter): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost('/jobs');
+        $context->prepareContextForGet('/jobs');
+        $context->getFilters()->add($filter->getFilters());
+        $context->getParameters()->add($filter->getParameters());
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($resource);
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(JobResource::class);
 
-        $context->setPayload($payload);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
 
+        return $resource;
+    }
+
+    /**
+     * @deprecated use jobs()->all() instead.
+     *
+     * @param mixed[] $filters
+     * @param mixed[] $parameters
+     *
+     * @return JobResource[]|ResourceCollection
+     */
+    public function getJobs(array $filters = [], array $parameters = []): ResourceCollection
+    {
+        $filter = new RequestFilter();
+        $filter->filters()->add($filters);
+        $filter->parameters()->add($parameters);
+
+        /** @var ResourceCollection $resource */
+        $resource = $this->all($filter);
+
+        return $resource;
+    }
+
+    /**
+     * @deprecated use jobs()->get() instead.
+     */
+    public function getJob(string $id): JobResource
+    {
+        /** @var JobResource $resource */
+        $resource = $this->get($id);
+
+        return $resource;
+    }
+
+    /**
+     * @deprecated use jobs()->created() instead.
+     */
+    public function postJob(JobResource $job): JobResource
+    {
         /** @var JobResource $response */
-        $response = $this->request($context, $resource);
+        $response = $this->create($job);
 
         return $response;
     }
@@ -104,6 +162,9 @@ class JobDelegateClient extends DelegateClient
         return $resource;
     }
 
+    /**
+     * @deprecated use jobs()->status()->transition() instead.
+     */
     public function updateStatus(JobResource $resource, JobStatusResource $status): JobResource
     {
         if (!in_array($status->getCanonical(), JobStatusResource::getAllCanonicals())) {
@@ -148,18 +209,15 @@ class JobDelegateClient extends DelegateClient
         return $this->request($context, $jobResource);
     }
 
-    public function submitJobNote(JobResource $job, JobNoteResource $jobNoteResource): JobResource
+    /**
+     * @deprecated Use jobs()->notes()->create() instead.
+     */
+    public function submitJobNote(JobResource $job, JobNoteResource $note): JobResource
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost(sprintf(
-            '/jobs/%s/notes',
-            $job->getId()
-        ));
+        /** @var JobResource $resource */
+        $resource = $this->notes()->create($job, $note);
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($jobNoteResource));
-
-        return $this->request($context, new JobResource());
+        return $resource;
     }
 
     public function submitJobMeta(JobResource $job, JobMetaResource $meta): JobResource

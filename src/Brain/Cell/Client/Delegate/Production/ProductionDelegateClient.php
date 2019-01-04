@@ -27,12 +27,11 @@ use Brain\Cell\EntityResource\Production\ProductionResourceInterface;
      */
     public function create(ProductionResourceInterface $production): ProductionResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost('/productions');
-
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($production);
 
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/productions');
         $context->setPayload($payload);
 
         /** @var ProductionResourceInterface $resource */

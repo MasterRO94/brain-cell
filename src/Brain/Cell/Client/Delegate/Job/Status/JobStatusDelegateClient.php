@@ -47,11 +47,12 @@ use Brain\Cell\Transfer\ResourceCollection;
     ): AbstractStatusResource {
         $id = $job->getId();
 
+        $handler = $this->configuration->getResourceHandler();
+        $payload = $handler->serialise($status);
+
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf('/jobs/%s/status', $id));
-
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($status));
+        $context->setPayload($payload);
 
         /** @var JobStatusResource $resource */
         $resource = $this->request($context, new JobStatusResource());

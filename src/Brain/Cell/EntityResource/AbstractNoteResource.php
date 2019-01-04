@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
@@ -12,12 +13,10 @@ use Brain\Cell\Transfer\AbstractResource;
 
 class AbstractNoteResource extends AbstractResource
 {
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use DeletedAtTrait;
     use UpdatedAtTrait;
-
-    /** @var string */
-    protected $id;
 
     /** @var string */
     protected $description;
@@ -38,11 +37,6 @@ class AbstractNoteResource extends AbstractResource
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
         ];
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getDescription(): string

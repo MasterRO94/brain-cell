@@ -9,7 +9,8 @@ use Brain\Cell\EntityResource\AbstractNoteResource;
 /**
  * {@inheritdoc}
  */
-class JobNoteResource extends AbstractNoteResource
+/* final */class JobNoteResource extends AbstractNoteResource implements
+    JobNoteResourceInterface
 {
     public const JOB_NOTE_CANONICAL_GENERIC = 'generic';
     public const JOB_NOTE_CANONICAL_QUERY = 'query';
@@ -17,6 +18,9 @@ class JobNoteResource extends AbstractNoteResource
     /** @var string */
     protected $summary;
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSummary(): string
     {
         return $this->summary;
