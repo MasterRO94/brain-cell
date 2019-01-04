@@ -31,9 +31,17 @@ class BrainClient extends DelegateClient
     }
 
     /**
+     * Operate on jobs.
+     */
+    public function jobs(): JobDelegateClient
+    {
+        return new JobDelegateClient($this->configuration);
+    }
+
+    /**
      * Operate on files.
      */
-    public function file(): FileDelegateClient
+    public function files(): FileDelegateClient
     {
         return new FileDelegateClient($this->configuration);
     }
@@ -41,7 +49,7 @@ class BrainClient extends DelegateClient
     /**
      * Operate on productions.
      */
-    public function production(): ProductionDelegateClient
+    public function productions(): ProductionDelegateClient
     {
         return new ProductionDelegateClient($this->configuration);
     }
@@ -61,9 +69,12 @@ class BrainClient extends DelegateClient
         return new DeliveryDelegateClient($this->configuration);
     }
 
+    /**
+     * @deprecated Use jobs() instead.
+     */
     public function job(): JobDelegateClient
     {
-        return new JobDelegateClient($this->configuration);
+        return $this->jobs();
     }
 
     public function jobComponent(): JobComponentDelegateClient
