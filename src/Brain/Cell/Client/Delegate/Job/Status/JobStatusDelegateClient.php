@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\Client\Delegate\Job\Status;
 
+use Brain\Cell\Client\Delegate\Job\Status\Helper\JobStatusTransitionHelper;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Common\AbstractStatusResource;
 use Brain\Cell\EntityResource\Common\Status\StatusTransitionResource;
@@ -17,6 +18,14 @@ use Brain\Cell\Transfer\ResourceCollection;
  */
 /* final */class JobStatusDelegateClient extends DelegateClient
 {
+    /**
+     * Return the transition helper.
+     */
+    public function helper(): JobStatusTransitionHelper
+    {
+        return new JobStatusTransitionHelper($this);
+    }
+
     /**
      * List all available transitions for the given job.
      *

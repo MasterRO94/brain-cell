@@ -11,7 +11,7 @@ use Brain\Cell\EntityResource\Production\ProductionResourceInterface;
 use Brain\Cell\EntityResource\Production\ProductionStatusResource;
 
 /**
- * API client helper for performing status transition.
+ * API client helper for performing production status transition.
  */
 final class ProductionStatusTransitionHelper
 {

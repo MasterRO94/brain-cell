@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Request;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
