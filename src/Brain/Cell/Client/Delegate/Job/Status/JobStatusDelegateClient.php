@@ -27,7 +27,7 @@ use Brain\Cell\Transfer\ResourceCollection;
     }
 
     /**
-     * List all available transitions for the given job.
+     * List all available transitions for the job.
      *
      * @return ResourceCollection|StatusTransitionResourceInterface[]
      */

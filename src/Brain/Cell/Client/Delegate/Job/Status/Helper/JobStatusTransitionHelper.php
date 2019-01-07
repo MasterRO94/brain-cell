@@ -23,7 +23,7 @@ final class JobStatusTransitionHelper
     }
 
     /**
-     * Mark the given job as production dispatched.
+     * Mark the job as production dispatched.
      */
     public function dispatched(JobResourceInterface $job, ?string $reason): AbstractStatusResource
     {

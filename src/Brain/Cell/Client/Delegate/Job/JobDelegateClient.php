@@ -9,6 +9,8 @@ use Brain\Cell\Client\Delegate\Job\Status\JobStatusDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\Client\Request\RequestFilter;
 use Brain\Cell\Client\Request\RequestFilterInterface;
+use Brain\Cell\EntityResource\Common\AbstractStatusResource;
+use Brain\Cell\EntityResource\Common\Status\StatusTransitionResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
 use Brain\Cell\EntityResource\Job\JobMetaResource;
@@ -89,6 +91,20 @@ class JobDelegateClient extends DelegateClient
 
         /** @var ResourceCollection $resource */
         $resource = $this->request($context, $collection);
+
+        return $resource;
+    }
+
+    /**
+     * Mark the job as cancelled.
+     */
+    public function cancel(JobResourceInterface $job, string $reason): AbstractStatusResource
+    {
+        $transition = new StatusTransitionResource();
+        $transition->setCanonical(JobStatusResource::STATUS_CANCELLED);
+        $transition->setReason($reason);
+
+        $resource = $this->status()->transition($job, $transition);
 
         return $resource;
     }
