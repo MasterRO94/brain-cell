@@ -11,6 +11,7 @@ use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\EntityResource\StockDefinitionResource;
 use Brain\Cell\EntityResource\TwoDimensionalResource;
+use Brain\Cell\Logical\Dimension\TwoDimensionalInterface;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -79,7 +80,7 @@ class JobComponentResource extends AbstractResource implements
     protected $material;
 
     /**
-     * @var TwoDimensionalResource
+     * @var TwoDimensionalInterface
      *
      * @Assert\Valid()
      */
@@ -240,12 +241,15 @@ class JobComponentResource extends AbstractResource implements
         );
     }
 
-    public function getDimensions(): TwoDimensionalResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getDimensions(): TwoDimensionalInterface
     {
         return $this->dimensions;
     }
 
-    public function setDimensions(TwoDimensionalResource $dimensions): void
+    public function setDimensions(TwoDimensionalInterface $dimensions): void
     {
         $this->dimensions = $dimensions;
     }
