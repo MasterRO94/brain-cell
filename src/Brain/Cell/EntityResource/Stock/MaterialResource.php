@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Stock;
 
+use Brain\Cell\EntityResource\Prototype\ResourceAliasTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
+use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResourceInterface;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
+use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResourceInterface;
 use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResource;
+use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResourceInterface;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,10 +19,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class MaterialResource extends AbstractResource
+class MaterialResource extends AbstractResource implements
+    MaterialResourceInterface
 {
-    /** @var string */
-    protected $id;
+    use ResourceIdentityTrait;
+    use ResourceAliasTrait;
 
     /**
      * @var string
@@ -30,13 +36,13 @@ class MaterialResource extends AbstractResource
     /** @var string */
     protected $name;
 
-    /** @var MaterialBaseResource */
+    /** @var MaterialBaseResourceInterface */
     protected $base;
 
-    /** @var MaterialVariantResource */
+    /** @var MaterialVariantResourceInterface */
     protected $variant;
 
-    /** @var MaterialWeightResource */
+    /** @var MaterialWeightResourceInterface */
     protected $weight;
 
     /**
@@ -51,56 +57,65 @@ class MaterialResource extends AbstractResource
         ];
     }
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function getAlias(): string
-    {
-        return $this->alias;
-    }
-
-    public function setAlias(string $alias): void
-    {
-        $this->alias = $alias;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * Set the human-readable name.
+     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function getBase(): MaterialBaseResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getBase(): MaterialBaseResourceInterface
     {
         return $this->base;
     }
 
+    /**
+     * @deprecated Do not use this, if you are using this for a test then mock the interface.
+     */
     public function setBase(MaterialBaseResource $base): void
     {
         $this->base = $base;
     }
 
-    public function getVariant(): MaterialVariantResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariant(): MaterialVariantResourceInterface
     {
         return $this->variant;
     }
 
+    /**
+     * @deprecated Do not use this, if you are using this for a test then mock the interface.
+     */
     public function setVariant(MaterialVariantResource $variant): void
     {
         $this->variant = $variant;
     }
 
-    public function getWeight(): MaterialWeightResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getWeight(): MaterialWeightResourceInterface
     {
         return $this->weight;
     }
 
+    /**
+     * @deprecated Do not use this, if you are using this for a test then mock the interface.
+     */
     public function setWeight(MaterialWeightResource $weight): void
     {
         $this->weight = $weight;

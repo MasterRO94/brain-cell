@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
+use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\EntityResource\StockDefinitionResource;
 use Brain\Cell\EntityResource\TwoDimensionalResource;
@@ -19,12 +19,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class JobComponentResource extends AbstractResource implements ResourceIdentityInterface
+class JobComponentResource extends AbstractResource implements
+    JobComponentResourceInterface
 {
     use ResourceIdentityTrait;
-
-    /** @var string */
-    protected $status;
 
     /**
      * @var int
@@ -73,7 +71,7 @@ class JobComponentResource extends AbstractResource implements ResourceIdentityI
     protected $stockDefinition;
 
     /**
-     * @var MaterialResource
+     * @var MaterialResourceInterface
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -126,7 +124,7 @@ class JobComponentResource extends AbstractResource implements ResourceIdentityI
     }
 
     /**
-     * @return JobComponentOptionResource[]|ResourceCollection
+     * {@inheritdoc}
      */
     public function getOptions(): ResourceCollection
     {
@@ -134,23 +132,18 @@ class JobComponentResource extends AbstractResource implements ResourceIdentityI
     }
 
     /**
-     * @param JobComponentOptionResource[]|ResourceCollection $options
+     * Set the job component level options.
+     *
+     * @param JobComponentOptionResourceInterface[]|ResourceCollection $options
      */
     public function setOptions(ResourceCollection $options): void
     {
         $this->options = $options;
     }
 
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): void
-    {
-        $this->status = $status;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getRangeStart(): int
     {
         return $this->rangeStart;
@@ -161,6 +154,9 @@ class JobComponentResource extends AbstractResource implements ResourceIdentityI
         $this->rangeStart = $rangeStart;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRangeEnd(): int
     {
         return $this->rangeEnd;
@@ -196,12 +192,18 @@ class JobComponentResource extends AbstractResource implements ResourceIdentityI
         return $this->stockDefinition;
     }
 
-    public function getMaterial(): MaterialResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getMaterial(): MaterialResourceInterface
     {
         return $this->material;
     }
 
-    public function setMaterial(MaterialResource $material): void
+    /**
+     * Set the component material.
+     */
+    public function setMaterial(MaterialResourceInterface $material): void
     {
         $this->material = $material;
     }

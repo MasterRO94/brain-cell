@@ -6,9 +6,9 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
 use Brain\Cell\EntityResource\Stock\FinishingCombinationResource;
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResource;

@@ -10,6 +10,7 @@ use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
+use Brain\Cell\EntityResource\Product\ProductResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
@@ -47,7 +48,7 @@ class JobResource extends AbstractResource implements
     /** @var JobStatusResource $status */
     protected $status;
 
-    /** @var ProductResource|null */
+    /** @var ProductResourceInterface|null */
     protected $product;
 
     /** @var int */
@@ -84,7 +85,7 @@ class JobResource extends AbstractResource implements
     protected $notes;
 
     /**
-     * @var JobBatchResource
+     * @var JobBatchResourceInterface|null
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -220,22 +221,34 @@ class JobResource extends AbstractResource implements
     {
     }
 
-    public function getProduct(): ?ProductResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getProduct(): ?ProductResourceInterface
     {
         return $this->product;
     }
 
-    public function setProduct(?ProductResource $product): void
+    /**
+     * Set the product against the job.
+     */
+    public function setProduct(?ProductResourceInterface $product): void
     {
         $this->product = $product;
     }
 
-    public function getBatch(): JobBatchResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getBatch(): ?JobBatchResourceInterface
     {
         return $this->batch;
     }
 
-    public function setBatch(JobBatchResource $batch): void
+    /**
+     * @deprecated This should not be used, if you are using it for tests mock the interface.
+     */
+    public function setBatch(JobBatchResourceInterface $batch): void
     {
         $this->batch = $batch;
     }
@@ -250,11 +263,17 @@ class JobResource extends AbstractResource implements
         $this->weight = $weight;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getQuantity(): int
     {
         return $this->quantity;
     }
 
+    /**
+     * Set the quantity of this job to be produced.
+     */
     public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
@@ -277,7 +296,7 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * @return JobComponentResource[]|ResourceCollection
+     * {@inheritdoc}
      */
     public function getComponents(): ResourceCollection
     {
@@ -285,7 +304,9 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * @param JobComponentResource[]|ResourceCollection $components
+     * Set the job components.
+     *
+     * @param JobComponentResourceInterface[]|ResourceCollection $components
      */
     public function setComponents(ResourceCollection $components): void
     {
@@ -293,7 +314,7 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * @return JobOptionResource[]|ResourceCollection
+     * {@inheritdoc}
      */
     public function getOptions(): ResourceCollection
     {
@@ -301,7 +322,7 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * @param JobOptionResource[]|ResourceCollection $options
+     * @param JobOptionResourceInterface[]|ResourceCollection $options
      */
     public function setOptions(ResourceCollection $options): void
     {

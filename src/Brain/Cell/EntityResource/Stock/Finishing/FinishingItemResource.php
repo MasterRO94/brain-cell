@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Brain\Cell\EntityResource\Stock;
+namespace Brain\Cell\EntityResource\Stock\Finishing;
 
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceAliasTrait;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
@@ -14,9 +14,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * {@inheritdoc}
  */
 class FinishingItemResource extends AbstractResource implements
-    ResourceIdentityInterface
+    FinishingItemResourceInterface
 {
     use ResourceIdentityTrait;
+    use ResourceAliasTrait;
 
     /**
      * @var string
@@ -53,21 +54,17 @@ class FinishingItemResource extends AbstractResource implements
         ];
     }
 
-    public function getAlias(): string
-    {
-        return $this->alias;
-    }
-
-    public function setAlias(string $alias): void
-    {
-        $this->alias = $alias;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * Set the human-readable name.
+     */
     public function setName(string $name): void
     {
         $this->name = $name;

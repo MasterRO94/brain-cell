@@ -4,20 +4,22 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResourceInterface;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResourceInterface;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class JobOptionResource extends AbstractResource implements ResourceIdentityInterface
+class JobOptionResource extends AbstractResource implements
+    JobOptionResourceInterface
 {
     use ResourceIdentityTrait;
 
     /**
-     * @var FinishingCategoryResource
+     * @var FinishingCategoryResourceInterface
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -25,7 +27,7 @@ class JobOptionResource extends AbstractResource implements ResourceIdentityInte
     protected $finishingCategory;
 
     /**
-     * @var FinishingItemResource
+     * @var FinishingItemResourceInterface
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -56,28 +58,40 @@ class JobOptionResource extends AbstractResource implements ResourceIdentityInte
         ];
     }
 
-    public function getFinishingCategory(): FinishingCategoryResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getFinishingCategory(): FinishingCategoryResourceInterface
     {
         return $this->finishingCategory;
     }
 
-    public function setFinishingCategory(FinishingCategoryResource $finishingCategory): void
+    /**
+     * Set the finishing category.
+     */
+    public function setFinishingCategory(FinishingCategoryResourceInterface $finishingCategory): void
     {
         $this->finishingCategory = $finishingCategory;
     }
 
-    public function getFinishingItem(): FinishingItemResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getFinishingItem(): FinishingItemResourceInterface
     {
         return $this->finishingItem;
     }
 
-    public function setFinishingItem(FinishingItemResource $finishingItem): void
+    /**
+     * Set the finishing item.
+     */
+    public function setFinishingItem(FinishingItemResourceInterface $finishingItem): void
     {
         $this->finishingItem = $finishingItem;
     }
 
     /**
-     * @return mixed[]
+     * {@inheritdoc}
      */
     public function getConfiguration(): array
     {
@@ -85,6 +99,8 @@ class JobOptionResource extends AbstractResource implements ResourceIdentityInte
     }
 
     /**
+     * Set the finishing configuration.
+     *
      * @param mixed[] $configuration
      */
     public function setConfiguration(array $configuration): void

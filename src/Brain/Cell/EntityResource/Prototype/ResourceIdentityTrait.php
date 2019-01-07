@@ -19,6 +19,14 @@ trait ResourceIdentityTrait
         return $this->id;
     }
 
+    public function hasId(): bool
+    {
+        return $this->id !== null;
+    }
+
+    /**
+     * @deprecated See reason mentioned in the interface.
+     */
     public function getIdOrThrow(): string
     {
         if ($this->id === null) {

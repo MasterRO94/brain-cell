@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource;
 
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\Transfer\AbstractResource;

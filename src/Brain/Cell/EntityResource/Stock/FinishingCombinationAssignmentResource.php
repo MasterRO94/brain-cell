@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Stock;
 
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 class FinishingCombinationAssignmentResource extends AbstractResource

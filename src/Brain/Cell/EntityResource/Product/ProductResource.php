@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Product;
 
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
  */
-class ProductResource extends AbstractResource implements ResourceIdentityInterface
+class ProductResource extends AbstractResource implements
+    ProductResourceInterface
 {
     use ResourceIdentityTrait;
 
+    /** @var string */
     protected $name;
 
     /** @var ProductGroupResource|null */
@@ -30,6 +31,9 @@ class ProductResource extends AbstractResource implements ResourceIdentityInterf
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return $this->name;
@@ -38,11 +42,6 @@ class ProductResource extends AbstractResource implements ResourceIdentityInterf
     public function setName(string $name): void
     {
         $this->name = $name;
-    }
-
-    public function getChangeSet(): ?ChangeSetResource
-    {
-        return $this->changeSet;
     }
 
     public function getProductGroup(): ?ProductGroupResource

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Stock\Material;
 
+use Brain\Cell\EntityResource\Prototype\ResourceAliasTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,10 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class MaterialWeightResource extends AbstractResource
+class MaterialWeightResource extends AbstractResource implements
+    MaterialWeightResourceInterface
 {
-    /** @var int */
-    protected $id;
+    use ResourceIdentityTrait;
+    use ResourceAliasTrait;
 
     /**
      * @var string
@@ -32,26 +35,17 @@ class MaterialWeightResource extends AbstractResource
     /** @var string */
     protected $weightUnit;
 
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getAlias(): string
-    {
-        return $this->alias;
-    }
-
-    public function setAlias(string $alias): void
-    {
-        $this->alias = $alias;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * Set the human-readable name.
+     */
     public function setName(string $name): void
     {
         $this->name = $name;

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResourceInterface;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResourceInterface;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,12 +17,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * {@inheritdoc}
  */
 class JobComponentOptionResource extends AbstractResource implements
-    ResourceIdentityInterface
+    JobComponentOptionResourceInterface
 {
     use ResourceIdentityTrait;
 
     /**
-     * @var FinishingCategoryResource
+     * @var FinishingCategoryResourceInterface
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -29,7 +30,7 @@ class JobComponentOptionResource extends AbstractResource implements
     protected $finishingCategory;
 
     /**
-     * @var FinishingItemResource
+     * @var FinishingItemResourceInterface
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -60,30 +61,40 @@ class JobComponentOptionResource extends AbstractResource implements
         ];
     }
 
-    public function getFinishingCategory(): FinishingCategoryResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getFinishingCategory(): FinishingCategoryResourceInterface
     {
         return $this->finishingCategory;
     }
 
-    public function setFinishingCategory(FinishingCategoryResource $finishingCategory): void
+    /**
+     * Set the finishing category.
+     */
+    public function setFinishingCategory(FinishingCategoryResourceInterface $finishingCategory): void
     {
         $this->finishingCategory = $finishingCategory;
     }
 
-    public function getFinishingItem(): FinishingItemResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getFinishingItem(): FinishingItemResourceInterface
     {
         return $this->finishingItem;
     }
 
-    public function setFinishingItem(FinishingItemResource $finishingItem): void
+    /**
+     * Set the finishing item.
+     */
+    public function setFinishingItem(FinishingItemResourceInterface $finishingItem): void
     {
         $this->finishingItem = $finishingItem;
     }
 
     /**
-     * Return the finishing item configuration.
-     *
-     * @return mixed[]
+     * {@inheritdoc}
      */
     public function getConfiguration(): array
     {
@@ -91,7 +102,7 @@ class JobComponentOptionResource extends AbstractResource implements
     }
 
     /**
-     * Set the finishing item configuration.
+     * Set the finishing configuration.
      *
      * @param mixed[] $configuration
      */

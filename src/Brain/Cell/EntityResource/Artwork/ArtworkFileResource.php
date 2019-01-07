@@ -7,7 +7,7 @@ namespace Brain\Cell\EntityResource\Artwork;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\File\FileResource;
 use Brain\Cell\EntityResource\File\FileResourceInterface;
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
