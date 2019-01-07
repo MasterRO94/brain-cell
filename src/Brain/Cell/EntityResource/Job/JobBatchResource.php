@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\AddressResource;
+use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
+use Brain\Cell\EntityResource\Delivery\DeliveryOptionResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -16,7 +16,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class JobBatchResource extends AbstractResource implements ResourceIdentityInterface
+/**
+ * {@inheritdoc}
+ */
+class JobBatchResource extends AbstractResource implements
+    JobBatchResourceInterface
 {
     use ResourceIdentityTrait;
 
@@ -24,7 +28,7 @@ class JobBatchResource extends AbstractResource implements ResourceIdentityInter
     protected $status;
 
     /**
-     * @var AddressResource
+     * @var AddressResourceInterface
      *
      * @deprecated Will be removed very soon. Please update your code. Use the $deliveryOption
      *   in status "incomplete" or the $batchDelivery in statuses past the status "incomplete".
@@ -66,13 +70,6 @@ class JobBatchResource extends AbstractResource implements ResourceIdentityInter
     public function getAssociatedResources(): array
     {
         return [
-            /*
-             * Will be removed soon
-             *
-             * @deprecated
-             */
-            'address' => AddressResource::class,
-
             'deliveryOption' => DeliveryOptionResource::class,
             'batchDelivery' => JobBatchBatchDeliveryResource::class,
         ];
@@ -90,29 +87,16 @@ class JobBatchResource extends AbstractResource implements ResourceIdentityInter
     }
 
     /**
-     * @deprecated
+     * {@inheritdoc}
      */
-    public function getAddress(): AddressResource
-    {
-        return $this->address;
-    }
-
-    /**
-     * @deprecated
-     */
-    public function setAddress(AddressResource $address): void
-    {
-        $this->address = $address;
-    }
-
-    public function getDeliveryOption(): ?DeliveryOptionResource
+    public function getDeliveryOption(): ?DeliveryOptionResourceInterface
     {
         return $this->deliveryOption;
     }
 
-    public function setDeliveryOption(?DeliveryOptionResource $deliveryOption = null): void
+    public function setDeliveryOption(?DeliveryOptionResourceInterface $option): void
     {
-        $this->deliveryOption = $deliveryOption;
+        $this->deliveryOption = $option;
     }
 
     public function getBatchDelivery(): ?JobBatchBatchDeliveryResource

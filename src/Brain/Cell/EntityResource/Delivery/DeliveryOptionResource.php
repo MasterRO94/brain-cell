@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Delivery;
 
-use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\Country\AddressResource;
+use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
@@ -14,12 +15,13 @@ use Brain\Cell\Transfer\AbstractResource;
 /**
  * {@inheritdoc}
  */
-class DeliveryOptionResource extends AbstractResource
+class DeliveryOptionResource extends AbstractResource implements
+    DeliveryOptionResourceInterface
 {
     use ResourceIdentityTrait;
     use CreatedAtTrait;
 
-    /** @var AddressResource */
+    /** @var AddressResourceInterface */
     protected $deliveryAddress;
 
     /** @var ProductionStrategyResource */
@@ -87,12 +89,12 @@ class DeliveryOptionResource extends AbstractResource
         ];
     }
 
-    public function getDeliveryAddress(): AddressResource
+    public function getDeliveryAddress(): AddressResourceInterface
     {
         return $this->deliveryAddress;
     }
 
-    public function setDeliveryAddress(AddressResource $deliveryAddress): void
+    public function setDeliveryAddress(AddressResourceInterface $deliveryAddress): void
     {
         $this->deliveryAddress = $deliveryAddress;
     }

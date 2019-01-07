@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\CountryResource;
+use Brain\Cell\EntityResource\Country\CountryResource;
+use Brain\Cell\EntityResource\Country\CountryResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
@@ -49,7 +50,7 @@ class DeliveryDelegateClient extends DelegateClient
     }
 
     /**
-     * @return CountryResource[]|ResourceCollection
+     * @return CountryResourceInterface[]|ResourceCollection
      */
     public function getCountries(): ResourceCollection
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;

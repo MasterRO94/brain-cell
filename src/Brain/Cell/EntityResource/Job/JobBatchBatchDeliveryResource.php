@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\AddressResource;
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
 use Brain\Cell\EntityResource\Delivery\ProductionStrategyResource;
 use Brain\Cell\Transfer\AbstractResource;
