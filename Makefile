@@ -10,13 +10,15 @@ build: \
 code: \
 	code.format.header \
 	code.format.use \
-	code.sniff.report
+	code.sniff.report \
+	code.phpstan
 
 code.fix: \
 	code.format.header \
 	code.format.use \
 	code.sniff.fix \
-	code.sniff.report
+	code.sniff.report \
+	code.phpstan
 
 code.format.header:
 	vendor/bin/php-formatter formatter:header:fix src --ansi --config="build/code/config"
@@ -35,6 +37,9 @@ code.sniff.report.only.diff:
 
 code.sniff.fix:
 	vendor/bin/phpcbf src
+
+code.phpstan:
+	vendor/bin/phpstan analyse -l 4 src
 
 # --------------------
 # Test
