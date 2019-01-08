@@ -57,12 +57,7 @@ final class ArrayDecoderTest extends TestCase
     public function decoderWillThrowWithCollectionMissingEntityClass(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(
-            sprintf(
-                'Missing entity class for collection',
-                ResourceCollection::class
-            )
-        );
+        $this->expectExceptionMessage('Missing entity class for collection');
 
         $this->decoder->decode(new ResourceCollection(), [1, 2, 3]);
     }

@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class FinishingItemResource extends AbstractResource implements
+final class FinishingItemResource extends AbstractResource implements
     FinishingItemResourceInterface
 {
     use ResourceIdentityTrait;
@@ -70,6 +70,9 @@ class FinishingItemResource extends AbstractResource implements
         $this->name = $name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isDefault(): bool
     {
         return $this->isDefault;
@@ -80,6 +83,9 @@ class FinishingItemResource extends AbstractResource implements
         $this->isDefault = $isDefault;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isConfigurable(): bool
     {
         return $this->configurable;
@@ -91,7 +97,7 @@ class FinishingItemResource extends AbstractResource implements
     }
 
     /**
-     * @return mixed[]
+     * {@inheritdoc}
      */
     public function getConfiguration(): array
     {

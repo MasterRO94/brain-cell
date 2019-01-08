@@ -20,7 +20,7 @@ final class FilePreviewResource extends AbstractResource implements
     /** @var int */
     protected $index;
 
-    /** @var FileResource */
+    /** @var FileResourceInterface */
     protected $file;
 
     /**

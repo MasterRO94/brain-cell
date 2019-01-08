@@ -50,7 +50,7 @@ class JobComponentResource extends AbstractResource implements
     protected $productionSheetCount;
 
     /**
-     * @var JobComponentOptionResource[]|ResourceCollection
+     * @var JobComponentOptionResourceInterface[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -99,6 +99,12 @@ class JobComponentResource extends AbstractResource implements
      * @Assert\NotBlank()
      */
     protected $artwork;
+
+    public function __construct()
+    {
+        $this->options = new ResourceCollection();
+        $this->options->setEntityClass(JobComponentOptionResource::class);
+    }
 
     /**
      * {@inheritdoc}

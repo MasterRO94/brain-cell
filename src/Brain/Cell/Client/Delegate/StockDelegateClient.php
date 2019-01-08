@@ -7,12 +7,14 @@ namespace Brain\Cell\Client\Delegate;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResourceInterface;
 use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
 use Brain\Cell\EntityResource\Stock\FinishingCombinationResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
+use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\EntityResource\StockFinishingsResource;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -66,7 +68,7 @@ class StockDelegateClient extends DelegateClient
         return $resource;
     }
 
-    public function createFinishingCategory(FinishingCategoryResource $resource): FinishingCategoryResource
+    public function createFinishingCategory(FinishingCategoryResource $resource): FinishingCategoryResourceInterface
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -74,6 +76,7 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/finishing/categories');
         $context->setPayload($handler->serialise($resource));
 
+        /** @var FinishingCategoryResourceInterface $resource */
         $resource = $this->request($context, new FinishingCategoryResource());
 
         return $resource;
@@ -137,14 +140,12 @@ class StockDelegateClient extends DelegateClient
         return $resource;
     }
 
-    /**
-     * @return MaterialResource[]|ResourceCollection
-     */
-    public function getMaterial(string $id): ResourceCollection
+    public function getMaterial(string $id): MaterialResourceInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/stock/materials/%s', $id));
 
+        /** @var MaterialResourceInterface $resource */
         $resource = $this->request($context, new MaterialResource());
 
         return $resource;
@@ -153,7 +154,7 @@ class StockDelegateClient extends DelegateClient
     /**
      * @param mixed[] $parameters
      *
-     * @return MaterialResource[]|ResourceCollection
+     * @return MaterialResourceInterface[]|ResourceCollection
      */
     public function getMaterials(array $parameters = []): ResourceCollection
     {

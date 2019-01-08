@@ -24,6 +24,11 @@ interface JobResourceInterface extends
     public function getHash(): ?string;
 
     /**
+     * The client reference.
+     */
+    public function getReference(): string;
+
+    /**
      * Return the product.
      *
      * Note; this will be NULL in cases where the job is a bespoke product.

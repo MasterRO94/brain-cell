@@ -64,11 +64,11 @@ class JobResource extends AbstractResource implements
      */
     protected $productionFinishDate;
 
-    /** @var JobQueryResource[] */
+    /** @var JobQueryResource[]|ResourceCollection */
     protected $queries;
 
     /**
-     * @var JobComponentResource[]|ResourceCollection
+     * @var JobComponentResourceInterface[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -78,7 +78,7 @@ class JobResource extends AbstractResource implements
      */
     protected $components;
 
-    /** @var JobOptionResource[]|ResourceCollection */
+    /** @var JobOptionResourceInterface[]|ResourceCollection */
     protected $options;
 
     /** @var JobNoteResource[]|ResourceCollection */
@@ -120,6 +120,21 @@ class JobResource extends AbstractResource implements
 
     /** @var string */
     protected $preflightFailurePolicy;
+
+    public function __construct()
+    {
+        $this->clients = new ResourceCollection();
+        $this->clients->setEntityClass(JobClientResource::class);
+
+        $this->components = new ResourceCollection();
+        $this->components->setEntityClass(JobComponentResource::class);
+
+        $this->options = new ResourceCollection();
+        $this->options->setEntityClass(JobOptionResource::class);
+
+        $this->queries = new ResourceCollection();
+        $this->queries->setEntityClass(JobQueryResource::class);
+    }
 
     /**
      * {@inheritdoc}
@@ -322,6 +337,8 @@ class JobResource extends AbstractResource implements
     }
 
     /**
+     * Set the job level options.
+     *
      * @param JobOptionResourceInterface[]|ResourceCollection $options
      */
     public function setOptions(ResourceCollection $options): void
@@ -380,6 +397,9 @@ class JobResource extends AbstractResource implements
         $this->price = $price;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getReference(): string
     {
         return $this->reference;
@@ -390,6 +410,9 @@ class JobResource extends AbstractResource implements
         $this->reference = $reference;
     }
 
+    /**
+     * @deprecated Do not use this, this functionality belongs in a helper.
+     */
     public function getPageCount(): int
     {
         $pages = 1;
@@ -400,29 +423,20 @@ class JobResource extends AbstractResource implements
         return $pages;
     }
 
+    /**
+     * @deprecated Do not use this, this functionality belongs in a helper.
+     */
     public function getSheetCount(): int
     {
+        /** @var JobComponentResource[] $components */
+        $components = $this->components;
+
         $sheets = 0;
-        foreach ($this->components as $component) {
+        foreach ($components as $component) {
             $sheets += $component->getProductionSheetCount();
         }
 
         return $sheets;
-    }
-
-    protected function has(string $optionCategoryAlias): bool
-    {
-        foreach ($this->components as $component) {
-            foreach ($component->getOptions() as $option) {
-                if ($option->getFinishingCategory()->getAlias() === $optionCategoryAlias
-                    && !$option->getFinishingItem()->isDefault()
-                ) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -538,6 +552,9 @@ class JobResource extends AbstractResource implements
         return $this->clonedFrom;
     }
 
+    /**
+     * @deprecated Do not use this, this logic belongs in a helper.
+     */
     public function isInImposition(): bool
     {
         return $this->status->getCanonical() === JobStatusResource::STATUS_IMPOSITION_QUEUED
@@ -588,5 +605,25 @@ class JobResource extends AbstractResource implements
     public function setPreflightFailurePolicy(string $preflightFailurePolicy): void
     {
         $this->preflightFailurePolicy = $preflightFailurePolicy;
+    }
+
+    /**
+     * @deprecated Remove this when there are no usages.
+     */
+    private function has(string $categoryAlias): bool
+    {
+        foreach ($this->components as $component) {
+            foreach ($component->getOptions() as $option) {
+                if ($option->getFinishingCategory()->getAlias() !== $categoryAlias) {
+                    continue;
+                }
+
+                if (!$option->getFinishingItem()->isDefault()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

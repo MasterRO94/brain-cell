@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class FinishingCategoryResource extends AbstractResource implements
+final class FinishingCategoryResource extends AbstractResource implements
     FinishingCategoryResourceInterface
 {
     use ResourceIdentityTrait;
@@ -30,14 +30,20 @@ class FinishingCategoryResource extends AbstractResource implements
     /** @var string */
     protected $name;
 
-    /** @var FinishingItemResource[] */
-    protected $options = [];
+    /** @var FinishingItemResourceInterface[]|ResourceCollection */
+    protected $options;
 
     /** @var string */
     protected $assignmentLevel;
 
     /** @var string */
     protected $applicationLevel;
+
+    public function __construct()
+    {
+        $this->options = new ResourceCollection();
+        $this->options->setEntityClass(FinishingItemResource::class);
+    }
 
     /**
      * {@inheritdoc}
@@ -66,7 +72,7 @@ class FinishingCategoryResource extends AbstractResource implements
     }
 
     /**
-     * @return FinishingItemResource[]|ResourceCollection
+     * {@inheritdoc}
      */
     public function getOptions(): ResourceCollection
     {
@@ -74,7 +80,7 @@ class FinishingCategoryResource extends AbstractResource implements
     }
 
     /**
-     * @param FinishingItemResource[]|ResourceCollection $options
+     * @param FinishingItemResourceInterface[]|ResourceCollection $options
      */
     public function setOptions(ResourceCollection $options): void
     {

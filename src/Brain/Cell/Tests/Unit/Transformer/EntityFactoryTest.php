@@ -37,6 +37,7 @@ final class EntityFactoryTest extends TestCase
         $response = $this->factory->create(SimpleResourceMock::class);
         $this->assertNull($response->getId(), 'The id should not have been set on construction');
 
+        /** @var SimpleResourceMock $response */
         $response = $this->factory->create(SimpleResourceMock::class, 1);
         $this->assertEquals(1, $response->getId(), 'The id should have been set on construction');
     }

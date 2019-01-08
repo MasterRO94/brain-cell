@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Job\JobBatchResource;
+use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -16,7 +17,7 @@ class DispatchResource extends AbstractResource
     protected $id;
 
     /**
-     * @var JobBatchResource
+     * @var JobBatchResourceInterface|null
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -29,8 +30,14 @@ class DispatchResource extends AbstractResource
     /** @var string */
     protected $labelUrl;
 
-    /** @var DispatchParcelResource[] $parcels */
+    /** @var DispatchParcelResource[]|ResourceCollection */
     protected $parcels;
+
+    public function __construct()
+    {
+        $this->parcels = new ResourceCollection();
+        $this->parcels->setEntityClass(DispatchParcelResource::class);
+    }
 
     /**
      * {@inheritdoc}
@@ -57,12 +64,12 @@ class DispatchResource extends AbstractResource
         return $this->id;
     }
 
-    public function getBatch(): ?JobBatchResource
+    public function getBatch(): ?JobBatchResourceInterface
     {
         return $this->batch;
     }
 
-    public function setBatch(?JobBatchResource $batch = null): void
+    public function setBatch(JobBatchResourceInterface $batch): void
     {
         $this->batch = $batch;
     }

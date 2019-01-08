@@ -20,7 +20,7 @@ final class ArtworkFileResource extends AbstractResource
     /** @var string */
     protected $label;
 
-    /** @var FileResource */
+    /** @var FileResourceInterface */
     protected $file;
 
     /** @var FinishingItemResource */

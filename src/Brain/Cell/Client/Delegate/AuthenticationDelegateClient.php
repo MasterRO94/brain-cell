@@ -14,6 +14,9 @@ class AuthenticationDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/whoami');
 
-        return $this->request($context, new WhoAmIResponseResource());
+        /** @var WhoAmIResponseResource $resource */
+        $resource = $this->request($context, new WhoAmIResponseResource());
+
+        return $resource;
     }
 }

@@ -17,8 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -49,8 +49,11 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
      */
     public function setUp()
     {
-        $this->guzzle = $this->createMock(GuzzleClient::class);
-        $this->adapter = new GuzzleHttpRequestAdapter($this->guzzle);
+        /** @var MockObject|GuzzleClient $guzzle */
+        $guzzle = $this->createMock(GuzzleClient::class);
+        $this->guzzle = $guzzle;
+
+        $this->adapter = new GuzzleHttpRequestAdapter($guzzle);
         $this->context = new RequestContext(self::BASE_PATH);
     }
 

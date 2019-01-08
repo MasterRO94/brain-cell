@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\Transformer;
 
 use Brain\Cell\AbstractTransformer;
+use Brain\Cell\EntityResource\Common\AbstractStatusResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\Exception\RuntimeException;
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
@@ -105,12 +106,18 @@ class ArrayEncoder extends AbstractTransformer
                 if ($this->isIdResourceAndShouldSerialiseAsId($value, $options)) {
                     $value = $this->getValueForIdResource($value, $options);
                 } elseif ($property->getName() === 'status') {
-                    $value = $value->getCanonical();
+                    /** @var AbstractStatusResource $subject */
+                    $subject = $value;
+
+                    $value = $subject->getCanonical();
 
                     // All other associated can be encoded hooray :)
                 } elseif (isset($resources[$property->getName()])) {
                     if ($resources[$property->getName()] === DateResource::class) {
-                        $value = $value->getIso();
+                        /** @var DateResource $subject */
+                        $subject = $value;
+
+                        $value = $subject->getIso();
                     } else {
                         $value = $this->encodeResource($value, $options);
                     }

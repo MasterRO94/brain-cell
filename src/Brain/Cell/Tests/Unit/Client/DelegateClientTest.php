@@ -16,8 +16,8 @@ use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\Transformer\ArrayDecoder;
 use Brain\Cell\Transformer\ArrayEncoder;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * @group cell
@@ -36,8 +36,11 @@ final class DelegateClientTest extends TestCase
      */
     public function setUp()
     {
-        $this->adapter = $this->getMockForAbstractClass(RequestAdapterInterface::class);
-        $this->configuration = new ClientConfiguration($this->adapter, 'some-key');
+        /** @var RequestAdapterInterface|MockObject $adapter */
+        $adapter = $this->createMock(RequestAdapterInterface::class);
+        $this->adapter = $adapter;
+
+        $this->configuration = new ClientConfiguration($adapter, 'some-key');
     }
 
     /**

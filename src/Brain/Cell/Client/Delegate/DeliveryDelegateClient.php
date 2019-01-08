@@ -35,7 +35,10 @@ class DeliveryDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(DeliveryOptionResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
     public function getDeliveryOption(string $id): DeliveryOptionResource

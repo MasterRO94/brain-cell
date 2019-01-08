@@ -32,8 +32,11 @@ final class BrainClientTest extends TestCase
      */
     public function setUp()
     {
-        $this->adapter = $this->createMock(RequestAdapterInterface::class);
-        $this->configuration = new ClientConfiguration($this->adapter, 'some-key');
+        /** @var RequestAdapterInterface|MockObject $adapter */
+        $adapter = $this->createMock(RequestAdapterInterface::class);
+        $this->adapter = $adapter;
+
+        $this->configuration = new ClientConfiguration($adapter, 'some-key');
     }
 
     /**

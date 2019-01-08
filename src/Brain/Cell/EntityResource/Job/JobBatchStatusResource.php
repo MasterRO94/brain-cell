@@ -9,8 +9,19 @@ use Brain\Cell\EntityResource\Common\AbstractStatusResource;
 /**
  * {@inheritdoc}
  */
-class JobBatchStatusResource extends AbstractStatusResource
+final class JobBatchStatusResource extends AbstractStatusResource
 {
     public const STATUS_INCOMPLETE = 'job_batch.status.incomplete';
     public const STATUS_READY = 'job_batch.status.ready';
+
+    /**
+     * @return string[]
+     */
+    public static function getAllCanonicals(): array
+    {
+        return [
+            self::STATUS_INCOMPLETE,
+            self::STATUS_READY,
+        ];
+    }
 }

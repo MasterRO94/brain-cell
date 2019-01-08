@@ -14,7 +14,10 @@ class ClientWorkflowDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/workflows/%s', $id));
 
-        return $this->request($context, new ClientWorkflowResource());
+        /** @var ClientWorkflowResource $resource */
+        $resource = $this->request($context, new ClientWorkflowResource());
+
+        return $resource;
     }
 
     public function postClientWorkflow(ClientWorkflowResource $clientWorkflowResource): ClientWorkflowResource
@@ -25,6 +28,9 @@ class ClientWorkflowDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($clientWorkflowResource));
 
-        return $this->request($context, $clientWorkflowResource);
+        /** @var ClientWorkflowResource $resource */
+        $resource = $this->request($context, $clientWorkflowResource);
+
+        return $resource;
     }
 }

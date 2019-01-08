@@ -57,6 +57,9 @@ class ArtworkDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($issue));
 
-        return $this->request($context, new ArtworkIssueResource());
+        /** @var ArtworkIssueResource $resource */
+        $resource = $this->request($context, new ArtworkIssueResource());
+
+        return $resource;
     }
 }

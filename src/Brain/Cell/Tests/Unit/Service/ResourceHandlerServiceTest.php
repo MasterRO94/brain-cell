@@ -10,8 +10,8 @@ use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\Transformer\ArrayDecoder;
 use Brain\Cell\Transformer\ArrayEncoder;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * @group cell
@@ -22,16 +22,16 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
 final class ResourceHandlerServiceTest extends TestCase
 {
     /** @var EntityResourceFactory|MockObject */
-    protected $factoryMock;
+    protected $factory;
 
     /** @var ArrayEncoder|MockObject */
-    protected $encoderMock;
+    protected $encoder;
 
     /** @var ArrayDecoder|MockObject */
-    protected $decoderMock;
+    protected $decoder;
 
     /** @var ResourceHandlerService */
-    protected $service;
+    protected $handler;
 
     /** @var SimpleResourceMock */
     protected $resource;
@@ -43,21 +43,25 @@ final class ResourceHandlerServiceTest extends TestCase
     {
         $this->resource = new SimpleResourceMock();
 
-        $this->factoryMock = $this->createMock(EntityResourceFactory::class);
+        /** @var EntityResourceFactory|MockObject $factory */
+        $factory = $this->createMock(EntityResourceFactory::class);
+        $this->factory = $factory;
 
         $builder = $this->getMockBuilder(ArrayEncoder::class);
         $builder->disableOriginalConstructor();
-        $this->encoderMock = $builder->getMock();
+
+        /** @var ArrayEncoder|MockObject $encoder */
+        $encoder = $builder->getMock();
+        $this->encoder = $encoder;
 
         $builder = $this->getMockBuilder(ArrayDecoder::class);
         $builder->disableOriginalConstructor();
-        $this->decoderMock = $builder->getMock();
 
-        $this->service = new ResourceHandlerService(
-            $this->factoryMock,
-            $this->encoderMock,
-            $this->decoderMock
-        );
+        /** @var ArrayDecoder|MockObject $decoder */
+        $decoder = $builder->getMock();
+        $this->decoder = $decoder;
+
+        $this->handler = new ResourceHandlerService($factory, $encoder, $decoder);
     }
 
     /**
@@ -69,11 +73,11 @@ final class ResourceHandlerServiceTest extends TestCase
             'encoded' => true,
         ];
 
-        $this->encoderMock->expects($this->once())
+        $this->encoder->expects($this->once())
             ->method('encode')
             ->willReturn($data);
 
-        $response = $this->service->serialise($this->resource);
+        $response = $this->handler->serialise($this->resource);
 
         $this->assertEquals($data, $response, 'Service is not returning the response from the TransformerEncoderInterface');
     }
@@ -83,11 +87,11 @@ final class ResourceHandlerServiceTest extends TestCase
      */
     public function serviceDecoderDependency(): void
     {
-        $this->decoderMock->expects($this->once())
+        $this->decoder->expects($this->once())
             ->method('decode')
             ->willReturn($this->resource);
 
-        $response = $this->service->deserialise($this->resource, []);
+        $response = $this->handler->deserialise($this->resource, []);
         $this->assertEquals($this->resource, $response, 'Service is not returning the response from the TransformerDecoderInterface');
     }
 
@@ -96,11 +100,11 @@ final class ResourceHandlerServiceTest extends TestCase
      */
     public function serviceEntityFactoryDependency(): void
     {
-        $this->factoryMock->expects($this->once())
+        $this->factory->expects($this->once())
             ->method('create')
             ->willReturn($this->resource);
 
-        $response = $this->service->create('class', 1);
+        $response = $this->handler->create('class', 1);
         $this->assertEquals($this->resource, $response, 'Service is not returning the response from the EntityFactory');
     }
 }

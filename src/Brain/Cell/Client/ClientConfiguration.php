@@ -18,7 +18,7 @@ class ClientConfiguration
     /** @var string */
     protected $basePath = 'https://api.printed-api.com';
 
-    /** @var ResourceHandlerService */
+    /** @var ResourceHandlerService|null */
     protected $resourceHandler;
 
     /** @var string */
@@ -52,7 +52,7 @@ class ClientConfiguration
 
     public function getResourceHandler(): ResourceHandlerService
     {
-        if (!$this->resourceHandler) {
+        if (!($this->resourceHandler instanceof ResourceHandlerService)) {
             throw new RuntimeException("Can't retrieve a Cell resource handler, because it's not been set.");
         }
 

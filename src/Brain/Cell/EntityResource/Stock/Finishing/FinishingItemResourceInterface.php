@@ -20,4 +20,21 @@ interface FinishingItemResourceInterface extends
      * Return the human-readable name.
      */
     public function getName(): string;
+
+    /**
+     * Check if the finishing is the default for its category.
+     */
+    public function isDefault(): bool;
+
+    /**
+     * Check if the finishing is configurable.
+     */
+    public function isConfigurable(): bool;
+
+    /**
+     * Return the default finishing configuration.
+     *
+     * @return mixed[]
+     */
+    public function getConfiguration(): array;
 }

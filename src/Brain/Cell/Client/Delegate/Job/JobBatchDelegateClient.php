@@ -8,55 +8,62 @@ use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Job\JobBatchBatchDeliveryResource;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
-use Brain\Cell\Enum\JobBatchStatusEnum;
+use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
+use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 
 class JobBatchDelegateClient extends DelegateClient
 {
-    public function getJobBatch(string $id): JobBatchResource
+    public function getJobBatch(string $id): JobBatchResourceInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/jobs/batches/%s', $id));
 
-        return $this->request($context, new JobBatchResource());
+        /** @var JobBatchResourceInterface $resource */
+        $resource = $this->request($context, new JobBatchResource());
+
+        return $resource;
     }
 
-    public function postJobBatch(JobBatchResource $resource): JobBatchResource
+    public function postJobBatch(JobBatchResourceInterface $batch): JobBatchResourceInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/jobs/batches');
 
         $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($resource);
+        $payload = $handler->serialise($batch);
         $context->setPayload($payload);
 
-        return $this->request($context, $resource);
+        /** @var JobBatchResourceInterface $resource */
+        $resource = $this->request($context, $batch);
+
+        return $resource;
     }
 
     public function updateJobBatchDeliveryOption(
         string $jobBatchId,
         DeliveryOptionResource $deliveryOptionResource
-    ): JobBatchResource {
+    ): JobBatchResourceInterface {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf('/jobs/batches/%s/delivery-option', $jobBatchId));
 
         $payload = [
-            'delivery_option' => $deliveryOptionResource->getIdOrThrow(),
+            'delivery_option' => $deliveryOptionResource->getId(),
         ];
 
         $context->setPayload($payload);
 
-        /** @var JobBatchResource $result */
-        $result = $this->request($context, new JobBatchResource());
+        /** @var JobBatchResourceInterface $resource */
+        $resource = $this->request($context, new JobBatchResource());
 
-        return $result;
+        return $resource;
     }
 
     public function updateJobBatchBatchDelivery(
         string $jobBatchId,
         JobBatchBatchDeliveryResource $batchDeliveryResource
-    ): JobBatchResource {
+    ): JobBatchResourceInterface {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPatch(sprintf('/jobs/batches/%s/batch-delivery', $jobBatchId));
 
@@ -68,25 +75,28 @@ class JobBatchDelegateClient extends DelegateClient
             ])
         ));
 
-        /** @var JobBatchResource $result */
-        $result = $this->request($context, new JobBatchResource());
+        /** @var JobBatchResourceInterface $resource */
+        $resource = $this->request($context, new JobBatchResource());
 
-        return $result;
+        return $resource;
     }
 
-    public function updateStatus(JobBatchResource $resource, string $status): JobBatchResource
+    public function updateStatus(JobBatchResourceInterface $batch, string $status): JobBatchResourceInterface
     {
-        if (!in_array($status, JobBatchStatusEnum::getAll())) {
+        if (!in_array($status, JobStatusResource::getAllCanonicals())) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));
         }
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
             '/jobs/batches/%s/%s',
-            $resource->getId(),
+            $batch->getId(),
             str_replace('_', '-', $status)
         ));
 
-        return $this->request($context, $resource);
+        /** @var JobBatchResourceInterface $resource */
+        $resource = $this->request($context, $batch);
+
+        return $resource;
     }
 }

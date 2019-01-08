@@ -14,8 +14,6 @@ use Brain\Cell\Transfer\ResourceCollection;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * {@inheritdoc}
  */
@@ -35,14 +33,18 @@ class JobBatchResource extends AbstractResource implements
      */
     protected $address;
 
-    /** @var DeliveryOptionResource|null This might be null only in the "incomplete" status */
+    /**
+     * This might be null only in the "incomplete" status.
+     *
+     * @var DeliveryOptionResourceInterface|null
+     */
     protected $deliveryOption;
 
     /** @var JobBatchBatchDeliveryResource|null This is null only in the "incomplete" status */
     protected $batchDelivery;
 
     /**
-     * @var JobResource[]|ResourceCollection
+     * @var JobResourceInterface[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -61,7 +63,11 @@ class JobBatchResource extends AbstractResource implements
 
     public function __construct()
     {
-        $this->dispatches = new ArrayCollection();
+        $this->jobs = new ResourceCollection();
+        $this->jobs->setEntityClass(JobResource::class);
+
+        $this->dispatches = new ResourceCollection();
+        $this->dispatches->setEntityClass(DispatchResource::class);
     }
 
     /**
@@ -110,15 +116,19 @@ class JobBatchResource extends AbstractResource implements
     }
 
     /**
-     * @return JobResource[]|ResourceCollection
+     * {@inheritdoc}
      */
-    public function getJobs()
+    public function getJobs(): ResourceCollection
     {
         return $this->jobs;
     }
 
     /**
-     * @param JobResource[]|ResourceCollection $jobs
+     * Set the jobs in the batch.
+     *
+     * @param JobResourceInterface[]|ResourceCollection $jobs
+     *
+     * @deprecated Unsure if this is allowed, check API endpoints in Brain.
      */
     public function setJobs($jobs): void
     {
