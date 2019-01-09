@@ -6,7 +6,11 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\Transfer\AbstractResource;
 
-class JobMetaResource extends AbstractResource
+/**
+ * {@inheritdoc}
+ */
+final class JobMetaResource extends AbstractResource implements
+    JobMetaResourceInterface
 {
     /** @var mixed[] */
     protected $data;
@@ -28,7 +32,7 @@ class JobMetaResource extends AbstractResource
     }
 
     /**
-     * @return mixed[]
+     * {@inheritdoc}
      */
     public function getData(): array
     {
@@ -53,6 +57,9 @@ class JobMetaResource extends AbstractResource
         $this->group = $group;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getNote(): string
     {
         return $this->note;

@@ -13,7 +13,7 @@ use Brain\Cell\EntityResource\Common\AbstractStatusResource;
 use Brain\Cell\EntityResource\Common\Status\StatusTransitionResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\CreateJobFromProductResource;
-use Brain\Cell\EntityResource\Job\JobMetaResource;
+use Brain\Cell\EntityResource\Job\JobMetaResourceInterface;
 use Brain\Cell\EntityResource\Job\JobNoteResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Job\JobResourceInterface;
@@ -241,7 +241,7 @@ class JobDelegateClient extends DelegateClient
     /**
      * @deprecated Use replaceJobMeta() instead.
      */
-    public function submitJobMeta(JobResourceInterface $job, JobMetaResource $meta): JobResourceInterface
+    public function submitJobMeta(JobResourceInterface $job, JobMetaResourceInterface $meta): JobResourceInterface
     {
         return $this->replaceJobMeta($job, $meta);
     }
@@ -251,7 +251,7 @@ class JobDelegateClient extends DelegateClient
      *
      * If you wish to perform an update I recommend you merge the job meta instead.
      */
-    public function replaceJobMeta(JobResourceInterface $job, JobMetaResource $meta): JobResourceInterface
+    public function replaceJobMeta(JobResourceInterface $job, JobMetaResourceInterface $meta): JobResourceInterface
     {
         $id = $id = $job->getId();
 

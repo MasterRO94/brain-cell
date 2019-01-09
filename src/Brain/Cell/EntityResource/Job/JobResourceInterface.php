@@ -60,4 +60,9 @@ interface JobResourceInterface extends
      * @return ResourceCollection|JobOptionResourceInterface[]
      */
     public function getOptions(): ResourceCollection;
+
+    /**
+     * Return the job meta.
+     */
+    public function getMeta(): JobMetaResourceInterface;
 }

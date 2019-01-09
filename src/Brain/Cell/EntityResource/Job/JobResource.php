@@ -112,7 +112,7 @@ class JobResource extends AbstractResource implements
     /** @var JobResource */
     protected $clonedFrom;
 
-    /** @var JobMetaResource */
+    /** @var JobMetaResourceInterface */
     protected $meta;
 
     /** @var PhaseResource */
@@ -561,12 +561,15 @@ class JobResource extends AbstractResource implements
             || $this->status->getCanonical() === JobStatusResource::STATUS_IMPOSITION_MANUAL;
     }
 
-    public function getMeta(): JobMetaResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getMeta(): JobMetaResourceInterface
     {
         return $this->meta;
     }
 
-    public function setMeta(JobMetaResource $meta): void
+    public function setMeta(JobMetaResourceInterface $meta): void
     {
         $this->meta = $meta;
     }
