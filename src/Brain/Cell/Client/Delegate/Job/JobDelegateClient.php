@@ -238,7 +238,20 @@ class JobDelegateClient extends DelegateClient
         return $resource;
     }
 
+    /**
+     * @deprecated Use replaceJobMeta() instead.
+     */
     public function submitJobMeta(JobResourceInterface $job, JobMetaResource $meta): JobResourceInterface
+    {
+        return $this->replaceJobMeta($job, $meta);
+    }
+
+    /**
+     * Replace the meta against a job.
+     *
+     * If you wish to perform an update I recommend you merge the job meta instead.
+     */
+    public function replaceJobMeta(JobResourceInterface $job, JobMetaResource $meta): JobResourceInterface
     {
         $id = $id = $job->getId();
 
