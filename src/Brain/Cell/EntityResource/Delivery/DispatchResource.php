@@ -6,6 +6,7 @@ namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -13,8 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class DispatchResource extends AbstractResource
 {
-    /** @var string */
-    protected $id;
+    use ResourceIdentityTrait;
 
     /**
      * @var JobBatchResourceInterface|null
@@ -57,11 +57,6 @@ class DispatchResource extends AbstractResource
         return [
             'parcels' => DispatchParcelResource::class,
         ];
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getBatch(): ?JobBatchResourceInterface

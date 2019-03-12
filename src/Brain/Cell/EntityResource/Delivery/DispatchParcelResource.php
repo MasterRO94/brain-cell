@@ -6,11 +6,11 @@ namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 
 class DispatchParcelResource extends AbstractResource
 {
-    /** @var string */
-    protected $id;
+    use ResourceIdentityTrait;
 
     /** @var ThreeDimensionalResource $dimensions */
     protected $dimensions;
@@ -73,15 +73,5 @@ class DispatchParcelResource extends AbstractResource
     public function setPostageLabelUrl(string $postageLabelUrl): void
     {
         $this->postageLabelUrl = $postageLabelUrl;
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function setId(string $id): void
-    {
-        $this->id = $id;
     }
 }
