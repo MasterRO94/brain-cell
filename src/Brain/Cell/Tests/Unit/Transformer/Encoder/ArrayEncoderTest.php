@@ -52,10 +52,10 @@ final class ArrayEncoderTest extends TestCase
      */
     public function encodeSimpleResources(): void
     {
-        $resource = SimpleResourceMock::create(1, 'string');
+        $resource = SimpleResourceMock::create('some-id', 'string');
 
         $expected = [
-            'id' => 1,
+            'id' => 'some-id',
             'name' => 'string',
         ];
 
@@ -68,14 +68,14 @@ final class ArrayEncoderTest extends TestCase
      */
     public function encodeSimpleResourcesWithAssociations(): void
     {
-        $resource = SimpleResourceMock::create(1, 'string');
+        $resource = SimpleResourceMock::create('some-id', 'string');
 
-        $parent = SimpleResourceAssociationMock::create(2);
+        $parent = SimpleResourceAssociationMock::create('another-id');
         $parent->setAssociatedResource($resource);
 
         $expected = [
-            'id' => 2,
-            'associated_resource' => 1,
+            'id' => 'another-id',
+            'associated_resource' => 'some-id',
         ];
 
         $response = $this->encoder->encode($parent);
@@ -88,12 +88,12 @@ final class ArrayEncoderTest extends TestCase
     public function encodeSimpleResourceCollections(): void
     {
         $collection = new ResourceCollection();
-        $collection->add(SimpleResourceMock::create(1, 'one'));
-        $collection->add(SimpleResourceMock::create(2, 'two'));
+        $collection->add(SimpleResourceMock::create('some-id', 'one'));
+        $collection->add(SimpleResourceMock::create('another-id', 'two'));
 
         $expected = [
-            1,
-            2,
+            'some-id',
+            'another-id',
         ];
 
         $response = $this->encoder->encode($collection);
@@ -106,19 +106,19 @@ final class ArrayEncoderTest extends TestCase
     public function encodeSimpleResourceCollectionsAsAssociations(): void
     {
         $collection = new ResourceCollection();
-        $collection->add(SimpleResourceMock::create(1, 'one'));
-        $collection->add(SimpleResourceMock::create(2, 'two'));
-        $collection->add(SimpleResourceMock::create(3, 'three'));
+        $collection->add(SimpleResourceMock::create('id-1', 'one'));
+        $collection->add(SimpleResourceMock::create('id-2', 'two'));
+        $collection->add(SimpleResourceMock::create('id-3', 'three'));
 
-        $resource = SimpleResourceCollectionAssociationMock::create(4);
+        $resource = SimpleResourceCollectionAssociationMock::create('id-4');
         $resource->setAssociatedCollection($collection);
 
         $expected = [
-            'id' => 4,
+            'id' => 'id-4',
             'associated_collection' => [
-                1,
-                2,
-                3,
+                'id-1',
+                'id-2',
+                'id-3',
             ],
         ];
 

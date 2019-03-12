@@ -104,7 +104,7 @@ final class ResourceHandlerServiceTest extends TestCase
             ->method('create')
             ->willReturn($this->resource);
 
-        $response = $this->handler->create('class', 1);
+        $response = $this->handler->create('class', '1');
         $this->assertEquals($this->resource, $response, 'Service is not returning the response from the EntityFactory');
     }
 }

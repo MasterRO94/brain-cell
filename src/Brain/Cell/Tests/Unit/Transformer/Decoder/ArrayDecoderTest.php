@@ -68,7 +68,7 @@ final class ArrayDecoderTest extends TestCase
     public function decodingSimpleResources(): void
     {
         $data = [
-            'id' => 1,
+            'id' => 'some-id',
             'name' => 'string',
         ];
 
@@ -86,7 +86,7 @@ final class ArrayDecoderTest extends TestCase
     public function decoderWillNotThrowWithAdditionalData(): void
     {
         $data = [
-            'id' => 100,
+            'id' => 'some-id',
             'name' => 'Tony Stark',
             'occupation' => 'Marvelous Super Hero',
         ];
@@ -94,14 +94,14 @@ final class ArrayDecoderTest extends TestCase
         /** @var SimpleResourceMock $resource */
         $resource = $this->decoder->decode(new SimpleResourceMock(), $data);
 
-        $this->assertEquals(100, $resource->getId());
+        $this->assertEquals('some-id', $resource->getId());
         $this->assertEquals('Tony Stark', $resource->getName());
     }
 
     public function decoderWillThrowWithMissingProperties(): void
     {
         $data = [
-            'id' => 100,
+            'id' => 'some-id',
         ];
 
         $this->decoder->decode(new SimpleResourceMock(), $data);
@@ -113,9 +113,9 @@ final class ArrayDecoderTest extends TestCase
     public function decodeSimpleResourcesWithAssociations(): void
     {
         $data = [
-            'id' => 2,
+            'id' => 'some-id',
             'associatedResource' => [
-                'id' => 1,
+                'id' => 'another-id',
                 'name' => 'string',
             ],
         ];
@@ -139,8 +139,8 @@ final class ArrayDecoderTest extends TestCase
     public function decodeSimpleResourceCollections(): void
     {
         $data = [
-            ['id' => 1, 'name' => 'one'],
-            ['id' => 2, 'name' => 'two'],
+            ['id' => 'some-id', 'name' => 'one'],
+            ['id' => 'another-id', 'name' => 'two'],
         ];
 
         $collection = new ResourceCollection();
@@ -163,11 +163,11 @@ final class ArrayDecoderTest extends TestCase
     public function decodeSimpleResourceCollectionsAsAssociations(): void
     {
         $data = [
-            'id' => 3,
+            'id' => 'some-id',
             'associatedCollection' => [
-                ['id' => 1, 'name' => 'one'],
-                ['id' => 2, 'name' => 'two'],
-                ['id' => 3, 'name' => 'three'],
+                ['id' => 'id-1', 'name' => 'one'],
+                ['id' => 'id-2', 'name' => 'two'],
+                ['id' => 'id-3', 'name' => 'three'],
             ],
         ];
 
