@@ -209,11 +209,10 @@ class ArrayEncoder extends AbstractTransformer
             return $resource->getAlias();
         }
 
-        if ($resource->hasId()) {
+        if (method_exists($resource, 'hasId') && $resource->hasId()) {
             return $resource->getId();
         }
 
-        // no ID or alias so this is a new object...
         return $this->encodeResource($resource, $options);
     }
 

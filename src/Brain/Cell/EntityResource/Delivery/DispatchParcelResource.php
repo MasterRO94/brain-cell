@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Delivery;
 
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 
 class DispatchParcelResource extends AbstractResource
 {

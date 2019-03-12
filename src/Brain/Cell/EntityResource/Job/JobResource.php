@@ -51,7 +51,7 @@ class JobResource extends AbstractResource implements
     /** @var ProductResourceInterface|null */
     protected $product;
 
-    /** @var int */
+    /** @var mixed[] */
     protected $weight;
 
     /** @var int */
@@ -281,11 +281,17 @@ class JobResource extends AbstractResource implements
         $this->batch = $batch;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getWeight(): array
     {
         return $this->weight;
     }
 
+    /**
+     * @param mixed[] $weight
+     */
     public function setWeight(array $weight): void
     {
         $this->weight = $weight;
@@ -560,9 +566,6 @@ class JobResource extends AbstractResource implements
         $this->artifacts = $artifacts;
     }
 
-    /**
-     * @return JobResource|null
-     */
     public function getClonedFrom(): ?JobResource
     {
         return $this->clonedFrom;

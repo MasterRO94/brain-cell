@@ -81,7 +81,7 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @return ArtworkIssueResource[]|ResourceCollection|null
+     * @return ArtworkIssueResource[]|ResourceCollection
      */
     public function getIssues(): ResourceCollection
     {
