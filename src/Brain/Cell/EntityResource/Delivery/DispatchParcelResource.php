@@ -1,20 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 
 class DispatchParcelResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
-    protected $id;
+    use ResourceIdentityTrait;
 
-    /**
-     * @var ThreeDimensionalResource $dimensions
-     */
+    /** @var ThreeDimensionalResource $dimensions */
     protected $dimensions;
 
     /** @var int $weight */
@@ -37,83 +35,43 @@ class DispatchParcelResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return ThreeDimensionalResource
-     */
-    public function getDimensions()
+    public function getDimensions(): ThreeDimensionalResource
     {
         return $this->dimensions;
     }
 
-    /**
-     * @param ThreeDimensionalResource $dimensions
-     */
-    public function setDimensions($dimensions)
+    public function setDimensions(ThreeDimensionalResource $dimensions): void
     {
         $this->dimensions = $dimensions;
     }
 
-    /**
-     * @return int
-     */
-    public function getWeight()
+    public function getWeight(): int
     {
         return $this->weight;
     }
 
-    /**
-     * @param int $weight
-     */
-    public function setWeight($weight)
+    public function setWeight(int $weight): void
     {
         $this->weight = $weight;
     }
 
-    /**
-     * @return DispatchResource
-     */
-    public function getDispatch()
+    public function getDispatch(): DispatchResource
     {
         return $this->dispatch;
     }
 
-    /**
-     * @param DispatchResource $dispatch
-     */
-    public function setDispatch($dispatch)
+    public function setDispatch(DispatchResource $dispatch): void
     {
         $this->dispatch = $dispatch;
     }
 
-    /**
-     * @return string
-     */
     public function getPostageLabelUrl(): string
     {
         return $this->postageLabelUrl;
     }
 
-    /**
-     * @param string $postageLabelUrl
-     */
-    public function setPostageLabelUrl(string $postageLabelUrl)
+    public function setPostageLabelUrl(string $postageLabelUrl): void
     {
         $this->postageLabelUrl = $postageLabelUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 }

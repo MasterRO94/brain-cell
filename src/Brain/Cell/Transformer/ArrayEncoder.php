@@ -204,7 +204,7 @@ class ArrayEncoder extends AbstractTransformer
             return $resource->getAlias();
         }
 
-        if ($resource->getId()) {
+        if ($resource->hasId()) {
             return $resource->getId();
         }
 

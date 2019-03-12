@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Job\JobBatchResource;
+use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -10,33 +14,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class DispatchResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
-    protected $id;
+    use ResourceIdentityTrait;
 
     /**
-     * @var JobBatchResource
+     * @var JobBatchResourceInterface|null
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
      */
     protected $batch;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $trackingCode;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $labelUrl;
 
-    /**
-     * @var DispatchParcelResource[] $parcels
-     */
+    /** @var DispatchParcelResource[]|ResourceCollection */
     protected $parcels;
+
+    public function __construct()
+    {
+        $this->parcels = new ResourceCollection();
+        $this->parcels->setEntityClass(DispatchParcelResource::class);
+    }
 
     /**
      * {@inheritdoc}
@@ -58,47 +59,27 @@ class DispatchResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return JobBatchResource|null
-     */
-    public function getBatch()
+    public function getBatch(): ?JobBatchResourceInterface
     {
         return $this->batch;
     }
 
-    /**
-     * @param JobBatchResource|null $batch
-     */
-    public function setBatch(JobBatchResource $batch = null)
+    public function setBatch(JobBatchResourceInterface $batch): void
     {
         $this->batch = $batch;
     }
 
-    public function clearBatch()
+    public function clearBatch(): void
     {
         $this->batch = null;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getTrackingCode()
+    public function getTrackingCode(): ?string
     {
         return $this->trackingCode;
     }
 
-    /**
-     * @param string $trackingCode
-     */
-    public function setTrackingCode($trackingCode)
+    public function setTrackingCode(string $trackingCode): void
     {
         $this->trackingCode = $trackingCode;
     }
@@ -114,23 +95,17 @@ class DispatchResource extends AbstractResource
     /**
      * @param DispatchParcelResource[]|ResourceCollection $parcels
      */
-    public function setParcels($parcels)
+    public function setParcels($parcels): void
     {
         $this->parcels = $parcels;
     }
 
-    /**
-     * @return string
-     */
-    public function getLabelUrl()
+    public function getLabelUrl(): string
     {
         return $this->labelUrl;
     }
 
-    /**
-     * @param string $labelUrl
-     */
-    public function setLabelUrl($labelUrl)
+    public function setLabelUrl(string $labelUrl): void
     {
         $this->labelUrl = $labelUrl;
     }
