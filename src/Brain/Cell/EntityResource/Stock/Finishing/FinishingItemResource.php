@@ -36,7 +36,7 @@ final class FinishingItemResource extends AbstractResource implements
     protected $weightUnit;
 
     /** @var bool */
-    protected $isDefault;
+    protected $isDefault = false;
 
     /** @var bool */
     protected $configurable;
