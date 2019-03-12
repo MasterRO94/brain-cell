@@ -78,7 +78,7 @@ class ResourceHandlerService
     /**
      * A shortcut method for the {@link EntityResourceFactory::create()} method.
      */
-    public function create(string $class, ?int $id = null): TransferEntityInterface
+    public function create(string $class, ?string $id = null): TransferEntityInterface
     {
         return $this->factory->create($class, $id);
     }

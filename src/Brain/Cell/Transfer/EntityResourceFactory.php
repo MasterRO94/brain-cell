@@ -18,7 +18,7 @@ class EntityResourceFactory
     /**
      * Create and return the given $class.
      */
-    public function create(string $class, ?int $id = null): TransferEntityInterface
+    public function create(string $class, ?string $id = null): TransferEntityInterface
     {
         /** @var TransferEntityInterface $class */
         $class = new $class();
