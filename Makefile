@@ -8,6 +8,9 @@ build: \
 	code \
 	test
 
+ci:
+	echo "Nothing to do".
+
 # --------------------
 # Utility
 
