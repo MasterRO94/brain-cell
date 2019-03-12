@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Transfer;
 
 use Brain\Cell\TransferEntityInterface;
+
+use ReflectionClass;
 
 /**
  * A entity resource factory.
@@ -13,18 +17,13 @@ class EntityResourceFactory
 {
     /**
      * Create and return the given $class.
-     *
-     * @param string $class
-     * @param int|null $id
-     *
-     * @return TransferEntityInterface
      */
-    public function create($class, $id = null)
+    public function create(string $class, ?string $id = null): TransferEntityInterface
     {
         /** @var TransferEntityInterface $class */
         $class = new $class();
 
-        if (!is_null($id)) {
+        if ($id !== null) {
             $class = $this->setProperty($class, 'id', $id);
         }
 
@@ -34,15 +33,11 @@ class EntityResourceFactory
     /**
      * Set a protected property.
      *
-     * @param TransferEntityInterface $class
-     * @param string $property
      * @param mixed $value
-     *
-     * @return TransferEntityInterface
      */
-    public function setProperty($class, $property, $value)
+    public function setProperty(TransferEntityInterface $class, string $property, $value): TransferEntityInterface
     {
-        $reflection = new \ReflectionClass(get_class($class));
+        $reflection = new ReflectionClass(get_class($class));
         $property = $reflection->getProperty($property);
         $property->setAccessible(true);
         $property->setValue($class, $value);

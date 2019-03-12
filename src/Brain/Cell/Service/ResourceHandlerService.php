@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Service;
 
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
@@ -58,14 +60,11 @@ class ResourceHandlerService
     /**
      * Serialise the given {@link TransferEntityInterface}.
      *
-     * @param TransferEntityInterface $entity
-     * @param ArrayEncoderSerialisationOptions|null $options
-     *
      * @return mixed
      */
     public function serialise(
         TransferEntityInterface $entity,
-        ArrayEncoderSerialisationOptions $options = null
+        ?ArrayEncoderSerialisationOptions $options = null
     ) {
         return $this->encoder->encode($entity, $options);
     }
@@ -73,25 +72,17 @@ class ResourceHandlerService
     /**
      * Deserialise the given {@link TransferEntityInterface}.
      *
-     * @param TransferEntityInterface $entity
      * @param mixed $data
-     *
-     * @return TransferEntityInterface
      */
-    public function deserialise(TransferEntityInterface $entity, $data)
+    public function deserialise(TransferEntityInterface $entity, $data): TransferEntityInterface
     {
         return $this->decoder->decode($entity, $data);
     }
 
     /**
      * A shortcut method for the {@link EntityResourceFactory::create()} method.
-     *
-     * @param string $class
-     * @param int|null $id
-     *
-     * @return TransferEntityInterface
      */
-    public function create($class, $id = null)
+    public function create(string $class, ?string $id = null): TransferEntityInterface
     {
         return $this->factory->create($class, $id);
     }
