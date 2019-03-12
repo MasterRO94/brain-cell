@@ -134,6 +134,9 @@ class JobResource extends AbstractResource implements
 
         $this->queries = new ResourceCollection();
         $this->queries->setEntityClass(JobQueryResource::class);
+
+        $this->notes = new ResourceCollection();
+        $this->notes->setEntityClass(JobNoteResource::class);
     }
 
     /**
@@ -168,6 +171,16 @@ class JobResource extends AbstractResource implements
             'notes' => JobNoteResource::class,
             'artifacts' => ArtifactResource::class,
             'queries' => JobQueryResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUnstructuredFields(): array
+    {
+        return [
+            'weight',
         ];
     }
 
@@ -268,12 +281,12 @@ class JobResource extends AbstractResource implements
         $this->batch = $batch;
     }
 
-    public function getWeight(): int
+    public function getWeight(): array
     {
         return $this->weight;
     }
 
-    public function setWeight(int $weight): void
+    public function setWeight(array $weight): void
     {
         $this->weight = $weight;
     }
@@ -547,7 +560,10 @@ class JobResource extends AbstractResource implements
         $this->artifacts = $artifacts;
     }
 
-    public function getClonedFrom(): JobResource
+    /**
+     * @return JobResource|null
+     */
+    public function getClonedFrom(): ?JobResource
     {
         return $this->clonedFrom;
     }

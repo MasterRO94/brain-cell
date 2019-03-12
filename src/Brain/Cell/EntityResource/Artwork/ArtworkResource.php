@@ -27,6 +27,12 @@ class ArtworkResource extends AbstractResource
     /** @var ArtworkIssueResource[]|ResourceCollection */
     protected $issues;
 
+    public function __construct()
+    {
+        $this->issues = new ResourceCollection();
+        $this->issues->setEntityClass(ArtworkIssueResource::class);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -75,7 +81,7 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @return ArtworkIssueResource[]|ResourceCollection
+     * @return ArtworkIssueResource[]|ResourceCollection|null
      */
     public function getIssues(): ResourceCollection
     {
