@@ -6,6 +6,7 @@ namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Job\JobResource;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -17,8 +18,7 @@ use Brain\Cell\Transfer\ResourceCollection;
  */
 class DeliveryJobBatchResource extends AbstractResource
 {
-    /** @var string */
-    protected $id;
+    use ResourceIdentityTrait;
 
     /**
      * @var AddressResource
@@ -57,11 +57,6 @@ class DeliveryJobBatchResource extends AbstractResource
         return [
             'jobs' => JobResource::class,
         ];
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
     }
 
     public function getDeliveryAddress(): AddressResource
