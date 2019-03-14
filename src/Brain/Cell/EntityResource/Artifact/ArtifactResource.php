@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Artifact;
 
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\File\FileResource;
+use Brain\Cell\EntityResource\File\FileResourceInterface;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
@@ -23,6 +25,9 @@ class ArtifactResource extends AbstractResource
     /** @var string */
     protected $status;
 
+    /** @var FileResourceInterface */
+    protected $file;
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +36,7 @@ class ArtifactResource extends AbstractResource
         return [
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
+            'file' => FileResource::class,
         ];
     }
 
@@ -62,5 +68,15 @@ class ArtifactResource extends AbstractResource
     public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+
+    public function getFile(): FileResourceInterface
+    {
+        return $this->file;
+    }
+
+    public function setFile(FileResourceInterface $file): void
+    {
+        $this->file = $file;
     }
 }
