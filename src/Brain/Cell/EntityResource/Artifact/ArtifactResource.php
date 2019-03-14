@@ -35,7 +35,7 @@ class ArtifactResource extends AbstractResource
         return [
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
-            'file' => FileResource::class
+            'file' => FileResource::class,
         ];
     }
 
