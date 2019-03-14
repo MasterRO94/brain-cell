@@ -6,6 +6,7 @@ namespace Brain\Cell\EntityResource\Artifact;
 
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\File\FileResource;
+use Brain\Cell\EntityResource\File\FileResourceInterface;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
@@ -24,7 +25,7 @@ class ArtifactResource extends AbstractResource
     /** @var string */
     protected $status;
 
-    /** @var FileResource */
+    /** @var FileResourceInterface */
     protected $file;
 
     /**
@@ -69,12 +70,12 @@ class ArtifactResource extends AbstractResource
         $this->status = $status;
     }
 
-    public function getFile(): FileResource
+    public function getFile(): FileResourceInterface
     {
         return $this->file;
     }
 
-    public function setFile(FileResource $file): void
+    public function setFile(FileResourceInterface $file): void
     {
         $this->file = $file;
     }
