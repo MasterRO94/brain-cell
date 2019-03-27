@@ -574,15 +574,12 @@ class JobResource extends AbstractResource implements
             || $this->status->getCanonical() === JobStatusResource::STATUS_IMPOSITION_MANUAL;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getMeta(): JobMetaResourceInterface
+    public function getMeta(): ?JobMetaResourceInterface
     {
         return $this->meta;
     }
 
-    public function setMeta(JobMetaResourceInterface $meta): void
+    public function setMeta(?JobMetaResourceInterface $meta): void
     {
         $this->meta = $meta;
     }

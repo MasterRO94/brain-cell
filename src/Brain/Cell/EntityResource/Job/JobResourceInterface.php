@@ -64,5 +64,5 @@ interface JobResourceInterface extends
     /**
      * Return the job meta.
      */
-    public function getMeta(): JobMetaResourceInterface;
+    public function getMeta(): ?JobMetaResourceInterface;
 }

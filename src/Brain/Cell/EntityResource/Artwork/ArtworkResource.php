@@ -81,9 +81,9 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @return ArtworkIssueResource[]|ResourceCollection
+     * @return ArtworkIssueResource[]|ResourceCollection|null
      */
-    public function getIssues(): ResourceCollection
+    public function getIssues(): ?ResourceCollection
     {
         return $this->issues;
     }
