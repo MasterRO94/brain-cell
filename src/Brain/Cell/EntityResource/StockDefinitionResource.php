@@ -1,92 +1,64 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
  */
-class StockDefinitionResource extends AbstractResource implements ResourcePublicIdInterface
+class StockDefinitionResource extends AbstractResource implements ResourceIdentityInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $width;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $height;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $stripWidth;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $stripQuantity;
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return int
-     */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
 
-    /**
-     * @return int
-     */
-    public function getHeight()
+    public function getHeight(): int
     {
         return $this->height;
     }
 
-    /**
-     * @return int
-     */
-    public function getStripWidth()
+    public function getStripWidth(): int
     {
         return $this->stripWidth;
     }
 
-    /**
-     * @return int
-     */
-    public function getStripQuantity()
+    public function getStripQuantity(): int
     {
         return $this->stripQuantity;
     }

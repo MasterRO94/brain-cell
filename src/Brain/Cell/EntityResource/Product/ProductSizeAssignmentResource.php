@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Product;
 
 use Brain\Cell\EntityResource\Stock\SizeResource;
@@ -10,14 +12,10 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class ProductSizeAssignmentResource extends AbstractResource
 {
-    /**
-     * @var ProductResource
-     */
+    /** @var ProductResource */
     protected $product;
 
-    /**
-     * @var SizeResource
-     */
+    /** @var SizeResource */
     protected $stockSize;
 
     /**
@@ -31,34 +29,22 @@ class ProductSizeAssignmentResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return ProductResource
-     */
-    public function getProduct()
+    public function getProduct(): ProductResource
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductResource $product
-     */
-    public function setProduct($product)
+    public function setProduct(ProductResource $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * @return SizeResource
-     */
-    public function getStockSize()
+    public function getStockSize(): SizeResource
     {
         return $this->stockSize;
     }
 
-    /**
-     * @param SizeResource $stockSize
-     */
-    public function setStockSize($stockSize)
+    public function setStockSize(SizeResource $stockSize): void
     {
         $this->stockSize = $stockSize;
     }

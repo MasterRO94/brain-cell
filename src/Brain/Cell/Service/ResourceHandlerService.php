@@ -45,10 +45,6 @@ class ResourceHandlerService
 
     /**
      * Construct a new {@link ResourceHandlerService}.
-     *
-     * @param EntityResourceFactory $entityFactory
-     * @param ArrayEncoder $encoder
-     * @param ArrayDecoder $decoder
      */
     public function __construct(EntityResourceFactory $entityFactory, ArrayEncoder $encoder, ArrayDecoder $decoder)
     {

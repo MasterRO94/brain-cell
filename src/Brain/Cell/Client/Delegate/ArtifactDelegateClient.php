@@ -1,22 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\EntityResource\Resource\PresignedAssetResource;
-use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\TransferEntityInterface;
 
 use Psr\Http\Message\StreamInterface;
 
 class ArtifactDelegateClient extends DelegateClient
 {
-    /**
-     * @param ArtifactResource $artifactResource
-     *
-     * @return AbstractResource|ArtifactResource|TransferEntityInterface
-     */
     public function createArtifact(ArtifactResource $artifactResource): ArtifactResource
     {
         $handler = $this->configuration->getResourceHandler();
@@ -25,26 +20,24 @@ class ArtifactDelegateClient extends DelegateClient
         $context->prepareContextForPost('/artifacts');
         $context->setPayload($handler->serialise($artifactResource));
 
-        return $this->request($context, new ArtifactResource());
+        /** @var ArtifactResource $resource */
+        $resource = $this->request($context, new ArtifactResource());
+
+        return $resource;
     }
 
-    /**
-     * @return AbstractResource|PresignedAssetResource|TransferEntityInterface
-     */
     public function getPresignedAsset(): PresignedAssetResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/presigned-assets');
 
-        return $this->request($context, new PresignedAssetResource());
+        /** @var PresignedAssetResource $resource */
+        $resource = $this->request($context, new PresignedAssetResource());
+
+        return $resource;
     }
 
-    /**
-     * @param string $id
-     *
-     * @return StreamInterface
-     */
-    public function downloadArtifact($id)
+    public function downloadArtifact(string $id): StreamInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/artifacts/%s/download', $id));

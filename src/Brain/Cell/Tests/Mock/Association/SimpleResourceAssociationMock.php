@@ -1,24 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Mock\Association;
 
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Tests\Mock\SimpleResourceMock;
 use Brain\Cell\Transfer\AbstractResource;
 
-class SimpleResourceAssociationMock extends AbstractResource
+/**
+ * @internal For mocking only.
+ */
+final class SimpleResourceAssociationMock extends AbstractResource
 {
-    /** @var int */
-    protected $id;
+    use ResourceIdentityTrait;
 
     /** @var SimpleResourceMock */
     protected $associatedResource;
 
-    /**
-     * @param int $id
-     *
-     * @return static
-     */
-    public static function create($id)
+    public static function create(string $id): SimpleResourceAssociationMock
     {
         $instance = new static();
         $instance->id = $id;
@@ -36,25 +36,12 @@ class SimpleResourceAssociationMock extends AbstractResource
         ];
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return SimpleResourceMock
-     */
-    public function getAssociatedResource()
+    public function getAssociatedResource(): SimpleResourceMock
     {
         return $this->associatedResource;
     }
 
     /**
-     * @param SimpleResourceMock $associatedResource
-     *
      * @return $this
      */
     public function setAssociatedResource(SimpleResourceMock $associatedResource)

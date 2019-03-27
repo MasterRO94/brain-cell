@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Unit\Client\RequestAdapter;
 
 use Brain\Cell\Client\RequestAdapter\GuzzleHttpRequestAdapter;
@@ -15,8 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -31,7 +33,7 @@ use Psr\Http\Message\UriInterface;
  */
 final class GuzzleHttpRequestAdapterTest extends TestCase
 {
-    const BASE_PATH = 'https://some.example.com/v1';
+    public const BASE_PATH = 'https://some.example.com/v1';
 
     /** @var GuzzleClient|MockObject */
     protected $guzzle;
@@ -47,8 +49,11 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
      */
     public function setUp()
     {
-        $this->guzzle = $this->createMock(GuzzleClient::class);
-        $this->adapter = new GuzzleHttpRequestAdapter($this->guzzle);
+        /** @var MockObject|GuzzleClient $guzzle */
+        $guzzle = $this->createMock(GuzzleClient::class);
+        $this->guzzle = $guzzle;
+
+        $this->adapter = new GuzzleHttpRequestAdapter($guzzle);
         $this->context = new RequestContext(self::BASE_PATH);
     }
 
@@ -56,7 +61,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
      * @test
      * @testdox Adapter can understand success JSON responses
      */
-    public function request_adapterReturnsSuccessResponse_deserialisedArrayIsReturned()
+    public function requestAdapterReturnsSuccessResponseDeserialisedArrayIsReturned(): void
     {
         $this->guzzle->expects($this->once())
             ->method('request')
@@ -83,7 +88,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
      * @test
      * @testdox Adapter can serialise filters.
      */
-    public function request_withSuppliedFilters_requestIsMadeWithFilters()
+    public function requestWithSuppliedFiltersRequestIsMadeWithFilters(): void
     {
         $this->guzzle->expects($this->once())
             ->method('request')

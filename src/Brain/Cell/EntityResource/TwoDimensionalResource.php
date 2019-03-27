@@ -1,59 +1,44 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Logical\Dimension\TwoDimensionalInterface;
 use Brain\Cell\Transfer\AbstractResource;
 
-class TwoDimensionalResource extends AbstractResource implements TwoDimensionalInterface
+class TwoDimensionalResource extends AbstractResource implements
+    TwoDimensionalInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $width;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $height;
 
     /**
      * {@inheritdoc}
      */
-    public function getWidth()
+    public function getWidth(): int
     {
         return $this->width;
     }
 
-    /**
-     * @param int $width
-     *
-     * @return TwoDimensionalResource
-     */
-    public function setWidth($width)
+    public function setWidth(int $width): void
     {
         $this->width = $width;
-
-        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getHeight()
+    public function getHeight(): int
     {
         return $this->height;
     }
 
-    /**
-     * @param int $height
-     *
-     * @return TwoDimensionalResource
-     */
-    public function setHeight($height)
+    public function setHeight(int $height): void
     {
         $this->height = $height;
-
-        return $this;
     }
 }

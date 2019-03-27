@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Unit\Transformer\Decoder;
 
 use Brain\Cell\Exception\RuntimeException;
@@ -38,7 +40,7 @@ final class ArrayDecoderTest extends TestCase
      * @expectedException \RuntimeException
      * @expectedExceptionMessage Unexpected TransferEntityInterface
      */
-    public function decoderWillThrowOnInvalidTransferEntityInterface()
+    public function decoderWillThrowOnInvalidTransferEntityInterface(): void
     {
         /** @var TransferEntityInterface $entity */
         $entity = $this->createMock(TransferEntityInterface::class);
@@ -52,15 +54,10 @@ final class ArrayDecoderTest extends TestCase
      * @expectedException \RuntimeException
      * @expectedExceptionMessage The ResourceCollection has no entity class set
      */
-    public function decoderWillThrowWithCollectionMissingEntityClass()
+    public function decoderWillThrowWithCollectionMissingEntityClass(): void
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage(
-            sprintf(
-                'Missing entity class for collection',
-                ResourceCollection::class
-            )
-        );
+        $this->expectExceptionMessage('Missing entity class for collection');
 
         $this->decoder->decode(new ResourceCollection(), [1, 2, 3]);
     }
@@ -68,10 +65,10 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decodingSimpleResources()
+    public function decodingSimpleResources(): void
     {
         $data = [
-            'id' => 1,
+            'id' => 'some-id',
             'name' => 'string',
         ];
 
@@ -86,10 +83,10 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decoderWillNotThrowWithAdditionalData()
+    public function decoderWillNotThrowWithAdditionalData(): void
     {
         $data = [
-            'id' => 100,
+            'id' => 'some-id',
             'name' => 'Tony Stark',
             'occupation' => 'Marvelous Super Hero',
         ];
@@ -97,20 +94,14 @@ final class ArrayDecoderTest extends TestCase
         /** @var SimpleResourceMock $resource */
         $resource = $this->decoder->decode(new SimpleResourceMock(), $data);
 
-        $this->assertEquals(100, $resource->getId());
+        $this->assertEquals('some-id', $resource->getId());
         $this->assertEquals('Tony Stark', $resource->getName());
     }
 
-    /**
-     * @disabled-test
-     *
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Missing property "name"
-     */
-    public function decoderWillThrowWithMissingProperties()
+    public function decoderWillThrowWithMissingProperties(): void
     {
         $data = [
-            'id' => 100,
+            'id' => 'some-id',
         ];
 
         $this->decoder->decode(new SimpleResourceMock(), $data);
@@ -119,12 +110,12 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decodeSimpleResourcesWithAssociations()
+    public function decodeSimpleResourcesWithAssociations(): void
     {
         $data = [
-            'id' => 2,
+            'id' => 'some-id',
             'associatedResource' => [
-                'id' => 1,
+                'id' => 'another-id',
                 'name' => 'string',
             ],
         ];
@@ -145,11 +136,11 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decodeSimpleResourceCollections()
+    public function decodeSimpleResourceCollections(): void
     {
         $data = [
-            ['id' => 1, 'name' => 'one'],
-            ['id' => 2, 'name' => 'two'],
+            ['id' => 'some-id', 'name' => 'one'],
+            ['id' => 'another-id', 'name' => 'two'],
         ];
 
         $collection = new ResourceCollection();
@@ -169,14 +160,14 @@ final class ArrayDecoderTest extends TestCase
     /**
      * @test
      */
-    public function decodeSimpleResourceCollectionsAsAssociations()
+    public function decodeSimpleResourceCollectionsAsAssociations(): void
     {
         $data = [
-            'id' => 3,
+            'id' => 'some-id',
             'associatedCollection' => [
-                ['id' => 1, 'name' => 'one'],
-                ['id' => 2, 'name' => 'two'],
-                ['id' => 3, 'name' => 'three'],
+                ['id' => 'id-1', 'name' => 'one'],
+                ['id' => 'id-2', 'name' => 'two'],
+                ['id' => 'id-3', 'name' => 'three'],
             ],
         ];
 

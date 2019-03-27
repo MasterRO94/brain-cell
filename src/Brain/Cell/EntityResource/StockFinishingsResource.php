@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\Transfer\AbstractResource;
@@ -13,19 +15,13 @@ use Brain\Cell\Transfer\ResourceCollection;
  */
 class StockFinishingsResource extends AbstractResource
 {
-    /**
-     * @var FinishingCategoryResource[]|ResourceCollection
-     */
+    /** @var FinishingCategoryResource[]|ResourceCollection */
     protected $finishings;
 
-    /**
-     * @var MaterialResource[]|ResourceCollection
-     */
+    /** @var MaterialResource[]|ResourceCollection */
     protected $materials;
 
-    /**
-     * @var ResourceCollection|SizeResource[]
-     */
+    /** @var ResourceCollection|SizeResource[] */
     protected $sizes;
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client;
 
 use Symfony\Component\HttpFoundation\HeaderBag;
@@ -8,42 +10,28 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RequestContext
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $method;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $path;
 
-    /**
-     * @var HeaderBag
-     */
+    /** @var HeaderBag */
     protected $headers;
 
-    /**
-     * @var ParameterBag
-     */
+    /** @var ParameterBag */
     protected $filters;
 
-    /**
-     * @var ParameterBag
-     */
+    /** @var ParameterBag */
     protected $selections;
 
-    /**
-     * @var ParameterBag
-     */
+    /** @var ParameterBag */
     protected $parameters;
 
-    /**
-     * @var array
-     */
+    /** @var mixed[] */
     protected $payload;
 
-    public function __construct($path)
+    public function __construct(string $path)
     {
         $this->path = $path;
 
@@ -54,121 +42,82 @@ class RequestContext
         $this->payload = [];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
 
-    /**
-     * @return string
-     */
-    public function getPath()
+    public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @return HeaderBag
-     */
-    public function getHeaders()
+    public function getHeaders(): HeaderBag
     {
         return $this->headers;
     }
 
-    /**
-     * @return ParameterBag
-     */
-    public function getFilters()
+    public function getFilters(): ParameterBag
     {
         return $this->filters;
     }
 
-    /**
-     * @return ParameterBag
-     */
-    public function getParameters()
+    public function getParameters(): ParameterBag
     {
         return $this->parameters;
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function getPayload()
+    public function getPayload(): array
     {
         return $this->payload;
     }
 
     /**
-     * @param array $payload
-     *
-     * @return RequestContext
+     * @param mixed[] $payload
      */
-    public function setPayload(array $payload)
+    public function setPayload(array $payload): RequestContext
     {
         $this->payload = $payload;
 
         return $this;
     }
 
-    /**
-     * @param string $path
-     */
-    public function prepareContextForGet($path)
+    public function prepareContextForGet(string $path): void
     {
         $this->prepareContext(Request::METHOD_GET, $path);
     }
 
-    /**
-     * @param string $path
-     */
-    public function prepareContextForPost($path)
+    public function prepareContextForPost(string $path): void
     {
         $this->prepareContext(Request::METHOD_POST, $path);
     }
 
-    /**
-     * @param string $path
-     */
-    public function prepareContextForPut($path)
+    public function prepareContextForPut(string $path): void
     {
         $this->prepareContext(Request::METHOD_PUT, $path);
     }
 
-    /**
-     * @param string $path
-     */
-    public function prepareContextForDelete($path)
+    public function prepareContextForDelete(string $path): void
     {
         $this->prepareContext(Request::METHOD_DELETE, $path);
     }
 
-    /**
-     * @param string $path
-     */
-    public function prepareContextForPatch($path)
+    public function prepareContextForPatch(string $path): void
     {
         $this->prepareContext(Request::METHOD_PATCH, $path);
     }
 
-    /**
-     * @param string $httpRequestMethod
-     * @param string $path
-     */
-    public function prepareContext($httpRequestMethod, $path)
+    public function prepareContext(string $httpRequestMethod, string $path): void
     {
         $this->method = $httpRequestMethod;
         $this->path = sprintf('%s/%s', $this->path, ltrim($path, '/'));
     }
 
-    /**
-     * @return bool
-     */
-    public function hasPayload()
+    public function hasPayload(): bool
     {
-        return null !== $this->payload;
+        return $this->payload !== null;
     }
 }

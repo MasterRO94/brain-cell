@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Product;
 
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
@@ -10,14 +12,10 @@ use Brain\Cell\Transfer\AbstractResource;
  */
 class ProductFinishingAssignmentResource extends AbstractResource
 {
-    /**
-     * @var ProductResource
-     */
+    /** @var ProductResource */
     protected $product;
 
-    /**
-     * @var FinishingItemResource
-     */
+    /** @var FinishingItemResource */
     protected $stockFinishingItem;
 
     /**
@@ -31,34 +29,22 @@ class ProductFinishingAssignmentResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return ProductResource
-     */
-    public function getProduct()
+    public function getProduct(): ProductResource
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductResource $product
-     */
-    public function setProduct($product)
+    public function setProduct(ProductResource $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * @return FinishingItemResource
-     */
-    public function getStockFinishingItem()
+    public function getStockFinishingItem(): FinishingItemResource
     {
         return $this->stockFinishingItem;
     }
 
-    /**
-     * @param FinishingItemResource $stockFinishingItem
-     */
-    public function setStockFinishingItem($stockFinishingItem)
+    public function setStockFinishingItem(FinishingItemResource $stockFinishingItem): void
     {
         $this->stockFinishingItem = $stockFinishingItem;
     }

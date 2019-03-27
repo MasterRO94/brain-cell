@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\File\FileResource;
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
+use Brain\Cell\EntityResource\File\FileResourceInterface;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
@@ -17,7 +20,7 @@ final class ArtworkFileResource extends AbstractResource
     /** @var string */
     protected $label;
 
-    /** @var FileResource */
+    /** @var FileResourceInterface */
     protected $file;
 
     /** @var FinishingItemResource */
@@ -46,8 +49,6 @@ final class ArtworkFileResource extends AbstractResource
 
     /**
      * Set the artwork file label.
-     *
-     * @param string $label
      */
     public function setLabel(string $label): void
     {
@@ -57,17 +58,15 @@ final class ArtworkFileResource extends AbstractResource
     /**
      * Return the artwork file.
      */
-    public function getFile(): FileResource
+    public function getFile(): FileResourceInterface
     {
         return $this->file;
     }
 
     /**
      * Set the artwork file.
-     *
-     * @param FileResource $file
      */
-    public function setFile(FileResource $file): void
+    public function setFile(FileResourceInterface $file): void
     {
         $this->file = $file;
     }
@@ -82,8 +81,6 @@ final class ArtworkFileResource extends AbstractResource
 
     /**
      * Set the associated finishing item.
-     *
-     * @param FinishingItemResource $finishingItem
      */
     public function setFinishingItem(FinishingItemResource $finishingItem): void
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
@@ -7,17 +9,16 @@ use Brain\Cell\EntityResource\Product\ProductFinishingAssignmentResource;
 use Brain\Cell\EntityResource\Product\ProductMaterialAssignmentResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\Product\ProductSizeAssignmentResource;
-use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class ProductDelegateClient extends DelegateClient
 {
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return ProductResource[]|ResourceCollection
      */
-    public function getProducts(array $parameters = [])
+    public function getProducts(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/products');
@@ -26,28 +27,24 @@ class ProductDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(ProductResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
-    /**
-     * @param string $id
-     *
-     * @return AbstractResource|ProductResource
-     */
-    public function getProduct($id)
+    public function getProduct(string $id): ProductResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/products/%s', $id));
 
-        return $this->request($context, new ProductResource());
+        /** @var ProductResource $resource */
+        $resource = $this->request($context, new ProductResource());
+
+        return $resource;
     }
 
-    /**
-     * @param ProductResource $resource
-     *
-     * @return AbstractResource|ProductResource
-     */
-    public function createProduct(ProductResource $resource)
+    public function createProduct(ProductResource $resource): ProductResource
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -55,39 +52,57 @@ class ProductDelegateClient extends DelegateClient
         $context->prepareContextForPost('/products');
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new ProductResource());
+        /** @var ProductResource $resource */
+        $resource = $this->request($context, new ProductResource());
+
+        return $resource;
     }
 
-    public function createProductSizeAssignment(ProductResource $productResource, ProductSizeAssignmentResource $assignmentResource)
-    {
+    public function createProductSizeAssignment(
+        ProductResource $productResource,
+        ProductSizeAssignmentResource $assignmentResource
+    ): ProductSizeAssignmentResource {
         $handler = $this->configuration->getResourceHandler();
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf('/products/%s/sizes', $productResource->getId()));
         $context->setPayload($handler->serialise($assignmentResource));
 
-        return $this->request($context, new ProductSizeAssignmentResource());
+        /** @var ProductSizeAssignmentResource $resource */
+        $resource = $this->request($context, new ProductSizeAssignmentResource());
+
+        return $resource;
     }
 
-    public function createProductMaterialAssignment(ProductResource $productResource, ProductMaterialAssignmentResource $assignmentResource)
-    {
+    public function createProductMaterialAssignment(
+        ProductResource $productResource,
+        ProductMaterialAssignmentResource $assignmentResource
+    ): ProductMaterialAssignmentResource {
         $handler = $this->configuration->getResourceHandler();
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf('/products/%s/materials', $productResource->getId()));
         $context->setPayload($handler->serialise($assignmentResource));
 
-        return $this->request($context, new ProductMaterialAssignmentResource());
+        /** @var ProductMaterialAssignmentResource $resource */
+        $resource = $this->request($context, new ProductMaterialAssignmentResource());
+
+        return $resource;
     }
 
-    public function createProductFinishingAssignment(ProductResource $productResource, ProductFinishingAssignmentResource $assignmentResource)
-    {
+    public function createProductFinishingAssignment(
+        ProductResource $productResource,
+        ProductFinishingAssignmentResource $assignmentResource
+    ): ProductFinishingAssignmentResource {
         $handler = $this->configuration->getResourceHandler();
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf('/products/%s/finishings', $productResource->getId()));
         $context->setPayload($handler->serialise($assignmentResource));
 
-        return $this->request($context, new ProductFinishingAssignmentResource());
+        /** @var ProductFinishingAssignmentResource $resource */
+        $resource = $this->request($context, new ProductFinishingAssignmentResource());
+
+        return $resource;
     }
 }

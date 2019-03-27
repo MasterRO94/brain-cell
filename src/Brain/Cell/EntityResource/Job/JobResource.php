@@ -51,7 +51,7 @@ class JobResource extends AbstractResource implements
     /** @var ProductResourceInterface|null */
     protected $product;
 
-    /** @var int */
+    /** @var mixed[] */
     protected $weight;
 
     /** @var int */
@@ -106,8 +106,8 @@ class JobResource extends AbstractResource implements
     /** @var string */
     protected $reference;
 
-    /** @var ArtifactResource[]|ResourceCollection */
-    protected $artifacts;
+    /** @var ArtifactResource */
+    protected $artifact;
 
     /** @var JobResource */
     protected $clonedFrom;
@@ -147,6 +147,7 @@ class JobResource extends AbstractResource implements
         return [
             'product' => ProductResource::class,
             'batch' => JobBatchResource::class,
+            'artifact' => ArtifactResource::class,
             'dimensions' => ThreeDimensionalResource::class,
             'price' => PriceResource::class,
             'status' => JobStatusResource::class,
@@ -169,7 +170,6 @@ class JobResource extends AbstractResource implements
             'components' => JobComponentResource::class,
             'options' => JobOptionResource::class,
             'notes' => JobNoteResource::class,
-            'artifacts' => ArtifactResource::class,
             'queries' => JobQueryResource::class,
         ];
     }
@@ -281,11 +281,17 @@ class JobResource extends AbstractResource implements
         $this->batch = $batch;
     }
 
+    /**
+     * @return mixed[]
+     */
     public function getWeight(): array
     {
         return $this->weight;
     }
 
+    /**
+     * @param mixed[] $weight
+     */
     public function setWeight(array $weight): void
     {
         $this->weight = $weight;
@@ -544,25 +550,16 @@ class JobResource extends AbstractResource implements
         return false;
     }
 
-    /**
-     * @return ArtifactResource[]|ResourceCollection
-     */
-    public function getArtifacts(): ResourceCollection
+    public function getArtifact(): ArtifactResource
     {
-        return $this->artifacts;
+        return $this->artifact;
     }
 
-    /**
-     * @param ArtifactResource[]|ResourceCollection $artifacts
-     */
-    public function setArtifacts(ResourceCollection $artifacts): void
+    public function setArtifact(ArtifactResource $artifact): void
     {
-        $this->artifacts = $artifacts;
+        $this->artifact = $artifact;
     }
 
-    /**
-     * @return JobResource|null
-     */
     public function getClonedFrom(): ?JobResource
     {
         return $this->clonedFrom;

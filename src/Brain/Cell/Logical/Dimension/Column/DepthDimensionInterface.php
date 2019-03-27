@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Logical\Dimension\Column;
 
 /**
@@ -9,8 +11,6 @@ interface DepthDimensionInterface
 {
     /**
      * Return the depth in millimeters (mm).
-     *
-     * @return int
      */
-    public function getDepth();
+    public function getDepth(): int;
 }

@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
+use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\EntityResource\StockDefinitionResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
 use Brain\Cell\EntityResource\TwoDimensionalResource;
+use Brain\Cell\Logical\Dimension\TwoDimensionalInterface;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -17,14 +20,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class JobComponentResource extends AbstractResource implements ResourcePublicIdInterface
+class JobComponentResource extends AbstractResource implements
+    JobComponentResourceInterface
 {
-    use ResourcePublicIdTrait;
-
-    /**
-     * @var string
-     */
-    protected $status;
+    use ResourceIdentityTrait;
 
     /**
      * @var int
@@ -51,7 +50,7 @@ class JobComponentResource extends AbstractResource implements ResourcePublicIdI
     protected $productionSheetCount;
 
     /**
-     * @var JobComponentOptionResource[]|ResourceCollection
+     * @var JobComponentOptionResourceInterface[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -69,13 +68,11 @@ class JobComponentResource extends AbstractResource implements ResourcePublicIdI
      */
     protected $size;
 
-    /**
-     * @var StockDefinitionResource
-     */
+    /** @var StockDefinitionResource */
     protected $stockDefinition;
 
     /**
-     * @var MaterialResource
+     * @var MaterialResourceInterface
      *
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -83,20 +80,16 @@ class JobComponentResource extends AbstractResource implements ResourcePublicIdI
     protected $material;
 
     /**
-     * @var TwoDimensionalResource
+     * @var TwoDimensionalInterface
      *
      * @Assert\Valid()
      */
     protected $dimensions;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $weight;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $label;
 
     /**
@@ -106,6 +99,12 @@ class JobComponentResource extends AbstractResource implements ResourcePublicIdI
      * @Assert\NotBlank()
      */
     protected $artwork;
+
+    public function __construct()
+    {
+        $this->options = new ResourceCollection();
+        $this->options->setEntityClass(JobComponentOptionResource::class);
+    }
 
     /**
      * {@inheritdoc}
@@ -132,193 +131,111 @@ class JobComponentResource extends AbstractResource implements ResourcePublicIdI
     }
 
     /**
-     * @return JobComponentOptionResource[]|ResourceCollection
+     * {@inheritdoc}
      */
-    public function getOptions()
+    public function getOptions(): ResourceCollection
     {
         return $this->options;
     }
 
     /**
-     * @param JobComponentOptionResource[]|ResourceCollection $options
+     * Set the job component level options.
      *
-     * @return JobComponentResource
+     * @param JobComponentOptionResourceInterface[]|ResourceCollection $options
      */
-    public function setOptions(ResourceCollection $options)
+    public function setOptions(ResourceCollection $options): void
     {
         $this->options = $options;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param int $status
-     *
-     * @return $this
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRangeStart()
+    public function getRangeStart(): int
     {
         return $this->rangeStart;
     }
 
-    /**
-     * @param int $rangeStart
-     *
-     * @return JobComponentResource
-     */
-    public function setRangeStart($rangeStart)
+    public function setRangeStart(int $rangeStart): void
     {
         $this->rangeStart = $rangeStart;
-
-        return $this;
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
-    public function getRangeEnd()
+    public function getRangeEnd(): int
     {
         return $this->rangeEnd;
     }
 
-    /**
-     * @param int $rangeEnd
-     *
-     * @return JobComponentResource
-     */
-    public function setRangeEnd($rangeEnd)
+    public function setRangeEnd(int $rangeEnd): void
     {
         $this->rangeEnd = $rangeEnd;
-
-        return $this;
     }
 
-    /**
-     * @return ArtworkResource
-     */
-    public function getArtwork()
+    public function getArtwork(): ArtworkResource
     {
         return $this->artwork;
     }
 
-    /**
-     * @param ArtworkResource $artwork
-     *
-     * @return JobComponentResource
-     */
-    public function setArtwork(ArtworkResource $artwork)
+    public function setArtwork(ArtworkResource $artwork): void
     {
         $this->artwork = $artwork;
     }
 
-    /**
-     * @return SizeResource
-     */
-    public function getSize()
+    public function getSize(): SizeResource
     {
         return $this->size;
     }
 
-    /**
-     * @param SizeResource $size
-     *
-     * @return JobComponentResource
-     */
-    public function setSize(SizeResource $size)
+    public function setSize(SizeResource $size): void
     {
         $this->size = $size;
-
-        return $this;
     }
 
-    /**
-     * @return StockDefinitionResource
-     */
-    public function getStockDefinition()
+    public function getStockDefinition(): StockDefinitionResource
     {
         return $this->stockDefinition;
     }
 
     /**
-     * @return MaterialResource
+     * {@inheritdoc}
      */
-    public function getMaterial()
+    public function getMaterial(): MaterialResourceInterface
     {
         return $this->material;
     }
 
     /**
-     * @param MaterialResource $material
-     *
-     * @return JobComponentResource
+     * Set the component material.
      */
-    public function setMaterial(MaterialResource $material)
+    public function setMaterial(MaterialResourceInterface $material): void
     {
         $this->material = $material;
-
-        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getWeight()
+    public function getWeight(): int
     {
         return $this->weight;
     }
 
-    /**
-     * @param int $weight
-     *
-     * @return JobComponentResource
-     */
-    public function setWeight($weight)
+    public function setWeight(int $weight): void
     {
         $this->weight = $weight;
-
-        return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getProductionSheetCount()
+    public function getProductionSheetCount(): int
     {
         return $this->productionSheetCount;
     }
 
-    /**
-     * @param int $productionSheetCount
-     */
-    public function setProductionSheetCount(int $productionSheetCount)
+    public function setProductionSheetCount(int $productionSheetCount): void
     {
         $this->productionSheetCount = $productionSheetCount;
     }
 
-    /**
-     * @todo stub - this will be calculated in Brain based on size and material
-     *
-     * @return int
-     */
-    public function getSizeCountPerMaterial()
+    public function getSizeCountPerMaterial(): int
     {
         $width = $this->getDimensions()->getWidth();
         $height = $this->getDimensions()->getHeight();
@@ -331,33 +248,24 @@ class JobComponentResource extends AbstractResource implements ResourcePublicIdI
     }
 
     /**
-     * @return TwoDimensionalResource
+     * {@inheritdoc}
      */
-    public function getDimensions()
+    public function getDimensions(): TwoDimensionalInterface
     {
         return $this->dimensions;
     }
 
-    /**
-     * @param TwoDimensionalResource $dimensions
-     */
-    public function setDimensions(TwoDimensionalResource $dimensions)
+    public function setDimensions(TwoDimensionalInterface $dimensions): void
     {
         $this->dimensions = $dimensions;
     }
 
-    /**
-     * @return string
-     */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
 
-    /**
-     * @param string $label
-     */
-    public function setLabel($label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }

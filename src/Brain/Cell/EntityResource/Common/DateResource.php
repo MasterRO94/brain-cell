@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Common;
 
 use Brain\Cell\Transfer\AbstractResource;
@@ -26,8 +28,6 @@ final class DateResource extends AbstractResource
 
     /**
      * Set the ISO8601 date.
-     *
-     * @param string $iso
      */
     public function setIso(string $iso): void
     {
@@ -44,8 +44,6 @@ final class DateResource extends AbstractResource
 
     /**
      * Set the timezone.
-     *
-     * @param string $timezone
      */
     public function setTimezone(string $timezone): void
     {

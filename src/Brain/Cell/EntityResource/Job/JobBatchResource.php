@@ -1,30 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
-use Brain\Cell\EntityResource\AddressResource;
+use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
+use Brain\Cell\EntityResource\Delivery\DeliveryOptionResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
-class JobBatchResource extends AbstractResource implements ResourcePublicIdInterface
+/**
+ * {@inheritdoc}
+ */
+class JobBatchResource extends AbstractResource implements
+    JobBatchResourceInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $status;
 
     /**
-     * @var AddressResource
+     * @var AddressResourceInterface
      *
      * @deprecated Will be removed very soon. Please update your code. Use the $deliveryOption
      *   in status "incomplete" or the $batchDelivery in statuses past the status "incomplete".
@@ -32,17 +34,17 @@ class JobBatchResource extends AbstractResource implements ResourcePublicIdInter
     protected $address;
 
     /**
-     * @var DeliveryOptionResource|null This might be null only in the "incomplete" status
+     * This might be null only in the "incomplete" status.
+     *
+     * @var DeliveryOptionResourceInterface|null
      */
     protected $deliveryOption;
 
-    /**
-     * @var JobBatchBatchDeliveryResource|null This is null only in the "incomplete" status
-     */
+    /** @var JobBatchBatchDeliveryResource|null This is null only in the "incomplete" status */
     protected $batchDelivery;
 
     /**
-     * @var JobResource[]|ResourceCollection
+     * @var JobResourceInterface[]|ResourceCollection
      *
      * @Assert\Valid()
      * @Assert\Expression(
@@ -61,7 +63,11 @@ class JobBatchResource extends AbstractResource implements ResourcePublicIdInter
 
     public function __construct()
     {
-        $this->dispatches = new ArrayCollection();
+        $this->jobs = new ResourceCollection();
+        $this->jobs->setEntityClass(JobResource::class);
+
+        $this->dispatches = new ResourceCollection();
+        $this->dispatches->setEntityClass(DispatchResource::class);
     }
 
     /**
@@ -70,13 +76,6 @@ class JobBatchResource extends AbstractResource implements ResourcePublicIdInter
     public function getAssociatedResources(): array
     {
         return [
-            /*
-             * Will be removed soon
-             *
-             * @deprecated
-             */
-            'address' => AddressResource::class,
-
             'deliveryOption' => DeliveryOptionResource::class,
             'batchDelivery' => JobBatchBatchDeliveryResource::class,
         ];
@@ -94,69 +93,44 @@ class JobBatchResource extends AbstractResource implements ResourcePublicIdInter
     }
 
     /**
-     * @deprecated
-     *
-     * @return AddressResource
+     * {@inheritdoc}
      */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * @deprecated
-     *
-     * @param AddressResource $address
-     */
-    public function setAddress(AddressResource $address)
-    {
-        $this->address = $address;
-    }
-
-    /**
-     * @return DeliveryOptionResource|null
-     */
-    public function getDeliveryOption()
+    public function getDeliveryOption(): ?DeliveryOptionResourceInterface
     {
         return $this->deliveryOption;
     }
 
-    /**
-     * @param DeliveryOptionResource $deliveryOption
-     */
-    public function setDeliveryOption(DeliveryOptionResource $deliveryOption = null)
+    public function setDeliveryOption(?DeliveryOptionResourceInterface $option): void
     {
-        $this->deliveryOption = $deliveryOption;
+        $this->deliveryOption = $option;
     }
 
-    /**
-     * @return JobBatchBatchDeliveryResource|null
-     */
-    public function getBatchDelivery()
+    public function getBatchDelivery(): ?JobBatchBatchDeliveryResource
     {
         return $this->batchDelivery;
     }
 
-    /**
-     * @param JobBatchBatchDeliveryResource $batchDelivery
-     */
-    public function setBatchDelivery(JobBatchBatchDeliveryResource $batchDelivery)
+    public function setBatchDelivery(JobBatchBatchDeliveryResource $batchDelivery): void
     {
         $this->batchDelivery = $batchDelivery;
     }
 
     /**
-     * @return JobResource[]|ResourceCollection
+     * {@inheritdoc}
      */
-    public function getJobs()
+    public function getJobs(): ResourceCollection
     {
         return $this->jobs;
     }
 
     /**
-     * @param JobResource[]|ResourceCollection $jobs
+     * Set the jobs in the batch.
+     *
+     * @param JobResourceInterface[]|ResourceCollection $jobs
+     *
+     * @deprecated Unsure if this is allowed, check API endpoints in Brain.
      */
-    public function setJobs($jobs)
+    public function setJobs($jobs): void
     {
         $this->jobs = $jobs;
     }
@@ -164,7 +138,7 @@ class JobBatchResource extends AbstractResource implements ResourcePublicIdInter
     /**
      * @param DispatchResource[]|ResourceCollection $dispatches
      */
-    public function setDispatches($dispatches)
+    public function setDispatches($dispatches): void
     {
         $this->dispatches = $dispatches;
     }
@@ -177,27 +151,18 @@ class JobBatchResource extends AbstractResource implements ResourcePublicIdInter
         return $this->dispatches;
     }
 
-    /**
-     * @param DispatchResource $dispatch
-     */
-    public function addDispatch($dispatch)
+    public function addDispatch(DispatchResource $dispatch): void
     {
         $this->dispatches->add($dispatch);
         $dispatch->setBatch($this);
     }
 
-    /**
-     * @return string
-     */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     */
-    public function setStatus($status)
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }

@@ -1,18 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\File;
 
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-final class FileResource extends AbstractResource
+/**
+ * A file.
+ */
+final class FileResource extends AbstractResource implements
+    FileResourceInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use UpdatedAtTrait;
     use DeletedAtTrait;
@@ -52,9 +58,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * Return the source path.
-     *
-     * @internal This property is never returned from the API.
+     * {@inheritdoc}
      */
     public function getSource(): string
     {
@@ -63,8 +67,6 @@ final class FileResource extends AbstractResource
 
     /**
      * Set the source path for the file.
-     *
-     * @param string $source
      */
     public function setSource(string $source): void
     {
@@ -72,7 +74,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * Return the mime type of the file.
+     * {@inheritdoc}
      */
     public function getMimeType(): string
     {
@@ -81,8 +83,6 @@ final class FileResource extends AbstractResource
 
     /**
      * Set the mime type of the file.
-     *
-     * @param string $mimeType
      */
     public function setMimeType(string $mimeType): void
     {
@@ -90,9 +90,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * Return the download path.
-     *
-     * This property is a virtual property and will only be returned from the API.
+     * {@inheritdoc}
      */
     public function getPath(): string
     {
@@ -100,7 +98,7 @@ final class FileResource extends AbstractResource
     }
 
     /**
-     * @return FilePreviewResource[]|ResourceCollection
+     * {@inheritdoc}
      */
     public function getPreviews(): ResourceCollection
     {
@@ -108,6 +106,8 @@ final class FileResource extends AbstractResource
     }
 
     /**
+     * Set the file previews.
+     *
      * @param FilePreviewResource[]|ResourceCollection $previews
      */
     public function setPreviews(ResourceCollection $previews): void

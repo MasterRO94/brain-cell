@@ -1,28 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Exception\Request;
+
+use Throwable;
 
 /**
  * {@inheritdoc}
  */
 class PayloadViolationException extends BadRequestException
 {
-    /** @var array */
+    /** @var mixed[] */
     private $violations;
 
     /**
-     * Constructor.
-     *
-     * @param string $message
-     * @param array|null $requestPayload
-     * @param array|null $responsePayload
-     * @param \Throwable|null $previous
+     * @param mixed[]|null $requestPayload
+     * @param mixed[]|null $responsePayload
      */
     public function __construct(
         string $message,
         ?array $requestPayload,
         ?array $responsePayload,
-        ?\Throwable $previous = null
+        ?Throwable $previous = null
     ) {
         parent::__construct(
             $message,
@@ -37,7 +37,7 @@ class PayloadViolationException extends BadRequestException
     /**
      * Return the payload violations.
      *
-     * @return array
+     * @return mixed[]
      */
     public function getViolations(): array
     {

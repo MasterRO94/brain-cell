@@ -1,10 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Stock;
 
+use Brain\Cell\EntityResource\Prototype\ResourceAliasTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
+use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResourceInterface;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
+use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResourceInterface;
 use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResource;
+use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResourceInterface;
 use Brain\Cell\Transfer\AbstractResource;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,12 +19,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * {@inheritdoc}
  */
-class MaterialResource extends AbstractResource
+class MaterialResource extends AbstractResource implements
+    MaterialResourceInterface
 {
-    /**
-     * @var string
-     */
-    protected $id;
+    use ResourceIdentityTrait;
+    use ResourceAliasTrait;
 
     /**
      * @var string
@@ -27,24 +33,16 @@ class MaterialResource extends AbstractResource
      */
     protected $alias;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var MaterialBaseResource
-     */
+    /** @var MaterialBaseResourceInterface */
     protected $base;
 
-    /**
-     * @var MaterialVariantResource
-     */
+    /** @var MaterialVariantResourceInterface */
     protected $variant;
 
-    /**
-     * @var MaterialWeightResource
-     */
+    /** @var MaterialWeightResourceInterface */
     protected $weight;
 
     /**
@@ -60,110 +58,66 @@ class MaterialResource extends AbstractResource
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAlias()
-    {
-        return $this->alias;
-    }
-
-    /**
-     * @param string $alias
-     *
-     * @return MaterialResource
-     */
-    public function setAlias($alias)
-    {
-        $this->alias = $alias;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
-     * @return MaterialResource
+     * Set the human-readable name.
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * @return MaterialBaseResource
+     * {@inheritdoc}
      */
-    public function getBase()
+    public function getBase(): MaterialBaseResourceInterface
     {
         return $this->base;
     }
 
     /**
-     * @param MaterialBaseResource $base
-     *
-     * @return MaterialResource
+     * @deprecated Do not use this, if you are using this for a test then mock the interface.
      */
-    public function setBase(MaterialBaseResource $base)
+    public function setBase(MaterialBaseResource $base): void
     {
         $this->base = $base;
-
-        return $this;
     }
 
     /**
-     * @return MaterialVariantResource
+     * {@inheritdoc}
      */
-    public function getVariant()
+    public function getVariant(): MaterialVariantResourceInterface
     {
         return $this->variant;
     }
 
     /**
-     * @param MaterialVariantResource $variant
-     *
-     * @return MaterialResource
+     * @deprecated Do not use this, if you are using this for a test then mock the interface.
      */
-    public function setVariant(MaterialVariantResource $variant)
+    public function setVariant(MaterialVariantResource $variant): void
     {
         $this->variant = $variant;
-
-        return $this;
     }
 
     /**
-     * @return MaterialWeightResource
+     * {@inheritdoc}
      */
-    public function getWeight()
+    public function getWeight(): MaterialWeightResourceInterface
     {
         return $this->weight;
     }
 
     /**
-     * @param MaterialWeightResource $weight
-     *
-     * @return MaterialResource
+     * @deprecated Do not use this, if you are using this for a test then mock the interface.
      */
-    public function setWeight(MaterialWeightResource $weight)
+    public function setWeight(MaterialWeightResource $weight): void
     {
         $this->weight = $weight;
-
-        return $this;
     }
 }

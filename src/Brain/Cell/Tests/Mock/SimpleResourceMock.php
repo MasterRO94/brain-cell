@@ -1,24 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Tests\Mock;
 
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-class SimpleResourceMock extends AbstractResource
+/**
+ * @internal For mocking only.
+ */
+final class SimpleResourceMock extends AbstractResource
 {
-    /** @var int */
-    protected $id;
+    use ResourceIdentityTrait;
 
     /** @var string */
     protected $name;
 
     /**
-     * @param int $id
-     * @param string $name
-     *
      * @return static
      */
-    public static function create($id, $name)
+    public static function create(string $id, string $name)
     {
         $instance = new static();
         $instance->id = $id;
@@ -27,18 +29,7 @@ class SimpleResourceMock extends AbstractResource
         return $instance;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

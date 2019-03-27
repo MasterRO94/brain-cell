@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Prototype\Column\Date;
 
 use Brain\Cell\EntityResource\Common\DateResource;
 
+use DateTime;
 use DateTimeInterface;
 
 trait UpdatedAtTrait
@@ -23,8 +26,6 @@ trait UpdatedAtTrait
      * Set the date updated at.
      *
      * @internal Note this has no affect when posting resources.
-     *
-     * @param DateResource $updatedAt
      */
     public function setUpdatedAt(DateResource $updatedAt): void
     {
@@ -42,11 +43,9 @@ trait UpdatedAtTrait
     }
 
     /**
-     * @param \DateTime $updated
-     *
      * @deprecated This method will be removed.
      */
-    public function setUpdated(\DateTime $updated): void
+    public function setUpdated(DateTime $updated): void
     {
     }
 }

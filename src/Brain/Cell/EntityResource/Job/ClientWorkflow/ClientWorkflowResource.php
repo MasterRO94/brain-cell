@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class ClientWorkflowResource extends AbstractResource implements ResourcePublicIdInterface
+class ClientWorkflowResource extends AbstractResource implements ResourceIdentityInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
@@ -45,17 +47,11 @@ class ClientWorkflowResource extends AbstractResource implements ResourcePublicI
         ];
     }
 
-    /**
-     * @return JobStatusResource
-     */
     public function getStatus(): JobStatusResource
     {
         return $this->status;
     }
 
-    /**
-     * @param JobStatusResource $status
-     */
     public function setStatus(JobStatusResource $status): void
     {
         $this->status = $status;

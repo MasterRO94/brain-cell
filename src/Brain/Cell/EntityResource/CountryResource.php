@@ -1,87 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
-use Brain\Cell\Transfer\AbstractResource;
-
-use Symfony\Component\Validator\Constraints as Assert;
+use Brain\Cell\EntityResource\Country\CountryResource as Proper;
 
 /**
- * {@inheritdoc}
+ * @deprecated Use the one this extends instead, this is for breaking change.
  */
-class CountryResource extends AbstractResource
+class CountryResource extends Proper
 {
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     *
-     * @Assert\Valid()
-     * @Assert\Expression(
-     *     expression="this.getIso() && strlen(this.getIso()) == 2",
-     *     message="iso code "
-     * )
-     */
-    protected $iso;
-
-    /**
-     * @var string
-     * @Assert\Valid()
-     * @Assert\Expression(
-     *     expression="this.getIso3() && strlen(this.getIso3()) == 3",
-     *     message="iso code "
-     * )
-     */
-    protected $iso3;
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIso()
-    {
-        return $this->iso;
-    }
-
-    /**
-     * @param string $iso
-     */
-    public function setIso($iso)
-    {
-        $this->iso = $iso;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIso3()
-    {
-        return $this->iso3;
-    }
-
-    /**
-     * @param string $iso3
-     */
-    public function setIso3($iso3)
-    {
-        $this->iso3 = $iso3;
-    }
 }

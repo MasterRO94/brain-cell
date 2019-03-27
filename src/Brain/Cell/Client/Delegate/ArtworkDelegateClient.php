@@ -1,24 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
+use Brain\Cell\Client\Delegate\File\FileDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
-use Brain\Cell\EntityResource\File\FileDownloadPathResource;
-use Brain\Cell\EntityResource\File\FileResource;
+use Brain\Cell\EntityResource\File\FileDownloadPathResourceInterface;
+use Brain\Cell\EntityResource\File\FileResourceInterface;
 
 use Psr\Http\Message\StreamInterface;
 
 class ArtworkDelegateClient extends DelegateClient
 {
     /**
-     * @deprecated use downloadFile instead
-     *
-     * @param string $id
-     *
-     * @return StreamInterface
+     * @deprecated use use file()->download() instead.
      */
-    public function downloadArtwork($id)
+    public function downloadArtwork(string $id): StreamInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/artworks/%s/download', $id));
@@ -27,51 +26,30 @@ class ArtworkDelegateClient extends DelegateClient
     }
 
     /**
-     * @param string $id
-     *
-     * @return FileResource
+     * @deprecated use file()->get() instead.
      */
-    public function getFile(string $id): FileResource
+    public function getFile(string $id): FileResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/files/%s', $id));
-
-        return $this->request($context, new FileResource());
+        return (new FileDelegateClient($this->configuration))->get($id);
     }
 
     /**
-     * @param string $id
-     *
-     * @return FileDownloadPathResource
+     * @deprecated use file()->getDownloadPath() instead.
      */
-    public function getFileDownloadPath(string $id): FileDownloadPathResource
+    public function getFileDownloadPath(string $id): FileDownloadPathResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/files/%s/download-path', $id));
-
-        return $this->request($context, new FileDownloadPathResource());
+        return (new FileDelegateClient($this->configuration))->getDownloadPath($id);
     }
 
     /**
-     * @param string $id
-     *
-     * @return StreamInterface
+     * @deprecated use file()->download() instead.
      */
     public function downloadFile(string $id): StreamInterface
     {
-        $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/files/%s/download', $id));
-
-        return $this->stream($context);
+        return (new FileDelegateClient($this->configuration))->download($id);
     }
 
-    /**
-     * @param string $id
-     * @param ArtworkIssueResource $issue
-     *
-     * @return ArtworkIssueResource
-     */
-    public function createArtworkIssue(string $id, ArtworkIssueResource $issue)
+    public function createArtworkIssue(string $id, ArtworkIssueResource $issue): ArtworkIssueResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost(sprintf('/artworks/%s/issues', $id));
@@ -79,6 +57,9 @@ class ArtworkDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($issue));
 
-        return $this->request($context, new ArtworkIssueResource());
+        /** @var ArtworkIssueResource $resource */
+        $resource = $this->request($context, new ArtworkIssueResource());
+
+        return $resource;
     }
 }

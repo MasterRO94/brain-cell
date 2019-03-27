@@ -1,19 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Stock;
 
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 class FinishingCombinationAssignmentResource extends AbstractResource
 {
-    /**
-     * @var FinishingCategoryResource
-     */
+    /** @var FinishingCategoryResource */
     protected $stockFinishingCategory;
 
-    /**
-     * @var FinishingItemResource
-     */
+    /** @var FinishingItemResource */
     protected $stockFinishingItem;
 
     /**
@@ -27,34 +27,22 @@ class FinishingCombinationAssignmentResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return FinishingCategoryResource
-     */
-    public function getStockFinishingCategory()
+    public function getStockFinishingCategory(): FinishingCategoryResource
     {
         return $this->stockFinishingCategory;
     }
 
-    /**
-     * @param FinishingCategoryResource $stockFinishingCategory
-     */
-    public function setStockFinishingCategory(FinishingCategoryResource $stockFinishingCategory)
+    public function setStockFinishingCategory(FinishingCategoryResource $stockFinishingCategory): void
     {
         $this->stockFinishingCategory = $stockFinishingCategory;
     }
 
-    /**
-     * @return FinishingItemResource|null
-     */
-    public function getStockFinishingItem()
+    public function getStockFinishingItem(): ?FinishingItemResource
     {
         return $this->stockFinishingItem;
     }
 
-    /**
-     * @param FinishingItemResource $stockFinishingItem
-     */
-    public function setStockFinishingItem(FinishingItemResource $stockFinishingItem)
+    public function setStockFinishingItem(FinishingItemResource $stockFinishingItem): void
     {
         $this->stockFinishingItem = $stockFinishingItem;
     }

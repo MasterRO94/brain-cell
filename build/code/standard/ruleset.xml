@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset name="Brain">
+  <description>The Printed API (Brain) coding standard.</description>
+
+  <!--
+    By default I have a standard called Umber, it follows PSR2 with some
+    developer experience changes. This doesn't mean we are following my
+    standards only, this file can be used to modify the rule set. My
+    umber standards is just a base that closely follows Doctrine.
+   -->
+  <rule ref="Umber">
+    <exclude name="Squiz.Commenting.InlineComment.NotCapital" />
+    <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingPropertyTypeHint" />
+
+    <!-- We have a fair amount of refactoring to do so these are difficult for now -->
+    <exclude name="Squiz.PHP.NonExecutableCode.Unreachable" />
+    <exclude name="Squiz.Commenting.InlineComment.SpacingAfter" />
+  </rule>
+
+  <rule ref="Squiz.Commenting.InlineComment">
+    <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
+  </rule>
+
+</ruleset>

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client;
 
 use Psr\Http\Message\StreamInterface;
@@ -7,16 +9,9 @@ use Psr\Http\Message\StreamInterface;
 interface RequestAdapterInterface
 {
     /**
-     * @param RequestContext $context
-     *
-     * @return array
+     * @return mixed[]
      */
-    public function request(RequestContext $context);
+    public function request(RequestContext $context): array;
 
-    /**
-     * @param RequestContext $context
-     *
-     * @return StreamInterface
-     */
-    public function stream(RequestContext $context);
+    public function stream(RequestContext $context): StreamInterface;
 }

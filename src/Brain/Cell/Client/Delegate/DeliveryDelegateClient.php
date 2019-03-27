@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\CountryResource;
+use Brain\Cell\EntityResource\Country\CountryResource;
+use Brain\Cell\EntityResource\Country\CountryResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
@@ -18,8 +21,6 @@ use Psr\Http\Message\StreamInterface;
 class DeliveryDelegateClient extends DelegateClient
 {
     /**
-     * @param DeliveryJobBatchResource $batch
-     *
      * @return DeliveryOptionResource[]|ResourceCollection
      */
     public function getDeliveryOptions(DeliveryJobBatchResource $batch)
@@ -34,15 +35,13 @@ class DeliveryDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(DeliveryOptionResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
-    /**
-     * @param string $id
-     *
-     * @return DeliveryOptionResource
-     */
-    public function getDeliveryOption($id)
+    public function getDeliveryOption(string $id): DeliveryOptionResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/delivery/options/%s', $id));
@@ -54,9 +53,9 @@ class DeliveryDelegateClient extends DelegateClient
     }
 
     /**
-     * @return CountryResource[]
+     * @return CountryResourceInterface[]|ResourceCollection
      */
-    public function getCountries()
+    public function getCountries(): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/countries');
@@ -64,17 +63,19 @@ class DeliveryDelegateClient extends DelegateClient
 
         $collection = new ResourceCollection();
         $collection->setEntityClass(CountryResource::class);
+
+        /** @var ResourceCollection $resource */
         $resource = $this->request($context, $collection);
 
         return $resource;
     }
 
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
-     * @return DeliveryServiceResource[]
+     * @return DeliveryServiceResource[]|ResourceCollection
      */
-    public function getServices($parameters = [])
+    public function getServices(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/delivery/services');
@@ -82,17 +83,14 @@ class DeliveryDelegateClient extends DelegateClient
 
         $collection = new ResourceCollection();
         $collection->setEntityClass(DeliveryServiceResource::class);
+
+        /** @var ResourceCollection $resource */
         $resource = $this->request($context, $collection);
 
         return $resource;
     }
 
-    /**
-     * @param DispatchResource $dispatch
-     *
-     * @return DispatchResource
-     */
-    public function createDispatch($dispatch)
+    public function createDispatch(DispatchResource $dispatch): DispatchResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/delivery/dispatch');
@@ -107,12 +105,7 @@ class DeliveryDelegateClient extends DelegateClient
         return $resource;
     }
 
-    /**
-     * @param string $dispatchId
-     *
-     * @return StreamInterface
-     */
-    public function downloadLabel($dispatchId)
+    public function downloadLabel(string $dispatchId): StreamInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/delivery/dispatch/%s/label', $dispatchId));

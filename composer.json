@@ -1,38 +1,37 @@
 {
-    "name": "brain/cell",
-    "description": "Brain SDK",
-    "type": "library",
-    "license": "MIT",
-    "minimum-stability": "stable",
-    "authors": [
-        {
-            "name": "printed.com",
-            "email": "developers@printed.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Brain\\Cell\\": "src/Brain/Cell"
-        }
-    },
-    "require": {
-        "php": ">=7.0",
+  "name": "brain/cell",
+  "description": "Brain SDK",
+  "type": "library",
 
-        "doctrine/collections": "~1.0",
-        "doctrine/common": "~2.0",
-
-        "symfony/http-foundation": "~3.1 || ~4.0",
-        "symfony/validator": "~3.1 || ~4.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^7.0",
-
-        "friendsofphp/php-cs-fixer": "2.8.3",
-        "mmoreram/php-formatter": "^1.3",
-
-        "guzzlehttp/guzzle": "^6.2"
-    },
-    "suggest": {
-        "guzzlehttp/guzzle": "Allow requests to be made using the GuzzleHttpRequestAdapter"
+  "autoload": {
+    "psr-4": {
+      "Brain\\Cell\\": "src/Brain/Cell"
     }
+  },
+
+  "require": {
+    "php": ">=7.1",
+    "ext-json": "*",
+
+    "doctrine/collections": "~1.0",
+    "doctrine/common": "~2.0",
+
+    "symfony/http-foundation": "~3.1 || ~4.0",
+    "symfony/validator": "~3.1 || ~4.0"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "^7.0",
+
+    "umber/coding-standard": "^2.0",
+    "mmoreram/php-formatter": "^1.3",
+
+    "phpstan/phpstan": "^0.10",
+
+    "guzzlehttp/guzzle": "^6.2"
+  },
+
+  "suggest": {
+    "guzzlehttp/guzzle": "Allow requests to be made using the GuzzleHttpRequestAdapter"
+  }
 }

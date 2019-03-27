@@ -1,23 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Product;
 
-use Brain\Cell\EntityResource\Interfaces\ResourcePublicIdInterface;
-use Brain\Cell\EntityResource\Traits\ResourcePublicIdTrait;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
  */
-class ProductResource extends AbstractResource implements ResourcePublicIdInterface
+class ProductResource extends AbstractResource implements
+    ProductResourceInterface
 {
-    use ResourcePublicIdTrait;
+    use ResourceIdentityTrait;
 
+    /** @var string */
     protected $name;
 
-    /**
-     * @var ProductGroupResource|null
-     */
+    /** @var ProductGroupResource|null */
     protected $productGroup;
 
     /**
@@ -31,41 +32,24 @@ class ProductResource extends AbstractResource implements ResourcePublicIdInterf
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return ChangeSetResource|null
-     */
-    public function getChangeSet()
-    {
-        return $this->changeSet;
-    }
-
-    /**
-     * @return ProductGroupResource|null
-     */
-    public function getProductGroup()
+    public function getProductGroup(): ?ProductGroupResource
     {
         return $this->productGroup;
     }
 
-    /**
-     * @param ProductGroupResource $productGroup
-     */
-    public function setProductGroup($productGroup)
+    public function setProductGroup(ProductGroupResource $productGroup): void
     {
         $this->productGroup = $productGroup;
     }

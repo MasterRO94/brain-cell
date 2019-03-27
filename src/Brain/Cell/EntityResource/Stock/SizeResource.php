@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Stock;
 
 use Brain\Cell\EntityResource\TwoDimensionalResource;
@@ -12,9 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SizeResource extends AbstractResource
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $id;
 
     /**
@@ -25,14 +25,10 @@ class SizeResource extends AbstractResource
      */
     protected $alias;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $name;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $stockType;
 
     /**
@@ -45,92 +41,51 @@ class SizeResource extends AbstractResource
         ];
     }
 
-    /**
-     * @var TwoDimensionalResource
-     */
+    /** @var TwoDimensionalResource */
     protected $dimensions;
 
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }
 
-    /**
-     * @param string $alias
-     *
-     * @return SizeResource
-     */
-    public function setAlias($alias)
+    public function setAlias(string $alias): void
     {
         $this->alias = $alias;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return SizeResource
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getStockType()
+    public function getStockType(): string
     {
         return $this->stockType;
     }
 
-    /**
-     * @param string $stockType
-     */
-    public function setStockType($stockType)
+    public function setStockType(string $stockType): void
     {
         $this->stockType = $stockType;
     }
 
-    /**
-     * @return TwoDimensionalResource
-     */
-    public function getDimensions()
+    public function getDimensions(): TwoDimensionalResource
     {
         return $this->dimensions;
     }
 
-    /**
-     * @param TwoDimensionalResource $dimensions
-     *
-     * @return SizeResource
-     */
-    public function setDimensions(TwoDimensionalResource $dimensions)
+    public function setDimensions(TwoDimensionalResource $dimensions): void
     {
         $this->dimensions = $dimensions;
-
-        return $this;
     }
 }

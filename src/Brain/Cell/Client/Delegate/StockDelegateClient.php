@@ -1,42 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\EntityResource\Stock\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResourceInterface;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
 use Brain\Cell\EntityResource\Stock\FinishingCombinationResource;
-use Brain\Cell\EntityResource\Stock\FinishingItemResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialBaseResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialVariantResource;
 use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
+use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
 use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\EntityResource\StockFinishingsResource;
-use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class StockDelegateClient extends DelegateClient
 {
     /**
-     * @param JobResource $jobResource
-     *
-     * @return AbstractResource|array|bool|StockFinishingsResource
-     *
      * @deprecated Please use "getStockOptions" from now on.
      */
-    public function getFinishings(JobResource $jobResource)
+    public function getFinishings(JobResource $jobResource): StockFinishingsResource
     {
         return $this->getStockOptions($jobResource);
     }
 
     /**
-     * @param JobResource $jobResource
      * @param mixed[] $parameters
-     *
-     * @return StockFinishingsResource
      */
-    public function getStockOptions(JobResource $jobResource, array $parameters = [])
+    public function getStockOptions(JobResource $jobResource, array $parameters = []): StockFinishingsResource
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/stock/options');
@@ -57,7 +53,7 @@ class StockDelegateClient extends DelegateClient
      *
      * @return FinishingCategoryResource[]|ResourceCollection
      */
-    public function getFinishingCategories(array $parameters = [])
+    public function getFinishingCategories(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/stock/finishing/categories');
@@ -66,15 +62,13 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(FinishingCategoryResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
-    /**
-     * @param FinishingCategoryResource $resource
-     *
-     * @return AbstractResource|array|bool|FinishingCategoryResource
-     */
-    public function createFinishingCategory(FinishingCategoryResource $resource)
+    public function createFinishingCategory(FinishingCategoryResource $resource): FinishingCategoryResourceInterface
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -82,15 +76,18 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/finishing/categories');
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new FinishingCategoryResource());
+        /** @var FinishingCategoryResourceInterface $resource */
+        $resource = $this->request($context, new FinishingCategoryResource());
+
+        return $resource;
     }
 
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return FinishingItemResource[]|ResourceCollection
      */
-    public function getFinishingOptions(array $parameters = [])
+    public function getFinishingOptions(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/stock/finishing/options');
@@ -99,16 +96,18 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(FinishingItemResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
     /**
-     * @param FinishingCategoryResource $resource
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
-     * @return AbstractResource|array|bool|FinishingItemResource[]
+     * @return ResourceCollection|FinishingItemResource[]
      */
-    public function getFinishingCategoryOptions(FinishingCategoryResource $resource, array $parameters = [])
+    public function getFinishingCategoryOptions(FinishingCategoryResource $resource, array $parameters = []): ResourceCollection
     {
         $categoryId = $resource->getId();
 
@@ -119,16 +118,13 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(FinishingItemResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
-    /**
-     * @param FinishingCategoryResource $categoryResource
-     * @param FinishingItemResource $resource
-     *
-     * @return array|bool|FinishingItemResource
-     */
-    public function createFinishingOption(FinishingCategoryResource $categoryResource, FinishingItemResource $resource)
+    public function createFinishingOption(FinishingCategoryResource $categoryResource, FinishingItemResource $resource): FinishingItemResource
     {
         $categoryId = $categoryResource->getId();
 
@@ -138,28 +134,29 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost(sprintf('/stock/finishing/categories/%s/options', $categoryId));
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new FinishingItemResource());
+        /** @var FinishingItemResource $resource */
+        $resource = $this->request($context, new FinishingItemResource());
+
+        return $resource;
     }
 
-    /**
-     * @param string $id
-     *
-     * @return MaterialResource[]|ResourceCollection
-     */
-    public function getMaterial($id)
+    public function getMaterial(string $id): MaterialResourceInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/stock/materials/%s', $id));
 
-        return $this->request($context, new MaterialResource());
+        /** @var MaterialResourceInterface $resource */
+        $resource = $this->request($context, new MaterialResource());
+
+        return $resource;
     }
 
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
-     * @return MaterialResource[]|ResourceCollection
+     * @return MaterialResourceInterface[]|ResourceCollection
      */
-    public function getMaterials(array $parameters = [])
+    public function getMaterials(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/stock/materials');
@@ -168,15 +165,18 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(MaterialResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return MaterialBaseResource[]|ResourceCollection
      */
-    public function getMaterialBases(array $parameters = [])
+    public function getMaterialBases(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/stock/material/bases');
@@ -185,15 +185,18 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(MaterialBaseResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return MaterialVariantResource[]|ResourceCollection
      */
-    public function getMaterialVariants(array $parameters = [])
+    public function getMaterialVariants(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/stock/material/variants');
@@ -202,15 +205,18 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(MaterialVariantResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return MaterialWeightResource[]|ResourceCollection
      */
-    public function getMaterialWeights(array $parameters = [])
+    public function getMaterialWeights(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/stock/material/weights');
@@ -219,15 +225,13 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(MaterialWeightResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
-    /**
-     * @param MaterialBaseResource $resource
-     *
-     * @return AbstractResource|array|bool|MaterialBaseResource
-     */
-    public function createMaterialBase(MaterialBaseResource $resource)
+    public function createMaterialBase(MaterialBaseResource $resource): MaterialBaseResource
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -235,15 +239,13 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/material/bases');
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new MaterialBaseResource());
+        /** @var MaterialBaseResource $resource */
+        $resource = $this->request($context, new MaterialBaseResource());
+
+        return $resource;
     }
 
-    /**
-     * @param MaterialWeightResource $resource
-     *
-     * @return AbstractResource|array|bool|MaterialWeightResource
-     */
-    public function createMaterialWeight(MaterialWeightResource $resource)
+    public function createMaterialWeight(MaterialWeightResource $resource): MaterialWeightResource
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -251,15 +253,13 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/material/weights');
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new MaterialWeightResource());
+        /** @var MaterialWeightResource $resource */
+        $resource = $this->request($context, new MaterialWeightResource());
+
+        return $resource;
     }
 
-    /**
-     * @param MaterialVariantResource $resource
-     *
-     * @return AbstractResource|array|bool|MaterialVariantResource
-     */
-    public function createMaterialVariant(MaterialVariantResource $resource)
+    public function createMaterialVariant(MaterialVariantResource $resource): MaterialVariantResource
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -267,15 +267,13 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/material/variants');
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new MaterialVariantResource());
+        /** @var MaterialVariantResource $resource */
+        $resource = $this->request($context, new MaterialVariantResource());
+
+        return $resource;
     }
 
-    /**
-     * @param MaterialResource $resource
-     *
-     * @return AbstractResource|array|bool|MaterialResource
-     */
-    public function createMaterial(MaterialResource $resource)
+    public function createMaterial(MaterialResource $resource): MaterialResource
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -283,15 +281,18 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/materials');
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new MaterialResource());
+        /** @var MaterialResource $resource */
+        $resource = $this->request($context, new MaterialResource());
+
+        return $resource;
     }
 
     /**
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return ResourceCollection|SizeResource[]
      */
-    public function getSizes(array $parameters = [])
+    public function getSizes(array $parameters = []): ResourceCollection
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet('/stock/sizes');
@@ -300,15 +301,13 @@ class StockDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(SizeResource::class);
 
-        return $this->request($context, $collection);
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $collection);
+
+        return $resource;
     }
 
-    /**
-     * @param SizeResource $resource
-     *
-     * @return AbstractResource|array|bool|SizeResource
-     */
-    public function createSize(SizeResource $resource)
+    public function createSize(SizeResource $resource): SizeResource
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -316,15 +315,13 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/sizes');
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new SizeResource());
+        /** @var SizeResource $resource */
+        $resource = $this->request($context, new SizeResource());
+
+        return $resource;
     }
 
-    /**
-     * @param FinishingCombinationResource $resource
-     *
-     * @return AbstractResource|FinishingCategoryResource
-     */
-    public function createFinishingCombination(FinishingCombinationResource $resource)
+    public function createFinishingCombination(FinishingCombinationResource $resource): FinishingCategoryResource
     {
         $handler = $this->configuration->getResourceHandler();
 
@@ -332,6 +329,9 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/finishing-combinations');
         $context->setPayload($handler->serialise($resource));
 
-        return $this->request($context, new FinishingCombinationResource());
+        /** @var FinishingCategoryResource $resource */
+        $resource = $this->request($context, new FinishingCombinationResource());
+
+        return $resource;
     }
 }

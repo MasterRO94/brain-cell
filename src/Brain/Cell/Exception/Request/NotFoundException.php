@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Exception\Request;
 
 use Brain\Cell\Exception\AbstractRequestException;
+
+use Throwable;
 
 /**
  * {@inheritdoc}
@@ -10,18 +14,14 @@ use Brain\Cell\Exception\AbstractRequestException;
 class NotFoundException extends AbstractRequestException
 {
     /**
-     * Constructor.
-     *
-     * @param string $message
-     * @param array|null $requestPayload
-     * @param array|null $responsePayload
-     * @param \Throwable|null $previous
+     * @param mixed[]|null $requestPayload
+     * @param mixed[]|null $responsePayload
      */
     public function __construct(
         string $message,
         ?array $requestPayload,
         ?array $responsePayload,
-        ?\Throwable $previous = null
+        ?Throwable $previous = null
     ) {
         parent::__construct(
             $message,
