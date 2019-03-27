@@ -574,9 +574,6 @@ class JobResource extends AbstractResource implements
             || $this->status->getCanonical() === JobStatusResource::STATUS_IMPOSITION_MANUAL;
     }
 
-    /**
-     * @return JobMetaResourceInterface|null
-     */
     public function getMeta(): ?JobMetaResourceInterface
     {
         return $this->meta;
