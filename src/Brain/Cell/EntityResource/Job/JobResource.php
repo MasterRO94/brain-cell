@@ -578,14 +578,14 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * {@inheritdoc}
+     * @return JobMetaResourceInterface|null
      */
-    public function getMeta(): JobMetaResourceInterface
+    public function getMeta(): ?JobMetaResourceInterface
     {
         return $this->meta;
     }
 
-    public function setMeta(JobMetaResourceInterface $meta): void
+    public function setMeta(?JobMetaResourceInterface $meta): void
     {
         $this->meta = $meta;
     }
