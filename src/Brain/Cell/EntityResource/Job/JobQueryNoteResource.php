@@ -15,7 +15,7 @@ class JobQueryNoteResource extends AbstractNoteResource
     public const CANONICAL_CREATION = 'job_query_note.canonical.creation';
     public const CANONICAL_RESOLUTION = 'job_query_note.canonical.resolution';
 
-    /** @var FileResource */
+    /** @var FileResource|null */
     protected $file;
 
     /**
