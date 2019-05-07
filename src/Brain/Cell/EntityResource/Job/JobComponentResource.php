@@ -45,7 +45,7 @@ class JobComponentResource extends AbstractResource implements
      * @Assert\NotBlank()
      * @Assert\Type(type="integer")
      *
-     * @var int
+     * @var int|null
      */
     protected $productionSheetCount;
 
@@ -225,14 +225,14 @@ class JobComponentResource extends AbstractResource implements
         $this->weight = $weight;
     }
 
-    public function getProductionSheetCount(): int
+    public function hasProductionSheetCount(): bool
     {
-        return $this->productionSheetCount;
+        return $this->productionSheetCount !== null;
     }
 
-    public function setProductionSheetCount(int $productionSheetCount): void
+    public function getProductionSheetCount(): ?int
     {
-        $this->productionSheetCount = $productionSheetCount;
+        return $this->productionSheetCount;
     }
 
     public function getSizeCountPerMaterial(): int
