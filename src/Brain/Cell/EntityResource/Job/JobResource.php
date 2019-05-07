@@ -112,7 +112,7 @@ class JobResource extends AbstractResource implements
     /** @var JobResource */
     protected $clonedFrom;
 
-    /** @var JobMetaResourceInterface */
+    /** @var JobMetaResourceInterface|null */
     protected $meta;
 
     /** @var PhaseResource|null */
