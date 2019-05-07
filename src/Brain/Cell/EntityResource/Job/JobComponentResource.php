@@ -225,6 +225,11 @@ class JobComponentResource extends AbstractResource implements
         $this->weight = $weight;
     }
 
+    public function hasProductionSheetCount(): bool
+    {
+        return $this->productionSheetCount !== null;
+    }
+
     public function getProductionSheetCount(): int
     {
         return $this->productionSheetCount;
