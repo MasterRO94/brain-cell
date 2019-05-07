@@ -47,7 +47,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         /** @var MockObject|GuzzleClient $guzzle */
         $guzzle = $this->createMock(GuzzleClient::class);
@@ -63,7 +63,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
      */
     public function requestAdapterReturnsSuccessResponseDeserialisedArrayIsReturned(): void
     {
-        $this->guzzle->expects($this->once())
+        $this->guzzle->expects(self::once())
             ->method('request')
             ->with(
                 Request::METHOD_GET,
@@ -80,8 +80,8 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
         $this->context->prepareContextForGet('/end-point');
         $response = $this->adapter->request($this->context);
 
-        $this->assertInternalType('array', $response);
-        $this->assertEquals(['hello' => 'world'], $response);
+        self::assertInternalType('array', $response);
+        self::assertEquals(['hello' => 'world'], $response);
     }
 
     /**
@@ -90,7 +90,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
      */
     public function requestWithSuppliedFiltersRequestIsMadeWithFilters(): void
     {
-        $this->guzzle->expects($this->once())
+        $this->guzzle->expects(self::once())
             ->method('request')
             ->with(
                 Request::METHOD_GET,

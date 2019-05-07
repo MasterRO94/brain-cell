@@ -35,7 +35,9 @@ class ArrayEncoderSerialisationOptions implements ArrayAccess
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $offset
+     *
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -43,7 +45,9 @@ class ArrayEncoderSerialisationOptions implements ArrayAccess
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $offset
+     *
+     * @return bool
      */
     public function offsetGet($offset)
     {
@@ -51,7 +55,8 @@ class ArrayEncoderSerialisationOptions implements ArrayAccess
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $offset
+     * @param bool $value
      */
     public function offsetSet($offset, $value): void
     {
@@ -59,7 +64,7 @@ class ArrayEncoderSerialisationOptions implements ArrayAccess
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $offset
      */
     public function offsetUnset($offset): void
     {

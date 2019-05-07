@@ -11,7 +11,10 @@ use Symfony\Component\HttpFoundation\ParameterBag;
  */
 final class RequestFilter implements RequestFilterInterface
 {
+    /** @var ParameterBag */
     private $filters;
+
+    /** @var ParameterBag */
     private $parameters;
 
     public function __construct()

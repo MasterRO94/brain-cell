@@ -68,13 +68,13 @@ class JobResource extends AbstractResource implements
     protected $queries;
 
     /**
-     * @var JobComponentResourceInterface[]|ResourceCollection
-     *
      * @Assert\Valid()
      * @Assert\Expression(
      *     expression="this.getComponents() && this.getComponents().count() > 0",
      *     message="There must be at least one component supplied"
      * )
+     *
+     * @var JobComponentResourceInterface[]|ResourceCollection
      */
     protected $components;
 
@@ -85,18 +85,18 @@ class JobResource extends AbstractResource implements
     protected $notes;
 
     /**
-     * @var JobBatchResourceInterface|null
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var JobBatchResourceInterface|null
      */
     protected $batch;
 
     /**
-     * @var ThreeDimensionalResource
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var ThreeDimensionalResource
      */
     protected $dimensions;
 
@@ -115,7 +115,7 @@ class JobResource extends AbstractResource implements
     /** @var JobMetaResourceInterface */
     protected $meta;
 
-    /** @var PhaseResource */
+    /** @var PhaseResource|null */
     protected $phase;
 
     /** @var string */

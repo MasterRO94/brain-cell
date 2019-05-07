@@ -12,6 +12,7 @@ use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transformer\ArrayEncoder;
 
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 /**
  * @group cell
@@ -22,21 +23,10 @@ use PHPUnit\Framework\TestCase;
  */
 final class ArrayEncoderTest extends TestCase
 {
-    /** @var ArrayEncoder */
-    protected $encoder;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
-    {
-        $this->encoder = new ArrayEncoder();
-    }
-
     /**
      * @test
      *
-     * @expectedException \RuntimeException
+     * @expectedException RuntimeException
      * @expectedExceptionMessage Unexpected TransferEntityInterface
      */
     public function encoderWillThrowOnInvalidTransferEntityInterface(): void
@@ -44,7 +34,7 @@ final class ArrayEncoderTest extends TestCase
         /** @var TransferEntityInterface $entity */
         $entity = $this->createMock(TransferEntityInterface::class);
 
-        $this->encoder->encode($entity);
+        (new ArrayEncoder())->encode($entity);
     }
 
     /**
@@ -59,8 +49,8 @@ final class ArrayEncoderTest extends TestCase
             'name' => 'string',
         ];
 
-        $response = $this->encoder->encode($resource);
-        $this->assertEquals($expected, $response);
+        $response = (new ArrayEncoder())->encode($resource);
+        self::assertEquals($expected, $response);
     }
 
     /**
@@ -78,8 +68,8 @@ final class ArrayEncoderTest extends TestCase
             'associated_resource' => 'some-id',
         ];
 
-        $response = $this->encoder->encode($parent);
-        $this->assertEquals($expected, $response);
+        $response = (new ArrayEncoder())->encode($parent);
+        self::assertEquals($expected, $response);
     }
 
     /**
@@ -96,8 +86,8 @@ final class ArrayEncoderTest extends TestCase
             'another-id',
         ];
 
-        $response = $this->encoder->encode($collection);
-        $this->assertEquals($expected, $response);
+        $response = (new ArrayEncoder())->encode($collection);
+        self::assertEquals($expected, $response);
     }
 
     /**
@@ -122,7 +112,7 @@ final class ArrayEncoderTest extends TestCase
             ],
         ];
 
-        $response = $this->encoder->encode($resource);
-        $this->assertEquals($expected, $response);
+        $response = (new ArrayEncoder())->encode($resource);
+        self::assertEquals($expected, $response);
     }
 }

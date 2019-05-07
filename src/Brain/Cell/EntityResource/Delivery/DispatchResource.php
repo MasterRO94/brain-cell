@@ -17,10 +17,10 @@ class DispatchResource extends AbstractResource
     use ResourceIdentityTrait;
 
     /**
-     * @var JobBatchResourceInterface|null
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var JobBatchResourceInterface|null
      */
     protected $batch;
 
