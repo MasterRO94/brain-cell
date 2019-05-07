@@ -7,6 +7,7 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\AbstractNoteResource;
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\File\FileResource;
 use Brain\Cell\EntityResource\File\FileResourceInterface;
 
 class JobQueryNoteResource extends AbstractNoteResource
