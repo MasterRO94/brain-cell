@@ -17,9 +17,9 @@ class ProductionStrategyResource extends AbstractResource
     use ResourceIdentityTrait;
 
     /**
-     * @var string
-     *
      * @Assert\NotBlank()
+     *
+     * @var string
      */
     protected $alias;
 

@@ -195,7 +195,7 @@ class AddressResource extends AbstractResource implements
     /**
      * {@inheritdoc}
      */
-    public function getAddressString()
+    public function getAddressString(): string
     {
         return implode(', ', array_filter([
             $this->name,
@@ -212,7 +212,7 @@ class AddressResource extends AbstractResource implements
     /**
      * {@inheritdoc}
      */
-    public function getDelimitedAddressString()
+    public function getDelimitedAddressString(): string
     {
         return implode(' | ', [
             $this->name,

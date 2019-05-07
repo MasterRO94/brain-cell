@@ -1,5 +1,7 @@
-parameters:
-  ignoreErrors:
+includes:
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
 
-    # Required because Guzzle doesn't extend Throwable here as it support BC PHP 5.5
-#    - '/GuzzleException/'
+parameters:
+  level: max
+  paths:
+    - src

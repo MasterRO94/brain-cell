@@ -15,6 +15,7 @@ use Brain\Cell\EntityResource\Production\ProductionStatusResource;
  */
 final class ProductionStatusTransitionHelper
 {
+    /** @var ProductionStatusDelegateClient */
     private $delegate;
 
     public function __construct(ProductionStatusDelegateClient $delegate)

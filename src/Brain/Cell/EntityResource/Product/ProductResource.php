@@ -18,7 +18,7 @@ class ProductResource extends AbstractResource implements
     /** @var string */
     protected $name;
 
-    /** @var ProductGroupResource|null */
+    /** @var ProductGroupResourceInterface|null */
     protected $productGroup;
 
     /**
@@ -44,13 +44,13 @@ class ProductResource extends AbstractResource implements
         $this->name = $name;
     }
 
-    public function getProductGroup(): ?ProductGroupResource
+    public function getProductGroup(): ?ProductGroupResourceInterface
     {
         return $this->productGroup;
     }
 
-    public function setProductGroup(ProductGroupResource $productGroup): void
+    public function setProductGroup(ProductGroupResourceInterface $group): void
     {
-        $this->productGroup = $productGroup;
+        $this->productGroup = $group;
     }
 }

@@ -18,17 +18,6 @@ use PHPUnit\Framework\TestCase;
  */
 final class ResourceCollectionTest extends TestCase
 {
-    /** @var ResourceCollection */
-    protected $collection;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
-    {
-        $this->collection = new ResourceCollection();
-    }
-
     /**
      * @test
      *
@@ -37,7 +26,7 @@ final class ResourceCollectionTest extends TestCase
      */
     public function getEntityClassOrThrowWillThrow(): void
     {
-        $this->collection->getEntityClassOrThrow();
+        (new ResourceCollection())->getEntityClassOrThrow();
     }
 
     /**
@@ -50,14 +39,15 @@ final class ResourceCollectionTest extends TestCase
     {
         $resource = new SimpleResourceMock();
 
-        $this->collection->add($resource);
-        $this->assertCount(1, $this->collection, 'Resource was not added to the ResourceCollection');
+        $collection = new ResourceCollection();
+        $collection->add($resource);
+        self::assertCount(1, $collection, 'Resource was not added to the ResourceCollection');
 
         /** @var SimpleResourceMock $resource */
         $resource = (object) [];
 
-        $this->collection->add($resource);
-        $this->fail('Collection should not accept anything but TransferEntityInterface');
+        $collection->add($resource);
+        self::fail('Collection should not accept anything but TransferEntityInterface');
     }
 
     /**
@@ -70,14 +60,16 @@ final class ResourceCollectionTest extends TestCase
     {
         $resource = new SimpleResourceMock();
 
+        $collection = new ResourceCollection();
+
         // Setting this should now tell the collection to be super strict on added resources.
-        $this->collection->setEntityClass(SimpleResourceMock::class);
+        $collection->setEntityClass(SimpleResourceMock::class);
 
         // Lets try it out.
-        $this->collection->add($resource);
-        $this->assertCount(1, $this->collection, 'Resource was not added to the ResourceCollection');
+        $collection->add($resource);
+        self::assertCount(1, $collection, 'Resource was not added to the ResourceCollection');
 
-        $this->collection->add(new SimpleResourceAssociationMock());
-        $this->fail('Collection should not accept anything but the set entity class (SimpleResourceMock)');
+        $collection->add(new SimpleResourceAssociationMock());
+        self::fail('Collection should not accept anything but the set entity class (SimpleResourceMock)');
     }
 }
