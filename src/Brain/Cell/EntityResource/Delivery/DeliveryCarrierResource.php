@@ -14,9 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class DeliveryCarrierResource extends AbstractResource
 {
     /**
-     * @var string
-     *
      * @Assert\NotBlank()
+     *
+     * @var string
      */
     protected $alias;
 

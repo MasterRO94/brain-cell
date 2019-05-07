@@ -39,7 +39,7 @@ final class ResourceHandlerServiceTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->resource = new SimpleResourceMock();
 
@@ -73,13 +73,13 @@ final class ResourceHandlerServiceTest extends TestCase
             'encoded' => true,
         ];
 
-        $this->encoder->expects($this->once())
+        $this->encoder->expects(self::once())
             ->method('encode')
             ->willReturn($data);
 
         $response = $this->handler->serialise($this->resource);
 
-        $this->assertEquals($data, $response, 'Service is not returning the response from the TransformerEncoderInterface');
+        self::assertEquals($data, $response, 'Service is not returning the response from the TransformerEncoderInterface');
     }
 
     /**
@@ -87,12 +87,12 @@ final class ResourceHandlerServiceTest extends TestCase
      */
     public function serviceDecoderDependency(): void
     {
-        $this->decoder->expects($this->once())
+        $this->decoder->expects(self::once())
             ->method('decode')
             ->willReturn($this->resource);
 
         $response = $this->handler->deserialise($this->resource, []);
-        $this->assertEquals($this->resource, $response, 'Service is not returning the response from the TransformerDecoderInterface');
+        self::assertEquals($this->resource, $response, 'Service is not returning the response from the TransformerDecoderInterface');
     }
 
     /**
@@ -100,11 +100,11 @@ final class ResourceHandlerServiceTest extends TestCase
      */
     public function serviceEntityFactoryDependency(): void
     {
-        $this->factory->expects($this->once())
+        $this->factory->expects(self::once())
             ->method('create')
             ->willReturn($this->resource);
 
         $response = $this->handler->create('class', '1');
-        $this->assertEquals($this->resource, $response, 'Service is not returning the response from the EntityFactory');
+        self::assertEquals($this->resource, $response, 'Service is not returning the response from the EntityFactory');
     }
 }

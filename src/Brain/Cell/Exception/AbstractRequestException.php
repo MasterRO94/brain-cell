@@ -12,8 +12,13 @@ use Throwable;
  */
 abstract class AbstractRequestException extends RuntimeException
 {
+    /** @var int */
     private $statusCode;
+
+    /** @var mixed[]|null */
     private $requestPayload;
+
+    /** @var mixed[]|null */
     private $responsePayload;
 
     /**

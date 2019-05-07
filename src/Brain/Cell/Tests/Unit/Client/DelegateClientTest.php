@@ -34,7 +34,7 @@ final class DelegateClientTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         /** @var RequestAdapterInterface|MockObject $adapter */
         $adapter = $this->createMock(RequestAdapterInterface::class);
@@ -49,7 +49,7 @@ final class DelegateClientTest extends TestCase
      */
     public function requestWhenRequestingWithResourceHandlerReturnsHydratedResources(): void
     {
-        $this->adapter->expects($this->once())
+        $this->adapter->expects(self::once())
             ->method('request')
             ->willReturn(
                 [
@@ -72,7 +72,7 @@ final class DelegateClientTest extends TestCase
         $delegate = new StockDelegateClient($this->configuration);
         $resource = $delegate->getFinishings(new JobResource());
 
-        $this->assertInstanceOf(StockFinishingsResource::class, $resource);
+        self::assertInstanceOf(StockFinishingsResource::class, $resource);
     }
 
     /**
@@ -81,16 +81,11 @@ final class DelegateClientTest extends TestCase
      */
     public function requestWhenRequestingWithPostSendsPayload(): void
     {
-        $this->adapter->expects($this->once())
+        $this->adapter->expects(self::once())
             ->method('request')
             ->with(
-                $this->callback(function (RequestContext $context) {
+                self::callback(static function (RequestContext $context) {
                     $payload = $context->getPayload();
-
-                    // Payload should be an array ..
-                    if (!is_array($payload)) {
-                        return false;
-                    }
 
                     // .. with resource keys at the root ..
                     if (!isset($payload['quantity'])) {

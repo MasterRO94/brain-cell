@@ -27,9 +27,9 @@ class ResourceCollection extends ArrayCollection implements
     /**
      * Return the entity class.
      *
-     * @throws RuntimeException When entity class is not present.
-     *
      * @internal
+     *
+     * @throws RuntimeException When entity class is not present.
      */
     public function getEntityClassOrThrow(): string
     {
@@ -61,18 +61,19 @@ class ResourceCollection extends ArrayCollection implements
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param TransferEntityInterface $value
      *
      * @throws RuntimeException When $value is not an instance of TransferEntityInterface.
      * @throws RuntimeException When $value is not an instance of the set entity class.
      */
-    public function add($value)
+    public function add($value): bool
     {
+        /** @var mixed $validation */
+        $validation = $value;
+
         // We only accept instance of TransferEntityInterface in these collections.
-        if (!$value instanceof TransferEntityInterface) {
-            throw new RuntimeException(sprintf('ResourceCollection::add() only accepts instances of TransferEntityInterface'));
+        if (!($validation instanceof TransferEntityInterface)) {
+            throw new RuntimeException('ResourceCollection::add() only accepts instances of TransferEntityInterface');
         }
 
         // Optionally if there was a entity class specified against the collection then we need to be strict.

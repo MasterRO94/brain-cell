@@ -13,6 +13,8 @@ interface CountryResourceInterface extends
     TransferEntityInterface
 {
     public function getName(): string;
+
     public function getIso(): string;
+
     public function getIso3(): string;
 }

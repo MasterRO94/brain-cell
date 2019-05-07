@@ -27,6 +27,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 {
     public const VERSION_MINIMUM = 6.2;
 
+    /** @var ClientInterface */
     protected $guzzle;
 
     public function __construct(ClientInterface $guzzle)
@@ -62,7 +63,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         $path = $context->getPath();
         $parameters = $context->getParameters()->all();
 
-        if ($context->getFilters()->count()) {
+        if ($context->getFilters()->count() !== 0) {
             $parameters = array_merge(
                 $parameters,
                 [
@@ -71,7 +72,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             );
         }
 
-        if (count($parameters)) {
+        if ($parameters !== []) {
             $path = sprintf('%s?%s', $path, urldecode(http_build_query($parameters)));
         }
 
@@ -101,14 +102,17 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     protected function wrapResponseException(Throwable $exception): Throwable
     {
         // If the exception isn't from Guzzle then return the original.
-        if (!$exception instanceof RequestException) {
+        if (!($exception instanceof RequestException)) {
             return $exception;
         }
+
+        /** @var ResponseInterface $response */
+        $response = $exception->getResponse();
 
         $method = $exception->getRequest()->getMethod();
         $uri = (string) $exception->getRequest()->getUri();
         $requestContent = $exception->getRequest()->getBody()->getContents();
-        $responseContent = $exception->getResponse()->getBody()->getContents();
+        $responseContent = $response->getBody()->getContents();
 
         $requestPayload = json_decode($requestContent, true);
         $responsePayload = json_decode($responseContent, true);
@@ -120,78 +124,73 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 
         // Attempt to fetch the canonical error, we can map exceptions on that.
         $canonical = $responsePayload['error']['canonical'] ?? null;
+        $status = $response->getStatusCode();
 
         // Decorate exceptions according to status code and potentially canonical.
-        switch ($exception->getResponse()->getStatusCode()) {
-            // Bad Request.
-            case 400:
-                if ($canonical === null) {
-                    return new BadRequestException(
-                        sprintf('%s %s: %s', $method, $uri, $responseContent),
+        if ($status === 400) {
+            if ($canonical === null) {
+                return new BadRequestException(
+                    sprintf('%s %s: %s', $method, $uri, $responseContent),
+                    $requestPayload,
+                    $responsePayload,
+                    $exception
+                );
+            }
+
+            // If we don't recognise the canonical we can still use the message
+            $message = $responsePayload['error']['message'] ?? null;
+            switch ($canonical) {
+                case ErrorMessageEnum::ERROR_PAYLOAD_VIOLATION:
+                    $violations = json_encode($responsePayload['violations'] ?? []);
+
+                    return new PayloadViolationException(
+                        sprintf('%s %s: %s', $method, $uri, $violations),
                         $requestPayload,
                         $responsePayload,
                         $exception
                     );
-                }
 
-                // If we don't recognise the canonical we can still use the message
-                $message = $responsePayload['error']['message'] ?? null;
-                switch ($canonical) {
-                    case ErrorMessageEnum::ERROR_PAYLOAD_VIOLATION:
-                        $violations = json_encode($responsePayload['violations'] ?? []);
+                case ErrorMessageEnum::ERROR_STATUS_TRANSITION:
+                    return new StatusTransitionException(
+                        sprintf(
+                            '%s %s: %s',
+                            $method,
+                            $uri,
+                            $message ?? $responseContent
+                        ),
+                        $requestPayload,
+                        $responsePayload,
+                        $exception
+                    );
 
-                        return new PayloadViolationException(
-                            sprintf('%s %s: %s', $method, $uri, $violations),
-                            $requestPayload,
-                            $responsePayload,
-                            $exception
-                        );
-
-                    case ErrorMessageEnum::ERROR_STATUS_TRANSITION:
-                        return new StatusTransitionException(
-                            sprintf(
-                                '%s %s: %s',
-                                $method,
-                                $uri,
-                                $message ?? $responseContent
-                            ),
-                            $requestPayload,
-                            $responsePayload,
-                            $exception
-                        );
-
-                    default:
-                        return new BadRequestException(
-                            sprintf(
-                                '%s %s: %s',
-                                $method,
-                                $uri,
-                                $message ?? $responseContent
-                            ),
-                            $requestPayload,
-                            $responsePayload,
-                            $exception
-                        );
-                }
-
-            // Not Found.
-            // no break
-                case 404:
-                return new NotFoundException(
-                    sprintf('%s %s', $method, $uri),
-                    $requestPayload,
-                    $responsePayload,
-                    $exception
-                );
-
-            default:
-                throw new UnknownRequestException(
-                    sprintf('%s %s: %s', $method, $uri, $responseContent),
-                    $exception->getResponse()->getStatusCode(),
-                    $requestPayload,
-                    $responsePayload,
-                    $exception
-                );
+                default:
+                    return new BadRequestException(
+                        sprintf(
+                            '%s %s: %s',
+                            $method,
+                            $uri,
+                            $message ?? $responseContent
+                        ),
+                        $requestPayload,
+                        $responsePayload,
+                        $exception
+                    );
+            }
+        } elseif ($status === 404) {
+            return new NotFoundException(
+                sprintf('%s %s', $method, $uri),
+                $requestPayload,
+                $responsePayload,
+                $exception
+            );
         }
+
+        throw new UnknownRequestException(
+            sprintf('%s %s: %s', $method, $uri, $responseContent),
+            $response->getStatusCode(),
+            $requestPayload,
+            $responsePayload,
+            $exception
+        );
     }
 }

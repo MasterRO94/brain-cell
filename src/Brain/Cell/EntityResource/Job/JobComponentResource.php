@@ -26,45 +26,45 @@ class JobComponentResource extends AbstractResource implements
     use ResourceIdentityTrait;
 
     /**
-     * @var int
-     *
      * @Assert\NotBlank()
      * @Assert\Type(type="integer")
+     *
+     * @var int
      */
     protected $rangeStart;
 
     /**
-     * @var int
-     *
      * @Assert\NotBlank()
      * @Assert\Type(type="integer")
+     *
+     * @var int
      */
     protected $rangeEnd;
 
     /**
-     * @var int
-     *
      * @Assert\NotBlank()
      * @Assert\Type(type="integer")
+     *
+     * @var int
      */
     protected $productionSheetCount;
 
     /**
-     * @var JobComponentOptionResourceInterface[]|ResourceCollection
-     *
      * @Assert\Valid()
      * @Assert\Expression(
      *     expression="this.getOptions() && this.getOptions().count() > 0",
      *     message="There must be options specified for the component"
      * )
+     *
+     * @var JobComponentOptionResourceInterface[]|ResourceCollection
      */
     protected $options;
 
     /**
-     * @var SizeResource
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var SizeResource
      */
     protected $size;
 
@@ -72,17 +72,17 @@ class JobComponentResource extends AbstractResource implements
     protected $stockDefinition;
 
     /**
-     * @var MaterialResourceInterface
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var MaterialResourceInterface
      */
     protected $material;
 
     /**
-     * @var TwoDimensionalInterface
-     *
      * @Assert\Valid()
+     *
+     * @var TwoDimensionalInterface
      */
     protected $dimensions;
 
@@ -93,10 +93,10 @@ class JobComponentResource extends AbstractResource implements
     protected $label;
 
     /**
-     * @var ArtworkResource
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var ArtworkResource
      */
     protected $artwork;
 

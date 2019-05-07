@@ -98,7 +98,7 @@ class ArrayDecoder extends AbstractTransformer
                     $value = $this->decodeResource($child, $value);
                 } else {
                     // we only have an ID or possibly an alias
-                    if (preg_match(static::UUID_REGEX, (string) $value)) {
+                    if (preg_match(self::UUID_REGEX, (string) $value) === 1) {
                         $value = $this->decodeResource($child, ['id' => $value]);
                     } else {
                         $value = $this->decodeResource($child, ['alias' => $value]);
@@ -112,8 +112,8 @@ class ArrayDecoder extends AbstractTransformer
                 $value = $this->decodeCollection($collection, $value);
 
                 // Unstructured fields - a different decoder would convert to array
-            } elseif (in_array($property->getName(), $dateTimeProperties)) {
-                $value = $value ? new DateTime($value) : $value;
+            } elseif (in_array($property->getName(), $dateTimeProperties, true)) {
+                $value = (bool) $value ? new DateTime($value) : $value;
             }
 
             // Using reflection set the protected property.

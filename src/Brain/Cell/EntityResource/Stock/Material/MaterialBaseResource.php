@@ -20,9 +20,9 @@ class MaterialBaseResource extends AbstractResource implements
     use ResourceAliasTrait;
 
     /**
-     * @var string
-     *
      * @Assert\NotBlank()
+     *
+     * @var string
      */
     protected $alias;
 

@@ -17,28 +17,25 @@ use PHPUnit\Framework\TestCase;
  */
 final class EntityFactoryTest extends TestCase
 {
-    /** @var EntityResourceFactory */
-    protected $factory;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUp()
-    {
-        $this->factory = new EntityResourceFactory();
-    }
-
     /**
      * @test
      */
     public function factoryConstructsNewTransferEntities(): void
     {
-        /** @var SimpleResourceMock $response */
-        $response = $this->factory->create(SimpleResourceMock::class);
-        $this->assertNull($response->getId(), 'The id should not have been set on construction');
+        /** @var SimpleResourceMock $resource */
+        $resource = (new EntityResourceFactory())->create(SimpleResourceMock::class);
 
-        /** @var SimpleResourceMock $response */
-        $response = $this->factory->create(SimpleResourceMock::class, 'some-id');
-        $this->assertEquals('some-id', $response->getId(), 'The id should have been set on construction');
+        self::assertNull($resource->getId());
+    }
+
+    /**
+     * @test
+     */
+    public function factoryConstructsNewTransferEntitiesWithId(): void
+    {
+        /** @var SimpleResourceMock $resource */
+        $resource = (new EntityResourceFactory())->create(SimpleResourceMock::class, 'some-id');
+
+        self::assertEquals('some-id', $resource->getId());
     }
 }
