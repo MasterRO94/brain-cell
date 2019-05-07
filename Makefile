@@ -67,7 +67,7 @@ code.sniff.fix:
 
 .PHONY: code.phpstan
 code.phpstan:
-	vendor/bin/phpstan analyse -l 4 src
+	vendor/bin/phpstan analyse
 
 # --------------------
 # Test

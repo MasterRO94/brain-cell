@@ -15,10 +15,48 @@
     <!-- We have a fair amount of refactoring to do so these are difficult for now -->
     <exclude name="Squiz.PHP.NonExecutableCode.Unreachable" />
     <exclude name="Squiz.Commenting.InlineComment.SpacingAfter" />
+
+    <!-- These cause syntax errors -->
+    <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint" />
+    <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint" />
+
+    <!-- Disabled for readability -->
+    <exclude name="SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses" />
+    <exclude name="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn.UselessIfCondition" />
+    <exclude name="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing.IncorrectLinesCountAfterLastControlStructure" />
+
+    <!-- Potentially broken at the moment -->
+    <exclude name="Squiz.Commenting.InlineComment.DocBlock" />
   </rule>
 
   <rule ref="Squiz.Commenting.InlineComment">
     <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
+  </rule>
+
+  <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+    <properties>
+      <property name="linesCountBeforeFirstContent" value="0"/>
+      <property name="linesCountAfterLastContent" value="0"/>
+      <property name="linesCountBetweenDescriptionAndAnnotations" value="1"/>
+      <property name="linesCountBetweenAnnotationsGroups" value="1"/>
+      <property name="annotationsGroups" type="array">
+        <element value="@todo, @todo-refactor"/>
+        <element value="@internal, @deprecated"/>
+        <element value="@Route, @Route\" />
+        <element value="@Rest, @Rest\" />
+        <element value="@ORM, @ORM\"/>
+        <element value="@Serializer, @Serializer\"/>
+        <element value="@Assert, @Assert\, @ApiSecurity\"/>
+        <element value="@test, @depends, @dataProvider"/>
+        <element value="@link, @see, @uses"/>
+        <element value="@group"/>
+        <element value="@param, @var"/>
+        <element value="@return"/>
+        <element value="@example"/>
+        <element value="@throws"/>
+        <element value="@covers, @coversNothing"/>
+      </property>
+    </properties>
   </rule>
 
 </ruleset>
