@@ -176,7 +176,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 
             // Not Found.
             // no break
-            case 404:
+                case 404:
                 return new NotFoundException(
                     sprintf('%s %s', $method, $uri),
                     $requestPayload,
