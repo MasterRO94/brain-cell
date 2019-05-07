@@ -7,7 +7,7 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\AbstractNoteResource;
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\File\FileResource;
+use Brain\Cell\EntityResource\File\FileResourceInterface;
 
 class JobQueryNoteResource extends AbstractNoteResource
 {
@@ -15,7 +15,7 @@ class JobQueryNoteResource extends AbstractNoteResource
     public const CANONICAL_CREATION = 'job_query_note.canonical.creation';
     public const CANONICAL_RESOLUTION = 'job_query_note.canonical.resolution';
 
-    /** @var FileResource|null */
+    /** @var FileResourceInterface|null */
     protected $file;
 
     /**
@@ -31,12 +31,12 @@ class JobQueryNoteResource extends AbstractNoteResource
         ];
     }
 
-    public function getFile(): ?FileResource
+    public function getFile(): ?FileResourceInterface
     {
         return $this->file;
     }
 
-    public function setFile(?FileResource $file): void
+    public function setFile(?FileResourceInterface $file): void
     {
         $this->file = $file;
     }
