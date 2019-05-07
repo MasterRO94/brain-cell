@@ -59,6 +59,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
 
     /**
      * @test
+     *
      * @testdox Adapter can understand success JSON responses
      */
     public function requestAdapterReturnsSuccessResponseDeserialisedArrayIsReturned(): void
@@ -86,6 +87,7 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
 
     /**
      * @test
+     *
      * @testdox Adapter can serialise filters.
      */
     public function requestWithSuppliedFiltersRequestIsMadeWithFilters(): void

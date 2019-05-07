@@ -45,6 +45,7 @@ final class DelegateClientTest extends TestCase
 
     /**
      * @test
+     *
      * @testdox Delegate hydrates resources as objects if there is a resource handler configured
      */
     public function requestWhenRequestingWithResourceHandlerReturnsHydratedResources(): void
@@ -77,6 +78,7 @@ final class DelegateClientTest extends TestCase
 
     /**
      * @test
+     *
      * @testdox Delegate can send post requests.
      */
     public function requestWhenRequestingWithPostSendsPayload(): void
