@@ -26,46 +26,31 @@ ci:
 # --------------------
 # Code Monitoring
 
-.PHONY: code
-code: \
-	code.format.header \
-	code.format.use \
-	code.sniff.report \
-	code.phpstan
+.PHONY: \
+	code code.fix code.format.header code.format.use code.phpstan \
+	code.sniff.report code.sniff.report.only.full code.sniff.report.only.diff code.sniff.fix
 
-.PHONY: code.fix
-code.fix: \
-	code.format.header \
-	code.format.use \
-	code.sniff.fix \
-	code.sniff.report \
-	code.phpstan
+code: code.format.header code.format.use code.sniff.report code.phpstan
+code.fix: code.format.header code.format.use code.sniff.fix code.sniff.report code.phpstan
 
-.PHONY: code.format.header
 code.format.header:
 	vendor/bin/php-formatter formatter:header:fix src --ansi --config="build/code/config"
 
-.PHONY: code.format.use
 code.format.use:
 	vendor/bin/php-formatter formatter:use:sort src --ansi --config="build/code/config"
 
-.PHONY: code.sniff.report
 code.sniff.report:
 	vendor/bin/phpcs --report=diff --report-full src
 
-.PHONY: code.sniff.report.only.full
 code.sniff.report.only.full:
 	vendor/bin/phpcs --report-full src
 
-.PHONY: code.sniff.report.only.diff
 code.sniff.report.only.diff:
 	vendor/bin/phpcs --report=diff src
 
-.PHONY: code.sniff.fix
 code.sniff.fix:
 	vendor/bin/phpcbf src
 
-.PHONY: code.phpstan
 code.phpstan:
 	vendor/bin/phpstan analyse
 
