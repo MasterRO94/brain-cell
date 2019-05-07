@@ -18,10 +18,10 @@ class SizeResource extends AbstractResource
     protected $id;
 
     /**
-     * @var string
-     *
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
+     *
+     * @var string
      */
     protected $alias;
 

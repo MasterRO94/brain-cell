@@ -10,6 +10,7 @@ use Brain\Cell\Transfer\ResourceCollection;
 
 class FinishingCombinationResource extends AbstractResource
 {
+    /** @var StockDefinitionResourceInterface */
     protected $stockDefinition;
 
     /** @var FinishingCombinationAssignmentResource[]|ResourceCollection */
@@ -45,20 +46,14 @@ class FinishingCombinationResource extends AbstractResource
         ];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getStockDefinition()
+    public function getStockDefinition(): StockDefinitionResourceInterface
     {
         return $this->stockDefinition;
     }
 
-    /**
-     * @param mixed $stockDefinition
-     */
-    public function setStockDefinition($stockDefinition): void
+    public function setStockDefinition(StockDefinitionResourceInterface $definition): void
     {
-        $this->stockDefinition = $stockDefinition;
+        $this->stockDefinition = $definition;
     }
 
     public function getStockMaterial(): MaterialResource

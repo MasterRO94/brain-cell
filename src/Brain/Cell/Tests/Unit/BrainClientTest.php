@@ -30,7 +30,7 @@ final class BrainClientTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         /** @var RequestAdapterInterface|MockObject $adapter */
         $adapter = $this->createMock(RequestAdapterInterface::class);
@@ -45,10 +45,10 @@ final class BrainClientTest extends TestCase
      */
     public function stockReturnsDelegateClient(): void
     {
-        $this->adapter->expects($this->never())->method('request');
+        $this->adapter->expects(self::never())->method('request');
 
         $client = new BrainClient($this->configuration);
-        $this->assertInstanceOf(StockDelegateClient::class, $client->stock());
+        self::assertInstanceOf(StockDelegateClient::class, $client->stock());
     }
 
     /**
@@ -57,9 +57,9 @@ final class BrainClientTest extends TestCase
      */
     public function jobReturnsDelegateClient(): void
     {
-        $this->adapter->expects($this->never())->method('request');
+        $this->adapter->expects(self::never())->method('request');
 
         $client = new BrainClient($this->configuration);
-        $this->assertInstanceOf(JobDelegateClient::class, $client->job());
+        self::assertInstanceOf(JobDelegateClient::class, $client->job());
     }
 }

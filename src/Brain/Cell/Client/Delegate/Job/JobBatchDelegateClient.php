@@ -83,7 +83,7 @@ class JobBatchDelegateClient extends DelegateClient
 
     public function updateStatus(JobBatchResourceInterface $batch, string $status): JobBatchResourceInterface
     {
-        if (!in_array($status, JobStatusResource::getAllCanonicals())) {
+        if (!in_array($status, JobStatusResource::getAllCanonicals(), true)) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));
         }
 

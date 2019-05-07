@@ -29,6 +29,8 @@ final class JobResourceIntegrationTest extends TestCase
     public function can(): void
     {
         $file = sprintf('%s/data/get-job.json', __DIR__);
+
+        /** @var string $json */
         $json = file_get_contents($file);
         $data = json_decode($json, true);
 

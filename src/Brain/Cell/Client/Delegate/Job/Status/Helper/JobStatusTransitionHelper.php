@@ -15,6 +15,7 @@ use Brain\Cell\EntityResource\Job\JobStatusResource;
  */
 final class JobStatusTransitionHelper
 {
+    /** @var JobStatusDelegateClient */
     private $delegate;
 
     public function __construct(JobStatusDelegateClient $delegate)

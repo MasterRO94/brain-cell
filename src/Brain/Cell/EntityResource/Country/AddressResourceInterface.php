@@ -37,9 +37,14 @@ interface AddressResourceInterface extends
     public function getCompany(): ?string;
 
     public function getAddressLine1(): string;
+
     public function getAddressLine2(): ?string;
+
     public function getCity(): string;
+
     public function getCountyState(): ?string;
+
     public function getPostcode(): string;
+
     public function getCountry(): CountryResourceInterface;
 }

@@ -21,21 +21,21 @@ class DeliveryJobBatchResource extends AbstractResource
     use ResourceIdentityTrait;
 
     /**
-     * @var AddressResource
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var AddressResource
      */
     protected $deliveryAddress;
 
     /**
-     * @var JobResource[]|ResourceCollection
-     *
      * @Assert\Valid()
      * @Assert\Expression(
      *     expression="this.getJobs() && this.getJobs().count() > 0",
      *     message="There must be jobs specified for the batch"
      * )
+     *
+     * @var JobResource[]|ResourceCollection
      */
     protected $jobs;
 

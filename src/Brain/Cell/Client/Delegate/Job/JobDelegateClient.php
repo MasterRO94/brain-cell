@@ -183,7 +183,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function updateStatus(JobResourceInterface $job, JobStatusResource $status): JobResourceInterface
     {
-        if (!in_array($status->getCanonical(), JobStatusResource::getAllCanonicals())) {
+        if (in_array($status->getCanonical(), JobStatusResource::getAllCanonicals(), true) === false) {
             throw new ClientException(sprintf(
                 'Invalid status canonical [%s]',
                 $status->getCanonical()
@@ -253,7 +253,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function replaceJobMeta(JobResourceInterface $job, JobMetaResourceInterface $meta): JobResourceInterface
     {
-        $id = $id = $job->getId();
+        $id = $job->getId();
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf('/jobs/%s/meta', $id));

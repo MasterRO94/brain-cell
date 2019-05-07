@@ -34,7 +34,7 @@ class ArrayEncoder extends AbstractTransformer
         TransferEntityInterface $entity,
         ?ArrayEncoderSerialisationOptions $options = null
     ): array {
-        if (!$options) {
+        if ($options === null) {
             $options = new ArrayEncoderSerialisationOptions();
         }
 
@@ -87,7 +87,7 @@ class ArrayEncoder extends AbstractTransformer
             // Certain fields can't be updated which is great
             // @todo remove setters for these and check missing setters here
             // @todo bear id in mind here - we need to be able to send id
-            if (\in_array($property->getName(), [
+            if (in_array($property->getName(), [
                 'created',
                 'updated',
                 'createdAt',
@@ -97,14 +97,17 @@ class ArrayEncoder extends AbstractTransformer
                 'productionHouse',
                 'productionFinishDate',
                 'dispatches',
-            ])) {
+            ], true)) {
                 continue;
             }
 
             if ($value instanceof TransferEntityInterface) {
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResourceAndShouldSerialiseAsId($value, $options)) {
-                    $value = $this->getValueForIdResource($value, $options);
+                    /** @var AbstractResource $input */
+                    $input = $value;
+
+                    $value = $this->getValueForIdResource($input, $options);
                 } elseif ($property->getName() === 'status') {
                     /** @var AbstractStatusResource $subject */
                     $subject = $value;
@@ -119,14 +122,20 @@ class ArrayEncoder extends AbstractTransformer
 
                         $value = $subject->getIso();
                     } else {
-                        $value = $this->encodeResource($value, $options);
+                        /** @var AbstractResource $input */
+                        $input = $value;
+
+                        $value = $this->encodeResource($input, $options);
                     }
                 } elseif (isset($collections[$property->getName()])) {
                     $result = [];
 
+                    /** @var ResourceCollection $input */
+                    $input = $value;
+
                     // Discard empty elements of collection
-                    foreach ($this->encodeCollection($value, $options) as $child) {
-                        if (empty($child)) {
+                    foreach ($this->encodeCollection($input, $options) as $child) {
+                        if ((bool) $child === false) {
                             continue;
                         }
 
@@ -148,7 +157,7 @@ class ArrayEncoder extends AbstractTransformer
             }
 
             // Ignore empty arrays, but don't ignore 0 or false
-            if ($value === null || (is_array($value) && empty($value))) {
+            if ($value === null || (is_array($value) && ((bool) $value === false))) {
                 continue;
             }
 
