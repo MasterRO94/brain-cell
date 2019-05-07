@@ -3,8 +3,5 @@ includes:
 
 parameters:
   level: max
-
-  # Add your new project files to this path list.
-  # All new code should be covered by the maximum strictness level.
   paths:
-    - app
+    - src

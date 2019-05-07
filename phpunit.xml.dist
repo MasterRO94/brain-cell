@@ -7,7 +7,7 @@
   forceCoversAnnotation="true"
   failOnRisky="true"
   colors="true"
-  bootstrap="app/autoload.php">
+  bootstrap="vendor/autoload.php">
 
     <php>
         <ini name="error_reporting" value="-1" />
