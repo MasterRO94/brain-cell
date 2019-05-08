@@ -41,6 +41,7 @@ final class BrainClientTest extends TestCase
 
     /**
      * @test
+     *
      * @testdox Can return a delegate for stock.
      */
     public function stockReturnsDelegateClient(): void
@@ -53,6 +54,7 @@ final class BrainClientTest extends TestCase
 
     /**
      * @test
+     *
      * @testdox Can return a delegate for job.
      */
     public function jobReturnsDelegateClient(): void
