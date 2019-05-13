@@ -42,7 +42,7 @@ class JobComponentResource extends AbstractResource implements
     protected $rangeEnd;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @Assert\NotBlank()
      * @Assert\Type(type="integer")
@@ -225,7 +225,7 @@ class JobComponentResource extends AbstractResource implements
         $this->weight = $weight;
     }
 
-    public function getProductionSheetCount(): int
+    public function getProductionSheetCount(): ?int
     {
         return $this->productionSheetCount;
     }

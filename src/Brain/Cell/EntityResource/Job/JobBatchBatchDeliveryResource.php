@@ -18,7 +18,8 @@ use Brain\Cell\Transfer\AbstractResource;
  *
  * These fields are nullable, because you can send this object "partially" to the api.
  */
-class JobBatchBatchDeliveryResource extends AbstractResource
+class JobBatchBatchDeliveryResource extends AbstractResource implements
+    JobBatchBatchDeliveryResourceInterface
 {
     /** @var AddressResource|null */
     protected $deliveryAddress;

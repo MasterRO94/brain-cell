@@ -40,7 +40,7 @@ class JobBatchResource extends AbstractResource implements
      */
     protected $deliveryOption;
 
-    /** @var JobBatchBatchDeliveryResource|null This is null only in the "incomplete" status */
+    /** @var JobBatchBatchDeliveryResourceInterface|null This is null only in the "incomplete" status */
     protected $batchDelivery;
 
     /**
@@ -105,12 +105,12 @@ class JobBatchResource extends AbstractResource implements
         $this->deliveryOption = $option;
     }
 
-    public function getBatchDelivery(): ?JobBatchBatchDeliveryResource
+    public function getBatchDelivery(): ?JobBatchBatchDeliveryResourceInterface
     {
         return $this->batchDelivery;
     }
 
-    public function setBatchDelivery(JobBatchBatchDeliveryResource $batchDelivery): void
+    public function setBatchDelivery(JobBatchBatchDeliveryResourceInterface $batchDelivery): void
     {
         $this->batchDelivery = $batchDelivery;
     }
