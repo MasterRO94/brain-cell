@@ -32,8 +32,6 @@ interface JobBatchResourceInterface extends
 
     /**
      * Return the batch delivery details.
-     *
-     * @return JobBatchBatchDeliveryResourceInterface|null
      */
     public function getBatchDelivery(): ?JobBatchBatchDeliveryResourceInterface;
 }
