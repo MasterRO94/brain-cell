@@ -22,6 +22,8 @@ interface MaterialResourceInterface extends
     public function getName(): string;
 
     public function getBase(): MaterialBaseResourceInterface;
+
     public function getVariant(): MaterialVariantResourceInterface;
+
     public function getWeight(): MaterialWeightResourceInterface;
 }

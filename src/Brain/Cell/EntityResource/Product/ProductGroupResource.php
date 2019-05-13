@@ -4,27 +4,23 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Product;
 
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
  * {@inheritdoc}
  */
-class ProductGroupResource extends AbstractResource
+class ProductGroupResource extends AbstractResource implements
+    ProductGroupResourceInterface
 {
-    protected $id;
+    use ResourceIdentityTrait;
 
+    /** @var string */
     protected $name;
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function setId(string $id): void
-    {
-        $this->id = $id;
-    }
-
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return $this->name;

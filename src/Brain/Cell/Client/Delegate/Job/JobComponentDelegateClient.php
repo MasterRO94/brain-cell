@@ -24,7 +24,7 @@ class JobComponentDelegateClient extends DelegateClient
             $jobComponentId
         ));
 
-        /** @var JobResource $resource */
+        /** @var JobComponentResource $resource */
         $resource = $this->request($context, new JobComponentResource());
 
         return $resource;

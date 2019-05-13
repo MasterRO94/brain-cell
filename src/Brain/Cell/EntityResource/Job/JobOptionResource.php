@@ -19,18 +19,18 @@ class JobOptionResource extends AbstractResource implements
     use ResourceIdentityTrait;
 
     /**
-     * @var FinishingCategoryResourceInterface
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var FinishingCategoryResourceInterface
      */
     protected $finishingCategory;
 
     /**
-     * @var FinishingItemResourceInterface
-     *
      * @Assert\Valid()
      * @Assert\NotBlank()
+     *
+     * @var FinishingItemResourceInterface
      */
     protected $finishingItem;
 

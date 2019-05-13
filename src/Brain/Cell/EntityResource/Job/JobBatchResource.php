@@ -26,10 +26,10 @@ class JobBatchResource extends AbstractResource implements
     protected $status;
 
     /**
-     * @var AddressResourceInterface
-     *
      * @deprecated Will be removed very soon. Please update your code. Use the $deliveryOption
      *   in status "incomplete" or the $batchDelivery in statuses past the status "incomplete".
+     *
+     * @var AddressResourceInterface
      */
     protected $address;
 
@@ -44,20 +44,20 @@ class JobBatchResource extends AbstractResource implements
     protected $batchDelivery;
 
     /**
-     * @var JobResourceInterface[]|ResourceCollection
-     *
      * @Assert\Valid()
      * @Assert\Expression(
      *     expression="this.getJobs() && this.getJobs().count() > 0",
      *     message="There must be jobs specified for the batch"
      * )
+     *
+     * @var JobResourceInterface[]|ResourceCollection
      */
     protected $jobs;
 
     /**
-     * @var DispatchResource[]|ResourceCollection
-     *
      * @Assert\Valid()
+     *
+     * @var DispatchResource[]|ResourceCollection
      */
     protected $dispatches;
 
@@ -126,9 +126,9 @@ class JobBatchResource extends AbstractResource implements
     /**
      * Set the jobs in the batch.
      *
-     * @param JobResourceInterface[]|ResourceCollection $jobs
-     *
      * @deprecated Unsure if this is allowed, check API endpoints in Brain.
+     *
+     * @param JobResourceInterface[]|ResourceCollection $jobs
      */
     public function setJobs($jobs): void
     {

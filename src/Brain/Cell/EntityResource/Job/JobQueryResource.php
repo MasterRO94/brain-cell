@@ -19,10 +19,10 @@ class JobQueryResource extends AbstractResource implements ResourceIdentityInter
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /** @var DateResource $resolved */
+    /** @var DateResource|null $resolved */
     protected $resolved;
 
-    /** @var DateResource $progressStarted */
+    /** @var DateResource|null $progressStarted */
     protected $progressStarted;
 
     /** @var ClientResource $assignee */

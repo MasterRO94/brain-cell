@@ -18,8 +18,10 @@ abstract class DelegateClient
         $this->configuration = $configuration;
     }
 
-    protected function request(RequestContext $context, ?TransferEntityInterface $resource = null): TransferEntityInterface
-    {
+    final protected function request(
+        RequestContext $context,
+        TransferEntityInterface $resource
+    ): TransferEntityInterface {
         $response = $this->configuration->getRequestAdapter()->request($context);
 
         return $this->configuration->getResourceHandler()->deserialise($resource, $response);

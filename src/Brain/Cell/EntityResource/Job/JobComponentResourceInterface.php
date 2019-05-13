@@ -18,6 +18,7 @@ interface JobComponentResourceInterface extends
     ResourceIdentityInterface
 {
     public function getRangeStart(): int;
+
     public function getRangeEnd(): int;
 
     /**
