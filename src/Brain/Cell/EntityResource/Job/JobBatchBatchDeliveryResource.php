@@ -6,6 +6,7 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Country\AddressResource;
+use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
 use Brain\Cell\EntityResource\Delivery\ProductionStrategyResource;
 use Brain\Cell\Transfer\AbstractResource;
@@ -16,9 +17,10 @@ use Brain\Cell\Transfer\AbstractResource;
  *
  * These fields are nullable, because you can send this object "partially" to the api.
  */
-class JobBatchBatchDeliveryResource extends AbstractResource
+class JobBatchBatchDeliveryResource extends AbstractResource implements
+    JobBatchBatchDeliveryResourceInterface
 {
-    /** @var AddressResource|null */
+    /** @var AddressResourceInterface|null */
     protected $deliveryAddress;
 
     /** @var ProductionStrategyResource|null */
@@ -65,12 +67,12 @@ class JobBatchBatchDeliveryResource extends AbstractResource
         ];
     }
 
-    public function getDeliveryAddress(): ?AddressResource
+    public function getDeliveryAddress(): ?AddressResourceInterface
     {
         return $this->deliveryAddress;
     }
 
-    public function setDeliveryAddress(AddressResource $deliveryAddress): void
+    public function setDeliveryAddress(AddressResourceInterface $deliveryAddress): void
     {
         $this->deliveryAddress = $deliveryAddress;
     }

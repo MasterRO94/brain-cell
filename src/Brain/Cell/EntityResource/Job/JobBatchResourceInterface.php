@@ -29,4 +29,9 @@ interface JobBatchResourceInterface extends
      * @return JobResourceInterface[]|ResourceCollection
      */
     public function getJobs(): ResourceCollection;
+
+    /**
+     * Return the batch delivery details.
+     */
+    public function getBatchDelivery(): ?JobBatchBatchDeliveryResourceInterface;
 }
