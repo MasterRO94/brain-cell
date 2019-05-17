@@ -11,7 +11,7 @@ use Brain\Cell\Transfer\ResourceCollection;
 /**
  * {@inheritdoc}
  */
-class ArtworkResource extends AbstractResource
+class ArtworkResource extends AbstractResource implements ArtworkResourceInterface
 {
     use ResourceIdentityTrait;
 
@@ -55,7 +55,7 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @return ArtworkFileResource[]|ResourceCollection
+     * {@inheritdoc}
      */
     public function getFiles(): ResourceCollection
     {
@@ -63,25 +63,31 @@ class ArtworkResource extends AbstractResource
     }
 
     /**
-     * @param ArtworkFileResource[]|ResourceCollection $files
+     * {@inheritdoc}
      */
     public function setFiles(ResourceCollection $files): void
     {
         $this->files = $files;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getStatus(): ArtworkStatusResource
     {
         return $this->status;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setStatus(ArtworkStatusResource $status): void
     {
         $this->status = $status;
     }
 
     /**
-     * @return ArtworkIssueResource[]|ResourceCollection|null
+     * {@inheritdoc}
      */
     public function getIssues(): ?ResourceCollection
     {

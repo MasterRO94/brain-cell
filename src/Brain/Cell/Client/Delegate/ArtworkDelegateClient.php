@@ -8,6 +8,7 @@ use Brain\Cell\Client\Delegate\File\FileDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Artwork\ArtworkResourceInterface;
 use Brain\Cell\EntityResource\File\FileDownloadPathResourceInterface;
 use Brain\Cell\EntityResource\File\FileResourceInterface;
 
@@ -15,12 +16,12 @@ use Psr\Http\Message\StreamInterface;
 
 class ArtworkDelegateClient extends DelegateClient
 {
-    public function get(string $id): ArtworkResource
+    public function get(string $id): ArtworkResourceInterface
     {
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForGet(sprintf('/artworks/%s', $id));
 
-        /** @var ArtworkResource $resource */
+        /** @var ArtworkResourceInterface $resource */
         $resource = $this->request($context, new ArtworkResource());
 
         return $resource;
