@@ -21,7 +21,7 @@ interface ArtworkResourceInterface extends
     /**
      * @return ArtworkStatusResource
      */
-    public function getStatus(): ArtworkStatusResource
+    public function getStatus(): ArtworkStatusResource;
 
     public function setStatus(ArtworkStatusResource $status): void;
 
