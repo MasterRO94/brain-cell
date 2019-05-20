@@ -15,12 +15,12 @@ interface JobMetaResourceInterface extends
     /**
      * Return meta data.
      *
-     * @return mixed[]
+     * @return mixed[]|null
      */
-    public function getData(): array;
+    public function getData(): ?array;
 
     /**
      * Return any job notes.
      */
-    public function getNote(): string;
+    public function getNote(): ?string;
 }
