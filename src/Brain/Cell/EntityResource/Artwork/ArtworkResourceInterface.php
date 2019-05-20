@@ -6,6 +6,7 @@ namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\TransferEntityInterface;
+use Brain\Cell\Transfer\ResourceCollection;
 
 interface ArtworkResourceInterface extends
     TransferEntityInterface,
