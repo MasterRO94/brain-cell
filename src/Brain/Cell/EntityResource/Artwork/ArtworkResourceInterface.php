@@ -21,9 +21,6 @@ interface ArtworkResourceInterface extends
      */
     public function setFiles(ResourceCollection $files): void;
 
-    /**
-     * @return ArtworkStatusResource
-     */
     public function getStatus(): ArtworkStatusResource;
 
     public function setStatus(ArtworkStatusResource $status): void;
