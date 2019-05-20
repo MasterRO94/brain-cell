@@ -12,13 +12,13 @@ use Brain\Cell\Transfer\AbstractResource;
 final class JobMetaResource extends AbstractResource implements
     JobMetaResourceInterface
 {
-    /** @var mixed[] */
+    /** @var mixed[]|null */
     protected $data;
 
-    /** @var string */
+    /** @var string|null */
     protected $group;
 
-    /** @var string */
+    /** @var string|null */
     protected $note;
 
     /**
@@ -34,25 +34,25 @@ final class JobMetaResource extends AbstractResource implements
     /**
      * {@inheritdoc}
      */
-    public function getData(): array
+    public function getData(): ?array
     {
         return $this->data;
     }
 
     /**
-     * @param mixed[] $data
+     * {@inheritdoc}
      */
-    public function setData(array $data): void
+    public function setData(?array $data): void
     {
         $this->data = $data;
     }
 
-    public function getGroup(): string
+    public function getGroup(): ?string
     {
         return $this->group;
     }
 
-    public function setGroup(string $group): void
+    public function setGroup(?string $group): void
     {
         $this->group = $group;
     }
@@ -60,12 +60,12 @@ final class JobMetaResource extends AbstractResource implements
     /**
      * {@inheritdoc}
      */
-    public function getNote(): string
+    public function getNote(): ?string
     {
         return $this->note;
     }
 
-    public function setNote(string $note): void
+    public function setNote(?string $note): void
     {
         $this->note = $note;
     }
