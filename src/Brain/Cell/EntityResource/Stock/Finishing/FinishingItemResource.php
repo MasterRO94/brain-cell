@@ -57,7 +57,7 @@ final class FinishingItemResource extends AbstractResource implements
     {
         return [
             'configuration',
-            'artworkLabels', // @todo ?
+            'artworkLabels',
         ];
     }
 
@@ -111,6 +111,9 @@ final class FinishingItemResource extends AbstractResource implements
         return $this->artworkLabels;
     }
 
+    /**
+     * @param string[] $artworkLabels
+     */
     public function setArtworkLabels(array $artworkLabels): void
     {
         $this->artworkLabels = $artworkLabels;
