@@ -41,6 +41,12 @@ final class FinishingItemResource extends AbstractResource implements
     /** @var bool */
     protected $configurable;
 
+    /** @var bool */
+    protected $isArtworkRequired;
+
+    /** @var string[] */
+    protected $artworkLabels;
+
     /** @var mixed[] */
     protected $configuration;
 
@@ -51,6 +57,7 @@ final class FinishingItemResource extends AbstractResource implements
     {
         return [
             'configuration',
+            'artworkLabels', // @todo ?
         ];
     }
 
@@ -81,6 +88,32 @@ final class FinishingItemResource extends AbstractResource implements
     public function setIsDefault(bool $isDefault): void
     {
         $this->isDefault = $isDefault;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isArtworkRequired(): bool
+    {
+        return $this->isArtworkRequired;
+    }
+
+    public function setIsArtworkRequired(bool $isArtworkRequired): void
+    {
+        $this->isArtworkRequired = $isArtworkRequired;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getArtworkLabels(): array
+    {
+        return $this->artworkLabels;
+    }
+
+    public function setArtworkLabels(array $artworkLabels): void
+    {
+        $this->artworkLabels = $artworkLabels;
     }
 
     /**
