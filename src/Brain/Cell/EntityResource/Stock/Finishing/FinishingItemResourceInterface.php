@@ -37,4 +37,14 @@ interface FinishingItemResourceInterface extends
      * @return mixed[]
      */
     public function getConfiguration(): array;
+
+    /**
+     * Check if artwork is required for this finishing item
+     */
+    public function isArtworkRequired(): bool;
+
+    /**
+     * @return string[]
+     */
+    public function getArtworkLabels(): array;
 }

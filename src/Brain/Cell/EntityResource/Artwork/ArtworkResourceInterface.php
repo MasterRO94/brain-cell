@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
-use Brain\Cell\TransferEntityInterface;
 use Brain\Cell\Transfer\ResourceCollection;
+use Brain\Cell\TransferEntityInterface;
 
 interface ArtworkResourceInterface extends
     TransferEntityInterface,
