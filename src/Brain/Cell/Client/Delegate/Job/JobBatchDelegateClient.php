@@ -18,7 +18,7 @@ class JobBatchDelegateClient extends DelegateClient
     public function getJobBatch(string $id): JobBatchResourceInterface
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/jobs/batches/%s', $id));
+        $context->prepareContextForGet(sprintf('/job/batches/%s', $id));
 
         /** @var JobBatchResourceInterface $resource */
         $resource = $this->request($context, new JobBatchResource());
@@ -29,7 +29,7 @@ class JobBatchDelegateClient extends DelegateClient
     public function postJobBatch(JobBatchResourceInterface $batch): JobBatchResourceInterface
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost('/jobs/batches');
+        $context->prepareContextForPost('/job/batches');
 
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($batch);
@@ -46,7 +46,7 @@ class JobBatchDelegateClient extends DelegateClient
         DeliveryOptionResource $deliveryOptionResource
     ): JobBatchResourceInterface {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPut(sprintf('/jobs/batches/%s/delivery-option', $jobBatchId));
+        $context->prepareContextForPut(sprintf('/job/batches/%s/delivery-option', $jobBatchId));
 
         $payload = [
             'delivery_option' => $deliveryOptionResource->getId(),
@@ -65,7 +65,7 @@ class JobBatchDelegateClient extends DelegateClient
         JobBatchBatchDeliveryResource $batchDeliveryResource
     ): JobBatchResourceInterface {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPatch(sprintf('/jobs/batches/%s/batch-delivery', $jobBatchId));
+        $context->prepareContextForPatch(sprintf('/job/batches/%s/batch-delivery', $jobBatchId));
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise(
@@ -89,7 +89,7 @@ class JobBatchDelegateClient extends DelegateClient
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
-            '/jobs/batches/%s/%s',
+            '/job/batches/%s/%s',
             $batch->getId(),
             str_replace('_', '-', $status)
         ));
