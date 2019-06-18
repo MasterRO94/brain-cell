@@ -20,7 +20,7 @@ class JobBatchDelegateClient extends DelegateClient
     public function getJobBatch($id)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForGet(sprintf('/jobs/batches/%s', $id));
+        $context->prepareContextForGet(sprintf('/job/batches/%s', $id));
 
         return $this->request($context, new JobBatchResource());
     }
@@ -33,7 +33,7 @@ class JobBatchDelegateClient extends DelegateClient
     public function postJobBatch(JobBatchResource $resource)
     {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPost('/jobs/batches');
+        $context->prepareContextForPost('/job/batches');
 
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($resource);
@@ -53,7 +53,7 @@ class JobBatchDelegateClient extends DelegateClient
         DeliveryOptionResource $deliveryOptionResource
     ) {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPut("/jobs/batches/{$jobBatchId}/delivery-option");
+        $context->prepareContextForPut("/job/batches/{$jobBatchId}/delivery-option");
 
         $payload = [
             'delivery_option' => $deliveryOptionResource->getIdOrThrow(),
@@ -78,7 +78,7 @@ class JobBatchDelegateClient extends DelegateClient
         JobBatchBatchDeliveryResource $batchDeliveryResource
     ) {
         $context = $this->configuration->createRequestContext();
-        $context->prepareContextForPatch("/jobs/batches/{$jobBatchId}/batch-delivery");
+        $context->prepareContextForPatch("/job/batches/{$jobBatchId}/batch-delivery");
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise(
@@ -108,7 +108,7 @@ class JobBatchDelegateClient extends DelegateClient
 
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPut(sprintf(
-            '/jobs/batches/%s/%s',
+            '/job/batches/%s/%s',
             $resource->getId(),
             str_replace('_', '-', $status)
         ));
