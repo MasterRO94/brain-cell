@@ -8,6 +8,7 @@ use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Pricing\PriceResource;
+use Brain\Cell\EntityResource\Pricing\PriceResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
@@ -54,13 +55,13 @@ class DeliveryOptionResource extends AbstractResource implements
     /** @var string */
     protected $deliveryTimeFrameLatest;
 
-    /** @var PriceResource */
+    /** @var PriceResourceInterface */
     protected $productionStrategyPrice;
 
-    /** @var PriceResource */
+    /** @var PriceResourceInterface */
     protected $deliveryServicePrice;
 
-    /** @var PriceResource */
+    /** @var PriceResourceInterface */
     protected $price;
 
     /** @var DateResource */
@@ -199,32 +200,32 @@ class DeliveryOptionResource extends AbstractResource implements
         $this->deliveryTimeFrameLatest = $deliveryTimeFrameLatest;
     }
 
-    public function getProductionStrategyPrice(): PriceResource
+    public function getProductionStrategyPrice(): PriceResourceInterface
     {
         return $this->productionStrategyPrice;
     }
 
-    public function setProductionStrategyPrice(PriceResource $productionStrategyPrice): void
+    public function setProductionStrategyPrice(PriceResourceInterface $productionStrategyPrice): void
     {
         $this->productionStrategyPrice = $productionStrategyPrice;
     }
 
-    public function getDeliveryServicePrice(): PriceResource
+    public function getDeliveryServicePrice(): PriceResourceInterface
     {
         return $this->deliveryServicePrice;
     }
 
-    public function setDeliveryServicePrice(PriceResource $deliveryServicePrice): void
+    public function setDeliveryServicePrice(PriceResourceInterface $deliveryServicePrice): void
     {
         $this->deliveryServicePrice = $deliveryServicePrice;
     }
 
-    public function getPrice(): PriceResource
+    public function getPrice(): PriceResourceInterface
     {
         return $this->price;
     }
 
-    public function setPrice(PriceResource $price): void
+    public function setPrice(PriceResourceInterface $price): void
     {
         $this->price = $price;
     }
