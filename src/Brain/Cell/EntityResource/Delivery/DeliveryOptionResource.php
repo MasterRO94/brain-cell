@@ -7,7 +7,7 @@ namespace Brain\Cell\EntityResource\Delivery;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Country\AddressResourceInterface;
-use Brain\Cell\EntityResource\PriceResource;
+use Brain\Cell\EntityResource\Pricing\PriceResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
