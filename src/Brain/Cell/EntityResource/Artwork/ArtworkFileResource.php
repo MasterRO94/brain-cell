@@ -26,7 +26,7 @@ final class ArtworkFileResource extends AbstractResource implements ArtworkFileR
     /** @var FileResourceInterface */
     protected $file;
 
-    /** @var FinishingItemResource */
+    /** @var FinishingItemResourceInterface */
     protected $finishingItem;
 
     /**

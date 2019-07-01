@@ -97,7 +97,7 @@ class JobComponentResource extends AbstractResource implements
      * @Assert\Valid()
      * @Assert\NotBlank()
      *
-     * @var ArtworkResource
+     * @var ArtworkResourceInterface
      */
     protected $artwork;
 
