@@ -10,7 +10,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
 
-final class DateResource extends AbstractResource
+final class DateResource extends AbstractResource implements DateResourceInterface
 {
     /** @var string */
     protected $iso;
@@ -19,7 +19,7 @@ final class DateResource extends AbstractResource
     protected $timezone;
 
     /**
-     * Return the ISO8601 date.
+     * {@inheritdoc}
      */
     public function getIso(): string
     {
@@ -27,7 +27,7 @@ final class DateResource extends AbstractResource
     }
 
     /**
-     * Set the ISO8601 date.
+     * {@inheritdoc}
      */
     public function setIso(string $iso): void
     {
@@ -35,7 +35,7 @@ final class DateResource extends AbstractResource
     }
 
     /**
-     * Return the timezone.
+     * {@inheritdoc}
      */
     public function getTimezone(): string
     {
@@ -43,7 +43,7 @@ final class DateResource extends AbstractResource
     }
 
     /**
-     * Set the timezone.
+     * {@inheritdoc}
      */
     public function setTimezone(string $timezone): void
     {
@@ -51,9 +51,7 @@ final class DateResource extends AbstractResource
     }
 
     /**
-     * Convert to a date time instance.
-     *
-     * @throws Exception Because DateTimeImmutable throws it for some reason.
+     * {@inheritdoc}
      */
     public function asDateTime(): DateTimeInterface
     {

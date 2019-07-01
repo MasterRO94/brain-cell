@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Artwork\ArtworkResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
 use Brain\Cell\Logical\Dimension\TwoDimensionalInterface;
@@ -37,4 +38,14 @@ interface JobComponentResourceInterface extends
      * @return ResourceCollection|JobComponentOptionResourceInterface[]
      */
     public function getOptions(): ResourceCollection;
+
+    /**
+     * @return ArtworkResourceInterface
+     */
+    public function getArtwork(): ArtworkResourceInterface;
+
+    /**
+     * @param ArtworkResourceInterface $artwork
+     */
+    public function setArtwork(ArtworkResourceInterface $artwork): void;
 }

@@ -13,12 +13,12 @@ interface ArtworkResourceInterface extends
     ResourceIdentityInterface
 {
     /**
-     * @return ArtworkFileResource[]|ResourceCollection
+     * @return ArtworkFileResourceInterface[]|ResourceCollection
      */
     public function getFiles(): ResourceCollection;
 
     /**
-     * @param ArtworkFileResource[]|ResourceCollection $files
+     * @param ArtworkFileResourceInterface[]|ResourceCollection $files
      */
     public function setFiles(ResourceCollection $files): void;
 
