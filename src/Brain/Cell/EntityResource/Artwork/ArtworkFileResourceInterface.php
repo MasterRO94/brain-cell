@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Artwork;
 
 use Brain\Cell\EntityResource\File\FileResourceInterface;
@@ -13,33 +15,15 @@ interface ArtworkFileResourceInterface extends
     ResourceIdentityInterface,
     CreatedAtInterface
 {
-    /**
-     * @return string
-     */
     public function getLabel(): string;
 
-    /**
-     * @param string $label
-     */
     public function setLabel(string $label): void;
 
-    /**
-     * @return FileResourceInterface
-     */
     public function getFile(): FileResourceInterface;
 
-    /**
-     * @param FileResourceInterface $file
-     */
     public function setFile(FileResourceInterface $file): void;
 
-    /**
-     * @return FinishingItemResourceInterface
-     */
     public function getFinishingItem(): FinishingItemResourceInterface;
 
-    /**
-     * @param FinishingItemResourceInterface $finishingItem
-     */
     public function setFinishingItem(FinishingItemResourceInterface $finishingItem): void;
 }

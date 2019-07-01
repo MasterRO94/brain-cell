@@ -8,7 +8,6 @@ use Brain\Cell\Transfer\AbstractResource;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use Exception;
 
 final class DateResource extends AbstractResource implements DateResourceInterface
 {

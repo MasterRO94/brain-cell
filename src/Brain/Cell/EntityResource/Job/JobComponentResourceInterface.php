@@ -39,13 +39,7 @@ interface JobComponentResourceInterface extends
      */
     public function getOptions(): ResourceCollection;
 
-    /**
-     * @return ArtworkResourceInterface
-     */
     public function getArtwork(): ArtworkResourceInterface;
 
-    /**
-     * @param ArtworkResourceInterface $artwork
-     */
     public function setArtwork(ArtworkResourceInterface $artwork): void;
 }

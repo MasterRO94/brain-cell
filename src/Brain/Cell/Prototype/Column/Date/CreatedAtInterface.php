@@ -1,13 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Prototype\Column\Date;
 
 use Brain\Cell\EntityResource\Common\DateResourceInterface;
 
 interface CreatedAtInterface
 {
-    /**
-     * @return DateResourceInterface
-     */
     public function getCreatedAt(): DateResourceInterface;
 }
