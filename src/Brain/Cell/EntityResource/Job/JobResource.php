@@ -8,7 +8,6 @@ use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
-use Brain\Cell\EntityResource\PriceResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\Product\ProductResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
@@ -100,9 +99,6 @@ class JobResource extends AbstractResource implements
      */
     protected $dimensions;
 
-    /** @var PriceResource */
-    protected $price;
-
     /** @var string */
     protected $reference;
 
@@ -149,7 +145,6 @@ class JobResource extends AbstractResource implements
             'batch' => JobBatchResource::class,
             'artifact' => ArtifactResource::class,
             'dimensions' => ThreeDimensionalResource::class,
-            'price' => PriceResource::class,
             'status' => JobStatusResource::class,
             'clonedFrom' => self::class,
             'meta' => JobMetaResource::class,
@@ -404,16 +399,6 @@ class JobResource extends AbstractResource implements
      */
     public function setHasQuery(bool $hasQuery): void
     {
-    }
-
-    public function getPrice(): PriceResource
-    {
-        return $this->price;
-    }
-
-    public function setPrice(PriceResource $price): void
-    {
-        $this->price = $price;
     }
 
     /**

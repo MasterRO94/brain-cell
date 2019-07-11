@@ -14,7 +14,7 @@ use Brain\Cell\Client\Delegate\Job\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobComponentDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobQueryDelegateClient;
-use Brain\Cell\Client\Delegate\PricingDelegateClient;
+use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\Production\ProductionDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
@@ -54,6 +54,9 @@ class BrainClient extends DelegateClient
         return new ProductionDelegateClient($this->configuration);
     }
 
+    /**
+     * Operate on pricing.
+     */
     public function pricing(): PricingDelegateClient
     {
         return new PricingDelegateClient($this->configuration);
