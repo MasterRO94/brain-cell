@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace Brain\Cell\Prototype\Column\Date;
 
-use Brain\Cell\EntityResource\Common\DateResource;
-
-use DateTime;
-use DateTimeInterface;
+use Brain\Cell\EntityResource\Common\DateResourceInterface;
 
 trait CreatedAtTrait
 {
-    /** @var DateResource */
+    /** @var DateResourceInterface */
     protected $createdAt;
 
     /**
      * Return the date created at.
      */
-    public function getCreatedAt(): DateResource
+    public function getCreatedAt(): DateResourceInterface
     {
         return $this->createdAt;
     }
@@ -27,25 +24,8 @@ trait CreatedAtTrait
      *
      * @internal Note this has no affect when posting resources.
      */
-    public function setCreatedAt(DateResource $createdAt): void
+    public function setCreatedAt(DateResourceInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
-    }
-
-    /**
-     * Return the date create at.
-     *
-     * @deprecated Consider using the "createdAt" methods instead, this method will be removed.
-     */
-    public function getCreated(): DateTimeInterface
-    {
-        return $this->createdAt->asDateTime();
-    }
-
-    /**
-     * @deprecated This method will be removed.
-     */
-    public function setCreated(DateTime $created): void
-    {
     }
 }

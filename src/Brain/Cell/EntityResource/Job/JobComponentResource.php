@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
+use Brain\Cell\EntityResource\Artwork\ArtworkResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
@@ -96,7 +97,7 @@ class JobComponentResource extends AbstractResource implements
      * @Assert\Valid()
      * @Assert\NotBlank()
      *
-     * @var ArtworkResource
+     * @var ArtworkResourceInterface
      */
     protected $artwork;
 
@@ -174,12 +175,12 @@ class JobComponentResource extends AbstractResource implements
         $this->rangeEnd = $rangeEnd;
     }
 
-    public function getArtwork(): ArtworkResource
+    public function getArtwork(): ArtworkResourceInterface
     {
         return $this->artwork;
     }
 
-    public function setArtwork(ArtworkResource $artwork): void
+    public function setArtwork(ArtworkResourceInterface $artwork): void
     {
         $this->artwork = $artwork;
     }

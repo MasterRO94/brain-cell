@@ -7,15 +7,18 @@ namespace Brain\Cell\EntityResource\Artwork;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\File\FileResource;
 use Brain\Cell\EntityResource\File\FileResourceInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResourceInterface;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-final class ArtworkFileResource extends AbstractResource
+final class ArtworkFileResource extends AbstractResource implements ArtworkFileResourceInterface
 {
     use CreatedAtTrait;
     use DeletedAtTrait;
+    use ResourceIdentityTrait;
 
     /** @var string */
     protected $label;
@@ -23,7 +26,7 @@ final class ArtworkFileResource extends AbstractResource
     /** @var FileResourceInterface */
     protected $file;
 
-    /** @var FinishingItemResource */
+    /** @var FinishingItemResourceInterface */
     protected $finishingItem;
 
     /**
@@ -40,7 +43,7 @@ final class ArtworkFileResource extends AbstractResource
     }
 
     /**
-     * Return the artwork file label.
+     * {@inheritdoc}
      */
     public function getLabel(): string
     {
@@ -48,7 +51,7 @@ final class ArtworkFileResource extends AbstractResource
     }
 
     /**
-     * Set the artwork file label.
+     * {@inheritdoc}
      */
     public function setLabel(string $label): void
     {
@@ -56,7 +59,7 @@ final class ArtworkFileResource extends AbstractResource
     }
 
     /**
-     * Return the artwork file.
+     * {@inheritdoc}
      */
     public function getFile(): FileResourceInterface
     {
@@ -64,7 +67,7 @@ final class ArtworkFileResource extends AbstractResource
     }
 
     /**
-     * Set the artwork file.
+     * {@inheritdoc}
      */
     public function setFile(FileResourceInterface $file): void
     {
@@ -72,17 +75,17 @@ final class ArtworkFileResource extends AbstractResource
     }
 
     /**
-     * Return the associated finishing item.
+     * {@inheritdoc}
      */
-    public function getFinishingItem(): FinishingItemResource
+    public function getFinishingItem(): FinishingItemResourceInterface
     {
         return $this->finishingItem;
     }
 
     /**
-     * Set the associated finishing item.
+     * {@inheritdoc}
      */
-    public function setFinishingItem(FinishingItemResource $finishingItem): void
+    public function setFinishingItem(FinishingItemResourceInterface $finishingItem): void
     {
         $this->finishingItem = $finishingItem;
     }

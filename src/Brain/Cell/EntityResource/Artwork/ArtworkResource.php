@@ -21,7 +21,7 @@ class ArtworkResource extends AbstractResource implements ArtworkResourceInterfa
     /** @var ArtworkStatusResource */
     protected $status;
 
-    /** @var ArtworkFileResource[]|ResourceCollection */
+    /** @var ArtworkFileResourceInterface[]|ResourceCollection */
     protected $files;
 
     /** @var ArtworkIssueResource[]|ResourceCollection */
