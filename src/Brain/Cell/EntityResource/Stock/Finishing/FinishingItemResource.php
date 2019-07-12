@@ -8,8 +8,6 @@ use Brain\Cell\EntityResource\Prototype\ResourceAliasTrait;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * {@inheritdoc}
  */
@@ -18,13 +16,6 @@ final class FinishingItemResource extends AbstractResource implements
 {
     use ResourceIdentityTrait;
     use ResourceAliasTrait;
-
-    /**
-     * @Assert\NotBlank()
-     *
-     * @var string
-     */
-    protected $alias;
 
     /** @var string */
     protected $name;

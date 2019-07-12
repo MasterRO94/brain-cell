@@ -9,8 +9,6 @@ use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * {@inheritdoc}
  */
@@ -19,13 +17,6 @@ final class FinishingCategoryResource extends AbstractResource implements
 {
     use ResourceIdentityTrait;
     use ResourceAliasTrait;
-
-    /**
-     * @Assert\NotBlank()
-     *
-     * @var string
-     */
-    protected $alias;
 
     /** @var string */
     protected $name;
