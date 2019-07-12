@@ -8,23 +8,14 @@ use Brain\Cell\EntityResource\Prototype\ResourceAliasTrait;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
- * {@inheritdoc}
+ * A material variant.
  */
 class MaterialVariantResource extends AbstractResource implements
     MaterialVariantResourceInterface
 {
     use ResourceIdentityTrait;
     use ResourceAliasTrait;
-
-    /**
-     * @Assert\NotBlank()
-     *
-     * @var string
-     */
-    protected $alias;
 
     /** @var string */
     protected $name;
@@ -38,7 +29,7 @@ class MaterialVariantResource extends AbstractResource implements
     }
 
     /**
-     * Set the human-readable name.
+     * @deprecated This should not be used, if you are using it for tests mock the interface.
      */
     public function setName(string $name): void
     {
