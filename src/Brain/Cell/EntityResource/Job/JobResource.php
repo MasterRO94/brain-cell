@@ -7,6 +7,8 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\Common\Weight\WeightResource;
+use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\Product\ProductResourceInterface;
@@ -50,7 +52,7 @@ class JobResource extends AbstractResource implements
     /** @var ProductResourceInterface|null */
     protected $product;
 
-    /** @var mixed[] */
+    /** @var WeightResourceInterface */
     protected $weight;
 
     /** @var int */
@@ -146,6 +148,7 @@ class JobResource extends AbstractResource implements
             'artifact' => ArtifactResource::class,
             'dimensions' => ThreeDimensionalResource::class,
             'status' => JobStatusResource::class,
+            'weight' => WeightResource::class,
             'clonedFrom' => self::class,
             'meta' => JobMetaResource::class,
             'phase' => PhaseResource::class,
@@ -277,17 +280,17 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * @return mixed[]
+     * {@inheritdoc}
      */
-    public function getWeight(): array
+    public function getWeight(): WeightResourceInterface
     {
         return $this->weight;
     }
 
     /**
-     * @param mixed[] $weight
+     * @deprecated This should not be used, if you are using it for tests mock the interface.
      */
-    public function setWeight(array $weight): void
+    public function setWeight(WeightResourceInterface $weight): void
     {
         $this->weight = $weight;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Stock\Material;
 
+use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceAliasInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\TransferEntityInterface;
@@ -20,4 +21,9 @@ interface MaterialWeightResourceInterface extends
      * Return the human-readable name.
      */
     public function getName(): string;
+
+    /**
+     * Return the material weight.
+     */
+    public function getWeight(): WeightResourceInterface;
 }

@@ -12,16 +12,25 @@ trait ResourceAliasTrait
     /** @var string|null */
     protected $alias;
 
-    public function getAlias(): string
+    /**
+     * Return the resource alias.
+     */
+    public function getAlias(): ?string
     {
         return $this->alias;
     }
 
+    /**
+     * @deprecated Test the return of getAlias() instead.
+     */
     public function hasAlias(): bool
     {
         return $this->alias !== null;
     }
 
+    /**
+     * @deprecated This should not be used, if you are using it for tests mock the interface.
+     */
     public function setAlias(string $alias): void
     {
         $this->alias = $alias;

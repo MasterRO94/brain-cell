@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Stock\Material;
 
+use Brain\Cell\EntityResource\Common\Weight\WeightResource;
+use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceAliasTrait;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
- * {@inheritdoc}
+ * A material weight.
  */
 class MaterialWeightResource extends AbstractResource implements
     MaterialWeightResourceInterface
@@ -19,21 +19,21 @@ class MaterialWeightResource extends AbstractResource implements
     use ResourceIdentityTrait;
     use ResourceAliasTrait;
 
-    /**
-     * @Assert\NotBlank()
-     *
-     * @var string
-     */
-    protected $alias;
-
     /** @var string */
     protected $name;
 
-    /** @var int */
+    /** @var WeightResourceInterface */
     protected $weight;
 
-    /** @var string */
-    protected $weightUnit;
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources(): array
+    {
+        return [
+            'weight' => WeightResource::class,
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -44,30 +44,34 @@ class MaterialWeightResource extends AbstractResource implements
     }
 
     /**
-     * Set the human-readable name.
+     * @deprecated This should not be used, if you are using it for tests mock the interface.
      */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    public function getWeight(): int
+    /**
+     * {@inheritdoc}
+     */
+    public function getWeight(): WeightResourceInterface
     {
         return $this->weight;
     }
 
-    public function setWeight(int $weight): void
+    /**
+     * @deprecated This should not be used, if you are using it for tests mock the interface.
+     */
+    public function setWeight(WeightResourceInterface $weight): void
     {
         $this->weight = $weight;
     }
 
+    /**
+     * @deprecated Will be removed soon, please use getWeight()->getUnit().
+     */
     public function getWeightUnit(): string
     {
-        return $this->weightUnit;
-    }
-
-    public function setWeightUnit(string $weightUnit): void
-    {
-        $this->weightUnit = $weightUnit;
+        return $this->weight->getUnit();
     }
 }

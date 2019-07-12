@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Product\ProductResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -46,6 +47,11 @@ interface JobResourceInterface extends
      * Return the quantity of this job to be produced.
      */
     public function getQuantity(): int;
+
+    /**
+     * Return the job weight resource.
+     */
+    public function getWeight(): WeightResourceInterface;
 
     /**
      * Return the job components.
