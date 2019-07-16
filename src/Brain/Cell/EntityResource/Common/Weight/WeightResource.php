@@ -13,10 +13,10 @@ final class WeightResource extends AbstractResource implements
     WeightResourceInterface
 {
     /** @var int */
-    private $value;
+    private $value = 0;
 
     /** @var string */
-    private $unit;
+    private $unit = WeightResourceInterface::UNIT_GRAMS;
 
     /**
      * {@inheritdoc}

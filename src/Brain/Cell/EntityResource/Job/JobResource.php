@@ -121,6 +121,8 @@ class JobResource extends AbstractResource implements
 
     public function __construct()
     {
+        $this->weight = new WeightResource();
+
         $this->clients = new ResourceCollection();
         $this->clients->setEntityClass(JobClientResource::class);
 
