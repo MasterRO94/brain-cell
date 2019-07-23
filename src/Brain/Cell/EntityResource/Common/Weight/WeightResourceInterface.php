@@ -17,7 +17,7 @@ interface WeightResourceInterface extends
     /**
      * Return the weight value.
      */
-    public function getValue(): int;
+    public function getValue(): float;
 
     /**
      * Return the weight unit.
