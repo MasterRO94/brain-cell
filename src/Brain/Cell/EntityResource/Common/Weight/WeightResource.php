@@ -21,7 +21,7 @@ final class WeightResource extends AbstractResource implements
     /**
      * {@inheritdoc}
      */
-    public function getValue(): int
+    public function getValue(): float
     {
         return $this->value;
     }
