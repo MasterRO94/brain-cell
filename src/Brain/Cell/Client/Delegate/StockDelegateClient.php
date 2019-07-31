@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\Common\Weight\WeightResource;
+use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResourceInterface;
@@ -16,7 +18,6 @@ use Brain\Cell\EntityResource\Stock\Material\MaterialWeightResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
 use Brain\Cell\EntityResource\Stock\SizeResource;
-use Brain\Cell\EntityResource\Stock\Weight\StockWeightResource;
 use Brain\Cell\EntityResource\StockFinishingsResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -336,16 +337,16 @@ class StockDelegateClient extends DelegateClient
         return $resource;
     }
 
-    public function getWeight(JobResource $resource): StockWeightResource
+    public function calculateJobWeight(JobResource $resource): WeightResourceInterface
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext();
         $context->prepareContextForPost('/stock/weight');
+
+        $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($resource));
 
-        /** @var StockWeightResource $resource */
-        $resource = $this->request($context, new StockWeightResource());
+        /** @var WeightResource $resource */
+        $resource = $this->request($context, new WeightResource());
 
         return $resource;
     }
