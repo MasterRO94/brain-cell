@@ -1,7 +1,12 @@
 includes:
+  - vendor/phpstan/phpstan-phpunit/extension.neon
   - vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
   level: max
   paths:
     - src
+
+  # This enables really strict contra-variance and covariance.
+  # Maybe for a future standards bump, but its a lot of work for now.
+  reportMaybesInMethodSignatures: false

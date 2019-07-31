@@ -10,7 +10,6 @@ use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Client\RequestContext;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\EntityResource\StockFinishingsResource;
 use Brain\Cell\Service\ResourceHandlerService;
 use Brain\Cell\Transfer\EntityResourceFactory;
 use Brain\Cell\Transformer\ArrayDecoder;
@@ -45,7 +44,6 @@ final class DelegateClientTest extends TestCase
 
     /**
      * @test
-     *
      * @testdox Delegate hydrates resources as objects if there is a resource handler configured
      */
     public function requestWhenRequestingWithResourceHandlerReturnsHydratedResources(): void
@@ -73,12 +71,11 @@ final class DelegateClientTest extends TestCase
         $delegate = new StockDelegateClient($this->configuration);
         $resource = $delegate->getFinishings(new JobResource());
 
-        self::assertInstanceOf(StockFinishingsResource::class, $resource);
+        self::assertEquals(1, $resource->getFinishings()->count());
     }
 
     /**
      * @test
-     *
      * @testdox Delegate can send post requests.
      */
     public function requestWhenRequestingWithPostSendsPayload(): void

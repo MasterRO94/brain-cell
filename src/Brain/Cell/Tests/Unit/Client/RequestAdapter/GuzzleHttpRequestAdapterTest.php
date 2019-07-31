@@ -59,7 +59,6 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
 
     /**
      * @test
-     *
      * @testdox Adapter can understand success JSON responses
      */
     public function requestAdapterReturnsSuccessResponseDeserialisedArrayIsReturned(): void
@@ -81,13 +80,11 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
         $this->context->prepareContextForGet('/end-point');
         $response = $this->adapter->request($this->context);
 
-        self::assertInternalType('array', $response);
         self::assertEquals(['hello' => 'world'], $response);
     }
 
     /**
      * @test
-     *
      * @testdox Adapter can serialise filters.
      */
     public function requestWithSuppliedFiltersRequestIsMadeWithFilters(): void
