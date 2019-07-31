@@ -1,31 +1,83 @@
 <?xml version="1.0"?>
-<ruleset name="Brain">
+<ruleset
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../vendor/squizlabs/php_codesniffer/phpcs.xsd"
+  name="Brain"
+>
   <description>The Printed API (Brain) coding standard.</description>
 
-  <!--
-    By default I have a standard called Umber, it follows PSR2 with some
-    developer experience changes. This doesn't mean we are following my
-    standards only, this file can be used to modify the rule set. My
-    umber standards is just a base that closely follows Doctrine.
-   -->
-  <rule ref="Umber">
-    <exclude name="Squiz.Commenting.InlineComment.NotCapital" />
+  <rule ref="PSR2">
+    <exclude name="Generic.Files.LineLength.TooLong" />
+    <exclude name="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses.IncorrectlyOrderedUses" />
     <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingPropertyTypeHint" />
+
+    <!-- Clashes with the Slevomat version causing double comma's -->
+    <exclude name="Squiz.Arrays.ArrayDeclaration.NoComma" />
+  </rule>
+
+  <!--
+    This standard now reads from doctrine as a base.
+    They can keep the standards up-to-date more than me so its easier to work from theirs.
+  -->
+  <rule ref="Doctrine">
+    <!--
+      These break code more than often.
+      For example methods that extend or implement that do not have return hints are given them.
+      This breaks the compatibility between them and will cause a syntax issue.
+    -->
+    <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint" />
+    <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint" />
+
+    <!-- Realistically line length is not an issue -->
+    <exclude name="Generic.Files.LineLength.TooLong" />
+
+    <!--
+      Lots of people are against this, however it makes it difficult to name when both are in the same namespace.
+      For this reason I am a fan of these 'fixes and thus this is an optional rule.
+    -->
+    <exclude name="SlevomatCodingStandard.Classes.SuperfluousAbstractClassNaming.SuperfluousPrefix" />
+    <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix" />
+    <exclude name="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming.SuperfluousSuffix" />
+    <exclude name="SlevomatCodingStandard.Classes.SuperfluousTraitNaming.SuperfluousSuffix" />
+
+    <!-- Aligning the use statements is ugly to me, disabled by default for this reason -->
+    <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame" />
+
+    <!-- In most cases the order of uses and annotations is important, but grouping is nice right? -->
+    <exclude name="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses.IncorrectlyOrderedUses" />
+    <exclude name="SlevomatCodingStandard.Namespaces.UseSpacing.IncorrectLinesCountBetweenSameTypeOfUse" />
+    <exclude name="SlevomatCodingStandard.Classes.TraitUseSpacing.IncorrectLinesCountBetweenUses" />
+
+    <!--
+      Global importing is something I am growing on.
+      But this can be enabled again, removed by default.
+    -->
+    <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName" />
+
+    <!-- Come on, aligning documentation -->
+    <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType" />
+    <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamName" />
+
+    <!-- Array syntax can be however you want, one-liners are almost always bad -->
+    <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed" />
+
+    <!-- Useless variables are better than pointless comments -->
+    <exclude name="SlevomatCodingStandard.Variables.UselessVariable.UselessVariable" />
+
+    <exclude name="Squiz.Commenting.InlineComment.NotCapital" />
+    <exclude name="Squiz.Commenting.InlineComment.SpacingAfter" />
 
     <!-- We have a fair amount of refactoring to do so these are difficult for now -->
     <exclude name="Squiz.PHP.NonExecutableCode.Unreachable" />
-    <exclude name="Squiz.Commenting.InlineComment.SpacingAfter" />
 
     <!-- These cause syntax errors -->
-    <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint" />
-    <exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint" />
 
     <!-- Disabled for readability -->
     <exclude name="SlevomatCodingStandard.PHP.UselessParentheses.UselessParentheses" />
     <exclude name="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn.UselessIfCondition" />
     <exclude name="SlevomatCodingStandard.ControlStructures.ControlStructureSpacing.IncorrectLinesCountAfterLastControlStructure" />
 
-    <!-- Potentially broken at the moment -->
+    <!-- This is disabled as it prevents explicit casting, probably will be enabled at some point -->
     <exclude name="Squiz.Commenting.InlineComment.DocBlock" />
   </rule>
 
@@ -33,6 +85,37 @@
     <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
   </rule>
 
+  <rule ref="Squiz.WhiteSpace.MemberVarSpacing">
+    <properties>
+      <property name="spacing" value="1" />
+      <property name="spacingBeforeFirst" value="0" />
+    </properties>
+  </rule>
+
+  <!--
+    Return type colon should sit along side the parenthesis.
+    Someone can fight me over this, but too many spaces.
+  -->
+  <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing">
+    <properties>
+      <property name="spacesCountBeforeColon" value="0" />
+    </properties>
+  </rule>
+
+  <!-- The exclamation mark should sit next to its target -->
+  <rule ref="Generic.Formatting.SpaceAfterNot">
+    <properties>
+      <property name="spacing" value="0" />
+    </properties>
+  </rule>
+
+  <!--
+    I need to figure out how to merge here.
+    These are altered from Doctrine with a few Symfony annotations thrown in.
+    Grouping also adds test annotations.
+  -->
+
+  <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing.IncorrectAnnotationsGroup" />
   <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
     <properties>
       <property name="linesCountBeforeFirstContent" value="0"/>
@@ -47,16 +130,41 @@
         <element value="@ORM, @ORM\"/>
         <element value="@Serializer, @Serializer\"/>
         <element value="@Assert, @Assert\, @ApiSecurity\"/>
-        <element value="@test, @depends, @dataProvider"/>
+        <element value="@test, @testdox, @depends, @dataProvider"/>
         <element value="@link, @see, @uses"/>
         <element value="@group"/>
         <element value="@param, @var"/>
         <element value="@return"/>
-        <element value="@example"/>
         <element value="@throws"/>
         <element value="@covers, @coversNothing"/>
+        <element value="@example"/>
       </property>
     </properties>
   </rule>
 
+  <rule ref="SlevomatCodingStandard.TypeHints.TypeHintDeclaration">
+    <properties>
+      <property name="usefulAnnotations" type="array">
+        <element value="@depends"/>
+        <element value="@requires"/>
+        <element value="@deprecated"/>
+        <element value="@group"/>
+        <element value="@internal"/>
+        <element value="@link"/>
+        <element value="@ODM\"/>
+        <element value="@ORM\"/>
+        <element value="@Rest\"/>
+        <element value="@Serializer\"/>
+        <element value="@Route"/>
+        <element value="@uses"/>
+        <element value="@see"/>
+        <element value="@test"/>
+        <element value="@dataProvider"/>
+        <element value="@throws"/>
+        <element value="@covers"/>
+        <element value="@coversDefaultClass"/>
+        <element value="@coversNothing"/>
+      </property>
+    </properties>
+  </rule>
 </ruleset>

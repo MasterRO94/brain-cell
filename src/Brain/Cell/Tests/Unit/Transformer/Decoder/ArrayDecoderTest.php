@@ -63,7 +63,6 @@ final class ArrayDecoderTest extends TestCase
 
         /** @var SimpleResourceMock $response */
         $response = (new ArrayDecoder())->decode(new SimpleResourceMock(), $data);
-        self::assertInstanceOf(SimpleResourceMock::class, $response, 'Decoder should return the given TransferEntityInterface');
 
         self::assertEquals($data['id'], $response->getId());
         self::assertEquals($data['name'], $response->getName());
@@ -111,12 +110,10 @@ final class ArrayDecoderTest extends TestCase
 
         /** @var SimpleResourceAssociationMock $response */
         $response = (new ArrayDecoder())->decode(new SimpleResourceAssociationMock(), $data);
-        self::assertInstanceOf(SimpleResourceAssociationMock::class, $response, 'Decoder should return the given TransferEntityInterface');
 
         self::assertEquals($data['id'], $response->getId());
 
         $association = $response->getAssociatedResource();
-        self::assertInstanceOf(SimpleResourceMock::class, $association);
         self::assertArrayHasKey('associatedResource', $data);
         self::assertEquals($data['associatedResource']['id'], $association->getId());
         self::assertEquals($data['associatedResource']['name'], $association->getName());
@@ -137,12 +134,9 @@ final class ArrayDecoderTest extends TestCase
 
         /** @var ResourceCollection $collection */
         $collection = (new ArrayDecoder())->decode($collection, $data);
-        self::assertInstanceOf(ResourceCollection::class, $collection, 'Decoder should return the given TransferEntityInterface');
 
         foreach ($collection as $resource) {
-            self::assertInstanceOf(SimpleResourceMock::class, $resource);
             self::assertNotNull($resource->getId());
-            self::assertNotNull($resource->getName());
         }
     }
 
@@ -162,17 +156,13 @@ final class ArrayDecoderTest extends TestCase
 
         /** @var SimpleResourceCollectionAssociationMock $response */
         $response = (new ArrayDecoder())->decode(new SimpleResourceCollectionAssociationMock(), $data);
-        self::assertInstanceOf(SimpleResourceCollectionAssociationMock::class, $response, 'Decoder should return the given TransferEntityInterface');
 
         self::assertEquals($data['id'], $response->getId());
 
         $collection = $response->getAssociatedCollection();
-        self::assertInstanceOf(ResourceCollection::class, $collection, 'Collection should have been created');
 
         foreach ($collection as $resource) {
-            self::assertInstanceOf(SimpleResourceMock::class, $resource);
             self::assertNotNull($resource->getId());
-            self::assertNotNull($resource->getName());
         }
     }
 }
