@@ -337,6 +337,9 @@ class StockDelegateClient extends DelegateClient
         return $resource;
     }
 
+    /**
+     * Calculate the weight of the given job.
+     */
     public function calculateJobWeight(JobResource $resource): WeightResourceInterface
     {
         $context = $this->configuration->createRequestContext();
