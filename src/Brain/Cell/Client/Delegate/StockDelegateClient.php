@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\EntityResource\Common\Weight\WeightResource;
+use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResourceInterface;
@@ -331,6 +333,23 @@ class StockDelegateClient extends DelegateClient
 
         /** @var FinishingCategoryResource $resource */
         $resource = $this->request($context, new FinishingCombinationResource());
+
+        return $resource;
+    }
+
+    /**
+     * Calculate the weight of the given job.
+     */
+    public function calculateJobWeight(JobResource $resource): WeightResourceInterface
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/stock/weight');
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($resource));
+
+        /** @var WeightResource $resource */
+        $resource = $this->request($context, new WeightResource());
 
         return $resource;
     }
