@@ -12,7 +12,7 @@ use Brain\Cell\Transfer\AbstractResource;
 final class WeightResource extends AbstractResource implements
     WeightResourceInterface
 {
-    /** @var int */
+    /** @var float */
     private $value = 0;
 
     /** @var string */
