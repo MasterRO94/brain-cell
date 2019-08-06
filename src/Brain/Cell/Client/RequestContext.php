@@ -110,6 +110,16 @@ class RequestContext
         $this->prepareContext(Request::METHOD_PATCH, $path);
     }
 
+    public function prepareContextForLink(string $path): void
+    {
+        $this->prepareContext('LINK', $path);
+    }
+
+    public function prepareContextForUnlink(string $path): void
+    {
+        $this->prepareContext('UNLINK', $path);
+    }
+
     public function prepareContext(string $httpRequestMethod, string $path): void
     {
         $this->method = $httpRequestMethod;

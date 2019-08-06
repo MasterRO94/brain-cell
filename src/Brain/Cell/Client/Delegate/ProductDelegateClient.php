@@ -9,6 +9,9 @@ use Brain\Cell\EntityResource\Product\ProductFinishingAssignmentResource;
 use Brain\Cell\EntityResource\Product\ProductMaterialAssignmentResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\Product\ProductSizeAssignmentResource;
+use Brain\Cell\EntityResource\Stock\Finishing\FinishingItemResource;
+use Brain\Cell\EntityResource\Stock\MaterialResource;
+use Brain\Cell\EntityResource\Stock\SizeResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class ProductDelegateClient extends DelegateClient
@@ -104,5 +107,31 @@ class ProductDelegateClient extends DelegateClient
         $resource = $this->request($context, new ProductFinishingAssignmentResource());
 
         return $resource;
+    }
+
+    public function linkMaterial(ProductResource $productResource, MaterialResource $materialResource): void
+    {
+        $handler = $this->configuration->getResourceHandler();
+
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForLink(sprintf('/products/%s/materials/%s', $productResource->getId(), $materialResource->getId()));
+
+        $this->configuration->getRequestAdapter()->request($context);
+    }
+
+    public function linkSize(ProductResource $productResource, SizeResource $sizeResource): void
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForLink(sprintf('/products/%s/sizes/%s', $productResource->getId(), $sizeResource->getId()));
+
+        $this->configuration->getRequestAdapter()->request($context);
+    }
+
+    public function linkFinishing(ProductResource $productResource, FinishingItemResource $finishingItemResource): void
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForLink(sprintf('/products/%s/finishings/%s', $productResource->getId(), $finishingItemResource->getId()));
+
+        $this->configuration->getRequestAdapter()->request($context);
     }
 }
