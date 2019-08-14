@@ -45,5 +45,4 @@ interface JobComponentResourceInterface extends
     public function setArtwork(ArtworkResourceInterface $artwork): void;
 
     public function getStockDefinition(): StockDefinitionResourceInterface;
-
 }
