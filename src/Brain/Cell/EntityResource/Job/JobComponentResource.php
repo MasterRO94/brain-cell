@@ -10,6 +10,7 @@ use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
 use Brain\Cell\EntityResource\Stock\SizeResource;
+use Brain\Cell\EntityResource\Stock\StockDefinitionResourceInterface;
 use Brain\Cell\EntityResource\StockDefinitionResource;
 use Brain\Cell\EntityResource\TwoDimensionalResource;
 use Brain\Cell\Logical\Dimension\TwoDimensionalInterface;
@@ -195,7 +196,7 @@ class JobComponentResource extends AbstractResource implements
         $this->size = $size;
     }
 
-    public function getStockDefinition(): StockDefinitionResource
+    public function getStockDefinition(): StockDefinitionResourceInterface
     {
         return $this->stockDefinition;
     }

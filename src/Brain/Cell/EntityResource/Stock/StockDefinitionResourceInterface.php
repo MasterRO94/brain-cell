@@ -18,4 +18,6 @@ interface StockDefinitionResourceInterface extends
      * The stock definition name defined by the client.
      */
     public function getName(): string;
+
+    public function getMinimumBleedBoxMargin(): int;
 }

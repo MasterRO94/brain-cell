@@ -34,6 +34,9 @@ class StockDefinitionResource extends AbstractResource implements
     /** @var int */
     protected $stripQuantity;
 
+    /** @var int */
+    protected $minimumBleedBoxMargin;
+
     public function getName(): string
     {
         return $this->name;
@@ -62,5 +65,10 @@ class StockDefinitionResource extends AbstractResource implements
     public function getStripQuantity(): int
     {
         return $this->stripQuantity;
+    }
+
+    public function getMinimumBleedBoxMargin(): int
+    {
+        return $this->minimumBleedBoxMargin;
     }
 }
