@@ -44,11 +44,6 @@ class SizeResource extends AbstractResource
     /** @var TwoDimensionalResource */
     protected $dimensions;
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
     public function getAlias(): string
     {
         return $this->alias;
