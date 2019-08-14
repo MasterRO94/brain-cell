@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Stock;
 
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\TwoDimensionalResource;
 use Brain\Cell\Transfer\AbstractResource;
 
@@ -14,8 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SizeResource extends AbstractResource
 {
-    /** @var string */
-    protected $id;
+    use ResourceIdentityTrait;
 
     /**
      * @Assert\NotBlank()
@@ -43,11 +43,6 @@ class SizeResource extends AbstractResource
 
     /** @var TwoDimensionalResource */
     protected $dimensions;
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
 
     public function getAlias(): string
     {
