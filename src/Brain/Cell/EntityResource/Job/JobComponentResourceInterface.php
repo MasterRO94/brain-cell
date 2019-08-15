@@ -7,6 +7,7 @@ namespace Brain\Cell\EntityResource\Job;
 use Brain\Cell\EntityResource\Artwork\ArtworkResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Stock\MaterialResourceInterface;
+use Brain\Cell\EntityResource\Stock\StockDefinitionResourceInterface;
 use Brain\Cell\Logical\Dimension\TwoDimensionalInterface;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
@@ -42,4 +43,6 @@ interface JobComponentResourceInterface extends
     public function getArtwork(): ArtworkResourceInterface;
 
     public function setArtwork(ArtworkResourceInterface $artwork): void;
+
+    public function getStockDefinition(): StockDefinitionResourceInterface;
 }
