@@ -45,7 +45,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         $contents = (string) $response->getBody();
 
         // Specifically handle LINK and UNLINK method calls to Brain as these do not return JSON responses.
-        if (in_array($context->getMethod(), ['LINK', 'UNLINK'])
+        if (in_array($context->getMethod(), ['LINK', 'UNLINK'], true)
             && $contents === ''
         ) {
             return [];
