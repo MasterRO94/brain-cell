@@ -5,12 +5,21 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Common\AbstractStatusResource;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 
 /**
  * {@inheritdoc}
  */
 final class JobStatusResource extends AbstractStatusResource
 {
+    /**
+     * @todo if these should be on AbstractStatusResource instead, move them there
+     * @todo also create interfaces for all of these
+     */
+    use ResourceIdentityTrait;
+    use CreatedAtTrait;
+
     public const STATUS_INCOMPLETE = 'job.status.incomplete';
     public const STATUS_READY = 'job.status.ready';
     public const STATUS_IMPOSITION_QUEUED = 'job.status.imposition_queued';
