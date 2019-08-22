@@ -15,16 +15,6 @@ final class JobStatusResource extends AbstractStatusResource
 {
     use CreatedAtTrait;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAssociatedResources(): array
-    {
-        return [
-            'createdAt' => DateResource::class,
-        ];
-    }
-
     public const STATUS_INCOMPLETE = 'job.status.incomplete';
     public const STATUS_READY = 'job.status.ready';
     public const STATUS_IMPOSITION_QUEUED = 'job.status.imposition_queued';
@@ -50,6 +40,16 @@ final class JobStatusResource extends AbstractStatusResource
             self::STATUS_PRODUCTION_FINISHED,
             self::STATUS_PRODUCTION_DISPATCHED,
             self::STATUS_CANCELLED,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources(): array
+    {
+        return [
+            'createdAt' => DateResource::class,
         ];
     }
 }

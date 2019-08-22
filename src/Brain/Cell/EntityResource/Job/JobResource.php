@@ -220,16 +220,11 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * @return JobStatusResource[]|ResourceCollection
+     * {@inheritdoc}
      */
-    public function getStatuses()
+    public function getStatuses(): ResourceCollection
     {
         return $this->statuses;
-    }
-
-    public function setStatuses(ResourceCollection $statuses): void
-    {
-        $this->statuses = $statuses;
     }
 
     /**
