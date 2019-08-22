@@ -6,7 +6,6 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Common\AbstractStatusResource;
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 
 /**
@@ -14,11 +13,6 @@ use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
  */
 final class JobStatusResource extends AbstractStatusResource
 {
-    /**
-     * @todo if these should be on AbstractStatusResource instead, move them there
-     * @todo also create interfaces for all of these
-     */
-    use ResourceIdentityTrait;
     use CreatedAtTrait;
 
     /**
