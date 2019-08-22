@@ -71,4 +71,9 @@ interface JobResourceInterface extends
      * Return the job meta.
      */
     public function getMeta(): ?JobMetaResourceInterface;
+
+    /**
+     * @return JobStatusResource[]|ResourceCollection
+     */
+    public function getStatuses(): ResourceCollection;
 }
