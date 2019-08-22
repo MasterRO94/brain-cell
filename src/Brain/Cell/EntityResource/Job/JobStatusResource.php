@@ -25,7 +25,6 @@ final class JobStatusResource extends AbstractStatusResource
         ];
     }
 
-
     public const STATUS_INCOMPLETE = 'job.status.incomplete';
     public const STATUS_READY = 'job.status.ready';
     public const STATUS_IMPOSITION_QUEUED = 'job.status.imposition_queued';
