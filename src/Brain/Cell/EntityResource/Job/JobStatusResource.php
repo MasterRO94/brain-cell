@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Common\AbstractStatusResource;
+use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 
 /**
  * {@inheritdoc}
  */
 final class JobStatusResource extends AbstractStatusResource
 {
+    use CreatedAtTrait;
+
     public const STATUS_INCOMPLETE = 'job.status.incomplete';
     public const STATUS_READY = 'job.status.ready';
     public const STATUS_IMPOSITION_QUEUED = 'job.status.imposition_queued';
@@ -36,6 +40,16 @@ final class JobStatusResource extends AbstractStatusResource
             self::STATUS_PRODUCTION_FINISHED,
             self::STATUS_PRODUCTION_DISPATCHED,
             self::STATUS_CANCELLED,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources(): array
+    {
+        return [
+            'createdAt' => DateResource::class,
         ];
     }
 }

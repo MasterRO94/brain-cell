@@ -49,6 +49,9 @@ class JobResource extends AbstractResource implements
     /** @var JobStatusResource $status */
     protected $status;
 
+    /** @var JobStatusResource[]|ResourceCollection $statuses */
+    protected $statuses;
+
     /** @var ProductResourceInterface|null */
     protected $product;
 
@@ -137,6 +140,9 @@ class JobResource extends AbstractResource implements
 
         $this->notes = new ResourceCollection();
         $this->notes->setEntityClass(JobNoteResource::class);
+
+        $this->statuses = new ResourceCollection();
+        $this->statuses->setEntityClass(JobStatusResource::class);
     }
 
     /**
@@ -171,6 +177,7 @@ class JobResource extends AbstractResource implements
             'options' => JobOptionResource::class,
             'notes' => JobNoteResource::class,
             'queries' => JobQueryResource::class,
+            'statuses' => JobStatusResource::class,
         ];
     }
 
@@ -210,6 +217,14 @@ class JobResource extends AbstractResource implements
     public function setStatus(JobStatusResource $status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatuses(): ResourceCollection
+    {
+        return $this->statuses;
     }
 
     /**
