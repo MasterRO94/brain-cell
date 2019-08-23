@@ -11,7 +11,7 @@ use Brain\Cell\EntityResource\Common\AbstractStatusResource;
  */
 final class ProductionStatusResource extends AbstractStatusResource
 {
-    public const STATUS_STARTED = 'production.status.started';
-    public const STATUS_COMPLETED = 'production.status.completed';
-    public const STATUS_CANCELLED = 'production.status.cancelled';
+    public const STATUS_STARTED = 'started';
+    public const STATUS_COMPLETED = 'completed';
+    public const STATUS_CANCELLED = 'cancelled';
 }
