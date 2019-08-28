@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Delivery;
 
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -15,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class DispatchResource extends AbstractResource
 {
     use ResourceIdentityTrait;
+    use CreatedAtTrait;
 
     /**
      * @Assert\Valid()
@@ -45,6 +48,7 @@ class DispatchResource extends AbstractResource
     public function getAssociatedResources(): array
     {
         return [
+            'createdAt' => DateResource::class,
             'batch' => JobBatchResource::class,
         ];
     }
