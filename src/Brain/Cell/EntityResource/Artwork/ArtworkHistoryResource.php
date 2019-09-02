@@ -18,6 +18,9 @@ class ArtworkHistoryResource extends AbstractResource implements ArtworkHistoryR
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAssociatedResources(): array
     {
         return [
