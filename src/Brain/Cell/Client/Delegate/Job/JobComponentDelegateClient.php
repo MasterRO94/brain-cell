@@ -9,6 +9,7 @@ use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Job\JobComponentResource;
 use Brain\Cell\EntityResource\Job\JobComponentResourceInterface;
 use Brain\Cell\EntityResource\Job\JobResourceInterface;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class JobComponentDelegateClient extends DelegateClient
 {
@@ -26,6 +27,26 @@ class JobComponentDelegateClient extends DelegateClient
 
         /** @var JobComponentResource $resource */
         $resource = $this->request($context, new JobComponentResource());
+
+        return $resource;
+    }
+
+    public function getArtworkHistories(
+        JobResourceInterface $job,
+        JobComponentResourceInterface $component
+    ): ResourceCollection {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf(
+            '/jobs/%s/components/%s/artwork-histories',
+            $job->getId(),
+            $component->getId()
+        ));
+
+        $result = new ResourceCollection();
+        $result->setEntityClass(ArtworkHistoryResource::class);
+
+        /** @var ResourceCollection $resource */
+        $resource = $this->request($context, $result);
 
         return $resource;
     }
