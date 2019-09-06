@@ -22,11 +22,15 @@ class ClientConfiguration
     protected $resourceHandler;
 
     /** @var string */
-    private $apiKey;
+    protected $apiKey;
 
-    public function __construct(RequestAdapterInterface $requestAdapter, string $apiKey)
+    public function __construct(RequestAdapterInterface $requestAdapter)
     {
         $this->requestAdapter = $requestAdapter;
+    }
+
+    public function setApiKey(string $apiKey): void
+    {
         $this->apiKey = $apiKey;
     }
 
