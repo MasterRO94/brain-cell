@@ -41,6 +41,19 @@ final class FinishingItemResource extends AbstractResource implements
     /** @var mixed[] */
     protected $configuration;
 
+    /** @var FinishingCategoryResource */
+    protected $category;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources(): array
+    {
+        return [
+            'category' => FinishingCategoryResource::class,
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -144,7 +157,7 @@ final class FinishingItemResource extends AbstractResource implements
         return $this->weight;
     }
 
-    public function setWeight(int $weight): self
+    public function setWeight(int $weight): void
     {
         $this->weight = $weight;
     }
@@ -154,8 +167,18 @@ final class FinishingItemResource extends AbstractResource implements
         return $this->weightUnit;
     }
 
-    public function setWeightUnit(string $weightUnit): self
+    public function setWeightUnit(string $weightUnit): void
     {
         $this->weightUnit = $weightUnit;
+    }
+
+    public function getCategory(): FinishingCategoryResource
+    {
+        return $this->category;
+    }
+
+    public function setCategory(FinishingCategoryResource $category): void
+    {
+        $this->category = $category;
     }
 }
