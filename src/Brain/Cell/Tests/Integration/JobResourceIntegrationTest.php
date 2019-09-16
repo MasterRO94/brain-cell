@@ -40,7 +40,7 @@ final class JobResourceIntegrationTest extends TestCase
             ->method('request')
             ->willReturn($data);
 
-        $configuration = new ClientConfiguration($adapter, 'some-key');
+        $configuration = new ClientConfiguration($adapter);
         $configuration->setResourceHandler(
             new ResourceHandlerService(
                 new EntityResourceFactory(),
