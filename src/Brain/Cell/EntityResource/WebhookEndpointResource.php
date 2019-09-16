@@ -4,7 +4,8 @@ namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Transfer\AbstractResource;
 
-class WebhookEndpointResource extends AbstractResource
+final class WebhookEndpointResource extends AbstractResource implements
+    WebhookEndpointResourceInterface
 {
     /**
      * @var string
@@ -12,7 +13,7 @@ class WebhookEndpointResource extends AbstractResource
     protected $endpoint;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getEndpoint(): string
     {
@@ -20,7 +21,7 @@ class WebhookEndpointResource extends AbstractResource
     }
 
     /**
-     * @param string $endpoint
+     * {@inheritdoc}
      */
     public function setEndpoint(string $endpoint): void
     {

@@ -12,11 +12,12 @@ use Brain\Cell\Transfer\AbstractResource;
 /**
  * {@inheritdoc}
  */
-class ClientEnvironmentResource extends AbstractResource implements ResourceIdentityInterface
+final class ClientEnvironmentResource extends AbstractResource implements
+    ClientEnvironmentResourceInterface
 {
     use ResourceIdentityTrait;
 
-    /** @var ClientEnvironmentTypeResource */
+    /** @var ClientEnvironmentTypeResourceInterface */
     protected $type;
 
     /** @var string */
@@ -32,18 +33,19 @@ class ClientEnvironmentResource extends AbstractResource implements ResourceIden
         ];
     }
 
-    public function getType(): ClientEnvironmentTypeResource
+    /**
+     * {@inheritdoc}
+     */
+    public function getType(): ClientEnvironmentTypeResourceInterface
     {
         return $this->type;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
     }
 }

@@ -8,30 +8,26 @@ use Brain\Cell\Service\ResourceHandlerService;
 
 use RuntimeException;
 
-class ClientConfiguration
+final class ClientConfiguration
 {
     public const VERSION = 'v1';
 
     /** @var RequestAdapterInterface */
-    protected $requestAdapter;
+    private $requestAdapter;
 
     /** @var string */
-    protected $basePath = 'https://api.printed-api.com';
+    private $basePath = 'https://api.printed-api.com';
 
     /** @var ResourceHandlerService|null */
-    protected $resourceHandler;
+    private $resourceHandler;
 
     /** @var string */
-    protected $apiKey;
+    private $apiKey;
 
-    public function __construct(RequestAdapterInterface $requestAdapter)
-    {
-        $this->requestAdapter = $requestAdapter;
-    }
-
-    public function setApiKey(string $apiKey): void
+    public function __construct(RequestAdapterInterface $requestAdapter, string $apiKey)
     {
         $this->apiKey = $apiKey;
+        $this->requestAdapter = $requestAdapter;
     }
 
     public function getRequestAdapter(): RequestAdapterInterface

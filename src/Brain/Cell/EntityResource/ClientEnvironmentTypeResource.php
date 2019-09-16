@@ -12,7 +12,8 @@ use Brain\Cell\Transfer\AbstractResource;
 /**
  * {@inheritdoc}
  */
-class ClientEnvironmentTypeResource extends AbstractResource implements ResourceIdentityInterface
+final class ClientEnvironmentTypeResource extends AbstractResource implements
+    ClientEnvironmentTypeResourceInterface
 {
     use ResourceIdentityTrait;
 
@@ -26,7 +27,7 @@ class ClientEnvironmentTypeResource extends AbstractResource implements Resource
     protected $priority;
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getAlias(): string
     {
@@ -34,15 +35,7 @@ class ClientEnvironmentTypeResource extends AbstractResource implements Resource
     }
 
     /**
-     * @param string $alias
-     */
-    public function setAlias(string $alias): void
-    {
-        $this->alias = $alias;
-    }
-
-    /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName(): string
     {
@@ -50,26 +43,10 @@ class ClientEnvironmentTypeResource extends AbstractResource implements Resource
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getPriority(): int
     {
         return $this->priority;
-    }
-
-    /**
-     * @param int $priority
-     */
-    public function setPriority(int $priority): void
-    {
-        $this->priority = $priority;
     }
 }

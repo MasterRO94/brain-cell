@@ -14,7 +14,7 @@ class WhoAmIResponseResource extends AbstractResource
     /** @var ClientResource */
     protected $client;
 
-    /** @var ClientEnvironmentResource */
+    /** @var ClientEnvironmentResourceInterface */
     protected $environment;
 
     /** @var mixed[] */
@@ -52,7 +52,7 @@ class WhoAmIResponseResource extends AbstractResource
         return $this->client;
     }
 
-    public function getEnvironment(): ClientEnvironmentResource
+    public function getEnvironment(): ClientEnvironmentResourceInterface
     {
         return $this->environment;
     }

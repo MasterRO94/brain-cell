@@ -3,13 +3,13 @@
 namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\WebhookEndpointResource;
+use Brain\Cell\EntityResource\WebhookEndpointResourceInterface;
 
-class WebhookDelegateClient extends DelegateClient
+final class WebhookDelegateClient extends DelegateClient
 {
     public function postWebhookEndpoint(
-        WebhookEndpointResource $webhookEndpoint
-    ): WebhookEndpointResource {
+        WebhookEndpointResourceInterface $webhookEndpoint
+    ): WebhookEndpointResourceInterface {
         $handler = $this->configuration->getResourceHandler();
 
         $context = $this->configuration->createRequestContext();
