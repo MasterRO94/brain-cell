@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource;
 
 use Brain\Cell\Transfer\AbstractResource;
@@ -7,9 +9,7 @@ use Brain\Cell\Transfer\AbstractResource;
 final class WebhookEndpointResource extends AbstractResource implements
     WebhookEndpointResourceInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $endpoint;
 
     /**

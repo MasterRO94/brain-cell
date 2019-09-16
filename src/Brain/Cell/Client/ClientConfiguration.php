@@ -26,8 +26,8 @@ final class ClientConfiguration
 
     public function __construct(RequestAdapterInterface $requestAdapter, string $apiKey)
     {
-        $this->apiKey = $apiKey;
         $this->requestAdapter = $requestAdapter;
+        $this->apiKey = $apiKey;
     }
 
     public function getRequestAdapter(): RequestAdapterInterface
