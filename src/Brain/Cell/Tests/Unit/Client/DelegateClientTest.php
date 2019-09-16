@@ -39,7 +39,7 @@ final class DelegateClientTest extends TestCase
         $adapter = $this->createMock(RequestAdapterInterface::class);
         $this->adapter = $adapter;
 
-        $this->configuration = new ClientConfiguration($adapter);
+        $this->configuration = new ClientConfiguration($adapter, 'some-key');
     }
 
     /**
