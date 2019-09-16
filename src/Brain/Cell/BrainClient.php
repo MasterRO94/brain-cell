@@ -18,6 +18,7 @@ use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\Production\ProductionDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
+use Brain\Cell\Client\Delegate\WebhookDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 
 /**
@@ -28,6 +29,11 @@ class BrainClient extends DelegateClient
     public function authentication(): AuthenticationDelegateClient
     {
         return new AuthenticationDelegateClient($this->configuration);
+    }
+
+    public function webhooks(): WebhookDelegateClient
+    {
+        return new WebhookDelegateClient($this->configuration);
     }
 
     /**
