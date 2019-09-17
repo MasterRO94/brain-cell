@@ -24,7 +24,7 @@ use Brain\Cell\Client\DelegateClient;
 /**
  * {@inheritdoc}
  */
-class BrainClient extends DelegateClient
+class BrainClient extends DelegateClient implements BrainClientInterface
 {
     public function authentication(): AuthenticationDelegateClient
     {
@@ -36,33 +36,21 @@ class BrainClient extends DelegateClient
         return new WebhookDelegateClient($this->configuration);
     }
 
-    /**
-     * Operate on jobs.
-     */
     public function jobs(): JobDelegateClient
     {
         return new JobDelegateClient($this->configuration);
     }
 
-    /**
-     * Operate on files.
-     */
     public function files(): FileDelegateClient
     {
         return new FileDelegateClient($this->configuration);
     }
 
-    /**
-     * Operate on productions.
-     */
     public function productions(): ProductionDelegateClient
     {
         return new ProductionDelegateClient($this->configuration);
     }
 
-    /**
-     * Operate on pricing.
-     */
     public function pricing(): PricingDelegateClient
     {
         return new PricingDelegateClient($this->configuration);
