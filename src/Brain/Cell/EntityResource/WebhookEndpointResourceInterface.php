@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource;
 
-interface WebhookEndpointResourceInterface
+use Brain\Cell\TransferEntityInterface;
+
+interface WebhookEndpointResourceInterface extends TransferEntityInterface
 {
     public function getEndpoint(): string;
 

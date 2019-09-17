@@ -19,7 +19,7 @@ final class WebhookDelegateClient extends DelegateClient
 
         $context->setPayload($handler->serialise($webhookEndpoint));
 
-        /** @var JobBatchResourceInterface $resource */
+        /** @var WebhookEndpointResourceInterface $resource */
         $resource = $this->request($context, $webhookEndpoint);
 
         return $resource;
