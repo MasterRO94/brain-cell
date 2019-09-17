@@ -14,11 +14,11 @@ class WhoAmIResponseResource extends AbstractResource
     /** @var ClientResource */
     protected $client;
 
-    /** @var mixed[] */
-    protected $application;
+    /** @var ClientEnvironmentResourceInterface */
+    protected $environment;
 
     /** @var mixed[] */
-    protected $environment;
+    protected $application;
 
     /**
      * {@inheritdoc}
@@ -28,6 +28,7 @@ class WhoAmIResponseResource extends AbstractResource
         return [
             'user' => UserResource::class,
             'client' => ClientResource::class,
+            'environment' => ClientEnvironmentResource::class,
         ];
     }
 
@@ -38,7 +39,6 @@ class WhoAmIResponseResource extends AbstractResource
     {
         return [
             'application',
-            'environment',
         ];
     }
 
@@ -47,19 +47,14 @@ class WhoAmIResponseResource extends AbstractResource
         return $this->user;
     }
 
-    public function setUser(UserResource $user): void
-    {
-        $this->user = $user;
-    }
-
     public function getClient(): ClientResource
     {
         return $this->client;
     }
 
-    public function setClient(ClientResource $client): void
+    public function getEnvironment(): ClientEnvironmentResourceInterface
     {
-        $this->client = $client;
+        return $this->environment;
     }
 
     /**
@@ -68,29 +63,5 @@ class WhoAmIResponseResource extends AbstractResource
     public function getApplication(): array
     {
         return $this->application;
-    }
-
-    /**
-     * @param mixed[] $application
-     */
-    public function setApplication(array $application): void
-    {
-        $this->application = $application;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function getEnvironment(): array
-    {
-        return $this->environment;
-    }
-
-    /**
-     * @param mixed[] $environment
-     */
-    public function setEnvironment(array $environment): void
-    {
-        $this->environment = $environment;
     }
 }

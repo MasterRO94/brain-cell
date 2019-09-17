@@ -18,45 +18,39 @@ use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
 use Brain\Cell\Client\Delegate\Production\ProductionDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
+use Brain\Cell\Client\Delegate\WebhookDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 
 /**
  * {@inheritdoc}
  */
-class BrainClient extends DelegateClient
+class BrainClient extends DelegateClient implements BrainClientInterface
 {
     public function authentication(): AuthenticationDelegateClient
     {
         return new AuthenticationDelegateClient($this->configuration);
     }
 
-    /**
-     * Operate on jobs.
-     */
+    public function webhooks(): WebhookDelegateClient
+    {
+        return new WebhookDelegateClient($this->configuration);
+    }
+
     public function jobs(): JobDelegateClient
     {
         return new JobDelegateClient($this->configuration);
     }
 
-    /**
-     * Operate on files.
-     */
     public function files(): FileDelegateClient
     {
         return new FileDelegateClient($this->configuration);
     }
 
-    /**
-     * Operate on productions.
-     */
     public function productions(): ProductionDelegateClient
     {
         return new ProductionDelegateClient($this->configuration);
     }
 
-    /**
-     * Operate on pricing.
-     */
     public function pricing(): PricingDelegateClient
     {
         return new PricingDelegateClient($this->configuration);
