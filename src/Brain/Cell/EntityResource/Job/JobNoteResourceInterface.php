@@ -6,6 +6,7 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\Prototype\Column\Date\CreatedAtInterface;
 use Brain\Cell\TransferEntityInterface;
 
 /**
@@ -13,7 +14,8 @@ use Brain\Cell\TransferEntityInterface;
  */
 interface JobNoteResourceInterface extends
     TransferEntityInterface,
-    ResourceIdentityInterface
+    ResourceIdentityInterface,
+    CreatedAtInterface
 {
     /**
      * Return the note canonical type.
