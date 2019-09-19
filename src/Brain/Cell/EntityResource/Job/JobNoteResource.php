@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\AbstractNoteResource;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 
 /**
  * {@inheritdoc}
@@ -12,6 +13,8 @@ use Brain\Cell\EntityResource\AbstractNoteResource;
 /* final */class JobNoteResource extends AbstractNoteResource implements
     JobNoteResourceInterface
 {
+    use CreatedAtTrait;
+
     public const JOB_NOTE_CANONICAL_GENERIC = 'generic';
     public const JOB_NOTE_CANONICAL_QUERY = 'query';
 
