@@ -13,7 +13,7 @@ use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class JobQueryResource extends AbstractResource implements ResourceIdentityInterface
+class JobQueryResource extends AbstractResource implements JobQueryResourceInterface
 {
     use ResourceIdentityTrait;
     use CreatedAtTrait;
@@ -28,7 +28,7 @@ class JobQueryResource extends AbstractResource implements ResourceIdentityInter
     /** @var ClientResource $assignee */
     protected $assignee;
 
-    /** @var string */
+    /** @var JobQuerySummaryResourceInterface */
     protected $summary;
 
     /** @var JobQueryNoteResource[]|ResourceCollection */
@@ -45,6 +45,7 @@ class JobQueryResource extends AbstractResource implements ResourceIdentityInter
             'updatedAt' => DateResource::class,
             'progressStarted' => DateResource::class,
             'resolved' => DateResource::class,
+            'summary' => JobQuerySummaryResource::class,
         ];
     }
 
@@ -58,12 +59,12 @@ class JobQueryResource extends AbstractResource implements ResourceIdentityInter
         ];
     }
 
-    public function getSummary(): string
+    public function getSummary(): JobQuerySummaryResourceInterface
     {
         return $this->summary;
     }
 
-    public function setSummary(string $summary): void
+    public function setSummary(JobQuerySummaryResourceInterface $summary): void
     {
         $this->summary = $summary;
     }
