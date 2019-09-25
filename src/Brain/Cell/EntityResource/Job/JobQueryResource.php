@@ -6,7 +6,7 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Common\DateResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
@@ -19,10 +19,10 @@ class JobQueryResource extends AbstractResource implements JobQueryResourceInter
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /** @var DateResource|null $resolved */
+    /** @var DateResourceInterface|null $resolved */
     protected $resolved;
 
-    /** @var DateResource|null $progressStarted */
+    /** @var DateResourceInterface|null $progressStarted */
     protected $progressStarted;
 
     /** @var ClientResource $assignee */
@@ -69,22 +69,22 @@ class JobQueryResource extends AbstractResource implements JobQueryResourceInter
         $this->summary = $summary;
     }
 
-    public function getResolved(): ?DateResource
+    public function getResolved(): ?DateResourceInterface
     {
         return $this->resolved;
     }
 
-    public function setResolved(?DateResource $resolved): void
+    public function setResolved(?DateResourceInterface $resolved): void
     {
         $this->resolved = $resolved;
     }
 
-    public function getProgressStarted(): ?DateResource
+    public function getProgressStarted(): ?DateResourceInterface
     {
         return $this->progressStarted;
     }
 
-    public function setProgressStarted(?DateResource $progressStarted): void
+    public function setProgressStarted(?DateResourceInterface $progressStarted): void
     {
         $this->progressStarted = $progressStarted;
     }

@@ -1,12 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
-interface JobQueryResourceInterface extends ResourceIdentityInterface
+use Brain\Cell\EntityResource\ClientResource;
+use Brain\Cell\EntityResource\Common\DateResourceInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\Transfer\ResourceCollection;
+use Brain\Cell\TransferEntityInterface;
+
+interface JobQueryResourceInterface extends
+    TransferEntityInterface,
+    ResourceIdentityInterface
 {
     public function getSummary(): JobQuerySummaryResourceInterface;
-    public function getResolved(): ?DateResource;
-    public function getProgressStarted(): ?DateResource;
+
+    public function getResolved(): ?DateResourceInterface;
+
+    public function getProgressStarted(): ?DateResourceInterface;
+
     public function getAssignee(): ClientResource;
 
     /**
