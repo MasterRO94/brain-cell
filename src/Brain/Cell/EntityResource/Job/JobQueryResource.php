@@ -34,6 +34,9 @@ class JobQueryResource extends AbstractResource implements JobQueryResourceInter
     /** @var JobQueryNoteResource[]|ResourceCollection */
     protected $notes;
 
+    /** @var bool */
+    protected $isExternal = false;
+
     /**
      * {@inheritdoc}
      */
@@ -113,5 +116,21 @@ class JobQueryResource extends AbstractResource implements JobQueryResourceInter
     public function setNotes(ResourceCollection $notes): void
     {
         $this->notes = $notes;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsExternal(): bool
+    {
+        return $this->isExternal;
+    }
+
+    /**
+     * @param bool $isExternal
+     */
+    public function setIsExternal(bool $isExternal): void
+    {
+        $this->isExternal = $isExternal;
     }
 }

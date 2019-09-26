@@ -22,6 +22,8 @@ interface JobQueryResourceInterface extends
 
     public function getAssignee(): ClientResource;
 
+    public function getIsExternal(): bool;
+
     /**
      * @return JobQueryNoteResource[]|ResourceCollection
      */
