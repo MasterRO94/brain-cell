@@ -8,10 +8,44 @@ use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Job\JobQueryNoteResource;
 use Brain\Cell\EntityResource\Job\JobQueryResource;
+use Brain\Cell\EntityResource\Job\JobQuerySummaryResource;
+use Brain\Cell\EntityResource\Job\JobQuerySummaryResourceInterface;
 use Brain\Cell\EntityResource\Job\JobResourceInterface;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class JobQueryDelegateClient extends DelegateClient
 {
+    /**
+     * @return JobQuerySummaryResourceInterface[]|ResourceCollection
+     */
+    public function getJobQuerySummaries(): ResourceCollection
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet('/job/query-summaries');
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(JobQuerySummaryResource::class);
+
+        /** @var JobQuerySummaryResourceInterface[]|ResourceCollection $collection */
+        $collection = $this->request($context, $collection);
+
+        return $collection;
+    }
+
+    public function postJobQuerySummary(JobQuerySummaryResourceInterface $summary): JobQuerySummaryResourceInterface
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForPost('/job/query-summaries');
+
+        $handler = $this->configuration->getResourceHandler();
+        $context->setPayload($handler->serialise($summary));
+
+        /** @var JobQuerySummaryResourceInterface $resource */
+        $resource = $this->request($context, $summary);
+
+        return $resource;
+    }
+
     public function getJobQuery(string $id): JobQueryResource
     {
         $context = $this->configuration->createRequestContext();

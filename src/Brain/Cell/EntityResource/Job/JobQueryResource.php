@@ -6,33 +6,36 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\Common\DateResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class JobQueryResource extends AbstractResource implements ResourceIdentityInterface
+class JobQueryResource extends AbstractResource implements JobQueryResourceInterface
 {
     use ResourceIdentityTrait;
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /** @var DateResource|null $resolved */
+    /** @var DateResourceInterface|null $resolved */
     protected $resolved;
 
-    /** @var DateResource|null $progressStarted */
+    /** @var DateResourceInterface|null $progressStarted */
     protected $progressStarted;
 
     /** @var ClientResource $assignee */
     protected $assignee;
 
-    /** @var string */
+    /** @var JobQuerySummaryResourceInterface */
     protected $summary;
 
     /** @var JobQueryNoteResource[]|ResourceCollection */
     protected $notes;
+
+    /** @var bool */
+    protected $isExternal = false;
 
     /**
      * {@inheritdoc}
@@ -45,6 +48,7 @@ class JobQueryResource extends AbstractResource implements ResourceIdentityInter
             'updatedAt' => DateResource::class,
             'progressStarted' => DateResource::class,
             'resolved' => DateResource::class,
+            'summary' => JobQuerySummaryResource::class,
         ];
     }
 
@@ -58,32 +62,32 @@ class JobQueryResource extends AbstractResource implements ResourceIdentityInter
         ];
     }
 
-    public function getSummary(): string
+    public function getSummary(): JobQuerySummaryResourceInterface
     {
         return $this->summary;
     }
 
-    public function setSummary(string $summary): void
+    public function setSummary(JobQuerySummaryResourceInterface $summary): void
     {
         $this->summary = $summary;
     }
 
-    public function getResolved(): ?DateResource
+    public function getResolved(): ?DateResourceInterface
     {
         return $this->resolved;
     }
 
-    public function setResolved(?DateResource $resolved): void
+    public function setResolved(?DateResourceInterface $resolved): void
     {
         $this->resolved = $resolved;
     }
 
-    public function getProgressStarted(): ?DateResource
+    public function getProgressStarted(): ?DateResourceInterface
     {
         return $this->progressStarted;
     }
 
-    public function setProgressStarted(?DateResource $progressStarted): void
+    public function setProgressStarted(?DateResourceInterface $progressStarted): void
     {
         $this->progressStarted = $progressStarted;
     }
@@ -112,5 +116,15 @@ class JobQueryResource extends AbstractResource implements ResourceIdentityInter
     public function setNotes(ResourceCollection $notes): void
     {
         $this->notes = $notes;
+    }
+
+    public function getIsExternal(): bool
+    {
+        return $this->isExternal;
+    }
+
+    public function setIsExternal(bool $isExternal): void
+    {
+        $this->isExternal = $isExternal;
     }
 }
