@@ -118,17 +118,11 @@ class JobQueryResource extends AbstractResource implements JobQueryResourceInter
         $this->notes = $notes;
     }
 
-    /**
-     * @return bool
-     */
     public function getIsExternal(): bool
     {
         return $this->isExternal;
     }
 
-    /**
-     * @param bool $isExternal
-     */
     public function setIsExternal(bool $isExternal): void
     {
         $this->isExternal = $isExternal;
