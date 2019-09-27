@@ -26,7 +26,7 @@ class JobQueryDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(JobQuerySummaryResource::class);
 
-        /** @var JobQuerySummaryResource[] $collection */
+        /** @var JobQuerySummaryResourceInterface[]|ResourceCollection $collection */
         $collection = $this->request($context, $collection);
 
         return $collection;
@@ -40,7 +40,7 @@ class JobQueryDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($summary));
 
-        /** @var JobQuerySummaryResource[] $collection */
+        /** @var JobQuerySummaryResourceInterface $resource */
         $resource = $this->request($context, $summary);
 
         return $resource;
