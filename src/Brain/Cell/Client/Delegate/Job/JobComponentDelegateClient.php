@@ -6,6 +6,7 @@ namespace Brain\Cell\Client\Delegate\Job;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artwork\ArtworkHistoryResource;
+use Brain\Cell\EntityResource\Artwork\ArtworkHistoryResourceInterface;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Job\JobComponentResource;
 use Brain\Cell\EntityResource\Job\JobComponentResourceInterface;
@@ -32,6 +33,9 @@ class JobComponentDelegateClient extends DelegateClient
         return $resource;
     }
 
+    /**
+     * @return ArtworkHistoryResourceInterface[]|ResourceCollection
+     */
     public function getArtworkHistories(
         JobResourceInterface $job,
         JobComponentResourceInterface $component
