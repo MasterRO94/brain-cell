@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace Brain\Cell\Prototype\Column\Date;
 
-use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\Common\DateResourceInterface;
 
 use DateTime;
 use DateTimeInterface;
 
 trait UpdatedAtTrait
 {
-    /** @var DateResource */
+    /** @var DateResourceInterface */
     protected $updatedAt;
 
     /**
      * Return the date updated at.
      */
-    public function getUpdatedAt(): DateResource
+    public function getUpdatedAt(): DateResourceInterface
     {
         return $this->updatedAt;
     }
@@ -27,7 +27,7 @@ trait UpdatedAtTrait
      *
      * @internal Note this has no affect when posting resources.
      */
-    public function setUpdatedAt(DateResource $updatedAt): void
+    public function setUpdatedAt(DateResourceInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
