@@ -54,4 +54,21 @@ class JobFilterDelegateClient extends DelegateClient
 
         return $resource;
     }
+
+    /**
+     * @return JobFilterResourceInterface[]|ResourceCollection
+     */
+    public function getJobFiltersForJob(string $jobId): ResourceCollection
+    {
+        $context = $this->configuration->createRequestContext();
+        $context->prepareContextForGet(sprintf('/jobs/%s/filters', $jobId));
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(JobFilterResource::class);
+
+        /** @var JobFilterResourceInterface[]|ResourceCollection $collection */
+        $collection = $this->request($context, $collection);
+
+        return $collection;
+    }
 }
