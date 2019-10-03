@@ -13,12 +13,14 @@ use Brain\Cell\Transfer\ResourceCollection;
 
 class JobFilterDelegateClient extends DelegateClient
 {
+    private const VERSION = '2.0';
+
     /**
      * @return JobFilterResourceInterface[]|ResourceCollection
      */
     public function getJobFilters(): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION);
         $context->prepareContextForGet('/job/filters');
 
         $collection = new ResourceCollection();
@@ -32,7 +34,7 @@ class JobFilterDelegateClient extends DelegateClient
 
     public function postJobFilter(JobFilterResourceInterface $summary): JobFilterResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION);
         $context->prepareContextForPost('/job/query-summaries');
 
         $handler = $this->configuration->getResourceHandler();
@@ -46,7 +48,7 @@ class JobFilterDelegateClient extends DelegateClient
 
     public function getJobFilter(string $id): JobFilterResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION);
         $context->prepareContextForGet(sprintf('/queries/%s', $id));
 
         /** @var JobFilterResource $resource */
@@ -60,7 +62,7 @@ class JobFilterDelegateClient extends DelegateClient
      */
     public function getJobFiltersForJob(string $jobId): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION);
         $context->prepareContextForGet(sprintf('/jobs/%s/filters', $jobId));
 
         $collection = new ResourceCollection();
