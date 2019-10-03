@@ -37,7 +37,7 @@ final class ClientConfiguration
 
     public function getBasePath($version = self::VERSION): string
     {
-        return sprintf('%s/%s', $this->basePath, self::VERSION);
+        return sprintf('%s/%s', $this->basePath, $version);
     }
 
     public function setBasePath(string $basePath): void
