@@ -44,6 +44,8 @@ interface BrainClientInterface
 
     public function jobBatch(): JobBatchDelegateClient;
 
+    public function jobFilter(): JobFilterDelegateClient;
+
     public function product(): ProductDelegateClient;
 
     public function artwork(): ArtworkDelegateClient;
