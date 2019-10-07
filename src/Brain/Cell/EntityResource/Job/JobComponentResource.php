@@ -27,20 +27,13 @@ class JobComponentResource extends AbstractResource implements
 {
     use ResourceIdentityTrait;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Type(type="integer")
-     *
-     * @var int
-     */
+    /** @var JobComponentRangeResourceInterface */
+    private $range;
+
+    /** @var int */
     protected $rangeStart;
 
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Type(type="integer")
-     *
-     * @var int
-     */
+    /** @var int */
     protected $rangeEnd;
 
     /**
@@ -104,6 +97,8 @@ class JobComponentResource extends AbstractResource implements
 
     public function __construct()
     {
+        $this->range = new JobComponentRangeResource();
+
         $this->options = new ResourceCollection();
         $this->options->setEntityClass(JobComponentOptionResource::class);
     }
@@ -114,6 +109,7 @@ class JobComponentResource extends AbstractResource implements
     public function getAssociatedResources(): array
     {
         return [
+            'range' => JobComponentRangeResource::class,
             'size' => SizeResource::class,
             'material' => MaterialResource::class,
             'dimensions' => TwoDimensionalResource::class,
@@ -153,27 +149,61 @@ class JobComponentResource extends AbstractResource implements
     /**
      * {@inheritdoc}
      */
-    public function getRangeStart(): int
+    public function getRange(): JobComponentRangeResourceInterface
     {
-        return $this->rangeStart;
-    }
-
-    public function setRangeStart(int $rangeStart): void
-    {
-        $this->rangeStart = $rangeStart;
+        return $this->range;
     }
 
     /**
-     * {@inheritdoc}
+     * @deprecated For the reasons mentioned in the interface.
+     *
+     * @see JobComponentResourceInterface::getRangeStart()
+     */
+    public function getRangeStart(): int
+    {
+        return $this->range->getOrder();
+    }
+
+    /**
+     * @deprecated For the reasons mentioned in the interface.
+     *
+     * @see JobComponentResourceInterface::getRangeStart()
+     */
+    public function setRangeStart(int $start): void
+    {
+        $this->rangeStart = $start;
+
+        if (!($this->range instanceof JobComponentRangeResource)) {
+            return;
+        }
+
+        $this->range->setOrder($start);
+    }
+
+    /**
+     * @deprecated For the reasons mentioned in the interface.
+     *
+     * @see JobComponentResourceInterface::getRangeEnd()
      */
     public function getRangeEnd(): int
     {
-        return $this->rangeEnd;
+        return $this->range->getQuantity();
     }
 
-    public function setRangeEnd(int $rangeEnd): void
+    /**
+     * @deprecated For the reasons mentioned in the interface.
+     *
+     * @see JobComponentResourceInterface::getRangeEnd()
+     */
+    public function setRangeEnd(int $end): void
     {
-        $this->rangeEnd = $rangeEnd;
+        $this->rangeEnd = $end;
+
+        if (!($this->range instanceof JobComponentRangeResource)) {
+            return;
+        }
+
+        $this->range->setQuantity($end);
     }
 
     public function getArtwork(): ArtworkResourceInterface
