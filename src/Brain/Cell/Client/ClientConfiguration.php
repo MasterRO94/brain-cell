@@ -35,7 +35,7 @@ final class ClientConfiguration
         return $this->requestAdapter;
     }
 
-    public function getBasePath($version = self::VERSION): string
+    public function getBasePath(string $version = self::VERSION): string
     {
         return sprintf('%s/%s', $this->basePath, $version);
     }
@@ -64,7 +64,7 @@ final class ClientConfiguration
         return $this->resourceHandler instanceof ResourceHandlerService;
     }
 
-    public function createRequestContext($version = self::VERSION): RequestContext
+    public function createRequestContext(string $version = self::VERSION): RequestContext
     {
         $context = new RequestContext($this->getBasePath($version));
         $context->getHeaders()->set('Authorization', sprintf('Bearer %s', $this->apiKey));
