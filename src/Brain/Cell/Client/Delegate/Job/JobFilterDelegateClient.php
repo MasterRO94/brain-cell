@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace Brain\Cell\Client\Delegate\Job;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Job\JobFilterResource;
 use Brain\Cell\EntityResource\Job\JobFilterResourceInterface;
-use Brain\Cell\EntityResource\Job\JobResourceInterface;
 use Brain\Cell\Transfer\ResourceCollection;
 
 class JobFilterDelegateClient extends DelegateClient
