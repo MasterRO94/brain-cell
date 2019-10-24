@@ -97,8 +97,6 @@ class JobComponentResource extends AbstractResource implements
 
     public function __construct()
     {
-        $this->range = new JobComponentRangeResource();
-
         $this->options = new ResourceCollection();
         $this->options->setEntityClass(JobComponentOptionResource::class);
     }
@@ -151,6 +149,11 @@ class JobComponentResource extends AbstractResource implements
      */
     public function getRange(): JobComponentRangeResourceInterface
     {
+        if (!($this->range instanceof JobComponentRangeResourceInterface)) {
+            $this->range = new JobComponentRangeResource();
+            $this->range->setOrder($this->rangeStart);
+            $this->range->setQuantity($this->rangeEnd - $this->rangeStart + 1);
+        }
         return $this->range;
     }
 
