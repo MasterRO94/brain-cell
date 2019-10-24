@@ -164,7 +164,7 @@ class JobComponentResource extends AbstractResource implements
      */
     public function getRangeStart(): int
     {
-        return $this->range->getOrder();
+        return $this->getRange()->getOrder();
     }
 
     /**
@@ -190,7 +190,7 @@ class JobComponentResource extends AbstractResource implements
      */
     public function getRangeEnd(): int
     {
-        return $this->range->getQuantity();
+        return $this->getRange()->getQuantity();
     }
 
     /**
