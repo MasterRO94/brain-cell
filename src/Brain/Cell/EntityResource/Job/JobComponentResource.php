@@ -27,7 +27,7 @@ class JobComponentResource extends AbstractResource implements
 {
     use ResourceIdentityTrait;
 
-    /** @var JobComponentRangeResourceInterface */
+    /** @var JobComponentRangeResourceInterface|null */
     private $range;
 
     /** @var int */
