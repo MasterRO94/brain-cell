@@ -154,6 +154,7 @@ class JobComponentResource extends AbstractResource implements
             $this->range->setOrder($this->rangeStart);
             $this->range->setQuantity($this->rangeEnd - $this->rangeStart + 1);
         }
+
         return $this->range;
     }
 
