@@ -33,7 +33,7 @@ class JobFilterDelegateClient extends DelegateClient
     public function postJobFilter(JobFilterResourceInterface $summary): JobFilterResourceInterface
     {
         $context = $this->configuration->createRequestContext(self::VERSION);
-        $context->prepareContextForPost('/job/query-summaries');
+        $context->prepareContextForPost('/job/filters');
 
         $handler = $this->configuration->getResourceHandler();
         $context->setPayload($handler->serialise($summary));
@@ -47,7 +47,7 @@ class JobFilterDelegateClient extends DelegateClient
     public function getJobFilter(string $id): JobFilterResourceInterface
     {
         $context = $this->configuration->createRequestContext(self::VERSION);
-        $context->prepareContextForGet(sprintf('/queries/%s', $id));
+        $context->prepareContextForGet(sprintf('/job/filters/%s', $id));
 
         /** @var JobFilterResource $resource */
         $resource = $this->request($context, new JobFilterResource());
