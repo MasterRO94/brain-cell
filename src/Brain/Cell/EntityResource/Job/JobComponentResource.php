@@ -207,7 +207,7 @@ class JobComponentResource extends AbstractResource implements
             return;
         }
 
-        $this->range->setQuantity($end);
+        $this->range->setQuantity($this->rangeEnd - $this->rangeStart + 1);
     }
 
     public function getArtwork(): ArtworkResourceInterface
