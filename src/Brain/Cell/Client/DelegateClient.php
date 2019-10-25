@@ -10,9 +10,8 @@ use Psr\Http\Message\StreamInterface;
 
 abstract class DelegateClient
 {
-    protected const VERSION_V1 = 'v1';
-    protected const VERSION_10 = '1.0';
-    protected const VERSION_20 = '2.0';
+    protected const VERSION_V1 = '1.0';
+    protected const VERSION_V2 = '2.0';
 
     /** @var ClientConfiguration */
     protected $configuration;

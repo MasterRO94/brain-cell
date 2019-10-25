@@ -16,7 +16,7 @@ final class JobFilterDelegateClient extends DelegateClient
      */
     public function getJobFilters(): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext(self::VERSION_20);
+        $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $context->prepareContextForGet('/job/filters');
 
         $collection = new ResourceCollection();
@@ -30,7 +30,7 @@ final class JobFilterDelegateClient extends DelegateClient
 
     public function postJobFilter(JobFilterResourceInterface $summary): JobFilterResourceInterface
     {
-        $context = $this->configuration->createRequestContext(self::VERSION_20);
+        $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $context->prepareContextForPost('/job/filters');
 
         $handler = $this->configuration->getResourceHandler();
@@ -44,7 +44,7 @@ final class JobFilterDelegateClient extends DelegateClient
 
     public function getJobFilter(string $id): JobFilterResourceInterface
     {
-        $context = $this->configuration->createRequestContext(self::VERSION_20);
+        $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $context->prepareContextForGet(sprintf('/job/filters/%s', $id));
 
         /** @var JobFilterResource $resource */
@@ -58,7 +58,7 @@ final class JobFilterDelegateClient extends DelegateClient
      */
     public function getJobFiltersForJob(string $jobId): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext(self::VERSION_20);
+        $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $context->prepareContextForGet(sprintf('/jobs/%s/filters', $jobId));
 
         $collection = new ResourceCollection();
