@@ -9,7 +9,7 @@ use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-class JobFilterResource extends AbstractResource implements
+final class JobFilterResource extends AbstractResource implements
     JobFilterResourceInterface
 {
     use ResourceIdentityTrait;
