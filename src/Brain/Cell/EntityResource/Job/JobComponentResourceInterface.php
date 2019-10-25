@@ -19,8 +19,35 @@ interface JobComponentResourceInterface extends
     TransferEntityInterface,
     ResourceIdentityInterface
 {
+    /**
+     * Return the job component range details.
+     */
+    public function getRange(): JobComponentRangeResourceInterface;
+
+    /**
+     * The range start will represent the order of which this component should be applied in binding context.
+     * It used to represent a start and finish of the component, which included the quantity.
+     * This is not so easy to figure out so has been deprecated for new functionality.
+     *
+     * This method is deprecated and simply proxies the new range resource methods.
+     *
+     * @deprecated Please use getRange()->getOrder()
+     *
+     * @see JobComponentRangeResourceInterface
+     */
     public function getRangeStart(): int;
 
+    /**
+     * The range start will represent the quantity of this component.
+     * It used to represent a start and finish of the component, which included the quantity.
+     * This is not so easy to figure out so has been deprecated for new functionality.
+     *
+     * This method is deprecated and simply proxies the new range resource methods.
+     *
+     * @deprecated Please use getRange()->getQuantity()
+     *
+     * @see JobComponentRangeResourceInterface
+     */
     public function getRangeEnd(): int;
 
     /**

@@ -27,6 +27,11 @@ interface JobComponentOptionResourceInterface extends
     public function getFinishingItem(): FinishingItemResourceInterface;
 
     /**
+     * Return the count of sides the finishing affects.
+     */
+    public function getSideCount(): int;
+
+    /**
      * Return the finishing configuration.
      *
      * @return mixed[]

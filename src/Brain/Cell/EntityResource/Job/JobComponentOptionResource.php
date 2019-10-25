@@ -37,6 +37,9 @@ class JobComponentOptionResource extends AbstractResource implements
      */
     protected $finishingItem;
 
+    /** @var int|null */
+    private $sidesCount;
+
     /** @var mixed[] */
     protected $configuration;
 
@@ -91,6 +94,18 @@ class JobComponentOptionResource extends AbstractResource implements
     public function setFinishingItem(FinishingItemResourceInterface $finishingItem): void
     {
         $this->finishingItem = $finishingItem;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSideCount(): int
+    {
+        if ($this->sidesCount === null) {
+            return 0;
+        }
+
+        return $this->sidesCount;
     }
 
     /**
