@@ -19,7 +19,7 @@ class JobComponentDelegateClient extends DelegateClient
         string $jobId,
         string $jobComponentId
     ): JobComponentResource {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
 
         $context->prepareContextForGet(sprintf(
             '/jobs/%s/components/%s',
@@ -40,7 +40,7 @@ class JobComponentDelegateClient extends DelegateClient
         JobResourceInterface $job,
         JobComponentResourceInterface $component
     ): ResourceCollection {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf(
             '/jobs/%s/components/%s/artwork-histories',
             $job->getId(),
@@ -64,7 +64,7 @@ class JobComponentDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($artwork);
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf(
             '/jobs/%s/components/%s/artwork',
             $job->getId(),

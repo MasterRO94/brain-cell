@@ -9,16 +9,14 @@ use Brain\Cell\EntityResource\Job\JobFilterResource;
 use Brain\Cell\EntityResource\Job\JobFilterResourceInterface;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class JobFilterDelegateClient extends DelegateClient
+final class JobFilterDelegateClient extends DelegateClient
 {
-    private const VERSION = '2.0';
-
     /**
      * @return JobFilterResourceInterface[]|ResourceCollection
      */
     public function getJobFilters(): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext(self::VERSION);
+        $context = $this->configuration->createRequestContext(self::VERSION_20);
         $context->prepareContextForGet('/job/filters');
 
         $collection = new ResourceCollection();
@@ -32,7 +30,7 @@ class JobFilterDelegateClient extends DelegateClient
 
     public function postJobFilter(JobFilterResourceInterface $summary): JobFilterResourceInterface
     {
-        $context = $this->configuration->createRequestContext(self::VERSION);
+        $context = $this->configuration->createRequestContext(self::VERSION_20);
         $context->prepareContextForPost('/job/filters');
 
         $handler = $this->configuration->getResourceHandler();
@@ -46,7 +44,7 @@ class JobFilterDelegateClient extends DelegateClient
 
     public function getJobFilter(string $id): JobFilterResourceInterface
     {
-        $context = $this->configuration->createRequestContext(self::VERSION);
+        $context = $this->configuration->createRequestContext(self::VERSION_20);
         $context->prepareContextForGet(sprintf('/job/filters/%s', $id));
 
         /** @var JobFilterResource $resource */
@@ -60,7 +58,7 @@ class JobFilterDelegateClient extends DelegateClient
      */
     public function getJobFiltersForJob(string $jobId): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext(self::VERSION);
+        $context = $this->configuration->createRequestContext(self::VERSION_20);
         $context->prepareContextForGet(sprintf('/jobs/%s/filters', $jobId));
 
         $collection = new ResourceCollection();

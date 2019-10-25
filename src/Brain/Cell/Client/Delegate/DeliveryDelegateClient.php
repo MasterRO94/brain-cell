@@ -25,7 +25,7 @@ class DeliveryDelegateClient extends DelegateClient
      */
     public function getDeliveryOptions(DeliveryJobBatchResource $batch)
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/delivery/options');
 
         $handler = $this->configuration->getResourceHandler();
@@ -43,7 +43,7 @@ class DeliveryDelegateClient extends DelegateClient
 
     public function getDeliveryOption(string $id): DeliveryOptionResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/delivery/options/%s', $id));
 
         /** @var DeliveryOptionResource $resource */
@@ -57,7 +57,7 @@ class DeliveryDelegateClient extends DelegateClient
      */
     public function getCountries(): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/countries');
         $context->getParameters()->add(['limit' => 500]);
 
@@ -77,7 +77,7 @@ class DeliveryDelegateClient extends DelegateClient
      */
     public function getServices(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/delivery/services');
         $context->getParameters()->add($parameters);
 
@@ -92,7 +92,7 @@ class DeliveryDelegateClient extends DelegateClient
 
     public function createDispatch(DispatchResource $dispatch): DispatchResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/delivery/dispatch');
 
         $handler = $this->configuration->getResourceHandler();
@@ -107,7 +107,7 @@ class DeliveryDelegateClient extends DelegateClient
 
     public function downloadLabel(string $dispatchId): StreamInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/delivery/dispatch/%s/label', $dispatchId));
 
         return $this->stream($context);

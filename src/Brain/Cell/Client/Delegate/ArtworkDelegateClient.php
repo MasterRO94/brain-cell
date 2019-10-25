@@ -18,7 +18,7 @@ class ArtworkDelegateClient extends DelegateClient
 {
     public function get(string $id): ArtworkResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/artworks/%s', $id));
 
         /** @var ArtworkResourceInterface $resource */
@@ -32,7 +32,7 @@ class ArtworkDelegateClient extends DelegateClient
      */
     public function downloadArtwork(string $id): StreamInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/artworks/%s/download', $id));
 
         return $this->stream($context);
@@ -64,7 +64,7 @@ class ArtworkDelegateClient extends DelegateClient
 
     public function createArtworkIssue(string $id, ArtworkIssueResource $issue): ArtworkIssueResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/artworks/%s/issues', $id));
 
         $handler = $this->configuration->getResourceHandler();

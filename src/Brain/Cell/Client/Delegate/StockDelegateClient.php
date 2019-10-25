@@ -36,7 +36,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function getStockOptions(JobResource $jobResource, array $parameters = []): StockFinishingsResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/options');
         $context->getParameters()->replace($parameters);
 
@@ -57,7 +57,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function getFinishingCategories(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/stock/finishing/categories');
         $context->getParameters()->add($parameters);
 
@@ -74,7 +74,7 @@ class StockDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/finishing/categories');
         $context->setPayload($handler->serialise($resource));
 
@@ -91,7 +91,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function getFinishingOptions(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/stock/finishing/options');
         $context->getParameters()->add($parameters);
 
@@ -113,7 +113,7 @@ class StockDelegateClient extends DelegateClient
     {
         $categoryId = $resource->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/stock/finishing/categories/%s/options', $categoryId));
         $context->getParameters()->add($parameters);
 
@@ -132,7 +132,7 @@ class StockDelegateClient extends DelegateClient
 
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/stock/finishing/categories/%s/options', $categoryId));
         $context->setPayload($handler->serialise($resource));
 
@@ -144,7 +144,7 @@ class StockDelegateClient extends DelegateClient
 
     public function getMaterial(string $id): MaterialResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/stock/materials/%s', $id));
 
         /** @var MaterialResourceInterface $resource */
@@ -160,7 +160,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function getMaterials(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/stock/materials');
         $context->getParameters()->add($parameters);
 
@@ -180,7 +180,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function getMaterialBases(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/stock/material/bases');
         $context->getParameters()->add($parameters);
 
@@ -200,7 +200,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function getMaterialVariants(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/stock/material/variants');
         $context->getParameters()->add($parameters);
 
@@ -220,7 +220,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function getMaterialWeights(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/stock/material/weights');
         $context->getParameters()->add($parameters);
 
@@ -237,7 +237,7 @@ class StockDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/material/bases');
         $context->setPayload($handler->serialise($resource));
 
@@ -251,7 +251,7 @@ class StockDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/material/weights');
         $context->setPayload($handler->serialise($resource));
 
@@ -265,7 +265,7 @@ class StockDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/material/variants');
         $context->setPayload($handler->serialise($resource));
 
@@ -279,7 +279,7 @@ class StockDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/materials');
         $context->setPayload($handler->serialise($resource));
 
@@ -296,7 +296,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function getSizes(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/stock/sizes');
         $context->getParameters()->add($parameters);
 
@@ -313,7 +313,7 @@ class StockDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/sizes');
         $context->setPayload($handler->serialise($resource));
 
@@ -327,7 +327,7 @@ class StockDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/finishing-combinations');
         $context->setPayload($handler->serialise($resource));
 
@@ -342,7 +342,7 @@ class StockDelegateClient extends DelegateClient
      */
     public function calculateJobWeight(JobResource $resource): WeightResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/weight');
 
         $handler = $this->configuration->getResourceHandler();

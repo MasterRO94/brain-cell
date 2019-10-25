@@ -17,7 +17,7 @@ class JobBatchDelegateClient extends DelegateClient
 {
     public function getJobBatch(string $id): JobBatchResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/job/batches/%s', $id));
 
         /** @var JobBatchResourceInterface $resource */
@@ -28,7 +28,7 @@ class JobBatchDelegateClient extends DelegateClient
 
     public function postJobBatch(JobBatchResourceInterface $batch): JobBatchResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/job/batches');
 
         $handler = $this->configuration->getResourceHandler();
@@ -45,7 +45,7 @@ class JobBatchDelegateClient extends DelegateClient
         string $jobBatchId,
         DeliveryOptionResource $deliveryOptionResource
     ): JobBatchResourceInterface {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/job/batches/%s/delivery-option', $jobBatchId));
 
         $payload = [
@@ -64,7 +64,7 @@ class JobBatchDelegateClient extends DelegateClient
         string $jobBatchId,
         JobBatchBatchDeliveryResource $batchDeliveryResource
     ): JobBatchResourceInterface {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPatch(sprintf('/job/batches/%s/batch-delivery', $jobBatchId));
 
         $handler = $this->configuration->getResourceHandler();
@@ -87,7 +87,7 @@ class JobBatchDelegateClient extends DelegateClient
             throw new ClientException(sprintf('Invalid status [%s]', $status));
         }
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf(
             '/job/batches/%s/%s',
             $batch->getId(),

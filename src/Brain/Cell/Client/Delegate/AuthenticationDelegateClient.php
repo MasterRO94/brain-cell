@@ -11,7 +11,7 @@ class AuthenticationDelegateClient extends DelegateClient
 {
     public function getMe(): WhoAmIResponseResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/whoami');
 
         /** @var WhoAmIResponseResource $resource */

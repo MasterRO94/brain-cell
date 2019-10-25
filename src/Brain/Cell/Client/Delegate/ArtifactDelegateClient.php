@@ -16,7 +16,7 @@ class ArtifactDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/artifacts');
         $context->setPayload($handler->serialise($artifactResource));
 
@@ -28,7 +28,7 @@ class ArtifactDelegateClient extends DelegateClient
 
     public function getPresignedAsset(): PresignedAssetResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/presigned-assets');
 
         /** @var PresignedAssetResource $resource */
@@ -39,7 +39,7 @@ class ArtifactDelegateClient extends DelegateClient
 
     public function downloadArtifact(string $id): StreamInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/artifacts/%s/download', $id));
 
         return $this->stream($context);

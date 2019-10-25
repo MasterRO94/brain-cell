@@ -23,7 +23,7 @@ class ProductDelegateClient extends DelegateClient
      */
     public function getProducts(array $parameters = []): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/products');
         $context->getParameters()->add($parameters);
 
@@ -38,7 +38,7 @@ class ProductDelegateClient extends DelegateClient
 
     public function getProduct(string $id): ProductResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/products/%s', $id));
 
         /** @var ProductResource $resource */
@@ -51,7 +51,7 @@ class ProductDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/products');
         $context->setPayload($handler->serialise($resource));
 
@@ -67,7 +67,7 @@ class ProductDelegateClient extends DelegateClient
     ): ProductSizeAssignmentResource {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/products/%s/sizes', $productResource->getId()));
         $context->setPayload($handler->serialise($assignmentResource));
 
@@ -83,7 +83,7 @@ class ProductDelegateClient extends DelegateClient
     ): ProductMaterialAssignmentResource {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/products/%s/materials', $productResource->getId()));
         $context->setPayload($handler->serialise($assignmentResource));
 
@@ -99,7 +99,7 @@ class ProductDelegateClient extends DelegateClient
     ): ProductFinishingAssignmentResource {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/products/%s/finishings', $productResource->getId()));
         $context->setPayload($handler->serialise($assignmentResource));
 
@@ -113,7 +113,7 @@ class ProductDelegateClient extends DelegateClient
     {
         $handler = $this->configuration->getResourceHandler();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForLink(sprintf('/products/%s/materials/%s', $productResource->getId(), $materialResource->getId()));
 
         $this->configuration->getRequestAdapter()->request($context);
@@ -121,7 +121,7 @@ class ProductDelegateClient extends DelegateClient
 
     public function linkSize(ProductResource $productResource, SizeResource $sizeResource): void
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForLink(sprintf('/products/%s/sizes/%s', $productResource->getId(), $sizeResource->getId()));
 
         $this->configuration->getRequestAdapter()->request($context);
@@ -129,7 +129,7 @@ class ProductDelegateClient extends DelegateClient
 
     public function linkFinishing(ProductResource $productResource, FinishingItemResource $finishingItemResource): void
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForLink(sprintf('/products/%s/finishings/%s', $productResource->getId(), $finishingItemResource->getId()));
 
         $this->configuration->getRequestAdapter()->request($context);
