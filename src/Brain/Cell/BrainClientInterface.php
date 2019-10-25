@@ -13,6 +13,7 @@ use Brain\Cell\Client\Delegate\File\FileDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobComponentDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobDelegateClient;
+use Brain\Cell\Client\Delegate\Job\JobFilterDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobQueryDelegateClient;
 use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
@@ -43,6 +44,8 @@ interface BrainClientInterface
     public function jobQuery(): JobQueryDelegateClient;
 
     public function jobBatch(): JobBatchDelegateClient;
+
+    public function jobFilter(): JobFilterDelegateClient;
 
     public function product(): ProductDelegateClient;
 

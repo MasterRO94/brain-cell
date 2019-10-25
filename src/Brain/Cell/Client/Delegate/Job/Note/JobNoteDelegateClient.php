@@ -24,7 +24,7 @@ use Brain\Cell\EntityResource\Job\JobResourceInterface;
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($note);
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/jobs/%s/notes', $id));
         $context->setPayload($payload);
 

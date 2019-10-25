@@ -50,7 +50,7 @@ class JobDelegateClient extends DelegateClient
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($job);
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/jobs');
         $context->setPayload($payload);
 
@@ -65,7 +65,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function get(string $id): JobResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/jobs/%s', $id));
 
         /** @var JobResource $resource */
@@ -81,7 +81,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function all(RequestFilterInterface $filter): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/jobs');
         $context->getFilters()->add($filter->getFilters());
         $context->getParameters()->add($filter->getParameters());
@@ -153,7 +153,7 @@ class JobDelegateClient extends DelegateClient
 
     public function createJobFromProduct(CreateJobFromProductResource $resource): JobResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/jobs');
 
         $handler = $this->configuration->getResourceHandler();
@@ -169,7 +169,7 @@ class JobDelegateClient extends DelegateClient
 
     public function cloneJob(string $jobId): JobResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/jobs/%s/clone', $jobId));
 
         /** @var JobResourceInterface $resource */
@@ -190,7 +190,7 @@ class JobDelegateClient extends DelegateClient
             ));
         }
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf(
             '/jobs/%s/status',
             $job->getId()
@@ -212,7 +212,7 @@ class JobDelegateClient extends DelegateClient
     {
         $id = $job->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/jobs/%s/phase', $id));
 
         $jobPhaseResource = new JobResource();
@@ -255,7 +255,7 @@ class JobDelegateClient extends DelegateClient
     {
         $id = $job->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/jobs/%s/meta', $id));
 
         $newResource = new JobResource();

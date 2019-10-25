@@ -10,8 +10,6 @@ use RuntimeException;
 
 final class ClientConfiguration
 {
-    public const VERSION = 'v1';
-
     /** @var RequestAdapterInterface */
     private $requestAdapter;
 
@@ -35,9 +33,9 @@ final class ClientConfiguration
         return $this->requestAdapter;
     }
 
-    public function getBasePath(): string
+    public function getBasePath(string $version): string
     {
-        return sprintf('%s/%s', $this->basePath, self::VERSION);
+        return sprintf('%s/%s', $this->basePath, $version);
     }
 
     public function setBasePath(string $basePath): void
@@ -64,11 +62,11 @@ final class ClientConfiguration
         return $this->resourceHandler instanceof ResourceHandlerService;
     }
 
-    public function createRequestContext(): RequestContext
+    public function createRequestContext(string $version): RequestContext
     {
-        $context = new RequestContext($this->getBasePath());
+        $context = new RequestContext($this->getBasePath($version));
         $context->getHeaders()->set('Authorization', sprintf('Bearer %s', $this->apiKey));
-        $context->getHeaders()->set('Api-Client-Version', self::VERSION);
+        $context->getHeaders()->set('Api-Client-Version', $version);
 
         return $context;
     }

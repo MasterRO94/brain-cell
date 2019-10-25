@@ -30,7 +30,7 @@ use Brain\Cell\EntityResource\Production\ProductionResourceInterface;
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($production);
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/productions');
         $context->setPayload($payload);
 
@@ -45,7 +45,7 @@ use Brain\Cell\EntityResource\Production\ProductionResourceInterface;
      */
     public function get(string $id): ProductionResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/productions/%s', $id));
 
         /** @var ProductionResource $resource */

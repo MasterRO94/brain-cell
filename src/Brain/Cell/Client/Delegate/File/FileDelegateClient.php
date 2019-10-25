@@ -22,7 +22,7 @@ use Psr\Http\Message\StreamInterface;
      */
     public function get(string $id): FileResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/files/%s', $id));
 
         /** @var FileResource $resource */
@@ -36,7 +36,7 @@ use Psr\Http\Message\StreamInterface;
      */
     public function getDownloadPath(string $id): FileDownloadPathResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/files/%s/download-path', $id));
 
         /** @var FileDownloadPathResource $resource */
@@ -50,7 +50,7 @@ use Psr\Http\Message\StreamInterface;
      */
     public function download(string $id): StreamInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/files/%s/download', $id));
 
         return $this->stream($context);

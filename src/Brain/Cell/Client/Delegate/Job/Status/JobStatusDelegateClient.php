@@ -35,7 +35,7 @@ use Brain\Cell\Transfer\ResourceCollection;
     {
         $id = $job->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/jobs/%s/status/transitions', $id));
 
         $collection = new ResourceCollection();
@@ -59,7 +59,7 @@ use Brain\Cell\Transfer\ResourceCollection;
         $handler = $this->configuration->getResourceHandler();
         $payload = $handler->serialise($status);
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/jobs/%s/status', $id));
         $context->setPayload($payload);
 

@@ -20,7 +20,7 @@ class JobQueryDelegateClient extends DelegateClient
      */
     public function getJobQuerySummaries(): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet('/job/query-summaries');
 
         $collection = new ResourceCollection();
@@ -34,7 +34,7 @@ class JobQueryDelegateClient extends DelegateClient
 
     public function postJobQuerySummary(JobQuerySummaryResourceInterface $summary): JobQuerySummaryResourceInterface
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/job/query-summaries');
 
         $handler = $this->configuration->getResourceHandler();
@@ -48,7 +48,7 @@ class JobQueryDelegateClient extends DelegateClient
 
     public function getJobQuery(string $id): JobQueryResource
     {
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForGet(sprintf('/queries/%s', $id));
 
         /** @var JobQueryResource $resource */
@@ -61,7 +61,7 @@ class JobQueryDelegateClient extends DelegateClient
     {
         $id = $job->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/jobs/%s/queries', $id));
 
         $handler = $this->configuration->getResourceHandler();
@@ -77,7 +77,7 @@ class JobQueryDelegateClient extends DelegateClient
     {
         $id = $query->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/queries/%s/notes', $id));
 
         $handler = $this->configuration->getResourceHandler();
@@ -93,7 +93,7 @@ class JobQueryDelegateClient extends DelegateClient
     {
         $id = $query->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/queries/%s/assignee', $id));
 
         $query->setAssignee($clientResource);
@@ -111,7 +111,7 @@ class JobQueryDelegateClient extends DelegateClient
     {
         $id = $query->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForDelete(sprintf('/queries/%s/assignee', $id));
 
         $handler = $this->configuration->getResourceHandler();
@@ -127,7 +127,7 @@ class JobQueryDelegateClient extends DelegateClient
     {
         $id = $query->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/queries/%s/in-progress', $id));
 
         $handler = $this->configuration->getResourceHandler();
@@ -143,7 +143,7 @@ class JobQueryDelegateClient extends DelegateClient
     {
         $id = $query->getId();
 
-        $context = $this->configuration->createRequestContext();
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/queries/%s/resolved', $id));
 
         $handler = $this->configuration->getResourceHandler();
