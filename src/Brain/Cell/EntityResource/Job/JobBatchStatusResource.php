@@ -13,6 +13,7 @@ final class JobBatchStatusResource extends AbstractStatusResource
 {
     public const STATUS_INCOMPLETE = 'job_batch.status.incomplete';
     public const STATUS_READY = 'job_batch.status.ready';
+    public const STATUS_DISPATCHED = 'job_batch.status.dispatched';
 
     /**
      * @return string[]
@@ -22,6 +23,7 @@ final class JobBatchStatusResource extends AbstractStatusResource
         return [
             self::STATUS_INCOMPLETE,
             self::STATUS_READY,
+            self::STATUS_DISPATCHED,
         ];
     }
 }
