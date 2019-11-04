@@ -9,7 +9,7 @@ use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Job\JobBatchBatchDeliveryResource;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
-use Brain\Cell\EntityResource\Job\JobStatusResource;
+use Brain\Cell\EntityResource\Job\JobBatchStatusResource;
 use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 
@@ -83,7 +83,7 @@ class JobBatchDelegateClient extends DelegateClient
 
     public function updateStatus(JobBatchResourceInterface $batch, string $status): JobBatchResourceInterface
     {
-        if (!in_array($status, JobStatusResource::getAllCanonicals(), true)) {
+        if (!in_array($status, JobBatchStatusResource::getAllCanonicals(), true)) {
             throw new ClientException(sprintf('Invalid status [%s]', $status));
         }
 
