@@ -228,6 +228,22 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
+     * @return ResourceCollection|JobStatusResource[]
+     */
+    public function getAvailableTransitions(string $id): ResourceCollection
+    {
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
+        $context->prepareContextForGet(sprintf('/jobs/%s/status/transitions', $id));
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(JobStatusResource::class);
+
+        $collection = $this->request($context, $collection);
+
+        return $collection;
+    }
+
+    /**
      * @deprecated Use jobs()->notes()->create() instead.
      */
     public function submitJobNote(JobResourceInterface $job, JobNoteResource $note): JobResourceInterface

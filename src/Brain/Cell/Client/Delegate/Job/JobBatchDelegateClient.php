@@ -101,4 +101,20 @@ class JobBatchDelegateClient extends DelegateClient
 
         return $resource;
     }
+
+    /**
+     * @return ResourceCollection|JobBatchStatusResource[]
+     */
+    public function getAvailableTransitions(string $id): ResourceCollection
+    {
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
+        $context->prepareContextForGet(sprintf('/job/batches/%s/status/transitions', $id));
+
+        $collection = new ResourceCollection();
+        $collection->setEntityClass(JobBatchStatusResource::class);
+
+        $collection = $this->request($context, $collection);
+
+        return $collection;
+    }
 }
