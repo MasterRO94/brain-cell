@@ -12,6 +12,7 @@ use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
 use Brain\Cell\EntityResource\Job\JobBatchStatusResource;
 use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class JobBatchDelegateClient extends DelegateClient
 {
