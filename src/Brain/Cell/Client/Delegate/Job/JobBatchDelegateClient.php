@@ -114,6 +114,7 @@ class JobBatchDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(JobBatchStatusResource::class);
 
+        /** @var ResourceCollection $collection */
         $collection = $this->request($context, $collection);
 
         return $collection;

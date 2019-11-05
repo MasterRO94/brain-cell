@@ -238,6 +238,7 @@ class JobDelegateClient extends DelegateClient
         $collection = new ResourceCollection();
         $collection->setEntityClass(JobStatusResource::class);
 
+        /** @var ResourceCollection $collection */
         $collection = $this->request($context, $collection);
 
         return $collection;
