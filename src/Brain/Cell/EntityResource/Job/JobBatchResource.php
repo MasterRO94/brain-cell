@@ -22,7 +22,7 @@ class JobBatchResource extends AbstractResource implements
 {
     use ResourceIdentityTrait;
 
-    /** @var string */
+    /** @var JobBatchStatusResource */
     protected $status;
 
     /**
@@ -78,6 +78,7 @@ class JobBatchResource extends AbstractResource implements
         return [
             'deliveryOption' => DeliveryOptionResource::class,
             'batchDelivery' => JobBatchBatchDeliveryResource::class,
+            'status' => JobBatchStatusResource::class,
         ];
     }
 
@@ -157,12 +158,12 @@ class JobBatchResource extends AbstractResource implements
         $dispatch->setBatch($this);
     }
 
-    public function getStatus(): string
+    public function getStatus(): JobBatchStatusResource
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(JobBatchStatusResource $status): void
     {
         $this->status = $status;
     }
