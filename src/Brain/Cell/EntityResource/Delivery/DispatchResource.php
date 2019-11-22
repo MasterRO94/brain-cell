@@ -31,6 +31,9 @@ class DispatchResource extends AbstractResource
     protected $trackingCode;
 
     /** @var string */
+    protected $trackingPublicUrl;
+
+    /** @var string */
     protected $labelUrl;
 
     /** @var DispatchParcelResource[]|ResourceCollection */
@@ -86,6 +89,16 @@ class DispatchResource extends AbstractResource
     public function setTrackingCode(string $trackingCode): void
     {
         $this->trackingCode = $trackingCode;
+    }
+
+    public function getTrackingPublicUrl(): ?string
+    {
+        return $this->trackingPublicUrl;
+    }
+
+    public function setTrackingPublicUrl(string $trackingPublicUrl): void
+    {
+        $this->trackingPublicUrl = $trackingPublicUrl;
     }
 
     /**
