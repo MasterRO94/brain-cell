@@ -18,6 +18,15 @@ interface JobResourceInterface extends
     ResourceIdentityInterface
 {
     /**
+     * @todo more general implementation
+     *
+     * @see https://projects.printed.systems/browse/BRN-742
+     */
+    public const PREFLIGHT_FAILURE_POLICY_FIX = 'job.preflight_failure_policy.fix';
+    public const PREFLIGHT_FAILURE_POLICY_CANCEL = 'job.preflight_failure_policy.cancel';
+    public const PREFLIGHT_FAILURE_POLICY_IGNORE = 'job.preflight_failure_policy.ignore';
+
+    /**
      * The shorthand hash of the Job.
      *
      * Note; this will be NULL on non-persisted entities.
