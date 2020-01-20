@@ -150,6 +150,7 @@ class JobResource extends AbstractResource implements
         return [
             'product' => ProductResource::class,
             'batch' => JobBatchResource::class,
+            'group' => JobGroupResource::class,
             'artifact' => ArtifactResource::class,
             'dimensions' => ThreeDimensionalResource::class,
             'status' => JobStatusResource::class,
