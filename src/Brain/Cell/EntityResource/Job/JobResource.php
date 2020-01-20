@@ -90,6 +90,9 @@ class JobResource extends AbstractResource implements
     /** @var JobGroupResourceInterface|null */
     protected $group;
 
+    /** @var int|null */
+    protected $index;
+
     /**
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -304,6 +307,22 @@ class JobResource extends AbstractResource implements
     public function setGroup(JobGroupResourceInterface $group): void
     {
         $this->group = $group;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIndex(): ?int
+    {
+        return $this->index;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIndex(?int $index): void
+    {
+        $this->index = $index;
     }
 
     /**

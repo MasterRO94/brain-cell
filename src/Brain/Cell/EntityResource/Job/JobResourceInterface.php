@@ -52,6 +52,10 @@ interface JobResourceInterface extends
      */
     public function getBatch(): ?JobBatchResourceInterface;
 
+    public function getGroup(): ?JobGroupResourceInterface;
+
+    public function getIndex(): ?int;
+
     /**
      * Return the quantity of this job to be produced.
      */
