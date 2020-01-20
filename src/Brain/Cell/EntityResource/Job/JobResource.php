@@ -87,6 +87,9 @@ class JobResource extends AbstractResource implements
      */
     protected $batch;
 
+    /** @var JobGroupResourceInterface|null */
+    protected $group;
+
     /**
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -285,6 +288,22 @@ class JobResource extends AbstractResource implements
     public function setBatch(JobBatchResourceInterface $batch): void
     {
         $this->batch = $batch;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroup(): ?JobGroupResourceInterface
+    {
+        return $this->group;
+    }
+
+    /**
+     * @deprecated This should not be used, if you are using it for tests mock the interface.
+     */
+    public function setGroup(JobGroupResourceInterface $group): void
+    {
+        $this->group = $group;
     }
 
     /**
