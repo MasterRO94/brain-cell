@@ -6,20 +6,14 @@ namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 /**
  * {@inheritdoc}
- *
- * This is only temporary as we have an inconsistency with payloads.
- * Will be fixed soon.
  */
-class DeliveryJobBatchResource extends AbstractResource
+class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
 {
-    use ResourceIdentityTrait;
-
     /**
      * @Assert\Valid()
      * @Assert\NotBlank()

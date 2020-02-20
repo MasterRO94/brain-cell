@@ -16,6 +16,7 @@ use Brain\Cell\Response\ErrorMessageEnum;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Throwable;
@@ -85,12 +86,15 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             $path = sprintf('%s?%s', $path, urldecode(http_build_query($parameters)));
         }
 
-        $options = [
-            'headers' => $context->getHeaders()->all(),
-        ];
+        /*
+         * Extra guzzle options are defined first, so that the main options take precedence
+         */
+        $options = $context->getExtraGuzzleRequestOptions()->all();
+
+        $options[RequestOptions::HEADERS] = $context->getHeaders()->all();
 
         if ($context->hasPayload()) {
-            $options['json'] = $context->getPayload();
+            $options[RequestOptions::JSON] = $context->getPayload();
         }
 
         try {

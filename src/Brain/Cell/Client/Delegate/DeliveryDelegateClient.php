@@ -7,12 +7,12 @@ namespace Brain\Cell\Client\Delegate;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Country\CountryResource;
 use Brain\Cell\EntityResource\Country\CountryResourceInterface;
-use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -23,13 +23,23 @@ class DeliveryDelegateClient extends DelegateClient
     /**
      * @return DeliveryOptionResource[]|ResourceCollection
      */
-    public function getDeliveryOptions(DeliveryJobBatchResource $batch)
-    {
+    public function getDeliveryOptions(
+        DeliveryGetDeliveryOptionsActionArgs $actionArgs,
+        array $options = []
+    ): ResourceCollection {
+        $options = array_merge([
+            'requestTimeoutSeconds' => null,
+        ], $options);
+
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/delivery/options');
 
+        if (null !== $options['requestTimeoutSeconds']) {
+            $context->getExtraGuzzleRequestOptions()->set(RequestOptions::TIMEOUT, $options['requestTimeoutSeconds']);
+        }
+
         $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($batch);
+        $payload = $handler->serialise($actionArgs);
         $context->setPayload($payload);
 
         $collection = new ResourceCollection();
