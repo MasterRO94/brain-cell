@@ -39,8 +39,7 @@ class DeliveryDelegateClient extends DelegateClient
             $context->getExtraGuzzleRequestOptions()->set(RequestOptions::TIMEOUT, $options['requestTimeoutSeconds']);
         }
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($actionArgs);
+        $payload = $this->resourceHandler->serialise($actionArgs);
         $context->setPayload($payload);
 
         $collection = new ResourceCollection();
@@ -106,8 +105,7 @@ class DeliveryDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/delivery/dispatch');
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($dispatch);
+        $payload = $this->resourceHandler->serialise($dispatch);
         $context->setPayload($payload);
 
         /** @var DispatchResource $resource */

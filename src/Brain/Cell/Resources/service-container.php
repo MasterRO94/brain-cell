@@ -49,52 +49,100 @@ function createServiceContainer(ClientConfiguration $clientConfiguration): CellS
          */
 
         AuthenticationDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new AuthenticationDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new AuthenticationDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         WebhookDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new WebhookDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new WebhookDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         JobDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new JobDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new JobDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         FileDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new FileDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new FileDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         ProductionDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new ProductionDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new ProductionDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         PricingDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new PricingDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new PricingDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         StockDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new StockDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new StockDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         DeliveryDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new DeliveryDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new DeliveryDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         JobComponentDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new JobComponentDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new JobComponentDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         JobQueryDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new JobQueryDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new JobQueryDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         JobBatchDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new JobBatchDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new JobBatchDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         JobFilterDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new JobFilterDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new JobFilterDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         ProductDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new ProductDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new ProductDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         ArtworkDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new ArtworkDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new ArtworkDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         ArtifactDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new ArtifactDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new ArtifactDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
         ClientWorkflowDelegateClient::class => function (CellServiceContainer $serviceContainer) {
-            return new ClientWorkflowDelegateClient($serviceContainer->get(ClientConfiguration::class));
+            return new ClientWorkflowDelegateClient(
+                $serviceContainer->get(ClientConfiguration::class),
+                $serviceContainer->get(ResourceHandlerService::class)
+            );
         },
 
         /*

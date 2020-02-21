@@ -14,11 +14,9 @@ class ArtifactDelegateClient extends DelegateClient
 {
     public function createArtifact(ArtifactResource $artifactResource): ArtifactResource
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/artifacts');
-        $context->setPayload($handler->serialise($artifactResource));
+        $context->setPayload($this->resourceHandler->serialise($artifactResource));
 
         /** @var ArtifactResource $resource */
         $resource = $this->request($context, new ArtifactResource());

@@ -61,8 +61,7 @@ class JobComponentDelegateClient extends DelegateClient
         JobComponentResourceInterface $component,
         ArtworkResource $artwork
     ): JobComponentResourceInterface {
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($artwork);
+        $payload = $this->resourceHandler->serialise($artwork);
 
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf(

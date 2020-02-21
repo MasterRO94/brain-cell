@@ -43,25 +43,6 @@ final class ClientConfiguration
         $this->basePath = $basePath;
     }
 
-    public function setResourceHandler(ResourceHandlerService $resourceHandler): void
-    {
-        $this->resourceHandler = $resourceHandler;
-    }
-
-    public function getResourceHandler(): ResourceHandlerService
-    {
-        if (!($this->resourceHandler instanceof ResourceHandlerService)) {
-            throw new RuntimeException("Can't retrieve a Cell resource handler, because it's not been set.");
-        }
-
-        return $this->resourceHandler;
-    }
-
-    public function hasResourceHandler(): bool
-    {
-        return $this->resourceHandler instanceof ResourceHandlerService;
-    }
-
     public function createRequestContext(string $version): RequestContext
     {
         $context = new RequestContext($this->getBasePath($version));

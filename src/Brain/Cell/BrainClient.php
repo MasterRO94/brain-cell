@@ -23,6 +23,7 @@ use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\Delegate\WebhookDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\Client\DelegateHelper\DeliveryDelegateClientHelper;
+use Brain\Cell\Service\ResourceHandlerService;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -35,7 +36,7 @@ class BrainClient extends DelegateClient implements BrainClientInterface
 
     public function __construct(ContainerInterface $serviceContainer, ClientConfiguration $clientConfiguration)
     {
-        parent::__construct($clientConfiguration);
+        parent::__construct($clientConfiguration, $serviceContainer->get(ResourceHandlerService::class));
 
         $this->serviceContainer = $serviceContainer;
     }

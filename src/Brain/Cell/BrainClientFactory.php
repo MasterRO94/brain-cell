@@ -18,8 +18,6 @@ class BrainClientFactory
         require_once __DIR__ . '/Resources/service-container.php';
         $serviceContainer = createServiceContainer($clientConfiguration);
 
-        $clientConfiguration->setResourceHandler($serviceContainer->get(ResourceHandlerService::class));
-
         return new BrainClient($serviceContainer, $clientConfiguration);
     }
 }

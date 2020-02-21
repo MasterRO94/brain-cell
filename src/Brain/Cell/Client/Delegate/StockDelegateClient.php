@@ -40,8 +40,7 @@ class StockDelegateClient extends DelegateClient
         $context->prepareContextForPost('/stock/options');
         $context->getParameters()->replace($parameters);
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($jobResource);
+        $payload = $this->resourceHandler->serialise($jobResource);
         $context->setPayload($payload);
 
         /** @var StockFinishingsResource $resource */
@@ -72,11 +71,9 @@ class StockDelegateClient extends DelegateClient
 
     public function createFinishingCategory(FinishingCategoryResource $resource): FinishingCategoryResourceInterface
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/finishing/categories');
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var FinishingCategoryResourceInterface $resource */
         $resource = $this->request($context, new FinishingCategoryResource());
@@ -130,11 +127,9 @@ class StockDelegateClient extends DelegateClient
     {
         $categoryId = $categoryResource->getId();
 
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/stock/finishing/categories/%s/options', $categoryId));
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var FinishingItemResource $resource */
         $resource = $this->request($context, new FinishingItemResource());
@@ -235,11 +230,9 @@ class StockDelegateClient extends DelegateClient
 
     public function createMaterialBase(MaterialBaseResource $resource): MaterialBaseResource
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/material/bases');
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var MaterialBaseResource $resource */
         $resource = $this->request($context, new MaterialBaseResource());
@@ -249,11 +242,9 @@ class StockDelegateClient extends DelegateClient
 
     public function createMaterialWeight(MaterialWeightResource $resource): MaterialWeightResource
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/material/weights');
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var MaterialWeightResource $resource */
         $resource = $this->request($context, new MaterialWeightResource());
@@ -263,11 +254,9 @@ class StockDelegateClient extends DelegateClient
 
     public function createMaterialVariant(MaterialVariantResource $resource): MaterialVariantResource
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/material/variants');
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var MaterialVariantResource $resource */
         $resource = $this->request($context, new MaterialVariantResource());
@@ -277,11 +266,9 @@ class StockDelegateClient extends DelegateClient
 
     public function createMaterial(MaterialResource $resource): MaterialResource
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/materials');
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var MaterialResource $resource */
         $resource = $this->request($context, new MaterialResource());
@@ -311,11 +298,9 @@ class StockDelegateClient extends DelegateClient
 
     public function createSize(SizeResource $resource): SizeResource
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/sizes');
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var SizeResource $resource */
         $resource = $this->request($context, new SizeResource());
@@ -325,11 +310,9 @@ class StockDelegateClient extends DelegateClient
 
     public function createFinishingCombination(FinishingCombinationResource $resource): FinishingCategoryResource
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/finishing-combinations');
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var FinishingCategoryResource $resource */
         $resource = $this->request($context, new FinishingCombinationResource());
@@ -345,8 +328,7 @@ class StockDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/stock/weight');
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var WeightResource $resource */
         $resource = $this->request($context, new WeightResource());
