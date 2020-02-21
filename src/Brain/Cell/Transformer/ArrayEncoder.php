@@ -55,7 +55,7 @@ class ArrayEncoder extends AbstractTransformer
     /**
      * @internal
      */
-    public function encodeDateTimeValue(\DateTime $dateTime): string
+    public function encodeDateTimeValue(DateTime $dateTime): string
     {
         return $dateTime->format('c');
     }

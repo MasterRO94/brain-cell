@@ -66,7 +66,7 @@ class JobBatchDelegateClient extends DelegateClient
     ): JobBatchResourceInterface {
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPatch(sprintf('/job/batches/%s/batch-delivery', $jobBatchId));
-        
+
         $context->setPayload($this->resourceHandler->serialise(
             $batchDeliveryResource,
             new ArrayEncoderSerialisationOptions([

@@ -78,7 +78,7 @@ abstract class AbstractResource implements TransferEntityInterface
      * ];
      * </code>
      *
-     * @return array Of structure { [fieldName: string]: (ArrayEncoder) => scalar|array };
+     * @return callable[] Of structure { [fieldName: string]: (ArrayEncoder) => scalar|array };
      */
     public function getFieldsCustomSerialisationFunctions(): array
     {

@@ -1,22 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Logical\Delivery;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\Transfer\ResourceCollection;
-use Exception;
+
+use Throwable;
 
 class GetDeliveryOptionsOrFallbackDeliveryOptionResult
 {
-    /** * @var DeliveryOptionResource[]|ResourceCollection */
+    /** @var DeliveryOptionResource[]|ResourceCollection */
     private $deliveryOptionsCollection;
 
-    /** * @var Exception|null */
+    /** @var Throwable|null */
     private $normalDeliveryOptionsCreationException;
 
     public function __construct(
         ResourceCollection $deliveryOptionsCollection,
-        ?Exception $normalDeliveryOptionsCreationException
+        ?Throwable $normalDeliveryOptionsCreationException
     ) {
         $this->deliveryOptionsCollection = $deliveryOptionsCollection;
         $this->normalDeliveryOptionsCreationException = $normalDeliveryOptionsCreationException;
@@ -32,10 +35,8 @@ class GetDeliveryOptionsOrFallbackDeliveryOptionResult
 
     /**
      * If set, it means that creating normal delivery options failed with the exception provided.
-     *
-     * @return Exception|null
      */
-    public function getNormalDeliveryOptionsCreationException(): ?Exception
+    public function getNormalDeliveryOptionsCreationException(): ?Throwable
     {
         return $this->normalDeliveryOptionsCreationException;
     }

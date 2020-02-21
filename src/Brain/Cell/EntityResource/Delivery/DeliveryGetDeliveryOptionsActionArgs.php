@@ -10,6 +10,8 @@ use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\Transformer\ArrayEncoder;
 
+use DateTime;
+
 /**
  * {@inheritdoc}
  */
@@ -34,9 +36,7 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
      */
     protected $jobs;
 
-    /**
-     * @var array See setters.
-     */
+    /** @var mixed[] See setters. */
     protected $options = [];
 
     /**
@@ -71,9 +71,8 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
                 /*
                  * Serialise the lifetime field
                  */
-                if (
-                    array_key_exists('minimal_delivery_options_lifetime', $actionArgsOptions)
-                    && $actionArgsOptions['minimal_delivery_options_lifetime']
+                if (array_key_exists('minimal_delivery_options_lifetime', $actionArgsOptions)
+                    && (bool) $actionArgsOptions['minimal_delivery_options_lifetime']
                 ) {
                     $actionArgsOptions['minimal_delivery_options_lifetime']
                         = $arrayEncoder->encodeDateTimeValue($actionArgsOptions['minimal_delivery_options_lifetime']);
@@ -126,7 +125,7 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
         $this->jobs = $jobs;
     }
 
-    public function setOptionMinimalDeliveryOptionsLifetime(?\DateTime $minimalLifetime): void
+    public function setOptionMinimalDeliveryOptionsLifetime(?DateTime $minimalLifetime): void
     {
         $this->options['minimal_delivery_options_lifetime'] = $minimalLifetime;
     }

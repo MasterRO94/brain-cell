@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Brain\Cell\Client;
 
-use Brain\Cell\Service\ResourceHandlerService;
-
-use RuntimeException;
-
 final class ClientConfiguration
 {
     /** @var RequestAdapterInterface */
@@ -15,9 +11,6 @@ final class ClientConfiguration
 
     /** @var string */
     private $basePath = 'https://api.printed-api.com';
-
-    /** @var ResourceHandlerService|null */
-    private $resourceHandler;
 
     /** @var string */
     private $apiKey;

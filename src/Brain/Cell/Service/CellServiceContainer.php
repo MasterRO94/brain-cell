@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Service;
 
 use Brain\Cell\Exception\Internal\ServiceNotFoundException;
+
 use Psr\Container\ContainerInterface;
 
 /**
@@ -10,10 +13,10 @@ use Psr\Container\ContainerInterface;
  */
 class CellServiceContainer implements ContainerInterface
 {
-    /** * @var array Of struture { [serviceName: string]: callable; } */
+    /** @var callable[] Of structure { [serviceName: string]: callable; } */
     private $servicesCreateFunctions = [];
 
-    /** @var array Of structure { [serviceName: string]: mixed; } */
+    /** @var mixed[] Of structure { [serviceName: string]: mixed; } */
     private $instantiatedServices;
 
     public function get($id)

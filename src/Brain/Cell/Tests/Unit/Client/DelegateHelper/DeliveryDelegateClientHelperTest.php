@@ -9,8 +9,11 @@ use Brain\Cell\Client\DelegateHelper\DeliveryDelegateClientHelper;
 use Brain\Cell\EntityResource\Delivery\DeliveryGetDeliveryOptionsActionArgs;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\Transfer\ResourceCollection;
+
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+use RuntimeException;
 
 /**
  * @group cell
@@ -29,7 +32,7 @@ final class DeliveryDelegateClientHelperTest extends TestCase
             ->getMock();
 
         $mockDeliveryDelegateClient
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getDeliveryOptions')
             ->willReturn(new ResourceCollection([
                 new DeliveryOptionResource(),
@@ -39,8 +42,8 @@ final class DeliveryDelegateClientHelperTest extends TestCase
 
         $result = $helper->getDeliveryOptionsOrFallbackDeliveryOption(new DeliveryGetDeliveryOptionsActionArgs());
 
-        $this->assertEquals(1, $result->getDeliveryOptionsCollection()->count());
-        $this->assertNull($result->getNormalDeliveryOptionsCreationException());
+        self::assertEquals(1, $result->getDeliveryOptionsCollection()->count());
+        self::assertNull($result->getNormalDeliveryOptionsCreationException());
     }
 
     /**
@@ -54,13 +57,13 @@ final class DeliveryDelegateClientHelperTest extends TestCase
             ->getMock();
 
         $mockDeliveryDelegateClient
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getDeliveryOptions')
-            ->will($this->returnCallback(function (DeliveryGetDeliveryOptionsActionArgs $args) {
+            ->will(self::returnCallback(static function (DeliveryGetDeliveryOptionsActionArgs $args) {
                 /*
                  * Retrieve the args' options using reflection. I don't want to supply getters for them.
                  */
-                $argsReflectionClass = new \ReflectionClass($args);
+                $argsReflectionClass = new ReflectionClass($args);
                 $argsOptionsProperty = $argsReflectionClass->getProperty('options');
                 $argsOptionsProperty->setAccessible(true);
                 $argsOptionsValue = $argsOptionsProperty->getValue($args);
@@ -73,14 +76,14 @@ final class DeliveryDelegateClientHelperTest extends TestCase
                     ]);
                 }
 
-                throw new \RuntimeException('Mock exception to represent normal delivery options retrieval failure. It should be caught and gracefully handled.');
+                throw new RuntimeException('Mock exception to represent normal delivery options retrieval failure. It should be caught and gracefully handled.');
             }));
 
         $helper = new DeliveryDelegateClientHelper($mockDeliveryDelegateClient);
 
         $result = $helper->getDeliveryOptionsOrFallbackDeliveryOption(new DeliveryGetDeliveryOptionsActionArgs());
 
-        $this->assertEquals(1, $result->getDeliveryOptionsCollection()->count());
-        $this->assertNotNull($result->getNormalDeliveryOptionsCreationException());
+        self::assertEquals(1, $result->getDeliveryOptionsCollection()->count());
+        self::assertNotNull($result->getNormalDeliveryOptionsCreationException());
     }
 }

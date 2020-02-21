@@ -22,6 +22,8 @@ use Psr\Http\Message\StreamInterface;
 class DeliveryDelegateClient extends DelegateClient
 {
     /**
+     * @param mixed[] $options
+     *
      * @return DeliveryOptionResource[]|ResourceCollection
      */
     public function getDeliveryOptions(
@@ -35,7 +37,7 @@ class DeliveryDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/delivery/options');
 
-        if (null !== $options['requestTimeoutSeconds']) {
+        if ($options['requestTimeoutSeconds'] !== null) {
             $context->getExtraGuzzleRequestOptions()->set(RequestOptions::TIMEOUT, $options['requestTimeoutSeconds']);
         }
 

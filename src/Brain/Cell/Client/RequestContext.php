@@ -28,8 +28,8 @@ class RequestContext
     /** @var ParameterBag */
     protected $parameters;
 
-    /** * @var ParameterBag */
-    private $extraGuzzleRequestOptions;
+    /** @var ParameterBag */
+    protected $extraGuzzleRequestOptions;
 
     /** @var mixed[] */
     protected $payload;

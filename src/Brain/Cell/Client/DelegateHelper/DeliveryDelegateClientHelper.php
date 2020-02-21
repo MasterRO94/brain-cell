@@ -7,11 +7,13 @@ namespace Brain\Cell\Client\DelegateHelper;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
 use Brain\Cell\EntityResource\Delivery\DeliveryGetDeliveryOptionsActionArgs;
 use Brain\Cell\Logical\Delivery\GetDeliveryOptionsOrFallbackDeliveryOptionResult;
+
 use Exception;
+use Throwable;
 
 class DeliveryDelegateClientHelper
 {
-    /** * @var DeliveryDelegateClient */
+    /** @var DeliveryDelegateClient */
     private $deliveryDelegateClient;
 
     public function __construct(DeliveryDelegateClient $deliveryDelegateClient)
@@ -19,6 +21,9 @@ class DeliveryDelegateClientHelper
         $this->deliveryDelegateClient = $deliveryDelegateClient;
     }
 
+    /**
+     * @param mixed[] $options
+     */
     public function getDeliveryOptionsOrFallbackDeliveryOption(
         DeliveryGetDeliveryOptionsActionArgs $actionArgs,
         array $options = []
@@ -40,7 +45,7 @@ class DeliveryDelegateClientHelper
                     'requestTimeoutSeconds' => $options['normalDeliveryOptionsCreationTimeoutSeconds'],
                 ]
             );
-        } catch (Exception $exception) {
+        } catch (Throwable $exception) {
             $normalDeliveryOptionsCreationException = $exception;
             $actionArgs->setOptionFallbackDeliveryOptionOnly(true);
 
