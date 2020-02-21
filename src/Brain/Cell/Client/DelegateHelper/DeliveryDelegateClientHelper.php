@@ -7,6 +7,7 @@ namespace Brain\Cell\Client\DelegateHelper;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
 use Brain\Cell\EntityResource\Delivery\DeliveryGetDeliveryOptionsActionArgs;
 use Brain\Cell\Logical\Delivery\GetDeliveryOptionsOrFallbackDeliveryOptionResult;
+use Exception;
 
 class DeliveryDelegateClientHelper
 {
@@ -29,17 +30,17 @@ class DeliveryDelegateClientHelper
             'normalDeliveryOptionsCreationTimeoutSeconds' => null,
         ], $options);
 
-        /** @var \Exception|null $normalDeliveryOptionsCreationException */
+        /** @var Exception|null $normalDeliveryOptionsCreationException */
         $normalDeliveryOptionsCreationException = null;
 
         try {
             $deliveryOptionsCollection = $this->deliveryDelegateClient->getDeliveryOptions(
                 $actionArgs,
                 [
-                    'requestTimeout' => $options['normalDeliveryOptionsCreationTimeoutSeconds'],
+                    'requestTimeoutSeconds' => $options['normalDeliveryOptionsCreationTimeoutSeconds'],
                 ]
             );
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $normalDeliveryOptionsCreationException = $exception;
             $actionArgs->setOptionFallbackDeliveryOptionOnly(true);
 
