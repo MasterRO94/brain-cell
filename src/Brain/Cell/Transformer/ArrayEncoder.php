@@ -53,6 +53,14 @@ class ArrayEncoder extends AbstractTransformer
     }
 
     /**
+     * @internal
+     */
+    public function encodeDateTimeValue(\DateTime $dateTime): string
+    {
+        return $dateTime->format('c');
+    }
+
+    /**
      * Serialise a {@link AbstractResource}.
      *
      * @return mixed[]
@@ -72,6 +80,8 @@ class ArrayEncoder extends AbstractTransformer
         // Note also that these look "deprecated" but are actually "internal".
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
+
+        $customSerialisationFunctions = $resource->getFieldsCustomSerialisationFunctions();
 
         foreach ($properties as $property) {
             // Use reflection to get protected property values
@@ -101,7 +111,12 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
-            if ($value instanceof TransferEntityInterface) {
+            if (array_key_exists($property->getName(), $customSerialisationFunctions)) {
+                /*
+                 * Custom serialisation
+                 */
+                $value = $customSerialisationFunctions[$property->getName()]($this);
+            } elseif ($value instanceof TransferEntityInterface) {
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResourceAndShouldSerialiseAsId($value, $options)) {
                     /** @var AbstractResource $input */
@@ -153,7 +168,7 @@ class ArrayEncoder extends AbstractTransformer
                     ));
                 }
             } elseif ($value instanceof DateTime) {
-                $value = $value->format('c');
+                $value = $this->encodeDateTimeValue($value);
             }
 
             // Ignore empty arrays, but don't ignore 0 or false

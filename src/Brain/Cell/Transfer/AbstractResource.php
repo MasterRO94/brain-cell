@@ -70,6 +70,22 @@ abstract class AbstractResource implements TransferEntityInterface
     }
 
     /**
+     * Return fields that should be serialised in a custom way.
+     *
+     * <code>
+     * return [
+     *  'complexField' => function (ArrayEncoder $arrayEncoder) { return sprintf('%5.2f', $this->complexField); },
+     * ];
+     * </code>
+     *
+     * @return array Of structure { [fieldName: string]: (ArrayEncoder) => scalar|array };
+     */
+    public function getFieldsCustomSerialisationFunctions(): array
+    {
+        return [];
+    }
+
+    /**
      * Return all properties that should be interpreted as \DateTime.
      *
      * @deprecated

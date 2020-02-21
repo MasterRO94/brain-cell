@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Brain\Cell\Client\DelegateHelper;
 
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
+use Brain\Cell\EntityResource\Delivery\DeliveryGetDeliveryOptionsActionArgs;
+use Brain\Cell\Logical\Delivery\GetDeliveryOptionsOrFallbackDeliveryOptionResult;
 
 class DeliveryDelegateClientHelper
 {
@@ -44,6 +46,9 @@ class DeliveryDelegateClientHelper
             $deliveryOptionsCollection = $this->deliveryDelegateClient->getDeliveryOptions($actionArgs);
         }
 
-        return new GetDeliveryOptionsOrFallbackDeliveryOptionResult($deliveryOptionsCollection, $normalDeliveryOptionsCreationException);
+        return new GetDeliveryOptionsOrFallbackDeliveryOptionResult(
+            $deliveryOptionsCollection,
+            $normalDeliveryOptionsCreationException
+        );
     }
 }

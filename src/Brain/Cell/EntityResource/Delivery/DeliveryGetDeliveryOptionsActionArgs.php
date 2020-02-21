@@ -8,6 +8,7 @@ use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
+use Brain\Cell\Transformer\ArrayEncoder;
 
 /**
  * {@inheritdoc}
@@ -34,6 +35,11 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
     protected $jobs;
 
     /**
+     * @var array See setters.
+     */
+    protected $options = [];
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources(): array
@@ -50,6 +56,31 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
     {
         return [
             'jobs' => JobResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFieldsCustomSerialisationFunctions(): array
+    {
+        return [
+            'options' => function (ArrayEncoder $arrayEncoder) {
+                $actionArgsOptions = $this->options;
+
+                /*
+                 * Serialise the lifetime field
+                 */
+                if (
+                    array_key_exists('minimal_delivery_options_lifetime', $actionArgsOptions)
+                    && $actionArgsOptions['minimal_delivery_options_lifetime']
+                ) {
+                    $actionArgsOptions['minimal_delivery_options_lifetime']
+                        = $arrayEncoder->encodeDateTimeValue($actionArgsOptions['minimal_delivery_options_lifetime']);
+                }
+
+                return $actionArgsOptions;
+            },
         ];
     }
 
@@ -90,8 +121,23 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
     /**
      * @param JobResource[]|ResourceCollection $jobs
      */
-    public function setJobs($jobs): void
+    public function setJobs(ResourceCollection $jobs): void
     {
         $this->jobs = $jobs;
+    }
+
+    public function setOptionMinimalDeliveryOptionsLifetime(?\DateTime $minimalLifetime): void
+    {
+        $this->options['minimal_delivery_options_lifetime'] = $minimalLifetime;
+    }
+
+    public function setOptionFastGenerationRoutine(bool $isEnabled): void
+    {
+        $this->options['fast_generation_routine'] = $isEnabled;
+    }
+
+    public function setOptionFallbackDeliveryOptionOnly(bool $isEnabled): void
+    {
+        $this->options['fallback_delivery_option_only'] = $isEnabled;
     }
 }

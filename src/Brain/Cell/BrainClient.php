@@ -21,6 +21,7 @@ use Brain\Cell\Client\Delegate\Production\ProductionDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\Delegate\WebhookDelegateClient;
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\Client\DelegateHelper\DeliveryDelegateClientHelper;
 
 /**
  * {@inheritdoc}
@@ -65,6 +66,11 @@ class BrainClient extends DelegateClient implements BrainClientInterface
     public function delivery(): DeliveryDelegateClient
     {
         return new DeliveryDelegateClient($this->configuration);
+    }
+
+    public function deliveryHelper(): DeliveryDelegateClientHelper
+    {
+        return new DeliveryDelegateClientHelper($this->delivery());
     }
 
     /**
