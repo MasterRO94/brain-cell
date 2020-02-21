@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell;
 
+use Brain\Cell\Client\ClientConfiguration;
 use Brain\Cell\Client\Delegate\ArtifactDelegateClient;
 use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
 use Brain\Cell\Client\Delegate\AuthenticationDelegateClient;
@@ -22,55 +23,66 @@ use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\Delegate\WebhookDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\Client\DelegateHelper\DeliveryDelegateClientHelper;
+use Psr\Container\ContainerInterface;
 
 /**
  * {@inheritdoc}
  */
 class BrainClient extends DelegateClient implements BrainClientInterface
 {
+    /** @var ContainerInterface */
+    private $serviceContainer;
+
+    public function __construct(ContainerInterface $serviceContainer, ClientConfiguration $clientConfiguration)
+    {
+        parent::__construct($clientConfiguration);
+
+        $this->serviceContainer = $serviceContainer;
+    }
+
     public function authentication(): AuthenticationDelegateClient
     {
-        return new AuthenticationDelegateClient($this->configuration);
+        return $this->serviceContainer->get(AuthenticationDelegateClient::class);
     }
 
     public function webhooks(): WebhookDelegateClient
     {
-        return new WebhookDelegateClient($this->configuration);
+        return $this->serviceContainer->get(WebhookDelegateClient::class);
     }
 
     public function jobs(): JobDelegateClient
     {
-        return new JobDelegateClient($this->configuration);
+        return $this->serviceContainer->get(JobDelegateClient::class);
     }
 
     public function files(): FileDelegateClient
     {
-        return new FileDelegateClient($this->configuration);
+        return $this->serviceContainer->get(FileDelegateClient::class);
     }
 
     public function productions(): ProductionDelegateClient
     {
-        return new ProductionDelegateClient($this->configuration);
+        return $this->serviceContainer->get(ProductionDelegateClient::class);
     }
 
     public function pricing(): PricingDelegateClient
     {
-        return new PricingDelegateClient($this->configuration);
+        return $this->serviceContainer->get(PricingDelegateClient::class);
     }
 
     public function stock(): StockDelegateClient
     {
-        return new StockDelegateClient($this->configuration);
+        return $this->serviceContainer->get(StockDelegateClient::class);
     }
 
     public function delivery(): DeliveryDelegateClient
     {
-        return new DeliveryDelegateClient($this->configuration);
+        return $this->serviceContainer->get(DeliveryDelegateClient::class);
     }
 
     public function deliveryHelper(): DeliveryDelegateClientHelper
     {
-        return new DeliveryDelegateClientHelper($this->delivery());
+        return $this->serviceContainer->get(DeliveryDelegateClientHelper::class);
     }
 
     /**
@@ -83,41 +95,41 @@ class BrainClient extends DelegateClient implements BrainClientInterface
 
     public function jobComponent(): JobComponentDelegateClient
     {
-        return new JobComponentDelegateClient($this->configuration);
+        return $this->serviceContainer->get(JobComponentDelegateClient::class);
     }
 
     public function jobQuery(): JobQueryDelegateClient
     {
-        return new JobQueryDelegateClient($this->configuration);
+        return $this->serviceContainer->get(JobQueryDelegateClient::class);
     }
 
     public function jobBatch(): JobBatchDelegateClient
     {
-        return new JobBatchDelegateClient($this->configuration);
+        return $this->serviceContainer->get(JobBatchDelegateClient::class);
     }
 
     public function jobFilter(): JobFilterDelegateClient
     {
-        return new JobFilterDelegateClient($this->configuration);
+        return $this->serviceContainer->get(JobFilterDelegateClient::class);
     }
 
     public function product(): ProductDelegateClient
     {
-        return new ProductDelegateClient($this->configuration);
+        return $this->serviceContainer->get(ProductDelegateClient::class);
     }
 
     public function artwork(): ArtworkDelegateClient
     {
-        return new ArtworkDelegateClient($this->configuration);
+        return $this->serviceContainer->get(ArtworkDelegateClient::class);
     }
 
     public function artifact(): ArtifactDelegateClient
     {
-        return new ArtifactDelegateClient($this->configuration);
+        return $this->serviceContainer->get(ArtifactDelegateClient::class);
     }
 
     public function clientWorkflow(): ClientWorkflowDelegateClient
     {
-        return new ClientWorkflowDelegateClient($this->configuration);
+        return $this->serviceContainer->get(ClientWorkflowDelegateClient::class);
     }
 }

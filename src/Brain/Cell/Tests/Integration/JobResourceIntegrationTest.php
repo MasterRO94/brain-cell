@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace Brain\Cell\Tests\Integration;
 
-use Brain\Cell\BrainClient;
+use Brain\Cell\BrainClientFactory;
 use Brain\Cell\Client\ClientConfiguration;
 use Brain\Cell\Client\RequestAdapter\GuzzleHttpRequestAdapter;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\Service\ResourceHandlerService;
-use Brain\Cell\Transfer\EntityResourceFactory;
-use Brain\Cell\Transformer\ArrayDecoder;
-use Brain\Cell\Transformer\ArrayEncoder;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -41,15 +37,8 @@ final class JobResourceIntegrationTest extends TestCase
             ->willReturn($data);
 
         $configuration = new ClientConfiguration($adapter, 'some-key');
-        $configuration->setResourceHandler(
-            new ResourceHandlerService(
-                new EntityResourceFactory(),
-                new ArrayEncoder(),
-                new ArrayDecoder()
-            )
-        );
 
-        $client = new BrainClient($configuration);
+        $client = (new BrainClientFactory())->createBrainClient($configuration);
 
         /** @var JobResource $job */
         $job = $client->job()->getJob('some-id');
