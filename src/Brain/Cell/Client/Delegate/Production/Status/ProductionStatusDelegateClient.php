@@ -56,8 +56,7 @@ use Brain\Cell\Transfer\ResourceCollection;
     ): AbstractStatusResource {
         $id = $production->getId();
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($status);
+        $payload = $this->resourceHandler->serialise($status);
 
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPut(sprintf('/productions/%s/status', $id));

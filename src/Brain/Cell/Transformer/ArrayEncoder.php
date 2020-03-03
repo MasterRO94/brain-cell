@@ -53,6 +53,14 @@ class ArrayEncoder extends AbstractTransformer
     }
 
     /**
+     * @internal
+     */
+    public function encodeDateTimeValue(DateTime $dateTime): string
+    {
+        return $dateTime->format('c');
+    }
+
+    /**
      * Serialise a {@link AbstractResource}.
      *
      * @return mixed[]
@@ -153,7 +161,7 @@ class ArrayEncoder extends AbstractTransformer
                     ));
                 }
             } elseif ($value instanceof DateTime) {
-                $value = $value->format('c');
+                $value = $this->encodeDateTimeValue($value);
             }
 
             // Ignore empty arrays, but don't ignore 0 or false

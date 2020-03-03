@@ -33,8 +33,7 @@ final class JobFilterDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $context->prepareContextForPost('/job/filters');
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($summary));
+        $context->setPayload($this->resourceHandler->serialise($summary));
 
         /** @var JobFilterResourceInterface $resource */
         $resource = $this->request($context, $summary);

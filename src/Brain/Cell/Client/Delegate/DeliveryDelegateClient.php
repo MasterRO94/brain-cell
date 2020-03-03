@@ -7,12 +7,13 @@ namespace Brain\Cell\Client\Delegate;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Country\CountryResource;
 use Brain\Cell\EntityResource\Country\CountryResourceInterface;
-use Brain\Cell\EntityResource\Delivery\DeliveryJobBatchResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
+use Brain\Cell\EntityResource\Delivery\GetDeliveryOptionsArgs;
 use Brain\Cell\Transfer\ResourceCollection;
 
+use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\StreamInterface;
 
 /**
@@ -21,15 +22,26 @@ use Psr\Http\Message\StreamInterface;
 class DeliveryDelegateClient extends DelegateClient
 {
     /**
+     * @param mixed[] $options
+     *
      * @return DeliveryOptionResource[]|ResourceCollection
      */
-    public function getDeliveryOptions(DeliveryJobBatchResource $batch)
-    {
+    public function getDeliveryOptions(
+        GetDeliveryOptionsArgs $actionArgs,
+        array $options = []
+    ): ResourceCollection {
+        $options = array_merge([
+            'requestTimeoutSeconds' => null,
+        ], $options);
+
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/delivery/options');
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($batch);
+        if ($options['requestTimeoutSeconds'] !== null) {
+            $context->getExtraGuzzleRequestOptions()->set(RequestOptions::TIMEOUT, $options['requestTimeoutSeconds']);
+        }
+
+        $payload = $this->resourceHandler->serialise($actionArgs);
         $context->setPayload($payload);
 
         $collection = new ResourceCollection();
@@ -95,8 +107,7 @@ class DeliveryDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/delivery/dispatch');
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($dispatch);
+        $payload = $this->resourceHandler->serialise($dispatch);
         $context->setPayload($payload);
 
         /** @var DispatchResource $resource */

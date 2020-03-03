@@ -19,7 +19,7 @@ use Brain\Cell\EntityResource\Production\ProductionResourceInterface;
      */
     public function status(): ProductionStatusDelegateClient
     {
-        return new ProductionStatusDelegateClient($this->configuration);
+        return new ProductionStatusDelegateClient($this->configuration, $this->resourceHandler);
     }
 
     /**
@@ -27,8 +27,7 @@ use Brain\Cell\EntityResource\Production\ProductionResourceInterface;
      */
     public function create(ProductionResourceInterface $production): ProductionResourceInterface
     {
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($production);
+        $payload = $this->resourceHandler->serialise($production);
 
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/productions');
