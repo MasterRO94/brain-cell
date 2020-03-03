@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Brain\Cell\Client\DelegateHelper;
 
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
-use Brain\Cell\EntityResource\Delivery\DeliveryGetDeliveryOptionsActionArgs;
+use Brain\Cell\EntityResource\Delivery\GetDeliveryOptionsArgs;
+use Brain\Cell\EntityResource\Delivery\GetDeliveryOptionsOptionsResource;
 use Brain\Cell\Logical\Delivery\GetDeliveryOptionsOrFallbackDeliveryOptionResult;
 
 use Exception;
@@ -25,7 +26,7 @@ class DeliveryDelegateClientHelper
      * @param mixed[] $options
      */
     public function getDeliveryOptionsOrFallbackDeliveryOption(
-        DeliveryGetDeliveryOptionsActionArgs $actionArgs,
+        GetDeliveryOptionsArgs $actionArgs,
         array $options = []
     ): GetDeliveryOptionsOrFallbackDeliveryOptionResult {
         $options = array_merge([
@@ -47,7 +48,13 @@ class DeliveryDelegateClientHelper
             );
         } catch (Throwable $exception) {
             $normalDeliveryOptionsCreationException = $exception;
-            $actionArgs->setOptionFallbackDeliveryOptionOnly(true);
+
+            /*
+             * Request fallback delivery option only.
+             */
+            $actionOptions = $actionArgs->getOptions() ?? new GetDeliveryOptionsOptionsResource();
+            $actionOptions->setFallbackDeliveryOptionOnly(true);
+            $actionArgs->setOptions($actionOptions);
 
             $deliveryOptionsCollection = $this->deliveryDelegateClient->getDeliveryOptions($actionArgs);
         }

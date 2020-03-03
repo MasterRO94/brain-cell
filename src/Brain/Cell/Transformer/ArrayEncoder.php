@@ -81,8 +81,6 @@ class ArrayEncoder extends AbstractTransformer
         $resources = $resource->getAssociatedResources();
         $collections = $resource->getAssociatedCollections();
 
-        $customSerialisationFunctions = $resource->getFieldsCustomSerialisationFunctions();
-
         foreach ($properties as $property) {
             // Use reflection to get protected property values
             $property->setAccessible(true);
@@ -111,12 +109,7 @@ class ArrayEncoder extends AbstractTransformer
                 continue;
             }
 
-            if (array_key_exists($property->getName(), $customSerialisationFunctions)) {
-                /*
-                 * Custom serialisation
-                 */
-                $value = $customSerialisationFunctions[$property->getName()]($this);
-            } elseif ($value instanceof TransferEntityInterface) {
+            if ($value instanceof TransferEntityInterface) {
                 // Some associated have to be sent as id (see comment above)
                 if ($this->isIdResourceAndShouldSerialiseAsId($value, $options)) {
                     /** @var AbstractResource $input */

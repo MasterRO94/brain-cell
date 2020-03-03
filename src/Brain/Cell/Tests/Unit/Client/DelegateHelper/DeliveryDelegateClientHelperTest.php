@@ -6,7 +6,7 @@ namespace Brain\Cell\Tests\Unit\Client\DelegateHelper;
 
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
 use Brain\Cell\Client\DelegateHelper\DeliveryDelegateClientHelper;
-use Brain\Cell\EntityResource\Delivery\DeliveryGetDeliveryOptionsActionArgs;
+use Brain\Cell\EntityResource\Delivery\GetDeliveryOptionsArgs;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -40,7 +40,7 @@ final class DeliveryDelegateClientHelperTest extends TestCase
 
         $helper = new DeliveryDelegateClientHelper($mockDeliveryDelegateClient);
 
-        $result = $helper->getDeliveryOptionsOrFallbackDeliveryOption(new DeliveryGetDeliveryOptionsActionArgs());
+        $result = $helper->getDeliveryOptionsOrFallbackDeliveryOption(new GetDeliveryOptionsArgs());
 
         self::assertEquals(1, $result->getDeliveryOptionsCollection()->count());
         self::assertNull($result->getNormalDeliveryOptionsCreationException());
@@ -59,7 +59,7 @@ final class DeliveryDelegateClientHelperTest extends TestCase
         $mockDeliveryDelegateClient
             ->expects(self::any())
             ->method('getDeliveryOptions')
-            ->will(self::returnCallback(static function (DeliveryGetDeliveryOptionsActionArgs $args) {
+            ->will(self::returnCallback(static function (GetDeliveryOptionsArgs $args) {
                 /*
                  * Retrieve the args' options using reflection. I don't want to supply getters for them.
                  */
@@ -81,7 +81,7 @@ final class DeliveryDelegateClientHelperTest extends TestCase
 
         $helper = new DeliveryDelegateClientHelper($mockDeliveryDelegateClient);
 
-        $result = $helper->getDeliveryOptionsOrFallbackDeliveryOption(new DeliveryGetDeliveryOptionsActionArgs());
+        $result = $helper->getDeliveryOptionsOrFallbackDeliveryOption(new GetDeliveryOptionsArgs());
 
         self::assertEquals(1, $result->getDeliveryOptionsCollection()->count());
         self::assertNotNull($result->getNormalDeliveryOptionsCreationException());

@@ -15,7 +15,7 @@ use DateTime;
 /**
  * {@inheritdoc}
  */
-class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
+class GetDeliveryOptionsArgs extends AbstractResource
 {
     /**
      * @Assert\Valid()
@@ -36,8 +36,12 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
      */
     protected $jobs;
 
-    /** @var mixed[] See setters. */
-    protected $options = [];
+    /**
+     * @Assert\Valid()
+     *
+     * @var GetDeliveryOptionsOptionsResource|null
+     */
+    protected $options;
 
     /**
      * {@inheritdoc}
@@ -46,6 +50,7 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
     {
         return [
             'deliveryAddress' => AddressResource::class,
+            'options' => GetDeliveryOptionsOptionsResource::class,
         ];
     }
 
@@ -56,30 +61,6 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
     {
         return [
             'jobs' => JobResource::class,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFieldsCustomSerialisationFunctions(): array
-    {
-        return [
-            'options' => function (ArrayEncoder $arrayEncoder) {
-                $actionArgsOptions = $this->options;
-
-                /*
-                 * Serialise the lifetime field
-                 */
-                if (array_key_exists('minimal_delivery_options_lifetime', $actionArgsOptions)
-                    && (bool) $actionArgsOptions['minimal_delivery_options_lifetime']
-                ) {
-                    $actionArgsOptions['minimal_delivery_options_lifetime']
-                        = $arrayEncoder->encodeDateTimeValue($actionArgsOptions['minimal_delivery_options_lifetime']);
-                }
-
-                return $actionArgsOptions;
-            },
         ];
     }
 
@@ -125,18 +106,19 @@ class DeliveryGetDeliveryOptionsActionArgs extends AbstractResource
         $this->jobs = $jobs;
     }
 
-    public function setOptionMinimalDeliveryOptionsLifetime(?DateTime $minimalLifetime): void
+    /**
+     * @return GetDeliveryOptionsOptionsResource|null
+     */
+    public function getOptions(): ?GetDeliveryOptionsOptionsResource
     {
-        $this->options['minimal_delivery_options_lifetime'] = $minimalLifetime;
+        return $this->options;
     }
 
-    public function setOptionFastGenerationRoutine(bool $isEnabled): void
+    /**
+     * @param GetDeliveryOptionsOptionsResource|null $options
+     */
+    public function setOptions(?GetDeliveryOptionsOptionsResource $options): void
     {
-        $this->options['fast_generation_routine'] = $isEnabled;
-    }
-
-    public function setOptionFallbackDeliveryOptionOnly(bool $isEnabled): void
-    {
-        $this->options['fallback_delivery_option_only'] = $isEnabled;
+        $this->options = $options;
     }
 }
