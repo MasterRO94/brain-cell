@@ -116,9 +116,8 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
     {
         // If the exception isn't a request exception or there's no response (e.g. connection timeout or just a connection error)
         // then return the original
-        if (
-            !($exception instanceof RequestException)
-            || null === $exception->getResponse()
+        if (!($exception instanceof RequestException)
+            || $exception->getResponse() === null
         ) {
             return $exception;
         }

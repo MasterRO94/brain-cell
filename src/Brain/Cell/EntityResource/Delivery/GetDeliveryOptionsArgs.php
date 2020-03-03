@@ -8,9 +8,6 @@ use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
-use Brain\Cell\Transformer\ArrayEncoder;
-
-use DateTime;
 
 /**
  * {@inheritdoc}
@@ -106,17 +103,11 @@ class GetDeliveryOptionsArgs extends AbstractResource
         $this->jobs = $jobs;
     }
 
-    /**
-     * @return GetDeliveryOptionsOptionsResource|null
-     */
     public function getOptions(): ?GetDeliveryOptionsOptionsResource
     {
         return $this->options;
     }
 
-    /**
-     * @param GetDeliveryOptionsOptionsResource|null $options
-     */
     public function setOptions(?GetDeliveryOptionsOptionsResource $options): void
     {
         $this->options = $options;

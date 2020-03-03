@@ -6,8 +6,9 @@ namespace Brain\Cell\Tests\Unit\Client\DelegateHelper;
 
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
 use Brain\Cell\Client\DelegateHelper\DeliveryDelegateClientHelper;
-use Brain\Cell\EntityResource\Delivery\GetDeliveryOptionsArgs;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
+use Brain\Cell\EntityResource\Delivery\GetDeliveryOptionsArgs;
+use Brain\Cell\EntityResource\Delivery\GetDeliveryOptionsOptionsResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 use PHPUnit\Framework\MockObject\MockObject;
@@ -60,15 +61,21 @@ final class DeliveryDelegateClientHelperTest extends TestCase
             ->expects(self::any())
             ->method('getDeliveryOptions')
             ->will(self::returnCallback(static function (GetDeliveryOptionsArgs $args) {
-                /*
-                 * Retrieve the args' options using reflection. I don't want to supply getters for them.
-                 */
-                $argsReflectionClass = new ReflectionClass($args);
-                $argsOptionsProperty = $argsReflectionClass->getProperty('options');
-                $argsOptionsProperty->setAccessible(true);
-                $argsOptionsValue = $argsOptionsProperty->getValue($args);
+                $isFallbackDeliveryOptionOnlyRequested = false;
 
-                $isFallbackDeliveryOptionOnlyRequested = $argsOptionsValue['fallback_delivery_option_only'] ?? false;
+                $argsOptions = $args->getOptions();
+                if ($argsOptions instanceof GetDeliveryOptionsOptionsResource) {
+                    /*
+                     * Retrieve the option using reflection. I don't want to supply getters for them.
+                     */
+                    $argsOptionsReflectionClass = new ReflectionClass($argsOptions);
+                    $argsOptionsFallbackOptionProperty = $argsOptionsReflectionClass->getProperty('fallbackDeliveryOptionOnly');
+                    $argsOptionsFallbackOptionProperty->setAccessible(true);
+
+                    $fallbackDeliveryOptionOnlyOption = $argsOptionsFallbackOptionProperty->getValue($argsOptions);
+
+                    $isFallbackDeliveryOptionOnlyRequested = (bool) $fallbackDeliveryOptionOnlyOption;
+                }
 
                 if ($isFallbackDeliveryOptionOnlyRequested) {
                     return new ResourceCollection([

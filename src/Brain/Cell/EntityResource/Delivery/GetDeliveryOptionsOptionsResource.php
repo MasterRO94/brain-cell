@@ -27,17 +27,11 @@ class GetDeliveryOptionsOptionsResource extends AbstractResource
         $this->minimalDeliveryOptionsLifetime = $minimalDeliveryOptionsLifetime;
     }
 
-    /**
-     * @param bool $fastGenerationRoutine
-     */
     public function setFastGenerationRoutine(bool $fastGenerationRoutine): void
     {
         $this->fastGenerationRoutine = $fastGenerationRoutine;
     }
 
-    /**
-     * @param bool $fallbackDeliveryOptionOnly
-     */
     public function setFallbackDeliveryOptionOnly(bool $fallbackDeliveryOptionOnly): void
     {
         $this->fallbackDeliveryOptionOnly = $fallbackDeliveryOptionOnly;
