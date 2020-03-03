@@ -114,8 +114,12 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
      */
     protected function wrapResponseException(Throwable $exception): Throwable
     {
-        // If the exception isn't from Guzzle then return the original.
-        if (!($exception instanceof RequestException)) {
+        // If the exception isn't a request exception or there's no response (e.g. connection timeout or just a connection error)
+        // then return the original
+        if (
+            !($exception instanceof RequestException)
+            || null === $exception->getResponse()
+        ) {
             return $exception;
         }
 
