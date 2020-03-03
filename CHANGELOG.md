@@ -8,7 +8,7 @@
 ### Changed
 - [Breaking change] `BrainClient::__construct()` param list change. Use the `BrainClientFactory` instead. 
 - [Breaking change] `ClientConfiguration::(get|set|has)ResourceHandler()` removed. 
-- [Breaking change] `DeliveryJobBatchResource` renamed.
+- [Breaking change] `DeliveryJobBatchResource` renamed to `GetDeliveryOptionsArgs`.
 - [Breaking change] `DeliveryDelegateClient::getDeliveryOptions()` param list change.
 
 ## 2019-01-08
