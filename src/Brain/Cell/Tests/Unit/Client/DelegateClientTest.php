@@ -65,10 +65,7 @@ final class DelegateClientTest extends TestCase
                 ]
             );
 
-        $resourceHandler = $this->getResourceHandler();
-        $this->configuration->setResourceHandler($resourceHandler);
-
-        $delegate = new StockDelegateClient($this->configuration);
+        $delegate = new StockDelegateClient($this->configuration, $this->getResourceHandler());
         $resource = $delegate->getFinishings(new JobResource());
 
         self::assertEquals(1, $resource->getFinishings()->count());
@@ -100,10 +97,7 @@ final class DelegateClientTest extends TestCase
         $job = new JobResource();
         $job->setQuantity(42);
 
-        $resourceHandler = $this->getResourceHandler();
-        $this->configuration->setResourceHandler($resourceHandler);
-
-        $delegate = new JobDelegateClient($this->configuration);
+        $delegate = new JobDelegateClient($this->configuration, $this->getResourceHandler());
         $delegate->postJob($job);
     }
 

@@ -28,6 +28,9 @@ class RequestContext
     /** @var ParameterBag */
     protected $parameters;
 
+    /** @var ParameterBag */
+    protected $extraGuzzleRequestOptions;
+
     /** @var mixed[] */
     protected $payload;
 
@@ -39,6 +42,7 @@ class RequestContext
         $this->filters = new ParameterBag();
         $this->selections = new ParameterBag();
         $this->parameters = new ParameterBag();
+        $this->extraGuzzleRequestOptions = new ParameterBag();
         $this->payload = [];
     }
 
@@ -65,6 +69,14 @@ class RequestContext
     public function getParameters(): ParameterBag
     {
         return $this->parameters;
+    }
+
+    /**
+     * @see \GuzzleHttp\RequestOptions
+     */
+    public function getExtraGuzzleRequestOptions(): ParameterBag
+    {
+        return $this->extraGuzzleRequestOptions;
     }
 
     /**

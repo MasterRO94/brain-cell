@@ -31,7 +31,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function status(): JobStatusDelegateClient
     {
-        return new JobStatusDelegateClient($this->configuration);
+        return new JobStatusDelegateClient($this->configuration, $this->resourceHandler);
     }
 
     /**
@@ -39,7 +39,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function notes(): JobNoteDelegateClient
     {
-        return new JobNoteDelegateClient($this->configuration);
+        return new JobNoteDelegateClient($this->configuration, $this->resourceHandler);
     }
 
     /**
@@ -47,8 +47,7 @@ class JobDelegateClient extends DelegateClient
      */
     public function create(JobResourceInterface $job): JobResourceInterface
     {
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($job);
+        $payload = $this->resourceHandler->serialise($job);
 
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/jobs');
@@ -156,8 +155,7 @@ class JobDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/jobs');
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($resource);
+        $payload = $this->resourceHandler->serialise($resource);
 
         $context->setPayload($payload);
 
@@ -199,8 +197,7 @@ class JobDelegateClient extends DelegateClient
         $jobStatusResource = new JobResource();
         $jobStatusResource->setStatus($status);
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($jobStatusResource));
+        $context->setPayload($this->resourceHandler->serialise($jobStatusResource));
 
         /** @var JobResourceInterface $job */
         $job = $this->request($context, $job);
@@ -218,8 +215,7 @@ class JobDelegateClient extends DelegateClient
         $jobPhaseResource = new JobResource();
         $jobPhaseResource->setPhase($phaseResource);
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($jobPhaseResource));
+        $context->setPayload($this->resourceHandler->serialise($jobPhaseResource));
 
         /** @var JobResourceInterface $resource */
         $resource = $this->request($context, $job);
@@ -278,8 +274,7 @@ class JobDelegateClient extends DelegateClient
         $newResource = new JobResource();
         $newResource->setMeta($meta);
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($newResource));
+        $context->setPayload($this->resourceHandler->serialise($newResource));
 
         /** @var JobResourceInterface $resource */
         $resource = $this->request($context, $newResource);

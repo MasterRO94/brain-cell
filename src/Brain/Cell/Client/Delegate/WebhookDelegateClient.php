@@ -12,12 +12,10 @@ final class WebhookDelegateClient extends DelegateClient
     public function postWebhookEndpoint(
         WebhookEndpointResourceInterface $webhookEndpoint
     ): WebhookEndpointResourceInterface {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/webhook/endpoints');
 
-        $context->setPayload($handler->serialise($webhookEndpoint));
+        $context->setPayload($this->resourceHandler->serialise($webhookEndpoint));
 
         /** @var WebhookEndpointResourceInterface $resource */
         $resource = $this->request($context, $webhookEndpoint);

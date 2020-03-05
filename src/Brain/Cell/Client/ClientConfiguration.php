@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Brain\Cell\Client;
 
-use Brain\Cell\Service\ResourceHandlerService;
-
-use RuntimeException;
-
 final class ClientConfiguration
 {
     /** @var RequestAdapterInterface */
@@ -15,9 +11,6 @@ final class ClientConfiguration
 
     /** @var string */
     private $basePath = 'https://api.printed-api.com';
-
-    /** @var ResourceHandlerService|null */
-    private $resourceHandler;
 
     /** @var string */
     private $apiKey;
@@ -41,25 +34,6 @@ final class ClientConfiguration
     public function setBasePath(string $basePath): void
     {
         $this->basePath = $basePath;
-    }
-
-    public function setResourceHandler(ResourceHandlerService $resourceHandler): void
-    {
-        $this->resourceHandler = $resourceHandler;
-    }
-
-    public function getResourceHandler(): ResourceHandlerService
-    {
-        if (!($this->resourceHandler instanceof ResourceHandlerService)) {
-            throw new RuntimeException("Can't retrieve a Cell resource handler, because it's not been set.");
-        }
-
-        return $this->resourceHandler;
-    }
-
-    public function hasResourceHandler(): bool
-    {
-        return $this->resourceHandler instanceof ResourceHandlerService;
     }
 
     public function createRequestContext(string $version): RequestContext

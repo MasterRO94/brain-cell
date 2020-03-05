@@ -43,7 +43,7 @@ class ArtworkDelegateClient extends DelegateClient
      */
     public function getFile(string $id): FileResourceInterface
     {
-        return (new FileDelegateClient($this->configuration))->get($id);
+        return (new FileDelegateClient($this->configuration, $this->resourceHandler))->get($id);
     }
 
     /**
@@ -51,7 +51,7 @@ class ArtworkDelegateClient extends DelegateClient
      */
     public function getFileDownloadPath(string $id): FileDownloadPathResourceInterface
     {
-        return (new FileDelegateClient($this->configuration))->getDownloadPath($id);
+        return (new FileDelegateClient($this->configuration, $this->resourceHandler))->getDownloadPath($id);
     }
 
     /**
@@ -59,7 +59,7 @@ class ArtworkDelegateClient extends DelegateClient
      */
     public function downloadFile(string $id): StreamInterface
     {
-        return (new FileDelegateClient($this->configuration))->download($id);
+        return (new FileDelegateClient($this->configuration, $this->resourceHandler))->download($id);
     }
 
     public function createArtworkIssue(string $id, ArtworkIssueResource $issue): ArtworkIssueResource
@@ -67,8 +67,7 @@ class ArtworkDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/artworks/%s/issues', $id));
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($issue));
+        $context->setPayload($this->resourceHandler->serialise($issue));
 
         /** @var ArtworkIssueResource $resource */
         $resource = $this->request($context, new ArtworkIssueResource());

@@ -6,20 +6,14 @@ namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
 /**
  * {@inheritdoc}
- *
- * This is only temporary as we have an inconsistency with payloads.
- * Will be fixed soon.
  */
-class DeliveryJobBatchResource extends AbstractResource
+class GetDeliveryOptionsArgs extends AbstractResource
 {
-    use ResourceIdentityTrait;
-
     /**
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -40,12 +34,20 @@ class DeliveryJobBatchResource extends AbstractResource
     protected $jobs;
 
     /**
+     * @Assert\Valid()
+     *
+     * @var GetDeliveryOptionsOptionsResource|null
+     */
+    protected $options;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedResources(): array
     {
         return [
             'deliveryAddress' => AddressResource::class,
+            'options' => GetDeliveryOptionsOptionsResource::class,
         ];
     }
 
@@ -96,8 +98,18 @@ class DeliveryJobBatchResource extends AbstractResource
     /**
      * @param JobResource[]|ResourceCollection $jobs
      */
-    public function setJobs($jobs): void
+    public function setJobs(ResourceCollection $jobs): void
     {
         $this->jobs = $jobs;
+    }
+
+    public function getOptions(): ?GetDeliveryOptionsOptionsResource
+    {
+        return $this->options;
+    }
+
+    public function setOptions(?GetDeliveryOptionsOptionsResource $options): void
+    {
+        $this->options = $options;
     }
 }

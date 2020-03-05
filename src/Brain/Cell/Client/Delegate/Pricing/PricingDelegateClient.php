@@ -19,8 +19,7 @@ class PricingDelegateClient extends DelegateClient
      */
     public function price(JobResourceInterface $job): PriceResourceInterface
     {
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($job);
+        $payload = $this->resourceHandler->serialise($job);
 
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/pricing');

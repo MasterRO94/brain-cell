@@ -49,11 +49,9 @@ class ProductDelegateClient extends DelegateClient
 
     public function createProduct(ProductResource $resource): ProductResource
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/products');
-        $context->setPayload($handler->serialise($resource));
+        $context->setPayload($this->resourceHandler->serialise($resource));
 
         /** @var ProductResource $resource */
         $resource = $this->request($context, new ProductResource());
@@ -65,11 +63,9 @@ class ProductDelegateClient extends DelegateClient
         ProductResource $productResource,
         ProductSizeAssignmentResource $assignmentResource
     ): ProductSizeAssignmentResource {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/products/%s/sizes', $productResource->getId()));
-        $context->setPayload($handler->serialise($assignmentResource));
+        $context->setPayload($this->resourceHandler->serialise($assignmentResource));
 
         /** @var ProductSizeAssignmentResource $resource */
         $resource = $this->request($context, new ProductSizeAssignmentResource());
@@ -81,11 +77,9 @@ class ProductDelegateClient extends DelegateClient
         ProductResource $productResource,
         ProductMaterialAssignmentResource $assignmentResource
     ): ProductMaterialAssignmentResource {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/products/%s/materials', $productResource->getId()));
-        $context->setPayload($handler->serialise($assignmentResource));
+        $context->setPayload($this->resourceHandler->serialise($assignmentResource));
 
         /** @var ProductMaterialAssignmentResource $resource */
         $resource = $this->request($context, new ProductMaterialAssignmentResource());
@@ -97,11 +91,9 @@ class ProductDelegateClient extends DelegateClient
         ProductResource $productResource,
         ProductFinishingAssignmentResource $assignmentResource
     ): ProductFinishingAssignmentResource {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost(sprintf('/products/%s/finishings', $productResource->getId()));
-        $context->setPayload($handler->serialise($assignmentResource));
+        $context->setPayload($this->resourceHandler->serialise($assignmentResource));
 
         /** @var ProductFinishingAssignmentResource $resource */
         $resource = $this->request($context, new ProductFinishingAssignmentResource());
@@ -111,8 +103,6 @@ class ProductDelegateClient extends DelegateClient
 
     public function linkMaterial(ProductResource $productResource, MaterialResource $materialResource): void
     {
-        $handler = $this->configuration->getResourceHandler();
-
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForLink(sprintf('/products/%s/materials/%s', $productResource->getId(), $materialResource->getId()));
 

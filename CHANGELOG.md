@@ -1,6 +1,17 @@
 # CHANGELOG
 
-### 2019-01-08
+## [0.2.0]
+### Added
+- DeliveryDelegateClientHelper
+- BrainClientFactory. Use the factory instead of instantiating the client in your code.
+
+### Changed
+- [Breaking change] `BrainClient::__construct()` param list change. Use the `BrainClientFactory` instead. 
+- [Breaking change] `ClientConfiguration::(get|set|has)ResourceHandler()` removed. 
+- [Breaking change] `DeliveryJobBatchResource` renamed to `GetDeliveryOptionsArgs`.
+- [Breaking change] `DeliveryDelegateClient::getDeliveryOptions()` param list change.
+
+## 2019-01-08 (un-versioned)
 
 * Everything is strictly-typed. Good luck.
 * A bunch of interfaces added for referencing instead of resources.

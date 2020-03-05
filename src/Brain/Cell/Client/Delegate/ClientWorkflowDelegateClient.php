@@ -25,8 +25,7 @@ class ClientWorkflowDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/workflows');
 
-        $handler = $this->configuration->getResourceHandler();
-        $context->setPayload($handler->serialise($clientWorkflowResource));
+        $context->setPayload($this->resourceHandler->serialise($clientWorkflowResource));
 
         /** @var ClientWorkflowResource $resource */
         $resource = $this->request($context, $clientWorkflowResource);
