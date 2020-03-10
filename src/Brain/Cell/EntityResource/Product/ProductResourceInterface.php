@@ -18,4 +18,14 @@ interface ProductResourceInterface extends
      * The product name defined by the client.
      */
     public function getName(): string;
+
+    /**
+     * Whether the Product allows custom sizes to be selected.
+     */
+    public function isAllowedCustomSizes(): bool;
+
+    /**
+     * The custom size range dimensions.
+     */
+    public function getCustomSizeRange(): ?ProductCustomSizeRangeResource;
 }

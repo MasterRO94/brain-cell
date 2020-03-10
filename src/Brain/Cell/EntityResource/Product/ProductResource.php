@@ -21,6 +21,12 @@ class ProductResource extends AbstractResource implements
     /** @var ProductGroupResourceInterface|null */
     protected $productGroup;
 
+    /** @var bool */
+    protected $isAllowedCustomSizes;
+
+    /** @var ProductCustomSizeRangeResource|null */
+    protected $customSizeRange;
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +34,7 @@ class ProductResource extends AbstractResource implements
     {
         return [
             'productGroup' => ProductGroupResource::class,
+            'customSizeRange' => ProductCustomSizeRangeResource::class,
         ];
     }
 
@@ -52,5 +59,28 @@ class ProductResource extends AbstractResource implements
     public function setProductGroup(ProductGroupResourceInterface $group): void
     {
         $this->productGroup = $group;
+    }
+
+    public function isAllowedCustomSizes(): bool
+    {
+        return $this->isAllowedCustomSizes;
+    }
+
+    public function setIsAllowedCustomSizes(bool $isAllowedCustomSizes): void
+    {
+        $this->isAllowedCustomSizes = $isAllowedCustomSizes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCustomSizeRange(): ?ProductCustomSizeRangeResource
+    {
+        return $this->customSizeRange;
+    }
+
+    public function setCustomSizeRange(ProductCustomSizeRangeResource $customSizeRangeResource): void
+    {
+        $this->customSizeRange = $customSizeRangeResource;
     }
 }
