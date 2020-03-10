@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## [Unreleased]
+
+## [0.2.1] - 2020-03-10
+### Added
+- Support for Custom Sizes in ProductResource.
+
 ## [0.2.0]
 ### Added
 - DeliveryDelegateClientHelper
