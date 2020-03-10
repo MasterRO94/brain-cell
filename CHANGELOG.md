@@ -1,6 +1,12 @@
 # CHANGELOG
 
-### 2019-01-08
+## [Unreleased]
+
+## [0.1.2] - 2020-03-10
+### Added
+- Support for Custom Sizes in ProductResource.
+
+## 2019-01-08 (un-versioned)
 
 * Everything is strictly-typed. Good luck.
 * A bunch of interfaces added for referencing instead of resources.
