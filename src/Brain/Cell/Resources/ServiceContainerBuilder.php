@@ -15,6 +15,7 @@ use Brain\Cell\Client\Delegate\Job\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobComponentDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobFilterDelegateClient;
+use Brain\Cell\Client\Delegate\Job\JobGroupDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobQueryDelegateClient;
 use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
@@ -144,6 +145,12 @@ class ServiceContainerBuilder
             },
             ClientWorkflowDelegateClient::class => static function (CellServiceContainer $serviceContainer) {
                 return new ClientWorkflowDelegateClient(
+                    $serviceContainer->get(ClientConfiguration::class),
+                    $serviceContainer->get(ResourceHandlerService::class)
+                );
+            },
+            JobGroupDelegateClient::class => static function (CellServiceContainer $serviceContainer) {
+                return new JobGroupDelegateClient(
                     $serviceContainer->get(ClientConfiguration::class),
                     $serviceContainer->get(ResourceHandlerService::class)
                 );
