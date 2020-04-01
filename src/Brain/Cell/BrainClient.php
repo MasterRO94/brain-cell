@@ -113,7 +113,7 @@ class BrainClient extends DelegateClient implements BrainClientInterface
 
     public function jobGroup(): JobGroupDelegateClient
     {
-        return new JobGroupDelegateClient($this->configuration);
+        return $this->serviceContainer->get(JobGroupDelegateClient::class);
     }
 
     public function jobFilter(): JobFilterDelegateClient

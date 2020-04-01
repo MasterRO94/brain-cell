@@ -26,8 +26,7 @@ class JobGroupDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/job/groups');
 
-        $handler = $this->configuration->getResourceHandler();
-        $payload = $handler->serialise($group);
+        $payload = $this->resourceHandler->serialise($group);
         $context->setPayload($payload);
 
         /** @var JobGroupResourceInterface $resource */
