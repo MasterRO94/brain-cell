@@ -87,6 +87,12 @@ class JobResource extends AbstractResource implements
      */
     protected $batch;
 
+    /** @var JobGroupResourceInterface|null */
+    protected $group;
+
+    /** @var int|null */
+    protected $index;
+
     /**
      * @Assert\Valid()
      * @Assert\NotBlank()
@@ -144,6 +150,7 @@ class JobResource extends AbstractResource implements
         return [
             'product' => ProductResource::class,
             'batch' => JobBatchResource::class,
+            'group' => JobGroupResource::class,
             'artifact' => ArtifactResource::class,
             'dimensions' => ThreeDimensionalResource::class,
             'status' => JobStatusResource::class,
@@ -285,6 +292,38 @@ class JobResource extends AbstractResource implements
     public function setBatch(JobBatchResourceInterface $batch): void
     {
         $this->batch = $batch;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroup(): ?JobGroupResourceInterface
+    {
+        return $this->group;
+    }
+
+    /**
+     * @deprecated This should not be used, if you are using it for tests mock the interface.
+     */
+    public function setGroup(JobGroupResourceInterface $group): void
+    {
+        $this->group = $group;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIndex(): ?int
+    {
+        return $this->index;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIndex(?int $index): void
+    {
+        $this->index = $index;
     }
 
     /**

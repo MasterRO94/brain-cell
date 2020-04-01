@@ -15,6 +15,7 @@ use Brain\Cell\Client\Delegate\Job\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobComponentDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobFilterDelegateClient;
+use Brain\Cell\Client\Delegate\Job\JobGroupDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobQueryDelegateClient;
 use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
@@ -108,6 +109,11 @@ class BrainClient extends DelegateClient implements BrainClientInterface
     public function jobBatch(): JobBatchDelegateClient
     {
         return $this->serviceContainer->get(JobBatchDelegateClient::class);
+    }
+
+    public function jobGroup(): JobGroupDelegateClient
+    {
+        return $this->serviceContainer->get(JobGroupDelegateClient::class);
     }
 
     public function jobFilter(): JobFilterDelegateClient
