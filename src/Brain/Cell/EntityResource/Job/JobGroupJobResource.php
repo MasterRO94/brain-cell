@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
@@ -29,4 +31,3 @@ class JobGroupJobResource extends AbstractResource implements
         $this->index = $index;
     }
 }
-
