@@ -28,4 +28,6 @@ interface JobGroupResourceInterface extends
      * @return JobResourceInterface[]|ResourceCollection
      */
     public function getJobs(): ResourceCollection;
+
+    public function setJobs($jobs): void;
 }
