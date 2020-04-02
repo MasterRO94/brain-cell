@@ -28,4 +28,13 @@ interface JobGroupResourceInterface extends
      * @return JobResourceInterface[]|ResourceCollection
      */
     public function getJobs(): ResourceCollection;
+
+    /**
+     * Set the jobs in the group.
+     *
+     * @deprecated Unsure if this is allowed, check API endpoints in Brain.
+     *
+     * @param JobGroupJobResourceInterface[]|JobResourceInterface[]|ResourceCollection $jobs
+     */
+    public function setJobs($jobs): void;
 }

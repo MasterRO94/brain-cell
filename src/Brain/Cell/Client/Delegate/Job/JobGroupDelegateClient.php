@@ -7,6 +7,7 @@ namespace Brain\Cell\Client\Delegate\Job;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Job\JobGroupResource;
 use Brain\Cell\EntityResource\Job\JobGroupResourceInterface;
+use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 
 class JobGroupDelegateClient extends DelegateClient
 {
@@ -26,7 +27,9 @@ class JobGroupDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPost('/job/groups');
 
-        $payload = $this->resourceHandler->serialise($group);
+        $payload = $this->resourceHandler->serialise($group, new ArrayEncoderSerialisationOptions([
+            'serialiseResourceIdInsteadOfWholeBodyIfPossible' => false,
+        ]));
         $context->setPayload($payload);
 
         /** @var JobGroupResourceInterface $resource */
