@@ -28,6 +28,9 @@ class StockFinishingsResource extends AbstractResource
     /** @var ResourceCollection|SizeResource[] */
     protected $sizes;
 
+    /** @var ClientResource[]|ResourceCollection */
+    protected $productionHouses;
+
     /**
      * {@inheritdoc}
      */
@@ -38,6 +41,7 @@ class StockFinishingsResource extends AbstractResource
             'finishings' => FinishingCategoryResource::class,
             'materials' => MaterialResource::class,
             'sizes' => SizeResource::class,
+            'productionHouses' => ClientResource::class,
         ];
     }
 
@@ -71,5 +75,13 @@ class StockFinishingsResource extends AbstractResource
     public function getSizes()
     {
         return $this->sizes;
+    }
+
+    /**
+     * @return ClientResource[]|ResourceCollection
+     */
+    public function getProductionHouses()
+    {
+        return $this->productionHouses;
     }
 }

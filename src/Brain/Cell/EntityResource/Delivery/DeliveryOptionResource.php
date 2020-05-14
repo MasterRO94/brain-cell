@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Delivery;
 
+use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Country\AddressResourceInterface;
@@ -67,6 +68,9 @@ class DeliveryOptionResource extends AbstractResource implements
     /** @var DateResource */
     protected $lifetimeFinishDate;
 
+    /** @var ClientResource */
+    protected $productionHouse;
+
     /**
      * {@inheritdoc}
      */
@@ -87,6 +91,7 @@ class DeliveryOptionResource extends AbstractResource implements
             'deliveryDateLatest' => DateResource::class,
             'deliveryDateEarliest' => DateResource::class,
             'createdAt' => DateResource::class,
+            'productionHouse' => ClientResource::class,
         ];
     }
 
@@ -238,5 +243,15 @@ class DeliveryOptionResource extends AbstractResource implements
     public function setLifetimeFinishDate(DateResource $lifetimeFinishDate): void
     {
         $this->lifetimeFinishDate = $lifetimeFinishDate;
+    }
+
+    public function getProductionHouse(): ClientResource
+    {
+        return $this->productionHouse;
+    }
+
+    public function setProductionHouse(ClientResource $productionHouse): void
+    {
+        $this->productionHouse = $productionHouse;
     }
 }
