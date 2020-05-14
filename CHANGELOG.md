@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Support availability in StockFinishingsResource.
+- Support availability in `StockFinishingsResource`.
+- Exposed Production House in `StockFinishingsResource` and `DeliveryOptionResource`.
 
 ## [0.3.2] - 2020-04-02
 ### Added
