@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource;
 
+use Brain\Cell\EntityResource\Stock\AvailabilityResource;
 use Brain\Cell\EntityResource\Stock\Finishing\FinishingCategoryResource;
 use Brain\Cell\EntityResource\Stock\MaterialResource;
 use Brain\Cell\EntityResource\Stock\SizeResource;
@@ -15,6 +16,9 @@ use Brain\Cell\Transfer\ResourceCollection;
  */
 class StockFinishingsResource extends AbstractResource
 {
+    /** @var AvailabilityResource[]|ResourceCollection */
+    protected $availability;
+
     /** @var FinishingCategoryResource[]|ResourceCollection */
     protected $finishings;
 
@@ -30,10 +34,19 @@ class StockFinishingsResource extends AbstractResource
     public function getAssociatedCollections(): array
     {
         return [
+            'availability' => AvailabilityResource::class,
             'finishings' => FinishingCategoryResource::class,
             'materials' => MaterialResource::class,
             'sizes' => SizeResource::class,
         ];
+    }
+
+    /**
+     * @return AvailabilityResource[]|ResourceCollection
+     */
+    public function getAvailability()
+    {
+        return $this->availability;
     }
 
     /**
