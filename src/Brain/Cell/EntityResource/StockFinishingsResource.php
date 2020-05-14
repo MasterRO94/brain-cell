@@ -28,7 +28,7 @@ class StockFinishingsResource extends AbstractResource
     /** @var ResourceCollection|SizeResource[] */
     protected $sizes;
 
-    /** ClientResource[]|ResourceCollection */
+    /** @var ClientResource[]|ResourceCollection */
     protected $productionHouses;
 
     /**
@@ -75,5 +75,13 @@ class StockFinishingsResource extends AbstractResource
     public function getSizes()
     {
         return $this->sizes;
+    }
+
+    /**
+     * @return ClientResource[]|ResourceCollection
+     */
+    public function getProductionHouses()
+    {
+        return $this->productionHouses;
     }
 }
