@@ -12,6 +12,7 @@ use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Product\ProductResource;
 use Brain\Cell\EntityResource\Product\ProductResourceInterface;
+use Brain\Cell\EntityResource\ProductionHouseResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
@@ -118,6 +119,9 @@ class JobResource extends AbstractResource implements
 
     /** @var string */
     protected $preflightFailurePolicy;
+
+    /** @var ProductionHouseResource|null */
+    protected $productionHouse;
 
     public function __construct()
     {
@@ -653,6 +657,11 @@ class JobResource extends AbstractResource implements
     public function setPreflightFailurePolicy(string $preflightFailurePolicy): void
     {
         $this->preflightFailurePolicy = $preflightFailurePolicy;
+    }
+
+    public function setProductionHouse(?ProductionHouseResource $productionHouse): void
+    {
+        $this->productionHouse = $productionHouse;
     }
 
     /**
