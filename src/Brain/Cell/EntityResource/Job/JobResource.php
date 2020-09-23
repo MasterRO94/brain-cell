@@ -163,6 +163,7 @@ class JobResource extends AbstractResource implements
             'meta' => JobMetaResource::class,
             'phase' => PhaseResource::class,
             'productionFinishDate' => DateResource::class,
+            'productionHouse' => ProductionHouseResource::class,
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
         ];
