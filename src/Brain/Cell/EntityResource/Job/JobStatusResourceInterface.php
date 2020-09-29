@@ -21,4 +21,8 @@ interface JobStatusResourceInterface
     public function getCreatedAt(): DateResourceInterface;
 
     public function setCreatedAt(DateResourceInterface $createdAt): void;
+
+    public function getCanonical(): string;
+
+    public function getMessage(): string;
 }
