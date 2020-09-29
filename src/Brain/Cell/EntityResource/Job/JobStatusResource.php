@@ -11,7 +11,7 @@ use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 /**
  * {@inheritdoc}
  */
-final class JobStatusResource extends AbstractStatusResource
+final class JobStatusResource extends AbstractStatusResource implements JobStatusResourceInterface
 {
     use CreatedAtTrait;
 
