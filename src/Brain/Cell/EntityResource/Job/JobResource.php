@@ -416,7 +416,7 @@ class JobResource extends AbstractResource implements
     }
 
     /**
-     * @return JobNoteResource[]|ResourceCollection
+     * {@inheritdoc}
      */
     public function getNotes(): ResourceCollection
     {
