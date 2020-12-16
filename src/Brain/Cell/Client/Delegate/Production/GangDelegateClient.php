@@ -25,6 +25,7 @@ class GangDelegateClient extends DelegateClient
 
         /** @var GangResourceInterface $resource */
         $resource = $this->request($context, new GangResource());
+
         return $resource;
     }
 
@@ -34,7 +35,7 @@ class GangDelegateClient extends DelegateClient
     public function get(string $id): GangResourceInterface
     {
         $context = $this->configuration->createRequestContext(self::VERSION_V2);
-        $context->prepareContextForGet("/gangs/{$id}");
+        $context->prepareContextForGet(sptinf("/gangs/%s", $id));
 
         /** @var GangResourceInterface $resource */
         $resource = $this->request($context, new GangResource());
@@ -54,7 +55,7 @@ class GangDelegateClient extends DelegateClient
         }
 
         $context = $this->configuration->createRequestContext(self::VERSION_V2);
-        $context->prepareContextForLink("/gangs/{$id}/jobs");
+        $context->prepareContextForLink(sprint("/gangs/%s/jobs", $id));
 
         $seriliasedJobs = $this->resourceHandler->serialise($jobs);
         $context->setPayload(['jobs' => $seriliasedJobs]);
@@ -68,7 +69,7 @@ class GangDelegateClient extends DelegateClient
     public function removeJobs(string $id, ResourceCollection $jobs): void
     {
         $context = $this->configuration->createRequestContext(self::VERSION_V2);
-        $context->prepareContextForUnlink("/gangs/{$id}/jobs");
+        $context->prepareContextForUnlink(sprintf("/gangs/%s/jobs", $id));
 
         $this->configuration->getRequestAdapter()->request($context);
     }
