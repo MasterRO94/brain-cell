@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Production;
 
 use Brain\Cell\EntityResource\Job\JobResource;
@@ -19,7 +21,8 @@ use Brain\Cell\Transfer\ResourceCollection;
  * projects are placed on a common paper sheet in an effort to
  * reduce printing costs and paper waste.
  */
-interface GangResourceInterface extends ResourceIdentityInterface,
+interface GangResourceInterface extends
+    ResourceIdentityInterface,
     ResourceAliasInterface,
     CreatedAtInterface,
     UpdatedAtInterface
@@ -29,5 +32,5 @@ interface GangResourceInterface extends ResourceIdentityInterface,
      *
      * @return JobResource[]|ResourceCollection
      */
-    public function getJobs():ResourceCollection;
+    public function getJobs(): ResourceCollection;
 }

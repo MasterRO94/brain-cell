@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Production;
 
-use Brain\Cell\EntityResource\Artwork\ArtworkFileResource;
-use Brain\Cell\EntityResource\Artwork\ArtworkIssueResource;
-use Brain\Cell\EntityResource\Common\AbstractStatusResource;
 use Brain\Cell\EntityResource\Job\JobResource;
-use Brain\Cell\EntityResource\Job\JobResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceAliasTrait;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
@@ -48,7 +44,7 @@ final class GangResource extends AbstractResource implements GangResourceInterfa
     /**
      * @inheritDoc
      */
-    public function getJobs():ResourceCollection
+    public function getJobs(): ResourceCollection
     {
         return $this->jobs;
     }

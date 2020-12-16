@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\Client\Delegate\Production;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Production\GangResource;
 use Brain\Cell\EntityResource\Production\GangResourceInterface;
@@ -15,9 +16,6 @@ class GangDelegateClient extends DelegateClient
     /**
      * Create a new gang.
      * The alias is used to identify gangs on the client application.
-     *
-     * @param string $alias
-     * @return GangResourceInterface
      */
     public function create(string $alias): GangResourceInterface
     {
@@ -32,9 +30,6 @@ class GangDelegateClient extends DelegateClient
 
     /**
      * Get the gang by the Gang id.
-     *
-     * @param string $id
-     * @return GangResourceInterface
      */
     public function get(string $id): GangResourceInterface
     {
@@ -69,9 +64,6 @@ class GangDelegateClient extends DelegateClient
 
     /**
      * Remove jobs from the gang
-     *
-     * @param string $id
-     * @param ResourceCollection $jobs
      */
     public function removeJobs(string $id, ResourceCollection $jobs): void
     {
