@@ -57,8 +57,8 @@ class GangDelegateClient extends DelegateClient
         $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $context->prepareContextForLink(sprintf('/gangs/%s/jobs', $id));
 
-        $seriliasedJobs = $this->resourceHandler->serialise($jobs);
-        $context->setPayload(['jobs' => $seriliasedJobs]);
+        $serialisedJobs = $this->resourceHandler->serialise($jobs);
+        $context->setPayload(['jobs' => $serialisedJobs]);
 
         $this->configuration->getRequestAdapter()->request($context);
     }
