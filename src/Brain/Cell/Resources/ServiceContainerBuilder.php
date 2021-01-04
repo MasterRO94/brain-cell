@@ -19,6 +19,7 @@ use Brain\Cell\Client\Delegate\Job\JobGroupDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobQueryDelegateClient;
 use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
+use Brain\Cell\Client\Delegate\Production\GangDelegateClient;
 use Brain\Cell\Client\Delegate\Production\ProductionDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\Delegate\WebhookDelegateClient;
@@ -79,6 +80,12 @@ class ServiceContainerBuilder
             },
             ProductionDelegateClient::class => static function (CellServiceContainer $serviceContainer) {
                 return new ProductionDelegateClient(
+                    $serviceContainer->get(ClientConfiguration::class),
+                    $serviceContainer->get(ResourceHandlerService::class)
+                );
+            },
+            GangDelegateClient::class => static function (CellServiceContainer $serviceContainer) {
+                return new GangDelegateClient(
                     $serviceContainer->get(ClientConfiguration::class),
                     $serviceContainer->get(ResourceHandlerService::class)
                 );

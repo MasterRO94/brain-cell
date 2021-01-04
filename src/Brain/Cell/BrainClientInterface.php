@@ -18,6 +18,7 @@ use Brain\Cell\Client\Delegate\Job\JobGroupDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobQueryDelegateClient;
 use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
+use Brain\Cell\Client\Delegate\Production\GangDelegateClient;
 use Brain\Cell\Client\Delegate\Production\ProductionDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\Delegate\WebhookDelegateClient;
@@ -33,6 +34,8 @@ interface BrainClientInterface
     public function files(): FileDelegateClient;
 
     public function productions(): ProductionDelegateClient;
+
+    public function gang(): GangDelegateClient;
 
     public function pricing(): PricingDelegateClient;
 
