@@ -102,7 +102,6 @@ class ArrayEncoder extends AbstractTransformer
                 'updatedAt',
                 'shop',
                 'productionSheetCount',
-                'productionHouse',
                 'productionFinishDate',
                 'dispatches',
             ], true)) {

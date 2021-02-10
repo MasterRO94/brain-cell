@@ -32,6 +32,13 @@ class StockFinishingsResource extends AbstractResource
     protected $productionHouses;
 
     /**
+     * Usually, this should be set. Otherwise it means a bad configuration on Brain.
+     *
+     * @var ClientResource|null
+     */
+    protected $productionHouse;
+
+    /**
      * {@inheritdoc}
      */
     public function getAssociatedCollections(): array
@@ -42,6 +49,16 @@ class StockFinishingsResource extends AbstractResource
             'materials' => MaterialResource::class,
             'sizes' => SizeResource::class,
             'productionHouses' => ClientResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedResources(): array
+    {
+        return [
+            'productionHouse' => ClientResource::class,
         ];
     }
 
@@ -83,5 +100,10 @@ class StockFinishingsResource extends AbstractResource
     public function getProductionHouses()
     {
         return $this->productionHouses;
+    }
+
+    public function getProductionHouse(): ?ClientResource
+    {
+        return $this->productionHouse;
     }
 }

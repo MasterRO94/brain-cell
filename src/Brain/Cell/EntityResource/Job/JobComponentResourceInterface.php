@@ -55,6 +55,8 @@ interface JobComponentResourceInterface extends
      */
     public function getMaterial(): MaterialResourceInterface;
 
+    public function setDimensions(TwoDimensionalInterface $dimensional): void;
+
     /**
      * Return the component dimensions.
      */

@@ -89,4 +89,9 @@ interface JobResourceInterface extends
      * @return JobStatusResource[]|ResourceCollection
      */
     public function getStatuses(): ResourceCollection;
+
+    /**
+     * @return JobNoteResource[]|ResourceCollection
+     */
+    public function getNotes(): ResourceCollection;
 }

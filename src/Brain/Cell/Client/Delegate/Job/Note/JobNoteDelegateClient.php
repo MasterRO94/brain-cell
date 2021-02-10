@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\Client\Delegate\Job\Note;
 
 use Brain\Cell\Client\DelegateClient;
-use Brain\Cell\EntityResource\Job\JobNoteResource;
+use Brain\Cell\EntityResource\Job\JobNoteResourceInterface;
 use Brain\Cell\EntityResource\Job\JobResource;
 use Brain\Cell\EntityResource\Job\JobResourceInterface;
 
@@ -17,7 +17,7 @@ use Brain\Cell\EntityResource\Job\JobResourceInterface;
     /**
      * Create a note against the job.
      */
-    public function create(JobResourceInterface $job, JobNoteResource $note): JobResourceInterface
+    public function create(JobResourceInterface $job, JobNoteResourceInterface $note): JobResourceInterface
     {
         $id = $job->getId();
 
