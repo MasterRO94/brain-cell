@@ -19,6 +19,7 @@ use Brain\Cell\Client\Delegate\Job\JobGroupDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobQueryDelegateClient;
 use Brain\Cell\Client\Delegate\Pricing\PricingDelegateClient;
 use Brain\Cell\Client\Delegate\ProductDelegateClient;
+use Brain\Cell\Client\Delegate\Production\GangDelegateClient;
 use Brain\Cell\Client\Delegate\Production\ProductionDelegateClient;
 use Brain\Cell\Client\Delegate\StockDelegateClient;
 use Brain\Cell\Client\Delegate\WebhookDelegateClient;
@@ -66,6 +67,11 @@ class BrainClient extends DelegateClient implements BrainClientInterface
     public function productions(): ProductionDelegateClient
     {
         return $this->serviceContainer->get(ProductionDelegateClient::class);
+    }
+
+    public function gang(): GangDelegateClient
+    {
+        return $this->serviceContainer->get(GangDelegateClient::class);
     }
 
     public function pricing(): PricingDelegateClient

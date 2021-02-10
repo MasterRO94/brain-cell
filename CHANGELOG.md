@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Support for `metaData` on `ArtifactResource`. 
+
+## [0.5.0] - 2021-01-05
+### Added
+- Gang client for public usage - `GangDelegateClient.php`, `BrainClient.php`, `BrainClientInterface.php`, `ServiceContainerBuilder.php`.
+- Gang Resource - `GangResource`, `GangResourceInterface`.
+
 ## [0.4.1] - 2020-09-29
 ### Added
 - Support for overriding production house in job submission.
