@@ -28,6 +28,9 @@ class ArtifactResource extends AbstractResource
     /** @var FileResourceInterface */
     protected $file;
 
+    /** @var mixed[] */
+    protected $metaData;
+
     /**
      * {@inheritdoc}
      */
@@ -78,5 +81,21 @@ class ArtifactResource extends AbstractResource
     public function setFile(FileResourceInterface $file): void
     {
         $this->file = $file;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getMetaData(): array
+    {
+        return $this->metaData;
+    }
+
+    /**
+     * @param mixed[] $metaData
+     */
+    public function setMetaData(array $metaData): void
+    {
+        $this->metaData = $metaData;
     }
 }
