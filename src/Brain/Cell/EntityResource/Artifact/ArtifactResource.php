@@ -7,17 +7,17 @@ namespace Brain\Cell\EntityResource\Artifact;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\File\FileResource;
 use Brain\Cell\EntityResource\File\FileResourceInterface;
+use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-class ArtifactResource extends AbstractResource
+class ArtifactResource extends AbstractResource implements 
+    ArtifactResourceInterface
 {
     use CreatedAtTrait;
     use UpdatedAtTrait;
-
-    /** @var string */
-    protected $id;
+    use ResourceIdentityTrait;
 
     /** @var string */
     protected $path;
@@ -41,16 +41,6 @@ class ArtifactResource extends AbstractResource
             'updatedAt' => DateResource::class,
             'file' => FileResource::class,
         ];
-    }
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function setId(string $id): void
-    {
-        $this->id = $id;
     }
 
     public function getPath(): string

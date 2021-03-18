@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
+use Brain\Cell\EntityResource\Artifact\ArtifactResourceInterface;
 use Brain\Cell\EntityResource\Artwork\ArtworkResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Common\Weight\WeightResource;
@@ -108,6 +109,9 @@ class JobResource extends AbstractResource implements
     /** @var ArtifactResource */
     protected $artifact;
 
+    /** @var ArtifactResourceInterface[]|ResourceCollection */
+    protected $artifacts;
+
     /** @var JobResource */
     protected $clonedFrom;
 
@@ -144,6 +148,9 @@ class JobResource extends AbstractResource implements
 
         $this->statuses = new ResourceCollection();
         $this->statuses->setEntityClass(JobStatusResource::class);
+
+        $this->artifacts = new ResourceCollection();
+        $this->artifacts->setEntityClass(ArtifactResource::class);
     }
 
     /**
@@ -181,6 +188,7 @@ class JobResource extends AbstractResource implements
             'notes' => JobNoteResource::class,
             'queries' => JobQueryResource::class,
             'statuses' => JobStatusResource::class,
+            'artifacts' => ArtifactResource::class,
         ];
     }
 
@@ -590,7 +598,7 @@ class JobResource extends AbstractResource implements
         return false;
     }
 
-    public function getArtifact(): ArtifactResource
+    public function getArtifact(): ?ArtifactResource
     {
         return $this->artifact;
     }
@@ -598,6 +606,14 @@ class JobResource extends AbstractResource implements
     public function setArtifact(ArtifactResource $artifact): void
     {
         $this->artifact = $artifact;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getArtifacts(): ResourceCollection
+    {
+        return $this->artifacts;
     }
 
     public function getClonedFrom(): ?JobResource

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Artifact\ArtifactResourceInterface;
 use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Product\ProductResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
@@ -94,4 +95,13 @@ interface JobResourceInterface extends
      * @return JobNoteResource[]|ResourceCollection
      */
     public function getNotes(): ResourceCollection;
+
+    /**
+     * Get all of the Artifacts that have been assigned to the job.
+     * A Job can only have one artifact at a time. This acts as a history of
+     * all of the Artifacts that have been assigned.
+     * 
+     * @return ArtifactResourceInterface[]|ResourceCollection
+     */
+    public function getArtifacts(): ResourceCollection;
 }
