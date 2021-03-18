@@ -12,7 +12,7 @@ use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-class ArtifactResource extends AbstractResource implements 
+class ArtifactResource extends AbstractResource implements
     ArtifactResourceInterface
 {
     use CreatedAtTrait;

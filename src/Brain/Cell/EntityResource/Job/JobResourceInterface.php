@@ -100,7 +100,7 @@ interface JobResourceInterface extends
      * Get all of the Artifacts that have been assigned to the job.
      * A Job can only have one artifact at a time. This acts as a history of
      * all of the Artifacts that have been assigned.
-     * 
+     *
      * @return ArtifactResourceInterface[]|ResourceCollection
      */
     public function getArtifacts(): ResourceCollection;

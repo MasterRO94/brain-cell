@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Artifact;
 
 use Brain\Cell\EntityResource\File\FileResourceInterface;
@@ -13,7 +15,7 @@ use Brain\Cell\TransferEntityInterface;
  * It is intended that these files should be the artwork image files, but
  * can also contain other files that may be used to construct the artwork,
  * i.e. CSV files used for personlisation of the artwork.
- * 
+ *
  * An Artifact is an alternative to assigning Artwork per component. The client
  * determines the situation in which a Job has the Artwork assigned to the
  * components or the job has an Artifact containing the Artwork.
@@ -29,8 +31,6 @@ interface ArtifactResourceInterface extends
     /**
      * A file (usually a zip) containing the Artwork
      * (or Artwork and Artwork Assembly files) that the client has uploaded.
-     *
-     * @return FileResourceInterface
      */
     public function getFile(): FileResourceInterface;
 
@@ -38,7 +38,7 @@ interface ArtifactResourceInterface extends
      * Meta-Data for the Artifact. Can be used to describe the contents of the
      * file, or the type of Artifact. The meta data is determined by the Client.
      *
-     * @return array
+     * @return mixed[]
      */
     public function getMetaData(): array;
 }
