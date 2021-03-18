@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ArtifactResource` uses `ResourceIdentityTrait`
 - `getArtifacts` method added to `JobResourceInterface` and `JobResource`
 
+### Fixed
+- Return type of `getArtifact` on `JobResource` can be null.
+
 ## 0.5.1 - 2021-02-10
 ### Changed
 - Support for `metaData` on `ArtifactResource`. 
