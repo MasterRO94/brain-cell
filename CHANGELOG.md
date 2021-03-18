@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `getArtifacts` method added to `JobResourceInterface` and `JobResource`
 
 ### Fixed
-- Return type of `getArtifact` on `JobResource` can be null.
+- Fixed method`getArtifact` on `JobResource`. It can now return null.
 
 ## 0.5.1 - 2021-02-10
 ### Changed
