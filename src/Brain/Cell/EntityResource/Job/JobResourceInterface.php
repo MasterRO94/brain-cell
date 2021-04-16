@@ -105,5 +105,9 @@ interface JobResourceInterface extends
      */
     public function getArtifacts(): ResourceCollection;
 
+    /**
+     * This will never be populated when retrieving a Job from Brain.
+     * It's only set for certain endpoints for optimising on Brain's side.
+     */
     public function getQuantityMultiplier(): ?int;
 }

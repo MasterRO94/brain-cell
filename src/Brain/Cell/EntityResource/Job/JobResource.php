@@ -684,11 +684,22 @@ class JobResource extends AbstractResource implements
         $this->productionHouse = $productionHouse;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @internal
+     */
     public function getQuantityMultiplier(): ?int
     {
         return $this->quantityMultiplier;
     }
 
+    /**
+     * This will never be populated when retrieving a Job from Brain.
+     * It's only set for certain endpoints for optimising on Brain's side.
+     *
+     * @internal
+     */
     public function setQuantityMultiplier(?int $quantityMultiplier): void
     {
         $this->quantityMultiplier = $quantityMultiplier;
