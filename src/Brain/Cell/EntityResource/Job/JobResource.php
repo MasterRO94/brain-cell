@@ -127,6 +127,9 @@ class JobResource extends AbstractResource implements
     /** @var ProductionHouseResource|null */
     protected $productionHouse;
 
+    /** @var int|null */
+    protected $quantityMultiplier;
+
     public function __construct()
     {
         $this->weight = new WeightResource();
@@ -679,6 +682,16 @@ class JobResource extends AbstractResource implements
     public function setProductionHouse(?ProductionHouseResource $productionHouse): void
     {
         $this->productionHouse = $productionHouse;
+    }
+
+    public function getQuantityMultiplier(): ?int
+    {
+        return $this->quantityMultiplier;
+    }
+
+    public function setQuantityMultiplier(?int $quantityMultiplier): void
+    {
+        $this->quantityMultiplier = $quantityMultiplier;
     }
 
     /**

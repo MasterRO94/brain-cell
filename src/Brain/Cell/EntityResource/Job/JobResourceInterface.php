@@ -104,4 +104,6 @@ interface JobResourceInterface extends
      * @return ArtifactResourceInterface[]|ResourceCollection
      */
     public function getArtifacts(): ResourceCollection;
+
+    public function getQuantityMultiplier(): ?int;
 }
