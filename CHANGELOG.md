@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.3] - 2021-04-19
+## Added
+- Support for `quantityMultiplier` on `JobResource` to optimise JobGroup support
+
 ## [0.5.2] - 2021-03-18
 ### Added
 - `ArtifactResourceInterface`.
