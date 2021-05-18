@@ -74,4 +74,14 @@ interface JobComponentResourceInterface extends
     public function setArtwork(ArtworkResourceInterface $artwork): void;
 
     public function getStockDefinition(): StockDefinitionResourceInterface;
+
+    /**
+     * Returns number of sheets required to print this JobComponent.
+     */
+    public function getProductionSheetCount(): ?int;
+
+    /**
+     * Returns how many pages can be printed on this JobComponent's chosen stock definition.
+     */
+    public function getProductionPagesPerSheet(): ?int;
 }

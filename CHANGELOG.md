@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.4] - 2021-05-18
+### Added
+- Support for `productionPagesPerSheet` on `JobComponentResource`.
+
 ## [0.5.3] - 2021-04-19
 ## Added
 - Support for `quantityMultiplier` on `JobResource` to optimise JobGroup support
