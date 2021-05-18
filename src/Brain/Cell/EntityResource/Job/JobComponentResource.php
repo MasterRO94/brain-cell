@@ -45,6 +45,14 @@ class JobComponentResource extends AbstractResource implements
     protected $productionSheetCount;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer")
+     *
+     * @var int|null
+     */
+    protected $productionPagesPerSheet;
+
+    /**
      * @Assert\Valid()
      * @Assert\Expression(
      *     expression="this.getOptions() && this.getOptions().count() > 0",
@@ -271,16 +279,28 @@ class JobComponentResource extends AbstractResource implements
         return $this->productionSheetCount;
     }
 
-    public function getSizeCountPerMaterial(): int
+    /**
+     * {@inheritdoc}
+     */
+    public function hasProductionPagesPerSheet(): bool
     {
-        $width = $this->getDimensions()->getWidth();
-        $height = $this->getDimensions()->getHeight();
-        $sra3Width = 450;
-        $sra3Height = 320;
+        return $this->productionPagesPerSheet !== null;
+    }
 
-        return (int) floor(
-            ($sra3Height * $sra3Width) / ($width * $height)
-        );
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductionPagesPerSheet(): ?int
+    {
+        return $this->productionPagesPerSheet;
+    }
+
+    /**
+     * @deprecated Use {@see JobComponentResource::getProductionPagesPerSheet()}
+     */
+    public function getSizeCountPerMaterial(): ?int
+    {
+        return $this->getProductionPagesPerSheet();
     }
 
     /**
