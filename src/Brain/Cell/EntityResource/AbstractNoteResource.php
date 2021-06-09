@@ -27,6 +27,9 @@ class AbstractNoteResource extends AbstractResource
     /** @var string */
     protected $canonical;
 
+    /** @var mixed[] */
+    protected $metaData;
+
     /**
      * {@inheritdoc}
      */
@@ -62,5 +65,21 @@ class AbstractNoteResource extends AbstractResource
     public function setCanonical(string $canonical): void
     {
         $this->canonical = $canonical;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getMetaData(): array
+    {
+        return $this->metaData;
+    }
+
+    /**
+     * @param mixed[] $metaData
+     */
+    public function setMetaData(array $metaData): void
+    {
+        $this->metaData = $metaData;
     }
 }
