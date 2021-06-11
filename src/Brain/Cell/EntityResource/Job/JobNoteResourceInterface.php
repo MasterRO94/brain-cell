@@ -36,4 +36,9 @@ interface JobNoteResourceInterface extends
      * Return the note originating client.
      */
     public function getOrigin(): ClientResource;
+
+    /**
+     * @return mixed[]
+     */
+    public function getMetaData(): array;
 }
