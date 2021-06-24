@@ -72,7 +72,7 @@ class AbstractNoteResource extends AbstractResource
      */
     public function getMetaData(): array
     {
-        return $this->metaData;
+        return $this->metaData ?? [];
     }
 
     /**
