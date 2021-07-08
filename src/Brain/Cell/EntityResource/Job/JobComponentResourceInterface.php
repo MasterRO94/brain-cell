@@ -20,6 +20,11 @@ interface JobComponentResourceInterface extends
     ResourceIdentityInterface
 {
     /**
+     * Return the component's label. Usually one of "general"|"cover"|"pages".
+     */
+    public function getLabel(): string;
+
+    /**
      * Return the job component range details.
      */
     public function getRange(): JobComponentRangeResourceInterface;
