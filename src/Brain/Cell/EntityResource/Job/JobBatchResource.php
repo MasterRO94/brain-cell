@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResourceInterface;
@@ -83,6 +84,8 @@ class JobBatchResource extends AbstractResource implements
             'deliveryOption' => DeliveryOptionResource::class,
             'batchDelivery' => JobBatchBatchDeliveryResource::class,
             'status' => JobBatchStatusResource::class,
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
         ];
     }
 
