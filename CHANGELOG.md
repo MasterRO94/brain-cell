@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.5.9] - 2021-08-25
 ### Fixed
 - `JobBatchResource::createdAt` and `JobBatchResource::updatedAt` were
-  incorretly returning arrays. They will now return `DateResource` object as
+  incorrectly returning arrays. They will now return `DateResource` object as
   per their method signatures.
 
 ## [0.5.8] - 2021-08-25
