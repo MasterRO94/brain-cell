@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.8] - 2021-08-25
+### Added
+- `JobBatchResource` uses `CreatedAtTrait` and `JobBatchResourceInterface` 
+  implements `CreatedAtInterface`.
+- `JobBatchResource` uses `UpdatedAtTrait` and `JobBatchResourceInterface`
+  implements `UpdatedAtInterface`.
+
 ## [0.5.7] - 2021-07-09
 ### Added
 - `JobClientResource` implements `ResourceIdentityInterface`.
