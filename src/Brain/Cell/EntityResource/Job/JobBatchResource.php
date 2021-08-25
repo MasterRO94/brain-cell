@@ -9,6 +9,8 @@ use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -21,6 +23,8 @@ class JobBatchResource extends AbstractResource implements
     JobBatchResourceInterface
 {
     use ResourceIdentityTrait;
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
 
     /** @var JobBatchStatusResource */
     protected $status;
