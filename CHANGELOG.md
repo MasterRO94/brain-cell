@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.10] - 2021-09-27
+### Changed
+- `JobResourceInterface` extends:
+  - `UpdatedAtInterface`
+  - `CreatedAtInterface`
+
 ## [0.5.9] - 2021-08-25
 ### Fixed
 - `JobBatchResource::createdAt` and `JobBatchResource::updatedAt` were
