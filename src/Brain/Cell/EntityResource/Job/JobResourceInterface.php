@@ -8,6 +8,8 @@ use Brain\Cell\EntityResource\Artifact\ArtifactResourceInterface;
 use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
 use Brain\Cell\EntityResource\Product\ProductResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\Prototype\Column\Date\CreatedAtInterface;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtInterface;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 
@@ -16,7 +18,9 @@ use Brain\Cell\TransferEntityInterface;
  */
 interface JobResourceInterface extends
     TransferEntityInterface,
-    ResourceIdentityInterface
+    ResourceIdentityInterface,
+    UpdatedAtInterface,
+    CreatedAtInterface
 {
     /**
      * @todo more general implementation
