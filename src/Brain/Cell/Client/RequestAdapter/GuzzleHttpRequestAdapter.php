@@ -17,13 +17,13 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
-use GuzzleHttp\Promise;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Throwable;
+use stdClass;
 
 /**
  * {@inheritdoc}
@@ -99,12 +99,12 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             $requests[] = new Request($method, $path, $context->getHeaders()->all());
         }
 
-        $storage = new \stdClass();
+        $storage = new stdClass();
         $storage->responses = [];
 
         $pool = new Pool($this->guzzle, $requests, [
             'concurrency' => 5,
-            'fulfilled' => function (Response $response, $index) use ($requests, $storage) {
+            'fulfilled' => static function (Response $response, $index) use ($requests, $storage) {
                 // this is delivered each successful response
 
                 $context = $requests[$index];
@@ -119,7 +119,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
 
                 $storage->responses[] = json_decode($contents, true);
             },
-            'rejected' => function (RequestException $reason, $index) {
+            'rejected' => static function (RequestException $reason, $index) {
                 // this is delivered each failed request
             },
         ]);

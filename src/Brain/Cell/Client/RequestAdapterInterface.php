@@ -15,6 +15,7 @@ interface RequestAdapterInterface
 
     /**
      * @param RequestContext[] $context
+     *
      * @return mixed[]
      */
     public function requestAsync(array $context): array;
