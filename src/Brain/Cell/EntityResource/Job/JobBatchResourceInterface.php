@@ -6,6 +6,8 @@ namespace Brain\Cell\EntityResource\Job;
 
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\Prototype\Column\Date\CreatedAtInterface;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtInterface;
 use Brain\Cell\Transfer\ResourceCollection;
 use Brain\Cell\TransferEntityInterface;
 
@@ -14,7 +16,9 @@ use Brain\Cell\TransferEntityInterface;
  */
 interface JobBatchResourceInterface extends
     TransferEntityInterface,
-    ResourceIdentityInterface
+    ResourceIdentityInterface,
+    CreatedAtInterface,
+    UpdatedAtInterface
 {
     /**
      * Return the batch delivery option.

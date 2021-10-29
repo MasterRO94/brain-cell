@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResource;
 use Brain\Cell\EntityResource\Delivery\DeliveryOptionResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DispatchResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
+use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
+use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
@@ -21,6 +24,8 @@ class JobBatchResource extends AbstractResource implements
     JobBatchResourceInterface
 {
     use ResourceIdentityTrait;
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
 
     /** @var JobBatchStatusResource */
     protected $status;
@@ -79,6 +84,8 @@ class JobBatchResource extends AbstractResource implements
             'deliveryOption' => DeliveryOptionResource::class,
             'batchDelivery' => JobBatchBatchDeliveryResource::class,
             'status' => JobBatchStatusResource::class,
+            'createdAt' => DateResource::class,
+            'updatedAt' => DateResource::class,
         ];
     }
 

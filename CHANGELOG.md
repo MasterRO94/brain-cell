@@ -8,6 +8,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated `JobComponentResourceInterface` to better match the implementation.
 
+## [0.5.10] - 2021-09-27
+### Changed
+- `JobResourceInterface` extends:
+  - `UpdatedAtInterface`
+  - `CreatedAtInterface`
+
+## [0.5.9] - 2021-08-25
+### Fixed
+- `JobBatchResource::createdAt` and `JobBatchResource::updatedAt` were
+  incorrectly returning arrays. They will now return `DateResource` object as
+  per their method signatures.
+
+## [0.5.8] - 2021-08-25
+### Added
+- `JobBatchResource` uses `CreatedAtTrait` and `JobBatchResourceInterface` 
+  implements `CreatedAtInterface`.
+- `JobBatchResource` uses `UpdatedAtTrait` and `JobBatchResourceInterface`
+  implements `UpdatedAtInterface`.
+
+## [0.5.7] - 2021-07-09
+### Added
+- `JobClientResource` implements `ResourceIdentityInterface`.
+
 ## [0.5.6] - 2021-06-24
 ### Fixed
 - Fixed method `getMetaData` on `AbstractNoteResource` to match method signature.
