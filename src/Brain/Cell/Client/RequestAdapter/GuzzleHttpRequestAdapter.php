@@ -22,8 +22,8 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use Throwable;
 use stdClass;
+use Throwable;
 
 /**
  * {@inheritdoc}

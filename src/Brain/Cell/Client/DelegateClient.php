@@ -37,6 +37,11 @@ abstract class DelegateClient
         return $this->resourceHandler->deserialise($resource, $response);
     }
 
+    /**
+     * @param RequestContext[] $requestContexts
+     *
+     * @return mixed[]
+     */
     final protected function requestAsync(
         array $requestContexts,
         string $resourceClassName
