@@ -16,6 +16,10 @@ use Brain\Cell\Response\ErrorMessageEnum;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Pool;
+use GuzzleHttp\Promise;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -53,6 +57,80 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         }
 
         return json_decode($contents, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function requestAsync(array $requestContexts): array
+    {
+        /** @var Request[] $requests */
+        $requests = [];
+
+        foreach ($requestContexts as $context) {
+            $path = $context->getPath();
+            $parameters = $context->getParameters()->all();
+
+            if ($context->getFilters()->count() !== 0) {
+                $parameters = array_merge(
+                    $parameters,
+                    [
+                        'filter' => $context->getFilters()->all(),
+                    ]
+                );
+            }
+
+            if ($parameters !== []) {
+                $path = sprintf('%s?%s', $path, urldecode(http_build_query($parameters)));
+            }
+
+            /*
+             * Extra guzzle options are defined first, so that the main options take precedence
+             */
+            $options = $context->getExtraGuzzleRequestOptions()->all();
+
+            $options[RequestOptions::HEADERS] = $context->getHeaders()->all();
+
+            if ($context->hasPayload()) {
+                $options[RequestOptions::JSON] = $context->getPayload();
+            }
+
+            $method = $context->getMethod();
+            $requests[] = new Request($method, $path, $context->getHeaders()->all());
+        }
+
+        $storage = new \stdClass();
+        $storage->responses = [];
+
+        $pool = new Pool($this->guzzle, $requests, [
+            'concurrency' => 5,
+            'fulfilled' => function (Response $response, $index) use ($requests, $storage) {
+                // this is delivered each successful response
+
+                $context = $requests[$index];
+                $contents = (string) $response->getBody();
+
+                // Specifically handle LINK and UNLINK method calls to Brain as these do not return JSON responses.
+                $isLinkUnlinkRequestMethod = in_array($context->getMethod(), ['LINK', 'UNLINK'], true);
+
+                if ($isLinkUnlinkRequestMethod && $contents === '') {
+                    $storage->responses[] = [];
+                }
+
+                $storage->responses[] = json_decode($contents, true);
+            },
+            'rejected' => function (RequestException $reason, $index) {
+                // this is delivered each failed request
+            },
+        ]);
+
+        // Initiate the transfers and create a promise
+        $promise = $pool->promise();
+
+        // Force the pool of requests to complete.
+        $promise->wait();
+
+        return $storage->responses;
     }
 
     /**

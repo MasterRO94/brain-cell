@@ -37,6 +37,23 @@ abstract class DelegateClient
         return $this->resourceHandler->deserialise($resource, $response);
     }
 
+    final protected function requestAsync(
+        array $requestContexts,
+        string $resourceClassName
+    ): array {
+        $responses = $this->configuration->getRequestAdapter()->requestAsync($requestContexts);
+
+        $results = [];
+
+        foreach ($responses as $response) {
+            $resource = new $resourceClassName();
+
+            $results[] = $this->resourceHandler->deserialise($resource, $response);
+        }
+
+        return $results;
+    }
+
     protected function stream(RequestContext $context): StreamInterface
     {
         return $this->configuration->getRequestAdapter()->stream($context);

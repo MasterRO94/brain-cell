@@ -9,6 +9,7 @@ use Brain\Cell\Client\Delegate\Job\Status\JobStatusDelegateClient;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\Client\Request\RequestFilter;
 use Brain\Cell\Client\Request\RequestFilterInterface;
+use Brain\Cell\Client\RequestContext;
 use Brain\Cell\EntityResource\Common\AbstractStatusResource;
 use Brain\Cell\EntityResource\Common\Status\StatusTransitionResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
@@ -71,6 +72,27 @@ class JobDelegateClient extends DelegateClient
         $resource = $this->request($context, new JobResource());
 
         return $resource;
+    }
+
+    /**
+     * Async return a job by id.
+     *
+     * @param string[] $ids
+     *
+     * @return JobResourceInterface[]
+     */
+    public function getAsync(array $ids): array
+    {
+        $contexts = [];
+
+        foreach ($ids as $id) {
+            $context = $this->configuration->createRequestContext(self::VERSION_V1);
+            $context->prepareContextForGet(sprintf('/jobs/%s', $id));
+
+            $contexts[] = $context;
+        }
+
+        return $this->requestAsync($contexts, JobResource::class);
     }
 
     /**
