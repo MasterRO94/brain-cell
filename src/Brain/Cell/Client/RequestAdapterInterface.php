@@ -13,5 +13,12 @@ interface RequestAdapterInterface
      */
     public function request(RequestContext $context): array;
 
+    /**
+     * @param RequestContext[] $context
+     *
+     * @return mixed[]
+     */
+    public function requestAsync(array $context): array;
+
     public function stream(RequestContext $context): StreamInterface;
 }

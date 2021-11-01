@@ -74,6 +74,27 @@ class JobDelegateClient extends DelegateClient
     }
 
     /**
+     * Async return a job by id.
+     *
+     * @param string[] $ids
+     *
+     * @return JobResourceInterface[]
+     */
+    public function getAsync(array $ids): array
+    {
+        $contexts = [];
+
+        foreach ($ids as $key => $id) {
+            $context = $this->configuration->createRequestContext(self::VERSION_V1);
+            $context->prepareContextForGet(sprintf('/jobs/%s', $id));
+
+            $contexts[$key] = $context;
+        }
+
+        return $this->requestAsync($contexts, JobResource::class);
+    }
+
+    /**
      * List all jobs.
      *
      * @return JobResource[]|ResourceCollection

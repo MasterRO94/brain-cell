@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.11] - 2021-11-01
+### Added
+- Support for async job resource API calls.
+
+### Changed
+- Updated `JobComponentResourceInterface` to better match the implementation.
+
 ## [0.5.10] - 2021-09-27
 ### Changed
 - `JobResourceInterface` extends:
