@@ -67,4 +67,30 @@ use Brain\Cell\Transfer\ResourceCollection;
 
         return $resource;
     }
+
+    /**
+     * Async transition a job to the given status.
+     *
+     * @param JobResourceInterface[] $jobs
+     *
+     * @return AbstractStatusResource[]
+     */
+    public function transitionAsync(array $jobs, StatusTransitionResourceInterface $status): array
+    {
+        $contexts = [];
+
+        $payload = $this->resourceHandler->serialise($status);
+
+        foreach ($jobs as $key => $job) {
+            $id = $job->getId();
+
+            $context = $this->configuration->createRequestContext(self::VERSION_V1);
+            $context->prepareContextForPut(sprintf('/jobs/%s/status', $id));
+            $context->setPayload($payload);
+
+            $contexts[$key] = $context;
+        }
+
+        return $this->requestAsync($contexts, JobStatusResource::class);
+    }
 }
