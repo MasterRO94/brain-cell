@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.13] - 2021-11-08
+### Added
+- Add ability to set the primaryProductionHouse option for the delivery/options endpoint.
+
 ## [0.5.12] - 2021-11-01
 ### Added
 - Support for async job status transition API calls.
