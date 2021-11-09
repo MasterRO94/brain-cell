@@ -84,19 +84,17 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
                 $path = sprintf('%s?%s', $path, urldecode(http_build_query($parameters)));
             }
 
-            /*
-             * Extra guzzle options are defined first, so that the main options take precedence
-             */
-            $options = $context->getExtraGuzzleRequestOptions()->all();
+            $body = null;
 
-            $options[RequestOptions::HEADERS] = $context->getHeaders()->all();
+            if ($context->getPayload()) {
+                /** @var string $body */
+                $body = json_encode($context->getPayload());
 
-            if ($context->hasPayload()) {
-                $options[RequestOptions::JSON] = $context->getPayload();
+                $context->getHeaders()->set('Content-type', 'application/json');
             }
 
             $method = $context->getMethod();
-            $requests[] = new Request($method, $path, $context->getHeaders()->all());
+            $requests[] = new Request($method, $path, $context->getHeaders()->all(), $body);
         }
 
         $storage = new stdClass();
