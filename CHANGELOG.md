@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.16] - 2021-11-11
+### Added
+- Add support for the TurnaroundResource
+
+### Deprecated
+- ProductionStrategyResource
+
 ## [0.5.15] - 2021-11-10
 ### Added
 - Add support for the new Brain api error type: CommonClientError.
