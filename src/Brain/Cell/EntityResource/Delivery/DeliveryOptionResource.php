@@ -26,8 +26,23 @@ class DeliveryOptionResource extends AbstractResource implements
     /** @var AddressResourceInterface */
     protected $deliveryAddress;
 
-    /** @var ProductionStrategyResource */
+    /**
+     * @deprecated Use ::turnaround instead.
+     *
+     * @var ProductionStrategyResource
+     */
     protected $productionStrategy;
+
+    /** @var TurnaroundResource */
+    protected $turnaround;
+
+    /**
+     * Turnaround parameters are different per different Turnaround instance. Example: some turnarounds
+     * mention whether the time estimations were evaluated against "standard" or "premium" production cut-off times.
+     *
+     * @var mixed[]
+     */
+    protected $turnaroundParameters;
 
     /** @var DeliveryServiceResource */
     protected $deliveryService;
@@ -78,7 +93,9 @@ class DeliveryOptionResource extends AbstractResource implements
     {
         return [
             'deliveryAddress' => AddressResource::class,
+            /** @deprecated Use ::turnaround instead */
             'productionStrategy' => ProductionStrategyResource::class,
+            'turnaround' => TurnaroundResource::class,
             'deliveryService' => DeliveryServiceResource::class,
             'productionStrategyPrice' => PriceResource::class,
             'deliveryServicePrice' => PriceResource::class,
@@ -105,6 +122,9 @@ class DeliveryOptionResource extends AbstractResource implements
         $this->deliveryAddress = $deliveryAddress;
     }
 
+    /**
+     * @deprecated Use ::getTurnaround() instead.
+     */
     public function getProductionStrategy(): ProductionStrategyResource
     {
         return $this->productionStrategy;
@@ -113,6 +133,32 @@ class DeliveryOptionResource extends AbstractResource implements
     public function setProductionStrategy(ProductionStrategyResource $productionStrategy): void
     {
         $this->productionStrategy = $productionStrategy;
+    }
+
+    public function getTurnaround(): TurnaroundResource
+    {
+        return $this->turnaround;
+    }
+
+    public function setTurnaround(TurnaroundResource $turnaround): void
+    {
+        $this->turnaround = $turnaround;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getTurnaroundParameters(): array
+    {
+        return $this->turnaroundParameters;
+    }
+
+    /**
+     * @param mixed[] $turnaroundParameters
+     */
+    public function setTurnaroundParameters(array $turnaroundParameters): void
+    {
+        $this->turnaroundParameters = $turnaroundParameters;
     }
 
     public function getDeliveryService(): DeliveryServiceResource
