@@ -7,6 +7,7 @@ namespace Brain\Cell\Tests\Unit\Client\RequestAdapter;
 use Brain\Cell\Client\RequestAdapter\GuzzleHttpRequestAdapter;
 use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\Request\BadRequestException;
+use Brain\Cell\Exception\Request\CommonClientErrorException;
 use Brain\Cell\Exception\Request\NotFoundException;
 use Brain\Cell\Exception\Request\PayloadViolationException;
 use Brain\Cell\Exception\Request\UnknownRequestException;
@@ -23,6 +24,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use Throwable;
 
 /**
  * @group cell
@@ -350,6 +352,99 @@ final class GuzzleHttpRequestAdapterTest extends TestCase
         self::expectExceptionMessage('POST /end-point');
 
         $this->adapter->request($this->context);
+    }
+
+    /**
+     * @test
+     *
+     * @group unit
+     * @group client
+     * @group client-adapter
+     */
+    public function wrapsExceptionCommonClientError(): void
+    {
+        /** @var MockObject|UriInterface $uri */
+        $uri = $this->createMock(UriInterface::class);
+        $uri->expects(self::any())
+            ->method('__toString')
+            ->willReturn('/end-point');
+
+        /** @var MockObject|StreamInterface $requestStream */
+        $requestStream = $this->createMock(StreamInterface::class);
+        $requestStream->expects(self::any())
+            ->method('getContents')
+            ->willReturn(json_encode(
+                []
+            ));
+
+        /** @var MockObject|RequestInterface $guzzleRequest */
+        $guzzleRequest = $this->createMock(RequestInterface::class);
+        $guzzleRequest->expects(self::any())
+            ->method('getUri')
+            ->willReturn($uri);
+
+        $guzzleRequest->expects(self::any())
+            ->method('getBody')
+            ->willReturn($requestStream);
+
+        $guzzleRequest->expects(self::any())
+            ->method('getMethod')
+            ->willReturn('POST');
+
+        /** @var MockObject|StreamInterface $responseStream */
+        $responseStream = $this->createMock(StreamInterface::class);
+        $responseStream->expects(self::any())
+            ->method('getContents')
+            ->willReturn(json_encode(
+                [
+                    'error' => [
+                        'canonical' => ErrorMessageEnum::ERROR_COMMON_CLIENT_ERROR,
+                        'message' => 'This is a user-displayable message example',
+                    ],
+                    'data' => [
+                        'isMessageEndUserSafe' => true,
+                    ],
+                ]
+            ));
+
+        /** @var MockObject|ResponseInterface $guzzleResponse */
+        $guzzleResponse = $this->createMock(ResponseInterface::class);
+        $guzzleResponse->expects(self::any())
+            ->method('getBody')
+            ->willReturn($responseStream);
+
+        $guzzleResponse->expects(self::any())
+            ->method('getStatusCode')
+            ->willReturn(400);
+
+        $this->guzzle->expects(self::once())
+            ->method('request')
+            ->with()
+            ->willThrowException(
+                new ClientException(
+                    'guzzle-error-message',
+                    $guzzleRequest,
+                    $guzzleResponse
+                )
+            );
+
+        $this->context->prepareContextForPost('/end-point');
+
+        try {
+            $this->adapter->request($this->context);
+        } catch (CommonClientErrorException $exception) {
+            self::assertEquals('This is a user-displayable message example', $exception->getMessage());
+            self::assertTrue($exception->isMessageEndUserSafe());
+            self::assertNull($exception->getErrorCode());
+
+            return;
+        } catch (Throwable $exception) {
+            self::fail(sprintf('Expected "%s" exception to have been thrown.', CommonClientErrorException::class));
+
+            return;
+        }
+
+        self::fail(sprintf('Expected "%s" exception to have been thrown.', CommonClientErrorException::class));
     }
 
     /**

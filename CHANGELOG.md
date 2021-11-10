@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.5.14] - 2021-11-09
 ### Fixed
 - Fixed issue with incorrect payload data being sent for async. 
-- Added missing Content-Type header. 
+- Added missing Content-Type header.
 
 ## [0.5.13] - 2021-11-08
 ### Added
