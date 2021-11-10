@@ -7,6 +7,7 @@ namespace Brain\Cell\Client\RequestAdapter;
 use Brain\Cell\Client\RequestAdapterInterface;
 use Brain\Cell\Client\RequestContext;
 use Brain\Cell\Exception\Request\BadRequestException;
+use Brain\Cell\Exception\Request\CommonClientErrorException;
 use Brain\Cell\Exception\Request\NotFoundException;
 use Brain\Cell\Exception\Request\PayloadViolationException;
 use Brain\Cell\Exception\Request\StatusTransitionException;
@@ -250,6 +251,14 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
                             $uri,
                             $message ?? $responseContent
                         ),
+                        $requestPayload,
+                        $responsePayload,
+                        $exception
+                    );
+
+                case ErrorMessageEnum::ERROR_COMMON_CLIENT_ERROR:
+                    return new CommonClientErrorException(
+                        $message,
                         $requestPayload,
                         $responsePayload,
                         $exception

@@ -8,4 +8,5 @@ final class ErrorMessageEnum
 {
     public const ERROR_PAYLOAD_VIOLATION = 'api.request.error.payload';
     public const ERROR_STATUS_TRANSITION = 'api.status.transition.bad_request';
+    public const ERROR_COMMON_CLIENT_ERROR = 'api.common.client_error';
 }
