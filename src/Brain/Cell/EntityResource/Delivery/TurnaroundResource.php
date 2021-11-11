@@ -7,22 +7,14 @@ namespace Brain\Cell\EntityResource\Delivery;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
- * @deprecated Use TurnaroundResource instead.
- *
  * {@inheritdoc}
  */
-class ProductionStrategyResource extends AbstractResource
+class TurnaroundResource extends AbstractResource
 {
     use ResourceIdentityTrait;
 
-    /**
-     * @Assert\NotBlank()
-     *
-     * @var string
-     */
+    /** @var string */
     protected $alias;
 
     /** @var string */

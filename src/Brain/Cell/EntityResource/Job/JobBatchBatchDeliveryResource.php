@@ -9,6 +9,7 @@ use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Delivery\DeliveryServiceResource;
 use Brain\Cell\EntityResource\Delivery\ProductionStrategyResource;
+use Brain\Cell\EntityResource\Delivery\TurnaroundResource;
 use Brain\Cell\Transfer\AbstractResource;
 
 /**
@@ -23,8 +24,15 @@ class JobBatchBatchDeliveryResource extends AbstractResource implements
     /** @var AddressResourceInterface|null */
     protected $deliveryAddress;
 
-    /** @var ProductionStrategyResource|null */
+    /**
+     * @deprecated Use ::turnaround instead.
+     *
+     * @var ProductionStrategyResource|null
+     */
     protected $productionStrategy;
+
+    /** @var TurnaroundResource|null */
+    protected $turnaround;
 
     /** @var DeliveryServiceResource|null */
     protected $deliveryService;
@@ -58,6 +66,7 @@ class JobBatchBatchDeliveryResource extends AbstractResource implements
         return [
             'deliveryAddress' => AddressResource::class,
             'productionStrategy' => ProductionStrategyResource::class,
+            'turnaround' => TurnaroundResource::class,
             'deliveryService' => DeliveryServiceResource::class,
             'assumedStartOfProductionDate' => DateResource::class,
             'endOfProductionDate' => DateResource::class,
@@ -77,6 +86,9 @@ class JobBatchBatchDeliveryResource extends AbstractResource implements
         $this->deliveryAddress = $deliveryAddress;
     }
 
+    /**
+     * @deprecated Use ::getTurnaround() instead.
+     */
     public function getProductionStrategy(): ?ProductionStrategyResource
     {
         return $this->productionStrategy;
@@ -85,6 +97,16 @@ class JobBatchBatchDeliveryResource extends AbstractResource implements
     public function setProductionStrategy(ProductionStrategyResource $productionStrategy): void
     {
         $this->productionStrategy = $productionStrategy;
+    }
+
+    public function getTurnaround(): ?TurnaroundResource
+    {
+        return $this->turnaround;
+    }
+
+    public function setTurnaround(?TurnaroundResource $turnaround): void
+    {
+        $this->turnaround = $turnaround;
     }
 
     public function getDeliveryService(): ?DeliveryServiceResource
