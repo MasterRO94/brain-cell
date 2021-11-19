@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\Job\ClientWorkflow\ClientWorkflowResourceInterface;
 use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
@@ -13,7 +14,7 @@ use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 use Brain\Cell\Transfer\ResourceCollection;
 
-class ClientWorkflowResource extends AbstractResource implements ResourceIdentityInterface
+class ClientWorkflowResource extends AbstractResource implements ClientWorkflowResourceInterface
 {
     use ResourceIdentityTrait;
     use CreatedAtTrait;
@@ -24,6 +25,9 @@ class ClientWorkflowResource extends AbstractResource implements ResourceIdentit
 
     /** @var PhaseResource[]|ResourceCollection */
     protected $phases;
+
+    /** @var TransitionResourceInterface[]|ResourceCollection */
+    protected $transitions;
 
     /**
      * {@inheritdoc}
@@ -44,14 +48,21 @@ class ClientWorkflowResource extends AbstractResource implements ResourceIdentit
     {
         return [
             'phases' => PhaseResource::class,
+            'transitions' => TransitionResource::class,
         ];
     }
 
+    /**
+     * @return JobStatusResource
+     */
     public function getStatus(): JobStatusResource
     {
         return $this->status;
     }
 
+    /**
+     * @param JobStatusResource $status
+     */
     public function setStatus(JobStatusResource $status): void
     {
         $this->status = $status;
@@ -71,5 +82,21 @@ class ClientWorkflowResource extends AbstractResource implements ResourceIdentit
     public function setPhases(ResourceCollection $phases): void
     {
         $this->phases = $phases;
+    }
+    
+    /**
+     * @return TransitionResourceInterface[]|ResourceCollection
+     */
+    public function getTransitions(): ResourceCollection
+    {
+        return $this->transitions;
+    }
+
+    /**
+     * @param TransitionResourceInterface[]|ResourceCollection $transitions
+     */
+    public function setTransitions(ResourceCollection $transitions): void
+    {
+        $this->transitions = $transitions;
     }
 }

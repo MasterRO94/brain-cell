@@ -27,9 +27,6 @@ class PhaseResource extends AbstractResource implements ResourceIdentityInterfac
     /** @var bool */
     protected $isEntryPoint;
 
-    /** @var ResourceCollection|TransitionResource[] */
-    protected $transitions;
-
     /** @var ClientWorkflowResource */
     protected $clientWorkflow;
 
@@ -42,16 +39,6 @@ class PhaseResource extends AbstractResource implements ResourceIdentityInterfac
             'clientWorkflow' => ClientWorkflowResource::class,
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAssociatedCollections(): array
-    {
-        return [
-            'transitions' => TransitionResource::class,
         ];
     }
 
@@ -92,22 +79,6 @@ class PhaseResource extends AbstractResource implements ResourceIdentityInterfac
     public function setIsEntryPoint(bool $isEntryPoint): void
     {
         $this->isEntryPoint = $isEntryPoint;
-    }
-
-    /**
-     * @return ResourceCollection|TransitionResource[]
-     */
-    public function getTransitions()
-    {
-        return $this->transitions;
-    }
-
-    /**
-     * @param ResourceCollection|TransitionResource[] $transitions
-     */
-    public function setTransitions($transitions): void
-    {
-        $this->transitions = $transitions;
     }
 
     public function getClientWorkflow(): ClientWorkflowResource

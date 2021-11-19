@@ -11,7 +11,7 @@ use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
-class TransitionResource extends AbstractResource implements ResourceIdentityInterface
+class TransitionResource extends AbstractResource implements TransitionResourceInterface
 {
     use ResourceIdentityTrait;
     use CreatedAtTrait;
