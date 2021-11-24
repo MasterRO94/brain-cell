@@ -5,20 +5,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [0.5.17] - tbc
+## [0.5.17] - 2021-11-24
 ### Changed
-- `ClientWorkflowResource` implements `ClientWorkflowResourceInterface
 - `ClientWorkflowResource` implements `ClientWorkflowResourceInterface`
+- `TransitionResource` implements `TransitionResourceInterface`
+- `ClientWorkflowDelegateClient` so that `getClientWorkflow` and 
+  `postClientWorkflow` return `ClientWorkflowResourceInterface`
 
 ### Added
 - `ClientWorkflowResourceInterface`
-- ``TransitionResourceInterface``
+- `TransitionResourceInterface`
 - transitions to client workflow 
   `ClientWorkflowResource::ClientWorkflowResource`, `ClientWorkflowResource::setTransitions`
 
 ### Removed
 - transitions from phase 
   `PhaseResource::getTransitions`, `PhaseResource::setTransitions` 
+
+### Fixed
+- `ClientWorkflowResource::getStatus` return a string. It was incorrectly
+  returning `JobStatusResource`.
 
 ## [0.5.16] - 2021-11-11
 ### Added
