@@ -10,7 +10,6 @@ use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\Transfer\ResourceCollection;
 
 class PhaseResource extends AbstractResource implements ResourceIdentityInterface
 {

@@ -6,8 +6,6 @@ namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
-use Brain\Cell\EntityResource\Job\ClientWorkflow\ClientWorkflowResourceInterface;
-use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
@@ -63,25 +61,16 @@ class ClientWorkflowResource extends AbstractResource implements ClientWorkflowR
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     */
     public function setStatus(string $status): void
     {
         $this->status = $status;
     }
 
-    /**
-     * @return ClientResource
-     */
     public function getClient(): ClientResource
     {
         return $this->client;
     }
 
-    /**
-     * @param ClientResource $client
-     */
     public function setClient(ClientResource $client): void
     {
         $this->client = $client;
