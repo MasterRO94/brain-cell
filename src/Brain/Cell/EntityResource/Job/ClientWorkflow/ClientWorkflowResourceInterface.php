@@ -2,6 +2,7 @@
 
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
+use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\TransitionResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
@@ -15,9 +16,17 @@ interface ClientWorkflowResourceInterface extends
     UpdatedAtInterface
 {
     /**
-     * @return JobStatusResource
+     * One of JobStatusResource::STATUS_*
+     * @see JobStatusResource
+     *
+     * @return string
      */
-    public function getStatus(): JobStatusResource;
+    public function getStatus(): string;
+
+    /**
+     * @return ClientResource
+     */
+    public function getClient(): ClientResource;
 
     /**
      * @return PhaseResource[]|ResourceCollection

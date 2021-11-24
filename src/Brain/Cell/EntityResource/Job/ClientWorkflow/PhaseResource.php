@@ -27,7 +27,7 @@ class PhaseResource extends AbstractResource implements ResourceIdentityInterfac
     /** @var bool */
     protected $isEntryPoint;
 
-    /** @var ClientWorkflowResource */
+    /** @var ClientWorkflowResourceInterface|null */
     protected $clientWorkflow;
 
     /**
@@ -81,12 +81,12 @@ class PhaseResource extends AbstractResource implements ResourceIdentityInterfac
         $this->isEntryPoint = $isEntryPoint;
     }
 
-    public function getClientWorkflow(): ClientWorkflowResource
+    public function getClientWorkflow(): ?ClientWorkflowResourceInterface
     {
         return $this->clientWorkflow;
     }
 
-    public function setClientWorkflow(ClientWorkflowResource $clientWorkflow): void
+    public function setClientWorkflow(?ClientWorkflowResourceInterface $clientWorkflow): void
     {
         $this->clientWorkflow = $clientWorkflow;
     }

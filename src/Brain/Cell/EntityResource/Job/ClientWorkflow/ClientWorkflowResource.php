@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job\ClientWorkflow;
 
+use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\Job\ClientWorkflow\ClientWorkflowResourceInterface;
-use Brain\Cell\EntityResource\Job\JobStatusResource;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
@@ -20,8 +20,11 @@ class ClientWorkflowResource extends AbstractResource implements ClientWorkflowR
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /** @var JobStatusResource */
+    /** @var string */
     protected $status;
+
+    /** @var ClientResource */
+    protected $client;
 
     /** @var PhaseResource[]|ResourceCollection */
     protected $phases;
@@ -35,7 +38,7 @@ class ClientWorkflowResource extends AbstractResource implements ClientWorkflowR
     public function getAssociatedResources(): array
     {
         return [
-            'status' => JobStatusResource::class,
+            'client' => ClientResource::class,
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
         ];
@@ -53,19 +56,35 @@ class ClientWorkflowResource extends AbstractResource implements ClientWorkflowR
     }
 
     /**
-     * @return JobStatusResource
+     * {@inheritDoc}
      */
-    public function getStatus(): JobStatusResource
+    public function getStatus(): string
     {
         return $this->status;
     }
 
     /**
-     * @param JobStatusResource $status
+     * @param string $status
      */
-    public function setStatus(JobStatusResource $status): void
+    public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return ClientResource
+     */
+    public function getClient(): ClientResource
+    {
+        return $this->client;
+    }
+
+    /**
+     * @param ClientResource $client
+     */
+    public function setClient(ClientResource $client): void
+    {
+        $this->client = $client;
     }
 
     /**
