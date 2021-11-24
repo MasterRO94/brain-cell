@@ -91,7 +91,7 @@ class ClientWorkflowResource extends AbstractResource implements ClientWorkflowR
     {
         $this->phases = $phases;
     }
-    
+
     /**
      * @return TransitionResourceInterface[]|ResourceCollection
      */
