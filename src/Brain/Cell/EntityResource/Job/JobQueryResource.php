@@ -25,7 +25,7 @@ class JobQueryResource extends AbstractResource implements JobQueryResourceInter
     /** @var DateResourceInterface|null $progressStarted */
     protected $progressStarted;
 
-    /** @var ClientResource $assignee */
+    /** @var ClientResource|null $assignee */
     protected $assignee;
 
     /** @var JobQuerySummaryResourceInterface */
@@ -92,11 +92,14 @@ class JobQueryResource extends AbstractResource implements JobQueryResourceInter
         $this->progressStarted = $progressStarted;
     }
 
-    public function getAssignee(): ClientResource
+    public function getAssignee(): ?ClientResource
     {
         return $this->assignee;
     }
 
+    /**
+     * NULL is not supported on the setter as a separate API call exists for unassigning an assignee.
+     */
     public function setAssignee(ClientResource $assignee): void
     {
         $this->assignee = $assignee;
