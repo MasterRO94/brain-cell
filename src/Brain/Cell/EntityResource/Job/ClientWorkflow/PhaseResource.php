@@ -10,7 +10,6 @@ use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\DeletedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
-use Brain\Cell\Transfer\ResourceCollection;
 
 class PhaseResource extends AbstractResource implements ResourceIdentityInterface
 {
@@ -27,10 +26,7 @@ class PhaseResource extends AbstractResource implements ResourceIdentityInterfac
     /** @var bool */
     protected $isEntryPoint;
 
-    /** @var ResourceCollection|TransitionResource[] */
-    protected $transitions;
-
-    /** @var ClientWorkflowResource */
+    /** @var ClientWorkflowResourceInterface|null */
     protected $clientWorkflow;
 
     /**
@@ -42,16 +38,6 @@ class PhaseResource extends AbstractResource implements ResourceIdentityInterfac
             'clientWorkflow' => ClientWorkflowResource::class,
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAssociatedCollections(): array
-    {
-        return [
-            'transitions' => TransitionResource::class,
         ];
     }
 
@@ -94,28 +80,12 @@ class PhaseResource extends AbstractResource implements ResourceIdentityInterfac
         $this->isEntryPoint = $isEntryPoint;
     }
 
-    /**
-     * @return ResourceCollection|TransitionResource[]
-     */
-    public function getTransitions()
-    {
-        return $this->transitions;
-    }
-
-    /**
-     * @param ResourceCollection|TransitionResource[] $transitions
-     */
-    public function setTransitions($transitions): void
-    {
-        $this->transitions = $transitions;
-    }
-
-    public function getClientWorkflow(): ClientWorkflowResource
+    public function getClientWorkflow(): ?ClientWorkflowResourceInterface
     {
         return $this->clientWorkflow;
     }
 
-    public function setClientWorkflow(ClientWorkflowResource $clientWorkflow): void
+    public function setClientWorkflow(?ClientWorkflowResourceInterface $clientWorkflow): void
     {
         $this->clientWorkflow = $clientWorkflow;
     }
