@@ -26,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ClientWorkflowResource::getStatus` return a string. It was incorrectly
   returning `JobStatusResource`.
 
+## [0.5.17] - 2021-11-25
+### Fixed
+- Fixed incorrect return type for `JobQueryResource::getAssignee()` as Queries can be unassigned.
+
 ## [0.5.16] - 2021-11-11
 ### Added
 - Add support for the TurnaroundResource

@@ -20,7 +20,7 @@ interface JobQueryResourceInterface extends
 
     public function getProgressStarted(): ?DateResourceInterface;
 
-    public function getAssignee(): ClientResource;
+    public function getAssignee(): ?ClientResource;
 
     public function getIsExternal(): bool;
 
