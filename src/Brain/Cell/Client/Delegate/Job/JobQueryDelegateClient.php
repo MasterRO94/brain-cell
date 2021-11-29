@@ -7,6 +7,7 @@ namespace Brain\Cell\Client\Delegate\Job;
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Job\JobQueryNoteResource;
+use Brain\Cell\EntityResource\Job\JobQueryNoteSuggestionResourceInterface;
 use Brain\Cell\EntityResource\Job\JobQueryResource;
 use Brain\Cell\EntityResource\Job\JobQuerySummaryResource;
 use Brain\Cell\EntityResource\Job\JobQuerySummaryResourceInterface;
@@ -146,5 +147,22 @@ class JobQueryDelegateClient extends DelegateClient
         $response = $this->request($context, new JobQueryResource());
 
         return $response;
+    }
+
+    public function postJobQueryNoteSuggestion(
+        string $summaryId,
+        JobQueryNoteSuggestionResourceInterface $noteSuggestion
+    ): JobQueryNoteSuggestionResourceInterface {
+
+        $context = $this->configuration->createRequestContext(self::VERSION_V2);
+        $path = sprintf('/job/query-summaries/%s/note-suggestions', $summaryId);
+        $context->prepareContextForPost($path);
+
+        $context->setPayload($this->resourceHandler->serialise($noteSuggestion));
+
+        /** @var JobQueryNoteSuggestionResourceInterface $resource */
+        $resource = $this->request($context, $noteSuggestion);
+
+        return $resource;
     }
 }

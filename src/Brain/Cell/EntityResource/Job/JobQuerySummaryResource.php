@@ -8,6 +8,7 @@ use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class JobQuerySummaryResource extends AbstractResource implements JobQuerySummaryResourceInterface
 {
@@ -27,6 +28,25 @@ class JobQuerySummaryResource extends AbstractResource implements JobQuerySummar
     /** @var bool */
     protected $isExternal;
 
+    /** @var ResourceCollection|JobQueryNoteSuggestionResourceInterface[] */
+    protected $noteSuggestions;
+
+    public function __construct()
+    {
+        $this->noteSuggestions = new ResourceCollection();
+        $this->noteSuggestions->setEntityClass(JobQueryNoteSuggestionResource::class);
+    }
+
+    public function getAssociatedCollections(): array
+    {
+        return [
+            'noteSuggestions' => JobQueryNoteSuggestionResource::class,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCanonical(): string
     {
         return $this->canonical;
@@ -37,6 +57,9 @@ class JobQuerySummaryResource extends AbstractResource implements JobQuerySummar
         $this->canonical = $canonical;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getReadable(): string
     {
         return $this->readable;
@@ -47,6 +70,9 @@ class JobQuerySummaryResource extends AbstractResource implements JobQuerySummar
         $this->readable = $readable;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDescription(): ?string
     {
         return $this->description;
@@ -57,6 +83,9 @@ class JobQuerySummaryResource extends AbstractResource implements JobQuerySummar
         $this->description = $description;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getIsExternal(): bool
     {
         return $this->isExternal;
@@ -65,5 +94,13 @@ class JobQuerySummaryResource extends AbstractResource implements JobQuerySummar
     public function setIsExternal(bool $isExternal): void
     {
         $this->isExternal = $isExternal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNoteSuggestions(): ResourceCollection
+    {
+        return $this->noteSuggestions;
     }
 }
