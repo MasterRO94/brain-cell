@@ -153,7 +153,6 @@ class JobQueryDelegateClient extends DelegateClient
         string $summaryId,
         JobQueryNoteSuggestionResourceInterface $noteSuggestion
     ): JobQueryNoteSuggestionResourceInterface {
-
         $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $path = sprintf('/job/query-summaries/%s/note-suggestions', $summaryId);
         $context->prepareContextForPost($path);

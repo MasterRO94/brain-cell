@@ -37,6 +37,9 @@ class JobQuerySummaryResource extends AbstractResource implements JobQuerySummar
         $this->noteSuggestions->setEntityClass(JobQueryNoteSuggestionResource::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAssociatedCollections(): array
     {
         return [
