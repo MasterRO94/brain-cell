@@ -19,6 +19,9 @@ class JobQueryNoteResource extends AbstractNoteResource
     /** @var FileResourceInterface|null */
     protected $file;
 
+    /** @var JobQueryNoteSuggestionResourceInterface|null */
+    protected $createdFromSuggestion;
+
     /**
      * {@inheritdoc}
      */
@@ -26,6 +29,7 @@ class JobQueryNoteResource extends AbstractNoteResource
     {
         return [
             'file' => FileResource::class,
+            'createdFromSuggestion' => JobQueryNoteSuggestionResource::class,
             'origin' => ClientResource::class,
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
@@ -40,5 +44,15 @@ class JobQueryNoteResource extends AbstractNoteResource
     public function setFile(?FileResourceInterface $file): void
     {
         $this->file = $file;
+    }
+
+    public function getNoteSuggestion(): ?JobQueryNoteSuggestionResourceInterface
+    {
+        return $this->createdFromSuggestion;
+    }
+
+    public function setNoteSuggestion(?JobQueryNoteSuggestionResourceInterface $noteSuggestion): void
+    {
+        $this->createdFromSuggestion = $noteSuggestion;
     }
 }
