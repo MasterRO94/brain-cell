@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.5.19] - 2022-01-13
+## [0.5.20] - 2022-01-13
 ### Added
 - `JobQueryNoteSuggestionResource`
 - `JobQueryNoteSuggestionResourceInterface`
@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `JobQueryNoteResource::getNoteSuggestions`, `JobQueryNoteResource::setNoteSuggestions`
 - `JobQuerySummaryResource::getNoteSuggestions`
 - `JobQuerySummaryResourceInterface::getNoteSuggestions`
+
+## [0.5.19] - 2021-12-02
+### Added
+- Support for adding additional artifacts to a Job.
 
 ## [0.5.18] - 2021-11-25
 ### Changed

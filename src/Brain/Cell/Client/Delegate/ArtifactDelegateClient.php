@@ -6,6 +6,7 @@ namespace Brain\Cell\Client\Delegate;
 
 use Brain\Cell\Client\DelegateClient;
 use Brain\Cell\EntityResource\Artifact\ArtifactResource;
+use Brain\Cell\EntityResource\Job\JobResourceInterface;
 use Brain\Cell\EntityResource\Resource\PresignedAssetResource;
 
 use Psr\Http\Message\StreamInterface;
@@ -41,5 +42,17 @@ class ArtifactDelegateClient extends DelegateClient
         $context->prepareContextForGet(sprintf('/artifacts/%s/download', $id));
 
         return $this->stream($context);
+    }
+
+    public function addArtifact(JobResourceInterface $jobResource, ArtifactResource $artifactResource): ArtifactResource
+    {
+        $context = $this->configuration->createRequestContext(self::VERSION_V1);
+        $context->prepareContextForPut(sprintf('/jobs/%s/artifacts', $jobResource->getId()));
+        $context->setPayload($this->resourceHandler->serialise($artifactResource));
+
+        /** @var ArtifactResource $resource */
+        $resource = $this->request($context, new ArtifactResource());
+
+        return $resource;
     }
 }
