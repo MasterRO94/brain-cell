@@ -36,7 +36,6 @@ class JobQueryNoteResource extends AbstractNoteResource
     {
         return [
             'file' => FileResource::class,
-            'createdFromSuggestion' => JobQueryNoteSuggestionResource::class,
             'origin' => ClientResource::class,
             'createdAt' => DateResource::class,
             'updatedAt' => DateResource::class,
@@ -49,7 +48,7 @@ class JobQueryNoteResource extends AbstractNoteResource
     public function getAssociatedCollections(): array
     {
         return [
-            'createFromSuggestions' => JobQueryNoteSuggestionResource::class,
+            'createdFromSuggestions' => JobQueryNoteSuggestionResource::class,
         ];
     }
 
