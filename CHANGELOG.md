@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.21] - 2022-01-13
+### Added
+- Endpoint for retrieving JobQueryNoteSuggestions.
+
 ## [0.5.20] - 2022-01-13
 ### Added
 - `JobQueryNoteSuggestionResource`
