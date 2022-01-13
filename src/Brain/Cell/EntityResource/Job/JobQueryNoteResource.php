@@ -9,6 +9,7 @@ use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Common\DateResource;
 use Brain\Cell\EntityResource\File\FileResource;
 use Brain\Cell\EntityResource\File\FileResourceInterface;
+use Brain\Cell\Transfer\ResourceCollection;
 
 class JobQueryNoteResource extends AbstractNoteResource
 {
@@ -18,6 +19,15 @@ class JobQueryNoteResource extends AbstractNoteResource
 
     /** @var FileResourceInterface|null */
     protected $file;
+
+    /** @var JobQueryNoteSuggestionResourceInterface[]|ResourceCollection */
+    protected $createdFromSuggestions;
+
+    public function __construct()
+    {
+        $this->createdFromSuggestions = new ResourceCollection();
+        $this->createdFromSuggestions->setEntityClass(JobQueryNoteSuggestionResource::class);
+    }
 
     /**
      * {@inheritdoc}
@@ -32,6 +42,16 @@ class JobQueryNoteResource extends AbstractNoteResource
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getAssociatedCollections(): array
+    {
+        return [
+            'createdFromSuggestions' => JobQueryNoteSuggestionResource::class,
+        ];
+    }
+
     public function getFile(): ?FileResourceInterface
     {
         return $this->file;
@@ -40,5 +60,21 @@ class JobQueryNoteResource extends AbstractNoteResource
     public function setFile(?FileResourceInterface $file): void
     {
         $this->file = $file;
+    }
+
+    /**
+     * @return JobQueryNoteSuggestionResourceInterface[]|ResourceCollection
+     */
+    public function getNoteSuggestions(): ResourceCollection
+    {
+        return $this->createdFromSuggestions;
+    }
+
+    /**
+     * @param JobQueryNoteSuggestionResourceInterface[]|ResourceCollection $noteSuggestions
+     */
+    public function setNoteSuggestions(ResourceCollection $noteSuggestions): void
+    {
+        $this->createdFromSuggestions = $noteSuggestions;
     }
 }
