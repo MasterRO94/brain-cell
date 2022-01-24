@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\Client\Delegate\Job;
 
 use Brain\Cell\Client\DelegateClient;
+use Brain\Cell\Client\Request\RequestFilterInterface;
 use Brain\Cell\EntityResource\ClientResource;
 use Brain\Cell\EntityResource\Job\JobQueryNoteResource;
 use Brain\Cell\EntityResource\Job\JobQueryNoteSuggestionResource;
@@ -169,11 +170,17 @@ class JobQueryDelegateClient extends DelegateClient
     /**
      * @return JobQueryNoteSuggestionResourceInterface[]|ResourceCollection
      */
-    public function getJobQueryNoteSuggestions(string $summaryId): ResourceCollection
+    public function getJobQueryNoteSuggestions(string $summaryId, ?RequestFilterInterface $filter = null): ResourceCollection
     {
-        $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $path = sprintf('/job/query-summaries/%s/note-suggestions', $summaryId);
+
+        $context = $this->configuration->createRequestContext(self::VERSION_V2);
         $context->prepareContextForGet($path);
+
+        if ($filter !==  null) {
+            $context->getFilters()->add($filter->getFilters());
+            $context->getParameters()->add($filter->getParameters());
+        }
 
         $collection = new ResourceCollection();
         $collection->setEntityClass(JobQueryNoteSuggestionResource::class);
