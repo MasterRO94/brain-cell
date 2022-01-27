@@ -22,8 +22,11 @@ class GetDeliveryOptionsOptionsResource extends AbstractResource
     /** @var bool */
     protected $fallbackDeliveryOptionOnly;
 
-    /** @var string */
+    /** @var string|null */
     protected $primaryProductionHouse;
+
+    /** @var int|null */
+    protected $extraProductionTimeDays;
 
     public function setMinimalDeliveryOptionsLifetime(?DateTime $minimalDeliveryOptionsLifetime): void
     {
@@ -43,5 +46,10 @@ class GetDeliveryOptionsOptionsResource extends AbstractResource
     public function setPrimaryProductionHouse(string $productionHouseId): void
     {
         $this->primaryProductionHouse = $productionHouseId;
+    }
+
+    public function setExtraProductionTimeDays(?int $extraProductionTimeDays): void
+    {
+        $this->extraProductionTimeDays = $extraProductionTimeDays;
     }
 }
