@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.23] - 2022-01-28
+### Added
+- GetDeliveryOptionsOptionsResource::$extraProductionTimeDays
+
 ## [0.5.22] - 2022-01-24
 ### Changed
 - Added filter support for JobQueryNoteSuggestions API call.
