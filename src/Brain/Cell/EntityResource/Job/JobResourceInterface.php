@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Brain\Cell\EntityResource\Job;
 
+use Brain\Cell\EntityResource\Artifact\ArtifactResource;
 use Brain\Cell\EntityResource\Artifact\ArtifactResourceInterface;
 use Brain\Cell\EntityResource\Common\Weight\WeightResourceInterface;
+use Brain\Cell\EntityResource\Job\ClientWorkflow\PhaseResource;
 use Brain\Cell\EntityResource\Product\ProductResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityInterface;
+use Brain\Cell\EntityResource\ThreeDimensionalResource;
 use Brain\Cell\Prototype\Column\Date\CreatedAtInterface;
 use Brain\Cell\Prototype\Column\Date\UpdatedAtInterface;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -90,15 +93,29 @@ interface JobResourceInterface extends
      */
     public function getMeta(): ?JobMetaResourceInterface;
 
+    public function getQueries(): ResourceCollection;
+
+    public function getPhase(): ?PhaseResource;
+
+    public function getPreflightFailurePolicy(): string;
+
+    public function getStatus(): JobStatusResource;
+
     /**
      * @return JobStatusResource[]|ResourceCollection
      */
     public function getStatuses(): ResourceCollection;
 
+    public function getClients(): ResourceCollection;
+
     /**
      * @return JobNoteResource[]|ResourceCollection
      */
     public function getNotes(): ResourceCollection;
+
+    public function getDimensions(): ThreeDimensionalResource;
+
+    public function getArtifact(): ?ArtifactResource;
 
     /**
      * Get all of the Artifacts that have been assigned to the job.
@@ -108,6 +125,8 @@ interface JobResourceInterface extends
      * @return ArtifactResourceInterface[]|ResourceCollection
      */
     public function getArtifacts(): ResourceCollection;
+
+    public function getClonedFrom(): ?JobResource;
 
     /**
      * This will never be populated when retrieving a Job from Brain.
