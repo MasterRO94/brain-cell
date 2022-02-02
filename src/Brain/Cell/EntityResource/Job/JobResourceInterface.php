@@ -92,7 +92,7 @@ interface JobResourceInterface extends
      * Return the job meta.
      */
     public function getMeta(): ?JobMetaResourceInterface;
-    
+
     public function getQueries(): ResourceCollection;
 
     public function getPhase(): ?PhaseResource;
