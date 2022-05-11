@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.25] - 2022-05-11
+### Added
+- GetDeliveryOptionsOptionsResource::$endOfProductionDictatedByShop
+
+### Changed
+- Backwards compatibility: DeliveryOptionResource::getLifetimeFinishDate() -- continue not returning null, even though
+  the value in question is now nullable.
+
 ## [0.5.24] - 2022-02-02
 ### Added
 - The following getters that are already defined on `JobResource` to `JobResourceInterface`
