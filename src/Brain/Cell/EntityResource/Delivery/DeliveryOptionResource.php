@@ -14,6 +14,8 @@ use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
 use Brain\Cell\Prototype\Column\Date\CreatedAtTrait;
 use Brain\Cell\Transfer\AbstractResource;
 
+use DateTime;
+
 /**
  * {@inheritdoc}
  */
@@ -80,7 +82,7 @@ class DeliveryOptionResource extends AbstractResource implements
     /** @var PriceResourceInterface */
     protected $price;
 
-    /** @var DateResource */
+    /** @var DateResource|null Null indicates that the delivery option is valid infinitely. This has a very limited use case. */
     protected $lifetimeFinishDate;
 
     /** @var ClientResource */
@@ -283,10 +285,29 @@ class DeliveryOptionResource extends AbstractResource implements
 
     public function getLifetimeFinishDate(): DateResource
     {
-        return $this->lifetimeFinishDate;
+        if ($this->lifetimeFinishDate instanceof DateResource) {
+            return $this->lifetimeFinishDate;
+        }
+
+        /*
+         * Ideally, this function would return null, but at the time of writing this, there were projects that were
+         * not handling the null case (which was added later). @todo Make the projects in question handle nulls and
+         * rewrite the following.
+         *
+         * In case of null, return the evaluation date + a sensible amount of time that in principle indicates "forever".
+         */
+
+        $lifetimeDateAsForever = (new DateTime($this->evaluationDate->asDateTime()->format('c')))
+            ->modify('+3 months');
+
+        $lifetimeDateResource = new DateResource();
+        $lifetimeDateResource->setIso($lifetimeDateAsForever->format('c'));
+        $lifetimeDateResource->setTimezone($this->evaluationDate->getTimezone());
+
+        return $lifetimeDateResource;
     }
 
-    public function setLifetimeFinishDate(DateResource $lifetimeFinishDate): void
+    public function setLifetimeFinishDate(?DateResource $lifetimeFinishDate): void
     {
         $this->lifetimeFinishDate = $lifetimeFinishDate;
     }

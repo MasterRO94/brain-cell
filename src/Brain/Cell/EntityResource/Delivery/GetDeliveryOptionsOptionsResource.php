@@ -28,6 +28,9 @@ class GetDeliveryOptionsOptionsResource extends AbstractResource
     /** @var int|null */
     protected $extraProductionTimeDays;
 
+    /** @var DateTime|null */
+    protected $endOfProductionDictatedByShop;
+
     public function setMinimalDeliveryOptionsLifetime(?DateTime $minimalDeliveryOptionsLifetime): void
     {
         $this->minimalDeliveryOptionsLifetime = $minimalDeliveryOptionsLifetime;
@@ -51,5 +54,10 @@ class GetDeliveryOptionsOptionsResource extends AbstractResource
     public function setExtraProductionTimeDays(?int $extraProductionTimeDays): void
     {
         $this->extraProductionTimeDays = $extraProductionTimeDays;
+    }
+
+    public function setEndOfProductionDictatedByShop(?DateTime $endOfProductionDictatedByShop): void
+    {
+        $this->endOfProductionDictatedByShop = $endOfProductionDictatedByShop;
     }
 }
