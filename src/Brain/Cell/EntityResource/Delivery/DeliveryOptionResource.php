@@ -310,7 +310,7 @@ class DeliveryOptionResource extends AbstractResource implements
          * hardcoding the time zone to whatever is good enough to express the intention of conveying "forever in the future".
          * In other words, the time zone is, quoting a classic, "supremely inconsequential" here.
          */
-//        $lifetimeDateResource->setTimezone($this->evaluationDate->getTimezone());
+// $lifetimeDateResource->setTimezone($this->evaluationDate->getTimezone());
         $lifetimeDateResource->setTimezone('Europe/London');
 
         return $lifetimeDateResource;
