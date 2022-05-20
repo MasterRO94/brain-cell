@@ -302,7 +302,16 @@ class DeliveryOptionResource extends AbstractResource implements
 
         $lifetimeDateResource = new DateResource();
         $lifetimeDateResource->setIso($lifetimeDateAsForever->format('c'));
-        $lifetimeDateResource->setTimezone($this->evaluationDate->getTimezone());
+
+        /*
+         * Accessing the timezone of the evaluation date is crashing (due to the timezone being missing) in one of the
+         * projects that use brain/cell. I'm 90% sure the fault is in the project in question, but since (1) this is
+         * part of a temporary(TM) walk-around and (2) some people "need it fixed by yesterday", I've concluded that
+         * hardcoding the time zone to whatever is good enough to express the intention of conveying "forever in the future".
+         * In other words, the time zone is, quoting a classic, "supremely inconsequential" here.
+         */
+//        $lifetimeDateResource->setTimezone($this->evaluationDate->getTimezone());
+        $lifetimeDateResource->setTimezone('Europe/London');
 
         return $lifetimeDateResource;
     }

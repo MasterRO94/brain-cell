@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.26] - 2022-05-20
+### Changed
+- DeliveryOptionResource::getLifetimeFinishDate() -- hardcode whatever timezone in the walk-around for the null value.
+
 ## [0.5.25] - 2022-05-11
 ### Added
 - GetDeliveryOptionsOptionsResource::$endOfProductionDictatedByShop
