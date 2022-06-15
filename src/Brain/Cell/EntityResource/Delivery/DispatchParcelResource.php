@@ -23,6 +23,9 @@ class DispatchParcelResource extends AbstractResource
 
     /** @var string $postageLabelUrl */
     protected $postageLabelUrl;
+    
+    /** @var string|null */
+    protected $predefinedPackageName;
 
     /**
      * {@inheritdoc}
@@ -73,5 +76,34 @@ class DispatchParcelResource extends AbstractResource
     public function setPostageLabelUrl(string $postageLabelUrl): void
     {
         $this->postageLabelUrl = $postageLabelUrl;
+    }
+
+    /**
+     * Some delivery service providers allow you to send parcels using a
+     * predefined name (e.g. 'Letter') instead of providing the
+     * dimensions of the parcel (in some scenarios this can affect the price
+     * offered by the delivery service API as it may be configured that
+     * the package size provides discount rates in the 3rd party api).
+     *
+     * If a predefined parcel was used in the dispatch, then this will
+     * have a value.
+     *
+     * Note: it is still required that you provide the dimensions of the parcel,
+     * but they would have been ignored if a predefined package name was
+     * provided.
+     *
+     * @return string|null
+     */
+    public function getPredefinedPackageName(): ?string
+    {
+        return $this->predefinedPackageName;
+    }
+
+    /**
+     * @param string|null $predefinedPackageName
+     */
+    public function setPredefinedPackageName(?string $predefinedPackageName): void
+    {
+        $this->predefinedPackageName = $predefinedPackageName;
     }
 }

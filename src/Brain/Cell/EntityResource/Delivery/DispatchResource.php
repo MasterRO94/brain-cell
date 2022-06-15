@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
 use Brain\Cell\EntityResource\Prototype\ResourceIdentityTrait;
@@ -38,6 +39,15 @@ class DispatchResource extends AbstractResource
 
     /** @var DispatchParcelResource[]|ResourceCollection */
     protected $parcels;
+
+    /** @var AddressResourceInterface */
+    protected $address;
+
+    /** @var DeliveryServiceResource */
+    protected $deliveryService;
+
+    /** @var mixed[] */
+    protected $metaData;
 
     public function __construct()
     {
@@ -125,5 +135,53 @@ class DispatchResource extends AbstractResource
     public function setLabelUrl(string $labelUrl): void
     {
         $this->labelUrl = $labelUrl;
+    }
+
+    /**
+     * @return AddressResourceInterface|null
+     */
+    public function getAddress(): ?AddressResourceInterface
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param AddressResourceInterface $address
+     */
+    public function setAddress(AddressResourceInterface $address): void
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return DeliveryServiceResource|null
+     */
+    public function getDeliveryService(): ?DeliveryServiceResource
+    {
+        return $this->deliveryService;
+    }
+
+    /**
+     * @param DeliveryServiceResource $deliveryService
+     */
+    public function setDeliveryService(DeliveryServiceResource $deliveryService): void
+    {
+        $this->deliveryService = $deliveryService;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getMetaData(): array
+    {
+        return $this->metaData;
+    }
+
+    /**
+     * @param mixed[] $metaData
+     */
+    public function setMetaData(array $metaData): void
+    {
+        $this->metaData = $metaData;
     }
 }
