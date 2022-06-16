@@ -91,17 +91,12 @@ class DispatchParcelResource extends AbstractResource
      * Note: it is still required that you provide the dimensions of the parcel,
      * but they would have been ignored if a predefined package name was
      * provided.
-     *
-     * @return string|null
      */
     public function getPredefinedPackageName(): ?string
     {
         return $this->predefinedPackageName;
     }
 
-    /**
-     * @param string|null $predefinedPackageName
-     */
     public function setPredefinedPackageName(?string $predefinedPackageName): void
     {
         $this->predefinedPackageName = $predefinedPackageName;
