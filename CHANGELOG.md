@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.27] - 2022-06-16
+### Added
+- DispatchResource::$address
+- DispatchResource::$deliveryService
+- DispatchResource::$metaData
+- DispatchParcelResource::$predefinedPackageName
+
 ## [0.5.26] - 2022-05-20
 ### Changed
 - DeliveryOptionResource::getLifetimeFinishDate() -- hardcode whatever timezone in the walk-around for the null value.
