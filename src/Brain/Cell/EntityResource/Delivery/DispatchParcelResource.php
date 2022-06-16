@@ -23,7 +23,7 @@ class DispatchParcelResource extends AbstractResource
 
     /** @var string $postageLabelUrl */
     protected $postageLabelUrl;
-    
+
     /** @var string|null */
     protected $predefinedPackageName;
 
