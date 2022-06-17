@@ -137,33 +137,21 @@ class DispatchResource extends AbstractResource
         $this->labelUrl = $labelUrl;
     }
 
-    /**
-     * @return AddressResourceInterface|null
-     */
     public function getAddress(): ?AddressResourceInterface
     {
         return $this->address;
     }
 
-    /**
-     * @param AddressResourceInterface $address
-     */
     public function setAddress(AddressResourceInterface $address): void
     {
         $this->address = $address;
     }
 
-    /**
-     * @return DeliveryServiceResource|null
-     */
     public function getDeliveryService(): ?DeliveryServiceResource
     {
         return $this->deliveryService;
     }
 
-    /**
-     * @param DeliveryServiceResource $deliveryService
-     */
     public function setDeliveryService(DeliveryServiceResource $deliveryService): void
     {
         $this->deliveryService = $deliveryService;
