@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.28] - 2022-06-20
+### Added
+- ExperimentalDelegateClient
+
 ## [0.5.27] - 2022-06-17
 ### Added
 - DispatchResource::$address

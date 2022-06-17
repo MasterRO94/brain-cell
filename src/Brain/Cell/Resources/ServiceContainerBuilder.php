@@ -10,6 +10,7 @@ use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
 use Brain\Cell\Client\Delegate\AuthenticationDelegateClient;
 use Brain\Cell\Client\Delegate\ClientWorkflowDelegateClient;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
+use Brain\Cell\Client\Delegate\ExperimentalDelegateClient;
 use Brain\Cell\Client\Delegate\File\FileDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobComponentDelegateClient;
@@ -104,6 +105,12 @@ class ServiceContainerBuilder
             },
             DeliveryDelegateClient::class => static function (CellServiceContainer $serviceContainer) {
                 return new DeliveryDelegateClient(
+                    $serviceContainer->get(ClientConfiguration::class),
+                    $serviceContainer->get(ResourceHandlerService::class)
+                );
+            },
+            ExperimentalDelegateClient::class => static function (CellServiceContainer $serviceContainer) {
+                return new ExperimentalDelegateClient(
                     $serviceContainer->get(ClientConfiguration::class),
                     $serviceContainer->get(ResourceHandlerService::class)
                 );
