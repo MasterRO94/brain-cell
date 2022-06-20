@@ -10,6 +10,7 @@ use Brain\Cell\Client\Delegate\ArtworkDelegateClient;
 use Brain\Cell\Client\Delegate\AuthenticationDelegateClient;
 use Brain\Cell\Client\Delegate\ClientWorkflowDelegateClient;
 use Brain\Cell\Client\Delegate\DeliveryDelegateClient;
+use Brain\Cell\Client\Delegate\ExperimentalDelegateClient;
 use Brain\Cell\Client\Delegate\File\FileDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobBatchDelegateClient;
 use Brain\Cell\Client\Delegate\Job\JobComponentDelegateClient;
@@ -92,6 +93,11 @@ class BrainClient extends DelegateClient implements BrainClientInterface
     public function deliveryHelper(): DeliveryDelegateClientHelper
     {
         return $this->serviceContainer->get(DeliveryDelegateClientHelper::class);
+    }
+
+    public function experimental(): ExperimentalDelegateClient
+    {
+        return $this->serviceContainer->get(ExperimentalDelegateClient::class);
     }
 
     /**
