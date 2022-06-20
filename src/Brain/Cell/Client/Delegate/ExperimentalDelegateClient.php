@@ -12,6 +12,8 @@ use Brain\Cell\Client\DelegateClient;
 class ExperimentalDelegateClient extends DelegateClient
 {
     /**
+     * Run an http request against an experimental (or otherwise not implemented in the sdk) endpoint.
+     *
      * Example $configureRequestContextFn:
      *
      * function (RequestContext $context) {
@@ -29,7 +31,7 @@ class ExperimentalDelegateClient extends DelegateClient
         callable $configureRequestContextFn
     ): array {
         $context = $this->configuration->createRequestContext($apiEndpointVersion);
-        
+
         $configureRequestContextFn($context);
 
         $responseData = $this->configuration->getRequestAdapter()->request($context);
