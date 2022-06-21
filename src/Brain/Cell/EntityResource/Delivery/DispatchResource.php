@@ -66,7 +66,7 @@ class DispatchResource extends AbstractResource
             'createdAt' => DateResource::class,
             'batch' => JobBatchResource::class,
             'deliveryService' => DeliveryServiceResource::class,
-            'address' => AddressResource::class
+            'address' => AddressResource::class,
         ];
     }
 
