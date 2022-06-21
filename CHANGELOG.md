@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.29] - 2022-06-21
+### Fixed
+- DispatchResource::$metaData should never be null.
+- DispatchResource::getDeliveryService will now return expected DeliveryServiceResource
+- DispatchResource::getAddress will now return expected AddressResource
+
 ## [0.5.28] - 2022-06-20
 ### Added
 - ExperimentalDelegateClient
