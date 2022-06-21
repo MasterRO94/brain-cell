@@ -53,6 +53,7 @@ class DispatchResource extends AbstractResource
     {
         $this->parcels = new ResourceCollection();
         $this->parcels->setEntityClass(DispatchParcelResource::class);
+        $this->metaData = [];
     }
 
     /**
