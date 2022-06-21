@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Brain\Cell\EntityResource\Delivery;
 
 use Brain\Cell\EntityResource\Common\DateResource;
+use Brain\Cell\EntityResource\Country\AddressResource;
 use Brain\Cell\EntityResource\Country\AddressResourceInterface;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
@@ -64,6 +65,8 @@ class DispatchResource extends AbstractResource
         return [
             'createdAt' => DateResource::class,
             'batch' => JobBatchResource::class,
+            'deliveryService' => DeliveryServiceResource::class,
+            'address' => AddressResource::class
         ];
     }
 
