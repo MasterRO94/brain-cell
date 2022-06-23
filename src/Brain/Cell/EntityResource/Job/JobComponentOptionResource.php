@@ -43,6 +43,12 @@ class JobComponentOptionResource extends AbstractResource implements
     /** @var mixed[] */
     protected $configuration;
 
+    public function __construct()
+    {
+        $this->configuration = [];
+    }
+
+
     /**
      * {@inheritdoc}
      */

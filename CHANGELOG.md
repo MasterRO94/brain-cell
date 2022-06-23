@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.30] - 2022-06-23
+### Fixed
+- JobComponentOptionResource::$configuration should never be null.
+
 ## [0.5.29] - 2022-06-21
 ### Fixed
 - DispatchResource::$metaData should never be null.
