@@ -48,7 +48,6 @@ class JobComponentOptionResource extends AbstractResource implements
         $this->configuration = [];
     }
 
-
     /**
      * {@inheritdoc}
      */
