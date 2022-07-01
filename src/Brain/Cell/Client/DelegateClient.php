@@ -50,10 +50,10 @@ abstract class DelegateClient
 
         $results = [];
 
-        foreach ($responses as $response) {
+        foreach ($responses as $key => $response) {
             $resource = new $resourceClassName();
 
-            $results[] = $this->resourceHandler->deserialise($resource, $response);
+            $results[$key] = $this->resourceHandler->deserialise($resource, $response);
         }
 
         return $results;

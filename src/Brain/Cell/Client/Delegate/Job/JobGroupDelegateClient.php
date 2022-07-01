@@ -11,10 +11,12 @@ use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 
 class JobGroupDelegateClient extends DelegateClient
 {
+    private const GET_PATH = '/job/groups/%s';
+
     public function getJobGroup(string $id): JobGroupResourceInterface
     {
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
-        $context->prepareContextForGet(sprintf('/job/groups/%s', $id));
+        $context->prepareContextForGet(sprintf(self::GET_PATH, $id));
 
         /** @var JobGroupResourceInterface $resource */
         $resource = $this->request($context, new JobGroupResource());
@@ -36,5 +38,26 @@ class JobGroupDelegateClient extends DelegateClient
         $resource = $this->request($context, $group);
 
         return $resource;
+    }
+
+    /**
+     * Async return a job group by id.
+     *
+     * @param string[] $ids
+     *
+     * @return JobGroupResourceInterface[]
+     */
+    public function getAsync(array $ids): array
+    {
+        $contexts = [];
+
+        foreach ($ids as $key => $id) {
+            $context = $this->configuration->createRequestContext(self::VERSION_V1);
+            $context->prepareContextForGet(sprintf(self::GET_PATH, $id));
+
+            $contexts[$key] = $context;
+        }
+
+        return $this->requestAsync($contexts, JobGroupResource::class);
     }
 }
