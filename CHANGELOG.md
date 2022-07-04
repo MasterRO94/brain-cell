@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.31] - 2022-07-04
+### Added
+- `JobBatchDelegateClient::getAsync`
+- `JobGroupDelegateClient::getAsync`
+
+### Changed
+- When `ids` are passed to a delegate clients `getAsync` method, the keys of the
+  `ids` array should be respected, so the returned resource will have
+  the same key as the id provided. Changes were made to the following classes
+  to make this work:
+  - `GuzzleHttpRequestAdapter::requestAsync`
+  - `DelegateClient::requestAsync`
+
 ## [0.5.30] - 2022-06-23
 ### Fixed
 - JobComponentOptionResource::$configuration should never be null.

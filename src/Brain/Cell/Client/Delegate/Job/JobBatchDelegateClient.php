@@ -16,10 +16,12 @@ use Brain\Cell\Transfer\ResourceCollection;
 
 class JobBatchDelegateClient extends DelegateClient
 {
+    private const GET_PATH = '/job/batches/%s';
+
     public function getJobBatch(string $id): JobBatchResourceInterface
     {
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
-        $context->prepareContextForGet(sprintf('/job/batches/%s', $id));
+        $context->prepareContextForGet(sprintf(self::GET_PATH, $id));
 
         /** @var JobBatchResourceInterface $resource */
         $resource = $this->request($context, new JobBatchResource());
@@ -116,5 +118,26 @@ class JobBatchDelegateClient extends DelegateClient
         $collection = $this->request($context, $collection);
 
         return $collection;
+    }
+
+    /**
+     * Async return a job batch by id.
+     *
+     * @param string[] $ids
+     *
+     * @return JobBatchResource[]
+     */
+    public function getAsync(array $ids): array
+    {
+        $contexts = [];
+
+        foreach ($ids as $key => $id) {
+            $context = $this->configuration->createRequestContext(self::VERSION_V1);
+            $context->prepareContextForGet(sprintf(self::GET_PATH, $id));
+
+            $contexts[$key] = $context;
+        }
+
+        return $this->requestAsync($contexts, JobBatchResource::class);
     }
 }

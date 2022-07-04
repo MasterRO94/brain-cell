@@ -68,7 +68,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
         /** @var Request[] $requests */
         $requests = [];
 
-        foreach ($requestContexts as $context) {
+        foreach ($requestContexts as $key => $context) {
             $path = $context->getPath();
             $parameters = $context->getParameters()->all();
 
@@ -95,7 +95,7 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
             }
 
             $method = $context->getMethod();
-            $requests[] = new Request($method, $path, $context->getHeaders()->all(), $body);
+            $requests[$key] = new Request($method, $path, $context->getHeaders()->all(), $body);
         }
 
         $storage = new stdClass();
@@ -113,10 +113,10 @@ class GuzzleHttpRequestAdapter implements RequestAdapterInterface
                 $isLinkUnlinkRequestMethod = in_array($context->getMethod(), ['LINK', 'UNLINK'], true);
 
                 if ($isLinkUnlinkRequestMethod && $contents === '') {
-                    $storage->responses[] = [];
+                    $storage->responses[$index] = [];
                 }
 
-                $storage->responses[] = json_decode($contents, true);
+                $storage->responses[$index] = json_decode($contents, true);
             },
             'rejected' => static function (RequestException $reason, $index) {
                 // this is delivered each failed request
