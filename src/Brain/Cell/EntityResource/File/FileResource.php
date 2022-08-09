@@ -35,6 +35,12 @@ final class FileResource extends AbstractResource implements
     /** @var FilePreviewResource[]|ResourceCollection */
     protected $previews;
 
+    public function __construct()
+    {
+        $this->previews = new ResourceCollection();
+        $this->previews->setEntityClass(FilePreviewResource::class);
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -37,6 +37,12 @@ class JobQueryResource extends AbstractResource implements JobQueryResourceInter
     /** @var bool */
     protected $isExternal = false;
 
+    public function __construct()
+    {
+        $this->notes = new ResourceCollection();
+        $this->notes->setEntityClass(JobQueryNoteResource::class);
+    }
+
     /**
      * {@inheritdoc}
      */

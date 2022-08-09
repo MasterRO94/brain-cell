@@ -29,6 +29,9 @@ class ArtworkResource extends AbstractResource implements ArtworkResourceInterfa
 
     public function __construct()
     {
+        $this->files = new ResourceCollection();
+        $this->files->setEntityClass(ArtworkFileResource::class);
+
         $this->issues = new ResourceCollection();
         $this->issues->setEntityClass(ArtworkIssueResource::class);
     }
