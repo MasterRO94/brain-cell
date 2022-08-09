@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.32] - 2022-08-09
+### Fixed
+- Initiate *Resource's fields that are ResourceCollection and whose getters are typehinted. This fixes a case when
+  that field in Brain api is empty array, in which case the api does not even mention that field in the api response.
+
 ## [0.5.31] - 2022-07-04
 ### Added
 - `JobBatchDelegateClient::getAsync`
