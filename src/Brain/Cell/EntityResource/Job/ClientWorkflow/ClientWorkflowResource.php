@@ -30,6 +30,15 @@ class ClientWorkflowResource extends AbstractResource implements ClientWorkflowR
     /** @var TransitionResourceInterface[]|ResourceCollection */
     protected $transitions;
 
+    public function __construct()
+    {
+        $this->phases = new ResourceCollection();
+        $this->phases->setEntityClass(PhaseResource::class);
+
+        $this->transitions = new ResourceCollection();
+        $this->transitions->setEntityClass(TransitionResource::class);
+    }
+
     /**
      * {@inheritdoc}
      */
