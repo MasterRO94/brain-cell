@@ -66,7 +66,7 @@ class JobBatchDelegateClient extends DelegateClient
     public function updateJobBatchBatchDelivery(
         string $jobBatchId,
         JobBatchBatchDeliveryResource $batchDeliveryResource,
-        UpdateJobBatchBatchDeliveryActionOptions $actionOptions = null
+        ?UpdateJobBatchBatchDeliveryActionOptions $actionOptions = null
     ): JobBatchResourceInterface {
         if ($actionOptions === null) {
             $actionOptions = new UpdateJobBatchBatchDeliveryActionOptions();

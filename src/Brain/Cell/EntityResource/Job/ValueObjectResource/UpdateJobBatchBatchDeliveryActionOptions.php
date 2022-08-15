@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brain\Cell\EntityResource\Job\ValueObjectResource;
 
 use Brain\Cell\Transfer\AbstractResource;
