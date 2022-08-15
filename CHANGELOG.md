@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.33] - 2022-08-15
+### Added
+- JobBatchDelegateClient::updateJobBatchBatchDelivery()::$actionOptions -- a way to update the delivery collection date
+  with Brain auto-recalculating the following dates (i.e. delivery finish dates).
+
 ## [0.5.32] - 2022-08-09
 ### Fixed
 - Initiate *Resource's fields that are ResourceCollection and whose getters are typehinted. This fixes a case when
