@@ -10,6 +10,7 @@ use Brain\Cell\EntityResource\Job\JobBatchBatchDeliveryResource;
 use Brain\Cell\EntityResource\Job\JobBatchResource;
 use Brain\Cell\EntityResource\Job\JobBatchResourceInterface;
 use Brain\Cell\EntityResource\Job\JobBatchStatusResource;
+use Brain\Cell\EntityResource\Job\ValueObjectResource\UpdateJobBatchBatchDeliveryActionOptions;
 use Brain\Cell\Exception\ClientException;
 use Brain\Cell\Logical\ArrayEncoderSerialisationOptions;
 use Brain\Cell\Transfer\ResourceCollection;
@@ -64,17 +65,29 @@ class JobBatchDelegateClient extends DelegateClient
 
     public function updateJobBatchBatchDelivery(
         string $jobBatchId,
-        JobBatchBatchDeliveryResource $batchDeliveryResource
+        JobBatchBatchDeliveryResource $batchDeliveryResource,
+        UpdateJobBatchBatchDeliveryActionOptions $actionOptions = null
     ): JobBatchResourceInterface {
+        if ($actionOptions === null) {
+            $actionOptions = new UpdateJobBatchBatchDeliveryActionOptions();
+        }
+
         $context = $this->configuration->createRequestContext(self::VERSION_V1);
         $context->prepareContextForPatch(sprintf('/job/batches/%s/batch-delivery', $jobBatchId));
 
-        $context->setPayload($this->resourceHandler->serialise(
-            $batchDeliveryResource,
-            new ArrayEncoderSerialisationOptions([
-                'preferSerialisingResourceAliasOverId' => false,
-            ])
-        ));
+        $payload = array_merge(
+            $this->resourceHandler->serialise(
+                $batchDeliveryResource,
+                new ArrayEncoderSerialisationOptions([
+                    'preferSerialisingResourceAliasOverId' => false,
+                ])
+            ),
+            [
+                '__action_options' => $this->resourceHandler->serialise($actionOptions),
+            ]
+        );
+
+        $context->setPayload($payload);
 
         /** @var JobBatchResourceInterface $resource */
         $resource = $this->request($context, new JobBatchResource());
